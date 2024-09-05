@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.ModelBaker;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelState;
 import net.minecraft.client.resources.model.SimpleBakedModel;
@@ -22,6 +23,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -40,7 +42,6 @@ import slimeknights.mantle.client.model.util.ColoredBlockModel.ColorData;
 import slimeknights.mantle.client.model.util.DynamicBakedWrapper;
 import slimeknights.mantle.client.model.util.ModelHelper;
 import slimeknights.mantle.client.model.util.SimpleBlockModel;
-import slimeknights.mantle.item.RetexturedBlockItem;
 import slimeknights.mantle.util.JsonHelper;
 import slimeknights.mantle.util.LogicHelper;
 import slimeknights.mantle.util.RetexturedHelper;
@@ -63,7 +64,10 @@ import java.util.function.Function;
  */
 @AllArgsConstructor
 public class FluidTextureModel implements IUnbakedGeometry<FluidTextureModel> {
-  /** Loader instance */
+
+  /**
+   * Loader instance
+   */
   public static final IGeometryLoader<FluidTextureModel> LOADER = FluidTextureModel::deserialize;
 
   private final ColoredBlockModel model;
@@ -71,11 +75,13 @@ public class FluidTextureModel implements IUnbakedGeometry<FluidTextureModel> {
   private final Set<String> retextured;
 
   @Override
-  public Collection<Material> getMaterials(IGeometryBakingContext owner, Function<ResourceLocation,UnbakedModel> modelGetter, Set<Pair<String,String>> missingTextureErrors) {
+  public Collection<Material> getMaterials(IGeometryBakingContext owner, Function<ResourceLocation, UnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors) {
     return model.getMaterials(owner, modelGetter, missingTextureErrors);
   }
 
-  /** Trims the # character off the beginning of a texture name (if present) */
+  /**
+   * Trims the # character off the beginning of a texture name (if present)
+   */
   private static String trimTextureName(String name) {
     if (name.charAt(0) == '#') {
       return name.substring(1);
@@ -84,7 +90,7 @@ public class FluidTextureModel implements IUnbakedGeometry<FluidTextureModel> {
   }
 
   @Override
-  public BakedModel bake(IGeometryBakingContext owner, ModelBakery bakery, Function<Material,TextureAtlasSprite> spriteGetter, ModelState transform, ItemOverrides overrides, ResourceLocation modelLocation) {
+  public BakedModel bake(IGeometryBakingContext owner, ModelBaker bakery, Function<Material, TextureAtlasSprite> spriteGetter, ModelState transform, ItemOverrides overrides, ResourceLocation modelLocation) {
     // start by baking the model, handing UV lock
     BakedModel baked = model.bake(owner, bakery, spriteGetter, transform, overrides, modelLocation);
 
@@ -97,8 +103,8 @@ public class FluidTextureModel implements IUnbakedGeometry<FluidTextureModel> {
       for (int i = 0; i < size; i++) {
         BlockElement part = elements.get(i);
         long fluidFaces = part.faces.values().stream()
-                                    .filter(face -> fluidTextures.contains(trimTextureName(face.texture)))
-                                    .count();
+          .filter(face -> fluidTextures.contains(trimTextureName(face.texture)))
+          .count();
         // for simplicity, each part is either a fluid or not. If for some reason it contains both we mark it as a fluid, meaning it may get colored
         // if this is undesired, just use separate elements
         if (fluidFaces > 0) {
@@ -115,9 +121,12 @@ public class FluidTextureModel implements IUnbakedGeometry<FluidTextureModel> {
 
   private record BakedCacheKey(FluidStack fluid, @Nullable ResourceLocation texture) {}
 
-  /** Baked wrapper class */
+  /**
+   * Baked wrapper class
+   */
   private static class Baked extends DynamicBakedWrapper<BakedModel> {
-    private final Map<BakedCacheKey,BakedModel> cache = new ConcurrentHashMap<>();
+
+    private final Map<BakedCacheKey, BakedModel> cache = new ConcurrentHashMap<>();
     private final List<BlockElement> elements;
     private final List<ColorData> colorData;
     private final IGeometryBakingContext owner;
@@ -137,10 +146,12 @@ public class FluidTextureModel implements IUnbakedGeometry<FluidTextureModel> {
       this.retextured = retextured;
     }
 
-    /** Retextures a model for the given fluid */
+    /**
+     * Retextures a model for the given fluid
+     */
     private BakedModel getRetexturedModel(BakedCacheKey key) {
       // setup model baking
-      Function<Material,TextureAtlasSprite> spriteGetter = Material::sprite;
+      Function<Material, TextureAtlasSprite> spriteGetter = Material::sprite;
 
       // if textured, retexture. Its fine to nest these configurations
       IGeometryBakingContext textured = this.owner;
@@ -184,7 +195,9 @@ public class FluidTextureModel implements IUnbakedGeometry<FluidTextureModel> {
       return builder.build(SimpleBlockModel.getRenderTypeGroup(owner));
     }
 
-    /** Gets a retextured model for the given fluid, using the cached model if possible */
+    /**
+     * Gets a retextured model for the given fluid, using the cached model if possible
+     */
     private BakedModel getCachedModel(BakedCacheKey key) {
       return this.cache.computeIfAbsent(key, this::getRetexturedModel);
     }
@@ -210,7 +223,9 @@ public class FluidTextureModel implements IUnbakedGeometry<FluidTextureModel> {
     }
   }
 
-  /** Deserializes this model from JSON */
+  /**
+   * Deserializes this model from JSON
+   */
   public static FluidTextureModel deserialize(JsonObject json, JsonDeserializationContext context) {
     ColoredBlockModel model = ColoredBlockModel.deserialize(json, context);
     Set<String> fluids = Collections.emptySet();
@@ -224,8 +239,11 @@ public class FluidTextureModel implements IUnbakedGeometry<FluidTextureModel> {
     return new FluidTextureModel(model, fluids, retextured);
   }
 
-  /** Override list to swap the texture in from NBT */
+  /**
+   * Override list to swap the texture in from NBT
+   */
   private static class RetexturedOverride extends ItemOverrides {
+
     private static final RetexturedOverride INSTANCE = new RetexturedOverride();
 
     @Nullable
@@ -242,7 +260,7 @@ public class FluidTextureModel implements IUnbakedGeometry<FluidTextureModel> {
       }
 
       // if valid, use the block
-      return ((Baked)originalModel).getCachedModel(new BakedCacheKey(FluidStack.EMPTY, ModelHelper.getParticleTexture(block)));
+      return ((Baked) originalModel).getCachedModel(new BakedCacheKey(FluidStack.EMPTY, ModelHelper.getParticleTexture(block)));
     }
   }
 }

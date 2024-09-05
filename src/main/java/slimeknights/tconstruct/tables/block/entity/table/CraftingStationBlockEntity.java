@@ -32,16 +32,23 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 
 public class CraftingStationBlockEntity extends RetexturedTableBlockEntity implements ILazyCrafter {
+
   public static final Component UNCRAFTABLE = TConstruct.makeTranslation("gui", "crafting_station.uncraftable");
   private static final Component NAME = TConstruct.makeTranslation("gui", "crafting_station");
 
-  /** Last crafted crafting recipe */
+  /**
+   * Last crafted crafting recipe
+   */
   @Nullable
   private CraftingRecipe lastRecipe;
-  /** Result inventory, lazy loads results */
+  /**
+   * Result inventory, lazy loads results
+   */
   @Getter
   private final LazyResultContainer craftingResult;
-  /** Crafting inventory for the recipe calls */
+  /**
+   * Crafting inventory for the recipe calls
+   */
   private final CraftingContainerWrapper craftingInventory;
 
   public CraftingStationBlockEntity(BlockPos pos, BlockState state) {
@@ -95,8 +102,7 @@ public class CraftingStationBlockEntity extends RetexturedTableBlockEntity imple
         }
       }
       ForgeHooks.setCraftingPlayer(null);
-    }
-    else if (this.lastRecipe != null && this.lastRecipe.matches(this.craftingInventory, this.level)) {
+    } else if (this.lastRecipe != null && this.lastRecipe.matches(this.craftingInventory, this.level)) {
       ForgeHooks.setCraftingPlayer(player);
       result = this.lastRecipe.assemble(this.craftingInventory);
       ForgeHooks.setCraftingPlayer(null);
@@ -106,8 +112,9 @@ public class CraftingStationBlockEntity extends RetexturedTableBlockEntity imple
 
   /**
    * Gets the player sensitive crafting result, also validating the player has access to this recipe
-   * @param player  Player
-   * @return  Player sensitive result
+   *
+   * @param player Player
+   * @return Player sensitive result
    */
   public ItemStack getResultForPlayer(Player player) {
     ForgeHooks.setCraftingPlayer(player);
@@ -145,9 +152,10 @@ public class CraftingStationBlockEntity extends RetexturedTableBlockEntity imple
 
   /**
    * Removes the result from this inventory, updating inputs and triggering recipe hooks
-   * @param player  Player taking result
-   * @param result  Result removed
-   * @param amount  Number of times crafted
+   *
+   * @param player Player taking result
+   * @param result Result removed
+   * @param amount Number of times crafted
    */
   public void takeResult(Player player, ItemStack result, int amount) {
     CraftingRecipe recipe = this.lastRecipe; // local variable just to prevent race conditions if the field changes, though that is unlikely
@@ -175,13 +183,11 @@ public class CraftingStationBlockEntity extends RetexturedTableBlockEntity imple
       // if empty or size 1, set directly (decreases by 1)
       if (original.isEmpty() || original.getCount() == 1) {
         this.setItem(i, newStack);
-      }
-      else if (ItemStack.isSame(original, newStack) && ItemStack.tagMatches(original, newStack)) {
+      } else if (ItemStack.isSame(original, newStack) && ItemStack.tagMatches(original, newStack)) {
         // if matching, merge (decreasing by 1
         newStack.grow(original.getCount() - 1);
         this.setItem(i, newStack);
-      }
-      else {
+      } else {
         // directly update the slot
         this.setItem(i, ItemHandlerHelper.copyStackWithSize(original, original.getCount() - 1));
         // otherwise, drop the item as the player
@@ -192,7 +198,9 @@ public class CraftingStationBlockEntity extends RetexturedTableBlockEntity imple
     }
   }
 
-  /** Sends a message alerting the player this item is currently uncraftable, typically due to gamerules */
+  /**
+   * Sends a message alerting the player this item is currently uncraftable, typically due to gamerules
+   */
   public void notifyUncraftable(Player player) {
     // if empty, send a message so the player is more aware of why they cannot craft it, sent to chat as status bar is not visible
     // TODO: consider moving into the UI somewhere
@@ -221,7 +229,8 @@ public class CraftingStationBlockEntity extends RetexturedTableBlockEntity imple
 
   /**
    * Sends the current recipe to the given player
-   * @param player  Player to send an update to
+   *
+   * @param player Player to send an update to
    */
   public void syncRecipe(Player player) {
     // must have a last recipe and a server world
@@ -232,7 +241,8 @@ public class CraftingStationBlockEntity extends RetexturedTableBlockEntity imple
 
   /**
    * Updates the recipe from the server
-   * @param recipe  New recipe
+   *
+   * @param recipe New recipe
    */
   public void updateRecipe(CraftingRecipe recipe) {
     this.lastRecipe = recipe;

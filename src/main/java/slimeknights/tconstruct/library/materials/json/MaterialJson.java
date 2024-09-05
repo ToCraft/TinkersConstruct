@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 
 @Data
 public class MaterialJson {
+
   @Nullable
   private final ICondition condition;
   @Nullable

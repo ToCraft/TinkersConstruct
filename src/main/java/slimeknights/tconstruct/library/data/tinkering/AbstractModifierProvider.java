@@ -20,11 +20,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-/** Datagen for dynamic modifiers */
+/**
+ * Datagen for dynamic modifiers
+ */
 @SuppressWarnings("SameParameterValue")
 public abstract class AbstractModifierProvider extends GenericDataProvider {
-  private final Map<ModifierId,Result> allModifiers = new HashMap<>();
-  private final Map<ModifierId,Composable> composableModifiers = new HashMap<>();
+
+  private final Map<ModifierId, Result> allModifiers = new HashMap<>();
+  private final Map<ModifierId, Composable> composableModifiers = new HashMap<>();
 
   public AbstractModifierProvider(DataGenerator generator) {
     super(generator, PackType.SERVER_DATA, ModifierManager.FOLDER, ModifierManager.GSON);
@@ -35,7 +38,9 @@ public abstract class AbstractModifierProvider extends GenericDataProvider {
    */
   protected abstract void addModifiers();
 
-  /** @deprecated use {@link #buildModifier(ModifierId, ICondition, JsonRedirect...)} */
+  /**
+   * @deprecated use {@link #buildModifier(ModifierId, ICondition, JsonRedirect...)}
+   */
   @Deprecated
   protected void addModifier(ModifierId id, @Nullable ICondition condition, @Nullable Modifier result, JsonRedirect... redirects) {
     if (result == null && redirects.length == 0) {
@@ -47,19 +52,25 @@ public abstract class AbstractModifierProvider extends GenericDataProvider {
     }
   }
 
-  /** @deprecated use {@link #buildModifier(ModifierId, JsonRedirect...)} */
+  /**
+   * @deprecated use {@link #buildModifier(ModifierId, JsonRedirect...)}
+   */
   @Deprecated
   protected void addModifier(ModifierId id, @Nullable Modifier result, JsonRedirect... redirects) {
     addModifier(id, null, result, redirects);
   }
 
-  /** @deprecated use {@link #buildModifier(DynamicModifier, ICondition, JsonRedirect...)} */
+  /**
+   * @deprecated use {@link #buildModifier(DynamicModifier, ICondition, JsonRedirect...)}
+   */
   @Deprecated
   protected void addModifier(DynamicModifier<?> id, @Nullable ICondition condition, @Nullable Modifier result, JsonRedirect... redirects) {
     addModifier(id.getId(), condition, result, redirects);
   }
 
-  /** @deprecated use {@link #buildModifier(DynamicModifier, JsonRedirect...)} */
+  /**
+   * @deprecated use {@link #buildModifier(DynamicModifier, JsonRedirect...)}
+   */
   @Deprecated
   protected void addModifier(DynamicModifier<?> id, @Nullable Modifier result, JsonRedirect... redirects) {
     addModifier(id, null, result, redirects);
@@ -68,7 +79,9 @@ public abstract class AbstractModifierProvider extends GenericDataProvider {
 
   /* Composable helpers */
 
-  /** Sets up a builder for a composable modifier */
+  /**
+   * Sets up a builder for a composable modifier
+   */
   protected ComposableModifier.Builder buildModifier(ModifierId id, @Nullable ICondition condition, JsonRedirect... redirects) {
     ComposableModifier.Builder builder = ComposableModifier.builder();
     Composable previous = composableModifiers.putIfAbsent(id, new Composable(builder, condition, redirects));
@@ -78,17 +91,23 @@ public abstract class AbstractModifierProvider extends GenericDataProvider {
     return builder;
   }
 
-  /** Sets up a builder for a composable modifier */
+  /**
+   * Sets up a builder for a composable modifier
+   */
   protected ComposableModifier.Builder buildModifier(ModifierId id, JsonRedirect... redirects) {
     return buildModifier(id, null, redirects);
   }
 
-  /** Sets up a builder for a composable modifier */
+  /**
+   * Sets up a builder for a composable modifier
+   */
   protected ComposableModifier.Builder buildModifier(DynamicModifier<?> modifier, @Nullable ICondition condition, JsonRedirect... redirects) {
     return buildModifier(modifier.getId(), condition, redirects);
   }
 
-  /** Sets up a builder for a composable modifier */
+  /**
+   * Sets up a builder for a composable modifier
+   */
   protected ComposableModifier.Builder buildModifier(DynamicModifier<?> modifier, JsonRedirect... redirects) {
     return buildModifier(modifier, null, redirects);
   }
@@ -96,17 +115,23 @@ public abstract class AbstractModifierProvider extends GenericDataProvider {
 
   /* Redirect helpers */
 
-  /** Adds a modifier redirect */
+  /**
+   * Adds a modifier redirect
+   */
   protected void addRedirect(ModifierId id, JsonRedirect... redirects) {
     addModifier(id, null, null, redirects);
   }
 
-  /** Makes a conditional redirect to the given ID */
+  /**
+   * Makes a conditional redirect to the given ID
+   */
   protected JsonRedirect conditionalRedirect(ModifierId id, @Nullable ICondition condition) {
     return new JsonRedirect(id, condition);
   }
 
-  /** Makes an unconditional redirect to the given ID */
+  /**
+   * Makes an unconditional redirect to the given ID
+   */
   protected JsonRedirect redirect(ModifierId id) {
     return conditionalRedirect(id, null);
   }
@@ -118,7 +143,9 @@ public abstract class AbstractModifierProvider extends GenericDataProvider {
     composableModifiers.forEach((id, data) -> saveJson(cache, id, data.serialize()));
   }
 
-  /** Serializes the given modifier with its condition and redirects */
+  /**
+   * Serializes the given modifier with its condition and redirects
+   */
   private static JsonObject serializeModifier(@Nullable Modifier modifier, @Nullable ICondition condition, JsonRedirect[] redirects) {
     JsonObject json;
     if (modifier != null) {
@@ -139,17 +166,28 @@ public abstract class AbstractModifierProvider extends GenericDataProvider {
     return json;
   }
 
-  /** Result record, as its nicer than a pair */
+  /**
+   * Result record, as its nicer than a pair
+   */
   private record Result(@Nullable Modifier modifier, @Nullable ICondition condition, JsonRedirect[] redirects) {
-    /** Writes this result to JSON */
+
+    /**
+     * Writes this result to JSON
+     */
     public JsonObject serialize() {
       return serializeModifier(modifier, condition, redirects);
     }
   }
 
-  /** Result for composable too */
-  private record Composable(ComposableModifier.Builder builder, @Nullable ICondition condition, JsonRedirect[] redirects) {
-    /** Writes this result to JSON */
+  /**
+   * Result for composable too
+   */
+  private record Composable(ComposableModifier.Builder builder, @Nullable ICondition condition,
+                            JsonRedirect[] redirects) {
+
+    /**
+     * Writes this result to JSON
+     */
     public JsonObject serialize() {
       return serializeModifier(builder.build(), condition, redirects);
     }

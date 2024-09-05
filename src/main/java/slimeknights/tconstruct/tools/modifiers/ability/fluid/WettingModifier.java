@@ -15,8 +15,11 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import javax.annotation.Nullable;
 
-/** Modifier to handle spilling recipes onto self when attacked */
+/**
+ * Modifier to handle spilling recipes onto self when attacked
+ */
 public class WettingModifier extends UseFluidOnHitModifier implements ModifyDamageModifierHook {
+
   @Override
   protected void registerHooks(Builder hookBuilder) {
     super.registerHooks(hookBuilder);

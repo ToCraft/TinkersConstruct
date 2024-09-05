@@ -28,8 +28,10 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class FancyItemFrameRenderer<T extends FancyItemFrameEntity> extends ItemFrameRenderer<T> {
+
   public static final Map<FrameType, ResourceLocation> LOCATIONS_MODEL = new EnumMap<>(FrameType.class);
   public static final Map<FrameType, ResourceLocation> LOCATIONS_MODEL_MAP = new EnumMap<>(FrameType.class);
+
   static {
     for (FrameType type : FrameType.values()) {
       String name = type == FrameType.REVERSED_GOLD ? FrameType.GOLD.getSerializedName() : type.getSerializedName();
@@ -48,7 +50,8 @@ public class FancyItemFrameRenderer<T extends FancyItemFrameEntity> extends Item
     return frame.getFrameType() == FrameType.MANYULLYN ? Math.max(7, baseLight) : baseLight;
   }
 
-  @SuppressWarnings("UnstableApiUsage")  // seriously forge, how am I supposed to implement something like vanilla if I cannot create events?
+  @SuppressWarnings("UnstableApiUsage")
+  // seriously forge, how am I supposed to implement something like vanilla if I cannot create events?
   @Override
   public void render(T frame, float entityYaw, float partialTicks, PoseStack matrices, MultiBufferSource bufferIn, int packedLight) {
     FrameType frameType = frame.getFrameType();

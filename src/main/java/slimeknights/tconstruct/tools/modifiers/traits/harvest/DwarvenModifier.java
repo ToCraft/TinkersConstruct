@@ -29,18 +29,27 @@ import java.util.Optional;
 
 // TODO: convert into a module
 public class DwarvenModifier extends Modifier implements ConditionalStatModifierHook, BreakSpeedModifierHook, TooltipModifierHook {
+
   private static final Component MINING_SPEED = TConstruct.makeTranslation("modifier", "dwarven.mining_speed");
   private static final Component VELOCITY = TConstruct.makeTranslation("modifier", "dwarven.velocity");
-  /** Distance below sea level to get boost */
+  /**
+   * Distance below sea level to get boost
+   */
   private static final float BOOST_DISTANCE = 64f;
-  /** Blocks above 0 when debuff starts, and the range of debuff in the world */
+  /**
+   * Blocks above 0 when debuff starts, and the range of debuff in the world
+   */
   private static final float DEBUFF_RANGE = 128f;
-  /** Mining speed boost when at distance, gets larger when lower */
+  /**
+   * Mining speed boost when at distance, gets larger when lower
+   */
   private static final float MINING_BONUS = 6;
-  /** Velocity boost when at distance, gets larger when lower */
+  /**
+   * Velocity boost when at distance, gets larger when lower
+   */
   private static final float VELOCITY_BONUS = 0.05f;
 
-  private static final ToolType[] TYPES = { ToolType.RANGED, ToolType.MELEE };
+  private static final ToolType[] TYPES = {ToolType.RANGED, ToolType.MELEE};
 
   @Override
   public int getPriority() {
@@ -52,7 +61,9 @@ public class DwarvenModifier extends Modifier implements ConditionalStatModifier
     hookBuilder.addHook(this, ModifierHooks.CONDITIONAL_STAT, ModifierHooks.BREAK_SPEED, ModifierHooks.TOOLTIP);
   }
 
-  /** Gets the boost for the given level and height, can go negative */
+  /**
+   * Gets the boost for the given level and height, can go negative
+   */
   private static float getBoost(Level world, float y, ModifierEntry entry, float baseSpeed, float bonus) {
     // grants 0 bonus at 64, 1x at -BOOST_DISTANCE, 2x at -2*BOOST_DISTANCE
     // prevents the modifier from getting too explosive in tall worlds, clamp between -6 and 12
@@ -90,7 +101,7 @@ public class DwarvenModifier extends Modifier implements ConditionalStatModifier
   @Override
   public float modifyStat(IToolStackView tool, ModifierEntry modifier, LivingEntity living, FloatToolStat stat, float baseValue, float multiplier) {
     if (stat == ToolStats.VELOCITY) {
-      return getBoost(living.level, (float)living.getY(), modifier, baseValue, multiplier * VELOCITY_BONUS);
+      return getBoost(living.level, (float) living.getY(), modifier, baseValue, multiplier * VELOCITY_BONUS);
     }
     return baseValue;
   }
@@ -105,7 +116,7 @@ public class DwarvenModifier extends Modifier implements ConditionalStatModifier
       if (player != null && key == TooltipKey.SHIFT) {
         // passing in 1 means greater than 1 is a boost, and less than 1 is a percentage
         // the -1 means for percentage, the range is now 0 to -75%, and for flat boost its properly 0 to baseBoost
-        boost = getBoost(player.level, (float)player.getY(), modifier, 1, baseBoost) - 1;
+        boost = getBoost(player.level, (float) player.getY(), modifier, 1, baseBoost) - 1;
         if (boost < 0) {
           // goes from 0 to -75%, don't show 0%
           if (boost <= -0.01) {

@@ -28,17 +28,26 @@ import static slimeknights.tconstruct.TConstruct.RANDOM;
 
 /**
  * Module which reduces damage on a tool by a given percentage
- * @param formula    Formula to use
- * @param condition  Condition for this module to run
+ *
+ * @param formula   Formula to use
+ * @param condition Condition for this module to run
  */
-public record ReduceToolDamageModule(ModifierFormula formula, ModifierCondition<IToolStackView> condition) implements ModifierModule, ToolDamageModifierHook, TooltipModifierHook, ConditionalModule<IToolStackView> {
+public record ReduceToolDamageModule(ModifierFormula formula,
+                                     ModifierCondition<IToolStackView> condition) implements ModifierModule, ToolDamageModifierHook, TooltipModifierHook, ConditionalModule<IToolStackView> {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<ReduceToolDamageModule>defaultHooks(ModifierHooks.TOOL_DAMAGE, ModifierHooks.TOOLTIP);
-  /** Formula instance for the loader */
+  /**
+   * Formula instance for the loader
+   */
   private static final FormulaLoadable FORMULA = new FormulaLoadable(FallbackFormula.IDENTITY, "level");
-  /** Loader instance */
+  /**
+   * Loader instance
+   */
   public static final RecordLoadable<ReduceToolDamageModule> LOADER = RecordLoadable.create(FORMULA.directField(ReduceToolDamageModule::formula), ModifierCondition.TOOL_FIELD, ReduceToolDamageModule::new);
 
-  /** Creates a builder instance */
+  /**
+   * Creates a builder instance
+   */
   public static FormulaLoadable.Builder<ReduceToolDamageModule> builder() {
     return FORMULA.builder(ReduceToolDamageModule::new);
   }
@@ -48,16 +57,19 @@ public record ReduceToolDamageModule(ModifierFormula formula, ModifierCondition<
     return DEFAULT_HOOKS;
   }
 
-  /** Gets the percentage to reduce tool damage */
+  /**
+   * Gets the percentage to reduce tool damage
+   */
   private float getPercent(ModifierEntry modifier) {
     return formula.apply(formula.processLevel(modifier));
   }
 
   /**
    * Damages the given amount with the reinforced percentage
-   * @param amount      Amount to damage
-   * @param percentage  Percentage of damage to cancel, runs probabilistically
-   * @return  Amount after reinforced
+   *
+   * @param amount     Amount to damage
+   * @param percentage Percentage of damage to cancel, runs probabilistically
+   * @return Amount after reinforced
    */
   public static int reduceDamage(int amount, float percentage) {
     // 100% protection? all damage blocked

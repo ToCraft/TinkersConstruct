@@ -20,13 +20,14 @@ public interface MeleeHitModifierHook {
    * <ul>
    *   <li>{@link #afterMeleeHit(IToolStackView, ModifierEntry, ToolAttackContext, float)}: Perform special attacks on entity hit beyond knockback boosts</li>
    * </ul>
-   * @param tool           Tool used to attack
-   * @param modifier       Modifier level
-   * @param context        Attack context
-   * @param damage         Damage to deal to the attacker
-   * @param baseKnockback  Base knockback before modifiers
-   * @param knockback      Computed knockback from all prior modifiers
-   * @return  New knockback to apply. 0.5 is equivelent to 1 level of the vanilla enchant
+   *
+   * @param tool          Tool used to attack
+   * @param modifier      Modifier level
+   * @param context       Attack context
+   * @param damage        Damage to deal to the attacker
+   * @param baseKnockback Base knockback before modifiers
+   * @param knockback     Computed knockback from all prior modifiers
+   * @return New knockback to apply. 0.5 is equivelent to 1 level of the vanilla enchant
    */
   default float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
     return knockback;
@@ -42,24 +43,29 @@ public interface MeleeHitModifierHook {
    *   <li>{@link #beforeMeleeHit(IToolStackView, ModifierEntry, ToolAttackContext, float, float, float)}: Change the amount of knockback dealt</li>
    *   <li>{@link #failedMeleeHit(IToolStackView, ModifierEntry, ToolAttackContext, float)}: Called after living hit when damage was not dealt</li>
    * </ul>
-   * @param tool          Tool used to attack
-   * @param modifier      Modifier level
-   * @param context       Attack context
-   * @param damageDealt   Amount of damage successfully dealt
+   *
+   * @param tool        Tool used to attack
+   * @param modifier    Modifier level
+   * @param context     Attack context
+   * @param damageDealt Amount of damage successfully dealt
    */
   default void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {}
 
   /**
    * Called after attacking an entity when no damage was dealt
-   * @param tool             Tool used to attack
-   * @param modifier         Modifier level
-   * @param context          Attack context
-   * @param damageAttempted  Amount of damage that was attempted to be dealt
+   *
+   * @param tool            Tool used to attack
+   * @param modifier        Modifier level
+   * @param context         Attack context
+   * @param damageAttempted Amount of damage that was attempted to be dealt
    */
   default void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {}
 
-  /** Merger that runs all nested hooks */
+  /**
+   * Merger that runs all nested hooks
+   */
   record AllMerger(Collection<MeleeHitModifierHook> modules) implements MeleeHitModifierHook {
+
     @Override
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
       for (MeleeHitModifierHook module : modules) {

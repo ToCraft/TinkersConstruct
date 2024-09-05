@@ -11,13 +11,20 @@ import slimeknights.tconstruct.library.modifiers.ModifierManager;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-/** Supplier that will return a modifier once they are fully registered, typically used with {@link ModifierDeferredRegister} */
+/**
+ * Supplier that will return a modifier once they are fully registered, typically used with {@link ModifierDeferredRegister}
+ */
 @RequiredArgsConstructor
 public class LazyModifier implements Supplier<Modifier>, IdAwareObject {
-  /** ID of the modifier to fetch */
+
+  /**
+   * ID of the modifier to fetch
+   */
   @Getter
   protected final ModifierId id;
-  /** Cached value for the modifier */
+  /**
+   * Cached value for the modifier
+   */
   protected Modifier result;
 
   public LazyModifier(Modifier modifier) {
@@ -30,7 +37,9 @@ public class LazyModifier implements Supplier<Modifier>, IdAwareObject {
     this.result = modifier.result;
   }
 
-  /** Gets the modifier, using the cached value if fetched before */
+  /**
+   * Gets the modifier, using the cached value if fetched before
+   */
   protected Modifier getUnchecked() {
     if (result == null) {
       result = ModifierManager.getValue(id);
@@ -38,7 +47,9 @@ public class LazyModifier implements Supplier<Modifier>, IdAwareObject {
     return result;
   }
 
-  /** Returns true if this static modifier has a value. A return of true here means a useful value is returned by {@link #get()} */
+  /**
+   * Returns true if this static modifier has a value. A return of true here means a useful value is returned by {@link #get()}
+   */
   public boolean isBound() {
     if (!ModifierManager.INSTANCE.isDynamicModifiersLoaded()) {
       return false;
@@ -48,7 +59,8 @@ public class LazyModifier implements Supplier<Modifier>, IdAwareObject {
 
   /**
    * Fetches the modifier from the modifier manager. Should not be called until after the modifier registration event fires
-   * @return  Modifier instance, or default if the modifier is missing
+   *
+   * @return Modifier instance, or default if the modifier is missing
    */
   @Override
   public Modifier get() {
@@ -59,7 +71,9 @@ public class LazyModifier implements Supplier<Modifier>, IdAwareObject {
     return getUnchecked();
   }
 
-  /** Checks if the modifier is in the given tag */
+  /**
+   * Checks if the modifier is in the given tag
+   */
   public boolean is(TagKey<Modifier> tag) {
     return ModifierManager.isInTag(getId(), tag);
   }
@@ -68,7 +82,7 @@ public class LazyModifier implements Supplier<Modifier>, IdAwareObject {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    LazyModifier that = (LazyModifier)o;
+    LazyModifier that = (LazyModifier) o;
     return Objects.equals(id, that.id);
   }
 

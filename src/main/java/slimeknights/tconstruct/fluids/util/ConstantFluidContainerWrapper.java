@@ -13,19 +13,30 @@ import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/** Represents a capability handler for a container with a constant fluid */
+/**
+ * Represents a capability handler for a container with a constant fluid
+ */
 public class ConstantFluidContainerWrapper implements IFluidHandlerItem, ICapabilityProvider {
+
   private final LazyOptional<IFluidHandlerItem> holder = LazyOptional.of(() -> this);
 
-  /** Contained fluid */
+  /**
+   * Contained fluid
+   */
   private final FluidStack fluid;
-  /** If true, the container is now empty */
+  /**
+   * If true, the container is now empty
+   */
   private boolean empty = false;
-  /** Item stack representing the current state */
+  /**
+   * Item stack representing the current state
+   */
   @Getter
   @Nonnull
   protected ItemStack container;
-  /** Empty version of the container */
+  /**
+   * Empty version of the container
+   */
   private final ItemStack emptyStack;
 
   public ConstantFluidContainerWrapper(FluidStack fluid, ItemStack container, ItemStack emptyStack) {

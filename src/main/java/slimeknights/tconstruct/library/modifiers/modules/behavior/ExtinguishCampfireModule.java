@@ -21,7 +21,9 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 /**
  * Module which performs AOE removing of campfires
  */
-public record ExtinguishCampfireModule(ModifierCondition<IToolStackView> condition) implements BlockTransformModule, ConditionalModule<IToolStackView> {
+public record ExtinguishCampfireModule(
+  ModifierCondition<IToolStackView> condition) implements BlockTransformModule, ConditionalModule<IToolStackView> {
+
   public static final ExtinguishCampfireModule INSTANCE = new ExtinguishCampfireModule(ModifierCondition.ANY_TOOL);
   public static final RecordLoadable<ExtinguishCampfireModule> LOADER = RecordLoadable.create(ModifierCondition.TOOL_FIELD, ExtinguishCampfireModule::new);
 

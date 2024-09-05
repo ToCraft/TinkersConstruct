@@ -43,45 +43,68 @@ import java.util.Collections;
 
 public class MelterBlockEntity extends NameableBlockEntity implements ITankBlockEntity {
 
-  /** Max capacity for the tank */
+  /**
+   * Max capacity for the tank
+   */
   private static final int TANK_CAPACITY = FluidValues.INGOT * 12;
   /* tags */
   private static final String TAG_INVENTORY = "inventory";
-  /** Name of the GUI */
+  /**
+   * Name of the GUI
+   */
   private static final MutableComponent NAME = TConstruct.makeTranslation("gui", "melter");
 
   public static final BlockEntityTicker<MelterBlockEntity> SERVER_TICKER = (level, pos, state, self) -> self.tick(level, pos, state);
 
   /* Tank */
-  /** Internal fluid tank output */
+  /**
+   * Internal fluid tank output
+   */
   @Getter
   protected final FluidTankAnimated tank = new FluidTankAnimated(TANK_CAPACITY, this);
-  /** Capability holder for the tank */
+  /**
+   * Capability holder for the tank
+   */
   private final LazyOptional<IFluidHandler> tankHolder = LazyOptional.of(() -> tank);
-  /** Last comparator strength to reduce block updates */
-  @Getter @Setter
+  /**
+   * Last comparator strength to reduce block updates
+   */
+  @Getter
+  @Setter
   private int lastStrength = -1;
 
-  /** Internal tick counter */
+  /**
+   * Internal tick counter
+   */
   private int tick;
 
   /* Heating */
-  /** Handles all the melting needs */
+  /**
+   * Handles all the melting needs
+   */
   @Getter
   private final MeltingModuleInventory meltingInventory = new MeltingModuleInventory(this, tank, Config.COMMON.melterOreRate, 3);
-  /** Capability holder for the tank */
+  /**
+   * Capability holder for the tank
+   */
   private final LazyOptional<IItemHandler> inventoryHolder = LazyOptional.of(() -> meltingInventory);
 
-  /** Fuel handling logic */
+  /**
+   * Fuel handling logic
+   */
   @Getter
   private final FuelModule fuelModule = new FuelModule(this, () -> Collections.singletonList(this.worldPosition.below()));
 
-  /** Main constructor */
+  /**
+   * Main constructor
+   */
   public MelterBlockEntity(BlockPos pos, BlockState state) {
     this(TinkerSmeltery.melter.get(), pos, state);
   }
 
-  /** Extendable constructor */
+  /**
+   * Extendable constructor
+   */
   @SuppressWarnings("WeakerAccess")
   protected MelterBlockEntity(BlockEntityType<? extends MelterBlockEntity> type, BlockPos pos, BlockState state) {
     super(type, pos, state, NAME);
@@ -126,13 +149,17 @@ public class MelterBlockEntity extends NameableBlockEntity implements ITankBlock
    * Melting
    */
 
-  /** Checks if the tile entity is active */
+  /**
+   * Checks if the tile entity is active
+   */
   private boolean isFormed() {
     BlockState state = this.getBlockState();
     return state.hasProperty(MelterBlock.IN_STRUCTURE) && state.getValue(MelterBlock.IN_STRUCTURE);
   }
 
-  /** Ticks the TE on the server */
+  /**
+   * Ticks the TE on the server
+   */
   private void tick(Level level, BlockPos pos, BlockState state) {
     // are we fully formed?
     if (isFormed()) {
@@ -142,7 +169,7 @@ public class MelterBlockEntity extends NameableBlockEntity implements ITankBlock
           if (!fuelModule.hasFuel() && meltingInventory.canHeat(fuelModule.findFuel(false))) {
             fuelModule.findFuel(true);
           }
-        // tick 2: heat items and consume fuel
+          // tick 2: heat items and consume fuel
         case 2: {
           boolean hasFuel = fuelModule.hasFuel();
           // update the active state

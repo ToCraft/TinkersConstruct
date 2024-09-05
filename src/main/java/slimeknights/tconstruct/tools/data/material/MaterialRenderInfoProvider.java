@@ -8,6 +8,7 @@ import slimeknights.tconstruct.library.materials.definition.IMaterial;
 import slimeknights.tconstruct.library.tools.helper.ToolBuildHandler;
 
 public class MaterialRenderInfoProvider extends AbstractMaterialRenderInfoProvider {
+
   public MaterialRenderInfoProvider(DataGenerator gen, AbstractMaterialSpriteProvider spriteProvider, ExistingFileHelper existingFileHelper) {
     super(gen, spriteProvider, existingFileHelper);
   }

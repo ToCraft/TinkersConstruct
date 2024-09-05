@@ -14,8 +14,12 @@ import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
 import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability.ComputableDataKey;
 
 public class MagicProtectionModifier extends AbstractProtectionModifier<ModifierMaxLevel> {
-  /** Entity data key for the data associated with this modifier */
+
+  /**
+   * Entity data key for the data associated with this modifier
+   */
   private static final ComputableDataKey<ModifierMaxLevel> MAGIC_DATA = TConstruct.createKey("magic_protection", ModifierMaxLevel::new);
+
   public MagicProtectionModifier() {
     super(MAGIC_DATA);
     // TODO: extract to data key module using ModifierEvents
@@ -38,7 +42,7 @@ public class MagicProtectionModifier extends AbstractProtectionModifier<Modifier
           float max = magicData.getMax();
           if (max > 0) {
             // decrease duration by 5% per level
-            int duration = (int)(newEffect.getDuration() * (1 - (max * 0.05f)));
+            int duration = (int) (newEffect.getDuration() * (1 - (max * 0.05f)));
             if (duration < 0) {
               duration = 0;
             }

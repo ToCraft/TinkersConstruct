@@ -21,12 +21,17 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Function;
 
-/** Module for keeping track of a single slot to run all logic for the modifier */
+/**
+ * Module for keeping track of a single slot to run all logic for the modifier
+ */
 public record SlotInChargeModule(TinkerDataKey<SlotInCharge> key) implements HookProvider, EquipmentChangeModifierHook {
-  private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<SlotInChargeModule>defaultHooks(ModifierHooks.EQUIPMENT_CHANGE);
-  private static final Function<TinkerDataKey<?>,SlotInCharge> CONSTRUCTOR = key -> new SlotInCharge();
 
-  /** Checks if the given tool cares about this modifier */
+  private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<SlotInChargeModule>defaultHooks(ModifierHooks.EQUIPMENT_CHANGE);
+  private static final Function<TinkerDataKey<?>, SlotInCharge> CONSTRUCTOR = key -> new SlotInCharge();
+
+  /**
+   * Checks if the given tool cares about this modifier
+   */
   private static boolean toolValid(IToolStackView tool, EquipmentSlot slot, EquipmentChangeContext context) {
     if (!tool.isBroken() && !context.getEntity().level.isClientSide) {
       return ModifierUtil.validArmorSlot(tool, slot);
@@ -61,7 +66,9 @@ public record SlotInChargeModule(TinkerDataKey<SlotInCharge> key) implements Hoo
     return DEFAULT_HOOKS;
   }
 
-  /** Checks if the given slot is in charge */
+  /**
+   * Checks if the given slot is in charge
+   */
   public static boolean isInCharge(LazyOptional<TinkerDataCapability.Holder> data, TinkerDataKey<SlotInCharge> key, EquipmentSlot slot) {
     return data.filter(d -> {
       SlotInCharge inCharge = d.get(key);
@@ -69,7 +76,9 @@ public record SlotInChargeModule(TinkerDataKey<SlotInCharge> key) implements Hoo
     }).isPresent();
   }
 
-  /** Checks if the given slot is in charge */
+  /**
+   * Checks if the given slot is in charge
+   */
   public static int getLevel(LazyOptional<TinkerDataCapability.Holder> data, TinkerDataKey<SlotInCharge> key, EquipmentSlot slot) {
     return data.map(d -> {
       SlotInCharge inCharge = d.get(key);
@@ -77,8 +86,11 @@ public record SlotInChargeModule(TinkerDataKey<SlotInCharge> key) implements Hoo
     }).orElse(0);
   }
 
-  /** Tracker to determine which slot should be in charge */
+  /**
+   * Tracker to determine which slot should be in charge
+   */
   public static class SlotInCharge {
+
     private final int[] levels = new int[6];
     @Getter
     private int totalLevel = 0;
@@ -88,7 +100,9 @@ public record SlotInChargeModule(TinkerDataKey<SlotInCharge> key) implements Hoo
 
     private SlotInCharge() {}
 
-    /** Adds the given slot to the tracker */
+    /**
+     * Adds the given slot to the tracker
+     */
     private void addSlot(EquipmentSlot slotType, int level) {
       int index = slotType.getFilterFlag();
       totalLevel += level - levels[index];
@@ -99,7 +113,9 @@ public record SlotInChargeModule(TinkerDataKey<SlotInCharge> key) implements Hoo
       }
     }
 
-    /** Removes the given slot from the tracker */
+    /**
+     * Removes the given slot from the tracker
+     */
     private void removeSlot(EquipmentSlot slotType) {
       int index = slotType.getFilterFlag();
       totalLevel -= levels[index];

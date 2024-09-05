@@ -11,8 +11,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import slimeknights.tconstruct.fluids.TinkerFluids;
 
-/** Event handlers to run when Immersive Engineering is present */
+/**
+ * Event handlers to run when Immersive Engineering is present
+ */
 public class ImmersiveEngineeringPlugin {
+
   @SubscribeEvent
   public void commonSetup(FMLCommonSetupEvent event) {
     ChemthrowerHandler.registerFlammable(TinkerFluids.blazingBlood.getLocalTag());
@@ -26,7 +29,9 @@ public class ImmersiveEngineeringPlugin {
     registerChemEffect(TinkerFluids.moltenUranium.getLocalTag(), MobEffects.POISON, 200);
   }
 
-  /** Shorthand to register a chemical potion effect */
+  /**
+   * Shorthand to register a chemical potion effect
+   */
   private static void registerChemEffect(TagKey<Fluid> tag, MobEffect effect, int duration) {
     ChemthrowerHandler.registerEffect(tag, new ChemthrowerEffect_Potion(null, 0, effect, duration, 0));
   }

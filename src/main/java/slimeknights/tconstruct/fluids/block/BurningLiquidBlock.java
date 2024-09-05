@@ -13,12 +13,20 @@ import net.minecraft.world.level.material.Material;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/** Liquid block setting the entity on fire */
+/**
+ * Liquid block setting the entity on fire
+ */
 public class BurningLiquidBlock extends LiquidBlock {
-  /** Burn time in seconds. Lava uses 15 */
+
+  /**
+   * Burn time in seconds. Lava uses 15
+   */
   private final int burnTime;
-  /** Damage from being in the fluid, lava uses 4 */
+  /**
+   * Damage from being in the fluid, lava uses 4
+   */
   private final float damage;
+
   public BurningLiquidBlock(Supplier<? extends FlowingFluid> supplier, Properties properties, int burnTime, float damage) {
     super(supplier, properties);
     this.burnTime = burnTime;
@@ -35,7 +43,9 @@ public class BurningLiquidBlock extends LiquidBlock {
     }
   }
 
-  /** Creates a new block supplier */
+  /**
+   * Creates a new block supplier
+   */
   public static Function<Supplier<? extends FlowingFluid>, LiquidBlock> createBurning(int lightLevel, int burnTime, float damage) {
     return fluid -> new BurningLiquidBlock(fluid, Properties.of(Material.LAVA).lightLevel(state -> lightLevel).noCollission().strength(100f).noLootTable(), burnTime, damage);
   }

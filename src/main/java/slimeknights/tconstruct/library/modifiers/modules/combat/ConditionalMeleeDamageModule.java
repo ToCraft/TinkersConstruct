@@ -30,12 +30,16 @@ import java.util.List;
 
 /**
  * Implementation of attack damage conditioned on the attacker or target's properties
- * @param target     Target condition
- * @param attacker   Attacker condition
- * @param formula    Damage formula
- * @param condition  Standard modifier conditions
+ *
+ * @param target    Target condition
+ * @param attacker  Attacker condition
+ * @param formula   Damage formula
+ * @param condition Standard modifier conditions
  */
-public record ConditionalMeleeDamageModule(IJsonPredicate<LivingEntity> target, IJsonPredicate<LivingEntity> attacker, MeleeFormula formula, ModifierCondition<IToolStackView> condition) implements MeleeDamageModifierHook, ConditionalStatTooltip, ModifierModule, ConditionalModule<IToolStackView> {
+public record ConditionalMeleeDamageModule(IJsonPredicate<LivingEntity> target, IJsonPredicate<LivingEntity> attacker,
+                                           MeleeFormula formula,
+                                           ModifierCondition<IToolStackView> condition) implements MeleeDamageModifierHook, ConditionalStatTooltip, ModifierModule, ConditionalModule<IToolStackView> {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<ConditionalMeleeDamageModule>defaultHooks(ModifierHooks.MELEE_DAMAGE, ModifierHooks.TOOLTIP);
   public static final RecordLoadable<ConditionalMeleeDamageModule> LOADER = RecordLoadable.create(
     LivingEntityPredicate.LOADER.defaultField("target", ConditionalMeleeDamageModule::target),
@@ -95,14 +99,19 @@ public record ConditionalMeleeDamageModule(IJsonPredicate<LivingEntity> target, 
 
   /* Builder */
 
-  /** Creates a builder instance */
+  /**
+   * Creates a builder instance
+   */
   public static Builder builder() {
     return new Builder();
   }
 
-  /** Builder class */
+  /**
+   * Builder class
+   */
   @Accessors(fluent = true)
-  public static class Builder extends VariableFormula.Builder<Builder,ConditionalMeleeDamageModule,MeleeVariable> {
+  public static class Builder extends VariableFormula.Builder<Builder, ConditionalMeleeDamageModule, MeleeVariable> {
+
     @Setter
     private IJsonPredicate<LivingEntity> target = LivingEntityPredicate.ANY;
     @Setter

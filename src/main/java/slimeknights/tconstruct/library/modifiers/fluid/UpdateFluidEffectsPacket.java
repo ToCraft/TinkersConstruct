@@ -8,17 +8,24 @@ import slimeknights.mantle.network.packet.IThreadsafePacket;
 
 import java.util.List;
 
-/** Packet to sync fluid predicates to the client */
+/**
+ * Packet to sync fluid predicates to the client
+ */
 @RequiredArgsConstructor
 public class UpdateFluidEffectsPacket implements IThreadsafePacket {
+
   private static final List<FluidEffect<? super FluidEffectContext.Block>> EMPTY_BLOCK = List.of(FluidEffect.EMPTY);
   private static final List<FluidEffect<? super FluidEffectContext.Entity>> EMPTY_ENTITY = List.of(FluidEffect.EMPTY);
-  /** Network syncing ignores effects in the fluid */
+  /**
+   * Network syncing ignores effects in the fluid
+   */
   private static final Streamable<List<FluidEffects>> NETWORK = FluidEffects.LOADABLE.list(0);
 
   private final List<FluidEffects> fluids;
 
-  /** Clientside constructor, sets ingredients */
+  /**
+   * Clientside constructor, sets ingredients
+   */
   public UpdateFluidEffectsPacket(FriendlyByteBuf buffer) {
     this.fluids = NETWORK.decode(buffer);
   }

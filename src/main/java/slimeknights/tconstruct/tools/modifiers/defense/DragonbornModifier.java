@@ -14,7 +14,9 @@ import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
 import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability.ComputableDataKey;
 
 public class DragonbornModifier extends AbstractProtectionModifier<ModifierMaxLevel> {
+
   private static final ComputableDataKey<ModifierMaxLevel> DRAGONBORN = TConstruct.createKey("dragonborn", ModifierMaxLevel::new);
+
   public DragonbornModifier() {
     super(DRAGONBORN);
     MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, false, CriticalHitEvent.class, DragonbornModifier::onCritical);
@@ -26,7 +28,9 @@ public class DragonbornModifier extends AbstractProtectionModifier<ModifierMaxLe
     hookBuilder.addModule(ProtectionModule.builder().entity(TinkerPredicate.AIRBORNE).eachLevel(2.5f));
   }
 
-  /** Boosts critical hit damage */
+  /**
+   * Boosts critical hit damage
+   */
   private static void onCritical(CriticalHitEvent event) {
     if (event.getResult() != Result.DENY) {
       // force critical if not already critical and in the air

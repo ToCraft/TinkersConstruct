@@ -49,6 +49,7 @@ public class SlimeTreeConfig implements FeatureConfiguration {
   @NoArgsConstructor
   @Accessors(fluent = true)
   public static class Builder {
+
     private static final SupplierBlockStateProvider AIR_PROVIDER = new SupplierBlockStateProvider(Blocks.AIR::defaultBlockState);
 
     @Setter
@@ -64,41 +65,55 @@ public class SlimeTreeConfig implements FeatureConfiguration {
     private boolean hasVines = false;
     private boolean planted = false;
 
-    /** Sets the tree as a planted tree */
+    /**
+     * Sets the tree as a planted tree
+     */
     public Builder canDoubleHeight() {
       this.canDoubleHeight = true;
       return this;
     }
 
-    /** Sets the trunk */
+    /**
+     * Sets the trunk
+     */
     public Builder trunk(Supplier<BlockState> supplier) {
       return trunkProvider(new SupplierBlockStateProvider(supplier));
     }
 
-    /** Sets the leaves */
+    /**
+     * Sets the leaves
+     */
     public Builder leaves(Supplier<BlockState> supplier) {
       return leavesProvider(new SupplierBlockStateProvider(supplier));
     }
 
-    /** Sets the vines */
+    /**
+     * Sets the vines
+     */
     public Builder vinesProvider(SupplierBlockStateProvider supplier) {
       this.vinesProvider = supplier;
       this.hasVines = true;
       return this;
     }
 
-    /** Sets the vines */
+    /**
+     * Sets the vines
+     */
     public Builder vines(Supplier<BlockState> supplier) {
       return vinesProvider(new SupplierBlockStateProvider(supplier));
     }
 
-    /** Sets the tree as a planted tree */
+    /**
+     * Sets the tree as a planted tree
+     */
     public Builder planted() {
       this.planted = true;
       return this;
     }
 
-    /** Builds the config */
+    /**
+     * Builds the config
+     */
     public SlimeTreeConfig build() {
       return new SlimeTreeConfig(this.trunkProvider, this.leavesProvider, this.vinesProvider, this.baseHeight, this.randomHeight, this.canDoubleHeight, this.hasVines, this.planted);
     }

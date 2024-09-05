@@ -15,8 +15,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import slimeknights.tconstruct.common.TinkerTags;
 
 public class SlimeLeavesBlock extends LeavesBlock {
+
   @Getter
   private final FoliageType foliageType;
+
   public SlimeLeavesBlock(Properties properties, FoliageType foliageType) {
     super(properties);
     this.foliageType = foliageType;

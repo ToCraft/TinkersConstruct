@@ -8,9 +8,14 @@ import slimeknights.tconstruct.library.modifiers.ModifierId;
 
 import java.util.List;
 
-/** Predicate that checks against a modifier */
+/**
+ * Predicate that checks against a modifier
+ */
 public interface ModifierPredicate extends IJsonPredicate<ModifierId> {
-  /** Instance that always returns true */
+
+  /**
+   * Instance that always returns true
+   */
   ModifierPredicate ANY = SingletonLoader.singleton(loader -> new ModifierPredicate() {
     @Override
     public boolean matches(ModifierId input) {
@@ -22,10 +27,14 @@ public interface ModifierPredicate extends IJsonPredicate<ModifierId> {
       return loader;
     }
   });
-  /** Loader for modifier predicates */
+  /**
+   * Loader for modifier predicates
+   */
   PredicateRegistry<ModifierId> LOADER = new PredicateRegistry<>("Modifier Predicate", ANY);
 
-  /** Gets an inverted condition */
+  /**
+   * Gets an inverted condition
+   */
   @Override
   default IJsonPredicate<ModifierId> inverted() {
     return LOADER.invert(this);
@@ -37,13 +46,17 @@ public interface ModifierPredicate extends IJsonPredicate<ModifierId> {
 
   /* Helper methods */
 
-  /** Creates an and predicate */
+  /**
+   * Creates an and predicate
+   */
   @SafeVarargs
   static IJsonPredicate<ModifierId> and(IJsonPredicate<ModifierId>... predicates) {
     return LOADER.and(List.of(predicates));
   }
 
-  /** Creates an or predicate */
+  /**
+   * Creates an or predicate
+   */
   @SafeVarargs
   static IJsonPredicate<ModifierId> or(IJsonPredicate<ModifierId>... predicates) {
     return LOADER.or(List.of(predicates));

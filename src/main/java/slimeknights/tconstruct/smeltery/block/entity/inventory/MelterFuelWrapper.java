@@ -15,6 +15,7 @@ import java.util.Optional;
  * Fluid tank wrapper that weakly references a tank from a neighbor
  */
 public class MelterFuelWrapper implements IFluidContainer {
+
   private final WeakReference<IFluidTank> tank;
 
   public MelterFuelWrapper(IFluidTank tank) {
@@ -23,7 +24,8 @@ public class MelterFuelWrapper implements IFluidContainer {
 
   /**
    * Checks if this reference is still valid
-   * @return  False if the stored tank is removed
+   *
+   * @return False if the stored tank is removed
    */
   public boolean isValid() {
     return this.tank.get() != null;
@@ -32,37 +34,40 @@ public class MelterFuelWrapper implements IFluidContainer {
   @Override
   public Fluid getFluid() {
     return Optional.ofNullable(tank.get())
-                   .map(IFluidTank::getFluid)
-                   .map(FluidStack::getFluid)
-                   .orElse(Fluids.EMPTY);
+      .map(IFluidTank::getFluid)
+      .map(FluidStack::getFluid)
+      .orElse(Fluids.EMPTY);
   }
 
   /* Melter methods */
 
   /**
    * Gets the contained fluid stack
-   * @return  Contained fluid stack
+   *
+   * @return Contained fluid stack
    */
   public FluidStack getFluidStack() {
     return Optional.ofNullable(tank.get())
-                   .map(IFluidTank::getFluid)
-                   .orElse(FluidStack.EMPTY);
+      .map(IFluidTank::getFluid)
+      .orElse(FluidStack.EMPTY);
   }
 
   /**
    * Gets the capacity of the contained tank
-   * @return  Tank capacity
+   *
+   * @return Tank capacity
    */
   public int getCapacity() {
     return Optional.ofNullable(tank.get())
-                   .map(IFluidTank::getCapacity)
-                   .orElse(0);
+      .map(IFluidTank::getCapacity)
+      .orElse(0);
   }
 
   /**
    * Drains one copy of fuel from the given tank
-   * @param fuel  Fuel to drain
-   * @return  Ticks of fuel units
+   *
+   * @param fuel Fuel to drain
+   * @return Ticks of fuel units
    */
   public int consumeFuel(MeltingFuel fuel) {
     IFluidTank tank = this.tank.get();

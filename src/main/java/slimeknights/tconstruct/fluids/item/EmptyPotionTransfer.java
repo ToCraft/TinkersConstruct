@@ -15,9 +15,13 @@ import slimeknights.mantle.fluid.transfer.IFluidContainerTransfer;
 import slimeknights.mantle.recipe.helper.ItemOutput;
 import slimeknights.tconstruct.TConstruct;
 
-/** Fluid transfer info that empties a fluid from an item, copying the fluid's NBT to the stack */
+/**
+ * Fluid transfer info that empties a fluid from an item, copying the fluid's NBT to the stack
+ */
 public class EmptyPotionTransfer extends EmptyFluidWithNBTTransfer implements IFluidContainerTransfer {
+
   public static final ResourceLocation ID = TConstruct.getResource("empty_potion");
+
   public EmptyPotionTransfer(Ingredient input, ItemOutput filled, FluidStack fluid) {
     super(input, filled, fluid);
   }
@@ -37,6 +41,8 @@ public class EmptyPotionTransfer extends EmptyFluidWithNBTTransfer implements IF
     return json;
   }
 
-  /** Unique loader instance */
+  /**
+   * Unique loader instance
+   */
   public static final JsonDeserializer<EmptyPotionTransfer> DESERIALIZER = new Deserializer<>(EmptyPotionTransfer::new);
 }

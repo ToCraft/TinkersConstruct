@@ -16,8 +16,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-/** Condition requiring that items exist in the intersection of all required item tags. */
+/**
+ * Condition requiring that items exist in the intersection of all required item tags.
+ */
 public class TagIntersectionPresentCondition<T> implements ICondition {
+
   private static final ResourceLocation NAME = TConstruct.getResource("tag_intersection_present");
   public static final Serializer SERIALIZER = new Serializer();
 
@@ -30,13 +33,17 @@ public class TagIntersectionPresentCondition<T> implements ICondition {
     this.names = names;
   }
 
-  /** Creates a condition from a set of keys */
+  /**
+   * Creates a condition from a set of keys
+   */
   @SafeVarargs
   public static <T> TagIntersectionPresentCondition<T> ofKeys(TagKey<T>... names) {
     return new TagIntersectionPresentCondition<>(Arrays.asList(names));
   }
 
-  /** Creates a condition from a registry and a set of names */
+  /**
+   * Creates a condition from a registry and a set of names
+   */
   public static <T> TagIntersectionPresentCondition<T> ofNames(ResourceKey<? extends Registry<T>> registry, ResourceLocation... names) {
     return new TagIntersectionPresentCondition<>(Arrays.stream(names).map(name -> TagKey.create(registry, name)).toList());
   }
@@ -78,6 +85,7 @@ public class TagIntersectionPresentCondition<T> implements ICondition {
   }
 
   private static class Serializer implements IConditionSerializer<TagIntersectionPresentCondition<?>> {
+
     @Override
     public void write(JsonObject json, TagIntersectionPresentCondition<?> value) {
       JsonArray names = new JsonArray();
@@ -88,7 +96,9 @@ public class TagIntersectionPresentCondition<T> implements ICondition {
       json.add("tags", names);
     }
 
-    /** Reads with generics happy */
+    /**
+     * Reads with generics happy
+     */
     private static <T> TagIntersectionPresentCondition<T> readGeneric(JsonObject json) {
       ResourceKey<Registry<T>> registry = ResourceKey.createRegistryKey(JsonHelper.getResourceLocation(json, "registry"));
       return new TagIntersectionPresentCondition<>(JsonHelper.parseList(json, "tags", (element, s) -> TagKey.create(registry, JsonHelper.convertToResourceLocation(element, s))));

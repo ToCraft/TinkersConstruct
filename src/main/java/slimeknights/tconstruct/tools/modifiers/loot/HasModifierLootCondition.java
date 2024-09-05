@@ -16,9 +16,12 @@ import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 
-/** Condition to check if a held tool has the given modifier */
+/**
+ * Condition to check if a held tool has the given modifier
+ */
 @RequiredArgsConstructor
 public class HasModifierLootCondition implements LootItemCondition {
+
   private final ModifierId modifier;
 
   @Override
@@ -33,6 +36,7 @@ public class HasModifierLootCondition implements LootItemCondition {
   }
 
   public static class ConditionSerializer implements Serializer<HasModifierLootCondition> {
+
     @Override
     public void serialize(JsonObject json, HasModifierLootCondition condition, JsonSerializationContext context) {
       json.addProperty("modifier", condition.modifier.toString());

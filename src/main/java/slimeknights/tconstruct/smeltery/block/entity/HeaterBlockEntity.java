@@ -23,8 +23,11 @@ import slimeknights.tconstruct.smeltery.menu.SingleItemContainerMenu;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/** Tile entity for the heater block below the melter */
+/**
+ * Tile entity for the heater block below the melter
+ */
 public class HeaterBlockEntity extends NameableBlockEntity {
+
   private static final String TAG_ITEM = "item";
   private static final Component TITLE = TConstruct.makeTranslation("gui", "heater");
 

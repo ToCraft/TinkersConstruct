@@ -4,6 +4,8 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -56,56 +58,92 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.BiPredicate;
 
-/** Helper functions for adding tooltips to tools */
+/**
+ * Helper functions for adding tooltips to tools
+ */
 public class TooltipUtil {
-  /** Translation key for the tool name format string */
+
+  /**
+   * Translation key for the tool name format string
+   */
   public static final String KEY_FORMAT = TConstruct.makeTranslationKey("item", "tool.format");
-  /** Format for a name ID pair */
+  /**
+   * Format for a name ID pair
+   */
   public static final String KEY_ID_FORMAT = TConstruct.makeTranslationKey("item", "tool.id_format");
-  /** Translation key for the tool name format string */
+  /**
+   * Translation key for the tool name format string
+   */
   private static final Component MATERIAL_SEPARATOR = TConstruct.makeTranslation("item", "tool.material_separator");
 
-  /** Tool tag to set that makes a tool a display tool */
+  /**
+   * Tool tag to set that makes a tool a display tool
+   */
   public static final String KEY_DISPLAY = "tic_display";
-  /** Tag to set name without name being italic */
+  /**
+   * Tag to set name without name being italic
+   */
   private static final String KEY_NAME = "tic_name";
 
-  /** Function to show all attributes in the tooltip */
+  /**
+   * Function to show all attributes in the tooltip
+   */
   public static final BiPredicate<Attribute, Operation> SHOW_ALL_ATTRIBUTES = (att, op) -> true;
-  /** Function to show all attributes in the tooltip */
+  /**
+   * Function to show all attributes in the tooltip
+   */
   public static final BiPredicate<Attribute, Operation> SHOW_MELEE_ATTRIBUTES = (att, op) -> op != Operation.ADDITION || (att != Attributes.ATTACK_DAMAGE && att != Attributes.ATTACK_SPEED && att != Attributes.ARMOR && att != Attributes.ARMOR_TOUGHNESS && att != Attributes.KNOCKBACK_RESISTANCE);
-  /** Function to show all attributes in the tooltip */
+  /**
+   * Function to show all attributes in the tooltip
+   */
   public static final BiPredicate<Attribute, Operation> SHOW_ARMOR_ATTRIBUTES = (att, op) -> op != Operation.ADDITION || (att != Attributes.ARMOR && att != Attributes.ARMOR_TOUGHNESS && att != Attributes.KNOCKBACK_RESISTANCE);
 
-  /** Flags used when not holding control or shift */
+  /**
+   * Flags used when not holding control or shift
+   */
   private static final int DEFAULT_HIDE_FLAGS = TooltipPart.ENCHANTMENTS.getMask();
-  /** Flags used when holding control or shift */
+  /**
+   * Flags used when holding control or shift
+   */
   private static final int MODIFIER_HIDE_FLAGS = TooltipPart.ENCHANTMENTS.getMask() | TooltipPart.MODIFIERS.getMask();
 
   private TooltipUtil() {}
 
-  /** Tooltip telling the player to hold shift for more info */
+  /**
+   * Tooltip telling the player to hold shift for more info
+   */
   public static final Component TOOLTIP_HOLD_SHIFT = TConstruct.makeTranslation("tooltip", "hold_shift", TConstruct.makeTranslation("key", "shift").withStyle(ChatFormatting.YELLOW, ChatFormatting.ITALIC));
-  /** Tooltip telling the player to hold control for part info */
+  /**
+   * Tooltip telling the player to hold control for part info
+   */
   public static final Component TOOLTIP_HOLD_CTRL = TConstruct.makeTranslation("tooltip", "hold_ctrl", TConstruct.makeTranslation("key", "ctrl").withStyle(ChatFormatting.AQUA, ChatFormatting.ITALIC));
-  /** Tooltip for when tool data is missing */
+  /**
+   * Tooltip for when tool data is missing
+   */
   private static final Component NO_DATA = TConstruct.makeTranslation("tooltip", "missing_data").withStyle(ChatFormatting.GRAY);
-  /** Tooltip for when a tool is uninitialized */
+  /**
+   * Tooltip for when a tool is uninitialized
+   */
   private static final Component UNINITIALIZED = TConstruct.makeTranslation("tooltip", "uninitialized").withStyle(ChatFormatting.GRAY);
-  /** Extra tooltip for multipart tools with no materials */
+  /**
+   * Extra tooltip for multipart tools with no materials
+   */
   private static final Component RANDOM_MATERIALS = TConstruct.makeTranslation("tooltip", "random_materials").withStyle(ChatFormatting.GRAY);
 
   /**
    * If true, this stack was created for display, so some of the tooltip is suppressed
-   * @param stack  Stack to check
-   * @return  True if marked display
+   *
+   * @param stack Stack to check
+   * @return True if marked display
    */
   public static boolean isDisplay(ItemStack stack) {
     CompoundTag nbt = stack.getTag();
     return nbt != null && nbt.getBoolean(KEY_DISPLAY);
   }
 
-  /** Gets the name for a given material variant */
+  /**
+   * Gets the name for a given material variant
+   */
   @Nullable
   private static Component nameFor(String itemKey, Component itemName, MaterialVariantId variantId) {
     String materialKey = MaterialTooltipCache.getKey(variantId);
@@ -127,10 +165,11 @@ public class TooltipUtil {
 
   /**
    * Gets the display name for a single material
-   * @param stack     Stack instance
-   * @param itemName  Name of the stack on its own
-   * @param material  Material to use
-   * @return  Name for a material tool
+   *
+   * @param stack    Stack instance
+   * @param itemName Name of the stack on its own
+   * @param material Material to use
+   * @return Name for a material tool
    */
   private static Component getMaterialItemName(ItemStack stack, Component itemName, MaterialVariantId material) {
     String itemKey = stack.getDescriptionId();
@@ -150,7 +189,7 @@ public class TooltipUtil {
   /**
    * Combines the given display name with the material names to form the new given name
    *
-   * @param itemName the standard display name
+   * @param itemName  the standard display name
    * @param materials the list of material names
    * @return the combined item name
    */
@@ -168,7 +207,9 @@ public class TooltipUtil {
     return Component.translatable(KEY_FORMAT, name, itemName);
   }
 
-  /** Sets the tool name in a way that will not be italic */
+  /**
+   * Sets the tool name in a way that will not be italic
+   */
   public static void setDisplayName(ItemStack tool, String name) {
     if (name.isEmpty()) {
       CompoundTag tag = tool.getTag();
@@ -181,7 +222,9 @@ public class TooltipUtil {
     tool.resetHoverName();
   }
 
-  /** Gets the display name from the given tool */
+  /**
+   * Gets the display name from the given tool
+   */
   public static String getDisplayName(ItemStack tool) {
     CompoundTag tag = tool.getTag();
     if (tag != null) {
@@ -192,9 +235,10 @@ public class TooltipUtil {
 
   /**
    * Gets the display name for a tool including the head material in the name
-   * @param stack           Stack instance
-   * @param toolDefinition  Tool definition
-   * @return  Display name including the head material
+   *
+   * @param stack          Stack instance
+   * @param toolDefinition Tool definition
+   * @return Display name including the head material
    */
   public static Component getDisplayName(ItemStack stack, ToolDefinition toolDefinition) {
     return getDisplayName(stack, null, toolDefinition);
@@ -202,9 +246,10 @@ public class TooltipUtil {
 
   /**
    * Gets the display name for a tool including the head material in the name
-   * @param stack  Stack instance
-   * @param tool   Tool instance
-   * @return  Display name including the head material
+   *
+   * @param stack Stack instance
+   * @param tool  Tool instance
+   * @return Display name including the head material
    */
   public static Component getDisplayName(ItemStack stack, @Nullable IToolStackView tool, ToolDefinition toolDefinition) {
     String name = getDisplayName(stack);
@@ -248,7 +293,9 @@ public class TooltipUtil {
     return getCombinedItemName(baseName, nameMaterials);
   }
 
-  /** Replaces the world argument with the local player */
+  /**
+   * Replaces the world argument with the local player
+   */
   public static void addInformation(IModifiableDisplay item, ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
     Player player = world == null ? null : SafeClientAccess.getPlayer();
     TooltipUtil.addInformation(item, stack, player, tooltip, tooltipKey, tooltipFlag);
@@ -297,10 +344,11 @@ public class TooltipUtil {
 
   /**
    * Adds modifier names to the tooltip
-   * @param stack      Stack instance. If empty, skips adding enchantment names
-   * @param tool       Tool instance
-   * @param tooltips   Tooltip list
-   * @param flag      Tooltip flag
+   *
+   * @param stack    Stack instance. If empty, skips adding enchantment names
+   * @param tool     Tool instance
+   * @param tooltips Tooltip list
+   * @param flag     Tooltip flag
    */
   @SuppressWarnings("deprecation")
   public static void addModifierNames(ItemStack stack, IToolStackView tool, List<Component> tooltips, TooltipFlag flag) {
@@ -321,8 +369,8 @@ public class TooltipUtil {
         for (int i = 0; i < enchantments.size(); ++i) {
           CompoundTag enchantmentTag = enchantments.getCompound(i);
           // TODO: is this the best place for this, or should we let vanilla run?
-          Registry.ENCHANTMENT.getOptional(ResourceLocation.tryParse(enchantmentTag.getString("id")))
-                              .ifPresent(enchantment -> tooltips.add(enchantment.getFullname(enchantmentTag.getInt("lvl"))));
+          BuiltInRegistries.ENCHANTMENT.getOptional(ResourceLocation.tryParse(enchantmentTag.getString("id")))
+            .ifPresent(enchantment -> tooltips.add(enchantment.getFullname(enchantmentTag.getInt("lvl"))));
         }
       }
     }
@@ -330,9 +378,10 @@ public class TooltipUtil {
 
   /**
    * Adds information when holding neither control nor shift
-   * @param tool      Tool stack instance
-   * @param tooltips  Tooltip list
-   * @param flag      Tooltip flag
+   *
+   * @param tool     Tool stack instance
+   * @param tooltips Tooltip list
+   * @param flag     Tooltip flag
    */
   public static void getDefaultInfo(ItemStack stack, IToolStackView tool, List<Component> tooltips, TooltipFlag flag) {
     // shows as broken when broken, hold shift for proper durability
@@ -351,9 +400,9 @@ public class TooltipUtil {
   /**
    * Gets the  default information for the given tool stack
    *
-   * @param tool      the tool stack
-   * @param tooltip   Tooltip list
-   * @param flag      Tooltip flag
+   * @param tool    the tool stack
+   * @param tooltip Tooltip list
+   * @param flag    Tooltip flag
    * @return List from the parameter after filling
    */
   public static List<Component> getDefaultStats(IToolStackView tool, @Nullable Player player, List<Component> tooltip, TooltipKey key, TooltipFlag flag) {
@@ -399,9 +448,9 @@ public class TooltipUtil {
   /**
    * Gets the  default information for the given tool stack
    *
-   * @param tool      the tool stack
-   * @param tooltip   Tooltip list
-   * @param flag      Tooltip flag
+   * @param tool    the tool stack
+   * @param tooltip Tooltip list
+   * @param flag    Tooltip flag
    * @return List from the parameter after filling
    */
   public static List<Component> getArmorStats(IToolStackView tool, @Nullable Player player, List<Component> tooltip, TooltipKey key, TooltipFlag flag) {
@@ -428,10 +477,11 @@ public class TooltipUtil {
 
   /**
    * Gets the tooltip of the components list of a tool
-   * @param item      Modifiable item instance
-   * @param stack     Item stack being displayed
-   * @param tooltips  List of tooltips
-   * @param flag      Tooltip flag, if advanced will show material IDs
+   *
+   * @param item     Modifiable item instance
+   * @param stack    Item stack being displayed
+   * @param tooltips List of tooltips
+   * @param flag     Tooltip flag, if advanced will show material IDs
    */
   public static void getComponents(IModifiable item, ItemStack stack, List<Component> tooltips, TooltipFlag flag) {
     // no components, nothing to do
@@ -478,16 +528,17 @@ public class TooltipUtil {
 
   /**
    * Adds attributes to the tooltip
-   * @param item           Modifiable item instance
-   * @param tool           Tool instance, primary source of info for the tool
-   * @param player         Player instance
-   * @param tooltip        Tooltip instance
-   * @param showAttribute  Predicate to determine whether an attribute should show
-   * @param slots          List of slots to display
+   *
+   * @param item          Modifiable item instance
+   * @param tool          Tool instance, primary source of info for the tool
+   * @param player        Player instance
+   * @param tooltip       Tooltip instance
+   * @param showAttribute Predicate to determine whether an attribute should show
+   * @param slots         List of slots to display
    */
   public static void addAttributes(ITinkerStationDisplay item, IToolStackView tool, @Nullable Player player, List<Component> tooltip, BiPredicate<Attribute, Operation> showAttribute, EquipmentSlot... slots) {
     for (EquipmentSlot slot : slots) {
-      Multimap<Attribute,AttributeModifier> modifiers = item.getAttributeModifiers(tool, slot);
+      Multimap<Attribute, AttributeModifier> modifiers = item.getAttributeModifiers(tool, slot);
       if (!modifiers.isEmpty()) {
         if (slots.length > 1) {
           tooltip.add(Component.empty());
@@ -529,22 +580,24 @@ public class TooltipUtil {
           Component name = Component.translatable(attribute.getDescriptionId());
           if (showEquals) {
             tooltip.add(Component.literal(" ")
-                          .append(Component.translatable("attribute.modifier.equals." + operation.toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(displayValue), name))
-                          .withStyle(ChatFormatting.DARK_GREEN));
+              .append(Component.translatable("attribute.modifier.equals." + operation.toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(displayValue), name))
+              .withStyle(ChatFormatting.DARK_GREEN));
           } else if (amount > 0.0D) {
             tooltip.add((Component.translatable("attribute.modifier.plus." + operation.toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(displayValue), name))
-                          .withStyle(ChatFormatting.BLUE));
+              .withStyle(ChatFormatting.BLUE));
           } else if (amount < 0.0D) {
             displayValue *= -1;
             tooltip.add((Component.translatable("attribute.modifier.take." + operation.toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(displayValue), name))
-                          .withStyle(ChatFormatting.RED));
+              .withStyle(ChatFormatting.RED));
           }
         }
       }
     }
   }
 
-  /** Gets the tooltip flags for the current ctrl+shift combination, used to hide enchantments and modifiers from the tooltip as needed */
+  /**
+   * Gets the tooltip flags for the current ctrl+shift combination, used to hide enchantments and modifiers from the tooltip as needed
+   */
   public static int getModifierHideFlags(ToolDefinition definition) {
     TooltipKey key = SafeClientAccess.getTooltipKey();
     if (key == TooltipKey.SHIFT || (key == TooltipKey.CONTROL && definition.hasMaterials())) {

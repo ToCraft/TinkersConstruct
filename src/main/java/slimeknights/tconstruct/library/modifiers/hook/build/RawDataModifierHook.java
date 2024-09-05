@@ -12,6 +12,7 @@ import java.util.Collection;
  * It is generally better to use volatile data when possible, or persistent data if you need it preserved between rebuilds.
  */
 public interface RawDataModifierHook {
+
   /**
    * Allows editing a restricted view of the tools raw NBT. You are responsible for cleaning up that data on removal via {@link #removeRawData(IToolStackView, Modifier, RestrictedCompoundTag)}.
    * This may be called when your data is already on the tool, ensure running multiple times in a row will give the same result.
@@ -21,9 +22,10 @@ public interface RawDataModifierHook {
    * <ul>
    *   <li>{@link VolatileDataModifierHook}: Modifier data that automatically cleans up when the modifier is removed.</li>
    * </ul>
-   * @param tool      Tool stack instance
-   * @param modifier  Modifier entry of the modifier
-   * @param tag       Mutable tag, will not allow modifiying any important tool stat
+   *
+   * @param tool     Tool stack instance
+   * @param modifier Modifier entry of the modifier
+   * @param tag      Mutable tag, will not allow modifiying any important tool stat
    */
   void addRawData(IToolStackView tool, ModifierEntry modifier, RestrictedCompoundTag tag);
 
@@ -37,14 +39,18 @@ public interface RawDataModifierHook {
    *   <li>{@link VolatileDataModifierHook}: Adds NBT that is automatically removed</li>
    *   <li>{@link ValidateModifierHook}: Allows marking a new state invalid</li>
    * </ul>
-   * @param tool      Tool instance
-   * @param modifier  Modifier being removed
-   * @param tag       Modifiable data that can be edited now that this modifier will no longer be here
+   *
+   * @param tool     Tool instance
+   * @param modifier Modifier being removed
+   * @param tag      Modifiable data that can be edited now that this modifier will no longer be here
    */
   void removeRawData(IToolStackView tool, Modifier modifier, RestrictedCompoundTag tag);
 
-  /** Merger that runs all hooks */
+  /**
+   * Merger that runs all hooks
+   */
   record AllMerger(Collection<RawDataModifierHook> modules) implements RawDataModifierHook {
+
     @Override
     public void addRawData(IToolStackView tool, ModifierEntry modifier, RestrictedCompoundTag tag) {
       for (RawDataModifierHook module : modules) {

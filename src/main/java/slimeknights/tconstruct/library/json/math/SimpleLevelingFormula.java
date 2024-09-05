@@ -5,8 +5,11 @@ import net.minecraft.network.FriendlyByteBuf;
 import slimeknights.tconstruct.library.json.LevelingValue;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 
-/** Implementation of {@link ModifierFormula} that uses a simpler formula for more efficiency, since not everything needs the flexibility of post fix */
+/**
+ * Implementation of {@link ModifierFormula} that uses a simpler formula for more efficiency, since not everything needs the flexibility of post fix
+ */
 record SimpleLevelingFormula(LevelingValue leveling, FallbackFormula formula) implements ModifierFormula {
+
   @Override
   public float apply(float... arguments) {
     return formula.apply(arguments);

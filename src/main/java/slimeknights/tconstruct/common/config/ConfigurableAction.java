@@ -3,8 +3,11 @@ package slimeknights.tconstruct.common.config;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 
-/** Config prop that runs a runnable assuming its true */
+/**
+ * Config prop that runs a runnable assuming its true
+ */
 public class ConfigurableAction implements Runnable {
+
   private final BooleanValue prop;
   private final Runnable action;
 

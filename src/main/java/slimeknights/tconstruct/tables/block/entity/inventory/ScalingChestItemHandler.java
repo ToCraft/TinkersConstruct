@@ -9,15 +9,25 @@ import slimeknights.mantle.block.entity.MantleBlockEntity;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/** Base logic for scaling chest inventories */
+/**
+ * Base logic for scaling chest inventories
+ */
 public abstract class ScalingChestItemHandler extends ItemStackHandler implements IChestItemHandler {
-  /** Default maximum size */
+
+  /**
+   * Default maximum size
+   */
   protected static final int DEFAULT_MAX = 256;
-  /** Current size for display in containers */
+  /**
+   * Current size for display in containers
+   */
   @Getter
   private int visualSize = 1;
-  /** TE owning this inventory */
-  @Setter @Nullable
+  /**
+   * TE owning this inventory
+   */
+  @Setter
+  @Nullable
   private MantleBlockEntity parent;
 
   public ScalingChestItemHandler(int size) {
@@ -42,7 +52,9 @@ public abstract class ScalingChestItemHandler extends ItemStackHandler implement
     this.visualSize = newLimit;
   }
 
-  /** Updates the visual size of the inventory */
+  /**
+   * Updates the visual size of the inventory
+   */
   private void updateVisualSize(int slotChanged, ItemStack stack) {
     // if the slot is too large, nothing to do
     int maxSlots = getSlots();
@@ -60,7 +72,7 @@ public abstract class ScalingChestItemHandler extends ItemStackHandler implement
     } else {
       // if the current index is past the max, increase visual size to this plus 1
       if (visualSize < maxSlots && visualSize < slotChanged + 2) {
-        visualSize =slotChanged + 2;
+        visualSize = slotChanged + 2;
       }
     }
   }

@@ -5,7 +5,9 @@ import lombok.Setter;
 import slimeknights.mantle.block.entity.MantleBlockEntity;
 
 public class FluidTankAnimated extends FluidTankBase<MantleBlockEntity> {
-  @Getter @Setter
+
+  @Getter
+  @Setter
   private float renderOffset;
 
   public FluidTankAnimated(int capacity, MantleBlockEntity parent) {

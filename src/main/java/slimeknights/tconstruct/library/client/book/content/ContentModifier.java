@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ContentModifier extends PageContent {
+
   public static final transient ResourceLocation ID = TConstruct.getResource("modifier");
   public static final transient int TEX_SIZE = 256;
   public static final ResourceLocation BOOK_MODIFY = TConstruct.getResource("textures/gui/book/modify.png");
@@ -65,33 +66,49 @@ public class ContentModifier extends PageContent {
   private transient int currentRecipe = 0;
   private final transient List<BookElement> parts = new ArrayList<>();
 
-  /** Text to display at the top of the page */
+  /**
+   * Text to display at the top of the page
+   */
   public TextData[] text;
-  /** Text to display in bulleted lists */
+  /**
+   * Text to display in bulleted lists
+   */
   public String[] effects;
-  /** If true, adds more space for top of page text, false adds more space for effects */
+  /**
+   * If true, adds more space for top of page text, false adds more space for effects
+   */
   public boolean more_text_space = false;
 
-  /** Modifier to display for this page */
+  /**
+   * Modifier to display for this page
+   */
   @SerializedName("modifier_id")
   public String modifierID;
-  /** Tag filter to limit tools that display on a page */
+  /**
+   * Tag filter to limit tools that display on a page
+   */
   @SerializedName("tool_filter")
   public String toolFilter = null;
 
-  /** Default constructor for page loader */
+  /**
+   * Default constructor for page loader
+   */
   public ContentModifier() {}
 
-  /** Creates a new page using the given modifier description */
+  /**
+   * Creates a new page using the given modifier description
+   */
   public ContentModifier(Modifier modifier) {
     this.modifier = modifier;
     this.modifierID = modifier.getId().toString();
-    this.text = new TextData[] {new TextData(ForgeI18n.getPattern(modifier.getTranslationKey() + ".description"))};
+    this.text = new TextData[]{new TextData(ForgeI18n.getPattern(modifier.getTranslationKey() + ".description"))};
     this.effects = new String[0];
     this.more_text_space = true;
   }
 
-  /** Gets the modifier for this page */
+  /**
+   * Gets the modifier for this page
+   */
   public Modifier getModifier() {
     if (this.modifier == null) {
       if (this.modifierID == null) {
@@ -102,14 +119,16 @@ public class ContentModifier extends PageContent {
     return this.modifier;
   }
 
-  /** Gets the tag filter for tool display */
+  /**
+   * Gets the tag filter for tool display
+   */
   @Nullable
   public TagKey<Item> getToolFilterTag() {
     if (this.toolFilter == null) {
       return null;
     }
     if (this.toolFilterTag == null) {
-      this.toolFilterTag = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(toolFilter));
+      this.toolFilterTag = TagKey.create(Registries.ITEM, new ResourceLocation(toolFilter));
     }
     return this.toolFilterTag;
   }

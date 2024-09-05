@@ -33,6 +33,7 @@ import java.util.stream.IntStream;
  */
 @AllArgsConstructor
 public class ToolBuildingRecipe implements ITinkerStationRecipe {
+
   public static final RecordLoadable<ToolBuildingRecipe> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(),
     LoadableRecipeSerializer.RECIPE_GROUP,
@@ -50,7 +51,9 @@ public class ToolBuildingRecipe implements ITinkerStationRecipe {
   protected final int outputCount;
   protected final List<Ingredient> ingredients;
 
-  /** Gets the additional recipe requirements beyond the tool parts */
+  /**
+   * Gets the additional recipe requirements beyond the tool parts
+   */
   public List<Ingredient> getExtraRequirements() {
     return ingredients;
   }
@@ -95,12 +98,14 @@ public class ToolBuildingRecipe implements ITinkerStationRecipe {
   public ItemStack assemble(ITinkerStationContainer inv) {
     // first n slots contain parts
     List<MaterialVariant> materials = IntStream.range(0, ToolPartsHook.parts(output.getToolDefinition()).size())
-                                               .mapToObj(i -> MaterialVariant.of(IMaterialItem.getMaterialFromStack(inv.getInput(i))))
-                                               .toList();
+      .mapToObj(i -> MaterialVariant.of(IMaterialItem.getMaterialFromStack(inv.getInput(i))))
+      .toList();
     return ToolStack.createTool(output.asItem(), output.getToolDefinition(), new MaterialNBT(materials)).createStack(outputCount);
   }
 
-  /** @deprecated Use {@link #assemble(ITinkerStationContainer)} */
+  /**
+   * @deprecated Use {@link #assemble(ITinkerStationContainer)}
+   */
   @Deprecated
   @Override
   public ItemStack getResultItem() {

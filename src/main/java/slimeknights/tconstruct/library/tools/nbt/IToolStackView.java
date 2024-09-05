@@ -15,16 +15,21 @@ import slimeknights.tconstruct.library.tools.stat.INumericToolStat;
 public interface IToolStackView extends IToolContext {
   /* Stats */
 
-  /** On built tools, contains the full tool stats. During tool rebuild, contains the base stats before considering modifiers. */
+  /**
+   * On built tools, contains the full tool stats. During tool rebuild, contains the base stats before considering modifiers.
+   */
   StatsNBT getStats();
 
   /**
    * Gets the tool stats if parsed, or parses from NBT if not yet parsed
+   *
    * @return stats
    */
   MultiplierNBT getMultipliers();
 
-  /** Commonly used operation, getting a stat multiplier */
+  /**
+   * Commonly used operation, getting a stat multiplier
+   */
   default float getMultiplier(INumericToolStat<?> stat) {
     return getMultipliers().get(stat);
   }
@@ -32,22 +37,31 @@ public interface IToolStackView extends IToolContext {
 
   /* Damage state */
 
-  /** Gets the current damage of the tool */
+  /**
+   * Gets the current damage of the tool
+   */
   int getDamage();
 
-  /** Gets the current durability remaining for this tool */
+  /**
+   * Gets the current durability remaining for this tool
+   */
   int getCurrentDurability();
 
-  /** Checks whether the tool is broken */
+  /**
+   * Checks whether the tool is broken
+   */
   boolean isBroken();
 
-  /** If true, tool is marked unbreakable by vanilla */
+  /**
+   * If true, tool is marked unbreakable by vanilla
+   */
   boolean isUnbreakable();
 
   /**
    * Sets the tools current damage.
    * Note in general you should use {@link ToolDamageUtil#damage(IToolStackView, int, LivingEntity, ItemStack)} or {@link ToolDamageUtil#repair(IToolStackView, int)} as they handle modifiers
-   * @param damage  New damage
+   *
+   * @param damage New damage
    */
   void setDamage(int damage);
 
@@ -71,7 +85,8 @@ public interface IToolStackView extends IToolContext {
 
   /**
    * Gets the free upgrade slots remaining on the tool
-   * @return  Free upgrade slots
+   *
+   * @return Free upgrade slots
    */
   default int getFreeSlots(SlotType type) {
     return getPersistentData().getSlots(type) + getVolatileData().getSlots(type);

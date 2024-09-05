@@ -19,6 +19,7 @@ import slimeknights.tconstruct.library.utils.TeleportHelper.ITeleportEventFactor
 import slimeknights.tconstruct.tools.TinkerModifiers;
 
 public class EnderdodgingModifier extends NoLevelsModifier implements DamageBlockModifierHook, OnAttackedModifierHook {
+
   private static final ITeleportEventFactory FACTORY = EnderdodgingTeleportEvent::new;
 
   @Override
@@ -34,7 +35,7 @@ public class EnderdodgingModifier extends NoLevelsModifier implements DamageBloc
     if (!self.hasEffect(TinkerModifiers.teleportCooldownEffect.get()) && source instanceof IndirectEntityDamageSource) {
       if (TeleportHelper.randomNearbyTeleport(context.getEntity(), FACTORY)) {
         TinkerModifiers.teleportCooldownEffect.get().apply(self, 15 * 20, 0, true);
-        ToolDamageUtil.damageAnimated(tool, (int)amount, self, slotType);
+        ToolDamageUtil.damageAnimated(tool, (int) amount, self, slotType);
         return true;
       }
       return false;

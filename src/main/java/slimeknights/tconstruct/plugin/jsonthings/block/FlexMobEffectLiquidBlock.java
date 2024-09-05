@@ -14,10 +14,14 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.function.Supplier;
 
-/** Json Things version of {@link slimeknights.tconstruct.fluids.block.BurningLiquidBlock} */
+/**
+ * Json Things version of {@link slimeknights.tconstruct.fluids.block.BurningLiquidBlock}
+ */
 public class FlexMobEffectLiquidBlock extends FlexLiquidBlock {
+
   private final Supplier<MobEffectInstance> effect;
-  public FlexMobEffectLiquidBlock(Properties properties, Map<Property<?>,Comparable<?>> propertyDefaultValues, Supplier<FlowingFluid> fluidSupplier, Supplier<MobEffectInstance> effect) {
+
+  public FlexMobEffectLiquidBlock(Properties properties, Map<Property<?>, Comparable<?>> propertyDefaultValues, Supplier<FlowingFluid> fluidSupplier, Supplier<MobEffectInstance> effect) {
     super(properties, propertyDefaultValues, fluidSupplier);
     this.effect = effect;
   }

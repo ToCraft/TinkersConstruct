@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -55,7 +56,8 @@ import java.util.stream.Collectors;
 import static slimeknights.tconstruct.tables.block.entity.table.TinkerStationBlockEntity.INPUT_SLOT;
 import static slimeknights.tconstruct.tables.block.entity.table.TinkerStationBlockEntity.TINKER_SLOT;
 
-public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEntity,TinkerStationContainerMenu> {
+public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEntity, TinkerStationContainerMenu> {
+
   // titles to display
   private static final Component COMPONENTS_TEXT = TConstruct.makeTranslation("gui", "tinker_station.components");
   private static final Component MODIFIERS_TEXT = TConstruct.makeTranslation("gui", "tinker_station.modifiers");
@@ -94,7 +96,9 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
   // text boxes
   private static final ElementScreen TEXT_BOX = new ElementScreen(0, 222, 90, 12);
 
-  /** Number of button columns in the UI */
+  /**
+   * Number of button columns in the UI
+   */
   public static final int COLUMN_COUNT = 5;
 
   // configurable elements
@@ -107,11 +111,17 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
   protected ElementScreen rightBeam = new ElementScreen(0, 0, 0, 0);
   protected ScalableElementScreen centerBeam = new ScalableElementScreen(0, 0, 0, 0);
 
-  /** Gets the default layout to apply, the "repair" button */
-  @Nonnull @Getter
+  /**
+   * Gets the default layout to apply, the "repair" button
+   */
+  @Nonnull
+  @Getter
   private final StationSlotLayout defaultLayout;
-  /** Currently selected tool */
-  @Nonnull @Getter
+  /**
+   * Currently selected tool
+   */
+  @Nonnull
+  @Getter
   private StationSlotLayout currentLayout;
 
   // components
@@ -120,21 +130,25 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
   protected InfoPanelScreen modifierInfo;
   protected TinkerStationButtonsWidget buttonsScreen;
 
-  /** Maximum available slots */
+  /**
+   * Maximum available slots
+   */
   @Getter
   private final int maxInputs;
-  /** How many of the available input slots are active */
+  /**
+   * How many of the available input slots are active
+   */
   protected int activeInputs;
 
   public TinkerStationScreen(TinkerStationContainerMenu container, Inventory playerInventory, Component title) {
     super(container, playerInventory, title);
 
     this.tinkerInfo = new InfoPanelScreen(this, container, playerInventory, title);
-    this.tinkerInfo.setTextScale(8/9f);
+    this.tinkerInfo.setTextScale(8 / 9f);
     this.addModule(this.tinkerInfo);
 
     this.modifierInfo = new InfoPanelScreen(this, container, playerInventory, title);
-    this.modifierInfo.setTextScale(7/9f);
+    this.modifierInfo.setTextScale(7 / 9f);
     this.addModule(this.modifierInfo);
 
     this.tinkerInfo.yOffset = 5;
@@ -160,7 +174,7 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
     if (te == null) {
       this.defaultLayout = StationSlotLayout.EMPTY;
     } else {
-      this.defaultLayout = StationSlotLayoutLoader.getInstance().get(Registry.BLOCK.getKey(te.getBlockState().getBlock()));
+      this.defaultLayout = StationSlotLayoutLoader.getInstance().get(BuiltInRegistries.BLOCK.getKey(te.getBlockState().getBlock()));
     }
     this.currentLayout = this.defaultLayout;
     this.activeInputs = Math.min(defaultLayout.getInputCount(), max);
@@ -183,7 +197,7 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
     this.modifierInfo.xOffset = this.tinkerInfo.xOffset;
     this.modifierInfo.yOffset = this.tinkerInfo.yOffset + this.tinkerInfo.imageHeight + 4;
 
-    for (ModuleScreen<?,?> module : this.modules) {
+    for (ModuleScreen<?, ?> module : this.modules) {
       module.topPos += 4;
     }
 
@@ -218,7 +232,9 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
     this.updateLayout();
   }
 
-  /** Updates all slots for the current slot layout */
+  /**
+   * Updates all slots for the current slot layout
+   */
   public void updateLayout() {
     int stillFilled = 0;
     for (int i = 0; i <= maxInputs; i++) {
@@ -244,13 +260,14 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
     this.updateDisplay();
   }
 
-  /** Updates the tool panel area */
+  /**
+   * Updates the tool panel area
+   */
   static void updateToolPanel(InfoPanelScreen tinkerInfo, ToolStack tool, ItemStack result) {
     if (tool.getItem() instanceof ITinkerStationDisplay display) {
       tinkerInfo.setCaption(display.getLocalizedName());
       tinkerInfo.setText(display.getStatInformation(tool, Minecraft.getInstance().player, new ArrayList<>(), SafeClientAccess.getTooltipKey(), TinkerTooltipFlags.TINKER_STATION));
-    }
-    else {
+    } else {
       tinkerInfo.setCaption(result.getHoverName());
       List<Component> list = new ArrayList<>();
       result.getItem().appendHoverText(result, Minecraft.getInstance().level, list, Default.NORMAL);
@@ -258,7 +275,9 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
     }
   }
 
-  /** Updates the modifier panel with relevant info */
+  /**
+   * Updates the modifier panel with relevant info
+   */
   static void updateModifierPanel(InfoPanelScreen modifierInfo, ToolStack tool) {
     List<Component> modifierNames = new ArrayList<>();
     List<Component> modifierTooltip = new ArrayList<>();
@@ -266,8 +285,8 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
     // control displays just traits, bit trickier to do
     if (hasControlDown()) {
       title = TRAITS_TEXT;
-      Map<Modifier,Integer> upgrades = tool.getUpgrades().getModifiers().stream()
-                                           .collect(Collectors.toMap(ModifierEntry::getModifier, ModifierEntry::getLevel));
+      Map<Modifier, Integer> upgrades = tool.getUpgrades().getModifiers().stream()
+        .collect(Collectors.toMap(ModifierEntry::getModifier, ModifierEntry::getLevel));
       for (ModifierEntry entry : tool.getModifierList()) {
         Modifier mod = entry.getModifier();
         if (mod.shouldDisplay(true)) {
@@ -463,10 +482,10 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
 
     // draw the decoration for the buttons
     for (SlotButtonItem button : this.buttonsScreen.getButtons()) {
-      this.buttonDecorationTop.draw(matrices, button.x, button.y - this.buttonDecorationTop.h);
+      this.buttonDecorationTop.draw(matrices, button.getX(), button.getY() - this.buttonDecorationTop.h);
       // don't draw the bottom for the buttons in the last row
       if (button.buttonId < this.buttonsScreen.getButtons().size() - COLUMN_COUNT) {
-        this.buttonDecorationBot.draw(matrices, button.x, button.y + button.getHeight());
+        this.buttonDecorationBot.draw(matrices, button.getX(), button.getY() + button.getHeight());
       }
     }
 
@@ -511,8 +530,8 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
     if (this.modifierInfo.handleMouseClicked(mouseX, mouseY, mouseButton)) {
       return false;
     }
-    
-    if(this.buttonsScreen.handleMouseClicked(mouseX, mouseY, mouseButton)) {
+
+    if (this.buttonsScreen.handleMouseClicked(mouseX, mouseY, mouseButton)) {
       return false;
     }
 
@@ -562,7 +581,9 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
     return super.mouseReleased(mouseX, mouseY, state);
   }
 
-  /** Returns true if a key changed that requires a display update */
+  /**
+   * Returns true if a key changed that requires a display update
+   */
   static boolean needsDisplayUpdate(int keyCode) {
     if (keyCode == GLFW.GLFW_KEY_LEFT_SHIFT || keyCode == GLFW.GLFW_KEY_RIGHT_SHIFT) {
       return true;
@@ -660,7 +681,8 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
 
   /**
    * Called when a tool button is pressed
-   * @param layout      Data of the slot selected
+   *
+   * @param layout Data of the slot selected
    */
   public void onToolSelection(StationSlotLayout layout) {
     this.activeInputs = Math.min(layout.getInputCount(), maxInputs);

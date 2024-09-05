@@ -16,8 +16,12 @@ import slimeknights.tconstruct.library.modifiers.fluid.FluidEffectContext;
 import slimeknights.tconstruct.library.modifiers.fluid.FluidEffectContext.Entity;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 
-/** Effect to restore hunger to the target */
-public record RestoreHungerFluidEffect(int hunger, float saturation, boolean canAlwaysEat, ItemOutput representative) implements FluidEffect<FluidEffectContext.Entity> {
+/**
+ * Effect to restore hunger to the target
+ */
+public record RestoreHungerFluidEffect(int hunger, float saturation, boolean canAlwaysEat,
+                                       ItemOutput representative) implements FluidEffect<FluidEffectContext.Entity> {
+
   public static final RecordLoadable<RestoreHungerFluidEffect> LOADER = RecordLoadable.create(
     IntLoadable.FROM_ONE.requiredField("hunger", e -> e.hunger),
     FloatLoadable.FROM_ZERO.requiredField("saturation", e -> e.saturation),
@@ -37,7 +41,7 @@ public record RestoreHungerFluidEffect(int hunger, float saturation, boolean can
       // we always consume the full amount as while hunger is capped, saturation is not
       float value = level.value();
       if (action.execute()) {
-        int finalHunger = (int)(hunger * value);
+        int finalHunger = (int) (hunger * value);
         player.getFoodData().eat(finalHunger, saturation);
         ItemStack representative = this.representative.get();
         if (!representative.isEmpty()) {

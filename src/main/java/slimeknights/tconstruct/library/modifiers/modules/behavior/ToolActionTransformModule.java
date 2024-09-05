@@ -34,7 +34,9 @@ import java.util.List;
 /**
  * Module which transforms a block using a tool action
  */
-public record ToolActionTransformModule(ToolAction action, SoundEvent sound, boolean requireGround, int eventId, ModifierCondition<IToolStackView> condition) implements BlockTransformModule, ToolActionModifierHook, ConditionalModule<IToolStackView> {
+public record ToolActionTransformModule(ToolAction action, SoundEvent sound, boolean requireGround, int eventId,
+                                        ModifierCondition<IToolStackView> condition) implements BlockTransformModule, ToolActionModifierHook, ConditionalModule<IToolStackView> {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<ToolActionTransformModule>defaultHooks(ModifierHooks.BLOCK_INTERACT, ModifierHooks.TOOL_ACTION);
   public static final RecordLoadable<ToolActionTransformModule> LOADER = RecordLoadable.create(
     Loadables.TOOL_ACTION.requiredField("tool_action", ToolActionTransformModule::action),
@@ -104,24 +106,30 @@ public record ToolActionTransformModule(ToolAction action, SoundEvent sound, boo
 
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   public static class Builder extends ModuleBuilder.Stack<Builder> {
+
     private final ToolAction action;
     private final SoundEvent sound;
     private boolean requireGround;
     /**
      * Event ID to play upon success
+     *
      * @see Level#levelEvent(int, BlockPos, int)
      */
     @Setter
     @Accessors(fluent = true)
     private int eventId = -1;
 
-    /** Sets the module to require the block above to be empty */
+    /**
+     * Sets the module to require the block above to be empty
+     */
     public Builder requireGround() {
       this.requireGround = true;
       return this;
     }
 
-    /** Builds the module */
+    /**
+     * Builds the module
+     */
     public ToolActionTransformModule build() {
       return new ToolActionTransformModule(action, sound, requireGround, eventId, condition);
     }

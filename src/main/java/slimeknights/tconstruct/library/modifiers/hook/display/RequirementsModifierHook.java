@@ -11,19 +11,27 @@ import java.util.List;
  * Hook for recipe display of modifier requirements. Note that the actual requirement are implemented via {@link slimeknights.tconstruct.library.modifiers.hook.build.ValidateModifierHook}
  */
 public interface RequirementsModifierHook {
-  /** Gets the list of modifiers to display on tools in recipe viewers */
+
+  /**
+   * Gets the list of modifiers to display on tools in recipe viewers
+   */
   default List<ModifierEntry> displayModifiers(ModifierEntry entry) {
     return List.of();
   }
 
-  /** Gets the hint about the modifier requirements, or null if no hint */
+  /**
+   * Gets the hint about the modifier requirements, or null if no hint
+   */
   @Nullable
   default Component requirementsError(ModifierEntry entry) {
     return null;
   }
 
-  /** Merger that returns the first match, intended for level based dispatching */
+  /**
+   * Merger that returns the first match, intended for level based dispatching
+   */
   record FirstMerger(Collection<RequirementsModifierHook> modules) implements RequirementsModifierHook {
+
     @Override
     public List<ModifierEntry> displayModifiers(ModifierEntry entry) {
       for (RequirementsModifierHook module : modules) {

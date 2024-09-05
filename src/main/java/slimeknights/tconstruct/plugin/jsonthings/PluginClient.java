@@ -8,8 +8,11 @@ import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.client.model.TinkerItemProperties;
 import slimeknights.tconstruct.library.client.model.tools.ToolModel;
 
-/** Handles anything that requires clientside class loading */
+/**
+ * Handles anything that requires clientside class loading
+ */
 public class PluginClient {
+
   public static void init() {
     ItemColorHandler.register(TConstruct.resourceString("tool"), block -> ToolModel.COLOR_HANDLER);
     FMLJavaModLoadingContext.get().getModEventBus().addListener(PluginClient::clientSetup);

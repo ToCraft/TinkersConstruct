@@ -8,8 +8,11 @@ import net.minecraft.util.GsonHelper;
 import slimeknights.mantle.data.loadable.field.RecordField;
 import slimeknights.mantle.util.typed.TypedMap;
 
-/** Specialized field used for parsing stat weights for {@link MaterialStatsModule} and {@link PartStatsModule} */
-record StatScaleField(String nestKey, String listKey) implements RecordField<float[],MaterialStatsModule> {
+/**
+ * Specialized field used for parsing stat weights for {@link MaterialStatsModule} and {@link PartStatsModule}
+ */
+record StatScaleField(String nestKey, String listKey) implements RecordField<float[], MaterialStatsModule> {
+
   @Override
   public float[] get(JsonObject json, TypedMap context) {
     JsonArray list = GsonHelper.getAsJsonArray(json, listKey);

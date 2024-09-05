@@ -14,6 +14,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class CheeseBlockItem extends BlockItem {
+
   public CheeseBlockItem(Block pBlock, Properties pProperties) {
     super(pBlock, pProperties);
   }

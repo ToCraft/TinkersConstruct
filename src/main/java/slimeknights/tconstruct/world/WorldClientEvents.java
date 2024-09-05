@@ -44,8 +44,9 @@ import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
-@EventBusSubscriber(modid=TConstruct.MOD_ID, value=Dist.CLIENT, bus=Bus.MOD)
+@EventBusSubscriber(modid = TConstruct.MOD_ID, value = Dist.CLIENT, bus = Bus.MOD)
 public class WorldClientEvents extends ClientEventBase {
+
   @SubscribeEvent
   static void addResourceListener(RegisterClientReloadListenersEvent event) {
     for (FoliageType type : FoliageType.values()) {
@@ -141,7 +142,7 @@ public class WorldClientEvents extends ClientEventBase {
     // geodes
     for (BudSize size : BudSize.values()) {
       ItemBlockRenderTypes.setRenderLayer(TinkerWorld.earthGeode.getBud(size), cutout);
-      ItemBlockRenderTypes.setRenderLayer(TinkerWorld.skyGeode.getBud(size),   cutout);
+      ItemBlockRenderTypes.setRenderLayer(TinkerWorld.skyGeode.getBud(size), cutout);
       ItemBlockRenderTypes.setRenderLayer(TinkerWorld.ichorGeode.getBud(size), cutout);
       ItemBlockRenderTypes.setRenderLayer(TinkerWorld.enderGeode.getBud(size), cutout);
     }
@@ -214,10 +215,11 @@ public class WorldClientEvents extends ClientEventBase {
 
   /**
    * Block colors for a slime type
-   * @param pos   Block position
-   * @param type  Slime foilage color
-   * @param add   Offset position
-   * @return  Color for the given position, or the default if position is null
+   *
+   * @param pos  Block position
+   * @param type Slime foilage color
+   * @param add  Offset position
+   * @return Color for the given position, or the default if position is null
    */
   private static int getSlimeColorByPos(@Nullable BlockPos pos, FoliageType type, @Nullable BlockPos add) {
     if (pos == null) {
@@ -230,13 +232,17 @@ public class WorldClientEvents extends ClientEventBase {
     return SlimeColorizer.getColorForPos(pos, type);
   }
 
-  /** Registers a skull with the entity renderer and the slimeskull renderer */
+  /**
+   * Registers a skull with the entity renderer and the slimeskull renderer
+   */
   private static void registerHeadModel(TinkerHeadType skull, MaterialId materialId, ResourceLocation texture) {
     SkullBlockRenderer.SKIN_BY_TYPE.put(skull, texture);
     SlimeskullArmorModel.registerHeadModel(materialId, SkullModelHelper.HEAD_LAYERS.get(skull), texture);
   }
 
-  /** Register a layer without being under the minecraft domain. TODO: is this needed? */
+  /**
+   * Register a layer without being under the minecraft domain. TODO: is this needed?
+   */
   private static ModelLayerLocation registerLayer(String name) {
     ModelLayerLocation location = new ModelLayerLocation(TConstruct.getResource(name), "main");
     if (!ModelLayers.ALL_MODELS.add(location)) {
@@ -246,7 +252,9 @@ public class WorldClientEvents extends ClientEventBase {
     }
   }
 
-  /** Register a head layer definition with forge */
+  /**
+   * Register a head layer definition with forge
+   */
   private static void registerLayerDefinition(EntityRenderersEvent.RegisterLayerDefinitions event, TinkerHeadType head, Supplier<LayerDefinition> supplier) {
     event.registerLayerDefinition(SkullModelHelper.HEAD_LAYERS.get(head), supplier);
   }

@@ -24,6 +24,7 @@ import java.util.List;
  * Recipe to craft an ordinary item using the part builder
  */
 public class ItemPartRecipe implements IDisplayPartBuilderRecipe {
+
   public static final RecordLoadable<ItemPartRecipe> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(),
     MaterialVariantId.LOADABLE.defaultField("material", IMaterial.UNKNOWN_ID, r -> r.material.getVariant()),
@@ -32,11 +33,11 @@ public class ItemPartRecipe implements IDisplayPartBuilderRecipe {
     IntLoadable.FROM_ZERO.defaultField("cost", 0, ItemPartRecipe::getCost),
     ItemOutput.Loadable.REQUIRED_STACK.requiredField("result", r -> r.result),
     ItemPartRecipe::new).validate((recipe, error) -> {
-      if (recipe.cost == 0 && !recipe.material.isEmpty()) {
-        throw error.create("Cost must be greater than zero if material is defined");
-      }
-      return recipe;
-    });
+    if (recipe.cost == 0 && !recipe.material.isEmpty()) {
+      throw error.create("Cost must be greater than zero if material is defined");
+    }
+    return recipe;
+  });
 
   @Getter
   private final ResourceLocation id;
@@ -84,7 +85,7 @@ public class ItemPartRecipe implements IDisplayPartBuilderRecipe {
     }
     IMaterialValue materialRecipe = inv.getMaterial();
     return materialRecipe != null && material.matchesVariant(materialRecipe.getMaterial())
-           && inv.getStack().getCount() >= materialRecipe.getItemsUsed(cost);
+      && inv.getStack().getCount() >= materialRecipe.getItemsUsed(cost);
   }
 
   @Override

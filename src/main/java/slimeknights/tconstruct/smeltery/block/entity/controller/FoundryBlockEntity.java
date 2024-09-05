@@ -19,12 +19,19 @@ import slimeknights.tconstruct.smeltery.block.entity.multiblock.HeatingStructure
 import javax.annotation.Nullable;
 
 public class FoundryBlockEntity extends HeatingStructureBlockEntity {
-  /** Fluid capacity per internal block */
+
+  /**
+   * Fluid capacity per internal block
+   */
   private static final int CAPACITY_PER_BLOCK = FluidValues.INGOT * 8;
-  /** GUI name */
+  /**
+   * GUI name
+   */
   private static final Component NAME = TConstruct.makeTranslation("gui", "foundry");
-  /** Number of wall blocks needed to increase the fuel cost by 1
-   * this is a bit higher than the smeltery as the structure uses more blocks, balances out in larger structures */
+  /**
+   * Number of wall blocks needed to increase the fuel cost by 1
+   * this is a bit higher than the smeltery as the structure uses more blocks, balances out in larger structures
+   */
   private static final int BLOCKS_PER_FUEL = 18;
 
   public FoundryBlockEntity(BlockPos pos, BlockState state) {
@@ -111,7 +118,7 @@ public class FoundryBlockEntity extends HeatingStructureBlockEntity {
       meltingInventory.resize(dx * dy * dz, dropItem);
       // fuel rate: every 20 blocks in the wall makes the fuel cost 1 more
       // perimeter: to prevent double counting, frame just added on X and floor
-      fuelRate = 1 + (2 * ((dx+2) * dy) + 2 * (dy * dz) + ((dx+2) * (dz+2))) / BLOCKS_PER_FUEL;
+      fuelRate = 1 + (2 * ((dx + 2) * dy) + 2 * (dy * dz) + ((dx + 2) * (dz + 2))) / BLOCKS_PER_FUEL;
     }
   }
 }

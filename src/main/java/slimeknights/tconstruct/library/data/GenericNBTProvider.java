@@ -17,19 +17,26 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-/** Data generator to create NBT files */
+/**
+ * Data generator to create NBT files
+ */
 @RequiredArgsConstructor
 public abstract class GenericNBTProvider implements DataProvider {
+
   protected final DataGenerator generator;
   protected final PackType packType;
   protected final String folder;
 
-  /** Localizes the given resource to the folder */
+  /**
+   * Localizes the given resource to the folder
+   */
   public ResourceLocation localize(ResourceLocation name) {
     return JsonHelper.localize(name, folder, ".nbt");
   }
 
-  /** Saves the given image to the given location */
+  /**
+   * Saves the given image to the given location
+   */
   @SuppressWarnings("UnstableApiUsage")
   protected void saveNBT(CachedOutput cache, ResourceLocation location, CompoundTag data) {
     try {

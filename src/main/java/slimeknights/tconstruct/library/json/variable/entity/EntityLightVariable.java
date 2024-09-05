@@ -6,8 +6,11 @@ import slimeknights.mantle.data.loadable.record.RecordLoadable;
 import slimeknights.mantle.data.registry.GenericLoaderRegistry.IGenericLoader;
 import slimeknights.tconstruct.library.json.TinkerLoadables;
 
-/** Gets the light level at the entity position */
+/**
+ * Gets the light level at the entity position
+ */
 public record EntityLightVariable(LightLayer lightLayer) implements EntityVariable {
+
   public static final RecordLoadable<EntityLightVariable> LOADER = RecordLoadable.create(TinkerLoadables.LIGHT_LAYER.requiredField("light_layer", EntityLightVariable::lightLayer), EntityLightVariable::new);
 
   @Override

@@ -22,27 +22,39 @@ import java.util.function.Consumer;
  * Inventory composite made of a set of melting module inventories
  */
 public class MeltingModuleInventory implements IItemHandlerModifiable {
+
   private static final String TAG_SLOT = "slot";
   private static final String TAG_ITEMS = "items";
   private static final String TAG_SIZE = "size";
 
-  /** Parent tile entity */
+  /**
+   * Parent tile entity
+   */
   private final MantleBlockEntity parent;
-  /** Fluid handler for outputs */
+  /**
+   * Fluid handler for outputs
+   */
   protected final IFluidHandler fluidHandler;
-  /** Array of modules containing each slot */
+  /**
+   * Array of modules containing each slot
+   */
   private MeltingModule[] modules;
-  /** If true, module cannot be resized */
+  /**
+   * If true, module cannot be resized
+   */
   private final boolean strictSize;
-  /** Number of nuggets to produce when melting an ore */
+  /**
+   * Number of nuggets to produce when melting an ore
+   */
   private final IOreRate oreRate;
 
   /**
    * Creates a new inventory with a fixed size
-   * @param parent         Parent tile
-   * @param fluidHandler   Tank for output
-   * @param oreRate        Ore rate
-   * @param size           Size
+   *
+   * @param parent       Parent tile
+   * @param fluidHandler Tank for output
+   * @param oreRate      Ore rate
+   * @param size         Size
    */
   public MeltingModuleInventory(MantleBlockEntity parent, IFluidHandler fluidHandler, IOreRate oreRate, int size) {
     this.parent = parent;
@@ -54,9 +66,10 @@ public class MeltingModuleInventory implements IItemHandlerModifiable {
 
   /**
    * Creates a new inventory with a variable size
-   * @param parent         Parent tile
-   * @param fluidHandler   Tank for output
-   * @param oreRate        Ore rate
+   *
+   * @param parent       Parent tile
+   * @param fluidHandler Tank for output
+   * @param oreRate      Ore rate
    */
   public MeltingModuleInventory(MantleBlockEntity parent, IFluidHandler fluidHandler, IOreRate oreRate) {
     this(parent, fluidHandler, oreRate, 0);
@@ -71,8 +84,9 @@ public class MeltingModuleInventory implements IItemHandlerModifiable {
 
   /**
    * Checks if the given slot index is valid
-   * @param slot  Slot index to check
-   * @return  True if valid
+   *
+   * @param slot Slot index to check
+   * @return True if valid
    */
   public boolean validSlot(int slot) {
     return slot >= 0 && slot < getSlots();
@@ -88,15 +102,18 @@ public class MeltingModuleInventory implements IItemHandlerModifiable {
     return true;
   }
 
-  /** Returns true if a slot is defined in the array */
+  /**
+   * Returns true if a slot is defined in the array
+   */
   private boolean hasModule(int slot) {
     return validSlot(slot) && modules[slot] != null;
   }
 
   /**
    * Gets the current time of a slot
-   * @param slot  Slot index
-   * @return  Slot temperature
+   *
+   * @param slot Slot index
+   * @return Slot temperature
    */
   public int getCurrentTime(int slot) {
     return hasModule(slot) ? modules[slot].getCurrentTime() : 0;
@@ -104,8 +121,9 @@ public class MeltingModuleInventory implements IItemHandlerModifiable {
 
   /**
    * Gets the required time for a slot
-   * @param slot  Slot index
-   * @return  Required time
+   *
+   * @param slot Slot index
+   * @return Required time
    */
   public int getRequiredTime(int slot) {
     return hasModule(slot) ? modules[slot].getRequiredTime() : 0;
@@ -113,8 +131,9 @@ public class MeltingModuleInventory implements IItemHandlerModifiable {
 
   /**
    * Gets the required temperature for a slot
-   * @param slot  Slot index
-   * @return  Required temperature
+   *
+   * @param slot Slot index
+   * @return Required temperature
    */
   public int getRequiredTemp(int slot) {
     return hasModule(slot) ? modules[slot].getRequiredTemp() : 0;
@@ -125,9 +144,10 @@ public class MeltingModuleInventory implements IItemHandlerModifiable {
 
   /**
    * Gets the module for the given index
-   * @param slot  Index
-   * @return  Module for index
-   * @throws IndexOutOfBoundsException  index is invalid
+   *
+   * @param slot Index
+   * @return Module for index
+   * @throws IndexOutOfBoundsException index is invalid
    */
   public MeltingModule getModule(int slot) {
     if (!validSlot(slot)) {
@@ -141,9 +161,10 @@ public class MeltingModuleInventory implements IItemHandlerModifiable {
 
   /**
    * Resizes the module to a new size
-   * @param newSize        New size
-   * @param stackConsumer  Consumer for any stacks that no longer fit
-   * @throws IllegalStateException  If this inventory cannot be resized
+   *
+   * @param newSize       New size
+   * @param stackConsumer Consumer for any stacks that no longer fit
+   * @throws IllegalStateException If this inventory cannot be resized
    */
   public void resize(int newSize, Consumer<ItemStack> stackConsumer) {
     if (strictSize) {
@@ -247,8 +268,9 @@ public class MeltingModuleInventory implements IItemHandlerModifiable {
 
   /**
    * Checks if any slot can heat
-   * @param temperature  Temperature to try
-   * @return  True if a slot can heat
+   *
+   * @param temperature Temperature to try
+   * @return True if a slot can heat
    */
   public boolean canHeat(int temperature) {
     for (MeltingModule module : modules) {
@@ -261,9 +283,10 @@ public class MeltingModuleInventory implements IItemHandlerModifiable {
 
   /**
    * Tries to fill the fluid handler with the given fluid
-   * @param index   Index of the module being filled
-   * @param recipe  Recipe to add
-   * @return  True if filled, false if not enough space for the whole fluid
+   *
+   * @param index  Index of the module being filled
+   * @param recipe Recipe to add
+   * @return True if filled, false if not enough space for the whole fluid
    */
   protected boolean tryFillTank(int index, IMeltingRecipe recipe) {
     FluidStack fluid = recipe.getOutput(getModule(index));
@@ -276,7 +299,8 @@ public class MeltingModuleInventory implements IItemHandlerModifiable {
 
   /**
    * Heats all items in the inventory
-   * @param temperature  Heating structure temperature
+   *
+   * @param temperature Heating structure temperature
    */
   public void heatItems(int temperature) {
     for (MeltingModule module : modules) {
@@ -299,7 +323,8 @@ public class MeltingModuleInventory implements IItemHandlerModifiable {
 
   /**
    * Writes this module to Tag
-   * @return  Module in Tag
+   *
+   * @return Module in Tag
    */
   public CompoundTag writeToTag() {
     CompoundTag nbt = new CompoundTag();
@@ -307,20 +332,21 @@ public class MeltingModuleInventory implements IItemHandlerModifiable {
     for (int i = 0; i < modules.length; i++) {
       if (modules[i] != null && !modules[i].getStack().isEmpty()) {
         CompoundTag moduleTag = modules[i].writeToTag();
-        moduleTag.putByte(TAG_SLOT, (byte)i);
+        moduleTag.putByte(TAG_SLOT, (byte) i);
         list.add(moduleTag);
       }
     }
     if (!list.isEmpty()) {
       nbt.put(TAG_ITEMS, list);
     }
-    nbt.putByte(TAG_SIZE, (byte)modules.length);
+    nbt.putByte(TAG_SIZE, (byte) modules.length);
     return nbt;
   }
 
   /**
    * Reads this inventory from Tag
-   * @param nbt  Tag compound
+   *
+   * @param nbt Tag compound
    */
   public void readFromTag(CompoundTag nbt) {
     if (!strictSize) {
@@ -353,7 +379,8 @@ public class MeltingModuleInventory implements IItemHandlerModifiable {
 
   /**
    * Sets up all sub slots for tracking
-   * @param consumer  IIntArray consumer
+   *
+   * @param consumer IIntArray consumer
    */
   public void trackInts(Consumer<ContainerData> consumer) {
     for (int i = 0; i < getSlots(); i++) {

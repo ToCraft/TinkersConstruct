@@ -14,12 +14,14 @@ import slimeknights.tconstruct.library.client.model.block.TankModel.Baked;
  * This class contains various methods that are safe to call on both sides, which internally call client only code.
  */
 public class SafeClient {
+
   /**
    * Triggers a model update if needed for this tank block
-   * @param be          Block entity instance
-   * @param tank        Fluid tank instance
-   * @param oldAmount   Old fluid amount
-   * @param newAmount   New fluid amount
+   *
+   * @param be        Block entity instance
+   * @param tank      Fluid tank instance
+   * @param oldAmount Old fluid amount
+   * @param newAmount New fluid amount
    */
   public static void updateFluidModel(BlockEntity be, FluidTank tank, int oldAmount, int newAmount) {
     if (FMLEnvironment.dist == Dist.CLIENT) {
@@ -27,9 +29,14 @@ public class SafeClient {
     }
   }
 
-  /** This class is only ever loaded client side */
+  /**
+   * This class is only ever loaded client side
+   */
   private static class ClientOnly {
-    /** @see SafeClient#updateFluidModel(BlockEntity, FluidTank, int, int)  */
+
+    /**
+     * @see SafeClient#updateFluidModel(BlockEntity, FluidTank, int, int)
+     */
     public static void updateFluidModel(BlockEntity be, FluidTank tank, int oldAmount, int newAmount) {
       Level level = be.getLevel();
       if (level != null && level.isClientSide) {

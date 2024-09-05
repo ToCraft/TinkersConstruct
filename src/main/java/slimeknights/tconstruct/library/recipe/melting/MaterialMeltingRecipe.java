@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
  * Recipe to melt all castable tool parts of a given material
  */
 public class MaterialMeltingRecipe implements IMeltingRecipe, IMultiRecipe<MeltingRecipe> {
+
   public static final RecordLoadable<MaterialMeltingRecipe> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(),
     MaterialVariantId.LOADABLE.requiredField("input", r -> r.input.getVariant()),
@@ -101,7 +102,7 @@ public class MaterialMeltingRecipe implements IMeltingRecipe, IMultiRecipe<Melti
               output = new FluidStack(output, output.getAmount() * entry.getIntValue());
             }
             return new MeltingRecipe(id, "", MaterialIngredient.of(entry.getKey(), inputId), output, temperature,
-                                     IMeltingRecipe.calcTimeForAmount(temperature, output.getAmount()), Collections.emptyList());
+              IMeltingRecipe.calcTimeForAmount(temperature, output.getAmount()), Collections.emptyList());
           }).collect(Collectors.toList());
       }
     }

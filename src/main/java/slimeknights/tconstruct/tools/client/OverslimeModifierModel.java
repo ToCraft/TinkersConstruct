@@ -20,7 +20,10 @@ import java.util.function.Function;
  * Modifier model that turns invisible when out of overslime
  */
 public class OverslimeModifierModel extends NormalModifierModel {
-  /** Constant unbaked model instance, as they are all the same */
+
+  /**
+   * Constant unbaked model instance, as they are all the same
+   */
   public static final IUnbakedModifierModel UNBAKED_INSTANCE = (smallGetter, largeGetter) -> {
     Material smallTexture = smallGetter.apply("");
     Material largeTexture = largeGetter.apply("");
@@ -44,7 +47,7 @@ public class OverslimeModifierModel extends NormalModifierModel {
   }
 
   @Override
-  public void addQuads(IToolStackView tool, ModifierEntry entry, Function<Material,TextureAtlasSprite> spriteGetter, Transformation transforms, boolean isLarge, int startTintIndex, Consumer<Collection<BakedQuad>> quadConsumer, @Nullable ItemLayerPixels pixels) {
+  public void addQuads(IToolStackView tool, ModifierEntry entry, Function<Material, TextureAtlasSprite> spriteGetter, Transformation transforms, boolean isLarge, int startTintIndex, Consumer<Collection<BakedQuad>> quadConsumer, @Nullable ItemLayerPixels pixels) {
     if (!(entry.getModifier() instanceof OverslimeModifier overslime) || overslime.getShield(tool) != 0) {
       super.addQuads(tool, entry, spriteGetter, transforms, isLarge, startTintIndex, quadConsumer, pixels);
     }

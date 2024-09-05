@@ -1,6 +1,6 @@
 package slimeknights.tconstruct;
 
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -156,10 +156,12 @@ public class TConstruct {
     datagenerator.addProvider(server, new GlobalLootModifiersProvider(datagenerator));
   }
 
-  /** Shared behavior between item and block missing mappings */
+  /**
+   * Shared behavior between item and block missing mappings
+   */
   @Nullable
   private static Block missingBlock(String name) {
-    return switch(name) {
+    return switch (name) {
       // blood removal
       case "blood_slime" -> Blocks.SLIME_BLOCK;
       case "blood_congealed_slime" -> TinkerWorld.congealedSlime.get(SlimeType.EARTH);
@@ -176,16 +178,18 @@ public class TConstruct {
     };
   }
 
-  /** Handles missing mappings of all types */
+  /**
+   * Handles missing mappings of all types
+   */
   private static void missingMappings(MissingMappingsEvent event) {
-    RegistrationHelper.handleMissingMappings(event, MOD_ID, Registry.BLOCK_REGISTRY, name -> {
+    RegistrationHelper.handleMissingMappings(event, MOD_ID, Registries.BLOCK, name -> {
       // no item form so we handle it directly
       if (name.equals("blood_fluid")) {
         return TinkerFluids.earthSlime.getBlock();
       }
       return missingBlock(name);
     });
-    RegistrationHelper.handleMissingMappings(event, MOD_ID, Registry.ITEM_REGISTRY, name -> switch (name) {
+    RegistrationHelper.handleMissingMappings(event, MOD_ID, Registries.ITEM, name -> switch (name) {
       // slings are modifiers now
       case "earth_slime_sling" -> TinkerTools.earthStaff.get();
       case "sky_slime_sling" -> TinkerTools.skyStaff.get();
@@ -207,13 +211,13 @@ public class TConstruct {
         yield block == null ? null : block.asItem();
       }
     });
-    RegistrationHelper.handleMissingMappings(event, MOD_ID, Registry.FLUID_REGISTRY, name -> switch (name) {
+    RegistrationHelper.handleMissingMappings(event, MOD_ID, Registries.FLUID, name -> switch (name) {
       case "blood" -> TinkerFluids.earthSlime.getStill();
       case "flowing_blood" -> TinkerFluids.earthSlime.getFlowing();
       default -> null;
     });
-    RegistrationHelper.handleMissingMappings(event, MOD_ID, Registry.ENTITY_TYPE_REGISTRY, name -> name.equals("earth_slime") ? EntityType.SLIME : null);
-    RegistrationHelper.handleMissingMappings(event, MOD_ID, Registry.MOB_EFFECT_REGISTRY, name -> switch (name) {
+    RegistrationHelper.handleMissingMappings(event, MOD_ID, Registries.ENTITY_TYPE, name -> name.equals("earth_slime") ? EntityType.SLIME : null);
+    RegistrationHelper.handleMissingMappings(event, MOD_ID, Registries.MOB_EFFECT, name -> switch (name) {
       case "momentum" -> TinkerModifiers.momentumEffect.get(ToolType.HARVEST);
       case "insatiable" -> TinkerModifiers.insatiableEffect.get(ToolType.MELEE);
       default -> null;
@@ -225,8 +229,9 @@ public class TConstruct {
 
   /**
    * Gets a resource location for Tinkers
-   * @param name  Resource path
-   * @return  Location for tinkers
+   *
+   * @param name Resource path
+   * @return Location for tinkers
    */
   public static ResourceLocation getResource(String name) {
     return new ResourceLocation(MOD_ID, name);
@@ -234,8 +239,9 @@ public class TConstruct {
 
   /**
    * Gets a data key for the capability, mainly used for modifier markers
-   * @param name  Resource path
-   * @return  Location for tinkers
+   *
+   * @param name Resource path
+   * @return Location for tinkers
    */
   public static <T> TinkerDataKey<T> createKey(String name) {
     return TinkerDataKey.of(getResource(name));
@@ -243,9 +249,10 @@ public class TConstruct {
 
   /**
    * Gets a data key for the capability, mainly used for modifier markers
-   * @param name         Resource path
-   * @param constructor  Constructor for compute if absent
-   * @return  Location for tinkers
+   *
+   * @param name        Resource path
+   * @param constructor Constructor for compute if absent
+   * @return Location for tinkers
    */
   public static <T> ComputableDataKey<T> createKey(String name, Supplier<T> constructor) {
     return ComputableDataKey.of(getResource(name), constructor);
@@ -267,16 +274,19 @@ public class TConstruct {
     return MOD_ID + "." + name.toLowerCase(Locale.US);
   }
 
-  /** Makes a Tinker's description ID */
+  /**
+   * Makes a Tinker's description ID
+   */
   public static String makeDescriptionId(String type, String name) {
     return type + "." + MOD_ID + "." + name;
   }
 
   /**
    * Makes a translation key for the given name
-   * @param base  Base name, such as "block" or "gui"
-   * @param name  Object name
-   * @return  Translation key
+   *
+   * @param base Base name, such as "block" or "gui"
+   * @param name Object name
+   * @return Translation key
    */
   public static String makeTranslationKey(String base, String name) {
     return Util.makeTranslationKey(base, getResource(name));
@@ -284,9 +294,10 @@ public class TConstruct {
 
   /**
    * Makes a translation text component for the given name
-   * @param base  Base name, such as "block" or "gui"
-   * @param name  Object name
-   * @return  Translation key
+   *
+   * @param base Base name, such as "block" or "gui"
+   * @param name Object name
+   * @return Translation key
    */
   public static MutableComponent makeTranslation(String base, String name) {
     return Component.translatable(makeTranslationKey(base, name));
@@ -294,10 +305,11 @@ public class TConstruct {
 
   /**
    * Makes a translation text component for the given name
-   * @param base       Base name, such as "block" or "gui"
-   * @param name       Object name
-   * @param arguments  Additional arguments to the translation
-   * @return  Translation key
+   *
+   * @param base      Base name, such as "block" or "gui"
+   * @param name      Object name
+   * @param arguments Additional arguments to the translation
+   * @return Translation key
    */
   public static MutableComponent makeTranslation(String base, String name, Object... arguments) {
     return Component.translatable(makeTranslationKey(base, name), arguments);
@@ -307,9 +319,10 @@ public class TConstruct {
    * This function is called in the constructor in some internal classes that are a common target for addons to wrongly extend.
    * These classes will cause issues if blindly used by the addon, and are typically trivial for the addon to implement
    * the parts they need if they just put in some effort understanding the code they are copying.
-   *
+   * <p>
    * As a reminder for addon devs, anything that is not in the library package can and will change arbitrarily. If you need to use a feature outside library, request it on our github.
-   * @param self  Class to validate
+   *
+   * @param self Class to validate
    */
   public static void sealTinkersClass(Object self, String base, String solution) {
     // note for future maintainers: this does not use Java 9's sealed classes as unless you use modules those are restricted to the same package.

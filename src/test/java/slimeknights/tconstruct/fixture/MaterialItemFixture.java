@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.fixture;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -22,7 +23,7 @@ public class MaterialItemFixture {
       return;
     }
     init = true;
-    Registry.ITEM.unfreeze(); // yes, I know this is bad, but this is testing so we do bad things sometimes
+    ForgeRegistries.ITEMS.unfreeze(); // yes, I know this is bad, but this is testing so we do bad things sometimes
     MATERIAL_ITEM = new ToolPartItem(new Item.Properties(), MaterialStatsFixture.STATS_TYPE);
     MATERIAL_ITEM_2 = new ToolPartItem(new Item.Properties(), MaterialStatsFixture.STATS_TYPE_2);
     MATERIAL_ITEM_HEAD = new ToolPartItem(new Item.Properties(), HeadMaterialStats.ID);

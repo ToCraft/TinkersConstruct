@@ -26,10 +26,15 @@ import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/** Base datagenerator to generate tool definition data */
+/**
+ * Base datagenerator to generate tool definition data
+ */
 public abstract class AbstractToolDefinitionDataProvider extends GenericDataProvider {
-  private final Map<ResourceLocation,ToolDefinitionDataBuilder> allTools = new HashMap<>();
-  /** Mod ID to filter definitions we care about */
+
+  private final Map<ResourceLocation, ToolDefinitionDataBuilder> allTools = new HashMap<>();
+  /**
+   * Mod ID to filter definitions we care about
+   */
   private final String modId;
 
   public AbstractToolDefinitionDataProvider(DataGenerator generator, String modId) {
@@ -42,22 +47,30 @@ public abstract class AbstractToolDefinitionDataProvider extends GenericDataProv
    */
   protected abstract void addToolDefinitions();
 
-  /** Defines the given ID as a tool definition */
+  /**
+   * Defines the given ID as a tool definition
+   */
   protected ToolDefinitionDataBuilder define(ResourceLocation id) {
     return allTools.computeIfAbsent(id, i -> ToolDefinitionDataBuilder.builder());
   }
 
-  /** Defines the given ID as a tool definition */
+  /**
+   * Defines the given ID as a tool definition
+   */
   protected ToolDefinitionDataBuilder define(ItemLike item) {
-    return define(Registry.ITEM.getKey(item.asItem()));
+    return define(ForgeRegistries.ITEMS.getKey(item.asItem()));
   }
 
-  /** Defines the given ID as a tool definition */
+  /**
+   * Defines the given ID as a tool definition
+   */
   protected ToolDefinitionDataBuilder define(ToolDefinition definition) {
     return define(definition.getId());
   }
 
-  /** Defines an armor data builder */
+  /**
+   * Defines an armor data builder
+   */
   protected ArmorDataBuilder defineArmor(ModifiableArmorMaterial armorMaterial) {
     return new ArmorDataBuilder(armorMaterial);
   }
@@ -65,9 +78,9 @@ public abstract class AbstractToolDefinitionDataProvider extends GenericDataProv
   @Override
   public void run(CachedOutput cache) throws IOException {
     addToolDefinitions();
-    Map<ResourceLocation,ToolDefinition> relevantDefinitions = ToolDefinitionLoader.getInstance().getRegisteredToolDefinitions().stream()
-                                                                                   .filter(def -> def.getId().getNamespace().equals(modId))
-                                                                                   .collect(Collectors.toMap(ToolDefinition::getId, Function.identity()));
+    Map<ResourceLocation, ToolDefinition> relevantDefinitions = ToolDefinitionLoader.getInstance().getRegisteredToolDefinitions().stream()
+      .filter(def -> def.getId().getNamespace().equals(modId))
+      .collect(Collectors.toMap(ToolDefinition::getId, Function.identity()));
     // ensure all required definitions are included
     for (ToolDefinition definition : relevantDefinitions.values()) {
       ResourceLocation name = definition.getId();
@@ -76,7 +89,7 @@ public abstract class AbstractToolDefinitionDataProvider extends GenericDataProv
       }
     }
     // ensure all included ones are required, and the built ones are valid
-    for (Entry<ResourceLocation,ToolDefinitionDataBuilder> entry : allTools.entrySet()) {
+    for (Entry<ResourceLocation, ToolDefinitionDataBuilder> entry : allTools.entrySet()) {
       ResourceLocation id = entry.getKey();
       ToolDefinition definition = relevantDefinitions.get(id);
       if (definition == null) {
@@ -86,12 +99,16 @@ public abstract class AbstractToolDefinitionDataProvider extends GenericDataProv
     }
   }
 
-  /** Builder for an armor material to batch certain hooks */
+  /**
+   * Builder for an armor material to batch certain hooks
+   */
   @SuppressWarnings("UnusedReturnValue")
   protected class ArmorDataBuilder {
+
     private final ResourceLocation name;
     private final ToolDefinitionDataBuilder[] builders;
     private final List<ArmorSlotType> slotTypes;
+
     private ArmorDataBuilder(ModifiableArmorMaterial armorMaterial) {
       this.name = armorMaterial.getId();
       this.builders = new ToolDefinitionDataBuilder[4];
@@ -106,7 +123,9 @@ public abstract class AbstractToolDefinitionDataProvider extends GenericDataProv
       this.slotTypes = slotTypes.build();
     }
 
-    /** Gets the builder for the given slot */
+    /**
+     * Gets the builder for the given slot
+     */
     protected ToolDefinitionDataBuilder getBuilder(ArmorSlotType slotType) {
       ToolDefinitionDataBuilder builder = builders[slotType.getIndex()];
       if (builder == null) {
@@ -118,27 +137,35 @@ public abstract class AbstractToolDefinitionDataProvider extends GenericDataProv
 
     /* Modules */
 
-    /** Adds a module to the definition with the given hooks */
+    /**
+     * Adds a module to the definition with the given hooks
+     */
     @SafeVarargs
     public final <T extends ToolModule> ArmorDataBuilder module(ArmorSlotType slotType, T module, ModuleHook<? super T>... hooks) {
       getBuilder(slotType).module(module, hooks);
       return this;
     }
 
-    /** Adds a module to the definition */
+    /**
+     * Adds a module to the definition
+     */
     public ArmorDataBuilder module(ArmorSlotType slotType, ToolModule module) {
       getBuilder(slotType).module(module);
       return this;
     }
 
-    /** Adds a module to the definition */
+    /**
+     * Adds a module to the definition
+     */
     public ArmorDataBuilder module(ArmorSlotType slotType, ToolModule... modules) {
       getBuilder(slotType).module(modules);
       return this;
     }
 
 
-    /** Adds a module to the definition with the given hooks */
+    /**
+     * Adds a module to the definition with the given hooks
+     */
     @SafeVarargs
     public final <T extends ToolModule> ArmorDataBuilder module(T module, ModuleHook<? super T>... hooks) {
       for (ArmorSlotType armorSlot : slotTypes) {
@@ -147,7 +174,9 @@ public abstract class AbstractToolDefinitionDataProvider extends GenericDataProv
       return this;
     }
 
-    /** Adds a module to the definition */
+    /**
+     * Adds a module to the definition
+     */
     public ArmorDataBuilder module(ToolModule module) {
       for (ArmorSlotType armorSlot : slotTypes) {
         module(armorSlot, module);
@@ -155,7 +184,9 @@ public abstract class AbstractToolDefinitionDataProvider extends GenericDataProv
       return this;
     }
 
-    /** Adds a module to the definition */
+    /**
+     * Adds a module to the definition
+     */
     public ArmorDataBuilder module(ToolModule... modules) {
       for (ArmorSlotType armorSlot : slotTypes) {
         module(armorSlot, modules);
@@ -163,7 +194,9 @@ public abstract class AbstractToolDefinitionDataProvider extends GenericDataProv
       return this;
     }
 
-    /** Adds modules to the definition using the passed builder */
+    /**
+     * Adds modules to the definition using the passed builder
+     */
     @SafeVarargs
     public final <T extends ToolModule> ArmorDataBuilder module(ArmorBuilder<T> builder, ModuleHook<? super T>... hooks) {
       for (ArmorSlotType armorSlot : slotTypes) {
@@ -172,7 +205,9 @@ public abstract class AbstractToolDefinitionDataProvider extends GenericDataProv
       return this;
     }
 
-    /** Adds modules to the definition using the passed builder */
+    /**
+     * Adds modules to the definition using the passed builder
+     */
     public ArmorDataBuilder module(ArmorBuilder<? extends ToolModule> builder) {
       for (ArmorSlotType armorSlot : slotTypes) {
         module(armorSlot, builder.build(armorSlot));
@@ -180,14 +215,18 @@ public abstract class AbstractToolDefinitionDataProvider extends GenericDataProv
       return this;
     }
 
-    /** Adds modules to the definition using the passed builder */
+    /**
+     * Adds modules to the definition using the passed builder
+     */
     @SafeVarargs
-    public final <T extends ToolModule> ArmorDataBuilder modules(Function<List<ArmorSlotType>,ArmorBuilder<T>> constructor, ModuleHook<? super T>... hooks) {
+    public final <T extends ToolModule> ArmorDataBuilder modules(Function<List<ArmorSlotType>, ArmorBuilder<T>> constructor, ModuleHook<? super T>... hooks) {
       return module(constructor.apply(slotTypes), hooks);
     }
 
-    /** Adds modules to the definition using the passed builder */
-    public ArmorDataBuilder modules(Function<List<ArmorSlotType>,ArmorBuilder<? extends ToolModule>> constructor) {
+    /**
+     * Adds modules to the definition using the passed builder
+     */
+    public ArmorDataBuilder modules(Function<List<ArmorSlotType>, ArmorBuilder<? extends ToolModule>> constructor) {
       return module(constructor.apply(slotTypes));
     }
   }

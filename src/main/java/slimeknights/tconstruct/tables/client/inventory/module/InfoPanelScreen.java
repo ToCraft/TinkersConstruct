@@ -26,10 +26,13 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class InfoPanelScreen extends ModuleScreen {
+
   private static final int resW = 118;
   private static final int resH = 75;
 
-  /** Default caption displayed until one is set */
+  /**
+   * Default caption displayed until one is set
+   */
   private static final Component DEFAULT_CAPTION = TConstruct.makeTranslation("gui", "caption").withStyle(ChatFormatting.UNDERLINE);
 
   protected static ResourceLocation BACKGROUND_IMAGE = TConstruct.getResource("textures/gui/panel.png");
@@ -65,6 +68,7 @@ public class InfoPanelScreen extends ModuleScreen {
 
   @Setter
   protected float textScale = 1.0f;
+
   public InfoPanelScreen(MultiModuleScreen parent, AbstractContainerMenu container, Inventory playerInventory, Component title) {
     super(parent, container, playerInventory, title, true, false);
 
@@ -85,9 +89,11 @@ public class InfoPanelScreen extends ModuleScreen {
     this.text = Lists.newLinkedList();
   }
 
-  /** Gets the height to render fonts scaled by the text scale */
+  /**
+   * Gets the height to render fonts scaled by the text scale
+   */
   public int getScaledFontHeight() {
-    return (int)Math.ceil(this.font.lineHeight * textScale);
+    return (int) Math.ceil(this.font.lineHeight * textScale);
   }
 
   @Override
@@ -240,7 +246,7 @@ public class InfoPanelScreen extends ModuleScreen {
 
   @Override
   protected void renderLabels(PoseStack matrixStack, int x, int y) {
-   // no-op
+    // no-op
   }
 
   @Override
@@ -258,7 +264,7 @@ public class InfoPanelScreen extends ModuleScreen {
     // floating over tooltip info?
     int scaledFontHeight = this.getScaledFontHeight();
     if (this.hasTooltips() && mouseX >= this.guiRight() - this.border.w - this.font.width("?") / 2 && mouseX < this.guiRight()
-        && mouseY > this.topPos + 5 && mouseY < this.topPos + 5 + scaledFontHeight) {
+      && mouseY > this.topPos + 5 && mouseY < this.topPos + 5 + scaledFontHeight) {
       this.renderTooltip(matrices, this.font.split(Component.translatable("gui.tconstruct.general.hover"), 150), mouseX - 155, mouseY);
     }
 
@@ -279,8 +285,7 @@ public class InfoPanelScreen extends ModuleScreen {
       if (mouseY > y && mouseY <= y + textHeight) {
         index = iter.nextIndex();
         break;
-      }
-      else {
+      } else {
         iter.next();
       }
       y += textHeight;

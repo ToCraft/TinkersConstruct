@@ -19,7 +19,8 @@ import java.util.Map;
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SeveringRecipeCache {
-  private static final Map<EntityType<?>,List<SeveringRecipe>> CACHE = new HashMap<>();
+
+  private static final Map<EntityType<?>, List<SeveringRecipe>> CACHE = new HashMap<>();
 
   static {
     RecipeCacheInvalidator.addReloadListener(client -> CACHE.clear());
@@ -27,9 +28,10 @@ public class SeveringRecipeCache {
 
   /**
    * Gets the recipe for the given type
-   * @param manager  Recipe manager
-   * @param type     Entity type
-   * @return  Recipe, or null if no recipe for this type
+   *
+   * @param manager Recipe manager
+   * @param type    Entity type
+   * @return Recipe, or null if no recipe for this type
    */
   public static List<SeveringRecipe> findRecipe(RecipeManager manager, EntityType<?> type) {
     if (CACHE.containsKey(type)) {

@@ -33,7 +33,7 @@ public class TConstructLootTableProvider extends LootTableProvider {
   }
 
   @Override
-  protected void validate(Map<ResourceLocation,LootTable> map, ValidationContext validationtracker) {
+  protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationtracker) {
     map.forEach((loc, table) -> LootTables.validate(validationtracker, loc, table));
     // Remove vanilla's tables, which we also loaded so we can redirect stuff to them.
     // This ensures the remaining generator logic doesn't write those to files.

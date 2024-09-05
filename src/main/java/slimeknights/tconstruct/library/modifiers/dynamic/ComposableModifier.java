@@ -27,8 +27,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/** Modifier consisting of many composed hooks, used in datagen as a serialized modifier. */
+/**
+ * Modifier consisting of many composed hooks, used in datagen as a serialized modifier.
+ */
 public class ComposableModifier extends BasicModifier {
+
   public static final RecordLoadable<ComposableModifier> LOADER = RecordLoadable.create(
     ModifierLevelDisplay.LOADER.defaultField("level_display", true, m -> m.levelDisplay),
     new EnumLoadable<>(TooltipDisplay.class).defaultField("tooltip_display", TooltipDisplay.ALWAYS, true, m -> m.tooltipDisplay),
@@ -41,17 +44,20 @@ public class ComposableModifier extends BasicModifier {
 
   /**
    * Creates a new instance
-   * @param levelDisplay     Level display
-   * @param tooltipDisplay   Tooltip display
-   * @param priority         If the value is {@link Integer#MIN_VALUE}, assumed unset for datagen
-   * @param modules          Modules for this modifier
+   *
+   * @param levelDisplay   Level display
+   * @param tooltipDisplay Tooltip display
+   * @param priority       If the value is {@link Integer#MIN_VALUE}, assumed unset for datagen
+   * @param modules        Modules for this modifier
    */
   protected ComposableModifier(ModifierLevelDisplay levelDisplay, TooltipDisplay tooltipDisplay, int priority, List<WithHooks<ModifierModule>> modules, ErrorFactory error) {
     super(ModuleHookMap.createMap(modules, error), levelDisplay, tooltipDisplay, priority);
     this.modules = modules;
   }
 
-  /** Creates a builder instance for datagen */
+  /**
+   * Creates a builder instance for datagen
+   */
   public static Builder builder() {
     return new Builder();
   }
@@ -66,7 +72,9 @@ public class ComposableModifier extends BasicModifier {
     return getHook(ModifierHooks.DISPLAY_NAME).getDisplayName(tool, entry, entry.getDisplayName());
   }
 
-  /** Computes the recommended priority for a set of modifier modules */
+  /**
+   * Computes the recommended priority for a set of modifier modules
+   */
   private static int computePriority(List<WithHooks<ModifierModule>> modules) {
     // poll all modules to find who has a priority preference
     List<ModifierModule> priorityModules = new ArrayList<>();
@@ -84,9 +92,9 @@ public class ComposableModifier extends BasicModifier {
         //noinspection ConstantConditions  validated nonnull above
         if (priorityModules.get(i).getPriority() != firstPriority) {
           TConstruct.LOG.warn("Multiple modules disagree on the preferred priority for composable modifier, choosing priority {}. Set the priority manually to silence this warning. All opinions: \n{}", firstPriority,
-                              priorityModules.stream()
-                                             .map(module -> "* " + module + ": " + module.getPriority())
-                                             .collect(Collectors.joining("\n")));
+            priorityModules.stream()
+              .map(module -> "* " + module + ": " + module.getPriority())
+              .collect(Collectors.joining("\n")));
           break;
         }
       }
@@ -95,27 +103,36 @@ public class ComposableModifier extends BasicModifier {
     return Modifier.DEFAULT_PRIORITY;
   }
 
-  /** Builder for a composable modifier instance */
+  /**
+   * Builder for a composable modifier instance
+   */
   @SuppressWarnings("UnusedReturnValue")  // it's a builder
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   @Accessors(fluent = true)
   public static class Builder {
+
     @Setter
     private ModifierLevelDisplay levelDisplay = ModifierLevelDisplay.DEFAULT;
     @Setter
     private TooltipDisplay tooltipDisplay = TooltipDisplay.ALWAYS;
-    /** {@link Integer#MIN_VALUE} is an internal value used to represent unset for datagen, to distinguish unset from {@link Modifier#DEFAULT_PRIORITY} */
+    /**
+     * {@link Integer#MIN_VALUE} is an internal value used to represent unset for datagen, to distinguish unset from {@link Modifier#DEFAULT_PRIORITY}
+     */
     @Setter
     private int priority = Integer.MIN_VALUE;
     private final ImmutableList.Builder<WithHooks<ModifierModule>> modules = ImmutableList.builder();
 
-    /** Adds a module to the builder */
+    /**
+     * Adds a module to the builder
+     */
     public final Builder addModule(ModifierModule module) {
       modules.add(new WithHooks<>(module, Collections.emptyList()));
       return this;
     }
 
-    /** Adds a module to the builder */
+    /**
+     * Adds a module to the builder
+     */
     public final Builder addModules(ModifierModule... modules) {
       for (ModifierModule module : modules) {
         addModule(module);
@@ -123,7 +140,9 @@ public class ComposableModifier extends BasicModifier {
       return this;
     }
 
-    /** Adds a module to the builder */
+    /**
+     * Adds a module to the builder
+     */
     @SuppressWarnings("UnusedReturnValue")
     @SafeVarargs
     public final <T extends ModifierModule> Builder addModule(T object, ModuleHook<? super T>... hooks) {
@@ -131,7 +150,9 @@ public class ComposableModifier extends BasicModifier {
       return this;
     }
 
-    /** Builds the final instance */
+    /**
+     * Builds the final instance
+     */
     public ComposableModifier build() {
       List<WithHooks<ModifierModule>> modules = this.modules.build();
       if (priority == Integer.MIN_VALUE) {

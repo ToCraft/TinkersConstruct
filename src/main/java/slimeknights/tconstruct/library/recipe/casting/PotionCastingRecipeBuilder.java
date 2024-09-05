@@ -24,17 +24,20 @@ import java.util.function.Consumer;
 @SuppressWarnings({"WeakerAccess", "unused", "UnusedReturnValue"})
 @RequiredArgsConstructor(staticName = "castingRecipe")
 public class PotionCastingRecipeBuilder extends AbstractRecipeBuilder<PotionCastingRecipeBuilder> {
+
   private final Item result;
   private final TypeAwareRecipeSerializer<PotionCastingRecipe> recipeSerializer;
   private Ingredient bottle = Ingredient.EMPTY;
   private FluidIngredient fluid = FluidIngredient.EMPTY;
-  @Setter @Accessors(chain = true)
+  @Setter
+  @Accessors(chain = true)
   private int coolingTime = 5;
 
   /**
    * Creates a new casting basin recipe
-   * @param result  Recipe result
-   * @return  Builder instance
+   *
+   * @param result Recipe result
+   * @return Builder instance
    */
   public static PotionCastingRecipeBuilder basinRecipe(ItemLike result) {
     return castingRecipe(result.asItem(), TinkerSmeltery.basinPotionRecipeSerializer.get());
@@ -42,8 +45,9 @@ public class PotionCastingRecipeBuilder extends AbstractRecipeBuilder<PotionCast
 
   /**
    * Creates a new casting table recipe
-   * @param result  Recipe result
-   * @return  Builder instance
+   *
+   * @param result Recipe result
+   * @return Builder instance
    */
   public static PotionCastingRecipeBuilder tableRecipe(ItemLike result) {
     return castingRecipe(result.asItem(), TinkerSmeltery.tablePotionRecipeSerializer.get());
@@ -54,9 +58,10 @@ public class PotionCastingRecipeBuilder extends AbstractRecipeBuilder<PotionCast
 
   /**
    * Sets the fluid for this recipe
-   * @param tagIn   Tag<Fluid> instance
-   * @param amount  amount of fluid
-   * @return  Builder instance
+   *
+   * @param tagIn  Tag<Fluid> instance
+   * @param amount amount of fluid
+   * @return Builder instance
    */
   public PotionCastingRecipeBuilder setFluid(TagKey<Fluid> tagIn, int amount) {
     return this.setFluid(FluidIngredient.of(tagIn, amount));
@@ -64,8 +69,9 @@ public class PotionCastingRecipeBuilder extends AbstractRecipeBuilder<PotionCast
 
   /**
    * Sets the fluid ingredient
-   * @param fluid  Fluid ingredient instance
-   * @return  Builder instance
+   *
+   * @param fluid Fluid ingredient instance
+   * @return Builder instance
    */
   public PotionCastingRecipeBuilder setFluid(FluidIngredient fluid) {
     this.fluid = fluid;
@@ -77,8 +83,9 @@ public class PotionCastingRecipeBuilder extends AbstractRecipeBuilder<PotionCast
 
   /**
    * Sets the cast from a tag, bottles are always consumed
-   * @param tagIn     Cast tag
-   * @return  Builder instance
+   *
+   * @param tagIn Cast tag
+   * @return Builder instance
    */
   public PotionCastingRecipeBuilder setBottle(TagKey<Item> tagIn) {
     return this.setBottle(Ingredient.of(tagIn));
@@ -86,8 +93,9 @@ public class PotionCastingRecipeBuilder extends AbstractRecipeBuilder<PotionCast
 
   /**
    * Sets the bottle from an item, bottles are always consumed
-   * @param itemIn    Cast item
-   * @return  Builder instance
+   *
+   * @param itemIn Cast item
+   * @return Builder instance
    */
   public PotionCastingRecipeBuilder setBottle(ItemLike itemIn) {
     return this.setBottle(Ingredient.of(itemIn));
@@ -95,8 +103,9 @@ public class PotionCastingRecipeBuilder extends AbstractRecipeBuilder<PotionCast
 
   /**
    * Sets the bottle from an ingredient, bottles are always consumed
-   * @param ingredient  Cast ingredient
-   * @return  Builder instance
+   *
+   * @param ingredient Cast ingredient
+   * @return Builder instance
    */
   public PotionCastingRecipeBuilder setBottle(Ingredient ingredient) {
     this.bottle = ingredient;
@@ -105,11 +114,12 @@ public class PotionCastingRecipeBuilder extends AbstractRecipeBuilder<PotionCast
 
   /**
    * Builds a recipe using the registry name as the recipe name
-   * @param consumerIn  Recipe consumer
+   *
+   * @param consumerIn Recipe consumer
    */
   @Override
   public void save(Consumer<FinishedRecipe> consumerIn) {
-    this.save(consumerIn, Registry.ITEM.getKey(this.result));
+    this.save(consumerIn, ForgeRegistries.ITEMS.getKey(this.result));
   }
 
   @Override

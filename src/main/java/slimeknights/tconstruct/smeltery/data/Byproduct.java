@@ -10,25 +10,27 @@ import slimeknights.tconstruct.library.recipe.FluidValues;
 import java.util.Locale;
 import java.util.function.Supplier;
 
-/** Standard ore byproducts for smeltery ores, this enum exists to simplify our builders to allow passing 3 args in varargs */
+/**
+ * Standard ore byproducts for smeltery ores, this enum exists to simplify our builders to allow passing 3 args in varargs
+ */
 @RequiredArgsConstructor
 public enum Byproduct implements IByproduct {
   // base metals
-  COPPER    (true, TinkerFluids.moltenCopper),
-  IRON      (true, TinkerFluids.moltenIron),
-  GOLD      (true, TinkerFluids.moltenGold),
+  COPPER(true, TinkerFluids.moltenCopper),
+  IRON(true, TinkerFluids.moltenIron),
+  GOLD(true, TinkerFluids.moltenGold),
   SMALL_GOLD("gold", true, TinkerFluids.moltenGold, FluidValues.NUGGET * 3),
-  COBALT    (true, TinkerFluids.moltenCobalt),
+  COBALT(true, TinkerFluids.moltenCobalt),
   // compat metals
-  TIN     (false, TinkerFluids.moltenTin),
-  SILVER  (false, TinkerFluids.moltenSilver),
-  NICKEL  (false, TinkerFluids.moltenNickel),
-  LEAD    (false, TinkerFluids.moltenLead),
+  TIN(false, TinkerFluids.moltenTin),
+  SILVER(false, TinkerFluids.moltenSilver),
+  NICKEL(false, TinkerFluids.moltenNickel),
+  LEAD(false, TinkerFluids.moltenLead),
   PLATINUM("platinum", false, TinkerFluids.moltenPlatinum, FluidValues.NUGGET * 3),
   // gems
-  DIAMOND ("diamond",  true, TinkerFluids.moltenDiamond, FluidValues.GEM),
+  DIAMOND("diamond", true, TinkerFluids.moltenDiamond, FluidValues.GEM),
   AMETHYST("amethyst", true, TinkerFluids.moltenAmethyst, FluidValues.GEM),
-  QUARTZ  ("quartz",   true, TinkerFluids.moltenQuartz, FluidValues.GEM);
+  QUARTZ("quartz", true, TinkerFluids.moltenQuartz, FluidValues.GEM);
 
   @Getter
   private final String name;

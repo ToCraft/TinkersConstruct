@@ -21,6 +21,7 @@ import slimeknights.tconstruct.library.tools.definition.ModifiableArmorMaterial;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 public class SpringyModifier extends Modifier implements MeleeHitModifierHook, OnAttackedModifierHook {
+
   private static final TinkerDataKey<SlotInCharge> SLOT_IN_CHARGE = TConstruct.createKey("springy");
 
   @Override
@@ -53,7 +54,7 @@ public class SpringyModifier extends Modifier implements MeleeHitModifierHook, O
       }
       // did we end up with any bonus?
       if (bestBonus > 0) {
-        float angle = attacker.getYRot() * (float)Math.PI / 180F;
+        float angle = attacker.getYRot() * (float) Math.PI / 180F;
         livingAttacker.knockback(bestBonus, -Mth.sin(angle), Mth.cos(angle));
       }
     }

@@ -9,9 +9,12 @@ import net.minecraftforge.network.NetworkEvent.Context;
 import slimeknights.mantle.network.packet.IThreadsafePacket;
 import slimeknights.tconstruct.library.tools.capability.PersistentDataCapability;
 
-/** Packet to sync player persistent data to the client */
+/**
+ * Packet to sync player persistent data to the client
+ */
 @RequiredArgsConstructor
 public class SyncPersistentDataPacket implements IThreadsafePacket {
+
   private final CompoundTag data;
 
   public SyncPersistentDataPacket(FriendlyByteBuf buffer) {
@@ -28,8 +31,11 @@ public class SyncPersistentDataPacket implements IThreadsafePacket {
     HandleClient.handle(this);
   }
 
-  /** Handles client side only code safely */
+  /**
+   * Handles client side only code safely
+   */
   private static class HandleClient {
+
     private static void handle(SyncPersistentDataPacket packet) {
       Player player = Minecraft.getInstance().player;
       if (player != null) {

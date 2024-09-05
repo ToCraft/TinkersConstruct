@@ -13,9 +13,11 @@ import slimeknights.tconstruct.library.modifiers.fluid.FluidEffectContext.Entity
 
 /**
  * Effect to increase or decrease the target's breath.
- * @param amount  Amount to restore
+ *
+ * @param amount Amount to restore
  */
 public record AddBreathFluidEffect(int amount) implements FluidEffect<FluidEffectContext.Entity> {
+
   public static final RecordLoadable<AddBreathFluidEffect> LOADER = RecordLoadable.create(
     IntLoadable.ANY_SHORT.requiredField("amount", e -> e.amount),
     AddBreathFluidEffect::new);
@@ -37,7 +39,7 @@ public record AddBreathFluidEffect(int amount) implements FluidEffect<FluidEffec
       // based on whether we are increasing or decreasing breath, the max change varies
       // only consume fluid based on the air we got/lost
       int maxChange = amount > 0 ? max - current : current;
-      return level.computeUsed(maxChange / (float)Math.abs(amount));
+      return level.computeUsed(maxChange / (float) Math.abs(amount));
     }
     return 0;
   }

@@ -41,11 +41,16 @@ import java.util.Optional;
  */
 @Log4j2
 public class MaterialRenderInfoLoader implements IEarlySafeManagerReloadListener {
+
   public static final MaterialRenderInfoLoader INSTANCE = new MaterialRenderInfoLoader();
 
-  /** Folder to scan for material render info JSONS */
+  /**
+   * Folder to scan for material render info JSONS
+   */
   public static final String FOLDER = "tinkering/materials";
-  /** GSON adapter for material info deserializing */
+  /**
+   * GSON adapter for material info deserializing
+   */
   public static final Gson GSON = (new GsonBuilder())
     .registerTypeAdapter(ResourceLocation.class, new ResourceLocation.Serializer())
     .registerTypeAdapter(MaterialStatsId.class, new ResourceLocationSerializer<>(MaterialStatsId::new, TConstruct.MOD_ID))
@@ -58,25 +63,28 @@ public class MaterialRenderInfoLoader implements IEarlySafeManagerReloadListener
   /**
    * Called on mod construct to register the resource listener
    */
-  public static void init()  {
+  public static void init() {
     // bit of a hack: instead of registering our resource listener to the list as we should, we use the additional model registration event
     // we do this as we need to guarantee we run before models are baked, which happens in the first stage of listeners in the bakery constructor
     // the other option would be to wait until the atlas stitch event, though that would make it more difficult to know which sprites we need
     FMLJavaModLoadingContext.get().getModEventBus().addListener(EventPriority.NORMAL, false, ModelEvent.RegisterAdditional.class, event -> {
-      if(ModLoader.isLoadingStateValid()) {
+      if (ModLoader.isLoadingStateValid()) {
         INSTANCE.onReloadSafe(Minecraft.getInstance().getResourceManager());
       }
     });
   }
 
-  /** Map of all loaded materials */
-  private Map<MaterialVariantId,MaterialRenderInfo> renderInfos = ImmutableMap.of();
+  /**
+   * Map of all loaded materials
+   */
+  private Map<MaterialVariantId, MaterialRenderInfo> renderInfos = ImmutableMap.of();
 
   private MaterialRenderInfoLoader() {}
 
   /**
    * Gets a list of all loaded materials render infos
-   * @return  All loaded material render infos
+   *
+   * @return All loaded material render infos
    */
   public Collection<MaterialRenderInfo> getAllRenderInfos() {
     return renderInfos.values();
@@ -84,8 +92,9 @@ public class MaterialRenderInfoLoader implements IEarlySafeManagerReloadListener
 
   /**
    * Gets the render info for the given material
-   * @param variantId  Material loaded
-   * @return  Material render info
+   *
+   * @param variantId Material loaded
+   * @return Material render info
    */
   public Optional<MaterialRenderInfo> getRenderInfo(MaterialVariantId variantId) {
     // if there is a variant, try fetching for the variant
@@ -102,8 +111,8 @@ public class MaterialRenderInfoLoader implements IEarlySafeManagerReloadListener
   @Override
   public void onReloadSafe(ResourceManager manager) {
     // first, we need to fetch all relevant JSON files
-    Map<MaterialVariantId,MaterialRenderInfo> map = new HashMap<>();
-    for(Entry<ResourceLocation, Resource> entry : manager.listResources(FOLDER, (loc) -> loc.getPath().endsWith(".json")).entrySet()) {
+    Map<MaterialVariantId, MaterialRenderInfo> map = new HashMap<>();
+    for (Entry<ResourceLocation, Resource> entry : manager.listResources(FOLDER, (loc) -> loc.getPath().endsWith(".json")).entrySet()) {
       // clean up ID by trimming off the extension and folder
       ResourceLocation location = entry.getKey();
       String localPath = JsonHelper.localize(location.getPath(), FOLDER, ".json");
@@ -141,9 +150,10 @@ public class MaterialRenderInfoLoader implements IEarlySafeManagerReloadListener
 
   /**
    * Gets material render info based on the given JSON
-   * @param material   Material location
-   * @param json  Render info JSON data
-   * @return  Material render info data
+   *
+   * @param material Material location
+   * @param json     Render info JSON data
+   * @return Material render info data
    */
   private MaterialRenderInfo loadRenderInfo(MaterialVariantId material, MaterialRenderInfoJson json) {
     // parse color

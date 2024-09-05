@@ -13,9 +13,13 @@ import slimeknights.tconstruct.library.tools.helper.ArmorUtil;
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
-/** Armor model with two texture layers, the base and an overlay */
+/**
+ * Armor model with two texture layers, the base and an overlay
+ */
 public class FlexMultilayerArmorModel extends FlexModifiableArmorItem {
+
   private final ResourceLocation name;
+
   public FlexMultilayerArmorModel(ArmorMaterial material, EquipmentSlot slot, Properties properties, ToolDefinition toolDefinition) {
     super(material, slot, properties, toolDefinition);
     this.name = new ResourceLocation(material.getName());

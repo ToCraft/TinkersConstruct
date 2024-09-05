@@ -17,6 +17,7 @@ import slimeknights.tconstruct.tables.menu.slot.LazyResultSlot;
 import javax.annotation.Nullable;
 
 public class PartBuilderContainerMenu extends TabbedContainerMenu<PartBuilderBlockEntity> {
+
   // slots
   @Getter
   private final Slot patternSlot;
@@ -81,9 +82,13 @@ public class PartBuilderContainerMenu extends TabbedContainerMenu<PartBuilderBlo
     return slotIn != this.outputSlot && super.canTakeItemForPickAll(stack, slotIn);
   }
 
-  /** Slot to update recipe on change */
+  /**
+   * Slot to update recipe on change
+   */
   private static class PartBuilderSlot extends Slot {
+
     private final LazyResultContainer craftResult;
+
     public PartBuilderSlot(PartBuilderBlockEntity tile, int index, int xPosition, int yPosition) {
       super(tile, index, xPosition, yPosition);
       craftResult = tile.getCraftingResult();
@@ -96,8 +101,11 @@ public class PartBuilderContainerMenu extends TabbedContainerMenu<PartBuilderBlo
     }
   }
 
-  /** Slot for the material, which wants to force a screen update */
+  /**
+   * Slot for the material, which wants to force a screen update
+   */
   private class MaterialSlot extends PartBuilderSlot {
+
     public MaterialSlot(PartBuilderBlockEntity tile, int index, int xPosition, int yPosition) {
       super(tile, index, xPosition, yPosition);
     }
@@ -113,6 +121,7 @@ public class PartBuilderContainerMenu extends TabbedContainerMenu<PartBuilderBlo
    * Slot for the pattern, updates buttons on change
    */
   private static class PatternSlot extends PartBuilderSlot {
+
     private PatternSlot(PartBuilderBlockEntity tile, int x, int y) {
       super(tile, PartBuilderBlockEntity.PATTERN_SLOT, x, y);
     }

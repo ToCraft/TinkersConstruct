@@ -22,6 +22,7 @@ import slimeknights.tconstruct.tools.modifiers.upgrades.ranged.ScopeModifier;
  * Shared logic for all slinging modifiers
  */
 public abstract class SlingModifier extends NoLevelsModifier implements GeneralInteractionModifierHook {
+
   @Override
   protected void registerHooks(Builder builder) {
     builder.addHook(this, ModifierHooks.GENERAL_INTERACT);
@@ -57,7 +58,9 @@ public abstract class SlingModifier extends NoLevelsModifier implements GeneralI
     return BlockingModifier.blockWhileCharging(tool, UseAnim.BOW);
   }
 
-  /** Gets the force to launch the sling at, considers drawspeed and velocity */
+  /**
+   * Gets the force to launch the sling at, considers drawspeed and velocity
+   */
   protected float getForce(IToolStackView tool, ModifierEntry entry, LivingEntity living, int timeLeft, boolean applyKnockback) {
     int chargeTime = getUseDuration(tool, entry) - timeLeft;
     if (chargeTime < 0) {
@@ -70,8 +73,8 @@ public abstract class SlingModifier extends NoLevelsModifier implements GeneralI
       knockback = tool.getModifierLevel(TinkerModifiers.knockback.getId()) / 2f;
     }
     float force = GeneralInteractionModifierHook.getToolCharge(tool, chargeTime)
-                  * (ConditionalStatModifierHook.getModifiedStat(tool, living, ToolStats.PROJECTILE_DAMAGE) + knockback) / 2f
-                  * ConditionalStatModifierHook.getModifiedStat(tool, living, ToolStats.VELOCITY);
+      * (ConditionalStatModifierHook.getModifiedStat(tool, living, ToolStats.PROJECTILE_DAMAGE) + knockback) / 2f
+      * ConditionalStatModifierHook.getModifiedStat(tool, living, ToolStats.VELOCITY);
     // knockback also means we should apply padded, divide per level
     if (applyKnockback) {
       force /= Math.pow(2, tool.getModifierLevel(TinkerModifiers.padded.getId()));

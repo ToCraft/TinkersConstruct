@@ -25,8 +25,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
-/** Reorders modifiers ion a tool */
+/**
+ * Reorders modifiers ion a tool
+ */
 public class ModifierSortingRecipe extends AbstractWorktableRecipe {
+
   private static final Component TITLE = TConstruct.makeTranslation("recipe", "modifier_sorting.title");
   private static final Component DESCRIPTION = TConstruct.makeTranslation("recipe", "modifier_sorting.description");
   private static final Component NOT_ENOUGH_MODIFIERS = TConstruct.makeTranslation("recipe", "modifier_sorting.not_enough_modifiers");
@@ -65,8 +68,8 @@ public class ModifierSortingRecipe extends AbstractWorktableRecipe {
     // find the modifier to remove
     List<ModifierEntry> upgrades = tool.getUpgrades().getModifiers();
     int toMove = IntStream.range(0, upgrades.size())
-                          .filter(i -> upgrades.get(i).matches(modifier.getId()))
-                          .findFirst().orElse(-1);
+      .filter(i -> upgrades.get(i).matches(modifier.getId()))
+      .findFirst().orElse(-1);
     // if no change, no need to do anything
     if (toMove == -1) {
       return RecipeResult.pass();

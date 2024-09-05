@@ -15,6 +15,7 @@ import slimeknights.tconstruct.library.recipe.modifiers.severing.SeveringRecipe;
  * Recipe to deshroom a mooshroom, taking brown into account
  */
 public class MooshroomDemushroomingRecipe extends SeveringRecipe {
+
   public MooshroomDemushroomingRecipe(ResourceLocation id) {
     super(id, EntityIngredient.of(EntityType.MOOSHROOM), ItemOutput.fromItem(Items.RED_MUSHROOM, 5));
   }

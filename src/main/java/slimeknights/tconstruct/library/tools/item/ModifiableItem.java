@@ -71,11 +71,16 @@ import java.util.function.Consumer;
  * This class handles how all the modifier hooks and display data for items made out of different materials
  */
 public class ModifiableItem extends Item implements IModifiableDisplay {
-  /** Tool definition for the given tool */
+
+  /**
+   * Tool definition for the given tool
+   */
   @Getter
   private final ToolDefinition toolDefinition;
 
-  /** Cached tool for rendering on UIs */
+  /**
+   * Cached tool for rendering on UIs
+   */
   private ItemStack toolForRendering;
 
   public ModifiableItem(Properties properties, ToolDefinition toolDefinition) {
@@ -115,7 +120,7 @@ public class ModifiableItem extends Item implements IModifiableDisplay {
   }
 
   @Override
-  public Map<Enchantment,Integer> getAllEnchantments(ItemStack stack) {
+  public Map<Enchantment, Integer> getAllEnchantments(ItemStack stack) {
     return EnchantmentModifierHook.getAllEnchantments(stack);
   }
 
@@ -240,7 +245,7 @@ public class ModifiableItem extends Item implements IModifiableDisplay {
   }
 
   @Override
-  public Multimap<Attribute,AttributeModifier> getAttributeModifiers(IToolStackView tool, EquipmentSlot slot) {
+  public Multimap<Attribute, AttributeModifier> getAttributeModifiers(IToolStackView tool, EquipmentSlot slot) {
     return AttributesModifierHook.getHeldAttributeModifiers(tool, slot);
   }
 
@@ -288,10 +293,12 @@ public class ModifiableItem extends Item implements IModifiableDisplay {
   public void inventoryTick(ItemStack stack, Level worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
     InventoryTickModifierHook.heldInventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
   }
-  
+
   /* Right click hooks */
 
-  /** If true, this interaction hook should defer to the offhand */
+  /**
+   * If true, this interaction hook should defer to the offhand
+   */
   protected static boolean shouldInteract(@Nullable LivingEntity player, ToolStack toolStack, InteractionHand hand) {
     IModDataView volatileData = toolStack.getVolatileData();
     if (volatileData.getBoolean(NO_INTERACTION)) {
@@ -304,7 +311,7 @@ public class ModifiableItem extends Item implements IModifiableDisplay {
     // main hand may wish to defer to the offhand if it has a tool
     return player == null || !volatileData.getBoolean(DEFER_OFFHAND) || player.getOffhandItem().isEmpty();
   }
-  
+
   @Override
   public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
     if (stack.getCount() == 1) {
@@ -454,7 +461,7 @@ public class ModifiableItem extends Item implements IModifiableDisplay {
   public int getDefaultTooltipHideFlags(ItemStack stack) {
     return TooltipUtil.getModifierHideFlags(getToolDefinition());
   }
-  
+
 
   /* Display items */
 
@@ -478,10 +485,11 @@ public class ModifiableItem extends Item implements IModifiableDisplay {
 
   /**
    * Logic to prevent reanimation on tools when properties such as autorepair change.
-   * @param oldStack      Old stack instance
-   * @param newStack      New stack instance
-   * @param slotChanged   If true, a slot changed
-   * @return  True if a reequip animation should be triggered
+   *
+   * @param oldStack    Old stack instance
+   * @param newStack    New stack instance
+   * @param slotChanged If true, a slot changed
+   * @return True if a reequip animation should be triggered
    */
   public static boolean shouldCauseReequip(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
     if (oldStack == newStack) {
@@ -505,7 +513,7 @@ public class ModifiableItem extends Item implements IModifiableDisplay {
     }
 
     // if the attributes changed, reequip
-    Multimap<Attribute,AttributeModifier> attributesNew = newStack.getAttributeModifiers(EquipmentSlot.MAINHAND);
+    Multimap<Attribute, AttributeModifier> attributesNew = newStack.getAttributeModifiers(EquipmentSlot.MAINHAND);
     Multimap<Attribute, AttributeModifier> attributesOld = oldStack.getAttributeModifiers(EquipmentSlot.MAINHAND);
     if (attributesNew.size() != attributesOld.size()) {
       return true;
@@ -542,11 +550,10 @@ public class ModifiableItem extends Item implements IModifiableDisplay {
   /**
    * Creates a raytrace and casts it to a BlockRayTraceResult
    *
-   * @param worldIn the world
-   * @param player the given player
+   * @param worldIn   the world
+   * @param player    the given player
    * @param fluidMode the fluid mode to use for the raytrace event
-   *
-   * @return  Raytrace
+   * @return Raytrace
    */
   public static BlockHitResult blockRayTrace(Level worldIn, Player player, ClipContext.Fluid fluidMode) {
     return Item.getPlayerPOVHitResult(worldIn, player, fluidMode);

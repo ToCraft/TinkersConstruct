@@ -29,6 +29,7 @@ import java.util.stream.Stream;
  * Modifier recipe that changes max level and slot behavior each level. Used for a single input recipe that has multiple slot requirements
  */
 public class MultilevelModifierRecipe extends ModifierRecipe implements IMultiRecipe<IDisplayModifierRecipe> {
+
   public static final RecordLoadable<MultilevelModifierRecipe> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(),
     SizedIngredient.LOADABLE.list(0).defaultField("inputs", List.of(), r -> r.inputs),
@@ -43,6 +44,7 @@ public class MultilevelModifierRecipe extends ModifierRecipe implements IMultiRe
   });
 
   private final List<LevelEntry> levels;
+
   protected MultilevelModifierRecipe(ResourceLocation id, List<SizedIngredient> inputs, Ingredient toolRequirement, int maxToolSize, ModifierId result, boolean allowCrystal, List<LevelEntry> levels, boolean checkTraitLevel) {
     super(id, inputs, toolRequirement, maxToolSize, result, levels.get(0).level, levels.get(0).slots(), allowCrystal, checkTraitLevel);
     this.levels = levels;
@@ -128,14 +130,19 @@ public class MultilevelModifierRecipe extends ModifierRecipe implements IMultiRe
     return displayRecipes;
   }
 
-  /** Entry in the levels list */
+  /**
+   * Entry in the levels list
+   */
   record LevelEntry(@Nullable SlotCount slots, IntRange level) {
+
     public static final RecordLoadable<LevelEntry> LOADABLE = RecordLoadable.create(
       SlotCount.LOADABLE.nullableField("slots", LevelEntry::slots),
       ModifierEntry.VALID_LEVEL.requiredField("level", LevelEntry::level),
       LevelEntry::new);
 
-    /** Checks if this entry matches the given level */
+    /**
+     * Checks if this entry matches the given level
+     */
     public boolean matches(int level) {
       return this.level.test(level);
     }

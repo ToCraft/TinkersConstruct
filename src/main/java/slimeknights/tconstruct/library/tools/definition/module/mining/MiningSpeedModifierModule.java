@@ -15,20 +15,28 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import java.util.List;
 
-/** Module for adjusting the mining speed */
-public record MiningSpeedModifierModule(float modifier, IJsonPredicate<BlockState> predicate) implements MiningSpeedToolHook, ToolModule {
+/**
+ * Module for adjusting the mining speed
+ */
+public record MiningSpeedModifierModule(float modifier,
+                                        IJsonPredicate<BlockState> predicate) implements MiningSpeedToolHook, ToolModule {
+
   public static final RecordLoadable<MiningSpeedModifierModule> LOADER = RecordLoadable.create(
     FloatLoadable.ANY.requiredField("modifier", MiningSpeedModifierModule::modifier),
     BlockPredicate.LOADER.directField("predicate_type", MiningSpeedModifierModule::predicate),
     MiningSpeedModifierModule::new);
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<MiningSpeedModifierModule>defaultHooks(ToolHooks.MINING_SPEED);
 
-  /** Modifies the given tag */
+  /**
+   * Modifies the given tag
+   */
   public static MiningSpeedModifierModule tag(TagKey<Block> tag, float modifier) {
     return new MiningSpeedModifierModule(modifier, BlockPredicate.tag(tag));
   }
 
-  /** Modifies the given blocks */
+  /**
+   * Modifies the given blocks
+   */
   public static MiningSpeedModifierModule blocks(float modifier, Block... blocks) {
     return new MiningSpeedModifierModule(modifier, BlockPredicate.set(blocks));
   }

@@ -17,6 +17,7 @@ import java.util.List;
  */
 @AllArgsConstructor
 public class StructureUpdatePacket implements IThreadsafePacket {
+
   private final BlockPos pos;
   private final BlockPos minPos;
   private final BlockPos maxPos;
@@ -50,9 +51,10 @@ public class StructureUpdatePacket implements IThreadsafePacket {
   }
 
   private static class HandleClient {
+
     private static void handle(StructureUpdatePacket packet) {
       BlockEntityHelper.get(HeatingStructureBlockEntity.class, Minecraft.getInstance().level, packet.pos)
-                       .ifPresent(te -> te.setStructureSize(packet.minPos, packet.maxPos, packet.tanks));
+        .ifPresent(te -> te.setStructureSize(packet.minPos, packet.maxPos, packet.tanks));
     }
   }
 }

@@ -15,8 +15,11 @@ import slimeknights.tconstruct.library.tools.nbt.MaterialNBT;
 
 import java.util.List;
 
-/** Module for adding traits to a tool */
+/**
+ * Module for adding traits to a tool
+ */
 public record ToolTraitsModule(List<ModifierEntry> traits) implements ToolTraitHook, ToolModule {
+
   public static final RecordLoadable<ToolTraitsModule> LOADER = RecordLoadable.create(ModifierEntry.LOADABLE.list(1).requiredField("traits", ToolTraitsModule::traits), ToolTraitsModule::new);
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<ToolTraitsModule>defaultHooks(ToolHooks.TOOL_TRAITS);
 
@@ -40,39 +43,52 @@ public record ToolTraitsModule(List<ModifierEntry> traits) implements ToolTraitH
   }
 
   public static class Builder {
+
     private final ImmutableList.Builder<ModifierEntry> traits = ImmutableList.builder();
 
     private Builder() {}
 
-    /** Adds a base trait to the tool */
+    /**
+     * Adds a base trait to the tool
+     */
     public Builder trait(ModifierId modifier, int level) {
       traits.add(new ModifierEntry(modifier, level));
       return this;
     }
 
-    /** Adds a base trait to the tool */
+    /**
+     * Adds a base trait to the tool
+     */
     public Builder trait(LazyModifier modifier, int level) {
       return trait(modifier.getId(), level);
     }
 
-    /** Adds a base trait to the tool */
+    /**
+     * Adds a base trait to the tool
+     */
     public Builder trait(ModifierId modifier) {
       return trait(modifier, 1);
     }
 
-    /** Adds a base trait to the tool */
+    /**
+     * Adds a base trait to the tool
+     */
     public Builder trait(LazyModifier modifier) {
       return trait(modifier, 1);
     }
 
-    /** Makes a copy of this builder */
+    /**
+     * Makes a copy of this builder
+     */
     public Builder copy() {
       Builder copy = new Builder();
       copy.traits.addAll(this.traits.build());
       return copy;
     }
 
-    /** Builds the final module */
+    /**
+     * Builds the final module
+     */
     public ToolTraitsModule build() {
       List<ModifierEntry> traits = this.traits.build();
       if (traits.isEmpty()) {

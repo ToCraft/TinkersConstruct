@@ -19,37 +19,45 @@ import java.util.List;
  * Main interface for all recipes in the Modifier Worktable
  */
 public interface IModifierWorktableRecipe extends ICommonRecipe<ITinkerableContainer> {
+
   @Override
   default RecipeType<?> getType() {
     return TinkerRecipeTypes.MODIFIER_WORKTABLE.get();
   }
 
-  /** If true, this recipe matches the given inputs, does not consider the modifier button yet */
+  /**
+   * If true, this recipe matches the given inputs, does not consider the modifier button yet
+   */
   @Override
   boolean matches(ITinkerableContainer inv, Level world);
 
-  /** Gets the title for display in JEI and in the info panel */
+  /**
+   * Gets the title for display in JEI and in the info panel
+   */
   Component getTitle();
 
   /**
    * Gets the description of this recipe, or display an error if this recipe matches but currently has no modifiers
-   * @param inv  Recipe inventory, null when fetching in JEI
+   *
+   * @param inv Recipe inventory, null when fetching in JEI
    */
   Component getDescription(@Nullable ITinkerableContainer inv);
 
   /**
    * Gets a list of modifier buttons for the given input. May be empty.
    * It will not be automatically sorted, you must ensure the order is consistent on both client and server.
-   * @param inv  Recipe inventory, null when fetching in JEI
+   *
+   * @param inv Recipe inventory, null when fetching in JEI
    */
   List<ModifierEntry> getModifierOptions(@Nullable ITinkerableContainer inv);
 
   /**
    * Gets the tool stack result for this recipe.
-   * @param inv             Inventory instance
-   * @param modifier        Modifier that was interacted with
+   *
+   * @param inv      Inventory instance
+   * @param modifier Modifier that was interacted with
    * @return Tool stack result. Can be the same instance as previousResult or a new instance.
-   *         Should never share NBT with {@link ITinkerableContainer#getTinkerable()}, needs to be a copy.
+   * Should never share NBT with {@link ITinkerableContainer#getTinkerable()}, needs to be a copy.
    */
   RecipeResult<LazyToolStack> getResult(ITinkerableContainer inv, ModifierEntry modifier);
 
@@ -59,9 +67,10 @@ public interface IModifierWorktableRecipe extends ICommonRecipe<ITinkerableConta
 
   /**
    * Updates the input stacks upon crafting this recipe
-   * @param result    Result from {@link #getResult(ITinkerableContainer, ModifierEntry)}
-   * @param inv       Inventory instance to modify inputs
-   * @param isServer  If true, this is on the serverside. Use to handle randomness, {@link IMutableTinkerStationContainer#giveItem(ItemStack)} should handle being called serverside only
+   *
+   * @param result   Result from {@link #getResult(ITinkerableContainer, ModifierEntry)}
+   * @param inv      Inventory instance to modify inputs
+   * @param isServer If true, this is on the serverside. Use to handle randomness, {@link IMutableTinkerStationContainer#giveItem(ItemStack)} should handle being called serverside only
    */
   default void updateInputs(LazyToolStack result, ITinkerableContainer.Mutable inv, ModifierEntry selected, boolean isServer) {
     // shrink all stacks by 1
@@ -70,26 +79,35 @@ public interface IModifierWorktableRecipe extends ICommonRecipe<ITinkerableConta
     }
   }
 
-  /** Gets input tool options, need not be rendered with the modifiers, simply be valid tools */
+  /**
+   * Gets input tool options, need not be rendered with the modifiers, simply be valid tools
+   */
   List<ItemStack> getInputTools();
 
   /**
    * Gets an ingredients to display in JEI.
-   * @param  slot  Slot index to display
-   * @return  Display item list
+   *
+   * @param slot Slot index to display
+   * @return Display item list
    */
   List<ItemStack> getDisplayItems(int slot);
 
-  /** Gets the number of inputs for this recipe */
+  /**
+   * Gets the number of inputs for this recipe
+   */
   int getInputCount();
 
-  /** If true, the recipe modifier is an output */
+  /**
+   * If true, the recipe modifier is an output
+   */
   default boolean isModifierOutput() {
     return false;
   }
 
 
-  /** Deprecated methods to ignore */
+  /**
+   * Deprecated methods to ignore
+   */
 
   @Override
   @Deprecated

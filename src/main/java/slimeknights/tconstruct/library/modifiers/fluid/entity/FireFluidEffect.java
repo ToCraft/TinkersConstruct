@@ -12,10 +12,12 @@ import slimeknights.tconstruct.library.modifiers.fluid.TimeAction;
 
 /**
  * Effect to set an entity on fire
- * @param action  Determines whether to set or add time
- * @param time    Time in seconds
+ *
+ * @param action Determines whether to set or add time
+ * @param time   Time in seconds
  */
 public record FireFluidEffect(TimeAction action, int time) implements FluidEffect<FluidEffectContext.Entity> {
+
   public static final RecordLoadable<FireFluidEffect> LOADER = RecordLoadable.create(
     TimeAction.LOADABLE.requiredField("action", e -> e.action),
     IntLoadable.FROM_ONE.requiredField("time", e -> e.time),

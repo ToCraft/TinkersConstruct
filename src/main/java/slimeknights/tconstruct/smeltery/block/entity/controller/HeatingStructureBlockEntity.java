@@ -64,65 +64,104 @@ import java.util.function.Consumer;
 import static slimeknights.mantle.util.RetexturedHelper.TAG_TEXTURE;
 
 public abstract class HeatingStructureBlockEntity extends NameableBlockEntity implements IMasterLogic, ISmelteryTankHandler, IRetexturedBlockEntity {
+
   private static final String TAG_STRUCTURE = "multiblock";
   private static final String TAG_TANK = "tank";
   private static final String TAG_INVENTORY = "inventory";
   private static final String TAG_ERROR_POS = "lastError";
 
-  /** Ticker instance for the serverside */
+  /**
+   * Ticker instance for the serverside
+   */
   public static final BlockEntityTicker<HeatingStructureBlockEntity> SERVER_TICKER = (level, pos, state, self) -> self.serverTick(level, pos, state);
-  /** Ticker instance for the clientside */
+  /**
+   * Ticker instance for the clientside
+   */
   public static final BlockEntityTicker<HeatingStructureBlockEntity> CLIENT_TICKER = (level, pos, state, self) -> self.clientTick(level, pos, state);
 
-  /** Sub module to detect the multiblock for this structure */
+  /**
+   * Sub module to detect the multiblock for this structure
+   */
   private final HeatingStructureMultiblock<?> multiblock = createMultiblock();
 
-  /** Position of the block causing the structure to not form */
-  @Nullable @Getter
+  /**
+   * Position of the block causing the structure to not form
+   */
+  @Nullable
+  @Getter
   private BlockPos errorPos;
-  /** Number of ticks the error will remain visible for */
+  /**
+   * Number of ticks the error will remain visible for
+   */
   private int errorVisibleFor = 0;
-  /** Temporary hack until forge fixes {@link #onLoad()}, do a first tick listener here as drains don't tick */
+  /**
+   * Temporary hack until forge fixes {@link #onLoad()}, do a first tick listener here as drains don't tick
+   */
   private boolean addedDrainListeners = false;
 
   /* Saved data, written to Tag */
-  /** Current structure contents */
-  @Nullable @Getter
+  /**
+   * Current structure contents
+   */
+  @Nullable
+  @Getter
   protected StructureData structure;
-  /** Tank instance for this smeltery */
+  /**
+   * Tank instance for this smeltery
+   */
   @Getter
   protected final SmelteryTank<HeatingStructureBlockEntity> tank = new SmelteryTank<>(this);
-  /** Capability to pass to drains for fluid handling */
+  /**
+   * Capability to pass to drains for fluid handling
+   */
   @Getter
   private LazyOptional<IFluidHandler> fluidCapability = LazyOptional.empty();
 
-  /** Inventory handling melting items */
+  /**
+   * Inventory handling melting items
+   */
   @Getter
   protected final MeltingModuleInventory meltingInventory = createMeltingInventory();
 
   private final LazyOptional<IItemHandler> itemCapability = LazyOptional.of(() -> meltingInventory);
 
-  /** Fuel module */
+  /**
+   * Fuel module
+   */
   @Getter
   protected final FuelModule fuelModule = new FuelModule(this, () -> structure != null ? structure.getTanks() : Collections.emptyList());
-  /** Current fuel consumption rate */
+  /**
+   * Current fuel consumption rate
+   */
   protected int fuelRate = 1;
 
 
-  /** Module handling entity interaction */
+  /**
+   * Module handling entity interaction
+   */
   protected final EntityMeltingModule entityModule = new EntityMeltingModule(this, tank, this::canMeltEntities, this::insertIntoInventory, () -> structure == null ? null : structure.getBounds());
 
 
   /* Instance data, this data is not written to Tag */
-  /** Timer to allow delaying actions based on number of ticks alive */
+  /**
+   * Timer to allow delaying actions based on number of ticks alive
+   */
   protected int tick = 0;
-  /** Updates every second. Once it reaches 10, checks above the smeltery for a layer to see if we can expand up */
+  /**
+   * Updates every second. Once it reaches 10, checks above the smeltery for a layer to see if we can expand up
+   */
   private int expandCounter = 0;
-  /** If true, structure will check for an update next tick */
+  /**
+   * If true, structure will check for an update next tick
+   */
   private boolean structureUpdateQueued = false;
-  /** If true, fluids have changed since the last update and should be synced to the client, synced at most once every 4 ticks */
+  /**
+   * If true, fluids have changed since the last update and should be synced to the client, synced at most once every 4 ticks
+   */
   private boolean fluidUpdateQueued = false;
-  /** Cache of the bounds for the case of no structure */
+  /**
+   * Cache of the bounds for the case of no structure
+   */
   private AABB defaultBounds;
   @Nonnull
   @Getter
@@ -132,9 +171,13 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
   private final List<WeakReference<IDisplayFluidListener>> fluidDisplayListeners = new ArrayList<>();
 
   /* Misc helpers */
-  /** Function to drop an item */
+  /**
+   * Function to drop an item
+   */
   protected final Consumer<ItemStack> dropItem = this::dropItem;
-  /** Fluid being displayed in the block model */
+  /**
+   * Fluid being displayed in the block model
+   */
   private FluidStack displayFluid = FluidStack.EMPTY;
 
   protected HeatingStructureBlockEntity(BlockEntityType<? extends HeatingStructureBlockEntity> type, BlockPos pos, BlockState state, Component name) {
@@ -143,19 +186,27 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
 
   /* Abstract methods */
 
-  /** Creates the multiblock for this tile */
+  /**
+   * Creates the multiblock for this tile
+   */
   protected abstract HeatingStructureMultiblock<?> createMultiblock();
 
-  /** Creates the melting inventory for this structure  */
+  /**
+   * Creates the melting inventory for this structure
+   */
   protected abstract MeltingModuleInventory createMeltingInventory();
 
-  /** Called while active to heat the contained items */
+  /**
+   * Called while active to heat the contained items
+   */
   protected abstract void heat();
 
 
   /* Logic */
 
-  /** Updates the error position and syncs to the client if relevant */
+  /**
+   * Updates the error position and syncs to the client if relevant
+   */
   private void updateErrorPos() {
     BlockPos oldErrorPos = this.errorPos;
     this.errorPos = multiblock.getLastResult().getPos();
@@ -164,7 +215,9 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
     }
   }
 
-  /** Handles the client tick */
+  /**
+   * Handles the client tick
+   */
   protected void clientTick(Level level, BlockPos pos, BlockState state) {
     if (errorVisibleFor > 0) {
       errorVisibleFor--;
@@ -188,7 +241,9 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
     }
   }
 
-  /** Handles the server tick */
+  /**
+   * Handles the server tick
+   */
   protected void serverTick(Level level, BlockPos pos, BlockState state) {
     if (level.isClientSide) {
       if (errorVisibleFor > 0) {
@@ -248,16 +303,17 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
 
   /**
    * Drops an item into the level
-   * @param stack  Item to drop
+   *
+   * @param stack Item to drop
    */
   protected void dropItem(ItemStack stack) {
     assert level != null;
     if (!level.isClientSide && !stack.isEmpty()) {
-      double x = (double)(level.random.nextFloat() * 0.5F) + 0.25D;
-      double y = (double)(level.random.nextFloat() * 0.5F) + 0.25D;
-      double z = (double)(level.random.nextFloat() * 0.5F) + 0.25D;
+      double x = (double) (level.random.nextFloat() * 0.5F) + 0.25D;
+      double y = (double) (level.random.nextFloat() * 0.5F) + 0.25D;
+      double z = (double) (level.random.nextFloat() * 0.5F) + 0.25D;
       BlockPos pos = this.worldPosition.relative(getBlockState().getValue(ControllerBlock.FACING));
-      ItemEntity itementity = new ItemEntity(level, (double)pos.getX() + x, (double)pos.getY() + y, (double)pos.getZ() + z, stack);
+      ItemEntity itementity = new ItemEntity(level, (double) pos.getX() + x, (double) pos.getY() + y, (double) pos.getZ() + z, stack);
       itementity.setDefaultPickUpDelay();
       level.addFreshEntity(itementity);
     }
@@ -293,7 +349,8 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
 
   /**
    * Sets the structure and updates results of the new size, good method to override
-   * @param structure  New structure
+   *
+   * @param structure New structure
    */
   protected void setStructure(@Nullable StructureData structure) {
     this.structure = structure;
@@ -375,7 +432,9 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
     }
   }
 
-  /** Gets the last result from this multiblock */
+  /**
+   * Gets the last result from this multiblock
+   */
   public MultiblockResult getStructureResult() {
     return multiblock.getLastResult();
   }
@@ -387,7 +446,9 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
     tank.setFluids(fluids);
   }
 
-  /** Updates all fluid display listeners */
+  /**
+   * Updates all fluid display listeners
+   */
   private void updateListeners(FluidStack fluid) {
     Iterator<WeakReference<IDisplayFluidListener>> iterator = fluidDisplayListeners.iterator();
     while (iterator.hasNext()) {
@@ -408,7 +469,8 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
 
   /**
    * Updates the fluid displayed in the block, only used client side
-   * @param fluid  Fluid
+   *
+   * @param fluid Fluid
    */
   private void updateDisplayFluid(FluidStack fluid) {
     if (level != null && level.isClientSide) {
@@ -461,7 +523,8 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
 
   /**
    * Checks if we can melt entities
-   * @return  True if we can melt entities
+   *
+   * @return True if we can melt entities
    */
   private boolean canMeltEntities() {
     if (fuelModule.hasFuel()) {
@@ -472,7 +535,8 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
 
   /**
    * Inserts an item into the inventory
-   * @param stack  Stack to insert
+   *
+   * @param stack Stack to insert
    */
   private ItemStack insertIntoInventory(ItemStack stack) {
     return ItemHandlerHelper.insertItem(meltingInventory, stack, false);
@@ -489,8 +553,9 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
 
   /**
    * Sets the structure info on the client side
-   * @param minPos  Min structure position
-   * @param maxPos  Max structure position
+   *
+   * @param minPos Min structure position
+   * @param maxPos Max structure position
    */
   public void setStructureSize(BlockPos minPos, BlockPos maxPos, List<BlockPos> tanks) {
     setStructure(multiblock.createClient(minPos, maxPos, tanks));
@@ -505,7 +570,9 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
     }
   }
 
-  /** Updates the error position from the server */
+  /**
+   * Updates the error position from the server
+   */
   public void setErrorPos(@Nullable BlockPos errorPos) {
     this.errorPos = errorPos;
     if (errorPos != null && this.level != null) {
@@ -514,19 +581,25 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
     }
   }
 
-  /** If true, the error position should be visible */
+  /**
+   * If true, the error position should be visible
+   */
   public boolean isHighlightError() {
     return errorVisibleFor > 0;
   }
 
-  /** If true, the given item triggers debug blocks */
+  /**
+   * If true, the given item triggers debug blocks
+   */
   protected abstract boolean isDebugItem(ItemStack stack);
 
-  /** If true, debug blocks should show in the TESR to the given player */
+  /**
+   * If true, debug blocks should show in the TESR to the given player
+   */
   public boolean showDebugBlockBorder(Player player) {
     return isDebugItem(player.getMainHandItem())
-           || isDebugItem(player.getOffhandItem())
-           || isDebugItem(player.getItemBySlot(EquipmentSlot.HEAD));
+      || isDebugItem(player.getOffhandItem())
+      || isDebugItem(player.getItemBySlot(EquipmentSlot.HEAD));
   }
 
 
@@ -625,7 +698,9 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
   /* Helpers */
 
 
-  /** Handles the unchecked cast for a block entity ticker */
+  /**
+   * Handles the unchecked cast for a block entity ticker
+   */
   @Nullable
   public static <HAVE extends HeatingStructureBlockEntity, RET extends BlockEntity> BlockEntityTicker<RET> getTicker(Level level, BlockEntityType<RET> expected, BlockEntityType<HAVE> have) {
     return BlockEntityHelper.castTicker(expected, have, level.isClientSide ? CLIENT_TICKER : SERVER_TICKER);

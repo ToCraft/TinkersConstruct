@@ -18,9 +18,11 @@ import slimeknights.tconstruct.library.fluid.FluidTankAnimated;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class RenderUtils {
+
   /**
    * Binds a texture for rendering
-   * @param texture  Texture
+   *
+   * @param texture Texture
    */
   public static void bindTexture(ResourceLocation texture) {
     RenderSystem.setShader(GameRenderer::getPositionTexShader);
@@ -29,11 +31,12 @@ public final class RenderUtils {
 
   /**
    * Sets up the shader for rendering
-   * @param texture  Texture
-   * @param red      Red tint
-   * @param green    Green tint
-   * @param blue     Blue tint
-   * @param alpha    Alpha tint
+   *
+   * @param texture Texture
+   * @param red     Red tint
+   * @param green   Green tint
+   * @param blue    Blue tint
+   * @param alpha   Alpha tint
    */
   public static void setup(ResourceLocation texture, float red, float green, float blue, float alpha) {
     bindTexture(texture);
@@ -42,7 +45,8 @@ public final class RenderUtils {
 
   /**
    * Sets up the shader for rendering
-   * @param texture  Texture
+   *
+   * @param texture Texture
    */
   public static void setup(ResourceLocation texture) {
     setup(texture, 1.0f, 1.0f, 1.0f, 1.0f);
@@ -50,12 +54,13 @@ public final class RenderUtils {
 
   /**
    * Adds a fluid cuboid with transparency
-   * @param matrices  Matrix stack instance
-   * @param buffer    Render type buffer instance
-   * @param fluid     Fluid to render
-   * @param opacity   Fluid opacity to blend in
-   * @param light     Quad lighting
-   * @param cube      Fluid cuboid instance
+   *
+   * @param matrices Matrix stack instance
+   * @param buffer   Render type buffer instance
+   * @param fluid    Fluid to render
+   * @param opacity  Fluid opacity to blend in
+   * @param light    Quad lighting
+   * @param cube     Fluid cuboid instance
    */
   public static void renderTransparentCuboid(PoseStack matrices, MultiBufferSource buffer, FluidCuboid cube, FluidStack fluid, int opacity, int light) {
     // nothing to render? skip
@@ -83,13 +88,14 @@ public final class RenderUtils {
 
   /**
    * Add textured quads for a fluid tank
-   * @param matrices      Matrix stack instance
-   * @param buffer        Render type buffer instance
-   * @param tank          Fluid tank animated to render=
-   * @param light         Quad lighting
-   * @param cube          Fluid cuboid instance
-   * @param partialTicks  Partial ticks
-   * @param flipGas       If true, flips gas cubes
+   *
+   * @param matrices     Matrix stack instance
+   * @param buffer       Render type buffer instance
+   * @param tank         Fluid tank animated to render=
+   * @param light        Quad lighting
+   * @param cube         Fluid cuboid instance
+   * @param partialTicks Partial ticks
+   * @param flipGas      If true, flips gas cubes
    */
   public static void renderFluidTank(PoseStack matrices, MultiBufferSource buffer, FluidCuboid cube, FluidTankAnimated tank, int light, float partialTicks, boolean flipGas) {
     // render liquid if present

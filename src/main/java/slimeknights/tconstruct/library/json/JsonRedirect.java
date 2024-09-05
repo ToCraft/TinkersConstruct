@@ -9,15 +9,20 @@ import slimeknights.mantle.util.JsonHelper;
 
 import javax.annotation.Nullable;
 
-/** Represents a redirect in a material or modifier JSON */
+/**
+ * Represents a redirect in a material or modifier JSON
+ */
 @SuppressWarnings("ClassCanBeRecord") // GSON does not support records
 @Data
 public class JsonRedirect {
+
   private final ResourceLocation id;
   @Nullable
   private final ICondition condition;
 
-  /** Serializes this to JSON */
+  /**
+   * Serializes this to JSON
+   */
   public JsonObject toJson() {
     JsonObject json = new JsonObject();
     json.addProperty("id", id.toString());
@@ -27,7 +32,9 @@ public class JsonRedirect {
     return json;
   }
 
-  /** Deserializes this to JSON */
+  /**
+   * Deserializes this to JSON
+   */
   public static JsonRedirect fromJson(JsonObject json) {
     ResourceLocation id = JsonHelper.getResourceLocation(json, "id");
     ICondition condition = null;

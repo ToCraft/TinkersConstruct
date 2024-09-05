@@ -34,6 +34,7 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 public class ContainerFillingRecipe implements ICastingRecipe, IMultiRecipe<DisplayCastingRecipe> {
+
   public static final RecordLoadable<ContainerFillingRecipe> LOADER = RecordLoadable.create(
     LoadableRecipeSerializer.TYPED_SERIALIZER.requiredField(), ContextKey.ID.requiredField(), LoadableRecipeSerializer.RECIPE_GROUP,
     IntLoadable.FROM_ONE.requiredField("fluid_amount", r -> r.fluidAmount),
@@ -58,8 +59,8 @@ public class ContainerFillingRecipe implements ICastingRecipe, IMultiRecipe<Disp
   public int getFluidAmount(ICastingContainer inv) {
     Fluid fluid = inv.getFluid();
     return inv.getStack().getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM)
-              .map(handler -> handler.fill(new FluidStack(fluid, this.fluidAmount), FluidAction.SIMULATE))
-              .orElse(0);
+      .map(handler -> handler.fill(new FluidStack(fluid, this.fluidAmount), FluidAction.SIMULATE))
+      .orElse(0);
   }
 
   @Override
@@ -82,12 +83,14 @@ public class ContainerFillingRecipe implements ICastingRecipe, IMultiRecipe<Disp
     ItemStack stack = inv.getStack();
     Fluid fluid = inv.getFluid();
     return stack.getItem() == this.container.asItem()
-           && stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM)
-                   .filter(handler -> handler.fill(new FluidStack(fluid, this.fluidAmount), FluidAction.SIMULATE) > 0)
-                   .isPresent();
+      && stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM)
+      .filter(handler -> handler.fill(new FluidStack(fluid, this.fluidAmount), FluidAction.SIMULATE) > 0)
+      .isPresent();
   }
 
-  /** @deprecated use {@link ICastingRecipe#assemble(Container)} */
+  /**
+   * @deprecated use {@link ICastingRecipe#assemble(Container)}
+   */
   @Override
   @Deprecated
   public ItemStack getResultItem() {
@@ -104,7 +107,9 @@ public class ContainerFillingRecipe implements ICastingRecipe, IMultiRecipe<Disp
   }
 
   /* Display */
-  /** Cache of items to display for this container */
+  /**
+   * Cache of items to display for this container
+   */
   private List<DisplayCastingRecipe> displayRecipes = null;
 
   @Override
@@ -112,17 +117,17 @@ public class ContainerFillingRecipe implements ICastingRecipe, IMultiRecipe<Disp
     if (displayRecipes == null) {
       List<ItemStack> casts = Collections.singletonList(new ItemStack(container));
       displayRecipes = ForgeRegistries.FLUIDS.getValues().stream()
-                                             .filter(fluid -> fluid.getBucket() != Items.AIR && fluid.isSource(fluid.defaultFluidState()))
-                                             .map(fluid -> {
-                                               FluidStack fluidStack = new FluidStack(fluid, fluidAmount);
-                                               ItemStack stack = new ItemStack(container);
-                                               stack = FluidUtil.getFluidHandler(stack).map(handler -> {
-                                                 handler.fill(fluidStack, FluidAction.EXECUTE);
-                                                 return handler.getContainer();
-                                               }).orElse(stack);
-                                               return new DisplayCastingRecipe(getType(), casts, Collections.singletonList(fluidStack), stack, 5, true);
-                                             })
-                                             .toList();
+        .filter(fluid -> fluid.getBucket() != Items.AIR && fluid.isSource(fluid.defaultFluidState()))
+        .map(fluid -> {
+          FluidStack fluidStack = new FluidStack(fluid, fluidAmount);
+          ItemStack stack = new ItemStack(container);
+          stack = FluidUtil.getFluidHandler(stack).map(handler -> {
+            handler.fill(fluidStack, FluidAction.EXECUTE);
+            return handler.getContainer();
+          }).orElse(stack);
+          return new DisplayCastingRecipe(getType(), casts, Collections.singletonList(fluidStack), stack, 5, true);
+        })
+        .toList();
     }
     return displayRecipes;
   }

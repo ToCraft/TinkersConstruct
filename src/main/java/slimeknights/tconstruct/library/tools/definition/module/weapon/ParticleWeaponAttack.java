@@ -2,6 +2,7 @@ package slimeknights.tconstruct.library.tools.definition.module.weapon;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
 import slimeknights.mantle.data.loadable.Loadables;
 import slimeknights.mantle.data.loadable.record.RecordLoadable;
 import slimeknights.tconstruct.library.module.ModuleHook;
@@ -14,14 +15,17 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import java.util.List;
 
-/** Weapon attack that just spawns an extra particle */
+/**
+ * Weapon attack that just spawns an extra particle
+ */
 public record ParticleWeaponAttack(SimpleParticleType particle) implements MeleeHitToolHook, ToolModule {
+
   public static final RecordLoadable<ParticleWeaponAttack> LOADER = RecordLoadable.create(
     Loadables.PARTICLE_TYPE.comapFlatMap((type, error) -> {
       if (type instanceof SimpleParticleType simple) {
         return simple;
       }
-      throw error.create("Expected particle " + Registry.PARTICLE_TYPE.getKey(type) + " be a simple particle, got " + type);
+      throw error.create("Expected particle " + BuiltInRegistries.PARTICLE_TYPE.getKey(type) + " be a simple particle, got " + type);
     }, type -> type).requiredField("particle", ParticleWeaponAttack::particle), ParticleWeaponAttack::new);
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<ParticleWeaponAttack>defaultHooks(ToolHooks.MELEE_HIT);
 

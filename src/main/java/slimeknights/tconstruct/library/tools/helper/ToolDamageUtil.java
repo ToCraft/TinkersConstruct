@@ -22,9 +22,11 @@ import java.util.function.Consumer;
  * Handles tool damage and repair, along with a quick broken check
  */
 public class ToolDamageUtil {
+
   /**
    * Raw method to set a tool as broken. Bypasses {@link ToolStack} for the sake of things that may not be a full Tinker Tool
-   * @param stack  Tool stack
+   *
+   * @param stack Tool stack
    */
   public static void breakTool(ItemStack stack) {
     stack.getOrCreateTag().putBoolean(ToolStack.TAG_BROKEN, true);
@@ -32,8 +34,9 @@ public class ToolDamageUtil {
 
   /**
    * Checks if the given stack is broken
-   * @param stack  Stack to check
-   * @return  True if broken
+   *
+   * @param stack Stack to check
+   * @return True if broken
    */
   public static boolean isBroken(ItemStack stack) {
     CompoundTag nbt = stack.getTag();
@@ -45,14 +48,15 @@ public class ToolDamageUtil {
 
   /**
    * Directly damages the tool, bypassing modifier hooks
-   * @param tool    Tool to damage
-   * @param amount  Amount to damage
-   * @param entity  Entity holding the tool
-   * @param stack   Stack being damaged
-   * @return  True if the tool is broken now
+   *
+   * @param tool   Tool to damage
+   * @param amount Amount to damage
+   * @param entity Entity holding the tool
+   * @param stack  Stack being damaged
+   * @return True if the tool is broken now
    */
   public static boolean directDamage(IToolStackView tool, int amount, @Nullable LivingEntity entity, @Nullable ItemStack stack) {
-    if (entity instanceof Player && ((Player)entity).isCreative()) {
+    if (entity instanceof Player && ((Player) entity).isCreative()) {
       return false;
     }
 
@@ -68,7 +72,7 @@ public class ToolDamageUtil {
         if (stack == null) {
           stack = entity.getMainHandItem();
         }
-        CriteriaTriggers.ITEM_DURABILITY_CHANGED.trigger((ServerPlayer)entity, stack, newDamage);
+        CriteriaTriggers.ITEM_DURABILITY_CHANGED.trigger((ServerPlayer) entity, stack, newDamage);
       }
 
       tool.setDamage(newDamage);
@@ -79,9 +83,10 @@ public class ToolDamageUtil {
 
   /**
    * Damages the tool by the given amount
-   * @param amount  Amount to damage
-   * @param entity  Entity for criteria updates, if null no updates run
-   * @param stack   Stack to use for criteria updates, if null uses main hand stack
+   *
+   * @param amount Amount to damage
+   * @param entity Entity for criteria updates, if null no updates run
+   * @param stack  Stack to use for criteria updates, if null uses main hand stack
    * @return true if the tool broke when damaging
    */
   public static boolean damage(IToolStackView tool, int amount, @Nullable LivingEntity entity, @Nullable ItemStack stack) {
@@ -102,10 +107,11 @@ public class ToolDamageUtil {
 
   /**
    * Damages the tool and sends the break animation if it broke
-   * @param tool    Tool to damage
-   * @param amount  Amount of damage
-   * @param entity  Entity for animation
-   * @param slot    Slot containing the stack
+   *
+   * @param tool   Tool to damage
+   * @param amount Amount of damage
+   * @param entity Entity for animation
+   * @param slot   Slot containing the stack
    */
   public static boolean damageAnimated(IToolStackView tool, int amount, LivingEntity entity, EquipmentSlot slot) {
     if (damage(tool, amount, entity, entity.getItemBySlot(slot))) {
@@ -117,10 +123,11 @@ public class ToolDamageUtil {
 
   /**
    * Damages the tool and sends the break animation if it broke
-   * @param tool    Tool to damage
-   * @param amount  Amount of damage
-   * @param entity  Entity for animation
-   * @param hand    Hand containing the stack
+   *
+   * @param tool   Tool to damage
+   * @param amount Amount of damage
+   * @param entity Entity for animation
+   * @param hand   Hand containing the stack
    * @return true if the tool broke when damaging
    */
   public static boolean damageAnimated(IToolStackView tool, int amount, LivingEntity entity, InteractionHand hand) {
@@ -133,15 +140,18 @@ public class ToolDamageUtil {
 
   /**
    * Damages the tool in the main hand and sends the break animation if it broke
-   * @param tool    Tool to damage
-   * @param amount  Amount of damage
-   * @param entity  Entity for animation
+   *
+   * @param tool   Tool to damage
+   * @param amount Amount of damage
+   * @param entity Entity for animation
    */
   public static boolean damageAnimated(IToolStackView tool, int amount, LivingEntity entity) {
     return damageAnimated(tool, amount, entity, entity.isUsingItem() ? entity.getUsedItemHand() : InteractionHand.MAIN_HAND);
   }
 
-  /** Implements {@link net.minecraft.world.item.Item#damageItem(ItemStack, int, LivingEntity, Consumer)} for a modifiable item */
+  /**
+   * Implements {@link net.minecraft.world.item.Item#damageItem(ItemStack, int, LivingEntity, Consumer)} for a modifiable item
+   */
   public static <T extends LivingEntity> void handleDamageItem(ItemStack stack, int amount, T damager, Consumer<T> onBroken) {
     // We basically emulate Itemstack.damageItem here. We always return 0 to skip the handling in ItemStack.
     // If we don't tools ignore our damage logic
@@ -152,7 +162,8 @@ public class ToolDamageUtil {
 
   /**
    * Repairs the given tool stack
-   * @param amount  Amount to repair
+   *
+   * @param amount Amount to repair
    */
   public static void repair(IToolStackView tool, int amount) {
     if (amount <= 0) {

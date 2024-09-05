@@ -41,8 +41,11 @@ public class InventorySlotSyncPacket implements IThreadsafePacket {
     HandleClient.handle(this);
   }
 
-  /** Safely runs client side only code in a method only called on client */
+  /**
+   * Safely runs client side only code in a method only called on client
+   */
   private static class HandleClient {
+
     private static void handle(InventorySlotSyncPacket packet) {
       Level world = Minecraft.getInstance().level;
       if (world != null) {
@@ -51,7 +54,7 @@ public class InventorySlotSyncPacket implements IThreadsafePacket {
           te.getCapability(ForgeCapabilities.ITEM_HANDLER)
             .filter(cap -> cap instanceof IItemHandlerModifiable)
             .ifPresent(cap -> {
-              ((IItemHandlerModifiable)cap).setStackInSlot(packet.slot, packet.itemStack);
+              ((IItemHandlerModifiable) cap).setStackInSlot(packet.slot, packet.itemStack);
               //noinspection ConstantConditions
               Minecraft.getInstance().levelRenderer.blockChanged(null, packet.pos, null, null, 0);
             });

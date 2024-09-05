@@ -80,15 +80,15 @@ public class TinkerMaterialSpriteProvider extends AbstractMaterialSpriteProvider
       .meleeHarvest().ranged().shieldCore()
       .fallbacks("wood", "stick", "primitive")
       .colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF281E0B).addARGB(102, 0xFF493615).addARGB(140, 0xFF584014).addARGB(178, 0xFF684E1E).addARGB(216, 0xFF785A22).addARGB(255, 0xFF896727).build());
-    buildPlanks(MaterialIds.oak     ).colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF4C3B20).addARGB(102, 0xFF594426).addARGB(140, 0xFF67502C).addARGB(178, 0xFF7E6237).addARGB(216, 0xFF967441).addARGB(234, 0xFFAF8F55).addARGB(255, 0xFFB8945F).build());
-    buildPlanks(MaterialIds.spruce  ).colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF3A2815).addARGB(102, 0xFF47301A).addARGB(140, 0xFF553A1F).addARGB(178, 0xFF5A4424).addARGB(216, 0xFF614B2E).addARGB(234, 0xFF7A5A34).addARGB(255, 0xFF82613A).build());
-    buildPlanks(MaterialIds.birch   ).colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF7F704F).addARGB(102, 0xFF8C7B56).addARGB(140, 0xFF9E8B61).addARGB(178, 0xFFA59467).addARGB(216, 0xFFAE9F76).addARGB(234, 0xFFC8B77A).addARGB(255, 0xFFD7C185).build());
-    buildPlanks(MaterialIds.jungle  ).colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF4C3323).addARGB(102, 0xFF593C29).addARGB(140, 0xFF68462F).addARGB(178, 0xFF785437).addARGB(216, 0xFF976A44).addARGB(234, 0xFFAA7954).addARGB(255, 0xFFB88764).build());
-    buildPlanks(MaterialIds.darkOak ).colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF160E06).addARGB(102, 0xFF1E1309).addARGB(140, 0xFF291A0C).addARGB(178, 0xFF301E0E).addARGB(216, 0xFF3A2411).addARGB(234, 0xFF492F17).addARGB(255, 0xFF4F3218).build());
-    buildPlanks(MaterialIds.acacia  ).colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF703A21).addARGB(102, 0xFF7A3F24).addARGB(140, 0xFF884728).addARGB(178, 0xFF8F4C2A).addARGB(216, 0xFF99502B).addARGB(234, 0xFFAD5D32).addARGB(255, 0xFFBA6337).build());
+    buildPlanks(MaterialIds.oak).colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF4C3B20).addARGB(102, 0xFF594426).addARGB(140, 0xFF67502C).addARGB(178, 0xFF7E6237).addARGB(216, 0xFF967441).addARGB(234, 0xFFAF8F55).addARGB(255, 0xFFB8945F).build());
+    buildPlanks(MaterialIds.spruce).colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF3A2815).addARGB(102, 0xFF47301A).addARGB(140, 0xFF553A1F).addARGB(178, 0xFF5A4424).addARGB(216, 0xFF614B2E).addARGB(234, 0xFF7A5A34).addARGB(255, 0xFF82613A).build());
+    buildPlanks(MaterialIds.birch).colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF7F704F).addARGB(102, 0xFF8C7B56).addARGB(140, 0xFF9E8B61).addARGB(178, 0xFFA59467).addARGB(216, 0xFFAE9F76).addARGB(234, 0xFFC8B77A).addARGB(255, 0xFFD7C185).build());
+    buildPlanks(MaterialIds.jungle).colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF4C3323).addARGB(102, 0xFF593C29).addARGB(140, 0xFF68462F).addARGB(178, 0xFF785437).addARGB(216, 0xFF976A44).addARGB(234, 0xFFAA7954).addARGB(255, 0xFFB88764).build());
+    buildPlanks(MaterialIds.darkOak).colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF160E06).addARGB(102, 0xFF1E1309).addARGB(140, 0xFF291A0C).addARGB(178, 0xFF301E0E).addARGB(216, 0xFF3A2411).addARGB(234, 0xFF492F17).addARGB(255, 0xFF4F3218).build());
+    buildPlanks(MaterialIds.acacia).colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF703A21).addARGB(102, 0xFF7A3F24).addARGB(140, 0xFF884728).addARGB(178, 0xFF8F4C2A).addARGB(216, 0xFF99502B).addARGB(234, 0xFFAD5D32).addARGB(255, 0xFFBA6337).build());
     buildPlanks(MaterialIds.mangrove).colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF471617).addARGB(102, 0xFF51191B).addARGB(140, 0xFF5D1C1E).addARGB(178, 0xFF642423).addARGB(216, 0xFF6F2A2D).addARGB(234, 0xFF773934).addARGB(255, 0xFF7F4234).build());
-    buildPlanks(MaterialIds.crimson ).colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF2B141F).addARGB(102, 0xFF331824).addARGB(140, 0xFF3F1E2D).addARGB(178, 0xFF442131).addARGB(216, 0xFF4B2737).addARGB(234, 0xFF6A344B).addARGB(255, 0xFF7E3A56).build());
-    buildPlanks(MaterialIds.warped  ).colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF0A211F).addARGB(102, 0xFF0D2B28).addARGB(140, 0xFF113835).addARGB(178, 0xFF1E4340).addARGB(216, 0xFF1F5752).addARGB(234, 0xFF287067).addARGB(255, 0xFF398382).build());
+    buildPlanks(MaterialIds.crimson).colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF2B141F).addARGB(102, 0xFF331824).addARGB(140, 0xFF3F1E2D).addARGB(178, 0xFF442131).addARGB(216, 0xFF4B2737).addARGB(234, 0xFF6A344B).addARGB(255, 0xFF7E3A56).build());
+    buildPlanks(MaterialIds.warped).colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF0A211F).addARGB(102, 0xFF0D2B28).addARGB(140, 0xFF113835).addARGB(178, 0xFF1E4340).addARGB(216, 0xFF1F5752).addARGB(234, 0xFF287067).addARGB(255, 0xFF398382).build());
     buildMaterial(MaterialIds.bamboo)
       .ranged().shieldCore().statType(WOOD)
       .fallbacks("wood", "stick", "primitive")
@@ -185,8 +185,8 @@ public class TinkerMaterialSpriteProvider extends AbstractMaterialSpriteProvider
       .fallbacks("metal")
       .colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF777B7C).addARGB(102, 0xFF818587).addARGB(140, 0xFF909698).addARGB(178, 0xFF999FA2).addARGB(216, 0xFFB2BABC).addARGB(255, 0xFFC5CDD0).build());
     // tier 2 - slimewood
-    buildPlanks(MaterialIds.greenheart ).colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF229630).addARGB(102, 0xFF24A033).addARGB(140, 0xFF27AB37).addARGB(178, 0xFF3EBD42).addARGB(216, 0xFF56CF4C).addARGB(234, 0xFF6FEA60).addARGB(255, 0xFF82F86D).build());
-    buildPlanks(MaterialIds.skyroot    ).colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF007E8C).addARGB(102, 0xFF008796).addARGB(140, 0xFF0090A3).addARGB(178, 0xFF00A2AE).addARGB(216, 0xFF00B4B8).addARGB(234, 0xFF10CFCC).addARGB(255, 0xFF23DDD9).build());
+    buildPlanks(MaterialIds.greenheart).colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF229630).addARGB(102, 0xFF24A033).addARGB(140, 0xFF27AB37).addARGB(178, 0xFF3EBD42).addARGB(216, 0xFF56CF4C).addARGB(234, 0xFF6FEA60).addARGB(255, 0xFF82F86D).build());
+    buildPlanks(MaterialIds.skyroot).colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF007E8C).addARGB(102, 0xFF008796).addARGB(140, 0xFF0090A3).addARGB(178, 0xFF00A2AE).addARGB(216, 0xFF00B4B8).addARGB(234, 0xFF10CFCC).addARGB(255, 0xFF23DDD9).build());
     buildPlanks(MaterialIds.bloodshroom).colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF7F0000).addARGB(102, 0xFF890000).addARGB(140, 0xFF960000).addARGB(178, 0xFF9B0000).addARGB(216, 0xFFC10000).addARGB(234, 0xFFD50000).addARGB(255, 0xFFDD0000).build());
     buildPlanks(MaterialIds.enderbark).transformer(transformerFromSprite(getResource("block/wood/enderbark/planks"), 1, 0xFF594D59));
 
@@ -263,10 +263,10 @@ public class TinkerMaterialSpriteProvider extends AbstractMaterialSpriteProvider
       .meleeHarvest().ranged().armor()
       .fallbacks("slime_metal", "metal")
       .transformer(GreyToSpriteTransformer.builderFromBlack()
-                                          .addTexture( 63, borderTexture,    0xFFC8C8C8).addTexture(102, borderTexture)
-                                          .addTexture(140, baseTexture,      0xFFE1E1E1).addTexture(178, baseTexture)
-                                          .addTexture(216, highlightTexture, 0xFFE1E1E1).addTexture(255, highlightTexture)
-                                          .build());
+        .addTexture(63, borderTexture, 0xFFC8C8C8).addTexture(102, borderTexture)
+        .addTexture(140, baseTexture, 0xFFE1E1E1).addTexture(178, baseTexture)
+        .addTexture(216, highlightTexture, 0xFFE1E1E1).addTexture(255, highlightTexture)
+        .build());
     buildMaterial(MaterialIds.hepatizon)
       .meleeHarvest().ranged().armor()
       .fallbacks("metal")
@@ -364,12 +364,14 @@ public class TinkerMaterialSpriteProvider extends AbstractMaterialSpriteProvider
 //      .colorMapper(GreyToColorMapping.builder().addARGB(0, 0xE07F7F7F).addARGB(63, 0xE59B9B9B).addARGB(102, 0xE6A1A1A1).addARGB(140, 0xE9A7A7A7).addARGB(178, 0xEDBBBBBB).addARGB(216, 0xF3D4D4D4).addARGB(255, 0xF8EFEFEF).build());
   }
 
-  /** Creates a palette for a sprite that tints it for borders */
+  /**
+   * Creates a palette for a sprite that tints it for borders
+   */
   public static ISpriteTransformer transformerFromSprite(ResourceLocation texture, int frames, int highlightColor) {
     GreyToSpriteTransformer.Builder builder = GreyToSpriteTransformer.builderFromBlack();
-    builder.addTexture( 63, texture, 0xFF404040)
-           .addTexture(102, texture, 0xFF808080)
-           .addTexture(140, texture);
+    builder.addTexture(63, texture, 0xFF404040)
+      .addTexture(102, texture, 0xFF808080)
+      .addTexture(140, texture);
     if (highlightColor != 0) {
       builder.addTexture(216, texture).addARGB(255, highlightColor);
     }
@@ -379,7 +381,9 @@ public class TinkerMaterialSpriteProvider extends AbstractMaterialSpriteProvider
     return builder.build();
   }
 
-  /** Adds a plank type as a wood variant */
+  /**
+   * Adds a plank type as a wood variant
+   */
   private MaterialSpriteInfoBuilder buildPlanks(MaterialVariantId material) {
     return buildMaterial(material)
       .meleeHarvest().ranged().shieldCore().statType(WOOD)

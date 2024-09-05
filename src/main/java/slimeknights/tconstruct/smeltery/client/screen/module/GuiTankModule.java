@@ -22,7 +22,10 @@ import java.util.function.BiConsumer;
  * Module handling the melter tank UI display
  */
 public class GuiTankModule {
-  /** Tooltip for when the capacity is 0, it breaks some stuff */
+
+  /**
+   * Tooltip for when the capacity is 0, it breaks some stuff
+   */
   private static final Component NO_CAPACITY = Component.translatable(Mantle.makeDescriptionId("gui", "fluid.millibucket"), 0).withStyle(ChatFormatting.GRAY);
 
   private static final int TANK_INDEX = 0;
@@ -30,7 +33,7 @@ public class GuiTankModule {
   private final IFluidHandler tank;
   @Getter
   private final int x, y, width, height;
-  private final BiConsumer<Integer,List<Component>> formatter;
+  private final BiConsumer<Integer, List<Component>> formatter;
 
   public GuiTankModule(AbstractContainerScreen<?> screen, IFluidHandler tank, int x, int y, int width, int height, ResourceLocation tooltipId) {
     this.screen = screen;
@@ -44,9 +47,10 @@ public class GuiTankModule {
 
   /**
    * Checks if the tank is hovered over
-   * @param checkX  Screen relative mouse X
-   * @param checkY  Screen relative mouse Y
-   * @return  True if hovered
+   *
+   * @param checkX Screen relative mouse X
+   * @param checkY Screen relative mouse Y
+   * @return True if hovered
    */
   private boolean isHovered(int checkX, int checkY) {
     return GuiUtil.isHovered(checkX, checkY, x - 1, y - 1, width + 2, height + 2);
@@ -54,10 +58,11 @@ public class GuiTankModule {
 
   /**
    * Gets the height of the fluid in pixels
-   * @return  Fluid height
+   *
+   * @return Fluid height
    */
   private int getFluidHeight() {
-    int capacity =  tank.getTankCapacity(TANK_INDEX);
+    int capacity = tank.getTankCapacity(TANK_INDEX);
     if (capacity == 0) {
       return height;
     }
@@ -66,7 +71,8 @@ public class GuiTankModule {
 
   /**
    * Draws the tank
-   * @param matrices  Matrix stack instance
+   *
+   * @param matrices Matrix stack instance
    */
   public void draw(PoseStack matrices) {
     GuiUtil.renderFluidTank(matrices, screen, tank.getFluidInTank(TANK_INDEX), tank.getTankCapacity(TANK_INDEX), x, y, width, height, 100);
@@ -74,9 +80,10 @@ public class GuiTankModule {
 
   /**
    * Highlights the hovered fluid
-   * @param matrices  Matrix stack instance
-   * @param checkX    Mouse X position, screen relative
-   * @param checkY    Mouse Y position, screen relative
+   *
+   * @param matrices Matrix stack instance
+   * @param checkX   Mouse X position, screen relative
+   * @param checkY   Mouse Y position, screen relative
    */
   public void highlightHoveredFluid(PoseStack matrices, int checkX, int checkY) {
     // highlight hovered fluid
@@ -96,9 +103,10 @@ public class GuiTankModule {
 
   /**
    * Renders the tooltip for hovering over the tank
-   * @param matrices  Matrix stack instance
-   * @param mouseX    Global mouse X position
-   * @param mouseY    Global mouse Y position
+   *
+   * @param matrices Matrix stack instance
+   * @param mouseX   Global mouse X position
+   * @param mouseY   Global mouse Y position
    */
   public void renderTooltip(PoseStack matrices, int mouseX, int mouseY) {
     int checkX = mouseX - screen.leftPos;
@@ -116,8 +124,8 @@ public class GuiTankModule {
       } else {
         // function to call for amounts
         BiConsumer<Integer, List<Component>> formatter = Screen.hasShiftDown()
-                                                              ? FluidTooltipHandler.BUCKET_FORMATTER
-                                                              : this.formatter;
+          ? FluidTooltipHandler.BUCKET_FORMATTER
+          : this.formatter;
 
         // add tooltips
         tooltip = new ArrayList<>();
@@ -142,9 +150,10 @@ public class GuiTankModule {
 
   /**
    * Gets the fluid stack under the mouse
-   * @param checkX  X position to check
-   * @param checkY  Y position to check
-   * @return  Fluid stack under mouse
+   *
+   * @param checkX X position to check
+   * @param checkY Y position to check
+   * @return Fluid stack under mouse
    */
   @Nullable
   public FluidStack getIngreientUnderMouse(int checkX, int checkY) {

@@ -9,38 +9,43 @@ import slimeknights.mantle.network.packet.IThreadsafePacket;
 import slimeknights.mantle.util.BlockEntityHelper;
 import slimeknights.tconstruct.smeltery.block.entity.ChannelBlockEntity;
 
-/** Packet for when the flowing state changes on a channel side */
+/**
+ * Packet for when the flowing state changes on a channel side
+ */
 public class ChannelFlowPacket implements IThreadsafePacket {
-	private final BlockPos pos;
-	private final Direction side;
-	private final boolean flow;
-	public ChannelFlowPacket(BlockPos pos, Direction side, boolean flow) {
-		this.pos = pos;
-		this.side = side;
-		this.flow = flow;
-	}
 
-	public ChannelFlowPacket(FriendlyByteBuf buffer) {
-		pos = buffer.readBlockPos();
-		side = buffer.readEnum(Direction.class);
-		flow = buffer.readBoolean();
-	}
+  private final BlockPos pos;
+  private final Direction side;
+  private final boolean flow;
 
-	@Override
-	public void encode(FriendlyByteBuf buffer) {
-		buffer.writeBlockPos(pos);
-		buffer.writeEnum(side);
-		buffer.writeBoolean(flow);
-	}
+  public ChannelFlowPacket(BlockPos pos, Direction side, boolean flow) {
+    this.pos = pos;
+    this.side = side;
+    this.flow = flow;
+  }
 
-	@Override
-	public void handleThreadsafe(Context context) {
-		HandleClient.handle(this);
-	}
+  public ChannelFlowPacket(FriendlyByteBuf buffer) {
+    pos = buffer.readBlockPos();
+    side = buffer.readEnum(Direction.class);
+    flow = buffer.readBoolean();
+  }
 
-	private static class HandleClient {
-		private static void handle(ChannelFlowPacket packet) {
-			BlockEntityHelper.get(ChannelBlockEntity.class, Minecraft.getInstance().level, packet.pos).ifPresent(te -> te.setFlow(packet.side, packet.flow));
-		}
-	}
+  @Override
+  public void encode(FriendlyByteBuf buffer) {
+    buffer.writeBlockPos(pos);
+    buffer.writeEnum(side);
+    buffer.writeBoolean(flow);
+  }
+
+  @Override
+  public void handleThreadsafe(Context context) {
+    HandleClient.handle(this);
+  }
+
+  private static class HandleClient {
+
+    private static void handle(ChannelFlowPacket packet) {
+      BlockEntityHelper.get(ChannelBlockEntity.class, Minecraft.getInstance().level, packet.pos).ifPresent(te -> te.setFlow(packet.side, packet.flow));
+    }
+  }
 }

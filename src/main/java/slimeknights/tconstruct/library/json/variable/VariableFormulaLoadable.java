@@ -21,23 +21,32 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
 
-/** Loadable for a variable formula */
+/**
+ * Loadable for a variable formula
+ */
 public record VariableFormulaLoadable<V extends IHaveLoader, F extends VariableFormula<V>>(
   GenericLoaderRegistry<V> variableLoader, String[] defaultNames,
   FallbackFormula boostFallback, FallbackFormula percentFallback,
-  Function3<ModifierFormula,List<V>,Boolean,F> constructor
+  Function3<ModifierFormula, List<V>, Boolean, F> constructor
 ) implements RecordLoadable<F> {
-  /** Loader with default fallback formulas */
-  public VariableFormulaLoadable(GenericLoaderRegistry<V> variableLoader, String[] defaultNames, Function3<ModifierFormula,List<V>,Boolean,F> constructor) {
+
+  /**
+   * Loader with default fallback formulas
+   */
+  public VariableFormulaLoadable(GenericLoaderRegistry<V> variableLoader, String[] defaultNames, Function3<ModifierFormula, List<V>, Boolean, F> constructor) {
     this(variableLoader, defaultNames, FallbackFormula.BOOST, FallbackFormula.PERCENT, constructor);
   }
 
-  /** Loader with just 1 fallback formula */
-  public VariableFormulaLoadable(GenericLoaderRegistry<V> variableLoader, String[] defaultNames, FallbackFormula formula, Function3<ModifierFormula,List<V>,Boolean,F> constructor) {
+  /**
+   * Loader with just 1 fallback formula
+   */
+  public VariableFormulaLoadable(GenericLoaderRegistry<V> variableLoader, String[] defaultNames, FallbackFormula formula, Function3<ModifierFormula, List<V>, Boolean, F> constructor) {
     this(variableLoader, defaultNames, formula, formula, constructor);
   }
 
-  /** Gets the fallback formula given percent */
+  /**
+   * Gets the fallback formula given percent
+   */
   private FallbackFormula fallback(boolean percent) {
     return percent ? percentFallback : boostFallback;
   }
@@ -53,7 +62,7 @@ public record VariableFormulaLoadable<V extends IHaveLoader, F extends VariableF
       int index = defaultNames.length;
       JsonObject variableObj = GsonHelper.getAsJsonObject(json, "variables");
       String[] newNames = Arrays.copyOf(defaultNames, index + variableObj.size());
-      for (Entry<String,JsonElement> entry : variableObj.entrySet()) {
+      for (Entry<String, JsonElement> entry : variableObj.entrySet()) {
         String key = entry.getKey();
         if (LogicHelper.isInList(defaultNames, key)) {
           throw new JsonSyntaxException("Variable " + key + " is already defined for this module");

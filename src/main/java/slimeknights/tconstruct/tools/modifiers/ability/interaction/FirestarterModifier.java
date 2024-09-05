@@ -54,9 +54,14 @@ import java.util.Collections;
  */
 @RequiredArgsConstructor
 public class FirestarterModifier extends NoLevelsModifier implements EntityInteractionModifierHook, BlockInteractionModifierHook, ToolActionModifierHook, RemoveBlockModifierHook {
-  /** Generic action for the sake of people who want compat but do not want to request a specific action */
+
+  /**
+   * Generic action for the sake of people who want compat but do not want to request a specific action
+   */
   private static final ToolAction LIGHT_FIRE = ToolAction.get("light_fire");
-  /** Compat with mods adding custom campfires */
+  /**
+   * Compat with mods adding custom campfires
+   */
   private static final ToolAction LIGHT_CAMPFIRE = ToolAction.get("light_campfire");
 
   @Getter
@@ -97,7 +102,9 @@ public class FirestarterModifier extends NoLevelsModifier implements EntityInter
     return InteractionResult.PASS;
   }
 
-  /** Ignites the given block */
+  /**
+   * Ignites the given block
+   */
   private static boolean ignite(IToolStackView tool, Level world, BlockPos pos, BlockState state, Direction sideHit, Direction horizontalFacing, @Nullable Player player) {
     // campfires first
     if (CampfireBlock.canLight(state) || CandleBlock.canLight(state) || CandleCakeBlock.canLight(state)) {

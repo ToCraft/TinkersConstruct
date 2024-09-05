@@ -2,7 +2,6 @@ package slimeknights.tconstruct.common.multiblock;
 
 import lombok.Getter;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
@@ -18,6 +17,7 @@ import slimeknights.tconstruct.library.utils.TagUtil;
 import javax.annotation.Nullable;
 
 public class ServantTileEntity extends MantleBlockEntity implements IServantLogic {
+
   private static final String TAG_MASTER_POS = "masterOffset";
   private static final String TAG_MASTER_BLOCK = "masterBlock";
 
@@ -31,15 +31,18 @@ public class ServantTileEntity extends MantleBlockEntity implements IServantLogi
     super(type, pos, state);
   }
 
-  /** Checks if this servant has a master */
+  /**
+   * Checks if this servant has a master
+   */
   public boolean hasMaster() {
     return masterPos != null;
   }
 
   /**
    * Called to change the master
-   * @param master  New master
-   * @param block   New master block
+   *
+   * @param master New master
+   * @param block  New master block
    */
   protected void setMaster(@Nullable BlockPos master, @Nullable Block block) {
     masterPos = master;
@@ -49,7 +52,8 @@ public class ServantTileEntity extends MantleBlockEntity implements IServantLogi
 
   /**
    * Checks that this servant has a valid master. Clears the master if invalid
-   * @return  True if this servant has a valid master
+   *
+   * @return True if this servant has a valid master
    */
   protected boolean validateMaster() {
     if (masterPos == null) {
@@ -91,7 +95,7 @@ public class ServantTileEntity extends MantleBlockEntity implements IServantLogi
     if (newMaster.equals(this.masterPos)) {
       masterBlock = master.getMasterBlock().getBlock();
       this.setChangedFast();
-    // otherwise, only set if we don't have a master
+      // otherwise, only set if we don't have a master
     } else if (!validateMaster()) {
       setMaster(newMaster, master.getMasterBlock().getBlock());
     }
@@ -109,7 +113,8 @@ public class ServantTileEntity extends MantleBlockEntity implements IServantLogi
 
   /**
    * Reads the master from NBT
-   * @param tags  NBT to read
+   *
+   * @param tags NBT to read
    */
   protected void readMaster(CompoundTag tags) {
     BlockPos masterPos = TagUtil.readOptionalPos(tags, TAG_MASTER_POS, this.worldPosition);
@@ -136,12 +141,13 @@ public class ServantTileEntity extends MantleBlockEntity implements IServantLogi
 
   /**
    * Writes the master position and master block to the given compound
-   * @param tags  Tags
+   *
+   * @param tags Tags
    */
   protected CompoundTag writeMaster(CompoundTag tags) {
     if (masterPos != null && masterBlock != null) {
       tags.put(TAG_MASTER_POS, NbtUtils.writeBlockPos(masterPos.subtract(this.worldPosition)));
-      tags.putString(TAG_MASTER_BLOCK, Registry.BLOCK.getKey(masterBlock).toString());
+      tags.putString(TAG_MASTER_BLOCK, ForgeRegistries.BLOCKS.getKey(masterBlock).toString());
     }
     return tags;
   }

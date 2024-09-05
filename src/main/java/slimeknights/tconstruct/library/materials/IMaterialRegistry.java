@@ -20,8 +20,9 @@ public interface IMaterialRegistry {
 
   /**
    * Resolves any redirects in the given material ID. Should be called internally by all methods in the registry, but exposed for the sake of using outside
-   * @param id  Material ID
-   * @return  Redirected ID, or original ID if no cange
+   *
+   * @param id Material ID
+   * @return Redirected ID, or original ID if no cange
    */
   default MaterialId resolve(MaterialId id) {
     return id;
@@ -29,20 +30,23 @@ public interface IMaterialRegistry {
 
   /**
    * Gets a material by ID
-   * @param id  Material ID
-   * @return  Material, or IMaterial.UNKNOWN if missing
+   *
+   * @param id Material ID
+   * @return Material, or IMaterial.UNKNOWN if missing
    */
   IMaterial getMaterial(MaterialId id);
 
   /**
    * Gets all currently registered materials
-   * @return  Collection of all materials
+   *
+   * @return Collection of all materials
    */
   Collection<IMaterial> getVisibleMaterials();
 
   /**
    * Gets all currently registered materials
-   * @return  Collection of all materials
+   *
+   * @return Collection of all materials
    */
   Collection<IMaterial> getAllMaterials();
 
@@ -51,14 +55,16 @@ public interface IMaterialRegistry {
 
   /**
    * Checks if the given modifier is in the given tag
-   * @return  True if the modifier is in the tag
+   *
+   * @return True if the modifier is in the tag
    */
   boolean isInTag(MaterialId id, TagKey<IMaterial> tag);
 
   /**
    * Gets all values contained in the given tag
-   * @param tag  Tag instance
-   * @return  Contained values
+   *
+   * @param tag Tag instance
+   * @return Contained values
    */
   List<IMaterial> getTagValues(TagKey<IMaterial> tag);
 
@@ -67,36 +73,42 @@ public interface IMaterialRegistry {
 
   /**
    * Gets the material stats for the given material and type
-   * @param materialId  Material ID
-   * @param statsId     Stats type
-   * @param <T>         Stat class type
-   * @return  Material stats if present
+   *
+   * @param materialId Material ID
+   * @param statsId    Stats type
+   * @param <T>        Stat class type
+   * @return Material stats if present
    */
   <T extends IMaterialStats> Optional<T> getMaterialStats(MaterialId materialId, MaterialStatsId statsId);
 
   /**
    * Gets all stats for the given material
-   * @param materialId  Material ID
-   * @return  Collection of all stats
+   *
+   * @param materialId Material ID
+   * @return Collection of all stats
    */
   Collection<IMaterialStats> getAllStats(MaterialId materialId);
 
-  /** Gets the loader for material stat types */
+  /**
+   * Gets the loader for material stat types
+   */
   Loadable<MaterialStatType<?>> getStatTypeLoader();
 
   /**
    * Gets the stat type for the given stat ID, which handles the default instance, serializing, and deserializing.
-   * @param statsId  Stat ID
-   * @return  Stat type, or null if nothing is registered with the ID
+   *
+   * @param statsId Stat ID
+   * @return Stat type, or null if nothing is registered with the ID
    */
   @Nullable
   <T extends IMaterialStats> MaterialStatType<T> getStatType(MaterialStatsId statsId);
 
   /**
    * Gets the default stats for the given stats ID
-   * @param statsId  Stats type
-   * @param <T>      Stats class type
-   * @return  Default stats for the type
+   *
+   * @param statsId Stats type
+   * @param <T>     Stats class type
+   * @return Default stats for the type
    */
   @Nullable
   default <T extends IMaterialStats> T getDefaultStats(MaterialStatsId statsId) {
@@ -106,9 +118,10 @@ public interface IMaterialRegistry {
 
   /**
    * Gets the loadable for the given stat type
-   * @param statsId  Stats type
-   * @param <T>      Stats class type
-   * @return  Loadable instance, or null if the stat type is not registered
+   *
+   * @param statsId Stats type
+   * @param <T>     Stats class type
+   * @return Loadable instance, or null if the stat type is not registered
    */
   @Nullable
   default <T extends IMaterialStats> RecordLoadable<T> getStatLoadable(MaterialStatsId statsId) {
@@ -118,8 +131,9 @@ public interface IMaterialRegistry {
 
   /**
    * Checks if the given material stats ID can repair, this is equivelent to an instanceof check on a stat type for {@link slimeknights.tconstruct.library.materials.stats.IRepairableMaterialStats}
-   * @param statsId  Stats ID
-   * @return  True if it can repair
+   *
+   * @param statsId Stats ID
+   * @return True if it can repair
    */
   default boolean canRepair(MaterialStatsId statsId) {
     MaterialStatType<?> type = getStatType(statsId);
@@ -139,7 +153,7 @@ public interface IMaterialRegistry {
    * <p>
    * All material stats for the same materialStatType <em>must</em> have the same class as its default after it's registered.
    *
-   * @param type  Stat type
+   * @param type Stat type
    */
   void registerStatType(MaterialStatType<?> type);
 
@@ -157,8 +171,8 @@ public interface IMaterialRegistry {
    * <p>
    * All material stats for the same materialStatType <em>must</em> have the same class as its default after it's registered.
    *
-   * @param type           Stat type
-   * @param traitFallback  Fallback to use if the traits are not set
+   * @param type          Stat type
+   * @param traitFallback Fallback to use if the traits are not set
    */
   default void registerStatType(MaterialStatType<?> type, @Nullable MaterialStatsId traitFallback) {
     registerStatType(type);
@@ -169,24 +183,27 @@ public interface IMaterialRegistry {
 
   /**
    * Gets the default material traits for the given material
-   * @param materialId  Material ID
-   * @return  Material traits
+   *
+   * @param materialId Material ID
+   * @return Material traits
    */
   List<ModifierEntry> getDefaultTraits(MaterialId materialId);
 
   /**
    * Checks if the given material and stat pair have unique traits
-   * @param materialId  Material ID
-   * @param statsId     Stats type
-   * @return  If the traits for this stat type are unique
+   *
+   * @param materialId Material ID
+   * @param statsId    Stats type
+   * @return If the traits for this stat type are unique
    */
   boolean hasUniqueTraits(MaterialId materialId, MaterialStatsId statsId);
 
   /**
    * Gets the material traits for the given material and type
-   * @param materialId  Material ID
-   * @param statsId     Stats type
-   * @return  Material traits
+   *
+   * @param materialId Material ID
+   * @param statsId    Stats type
+   * @return Material traits
    */
   List<ModifierEntry> getTraits(MaterialId materialId, MaterialStatsId statsId);
 }

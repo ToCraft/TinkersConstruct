@@ -2,7 +2,6 @@ package slimeknights.tconstruct.library.recipe.molding;
 
 import com.google.gson.JsonObject;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -21,6 +20,7 @@ import java.util.function.Consumer;
 @SuppressWarnings("unused")
 @RequiredArgsConstructor(staticName = "molding")
 public class MoldingRecipeBuilder extends AbstractRecipeBuilder<MoldingRecipeBuilder> {
+
   private final ItemOutput output;
   private final TypeAwareRecipeSerializer<MoldingRecipe> serializer;
   private Ingredient material = Ingredient.EMPTY;
@@ -29,8 +29,9 @@ public class MoldingRecipeBuilder extends AbstractRecipeBuilder<MoldingRecipeBui
 
   /**
    * Creates a new builder of the given item
-   * @param item  Item output
-   * @return  Recipe
+   *
+   * @param item Item output
+   * @return Recipe
    */
   public static MoldingRecipeBuilder moldingTable(ItemLike item) {
     return molding(ItemOutput.fromItem(item), TinkerSmeltery.moldingTableSerializer.get());
@@ -38,8 +39,9 @@ public class MoldingRecipeBuilder extends AbstractRecipeBuilder<MoldingRecipeBui
 
   /**
    * Creates a new builder of the given item
-   * @param item  Item output
-   * @return  Recipe
+   *
+   * @param item Item output
+   * @return Recipe
    */
   public static MoldingRecipeBuilder moldingBasin(ItemLike item) {
     return molding(ItemOutput.fromItem(item), TinkerSmeltery.moldingBasinSerializer.get());
@@ -47,35 +49,47 @@ public class MoldingRecipeBuilder extends AbstractRecipeBuilder<MoldingRecipeBui
 
   /* Inputs */
 
-  /** Sets the material item, on the table */
+  /**
+   * Sets the material item, on the table
+   */
   public MoldingRecipeBuilder setMaterial(Ingredient ingredient) {
     this.material = ingredient;
     return this;
   }
 
-  /** Sets the material item, on the table */
+  /**
+   * Sets the material item, on the table
+   */
   public MoldingRecipeBuilder setMaterial(ItemLike item) {
     return setMaterial(Ingredient.of(item));
   }
 
-  /** Sets the material item, on the table */
+  /**
+   * Sets the material item, on the table
+   */
   public MoldingRecipeBuilder setMaterial(TagKey<Item> tag) {
     return setMaterial(Ingredient.of(tag));
   }
 
-  /** Sets the mold item, in the players hand */
+  /**
+   * Sets the mold item, in the players hand
+   */
   public MoldingRecipeBuilder setPattern(Ingredient ingredient, boolean consumed) {
     this.pattern = ingredient;
     this.patternConsumed = consumed;
     return this;
   }
 
-  /** Sets the mold item, in the players hand */
+  /**
+   * Sets the mold item, in the players hand
+   */
   public MoldingRecipeBuilder setPattern(ItemLike item, boolean consumed) {
     return setPattern(Ingredient.of(item), consumed);
   }
 
-  /** Sets the mold item, in the players hand */
+  /**
+   * Sets the mold item, in the players hand
+   */
   public MoldingRecipeBuilder setPattern(TagKey<Item> tag, boolean consumed) {
     return setPattern(Ingredient.of(tag), consumed);
   }
@@ -85,7 +99,7 @@ public class MoldingRecipeBuilder extends AbstractRecipeBuilder<MoldingRecipeBui
 
   @Override
   public void save(Consumer<FinishedRecipe> consumer) {
-    save(consumer, Registry.ITEM.getKey(output.get().getItem()));
+    save(consumer, ForgeRegistries.ITEMS.getKey(output.get().getItem()));
   }
 
   @Override
@@ -98,6 +112,7 @@ public class MoldingRecipeBuilder extends AbstractRecipeBuilder<MoldingRecipeBui
   }
 
   private class Finished extends AbstractFinishedRecipe {
+
     public Finished(ResourceLocation ID, @Nullable ResourceLocation advancementID) {
       super(ID, advancementID);
     }

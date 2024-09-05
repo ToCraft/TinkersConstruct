@@ -28,10 +28,14 @@ import slimeknights.tconstruct.smeltery.block.entity.component.SmelteryComponent
 
 import javax.annotation.Nullable;
 
-/** Filtering drain block, have to reimplement either inventory block logic or seared block logic unfortunately */
+/**
+ * Filtering drain block, have to reimplement either inventory block logic or seared block logic unfortunately
+ */
 public class SearedDuctBlock extends InventoryBlock {
+
   public static final BooleanProperty IN_STRUCTURE = SearedBlock.IN_STRUCTURE;
   public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
+
   public SearedDuctBlock(Properties properties) {
     super(properties);
     this.registerDefaultState(this.defaultBlockState().setValue(IN_STRUCTURE, false));
@@ -60,7 +64,7 @@ public class SearedDuctBlock extends InventoryBlock {
     SmelteryComponentBlockEntity.updateNeighbors(world, pos, state);
     RetexturedBlock.updateTextureBlock(world, pos, stack);
   }
-  
+
   @Override
   public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
     return RetexturedBlock.getPickBlock(world, pos, state);
@@ -70,7 +74,7 @@ public class SearedDuctBlock extends InventoryBlock {
   /* Orientation */
 
   @Override
-  protected void createBlockStateDefinition(StateDefinition.Builder<Block,BlockState> builder) {
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
     builder.add(IN_STRUCTURE, FACING);
   }
 

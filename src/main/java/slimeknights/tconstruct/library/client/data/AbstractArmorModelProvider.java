@@ -16,15 +16,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-/** Data provider for armor models */
+/**
+ * Data provider for armor models
+ */
 public abstract class AbstractArmorModelProvider extends GenericDataProvider {
-  private final Map<ResourceLocation,ArmorModel> models = new HashMap<>();
+
+  private final Map<ResourceLocation, ArmorModel> models = new HashMap<>();
 
   public AbstractArmorModelProvider(DataGenerator generator) {
     super(generator, PackType.CLIENT_RESOURCES, ArmorModelManager.FOLDER);
   }
 
-  /** Add all models to the manager */
+  /**
+   * Add all models to the manager
+   */
   protected abstract void addModels();
 
   @Override
@@ -33,7 +38,9 @@ public abstract class AbstractArmorModelProvider extends GenericDataProvider {
     models.forEach((id, model) -> saveJson(output, id, ArmorModel.LOADABLE.serialize(model)));
   }
 
-  /** Adds a model to the generator */
+  /**
+   * Adds a model to the generator
+   */
   protected void addModel(ResourceLocation name, ArmorTextureSupplier... layers) {
     ArmorModel existing = this.models.putIfAbsent(name, new ArmorModel(List.of(layers)));
     if (existing != null) {
@@ -41,13 +48,17 @@ public abstract class AbstractArmorModelProvider extends GenericDataProvider {
     }
   }
 
-  /** Adds a model to the generator */
+  /**
+   * Adds a model to the generator
+   */
   protected void addModel(IdAwareObject name, ArmorTextureSupplier... layers) {
     addModel(name.getId(), layers);
   }
 
-  /** Adds a model to the generator */
-  protected void addModel(IdAwareObject name, Function<ResourceLocation,ArmorTextureSupplier[]> layers) {
+  /**
+   * Adds a model to the generator
+   */
+  protected void addModel(IdAwareObject name, Function<ResourceLocation, ArmorTextureSupplier[]> layers) {
     addModel(name.getId(), layers.apply(name.getId()));
   }
 }

@@ -13,13 +13,18 @@ import slimeknights.tconstruct.tables.block.entity.inventory.ScalingChestItemHan
  * Chest that holds casts, up to 4 of every type
  */
 public class CastChestBlockEntity extends AbstractChestBlockEntity {
+
   private static final Component NAME = TConstruct.makeTranslation("gui", "cast_chest");
+
   public CastChestBlockEntity(BlockPos pos, BlockState state) {
     super(TinkerTables.castChestTile.get(), pos, state, NAME, new CastChestIItemHandler());
   }
 
-  /** Item handler for cast chests */
+  /**
+   * Item handler for cast chests
+   */
   public static class CastChestIItemHandler extends ScalingChestItemHandler {
+
     @Override
     public int getSlotLimit(int slot) {
       return 4;

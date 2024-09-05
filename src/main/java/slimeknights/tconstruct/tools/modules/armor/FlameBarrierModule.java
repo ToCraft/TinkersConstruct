@@ -24,8 +24,12 @@ import slimeknights.tconstruct.tools.modifiers.traits.melee.ConductingModifier;
 import javax.annotation.Nullable;
 import java.util.List;
 
-/** Module for boosting damage while on fire, based on the fire amount. TODO: consider merging into protection module via a formula builder */
-public record FlameBarrierModule(LevelingValue amount) implements ModifierModule, ProtectionModifierHook, TooltipModifierHook {
+/**
+ * Module for boosting damage while on fire, based on the fire amount. TODO: consider merging into protection module via a formula builder
+ */
+public record FlameBarrierModule(
+  LevelingValue amount) implements ModifierModule, ProtectionModifierHook, TooltipModifierHook {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<FlameBarrierModule>defaultHooks(ModifierHooks.PROTECTION, ModifierHooks.TOOLTIP);
   public static final RecordLoadable<FlameBarrierModule> LOADER = RecordLoadable.create(LevelingValue.LOADABLE.directField(FlameBarrierModule::amount), FlameBarrierModule::new);
 

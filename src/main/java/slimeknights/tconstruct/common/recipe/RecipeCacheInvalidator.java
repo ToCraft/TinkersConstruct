@@ -16,12 +16,14 @@ import java.util.List;
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RecipeCacheInvalidator implements IEarlySafeManagerReloadListener {
+
   private static final RecipeCacheInvalidator INSTANCE = new RecipeCacheInvalidator();
   private static final List<BooleanConsumer> listeners = new ArrayList<>();
 
   /**
    * Adds a new listener that runs every time the recipes are reloaded
-   * @param runnable  Runnable
+   *
+   * @param runnable Runnable
    */
   public static void addReloadListener(BooleanConsumer runnable) {
     listeners.add(runnable);
@@ -29,8 +31,9 @@ public class RecipeCacheInvalidator implements IEarlySafeManagerReloadListener {
 
   /**
    * Registers a listener that properly responds to the client side
-   * @param runnable  Runnable to clear cache
-   * @return  Object that can clear cache as needed
+   *
+   * @param runnable Runnable to clear cache
+   * @return Object that can clear cache as needed
    */
   public static DuelSidedListener addDuelSidedListener(Runnable runnable) {
     DuelSidedListener listener = new DuelSidedListener(runnable);
@@ -54,15 +57,19 @@ public class RecipeCacheInvalidator implements IEarlySafeManagerReloadListener {
 
   /**
    * Called when resource managers reload
-   * @param event  Reload event
+   *
+   * @param event Reload event
    */
   public static void onReloadListenerReload(AddReloadListenerEvent event) {
     event.addListener(INSTANCE);
   }
 
-  /** Logic to respond properly to late running of the client */
+  /**
+   * Logic to respond properly to late running of the client
+   */
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   public static class DuelSidedListener implements BooleanConsumer {
+
     private final Runnable clearCache;
     private boolean clearQueued = false;
 

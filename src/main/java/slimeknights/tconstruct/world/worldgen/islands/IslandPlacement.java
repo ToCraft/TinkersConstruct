@@ -18,9 +18,13 @@ import net.minecraft.world.level.levelgen.RandomState;
 
 import java.util.Locale;
 
-/** Represents island height generation options */
+/**
+ * Represents island height generation options
+ */
 public enum IslandPlacement implements StringRepresentable {
-  /** Island that generates in the air */
+  /**
+   * Island that generates in the air
+   */
   SKY {
     @Override
     int getHeight(ChunkPos chunkPos, ChunkGenerator generator, LevelHeightAccessor pLevel, Rotation rotation, RandomSource random, RandomState randomState) {
@@ -56,7 +60,9 @@ public enum IslandPlacement implements StringRepresentable {
       return Math.min(Math.min(Math.min(minXMinZ, minXMaxZ), Math.min(maxXMinZ, maxXMaxZ)) + 60 + random.nextInt(50), generator.getGenDepth() - 20);
     }
   },
-  /** Island that generates on the ocean surface */
+  /**
+   * Island that generates on the ocean surface
+   */
   SEA {
     @Override
     int getHeight(ChunkPos chunkPos, ChunkGenerator generator, LevelHeightAccessor pLevel, Rotation rotation, RandomSource random, RandomState randomState) {
@@ -80,7 +86,9 @@ public enum IslandPlacement implements StringRepresentable {
 
   public static final Codec<IslandPlacement> CODEC = StringRepresentable.fromEnum(IslandPlacement::values);
 
-  /** Checks if the given position is either empty or a fluid block */
+  /**
+   * Checks if the given position is either empty or a fluid block
+   */
   private static boolean isFluidOrEmpty(WorldGenLevel world, BlockPos pos) {
     return world.isEmptyBlock(pos) || world.getBlockState(pos).getBlock() instanceof LiquidBlock;
   }
@@ -88,11 +96,15 @@ public enum IslandPlacement implements StringRepresentable {
   @Getter
   private final String serializedName = this.name().toLowerCase(Locale.ROOT);
 
-  /** Checks if the given position is valid for this island */
+  /**
+   * Checks if the given position is valid for this island
+   */
   public boolean isPositionValid(WorldGenLevel world, BlockPos pos, ChunkGenerator generator) {
     return true;
   }
 
-  /** Gets the height to generate this island */
+  /**
+   * Gets the height to generate this island
+   */
   abstract int getHeight(ChunkPos chunkPos, ChunkGenerator generator, LevelHeightAccessor pLevel, Rotation rotation, RandomSource random, RandomState randomState);
 }

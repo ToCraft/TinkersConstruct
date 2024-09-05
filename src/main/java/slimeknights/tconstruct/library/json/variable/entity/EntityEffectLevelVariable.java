@@ -7,8 +7,11 @@ import slimeknights.mantle.data.loadable.Loadables;
 import slimeknights.mantle.data.loadable.record.RecordLoadable;
 import slimeknights.mantle.data.registry.GenericLoaderRegistry.IGenericLoader;
 
-/** Gets the level of the mob effect on an entity */
+/**
+ * Gets the level of the mob effect on an entity
+ */
 public record EntityEffectLevelVariable(MobEffect effect) implements EntityVariable {
+
   public static final RecordLoadable<EntityEffectLevelVariable> LOADER = RecordLoadable.create(Loadables.MOB_EFFECT.requiredField("effect", EntityEffectLevelVariable::effect), EntityEffectLevelVariable::new);
 
   @Override

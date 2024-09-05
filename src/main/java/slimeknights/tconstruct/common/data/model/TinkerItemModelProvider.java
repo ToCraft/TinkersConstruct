@@ -1,6 +1,5 @@
 package slimeknights.tconstruct.common.data.model;
 
-import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -21,6 +20,7 @@ import static slimeknights.tconstruct.TConstruct.getResource;
 
 @SuppressWarnings("UnusedReturnValue")
 public class TinkerItemModelProvider extends ItemModelProvider {
+
   public TinkerItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
     super(generator, TConstruct.MOD_ID, existingFileHelper);
   }
@@ -101,45 +101,59 @@ public class TinkerItemModelProvider extends ItemModelProvider {
     cast(TinkerSmeltery.mailleCast);
   }
 
-  /** Generated item with a texture */
+  /**
+   * Generated item with a texture
+   */
   private ItemModelBuilder basicItem(ResourceLocation item, String texture) {
     return getBuilder(item.toString())
       .parent(new ModelFile.UncheckedModelFile("item/generated"))
       .texture("layer0", new ResourceLocation(item.getNamespace(), "item/" + texture));
   }
 
-  /** Generated item with a texture */
+  /**
+   * Generated item with a texture
+   */
   private ItemModelBuilder basicItem(ItemLike item, String texture) {
-    return basicItem(Registry.ITEM.getKey(item.asItem()), texture);
+    return basicItem(ForgeRegistries.ITEMS.getKey(item.asItem()), texture);
   }
 
 
   /* Parts */
 
-  /** Creates a part model with the given texture */
+  /**
+   * Creates a part model with the given texture
+   */
   private MaterialModelBuilder<ItemModelBuilder> part(ResourceLocation part, String texture) {
     return withExistingParent(part.getPath(), "forge:item/default")
       .texture("texture", getResource("item/tool/" + texture))
       .customLoader(MaterialModelBuilder::new);
   }
 
-  /** Creates a part model in the parts folder */
+  /**
+   * Creates a part model in the parts folder
+   */
   private MaterialModelBuilder<ItemModelBuilder> part(Item item, String texture) {
-    return part(Registry.ITEM.getKey(item), texture);
+    return part(ForgeRegistries.ITEMS.getKey(item), texture);
   }
 
-  /** Creates a part model with the given texture */
+  /**
+   * Creates a part model with the given texture
+   */
   private MaterialModelBuilder<ItemModelBuilder> part(ItemObject<? extends MaterialItem> part, String texture) {
     return part(part.getId(), texture);
   }
 
-  /** Creates a part model in the parts folder */
+  /**
+   * Creates a part model in the parts folder
+   */
   private void part(ItemObject<? extends MaterialItem> part) {
     part(part, "parts/" + part.getId().getPath());
   }
 
 
-  /** Creates models for the given cast object */
+  /**
+   * Creates models for the given cast object
+   */
   private void cast(CastItemObject cast) {
     String name = cast.getName().getPath();
     basicItem(cast.getId(), "cast/" + name);

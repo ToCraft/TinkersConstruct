@@ -27,12 +27,14 @@ import slimeknights.tconstruct.gadgets.TinkerGadgets;
 import slimeknights.tconstruct.library.utils.Util;
 
 public class FancyItemFrameEntity extends ItemFrame implements IEntityAdditionalSpawnData {
+
   private static final int DIAMOND_TIMER = 300;
   private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(FancyItemFrameEntity.class, EntityDataSerializers.INT);
   private static final String TAG_VARIANT = "Variant";
   private static final String TAG_ROTATION_TIMER = "RotationTimer";
 
   private int rotationTimer = 0;
+
   public FancyItemFrameEntity(EntityType<? extends FancyItemFrameEntity> type, Level level) {
     super(type, level);
   }
@@ -44,12 +46,16 @@ public class FancyItemFrameEntity extends ItemFrame implements IEntityAdditional
     this.entityData.set(VARIANT, variant.getId());
   }
 
-  /** Quick helper as two types spin */
+  /**
+   * Quick helper as two types spin
+   */
   private static boolean doesRotate(int type) {
     return type == FrameType.GOLD.getId() || type == FrameType.REVERSED_GOLD.getId() || type == FrameType.DIAMOND.getId();
   }
 
-  /** Resets the rotation timer to 0 */
+  /**
+   * Resets the rotation timer to 0
+   */
   public void updateRotationTimer(boolean overturn) {
     this.rotationTimer = overturn ? -DIAMOND_TIMER : 0;
   }
@@ -119,7 +125,9 @@ public class FancyItemFrameEntity extends ItemFrame implements IEntityAdditional
     }
   }
 
-  /** Internal logic to set the rotation */
+  /**
+   * Internal logic to set the rotation
+   */
   private void setRotationRaw(int rotationIn, boolean updateComparator) {
     this.getEntityData().set(DATA_ROTATION, rotationIn);
     if (updateComparator) {
@@ -150,17 +158,23 @@ public class FancyItemFrameEntity extends ItemFrame implements IEntityAdditional
     this.entityData.define(VARIANT, 0);
   }
 
-  /** Gets the frame type */
+  /**
+   * Gets the frame type
+   */
   public FrameType getFrameType() {
     return FrameType.byId(this.getFrameId());
   }
 
-  /** Gets the frame type */
+  /**
+   * Gets the frame type
+   */
   public Item getFrameItem() {
     return TinkerGadgets.itemFrame.get(getFrameType());
   }
 
-  /** Gets the index of the frame type */
+  /**
+   * Gets the index of the frame type
+   */
   protected int getFrameId() {
     return this.entityData.get(VARIANT);
   }

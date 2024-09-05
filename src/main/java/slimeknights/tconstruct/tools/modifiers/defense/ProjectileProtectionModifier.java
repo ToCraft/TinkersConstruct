@@ -16,9 +16,13 @@ import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
 import java.util.UUID;
 
 public class ProjectileProtectionModifier extends AbstractProtectionModifier<ModifierMaxLevel> {
+
   private static final UUID ATTRIBUTE_UUID = UUID.fromString("6f030b1e-e9e1-11ec-8fea-0242ac120002");
-  /** Entity data key for the data associated with this modifier */
+  /**
+   * Entity data key for the data associated with this modifier
+   */
   private static final ComputableDataKey<ModifierMaxLevel> PROJECTILE_DATA = TConstruct.createKey("projectile_protection", ModifierMaxLevel::new);
+
   public ProjectileProtectionModifier() {
     super(PROJECTILE_DATA, true);
   }

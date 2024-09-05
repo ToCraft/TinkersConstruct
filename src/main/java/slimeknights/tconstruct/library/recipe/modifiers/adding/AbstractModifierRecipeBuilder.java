@@ -21,10 +21,13 @@ import java.util.function.Consumer;
 
 import static slimeknights.tconstruct.library.modifiers.ModifierEntry.VALID_LEVEL;
 
-/** Shared logic between normal and incremental modifier recipe builders */
+/**
+ * Shared logic between normal and incremental modifier recipe builders
+ */
 @SuppressWarnings("unchecked")
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class AbstractModifierRecipeBuilder<T extends AbstractModifierRecipeBuilder<T>> extends AbstractRecipeBuilder<T> {
+
   // shared
   protected final ModifierId result;
   protected Ingredient tools = Ingredient.of(TinkerTags.Items.MODIFIABLE);
@@ -40,8 +43,9 @@ public abstract class AbstractModifierRecipeBuilder<T extends AbstractModifierRe
 
   /**
    * Sets the list of tools this modifier can be applied to
-   * @param tools  Modifier tools list
-   * @return  Builder instance
+   *
+   * @param tools Modifier tools list
+   * @return Builder instance
    */
   public T setTools(Ingredient tools) {
     return setTools(tools, ITinkerStationRecipe.DEFAULT_TOOL_STACK_SIZE);
@@ -49,9 +53,10 @@ public abstract class AbstractModifierRecipeBuilder<T extends AbstractModifierRe
 
   /**
    * Sets the list of tools this modifier can be applied to
-   * @param tools    Modifier tools list
-   * @param maxSize  Max stack size this recipe applies to
-   * @return  Builder instance
+   *
+   * @param tools   Modifier tools list
+   * @param maxSize Max stack size this recipe applies to
+   * @return Builder instance
    */
   public T setTools(Ingredient tools, int maxSize) {
     this.tools = tools;
@@ -61,8 +66,9 @@ public abstract class AbstractModifierRecipeBuilder<T extends AbstractModifierRe
 
   /**
    * Sets the tag for applicable tools
-   * @param tag  Tag
-   * @return  Builder instance
+   *
+   * @param tag Tag
+   * @return Builder instance
    */
   public T setTools(TagKey<Item> tag) {
     return this.setTools(Ingredient.of(tag));
@@ -70,8 +76,9 @@ public abstract class AbstractModifierRecipeBuilder<T extends AbstractModifierRe
 
   /**
    * Sets the max level for this modifier, affects both the recipe and the salvage
-   * @param level  Max level
-   * @return  Builder instance
+   *
+   * @param level Max level
+   * @return Builder instance
    */
   @CanIgnoreReturnValue
   public T setMinLevel(int level) {
@@ -84,8 +91,9 @@ public abstract class AbstractModifierRecipeBuilder<T extends AbstractModifierRe
 
   /**
    * Sets the max level for this modifier, affects both the recipe and the salvage
-   * @param level  Max level
-   * @return  Builder instance
+   *
+   * @param level Max level
+   * @return Builder instance
    */
   public T setMaxLevel(int level) {
     if (level < 1) {
@@ -98,19 +106,24 @@ public abstract class AbstractModifierRecipeBuilder<T extends AbstractModifierRe
   /**
    * Tells the builder to set the max level for salvage recipes.
    * Normally we leave it off for flexability, but it sometimes needs to be forced as a higher level has another meaning.
-   * @return  Builder instance
+   *
+   * @return Builder instance
    */
   public T useSalvageMax() {
     this.useSalvageMax = true;
     return (T) this;
   }
 
-  /** Sets this modifier to only work at a single level */
+  /**
+   * Sets this modifier to only work at a single level
+   */
   public T exactLevel(int level) {
     return setLevelRange(level, level);
   }
 
-  /** Sets this modifier to work on the given range of levels */
+  /**
+   * Sets this modifier to work on the given range of levels
+   */
   public T setLevelRange(int min, int max) {
     setMinLevel(min);
     setMaxLevel(max);
@@ -119,7 +132,8 @@ public abstract class AbstractModifierRecipeBuilder<T extends AbstractModifierRe
 
   /**
    * Allows using modifier crystals to apply this modifier
-   * @return  Builder instance
+   *
+   * @return Builder instance
    */
   public T allowCrystal() {
     allowCrystal = true;
@@ -128,7 +142,8 @@ public abstract class AbstractModifierRecipeBuilder<T extends AbstractModifierRe
 
   /**
    * Disallows using modifier crystals to apply this modifier
-   * @return  Builder instance
+   *
+   * @return Builder instance
    */
   public T disallowCrystal() {
     allowCrystal = false;
@@ -137,7 +152,8 @@ public abstract class AbstractModifierRecipeBuilder<T extends AbstractModifierRe
 
   /**
    * Makes the recipe check the trait level in addition to the level of recipe modifiers
-   * @return  Builder instance
+   *
+   * @return Builder instance
    */
   public T checkTraitLevel() {
     checkTraitLevel = true;
@@ -149,9 +165,10 @@ public abstract class AbstractModifierRecipeBuilder<T extends AbstractModifierRe
 
   /**
    * Sets the number of slots required by this recipe
-   * @param slotType  Slot type
-   * @param slots     Slot count
-   * @return  Builder instance
+   *
+   * @param slotType Slot type
+   * @param slots    Slot count
+   * @return Builder instance
    */
   public T setSlots(SlotType slotType, int slots) {
     if (slots < 0) {
@@ -168,8 +185,9 @@ public abstract class AbstractModifierRecipeBuilder<T extends AbstractModifierRe
 
   /**
    * Builds a salvage recipe from this recipe builder
-   * @param consumer  Consumer instance
-   * @param id        Recipe ID
+   *
+   * @param consumer Consumer instance
+   * @param id       Recipe ID
    */
   public T saveSalvage(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
     if (maxLevel < minLevel) {
@@ -180,7 +198,9 @@ public abstract class AbstractModifierRecipeBuilder<T extends AbstractModifierRe
     return (T) this;
   }
 
-  /** Makes the salvage recipe to save in {@link #saveSalvage(Consumer, ResourceLocation)} */
+  /**
+   * Makes the salvage recipe to save in {@link #saveSalvage(Consumer, ResourceLocation)}
+   */
   protected ModifierSalvage makeSalvage(ResourceLocation id) {
     return new ModifierSalvage(id, tools, maxToolSize, result, VALID_LEVEL.range(minLevel, useSalvageMax ? maxLevel : VALID_LEVEL.max()), slots);
   }

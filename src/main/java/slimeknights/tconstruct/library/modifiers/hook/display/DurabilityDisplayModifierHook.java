@@ -13,36 +13,42 @@ import javax.annotation.Nullable;
 import java.util.Collection;
 
 public interface DurabilityDisplayModifierHook {
+
   /**
    * Override the default tool logic for showing the durability bar.
    * TODO 1.19: Switch to boolean return type, disallow a modifier from hiding the durability bar when the someone else wishes to show it.
-   * @param tool      Tool instance
-   * @param modifier  Modifier running the hook
-   * @return  True forces the bar to show, false forces it to hide. Return null defer to later modifiers.
+   *
+   * @param tool     Tool instance
+   * @param modifier Modifier running the hook
+   * @return True forces the bar to show, false forces it to hide. Return null defer to later modifiers.
    */
   @Nullable
   Boolean showDurabilityBar(IToolStackView tool, ModifierEntry modifier);
 
   /**
    * Gets the damage percentage for display.  First tool returning something other than NaN will determine display durability
-   * @param tool      Tool instance
-   * @param modifier  Modifier running the hook
-   * @return  Width of the durability bar between 1 and 13 with 13 being full. Return 0 to indicate you have nothing to display (falling back to the next hook).
+   *
+   * @param tool     Tool instance
+   * @param modifier Modifier running the hook
+   * @return Width of the durability bar between 1 and 13 with 13 being full. Return 0 to indicate you have nothing to display (falling back to the next hook).
    */
   int getDurabilityWidth(IToolStackView tool, ModifierEntry modifier);
 
   /**
    * Gets the RGB for the durability bar
-   * @param tool      Tool instance
-   * @param modifier  Modifier running the hook
-   * @return  Color integer in the format of 0xRRGGBB, or -1 to not handle it
+   *
+   * @param tool     Tool instance
+   * @param modifier Modifier running the hook
+   * @return Color integer in the format of 0xRRGGBB, or -1 to not handle it
    */
   int getDurabilityRGB(IToolStackView tool, ModifierEntry modifier);
 
 
   /* Helpers */
 
-  /** Checks if the durability bar should show for the given tool stack */
+  /**
+   * Checks if the durability bar should show for the given tool stack
+   */
   static boolean showDurabilityBar(ItemStack stack) {
     // don't show durability bar if the tool does not support durability
     // we don't use that feature in the base mod, but Tinkers' Things notably has a tool that uses it
@@ -63,9 +69,10 @@ public interface DurabilityDisplayModifierHook {
 
   /**
    * Gets the width to display for the given amount.
-   * @param amount  Amount between 0 and max. Larger values mean more durability/width
-   * @param max     Maximum amount
-   * @return  Width to display.
+   *
+   * @param amount Amount between 0 and max. Larger values mean more durability/width
+   * @param max    Maximum amount
+   * @return Width to display.
    */
   static int getWidthFor(int amount, int max) {
     // empty? fallback to next option
@@ -85,8 +92,9 @@ public interface DurabilityDisplayModifierHook {
 
   /**
    * Gets the durability to display on the stack durability bar
-   * @param stack  Stack instance
-   * @return  Durability width between 0 and 13
+   *
+   * @param stack Stack instance
+   * @return Durability width between 0 and 13
    */
   static int getDurabilityWidth(ItemStack stack) {
     ToolStack tool = ToolStack.from(stack);
@@ -107,8 +115,9 @@ public interface DurabilityDisplayModifierHook {
 
   /**
    * Gets the RGB to display durability at
-   * @param stack  Stack instance
-   * @return  RGB value
+   *
+   * @param stack Stack instance
+   * @return RGB value
    */
   static int getDurabilityRGB(ItemStack stack) {
     ToolStack tool = ToolStack.from(stack);
@@ -133,8 +142,11 @@ public interface DurabilityDisplayModifierHook {
   }
 
 
-  /** Merger that runs the first hook that returns a non-default value */
+  /**
+   * Merger that runs the first hook that returns a non-default value
+   */
   record FirstMerger(Collection<DurabilityDisplayModifierHook> modules) implements DurabilityDisplayModifierHook {
+
     @Nullable
     @Override
     public Boolean showDurabilityBar(IToolStackView tool, ModifierEntry modifier) {

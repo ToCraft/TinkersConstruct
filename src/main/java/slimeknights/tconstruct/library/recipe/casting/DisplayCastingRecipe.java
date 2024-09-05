@@ -13,6 +13,7 @@ import java.util.List;
 @SuppressWarnings("ClassCanBeRecord")
 @Data
 public final class DisplayCastingRecipe implements IDisplayableCastingRecipe {
+
   private final RecipeType<?> type;
   private final List<ItemStack> castItems;
   private final List<FluidStack> fluids;

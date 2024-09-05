@@ -29,15 +29,18 @@ import static net.minecraft.world.level.block.MangrovePropaguleBlock.SHAPE_PER_A
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HANGING;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED;
 
-/** Recreation of {@link net.minecraft.world.level.block.MangrovePropaguleBlock} to swap out the tree grower. */
+/**
+ * Recreation of {@link net.minecraft.world.level.block.MangrovePropaguleBlock} to swap out the tree grower.
+ */
 public class SlimePropaguleBlock extends SlimeSaplingBlock {
+
   public SlimePropaguleBlock(AbstractTreeGrower treeIn, FoliageType foliageType, Properties properties) {
     super(treeIn, foliageType, properties);
     this.registerDefaultState(this.stateDefinition.any().setValue(STAGE, 0).setValue(AGE, 0).setValue(WATERLOGGED, false).setValue(HANGING, false));
   }
 
   @Override
-  protected void createBlockStateDefinition(StateDefinition.Builder<Block,BlockState> pBuilder) {
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
     pBuilder.add(STAGE).add(AGE).add(WATERLOGGED).add(HANGING);
   }
 
@@ -47,8 +50,8 @@ public class SlimePropaguleBlock extends SlimeSaplingBlock {
     FluidState fluidstate = pContext.getLevel().getFluidState(pContext.getClickedPos());
     boolean flag = fluidstate.getType() == Fluids.WATER;
     return Objects.requireNonNull(super.getStateForPlacement(pContext))
-                  .setValue(WATERLOGGED, flag)
-                  .setValue(AGE, 4);
+      .setValue(WATERLOGGED, flag)
+      .setValue(AGE, 4);
   }
 
 
@@ -68,8 +71,8 @@ public class SlimePropaguleBlock extends SlimeSaplingBlock {
   @Override
   public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
     return state.getValue(HANGING)
-           ? level.getBlockState(pos.above()).is(TinkerTags.Blocks.SLIMY_LEAVES)
-           : super.canSurvive(state, level, pos);
+      ? level.getBlockState(pos.above()).is(TinkerTags.Blocks.SLIMY_LEAVES)
+      : super.canSurvive(state, level, pos);
   }
 
   @Override
@@ -84,8 +87,8 @@ public class SlimePropaguleBlock extends SlimeSaplingBlock {
   @Override
   public FluidState getFluidState(BlockState pState) {
     return pState.getValue(WATERLOGGED)
-           ? Fluids.WATER.getSource(false)
-           : super.getFluidState(pState);
+      ? Fluids.WATER.getSource(false)
+      : super.getFluidState(pState);
   }
 
   @Override
@@ -111,8 +114,8 @@ public class SlimePropaguleBlock extends SlimeSaplingBlock {
   @Override
   public boolean isBonemealSuccess(Level pLevel, RandomSource pRandom, BlockPos pPos, BlockState pState) {
     return pState.getValue(HANGING)
-           ? pState.getValue(AGE) != 4
-           : super.isBonemealSuccess(pLevel, pRandom, pPos, pState);
+      ? pState.getValue(AGE) != 4
+      : super.isBonemealSuccess(pLevel, pRandom, pPos, pState);
   }
 
   @Override

@@ -24,12 +24,15 @@ import slimeknights.tconstruct.library.tools.nbt.NamespacedNBT;
 import javax.annotation.Nullable;
 
 public class FreezingModifier extends Modifier implements ProjectileHitModifierHook, MeleeHitModifierHook, OnAttackedModifierHook {
+
   @Override
   protected void registerHooks(Builder hookBuilder) {
     hookBuilder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.ON_ATTACKED);
   }
 
-  /** Freezes the entity */
+  /**
+   * Freezes the entity
+   */
   private void apply(int level, @Nullable Entity target) {
     if (target != null && target.canFreeze()) {
       target.setTicksFrozen(Math.max(target.getTicksRequiredToFreeze(), target.getTicksFrozen()) + (level + 1) * 80);

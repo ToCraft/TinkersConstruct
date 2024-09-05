@@ -56,6 +56,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierRecipe> {
+
   protected static final ResourceLocation BACKGROUND_LOC = TConstruct.getResource("textures/gui/jei/tinker_station.png");
   private static final Component TITLE = TConstruct.makeTranslation("jei", "modifiers.title");
 
@@ -77,7 +78,8 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
   private final IDrawable icon;
   private final IDrawable requirements, incremental;
   private final IDrawable[] slotIcons;
-  private final Map<SlotType,TextureAtlasSprite> slotTypeSprites = new HashMap<>();
+  private final Map<SlotType, TextureAtlasSprite> slotTypeSprites = new HashMap<>();
+
   public ModifierRecipeCategory(IGuiHelper helper) {
     this.background = helper.createDrawable(BACKGROUND_LOC, 0, 0, 128, 77);
     this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, CreativeSlotItem.withSlot(new ItemStack(TinkerModifiers.creativeSlotItem), SlotType.UPGRADE));
@@ -99,7 +101,9 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
     return TITLE;
   }
 
-  /** Draws a single slot icon */
+  /**
+   * Draws a single slot icon
+   */
   private void drawSlot(PoseStack matrices, IDisplayModifierRecipe recipe, int slot, int x, int y) {
     List<ItemStack> stacks = recipe.getDisplayItems(slot);
     if (stacks.isEmpty()) {
@@ -108,7 +112,9 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
     }
   }
 
-  /** Draws the icon for the given slot type */
+  /**
+   * Draws the icon for the given slot type
+   */
   private void drawSlotType(PoseStack matrices, @Nullable SlotType slotType, int x, int y) {
     Minecraft minecraft = Minecraft.getInstance();
     TextureAtlasSprite sprite;
@@ -119,7 +125,7 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
       // gets the model for the item, its a sepcial one that gives us texture info
       BakedModel model = minecraft.getItemRenderer().getItemModelShaper().getItemModel(TinkerModifiers.creativeSlotItem.get());
       if (model != null && model.getOverrides() instanceof NBTKeyModel.Overrides) {
-        Material material = ((NBTKeyModel.Overrides)model.getOverrides()).getTexture(slotType == null ? "slotless" : slotType.getName());
+        Material material = ((NBTKeyModel.Overrides) model.getOverrides()).getTexture(slotType == null ? "slotless" : slotType.getName());
         sprite = modelManager.getAtlas(material.atlasLocation()).getSprite(material.texture());
       } else {
         // failed to use the model, use missing texture
@@ -135,11 +141,11 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
 
   @Override
   public void draw(IDisplayModifierRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack matrices, double mouseX, double mouseY) {
-    drawSlot(matrices, recipe, 0,  2, 32);
+    drawSlot(matrices, recipe, 0, 2, 32);
     drawSlot(matrices, recipe, 1, 24, 14);
     drawSlot(matrices, recipe, 2, 46, 32);
     drawSlot(matrices, recipe, 3, 42, 57);
-    drawSlot(matrices, recipe, 4,  6, 57);
+    drawSlot(matrices, recipe, 4, 6, 57);
 
     // draw info icons
     ModifierEntry result = recipe.getDisplayResult();
@@ -217,22 +223,22 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
         return TEXT_FREE;
       }
     }
-    
+
     return Collections.emptyList();
   }
 
   @Override
   public void setRecipe(IRecipeLayoutBuilder builder, IDisplayModifierRecipe recipe, IFocusGroup focuses) {
     // inputs
-    builder.addSlot(RecipeIngredientRole.INPUT,  3, 33).addItemStacks(recipe.getDisplayItems(0));
+    builder.addSlot(RecipeIngredientRole.INPUT, 3, 33).addItemStacks(recipe.getDisplayItems(0));
     builder.addSlot(RecipeIngredientRole.INPUT, 25, 15).addItemStacks(recipe.getDisplayItems(1));
     builder.addSlot(RecipeIngredientRole.INPUT, 47, 33).addItemStacks(recipe.getDisplayItems(2));
     builder.addSlot(RecipeIngredientRole.INPUT, 43, 58).addItemStacks(recipe.getDisplayItems(3));
-    builder.addSlot(RecipeIngredientRole.INPUT,  7, 58).addItemStacks(recipe.getDisplayItems(4));
+    builder.addSlot(RecipeIngredientRole.INPUT, 7, 58).addItemStacks(recipe.getDisplayItems(4));
     // modifiers
     builder.addSlot(RecipeIngredientRole.OUTPUT, 3, 3)
-           .setCustomRenderer(TConstructJEIConstants.MODIFIER_TYPE, modifierRenderer)
-           .addIngredient(TConstructJEIConstants.MODIFIER_TYPE, recipe.getDisplayResult());
+      .setCustomRenderer(TConstructJEIConstants.MODIFIER_TYPE, modifierRenderer)
+      .addIngredient(TConstructJEIConstants.MODIFIER_TYPE, recipe.getDisplayResult());
     // tool
     List<ItemStack> toolWithoutModifier = recipe.getToolWithoutModifier();
     List<ItemStack> toolWithModifier = recipe.getToolWithModifier();
@@ -265,29 +271,35 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
         }
       }
     }
-    builder.addSlot(RecipeIngredientRole.CATALYST,  25, 38).addItemStacks(toolWithoutModifier);
+    builder.addSlot(RecipeIngredientRole.CATALYST, 25, 38).addItemStacks(toolWithoutModifier);
     builder.addSlot(RecipeIngredientRole.CATALYST, 105, 34).addItemStacks(toolWithModifier);
   }
 
 
   /* Slimeskull workaround */
-  /** internal list of slimeskulls for the sake of ingredient lookup, needed since they are technically distinct but modifiers treat them as the same */
+  /**
+   * internal list of slimeskulls for the sake of ingredient lookup, needed since they are technically distinct but modifiers treat them as the same
+   */
   private static List<ItemStack> SLIMESKULL_HELMETS = null;
 
-  /** called to clear the cache on ingredient reload as materials may have changed */
+  /**
+   * called to clear the cache on ingredient reload as materials may have changed
+   */
   public static void clearSlimeskullCache() {
     SLIMESKULL_HELMETS = null;
   }
 
-  /** gets the list of slimeskull helmets, loading it if needed */
+  /**
+   * gets the list of slimeskull helmets, loading it if needed
+   */
   private static List<ItemStack> getSlimeskullHelmets() {
     if (SLIMESKULL_HELMETS == null) {
       IMaterialRegistry registry = MaterialRegistry.getInstance();
       IModifiable slimeskull = TinkerTools.slimesuit.get(ArmorSlotType.HELMET);
       SLIMESKULL_HELMETS = registry.getAllMaterials().stream()
-                                   .filter(material -> registry.getMaterialStats(material.getIdentifier(), SkullStats.ID).isPresent())
-                                   .map(material -> ToolBuildHandler.buildItemFromMaterials(slimeskull, MaterialNBT.of(material)))
-                                   .toList();
+        .filter(material -> registry.getMaterialStats(material.getIdentifier(), SkullStats.ID).isPresent())
+        .map(material -> ToolBuildHandler.buildItemFromMaterials(slimeskull, MaterialNBT.of(material)))
+        .toList();
     }
     return SLIMESKULL_HELMETS;
   }

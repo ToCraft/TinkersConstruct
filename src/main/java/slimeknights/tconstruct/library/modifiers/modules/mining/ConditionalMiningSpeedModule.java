@@ -34,15 +34,17 @@ import java.util.List;
 
 /**
  * Implementation of attack damage conditioned on the attacker or target's properties
- * @param block      Blocks to boost speed
- * @param holder     Condition on the entity holding this tool
- * @param formula    Damage formula
- * @param condition  Standard modifier conditions
+ *
+ * @param block     Blocks to boost speed
+ * @param holder    Condition on the entity holding this tool
+ * @param formula   Damage formula
+ * @param condition Standard modifier conditions
  */
 public record ConditionalMiningSpeedModule(
   IJsonPredicate<BlockState> block, IJsonPredicate<LivingEntity> holder, boolean requireEffective,
   MiningSpeedFormula formula, ModifierCondition<IToolStackView> condition
 ) implements BreakSpeedModifierHook, ConditionalStatTooltip, ModifierModule, ConditionalModule<IToolStackView> {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<ConditionalMiningSpeedModule>defaultHooks(ModifierHooks.BREAK_SPEED, ModifierHooks.TOOLTIP);
   public static final RecordLoadable<ConditionalMiningSpeedModule> LOADER = RecordLoadable.create(
     BlockPredicate.LOADER.defaultField("blocks", ConditionalMiningSpeedModule::block),
@@ -95,14 +97,19 @@ public record ConditionalMiningSpeedModule(
 
   /* Builder */
 
-  /** Creates a builder instance */
+  /**
+   * Creates a builder instance
+   */
   public static Builder builder() {
     return new Builder();
   }
 
-  /** Builder class */
+  /**
+   * Builder class
+   */
   @Accessors(fluent = true)
-  public static class Builder extends VariableFormula.Builder<Builder,ConditionalMiningSpeedModule,MiningSpeedVariable> {
+  public static class Builder extends VariableFormula.Builder<Builder, ConditionalMiningSpeedModule, MiningSpeedVariable> {
+
     @Setter
     private IJsonPredicate<BlockState> blocks = BlockPredicate.ANY;
     @Setter
@@ -113,7 +120,9 @@ public record ConditionalMiningSpeedModule(
       super(MiningSpeedFormula.VARIABLES);
     }
 
-    /** Sets this to a percent boost formula */
+    /**
+     * Sets this to a percent boost formula
+     */
     public Builder allowIneffective() {
       this.requireEffective = false;
       return this;

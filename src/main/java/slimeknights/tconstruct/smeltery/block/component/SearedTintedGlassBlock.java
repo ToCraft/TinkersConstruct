@@ -5,6 +5,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class SearedTintedGlassBlock extends SearedGlassBlock {
+
   public SearedTintedGlassBlock(Properties properties) {
     super(properties);
   }

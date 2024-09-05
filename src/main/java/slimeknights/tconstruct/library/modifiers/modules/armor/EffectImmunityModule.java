@@ -25,7 +25,9 @@ import java.util.List;
 /**
  * Module for armor modifiers that makes the wearer immune to a mob effect
  */
-public record EffectImmunityModule(MobEffect effect, ModifierCondition<IToolStackView> condition) implements ModifierModule, EquipmentChangeModifierHook, ConditionalModule<IToolStackView> {
+public record EffectImmunityModule(MobEffect effect,
+                                   ModifierCondition<IToolStackView> condition) implements ModifierModule, EquipmentChangeModifierHook, ConditionalModule<IToolStackView> {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<MobDisguiseModule>defaultHooks(ModifierHooks.EQUIPMENT_CHANGE);
   public static final ComputableDataKey<Multiset<MobEffect>> EFFECT_IMMUNITY = TConstruct.createKey("effect_immunity", HashMultiset::create);
   public static final RecordLoadable<EffectImmunityModule> LOADER = RecordLoadable.create(

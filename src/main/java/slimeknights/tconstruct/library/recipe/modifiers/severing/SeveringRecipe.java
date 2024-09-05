@@ -24,8 +24,11 @@ import slimeknights.tconstruct.tools.TinkerModifiers;
  */
 @RequiredArgsConstructor
 public class SeveringRecipe implements ICustomOutputRecipe<IEmptyContainer> {
-  protected static LoadableField<EntityIngredient,SeveringRecipe> ENTITY_FIELD = EntityIngredient.LOADABLE.requiredField("entity", r -> r.ingredient);
-  /** Loader instance */
+
+  protected static LoadableField<EntityIngredient, SeveringRecipe> ENTITY_FIELD = EntityIngredient.LOADABLE.requiredField("entity", r -> r.ingredient);
+  /**
+   * Loader instance
+   */
   public static final RecordLoadable<SeveringRecipe> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(), ENTITY_FIELD,
     ItemOutput.Loadable.REQUIRED_STACK.requiredField("result", r -> r.output),
@@ -39,8 +42,9 @@ public class SeveringRecipe implements ICustomOutputRecipe<IEmptyContainer> {
 
   /**
    * Checks if the recipe matches the given type
-   * @param type  Type
-   * @return  True if it matches
+   *
+   * @param type Type
+   * @return True if it matches
    */
   public boolean matches(EntityType<?> type) {
     return ingredient.test(type);
@@ -48,7 +52,8 @@ public class SeveringRecipe implements ICustomOutputRecipe<IEmptyContainer> {
 
   /**
    * Gets the output for this recipe for display in JEI, needs to be consistent
-   * @return  Display output
+   *
+   * @return Display output
    */
   public ItemStack getOutput() {
     return output.get();
@@ -56,8 +61,9 @@ public class SeveringRecipe implements ICustomOutputRecipe<IEmptyContainer> {
 
   /**
    * Gets the output for this recipe, does not need to be consistent (can use randomness) and may be empty
-   * @param entity  Entity being melted
-   * @return  Item output
+   *
+   * @param entity Entity being melted
+   * @return Item output
    */
   public ItemStack getOutput(Entity entity) {
     return getOutput().copy();
@@ -73,7 +79,9 @@ public class SeveringRecipe implements ICustomOutputRecipe<IEmptyContainer> {
     return TinkerRecipeTypes.SEVERING.get();
   }
 
-  /** @deprecated use {@link #matches(EntityType)}*/
+  /**
+   * @deprecated use {@link #matches(EntityType)}
+   */
   @Deprecated
   @Override
   public boolean matches(IEmptyContainer inv, Level worldIn) {

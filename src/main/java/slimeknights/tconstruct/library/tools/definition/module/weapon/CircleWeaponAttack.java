@@ -19,8 +19,11 @@ import slimeknights.tconstruct.tools.TinkerModifiers;
 
 import java.util.List;
 
-/** Deals damage in a circle around the primary target */
+/**
+ * Deals damage in a circle around the primary target
+ */
 public record CircleWeaponAttack(float diameter) implements MeleeHitToolHook, ToolModule {
+
   public static final RecordLoadable<CircleWeaponAttack> LOADER = RecordLoadable.create(FloatLoadable.ANY.defaultField("diameter", 0f, true, CircleWeaponAttack::diameter), CircleWeaponAttack::new);
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<CircleWeaponAttack>defaultHooks(ToolHooks.MELEE_HIT);
 
@@ -47,8 +50,8 @@ public record CircleWeaponAttack(float diameter) implements MeleeHitToolHook, To
         Entity target = context.getTarget();
         for (LivingEntity aoeTarget : attacker.level.getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(range, 0.25D, range))) {
           if (aoeTarget != attacker && aoeTarget != target && !attacker.isAlliedTo(aoeTarget)
-              && !(aoeTarget instanceof ArmorStand stand && stand.isMarker()) && target.distanceToSqr(aoeTarget) < rangeSq) {
-            float angle = attacker.getYRot() * ((float)Math.PI / 180F);
+            && !(aoeTarget instanceof ArmorStand stand && stand.isMarker()) && target.distanceToSqr(aoeTarget) < rangeSq) {
+            float angle = attacker.getYRot() * ((float) Math.PI / 180F);
             aoeTarget.knockback(0.4F, Mth.sin(angle), -Mth.cos(angle));
             // TODO: do we want to bring back the behavior where circle returns success if any AOE target is hit?
             ToolAttackUtil.extraEntityAttack(tool, attacker, context.getHand(), aoeTarget);

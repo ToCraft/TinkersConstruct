@@ -21,7 +21,9 @@ import static slimeknights.tconstruct.TConstruct.getResource;
  * Provides textures used in general models
  */
 public class ModelSpriteProvider extends GenericTextureGenerator {
+
   private final DataGenSpriteReader spriteReader;
+
   public ModelSpriteProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
     super(generator, existingFileHelper, "textures");
     spriteReader = new DataGenSpriteReader(existingFileHelper, "textures");
@@ -43,16 +45,19 @@ public class ModelSpriteProvider extends GenericTextureGenerator {
     spriteReader.closeAll();
   }
 
-  /** Gets the LCM of two ints */
-  private static int lcm(int a, int b){
+  /**
+   * Gets the LCM of two ints
+   */
+  private static int lcm(int a, int b) {
     return a * (b / IntMath.gcd(a, b));
   }
 
   /**
    * Generates a sprite by stacking each of the inputs
-   * @param cache    Output cache
-   * @param output   Output path
-   * @param inputs   List of inputs, will iterate from 0 to the end and grab the first non-transparent pixel
+   *
+   * @param cache  Output cache
+   * @param output Output path
+   * @param inputs List of inputs, will iterate from 0 to the end and grab the first non-transparent pixel
    */
   protected void stackSprites(CachedOutput cache, ResourceLocation output, ResourceLocation... inputs) {
     List<NativeImage> sprites = Arrays.stream(inputs).map(path -> {

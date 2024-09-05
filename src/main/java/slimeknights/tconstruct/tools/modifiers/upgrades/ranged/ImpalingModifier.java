@@ -14,6 +14,7 @@ import slimeknights.tconstruct.library.tools.nbt.NamespacedNBT;
 import javax.annotation.Nullable;
 
 public class ImpalingModifier extends Modifier implements ProjectileLaunchModifierHook {
+
   @Override
   protected void registerHooks(Builder hookBuilder) {
     hookBuilder.addHook(this, ModifierHooks.PROJECTILE_LAUNCH);
@@ -22,7 +23,7 @@ public class ImpalingModifier extends Modifier implements ProjectileLaunchModifi
   @Override
   public void onProjectileLaunch(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, Projectile projectile, @Nullable AbstractArrow arrow, NamespacedNBT persistentData, boolean primary) {
     if (arrow != null) {
-      arrow.setPierceLevel((byte)modifier.getLevel());
+      arrow.setPierceLevel((byte) modifier.getLevel());
     }
   }
 }

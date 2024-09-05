@@ -25,8 +25,10 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class WeatheringPlatformBlock extends PlatformBlock implements WeatheringCopper {
+
   @Getter
   private final WeatherState age;
+
   public WeatheringPlatformBlock(WeatherState age, Properties props) {
     super(props);
     this.age = age;
@@ -42,7 +44,9 @@ public class WeatheringPlatformBlock extends PlatformBlock implements Weathering
     this.onRandomTick(pState, pLevel, pPos, pRandom);
   }
 
-  /** Gets the next state for weathering */
+  /**
+   * Gets the next state for weathering
+   */
   @Nullable
   private static WeatherState getNext(WeatherState original) {
     return switch (original) {
@@ -61,10 +65,12 @@ public class WeatheringPlatformBlock extends PlatformBlock implements Weathering
   @Override
   public Optional<BlockState> getNext(BlockState state) {
     return Optional.ofNullable(getNext(age))
-                   .map(next -> TinkerCommons.copperPlatform.get(next).withPropertiesOf(state));
+      .map(next -> TinkerCommons.copperPlatform.get(next).withPropertiesOf(state));
   }
 
-  /** Gets the next state for weathering */
+  /**
+   * Gets the next state for weathering
+   */
   @Nullable
   private static WeatherState getPrevious(WeatherState original) {
     return switch (original) {

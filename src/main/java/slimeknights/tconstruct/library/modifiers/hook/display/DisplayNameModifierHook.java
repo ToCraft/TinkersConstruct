@@ -13,17 +13,22 @@ import java.util.Collection;
  * Unlikely other modifier hooks, this is not supported by every modifier, mainly composable supports it. See {@link Modifier#getDisplayName(IToolStackView, slimeknights.tconstruct.library.modifiers.ModifierEntry)} for ordinary modifiers.
  */
 public interface DisplayNameModifierHook {
+
   /**
    * Allows the modifier to transform the modifier's display name.
-   * @param tool   Tool instance
-   * @param entry  Modifier transforming the name
-   * @param name   Name after previous modifiers made their changes
-   * @return  Changed name
+   *
+   * @param tool  Tool instance
+   * @param entry Modifier transforming the name
+   * @param name  Name after previous modifiers made their changes
+   * @return Changed name
    */
   Component getDisplayName(IToolStackView tool, ModifierEntry entry, Component name);
 
-  /** Merger that composes one function after another */
+  /**
+   * Merger that composes one function after another
+   */
   record ComposeMerger(Collection<DisplayNameModifierHook> modules) implements DisplayNameModifierHook {
+
     @Override
     public Component getDisplayName(IToolStackView tool, ModifierEntry entry, Component name) {
       for (DisplayNameModifierHook module : modules) {

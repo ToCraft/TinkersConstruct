@@ -37,12 +37,16 @@ import java.util.List;
 
 /**
  * Module to increase protection against the given source
+ *
  * @param source    Source to protect against
  * @param entity    Conditions on the entity wearing the armor
  * @param amount    Amount of damage to block
  * @param condition Modifier module conditions
  */
-public record ProtectionModule(IJsonPredicate<DamageSource> source, IJsonPredicate<LivingEntity> entity, IJsonPredicate<LivingEntity> attacker, LevelingValue amount, ModifierCondition<IToolStackView> condition) implements ProtectionModifierHook, TooltipModifierHook, ModifierModule, ConditionalModule<IToolStackView> {
+public record ProtectionModule(IJsonPredicate<DamageSource> source, IJsonPredicate<LivingEntity> entity,
+                               IJsonPredicate<LivingEntity> attacker, LevelingValue amount,
+                               ModifierCondition<IToolStackView> condition) implements ProtectionModifierHook, TooltipModifierHook, ModifierModule, ConditionalModule<IToolStackView> {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<ProtectionModule>defaultHooks(ModifierHooks.PROTECTION, ModifierHooks.TOOLTIP);
   public static final RecordLoadable<ProtectionModule> LOADER = RecordLoadable.create(
     DamageSourcePredicate.LOADER.defaultField("damage_source", ProtectionModule::source),
@@ -61,14 +65,16 @@ public record ProtectionModule(IJsonPredicate<DamageSource> source, IJsonPredica
   public float getProtectionModifier(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float modifierValue) {
     // apply the main protection bonus
     if (condition.matches(tool, modifier) && this.source.matches(source) && this.entity.matches(context.getEntity())
-        // skip the instanceof check if the attacker is non-living
-        && (this.attacker == LivingEntityPredicate.ANY || source.getEntity() instanceof LivingEntity living && attacker.matches(living))) {
+      // skip the instanceof check if the attacker is non-living
+      && (this.attacker == LivingEntityPredicate.ANY || source.getEntity() instanceof LivingEntity living && attacker.matches(living))) {
       modifierValue += amount.compute(modifier.getEffectiveLevel());
     }
     return modifierValue;
   }
 
-  /** Adds the tooltip for the module */
+  /**
+   * Adds the tooltip for the module
+   */
   public static void addResistanceTooltip(IToolStackView tool, Modifier modifier, float amount, @Nullable Player player, List<Component> tooltip) {
     float cap;
     if (player != null) {
@@ -104,13 +110,16 @@ public record ProtectionModule(IJsonPredicate<DamageSource> source, IJsonPredica
   @Setter
   @Accessors(fluent = true)
   public static class Builder extends ModuleBuilder.Stack<Builder> implements LevelingValue.Builder<ProtectionModule> {
+
     private IJsonPredicate<DamageSource> source = DamageSourcePredicate.CAN_PROTECT;
     private IJsonPredicate<LivingEntity> entity = LivingEntityPredicate.ANY;
     private IJsonPredicate<LivingEntity> attacker = LivingEntityPredicate.ANY;
 
     private Builder() {}
 
-    /** Sets the source to the given sources anded together */
+    /**
+     * Sets the source to the given sources anded together
+     */
     @SafeVarargs
     public final Builder sources(IJsonPredicate<DamageSource>... sources) {
       return source(DamageSourcePredicate.and(sources));

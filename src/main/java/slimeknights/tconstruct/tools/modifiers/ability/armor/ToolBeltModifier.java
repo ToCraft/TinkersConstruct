@@ -40,10 +40,13 @@ import javax.annotation.Nullable;
 import static slimeknights.tconstruct.library.tools.capability.inventory.ToolInventoryCapability.isBlacklisted;
 
 public class ToolBeltModifier extends InventoryMenuModifier implements VolatileDataModifierHook {
+
   private static final Pattern PATTERN = new Pattern(TConstruct.MOD_ID, "tool_belt");
   private static final ResourceLocation SLOT_OVERRIDE = TConstruct.getResource("tool_belt_override");
 
-  /** Loader instance */
+  /**
+   * Loader instance
+   */
   public static final IGenericLoader<ToolBeltModifier> LOADER = new IGenericLoader<>() {
     @Override
     public ToolBeltModifier deserialize(JsonObject json) {
@@ -51,8 +54,8 @@ public class ToolBeltModifier extends InventoryMenuModifier implements VolatileD
       int[] slots = new int[slotJson.size()];
       // TODO: can this sort of thing be generalized?
       for (int i = 0; i < slots.length; i++) {
-        slots[i] = GsonHelper.convertToInt(slotJson.get(i), "level_slots["+i+"]");
-        if (i > 0 && slots[i] <= slots[i-1]) {
+        slots[i] = GsonHelper.convertToInt(slotJson.get(i), "level_slots[" + i + "]");
+        if (i > 0 && slots[i] <= slots[i - 1]) {
           throw new JsonSyntaxException("level_slots must be increasing");
         }
       }
@@ -80,6 +83,7 @@ public class ToolBeltModifier extends InventoryMenuModifier implements VolatileD
   };
 
   private final int[] counts;
+
   public ToolBeltModifier(int[] counts) {
     super(counts[0]);
     this.counts = counts;
@@ -106,7 +110,9 @@ public class ToolBeltModifier extends InventoryMenuModifier implements VolatileD
     return 85; // after shield strap, before pockets
   }
 
-  /** Gets the proper number of slots for the given level */
+  /**
+   * Gets the proper number of slots for the given level
+   */
   private int getProperSlots(ModifierEntry entry) {
     int level = entry.intEffectiveLevel();
     if (level <= 0) {

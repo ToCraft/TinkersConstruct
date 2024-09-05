@@ -60,6 +60,7 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 public abstract class CastingBlockEntity extends TableBlockEntity implements WorldlyContainer, FluidUpdatePacket.IFluidPacketReceiver {
+
   // slots
   public static final int INPUT = 0;
   public static final int OUTPUT = 1;
@@ -70,51 +71,87 @@ public abstract class CastingBlockEntity extends TableBlockEntity implements Wor
   private static final String TAG_REDSTONE = "redstone";
   private static final Component NAME = TConstruct.makeTranslation("gui", "casting");
 
-  /** Handles ticking on the serverside */
+  /**
+   * Handles ticking on the serverside
+   */
   public static final BlockEntityTicker<CastingBlockEntity> SERVER_TICKER = (level, pos, state, self) -> self.serverTick(level, pos);
-  /** Handles ticking on the clientside */
+  /**
+   * Handles ticking on the clientside
+   */
   public static final BlockEntityTicker<CastingBlockEntity> CLIENT_TICKER = (level, pos, state, self) -> self.clientTick(level, pos);
 
-  /** Special casting fluid tank */
+  /**
+   * Special casting fluid tank
+   */
   @Getter
   private final CastingFluidHandler tank = new CastingFluidHandler(this);
   private final LazyOptional<CastingFluidHandler> holder = LazyOptional.of(() -> tank);
 
   /* Casting recipes */
-  /** Recipe type for casting recipes, may be basin or table */
+  /**
+   * Recipe type for casting recipes, may be basin or table
+   */
   private final RecipeType<ICastingRecipe> castingType;
-  /** Inventory for use in casting recipes */
+  /**
+   * Inventory for use in casting recipes
+   */
   private final CastingContainerWrapper castingInventory;
-  /** Current recipe progress */
+  /**
+   * Current recipe progress
+   */
   @Getter
   private int timer;
-  /** Time needed for the recipe to finish */
+  /**
+   * Time needed for the recipe to finish
+   */
   @Getter
   private int coolingTime = -1;
-  /** Current in progress recipe */
+  /**
+   * Current in progress recipe
+   */
   private ICastingRecipe currentRecipe;
-  /** Name of the current recipe, fetched from Tag. Used since Tag is read before recipe manager access */
+  /**
+   * Name of the current recipe, fetched from Tag. Used since Tag is read before recipe manager access
+   */
   private ResourceLocation recipeName;
-  /** Cache recipe to reduce time during recipe lookups. Not saved to Tag */
+  /**
+   * Cache recipe to reduce time during recipe lookups. Not saved to Tag
+   */
   private ICastingRecipe lastCastingRecipe;
-  /** Last recipe output for client side display */
+  /**
+   * Last recipe output for client side display
+   */
   private ItemStack lastOutput = null;
-  /** If true, this block is allowed to cast without a cast */
+  /**
+   * If true, this block is allowed to cast without a cast
+   */
   private final boolean requireCast;
-  /** Items that count as empty in the casting table */
+  /**
+   * Items that count as empty in the casting table
+   */
   @Getter
   private final TagKey<Item> emptyCastTag;
 
   /* Molding recipes */
-  /** Recipe type for molding recipes, may be basin or table */
+  /**
+   * Recipe type for molding recipes, may be basin or table
+   */
   private final RecipeType<MoldingRecipe> moldingType;
-  /** Inventory to use for molding recipes */
+  /**
+   * Inventory to use for molding recipes
+   */
   private final MoldingContainerWrapper moldingInventory;
-  /** Cache recipe to reduce time during recipe lookups. Not saved to Tag */
+  /**
+   * Cache recipe to reduce time during recipe lookups. Not saved to Tag
+   */
   private MoldingRecipe lastMoldingRecipe;
-  /** Last redstone state of the block */
+  /**
+   * Last redstone state of the block
+   */
   private boolean lastRedstone = false;
-  /** Last analog signal strength */
+  /**
+   * Last analog signal strength
+   */
   private int lastAnalogSignal;
 
   protected CastingBlockEntity(BlockEntityType<?> beType, BlockPos pos, BlockState state, RecipeType<ICastingRecipe> castingType, RecipeType<MoldingRecipe> moldingType, TagKey<Item> emptyCastTag) {
@@ -136,7 +173,9 @@ public abstract class CastingBlockEntity extends TableBlockEntity implements Wor
     return super.getCapability(capability, facing);
   }
 
-  /** Interacts with a fluid item held by the player */
+  /**
+   * Interacts with a fluid item held by the player
+   */
   private boolean interactWithFluidItem(Player player, InteractionHand hand, ItemStack stack) {
     if (level == null) {
       return false;
@@ -189,6 +228,7 @@ public abstract class CastingBlockEntity extends TableBlockEntity implements Wor
 
   /**
    * Called from {@link slimeknights.tconstruct.smeltery.block.AbstractCastingBlock#use(BlockState, Level, BlockPos, Player, InteractionHand, BlockHitResult)}
+   *
    * @param player Player activating the block.
    */
   public void interact(Player player, InteractionHand hand) {
@@ -283,11 +323,13 @@ public abstract class CastingBlockEntity extends TableBlockEntity implements Wor
     }
   }
 
-  /** Called on block update to update the redstone state */
+  /**
+   * Called on block update to update the redstone state
+   */
   public void handleRedstone(boolean hasSignal) {
     if (lastRedstone != hasSignal) {
       if (hasSignal) {
-        if (level != null){
+        if (level != null) {
           level.scheduleTick(worldPosition, this.getBlockState().getBlock(), 2);
         }
       }
@@ -295,7 +337,9 @@ public abstract class CastingBlockEntity extends TableBlockEntity implements Wor
     }
   }
 
-  /** Called after a redstone tick to swap input and output */
+  /**
+   * Called after a redstone tick to swap input and output
+   */
   public void swap() {
     if (currentRecipe == null) {
       ItemStack output = getItem(OUTPUT);
@@ -306,7 +350,7 @@ public abstract class CastingBlockEntity extends TableBlockEntity implements Wor
       }
     }
   }
-  
+
   @Override
   @Nonnull
   public int[] getSlotsForFace(Direction side) {
@@ -323,7 +367,9 @@ public abstract class CastingBlockEntity extends TableBlockEntity implements Wor
     return tank.isEmpty() && index == OUTPUT;
   }
 
-  /** Handles cooling the casting recipe */
+  /**
+   * Handles cooling the casting recipe
+   */
   private void serverTick(Level level, BlockPos pos) {
     // no recipe
     // TODO: should consider the case where the tank has fluid, but there is no current recipe
@@ -371,7 +417,9 @@ public abstract class CastingBlockEntity extends TableBlockEntity implements Wor
     }
   }
 
-  /** Handles animating the recipe */
+  /**
+   * Handles animating the recipe
+   */
   private void clientTick(Level level, BlockPos pos) {
     if (currentRecipe == null) {
       return;
@@ -402,7 +450,8 @@ public abstract class CastingBlockEntity extends TableBlockEntity implements Wor
 
   /**
    * Finds a molding recipe for the given inventory
-   * @return  Recipe, or null if no recipe found
+   *
+   * @return Recipe, or null if no recipe found
    */
   @Nullable
   private MoldingRecipe findMoldingRecipe() {
@@ -421,9 +470,10 @@ public abstract class CastingBlockEntity extends TableBlockEntity implements Wor
 
   /**
    * Called from CastingFluidHandler.fill()
-   * @param fluid   Fluid used in casting
-   * @param action  EXECUTE or SIMULATE
-   * @return        Amount of fluid needed for recipe, used to resize the tank.
+   *
+   * @param fluid  Fluid used in casting
+   * @param action EXECUTE or SIMULATE
+   * @return Amount of fluid needed for recipe, used to resize the tank.
    */
   public int initNewCasting(FluidStack fluid, IFluidHandler.FluidAction action) {
     if (this.currentRecipe != null || this.recipeName != null) {
@@ -488,7 +538,9 @@ public abstract class CastingBlockEntity extends TableBlockEntity implements Wor
     onContentsChanged();
   }
 
-  /** Called when tank contents change */
+  /**
+   * Called when tank contents change
+   */
   public void onContentsChanged() {
     // start timer
     FluidStack fluidStack = tank.getFluid();
@@ -535,7 +587,8 @@ public abstract class CastingBlockEntity extends TableBlockEntity implements Wor
 
   /**
    * Gets the recipe output for display in the TER
-   * @return  Recipe output
+   *
+   * @return Recipe output
    */
   public ItemStack getRecipeOutput() {
     if (lastOutput == null) {
@@ -548,7 +601,9 @@ public abstract class CastingBlockEntity extends TableBlockEntity implements Wor
     return lastOutput;
   }
 
-  /** Updates the comparator strength if needed */
+  /**
+   * Updates the comparator strength if needed
+   */
   private void updateAnalogSignal() {
     if (level == null || !level.isClientSide) {
       int newStrength = getAnalogSignal();
@@ -561,7 +616,9 @@ public abstract class CastingBlockEntity extends TableBlockEntity implements Wor
     }
   }
 
-  /** Gets the comparator strength */
+  /**
+   * Gets the comparator strength
+   */
   public int getAnalogSignal() {
     if (isStackInSlot(CastingBlockEntity.OUTPUT)) {
       return 15;
@@ -588,13 +645,14 @@ public abstract class CastingBlockEntity extends TableBlockEntity implements Wor
 
   /**
    * Loads a recipe in from its name and updates the tank capacity
-   * @param level  Nonnull level instance
-   * @param name   Recipe name to load
+   *
+   * @param level Nonnull level instance
+   * @param name  Recipe name to load
    */
   private void loadRecipe(Level level, ResourceLocation name) {
     // if the tank is empty, ignore old recipe
     FluidStack fluid = tank.getFluid();
-    if(!fluid.isEmpty()) {
+    if (!fluid.isEmpty()) {
       // fetch recipe by name
       RecipeHelper.getRecipe(level.getRecipeManager(), name, ICastingRecipe.class).ifPresent(recipe -> {
         this.currentRecipe = recipe;
@@ -656,12 +714,14 @@ public abstract class CastingBlockEntity extends TableBlockEntity implements Wor
   }
 
   public static class Basin extends CastingBlockEntity {
+
     public Basin(BlockPos pos, BlockState state) {
       super(TinkerSmeltery.basin.get(), pos, state, TinkerRecipeTypes.CASTING_BASIN.get(), TinkerRecipeTypes.MOLDING_BASIN.get(), TinkerTags.Items.BASIN_EMPTY_CASTS);
     }
   }
 
   public static class Table extends CastingBlockEntity {
+
     public Table(BlockPos pos, BlockState state) {
       super(TinkerSmeltery.table.get(), pos, state, TinkerRecipeTypes.CASTING_TABLE.get(), TinkerRecipeTypes.MOLDING_TABLE.get(), TinkerTags.Items.TABLE_EMPTY_CASTS);
     }
@@ -670,7 +730,9 @@ public abstract class CastingBlockEntity extends TableBlockEntity implements Wor
 
   /* Helpers */
 
-  /** Gets the ticker for a casting entity */
+  /**
+   * Gets the ticker for a casting entity
+   */
   @Nullable
   public static <CAST extends CastingBlockEntity, RET extends BlockEntity> BlockEntityTicker<RET> getTicker(Level level, BlockEntityType<RET> check, BlockEntityType<CAST> casting) {
     return BlockEntityHelper.castTicker(check, casting, level.isClientSide ? CLIENT_TICKER : SERVER_TICKER);

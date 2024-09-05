@@ -18,9 +18,13 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
-/** This item is mainly to return the proper model for a slimeskull */
+/**
+ * This item is mainly to return the proper model for a slimeskull
+ */
 public class SlimeskullItem extends ModifiableArmorItem {
+
   private final ResourceLocation name;
+
   public SlimeskullItem(ModifiableArmorMaterial material, Properties properties) {
     super(material, ArmorSlotType.HELMET, properties);
     this.name = material.getId();

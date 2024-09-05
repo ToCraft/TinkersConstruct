@@ -25,7 +25,7 @@ import java.util.function.Predicate;
 
 /**
  * Texture generator to generate textures for materials, supports adding a set of sprites to recolor, alongside a set of materials
- *
+ * <p>
  * Note this only supports generating the crossproduct of materials and textures. If your addon adds both materials and tools, the best setup is having two generators:
  * <ul>
  *   <li>A generator adding all TiC and custom materials for your new sprites</li>
@@ -34,13 +34,20 @@ import java.util.function.Predicate;
  * In case you need to divide into more than those two, it will be most efficient if each sprite is handled by only a single generator, so always split over sets of materials.
  */
 public class MaterialPartTextureGenerator extends GenericTextureGenerator {
-  /** Path to textures outputted by this generator */
+
+  /**
+   * Path to textures outputted by this generator
+   */
   public static final String FOLDER = "textures";
   private final DataGenSpriteReader spriteReader;
   private final ExistingFileHelper existingFileHelper;
-  /** Sprite provider */
+  /**
+   * Sprite provider
+   */
   private final AbstractPartSpriteProvider partProvider;
-  /** Materials to provide */
+  /**
+   * Materials to provide
+   */
   private final AbstractMaterialSpriteProvider[] materialProviders;
   private final StatOverride overrides;
 
@@ -74,7 +81,7 @@ public class MaterialPartTextureGenerator extends GenericTextureGenerator {
   @Override
   public void run(CachedOutput cache) throws IOException {
     runCallbacks(existingFileHelper, null);
-    
+
     // ensure we have parts
     List<PartSpriteInfo> parts = partProvider.getSprites();
     if (parts.isEmpty()) {
@@ -106,14 +113,15 @@ public class MaterialPartTextureGenerator extends GenericTextureGenerator {
 
   /**
    * Generates the given sprite
-   * @param spriteReader    Reader to find existing sprites
-   * @param material        Material for the sprite
-   * @param part            Part for the sprites
-   * @param shouldGenerate  Predicate to determine if the sprite should generate, given the local path to the sprite
-   * @param saver           Function to save the images
-   * @param metaSaver       Function to save the animation metadata
+   *
+   * @param spriteReader   Reader to find existing sprites
+   * @param material       Material for the sprite
+   * @param part           Part for the sprites
+   * @param shouldGenerate Predicate to determine if the sprite should generate, given the local path to the sprite
+   * @param saver          Function to save the images
+   * @param metaSaver      Function to save the animation metadata
    */
-  public static void generateSprite(AbstractSpriteReader spriteReader, MaterialSpriteInfo material, PartSpriteInfo part, Predicate<ResourceLocation> shouldGenerate, BiConsumer<ResourceLocation, NativeImage> saver, BiConsumer<ResourceLocation,JsonObject> metaSaver) {
+  public static void generateSprite(AbstractSpriteReader spriteReader, MaterialSpriteInfo material, PartSpriteInfo part, Predicate<ResourceLocation> shouldGenerate, BiConsumer<ResourceLocation, NativeImage> saver, BiConsumer<ResourceLocation, JsonObject> metaSaver) {
     // first step: see if this sprite has already been generated, if so nothing to do
     // path format: pNamespace:pPath_mNamespace_mPath
     ResourceLocation partPath = part.getPath();
@@ -154,15 +162,21 @@ public class MaterialPartTextureGenerator extends GenericTextureGenerator {
 
   /* Static callbacks, handled this way as the event bus is a pain to use during datagen */
 
-  /** List of callbacks */
+  /**
+   * List of callbacks
+   */
   private static final List<IPartTextureCallback> TEXTURE_CALLBACKS = new ArrayList<>();
 
-  /** Registers a callback to run whenever sprites are generated. */
+  /**
+   * Registers a callback to run whenever sprites are generated.
+   */
   public static void registerCallback(IPartTextureCallback callback) {
     TEXTURE_CALLBACKS.add(callback);
   }
 
-  /** Runs all callbacks */
+  /**
+   * Runs all callbacks
+   */
   public static void runCallbacks(@Nullable ExistingFileHelper existingFileHelper, @Nullable ResourceManager manager) {
     for (IPartTextureCallback callback : TEXTURE_CALLBACKS) {
       callback.accept(existingFileHelper, manager);
@@ -170,10 +184,12 @@ public class MaterialPartTextureGenerator extends GenericTextureGenerator {
   }
 
   public interface IPartTextureCallback {
+
     /**
      * Tells the given callback that texture generating is either starting or ending. Both parameters being null means texture generating is ending
-     * @param existingFileHelper  If nonnull, datagenerators are starting
-     * @param manager             If nonnull, command is starting
+     *
+     * @param existingFileHelper If nonnull, datagenerators are starting
+     * @param manager            If nonnull, command is starting
      */
     void accept(@Nullable ExistingFileHelper existingFileHelper, @Nullable ResourceManager manager);
   }

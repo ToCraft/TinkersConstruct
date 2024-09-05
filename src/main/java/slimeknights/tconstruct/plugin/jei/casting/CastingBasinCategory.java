@@ -9,7 +9,9 @@ import slimeknights.tconstruct.plugin.jei.TConstructJEIConstants;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 
 public class CastingBasinCategory extends AbstractCastingCategory {
+
   private static final Component TITLE = TConstruct.makeTranslation("jei", "casting.basin");
+
   public CastingBasinCategory(IGuiHelper guiHelper) {
     super(guiHelper, TinkerSmeltery.searedBasin.get(), guiHelper.createDrawable(BACKGROUND_LOC, 117, 16, 16, 16));
   }

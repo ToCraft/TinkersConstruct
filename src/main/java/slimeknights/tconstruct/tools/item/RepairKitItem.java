@@ -20,6 +20,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class RepairKitItem extends MaterialItem implements IRepairKitItem {
+
   public RepairKitItem(Properties properties) {
     super(properties);
   }
@@ -27,9 +28,9 @@ public class RepairKitItem extends MaterialItem implements IRepairKitItem {
   @Override
   public boolean canUseMaterial(MaterialId material) {
     return MaterialRegistry.getInstance()
-                           .getAllStats(material)
-                           .stream()
-                           .anyMatch(stats -> stats == StatlessMaterialStats.REPAIR_KIT || stats.getType().canRepair());
+      .getAllStats(material)
+      .stream()
+      .anyMatch(stats -> stats == StatlessMaterialStats.REPAIR_KIT || stats.getType().canRepair());
   }
 
   @Override

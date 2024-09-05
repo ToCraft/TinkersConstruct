@@ -12,29 +12,43 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Supplier;
 
-/** Utility similar to {@link net.minecraftforge.registries.DeferredRegister} but for modifiers, as they no longer use a forge registry */
+/**
+ * Utility similar to {@link net.minecraftforge.registries.DeferredRegister} but for modifiers, as they no longer use a forge registry
+ */
 @RequiredArgsConstructor(staticName = "create")
 public class ModifierDeferredRegister {
-  /** All modifiers will be registered under this domain */
-  private final String modId;
-  /** List of entries to register */
-  private final Map<ModifierId,Supplier<? extends Modifier>> entries = new LinkedHashMap<>();
-  /** List of dynamic modifiers to expect */
-  private final Map<ModifierId,Class<?>> expected = new LinkedHashMap<>();
 
-  /** If true, the registration event has been seen, so its now too late to register new modifiers */
+  /**
+   * All modifiers will be registered under this domain
+   */
+  private final String modId;
+  /**
+   * List of entries to register
+   */
+  private final Map<ModifierId, Supplier<? extends Modifier>> entries = new LinkedHashMap<>();
+  /**
+   * List of dynamic modifiers to expect
+   */
+  private final Map<ModifierId, Class<?>> expected = new LinkedHashMap<>();
+
+  /**
+   * If true, the registration event has been seen, so its now too late to register new modifiers
+   */
   private boolean seenRegisterEvent = false;
 
-  /** Registers the deferred register with the relevant forge event busses */
+  /**
+   * Registers the deferred register with the relevant forge event busses
+   */
   public void register(IEventBus bus) {
     bus.addListener(EventPriority.NORMAL, false, ModifierRegistrationEvent.class, this::handleEvent);
   }
 
   /**
    * Registers a new static modifier with the modifier manager. Its generally preferred to use dynamic modifiers as that gives datapacks more control
-   * @param name      Modifier name
-   * @param supplier  Supplier to modifier instance
-   * @param <T>       Type of modifier
+   *
+   * @param name     Modifier name
+   * @param supplier Supplier to modifier instance
+   * @param <T>      Type of modifier
    * @return StaticModifier instance that will resolve to the modifier once static modifiers are registered
    */
   public <T extends Modifier> StaticModifier<T> register(String name, Supplier<? extends T> supplier) {
@@ -54,10 +68,11 @@ public class ModifierDeferredRegister {
 
   /**
    * Registers a modifier as an expected dynamic modifier
-   * @param name         Modifier name, if this modifier is missing from datapacks a warning will be logged
-   * @param classFilter  Class filter, if the modifier does not match this type in datapacks a warning will be logged
-   * @param <T>  Class type
-   * @return  Dynamic modifier instance
+   *
+   * @param name        Modifier name, if this modifier is missing from datapacks a warning will be logged
+   * @param classFilter Class filter, if the modifier does not match this type in datapacks a warning will be logged
+   * @param <T>         Class type
+   * @return Dynamic modifier instance
    */
   public <T extends Modifier> DynamicModifier<T> registerDynamic(String name, Class<T> classFilter) {
     if (seenRegisterEvent) {
@@ -76,14 +91,17 @@ public class ModifierDeferredRegister {
 
   /**
    * Registers a modifier as an expected dynamic modifier supporting any class
-   * @param name  Modifier name, if this modifier is missing from datapacks a warning will be logged
-   * @return  Dynamic modifier instance
+   *
+   * @param name Modifier name, if this modifier is missing from datapacks a warning will be logged
+   * @return Dynamic modifier instance
    */
   public DynamicModifier<Modifier> registerDynamic(String name) {
     return registerDynamic(name, Modifier.class);
   }
 
-  /** Called on modifier registration to register all entries */
+  /**
+   * Called on modifier registration to register all entries
+   */
   private void handleEvent(ModifierRegistrationEvent event) {
     seenRegisterEvent = true;
     for (Entry<ModifierId, Supplier<? extends Modifier>> entry : entries.entrySet()) {

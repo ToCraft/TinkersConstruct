@@ -16,7 +16,10 @@ import java.util.function.BiFunction;
 @EqualsAndHashCode
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class NamespacedNBT implements INamespacedNBTView {
-  /** Compound representing modifier data */
+
+  /**
+   * Compound representing modifier data
+   */
   @Getter(AccessLevel.PROTECTED)
   private final CompoundTag data;
 
@@ -28,7 +31,7 @@ public class NamespacedNBT implements INamespacedNBTView {
   }
 
   @Override
-  public <T> T get(ResourceLocation name, BiFunction<CompoundTag,String,T> function) {
+  public <T> T get(ResourceLocation name, BiFunction<CompoundTag, String, T> function) {
     return function.apply(data, name.toString());
   }
 
@@ -39,8 +42,9 @@ public class NamespacedNBT implements INamespacedNBTView {
 
   /**
    * Sets the given NBT into the data
-   * @param name  Key name
-   * @param nbt   NBT value
+   *
+   * @param name Key name
+   * @param nbt  NBT value
    */
   public void put(ResourceLocation name, Tag nbt) {
     data.put(name.toString(), nbt);
@@ -48,8 +52,9 @@ public class NamespacedNBT implements INamespacedNBTView {
 
   /**
    * Sets an integer from the mod data
+   *
    * @param name  Name
-   * @param value  Integer value
+   * @param value Integer value
    */
   public void putInt(ResourceLocation name, int value) {
     data.putInt(name.toString(), value);
@@ -57,8 +62,9 @@ public class NamespacedNBT implements INamespacedNBTView {
 
   /**
    * Sets an boolean from the mod data
+   *
    * @param name  Name
-   * @param value  Boolean value
+   * @param value Boolean value
    */
   public void putBoolean(ResourceLocation name, boolean value) {
     data.putBoolean(name.toString(), value);
@@ -66,8 +72,9 @@ public class NamespacedNBT implements INamespacedNBTView {
 
   /**
    * Sets an float from the mod data
+   *
    * @param name  Name
-   * @param value  Float value
+   * @param value Float value
    */
   public void putFloat(ResourceLocation name, float value) {
     data.putFloat(name.toString(), value);
@@ -75,8 +82,9 @@ public class NamespacedNBT implements INamespacedNBTView {
 
   /**
    * Reads a string from the mod data
+   *
    * @param name  Name
-   * @param value  String value
+   * @param value String value
    */
   public void putString(ResourceLocation name, String value) {
     data.putString(name.toString(), value);
@@ -84,7 +92,8 @@ public class NamespacedNBT implements INamespacedNBTView {
 
   /**
    * Removes the given key from the NBT
-   * @param name  Key to remove
+   *
+   * @param name Key to remove
    */
   public void remove(ResourceLocation name) {
     data.remove(name.toString());
@@ -93,14 +102,17 @@ public class NamespacedNBT implements INamespacedNBTView {
 
   /* Networking */
 
-  /** Gets a copy of the internal data, generally should only be used for syncing, no reason to call directly */
+  /**
+   * Gets a copy of the internal data, generally should only be used for syncing, no reason to call directly
+   */
   public CompoundTag getCopy() {
     return data.copy();
   }
 
   /**
    * Called to merge this NBT data from another
-   * @param data  data
+   *
+   * @param data data
    */
   public void copyFrom(CompoundTag data) {
     this.data.getAllKeys().clear();
@@ -109,8 +121,9 @@ public class NamespacedNBT implements INamespacedNBTView {
 
   /**
    * Parses the data from NBT
-   * @param data  data
-   * @return  Parsed mod data
+   *
+   * @param data data
+   * @return Parsed mod data
    */
   public static NamespacedNBT readFromNBT(CompoundTag data) {
     return new NamespacedNBT(data);

@@ -34,28 +34,51 @@ import java.util.function.Predicate;
  */
 @RequiredArgsConstructor
 public abstract class MultiblockCuboid<T extends MultiblockStructureData> {
-  /** Error if the multiblock detection logic never ran */
+
+  /**
+   * Error if the multiblock detection logic never ran
+   */
   protected static final MultiblockResult NO_ATTEMPT = MultiblockResult.error(null, TConstruct.makeTranslation("multiblock", "generic.no_attempt"));
-  /** Error if the structure is outside the loaded area */
+  /**
+   * Error if the structure is outside the loaded area
+   */
   protected static final MultiblockResult NOT_LOADED = MultiblockResult.error(null, TConstruct.makeTranslation("multiblock", "generic.not_loaded"));
-  /** Error if the structure is outside the loaded area */
+  /**
+   * Error if the structure is outside the loaded area
+   */
   protected static final MultiblockResult TOO_HIGH = MultiblockResult.error(null, TConstruct.makeTranslation("multiblock", "generic.too_high"));
 
-  /** Error if the structure inside is not valid */
+  /**
+   * Error if the structure inside is not valid
+   */
   protected static final Component INVALID_INNER_BLOCK = TConstruct.makeTranslation("multiblock", "generic.invalid_inner_block");
-  /** Error if the structure inside is not valid */
+  /**
+   * Error if the structure inside is not valid
+   */
   protected static final String TOO_LARGE = TConstruct.makeTranslationKey("multiblock", "generic.too_large");
-  /** Error if a block is invalid in the floor */
+  /**
+   * Error if a block is invalid in the floor
+   */
   protected static final Component INVALID_FLOOR_BLOCK = TConstruct.makeTranslation("multiblock", "generic.invalid_floor_block");
-  /** Error if a block is invalid in the ceiling */
+  /**
+   * Error if a block is invalid in the ceiling
+   */
   protected static final Component INVALID_CEILING_BLOCK = TConstruct.makeTranslation("multiblock", "generic.invalid_floor_block");
-  /** Error if a block is invalid in the walls */
+  /**
+   * Error if a block is invalid in the walls
+   */
   protected static final Component INVALID_WALL_BLOCK = TConstruct.makeTranslation("multiblock", "generic.invalid_wall_block");
-  /** Error if the structure floor has no frame */
+  /**
+   * Error if the structure floor has no frame
+   */
   protected static final Component INVALID_FLOOR_FRAME = TConstruct.makeTranslation("multiblock", "generic.invalid_floor_frame");
-  /** Error if the structure ceiling has no frame */
+  /**
+   * Error if the structure ceiling has no frame
+   */
   protected static final Component INVALID_CEILING_FRAME = TConstruct.makeTranslation("multiblock", "generic.invalid_ceiling_frame");
-  /** Error if the structure wall has no frame */
+  /**
+   * Error if the structure wall has no frame
+   */
   protected static final Component INVALID_WALL_FRAME = TConstruct.makeTranslation("multiblock", "generic.invalid_wall_frame");
 
   // constants to make code more readible
@@ -64,20 +87,33 @@ public abstract class MultiblockCuboid<T extends MultiblockStructureData> {
   private static final int SOUTH = Direction.SOUTH.get2DDataValue();
   private static final int WEST = Direction.WEST.get2DDataValue();
 
-  /** If true, the multiblock requires a floor */
+  /**
+   * If true, the multiblock requires a floor
+   */
   protected final boolean hasFloor;
-  /** If true, the multiblock requires a frame */
+  /**
+   * If true, the multiblock requires a frame
+   */
   protected final boolean hasFrame;
-  /** If true, the multiblock requires a ceiling */
+  /**
+   * If true, the multiblock requires a ceiling
+   */
   protected final boolean hasCeiling;
-  /** Maximum number of blocks to detect belowwards */
+  /**
+   * Maximum number of blocks to detect belowwards
+   */
   @Getter
   private final int maxHeight;
-  /** Maximum inner size of the structure */
+  /**
+   * Maximum inner size of the structure
+   */
   private final int innerLimit;
 
-  /** Gets the last result of the structure */
-  @Setter(AccessLevel.PROTECTED) @Getter
+  /**
+   * Gets the last result of the structure
+   */
+  @Setter(AccessLevel.PROTECTED)
+  @Getter
   private MultiblockResult lastResult = NO_ATTEMPT;
 
   /**
@@ -89,10 +125,11 @@ public abstract class MultiblockCuboid<T extends MultiblockStructureData> {
 
   /**
    * Gets a list of all positions inside the structure
-   * @param world   Level instance
-   * @param master  Position of the master
-   * @param facing  Direction the master is facing. Opposite is behind the controller
-   * @return  Multiblock structue data
+   *
+   * @param world  Level instance
+   * @param master Position of the master
+   * @param facing Direction the master is facing. Opposite is behind the controller
+   * @return Multiblock structue data
    */
   @Nullable
   public T detectMultiblock(Level world, BlockPos master, Direction facing) {
@@ -139,7 +176,7 @@ public abstract class MultiblockCuboid<T extends MultiblockStructureData> {
     // walls too far away?
     int xd = (edges[SOUTH] - edges[NORTH]) - 1;
     int zd = (edges[EAST] - edges[WEST]) - 1;
-    if(xd > innerLimit || zd > innerLimit) {
+    if (xd > innerLimit || zd > innerLimit) {
       setLastResult(MultiblockResult.error(null, TOO_LARGE, xd, zd, innerLimit, innerLimit));
       return null;
     }
@@ -227,14 +264,15 @@ public abstract class MultiblockCuboid<T extends MultiblockStructureData> {
 
   /**
    * Gets the farthest position in the given direction
-   * @param world      Level instance
-   * @param pos        Start position
-   * @param direction  Direction to check
-   * @param limit      Max distance to check
-   * @return  Block position of farthest position in the directon
+   *
+   * @param world     Level instance
+   * @param pos       Start position
+   * @param direction Direction to check
+   * @param limit     Max distance to check
+   * @return Block position of farthest position in the directon
    */
   protected BlockPos getOuterPos(Level world, BlockPos pos, Direction direction, int limit) {
-    for(int i = 0; i < limit && world.isLoaded(pos) && isInnerBlock(world, pos); i++) {
+    for (int i = 0; i < limit && world.isLoaded(pos) && isInnerBlock(world, pos); i++) {
       pos = pos.relative(direction);
     }
 
@@ -243,12 +281,13 @@ public abstract class MultiblockCuboid<T extends MultiblockStructureData> {
 
   /**
    * Detects the floor or ceiling of the structure
-   * @param world     Level instance
-   * @param from      Start position for the cap
-   * @param to        End position for the cap
-   * @param side      Side of the cube
-   * @param consumer  Consumer for any extra positions in this region, specifically frame positions when frame is disabled
-   * @return  True if this "cap" is valid, false if not
+   *
+   * @param world    Level instance
+   * @param from     Start position for the cap
+   * @param to       End position for the cap
+   * @param side     Side of the cube
+   * @param consumer Consumer for any extra positions in this region, specifically frame positions when frame is disabled
+   * @return True if this "cap" is valid, false if not
    */
   @SuppressWarnings("deprecation")
   protected MultiblockResult detectCap(Level world, BlockPos from, BlockPos to, CuboidSide side, Consumer<Collection<BlockPos>> consumer) {
@@ -268,13 +307,17 @@ public abstract class MultiblockCuboid<T extends MultiblockStructureData> {
       // x direction
       Component frameError = side == CuboidSide.CEILING ? INVALID_CEILING_FRAME : INVALID_FLOOR_FRAME;
       for (int x = from.getX(); x <= to.getX(); x++) {
-        if (!frameCheck.test(mutable.set(x, height, from.getZ()))) return MultiblockResult.error(mutable.immutable(), frameError);
-        if (!frameCheck.test(mutable.set(x, height, to.getZ())))   return MultiblockResult.error(mutable.immutable(), frameError);
+        if (!frameCheck.test(mutable.set(x, height, from.getZ())))
+          return MultiblockResult.error(mutable.immutable(), frameError);
+        if (!frameCheck.test(mutable.set(x, height, to.getZ())))
+          return MultiblockResult.error(mutable.immutable(), frameError);
       }
       // z direction. don't doublecheck corners
       for (int z = from.getZ() + 1; z < to.getZ(); z++) {
-        if (!frameCheck.test(mutable.set(from.getX(), height, z))) return MultiblockResult.error(mutable.immutable(), frameError);
-        if (!frameCheck.test(mutable.set(to.getX(), height, z)))   return MultiblockResult.error(mutable.immutable(), frameError);
+        if (!frameCheck.test(mutable.set(from.getX(), height, z)))
+          return MultiblockResult.error(mutable.immutable(), frameError);
+        if (!frameCheck.test(mutable.set(to.getX(), height, z)))
+          return MultiblockResult.error(mutable.immutable(), frameError);
       }
     }
 
@@ -292,16 +335,17 @@ public abstract class MultiblockCuboid<T extends MultiblockStructureData> {
 
   /**
    * Detects an inner layer of the structure. That is, an area with an empty center
-   * @param world     Level instance
-   * @param from      Start position for the layer
-   * @param to        End position for the layer
-   * @param consumer  Consumer for any extra positions in this region
-   * @return  True if this layer is valid, false otherwise
+   *
+   * @param world    Level instance
+   * @param from     Start position for the layer
+   * @param to       End position for the layer
+   * @param consumer Consumer for any extra positions in this region
+   * @return True if this layer is valid, false otherwise
    */
   @SuppressWarnings("deprecation")
   protected MultiblockResult detectLayer(Level world, BlockPos from, BlockPos to, Consumer<Collection<BlockPos>> consumer) {
     // ensure its loaded
-    if(!world.hasChunksAt(from, to)) {
+    if (!world.hasChunksAt(from, to)) {
       return NOT_LOADED;
     }
 
@@ -333,20 +377,26 @@ public abstract class MultiblockCuboid<T extends MultiblockStructureData> {
 
       // we only have 4 corner blocks to check
       if (!frameCheck.test(from)) return MultiblockResult.error(from.immutable(), INVALID_WALL_FRAME);
-      if (!frameCheck.test(mutable.set(from.getX(), height, to.getZ()))) return MultiblockResult.error(mutable.immutable(), INVALID_WALL_FRAME);
-      if (!frameCheck.test(mutable.set(to.getX(), height, from.getZ()))) return MultiblockResult.error(mutable.immutable(), INVALID_WALL_FRAME);
-      if (!frameCheck.test(to))   return MultiblockResult.error(to.immutable(), INVALID_WALL_FRAME);
+      if (!frameCheck.test(mutable.set(from.getX(), height, to.getZ())))
+        return MultiblockResult.error(mutable.immutable(), INVALID_WALL_FRAME);
+      if (!frameCheck.test(mutable.set(to.getX(), height, from.getZ())))
+        return MultiblockResult.error(mutable.immutable(), INVALID_WALL_FRAME);
+      if (!frameCheck.test(to)) return MultiblockResult.error(to.immutable(), INVALID_WALL_FRAME);
     }
 
     // validate the 4 sides
     Predicate<BlockPos> wallCheck = pos -> isValidBlock(world, pos, CuboidSide.WALL, false);
     for (int x = from.getX() + 1; x < to.getX(); x++) {
-      if (!wallCheck.test(mutable.set(x, height, from.getZ()))) return MultiblockResult.error(mutable.immutable(), INVALID_WALL_BLOCK);
-      if (!wallCheck.test(mutable.set(x, height, to.getZ()))) return MultiblockResult.error(mutable.immutable(), INVALID_WALL_BLOCK);
+      if (!wallCheck.test(mutable.set(x, height, from.getZ())))
+        return MultiblockResult.error(mutable.immutable(), INVALID_WALL_BLOCK);
+      if (!wallCheck.test(mutable.set(x, height, to.getZ())))
+        return MultiblockResult.error(mutable.immutable(), INVALID_WALL_BLOCK);
     }
     for (int z = from.getZ() + 1; z < to.getZ(); z++) {
-      if (!wallCheck.test(mutable.set(from.getX(), height, z))) return MultiblockResult.error(mutable.immutable(), INVALID_WALL_BLOCK);
-      if (!wallCheck.test(mutable.set(to.getX(), height, z))) return MultiblockResult.error(mutable.immutable(), INVALID_WALL_BLOCK);
+      if (!wallCheck.test(mutable.set(from.getX(), height, z)))
+        return MultiblockResult.error(mutable.immutable(), INVALID_WALL_BLOCK);
+      if (!wallCheck.test(mutable.set(to.getX(), height, z)))
+        return MultiblockResult.error(mutable.immutable(), INVALID_WALL_BLOCK);
     }
 
     // was successful, add all candidates
@@ -360,19 +410,21 @@ public abstract class MultiblockCuboid<T extends MultiblockStructureData> {
 
   /**
    * Checks if a block is valid in the structure
-   * @param world    Level argument
-   * @param pos      Position to check, note it may be mutable
-   * @param side     Side of the structure, floor, ceiling, or wall
-   * @param isFrame  If true, checking a frame. If false, checking a side
-   * @return  True if this block is valid
+   *
+   * @param world   Level argument
+   * @param pos     Position to check, note it may be mutable
+   * @param side    Side of the structure, floor, ceiling, or wall
+   * @param isFrame If true, checking a frame. If false, checking a side
+   * @return True if this block is valid
    */
   protected abstract boolean isValidBlock(Level world, BlockPos pos, CuboidSide side, boolean isFrame);
 
   /**
    * Checks if a block is a valid block inside the cuboid
-   * @param world  Level instance
-   * @param pos    Position to check, note it may be mutable
-   * @return  True if its a valid inner block
+   *
+   * @param world Level instance
+   * @param pos   Position to check, note it may be mutable
+   * @return True if its a valid inner block
    */
   public boolean isInnerBlock(Level world, BlockPos pos) {
     return world.isEmptyBlock(pos);
@@ -383,11 +435,12 @@ public abstract class MultiblockCuboid<T extends MultiblockStructureData> {
 
   /**
    * Checks if the structure should update
-   * @param world      Level instance
-   * @param structure  Structure data
-   * @param pos        Position that changed
-   * @param state      State that changed
-   * @return  True if the structure should update
+   *
+   * @param world     Level instance
+   * @param structure Structure data
+   * @param pos       Position that changed
+   * @param state     State that changed
+   * @return True if the structure should update
    */
   public abstract boolean shouldUpdate(Level world, MultiblockStructureData structure, BlockPos pos, BlockState state);
 
@@ -396,8 +449,9 @@ public abstract class MultiblockCuboid<T extends MultiblockStructureData> {
 
   /**
    * Reads the structure data from Tag
-   * @param nbt  Tag tag
-   * @param controllerPos  Position of the controller block entity, to store them relatively. If you wish to store absolutely, use {@link BlockPos#ZERO}.
+   *
+   * @param nbt           Tag tag
+   * @param controllerPos Position of the controller block entity, to store them relatively. If you wish to store absolutely, use {@link BlockPos#ZERO}.
    * @return Structure data, or null if invalid
    */
   @Nullable
@@ -413,19 +467,21 @@ public abstract class MultiblockCuboid<T extends MultiblockStructureData> {
 
   /**
    * Creates a new instance from the given min and max bounds. Used to create the structure client side
-   * @param min       Min pos
-   * @param max       Max pos
-   * @param extraPos  Set of extra positons in the structure
-   * @return  Structure from bounds
+   *
+   * @param min      Min pos
+   * @param max      Max pos
+   * @param extraPos Set of extra positons in the structure
+   * @return Structure from bounds
    */
   public abstract T create(BlockPos min, BlockPos max, Set<BlockPos> extraPos);
 
   /**
    * Reads a set of positions from a Tag position list
-   * @param rootTag  Root Tag tag
-   * @param key      Key to read
-   * @param offset   Offset position, for saving relatively. Use {@link BlockPos#ZERO} for absolute
-   * @return  Set of positions
+   *
+   * @param rootTag Root Tag tag
+   * @param key     Key to read
+   * @param offset  Offset position, for saving relatively. Use {@link BlockPos#ZERO} for absolute
+   * @return Set of positions
    */
   protected static Collection<BlockPos> readPosList(CompoundTag rootTag, String key, BlockPos offset) {
     if (!rootTag.contains(key, Tag.TAG_LIST)) {

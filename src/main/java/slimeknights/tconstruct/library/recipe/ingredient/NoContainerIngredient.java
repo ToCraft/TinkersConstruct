@@ -17,8 +17,11 @@ import slimeknights.tconstruct.library.utils.JsonUtils;
 
 import javax.annotation.Nullable;
 
-/** Ingredient matching an item with no container item, used to ensure NBT fluid items are empty */
+/**
+ * Ingredient matching an item with no container item, used to ensure NBT fluid items are empty
+ */
 public class NoContainerIngredient extends NestedIngredient {
+
   public static final ResourceLocation ID = TConstruct.getResource("no_container");
 
   protected NoContainerIngredient(Ingredient nested) {
@@ -84,22 +87,30 @@ public class NoContainerIngredient extends NestedIngredient {
 
   /* Static constructors */
 
-  /** Creates an instance from the given nested ingredient */
+  /**
+   * Creates an instance from the given nested ingredient
+   */
   public static NoContainerIngredient of(Ingredient ingredient) {
     return new NoContainerIngredient(ingredient);
   }
 
-  /** Creates an instance from the given items */
+  /**
+   * Creates an instance from the given items
+   */
   public static NoContainerIngredient of(ItemLike... items) {
     return of(Ingredient.of(items));
   }
 
-  /** Creates an instance from the given stacks */
+  /**
+   * Creates an instance from the given stacks
+   */
   public static NoContainerIngredient of(ItemStack... stacks) {
     return of(Ingredient.of(stacks));
   }
 
-  /** Creates an instance from the given tag */
+  /**
+   * Creates an instance from the given tag
+   */
   public static NoContainerIngredient of(TagKey<Item> tag) {
     return of(Ingredient.of(tag));
   }

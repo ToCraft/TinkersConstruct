@@ -8,8 +8,11 @@ import slimeknights.tconstruct.library.tools.SlotType;
 
 import javax.annotation.Nullable;
 
-/** Predicate that matches any modifiers with recipes requiring a slot */
+/**
+ * Predicate that matches any modifiers with recipes requiring a slot
+ */
 public record SlotTypeModifierPredicate(@Nullable SlotType slotType) implements ModifierPredicate {
+
   public static final RecordLoadable<SlotTypeModifierPredicate> LOADER = RecordLoadable.create(SlotType.LOADABLE.nullableField("slot", SlotTypeModifierPredicate::slotType), SlotTypeModifierPredicate::new);
 
   @Override

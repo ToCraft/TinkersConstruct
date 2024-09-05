@@ -23,10 +23,14 @@ import java.util.function.Function;
  * This model contains a list of items to display in the TESR, plus a single scalable fluid that can either be statically rendered or rendered in the TESR
  */
 public class MelterModel extends TankModel {
-  /** Shared loader instance */
+
+  /**
+   * Shared loader instance
+   */
   public static final IGeometryLoader<TankModel> LOADER = MelterModel::deserialize;
 
   private final List<ModelItem> items;
+
   @SuppressWarnings("WeakerAccess")
   protected MelterModel(SimpleBlockModel model, @Nullable SimpleBlockModel gui, IncrementalFluidCuboid fluid, List<ModelItem> items) {
     super(model, gui, fluid, false);
@@ -34,7 +38,7 @@ public class MelterModel extends TankModel {
   }
 
   @Override
-  public BakedModel bake(IGeometryBakingContext owner, ModelBakery bakery, Function<Material,TextureAtlasSprite> spriteGetter, ModelState transform, ItemOverrides overrides, ResourceLocation location) {
+  public BakedModel bake(IGeometryBakingContext owner, ModelBakery bakery, Function<Material, TextureAtlasSprite> spriteGetter, ModelState transform, ItemOverrides overrides, ResourceLocation location) {
     BakedModel baked = model.bake(owner, bakery, spriteGetter, transform, overrides, location);
     // bake the GUI model if present
     BakedModel bakedGui = baked;
@@ -44,22 +48,28 @@ public class MelterModel extends TankModel {
     return new Baked(owner, transform, baked, bakedGui, this);
   }
 
-  /** Baked variant to allow access to items */
+  /**
+   * Baked variant to allow access to items
+   */
   public static final class Baked extends TankModel.Baked<MelterModel> {
+
     private Baked(IGeometryBakingContext owner, ModelState transforms, BakedModel baked, BakedModel gui, MelterModel original) {
       super(owner, transforms, baked, gui, original);
     }
 
     /**
      * Gets a list of items used in inventory display
-     * @return  Item list
+     *
+     * @return Item list
      */
     public List<ModelItem> getItems() {
       return this.original.items;
     }
   }
 
-  /** Loader for this model */
+  /**
+   * Loader for this model
+   */
   public static TankModel deserialize(JsonObject json, JsonDeserializationContext context) {
     SimpleBlockModel model = SimpleBlockModel.deserialize(json, context);
     SimpleBlockModel gui = null;

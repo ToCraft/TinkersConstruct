@@ -6,13 +6,16 @@ import slimeknights.mantle.data.loadable.Loadables;
 import slimeknights.mantle.data.loadable.record.RecordLoadable;
 import slimeknights.mantle.data.registry.GenericLoaderRegistry.IGenericLoader;
 
-/** Variable that fetches an attribute value */
+/**
+ * Variable that fetches an attribute value
+ */
 public record AttributeEntityVariable(Attribute attribute) implements EntityVariable {
+
   public static final RecordLoadable<AttributeEntityVariable> LOADER = RecordLoadable.create(Loadables.ATTRIBUTE.requiredField("attribute", AttributeEntityVariable::attribute), AttributeEntityVariable::new);
 
   @Override
   public float getValue(LivingEntity entity) {
-    return (float)entity.getAttributeValue(attribute);
+    return (float) entity.getAttributeValue(attribute);
   }
 
   @Override

@@ -14,7 +14,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class FlexToolPartItem extends ToolPartItem implements IFlexItem {
-  private final Map<String,FlexEventHandler> eventHandlers = new HashMap<>();
+
+  private final Map<String, FlexEventHandler> eventHandlers = new HashMap<>();
   private final Set<CreativeModeTab> tabs = new HashSet<>();
 
   public FlexToolPartItem(Properties properties, MaterialStatsId id) {

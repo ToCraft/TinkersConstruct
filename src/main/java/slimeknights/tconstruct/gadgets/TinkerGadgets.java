@@ -51,7 +51,10 @@ import java.util.function.Function;
  */
 @SuppressWarnings("unused")
 public final class TinkerGadgets extends TinkerModule {
-  /** Tab for all special tools added by the mod */
+
+  /**
+   * Tab for all special tools added by the mod
+   */
   public static final CreativeModeTab TAB_GADGETS = new SupplierCreativeTab(TConstruct.MOD_ID, "gadgets", () -> new ItemStack(TinkerGadgets.itemFrame.get(FrameType.CLEAR)));
   static final Logger log = Util.getLogger("tinker_gadgets");
 
@@ -60,9 +63,9 @@ public final class TinkerGadgets extends TinkerModule {
    */
   private static final Item.Properties GADGET_PROPS = new Item.Properties().tab(TAB_GADGETS);
   private static final Item.Properties UNSTACKABLE_PROPS = new Item.Properties().tab(TAB_GADGETS).stacksTo(1);
-  private static final Function<Block,? extends BlockItem> DEFAULT_BLOCK_ITEM = (b) -> new BlockItem(b, GADGET_PROPS);
-  private static final Function<Block,? extends BlockItem> TOOLTIP_BLOCK_ITEM = (b) -> new BlockTooltipItem(b, GADGET_PROPS);
-  private static final Function<Block,? extends BlockItem> UNSTACKABLE_BLOCK_ITEM = (b) -> new BlockTooltipItem(b, UNSTACKABLE_PROPS);
+  private static final Function<Block, ? extends BlockItem> DEFAULT_BLOCK_ITEM = (b) -> new BlockItem(b, GADGET_PROPS);
+  private static final Function<Block, ? extends BlockItem> TOOLTIP_BLOCK_ITEM = (b) -> new BlockTooltipItem(b, GADGET_PROPS);
+  private static final Function<Block, ? extends BlockItem> UNSTACKABLE_BLOCK_ITEM = (b) -> new BlockTooltipItem(b, UNSTACKABLE_PROPS);
 
   /*
    * Blocks
@@ -73,7 +76,7 @@ public final class TinkerGadgets extends TinkerModule {
    * Items
    */
   public static final ItemObject<PiggyBackPackItem> piggyBackpack = ITEMS.register("piggy_backpack", () -> new PiggyBackPackItem(new Properties().tab(TinkerGadgets.TAB_GADGETS).stacksTo(16)));
-  public static final EnumObject<FrameType,FancyItemFrameItem> itemFrame = ITEMS.registerEnum(FrameType.values(), "item_frame", (type) -> new FancyItemFrameItem(GADGET_PROPS, (world, pos, dir) -> new FancyItemFrameEntity(world, pos, dir, type)));
+  public static final EnumObject<FrameType, FancyItemFrameItem> itemFrame = ITEMS.registerEnum(FrameType.values(), "item_frame", (type) -> new FancyItemFrameItem(GADGET_PROPS, (world, pos, dir) -> new FancyItemFrameEntity(world, pos, dir, type)));
 
   // throwballs
   public static final ItemObject<GlowBallItem> glowBall = ITEMS.register("glow_ball", GlowBallItem::new);
@@ -81,7 +84,7 @@ public final class TinkerGadgets extends TinkerModule {
 
   // foods
   private static final BlockBehaviour.Properties CAKE = builder(Material.CAKE, SoundType.WOOL).strength(0.5F);
-  public static final EnumObject<FoliageType,FoodCakeBlock> cake = BLOCKS.registerEnum(FoliageType.values(), "cake", type -> new FoodCakeBlock(CAKE, TinkerFood.getCake(type)), UNSTACKABLE_BLOCK_ITEM);
+  public static final EnumObject<FoliageType, FoodCakeBlock> cake = BLOCKS.registerEnum(FoliageType.values(), "cake", type -> new FoodCakeBlock(CAKE, TinkerFood.getCake(type)), UNSTACKABLE_BLOCK_ITEM);
   public static final ItemObject<FoodCakeBlock> magmaCake = BLOCKS.register("magma_cake", () -> new FoodCakeBlock(CAKE, TinkerFood.MAGMA_CAKE), UNSTACKABLE_BLOCK_ITEM);
 
   // Shurikens
@@ -94,7 +97,7 @@ public final class TinkerGadgets extends TinkerModule {
    */
   public static final RegistryObject<EntityType<FancyItemFrameEntity>> itemFrameEntity = ENTITIES.register("fancy_item_frame", () ->
     EntityType.Builder.<FancyItemFrameEntity>of(
-      FancyItemFrameEntity::new, MobCategory.MISC)
+        FancyItemFrameEntity::new, MobCategory.MISC)
       .sized(0.5F, 0.5F)
       .setTrackingRange(10)
       .setUpdateInterval(Integer.MAX_VALUE)
@@ -116,7 +119,7 @@ public final class TinkerGadgets extends TinkerModule {
       .setUpdateInterval(10)
       .setCustomClientFactory((spawnEntity, world) -> new EFLNEntity(TinkerGadgets.eflnEntity.get(), world))
       .setShouldReceiveVelocityUpdates(true)
-                                                                                           );
+  );
   public static final RegistryObject<EntityType<QuartzShurikenEntity>> quartzShurikenEntity = ENTITIES.register("quartz_shuriken", () ->
     EntityType.Builder.<QuartzShurikenEntity>of(QuartzShurikenEntity::new, MobCategory.MISC)
       .sized(0.25F, 0.25F)

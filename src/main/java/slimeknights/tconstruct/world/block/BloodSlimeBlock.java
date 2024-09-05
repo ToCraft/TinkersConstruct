@@ -6,8 +6,11 @@ import slimeknights.tconstruct.world.TinkerWorld;
 
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
-/** Slime block that only sticks to other slime blocks */
+/**
+ * Slime block that only sticks to other slime blocks
+ */
 public class BloodSlimeBlock extends SlimeBlock {
+
   public BloodSlimeBlock(Properties properties) {
     super(properties);
   }

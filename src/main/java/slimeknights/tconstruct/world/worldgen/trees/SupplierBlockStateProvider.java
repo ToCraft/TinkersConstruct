@@ -27,12 +27,16 @@ public class SupplierBlockStateProvider extends BlockStateProvider {
     this.supplier = blockStateSupplier;
   }
 
-  /** Create a supplier for a state */
+  /**
+   * Create a supplier for a state
+   */
   public static SupplierBlockStateProvider ofState(Supplier<BlockState> supplier) {
     return new SupplierBlockStateProvider(supplier);
   }
 
-  /** Create a supplier for a blocks default state */
+  /**
+   * Create a supplier for a blocks default state
+   */
   public static SupplierBlockStateProvider ofBlock(Supplier<? extends Block> supplier) {
     return ofState(() -> supplier.get().defaultBlockState());
   }

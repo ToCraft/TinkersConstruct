@@ -34,36 +34,53 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.ToIntFunction;
 
-import static com.mojang.blaze3d.platform.NativeImage.getA;
+import static slimeknights.tconstruct.util.ColourUtils.getA;
 
 /**
  * Supports including sprites as "part of the palette"
  */
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public class GreyToSpriteTransformer implements ISpriteTransformer {
+
   public static final ResourceLocation NAME = TConstruct.getResource("grey_to_sprite");
   public static final Deserializer DESERIALIZER = new Deserializer();
 
-  /** Base folder for texture backgrounds */
+  /**
+   * Base folder for texture backgrounds
+   */
   private static final String TEXTURE_FOLDER = "textures";
-  /** Sprite reader instance, filled in by events */
+  /**
+   * Sprite reader instance, filled in by events
+   */
   @Nullable
   static AbstractSpriteReader READER = null;
-  /** List of all sprite mappings with cached data that need to be cleared */
+  /**
+   * List of all sprite mappings with cached data that need to be cleared
+   */
   private static final List<SpriteMapping> MAPPINGS_TO_CLEAR = new ArrayList<>();
 
-  /** List of sprites to try */
+  /**
+   * List of sprites to try
+   */
   private final List<SpriteMapping> sprites;
 
-  /** Cache of the sprites to use for each color value */
+  /**
+   * Cache of the sprites to use for each color value
+   */
   private final SpriteRange[] foundSpriteCache = new SpriteRange[256];
 
-  /** Constructor for search */
+  /**
+   * Constructor for search
+   */
   private static final Interpolate<SpriteMapping, SpriteRange> SPRITE_RANGE = (first, second, grey) -> new SpriteRange(first, second);
-  /** Gets the grey value of a color */
+  /**
+   * Gets the grey value of a color
+   */
   private static final ToIntFunction<SpriteMapping> GET_GREY = SpriteMapping::getGrey;
 
-  /** Gets the sprite for the given color */
+  /**
+   * Gets the sprite for the given color
+   */
   protected SpriteRange getSpriteRange(int grey) {
     if (foundSpriteCache[grey] == null) {
       foundSpriteCache[grey] = GreyToColorMapping.getNearestByGrey(sprites, GET_GREY, grey, SPRITE_RANGE);
@@ -71,7 +88,9 @@ public class GreyToSpriteTransformer implements ISpriteTransformer {
     return foundSpriteCache[grey];
   }
 
-  /** Gets the color at the given location from its full color value */
+  /**
+   * Gets the color at the given location from its full color value
+   */
   private int getNewColor(int color, int x, int y) {
     // if fully transparent, just return fully transparent
     // we do not do 0 alpha RGB values to save effort
@@ -121,15 +140,18 @@ public class GreyToSpriteTransformer implements ISpriteTransformer {
     return object;
   }
 
-  /** Serializer for a recolor sprite transformer */
+  /**
+   * Serializer for a recolor sprite transformer
+   */
   protected static class Deserializer implements JsonDeserializer<GreyToSpriteTransformer> {
+
     @Override
     public GreyToSpriteTransformer deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
       JsonObject object = json.getAsJsonObject();
       JsonArray palette = GsonHelper.getAsJsonArray(object, "palette");
       GreyToSpriteTransformer.Builder paletteBuilder = GreyToSpriteTransformer.builder();
       for (int i = 0; i < palette.size(); i++) {
-        JsonObject palettePair = GsonHelper.convertToJsonObject(palette.get(i), "palette["+i+']');
+        JsonObject palettePair = GsonHelper.convertToJsonObject(palette.get(i), "palette[" + i + ']');
         int grey = GsonHelper.getAsInt(palettePair, "grey");
         if (i == 0 && grey != 0) {
           paletteBuilder.addABGR(0, 0xFF000000);
@@ -149,22 +171,31 @@ public class GreyToSpriteTransformer implements ISpriteTransformer {
 
   /* Builder */
 
-  /** Creates a new grey to color builder */
+  /**
+   * Creates a new grey to color builder
+   */
   public static Builder builder() {
     return new Builder();
   }
 
-  /** Creates a new grey to color builder starting with greyscale 0 as white */
+  /**
+   * Creates a new grey to color builder starting with greyscale 0 as white
+   */
   public static Builder builderFromBlack() {
     return builder().addABGR(0, 0xFF000000);
   }
 
-  /** Builder to create a palette of this type */
+  /**
+   * Builder to create a palette of this type
+   */
   public static class Builder {
+
     private final ImmutableList.Builder<SpriteMapping> builder = ImmutableList.builder();
     private int lastGrey = -1;
 
-    /** Validates the given grey value */
+    /**
+     * Validates the given grey value
+     */
     private void checkGrey(int grey) {
       if (grey < 0 || grey > 255) {
         throw new IllegalArgumentException("Invalid grey value, must be between 0 and 255, inclusive");
@@ -175,32 +206,42 @@ public class GreyToSpriteTransformer implements ISpriteTransformer {
       lastGrey = grey;
     }
 
-    /** Adds a color to the palette in ABGR format */
+    /**
+     * Adds a color to the palette in ABGR format
+     */
     public Builder addABGR(int grey, int color) {
       checkGrey(grey);
       builder.add(new SpriteMapping(grey, color, null));
       return this;
     }
 
-    /** Adds a color to the palette in ARGB format */
+    /**
+     * Adds a color to the palette in ARGB format
+     */
     @SuppressWarnings("UnusedReturnValue")
     public Builder addARGB(int grey, int color) {
       return addABGR(grey, Util.translateColorBGR(color));
     }
 
-    /** Adds a texture to the palette */
+    /**
+     * Adds a texture to the palette
+     */
     public Builder addTexture(int grey, ResourceLocation texture, int tint) {
       checkGrey(grey);
       builder.add(new SpriteMapping(grey, Util.translateColorBGR(tint), texture));
       return this;
     }
 
-    /** Adds a texture to the palette */
+    /**
+     * Adds a texture to the palette
+     */
     public Builder addTexture(int grey, ResourceLocation texture) {
       return addTexture(grey, texture, -1);
     }
 
-    /** Builds a color mapping */
+    /**
+     * Builds a color mapping
+     */
     public GreyToSpriteTransformer build() {
       List<SpriteMapping> list = builder.build();
       if (list.size() < 2) {
@@ -209,7 +250,9 @@ public class GreyToSpriteTransformer implements ISpriteTransformer {
       return new GreyToSpriteTransformer(list);
     }
 
-    /** Builds an animated transformer */
+    /**
+     * Builds an animated transformer
+     */
     public AnimatedGreyToSpriteTransformer animated(ResourceLocation metaPath, int frames) {
       List<SpriteMapping> list = builder.build();
       if (list.size() < 2) {
@@ -222,20 +265,29 @@ public class GreyToSpriteTransformer implements ISpriteTransformer {
 
   /* Data classes */
 
-  /** Mapping from greyscale to color */
+  /**
+   * Mapping from greyscale to color
+   */
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   static class SpriteMapping {
+
     @Getter
     private final int grey;
     private final int color;
-    /** Path of the sprite relative to the textures folder */
+    /**
+     * Path of the sprite relative to the textures folder
+     */
     @Nullable
     private final ResourceLocation path;
 
-    /** Loaded image */
+    /**
+     * Loaded image
+     */
     private transient NativeImage image = null;
 
-    /** Gets the image for this mapping */
+    /**
+     * Gets the image for this mapping
+     */
     @Nullable
     private NativeImage getImage() {
       if (path != null && image == null) {
@@ -252,7 +304,9 @@ public class GreyToSpriteTransformer implements ISpriteTransformer {
       return image;
     }
 
-    /** Gets the color for the given X, Y, and frame */
+    /**
+     * Gets the color for the given X, Y, and frame
+     */
     public int getColor(int x, int y, int frame) {
       if (path != null) {
         NativeImage image = getImage();
@@ -278,7 +332,9 @@ public class GreyToSpriteTransformer implements ISpriteTransformer {
       return color;
     }
 
-    /** Gets the average color of this sprite in ARGB format, or the base color if no path */
+    /**
+     * Gets the average color of this sprite in ARGB format, or the base color if no path
+     */
     public int getAverage() {
       if (path != null) {
         NativeImage image = getImage();
@@ -290,9 +346,9 @@ public class GreyToSpriteTransformer implements ISpriteTransformer {
           for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
               int color = image.getPixelRGBA(x, y);
-              red   += NativeImage.getR(color);
+              red += NativeImage.getR(color);
               green += NativeImage.getG(color);
-              blue  += NativeImage.getB(color);
+              blue += NativeImage.getB(color);
               alpha += NativeImage.getA(color);
             }
           }
@@ -308,14 +364,19 @@ public class GreyToSpriteTransformer implements ISpriteTransformer {
       return color;
     }
 
-    /** Checks if these two mappings have the same values */
+    /**
+     * Checks if these two mappings have the same values
+     */
     public boolean isSame(SpriteMapping other) {
       return this == other || (this.color == other.color && Objects.equals(this.path, other.path));
     }
   }
 
-  /** Result from a sprite search for a given color */
+  /**
+   * Result from a sprite search for a given color
+   */
   protected record SpriteRange(@Nullable SpriteMapping before, @Nullable SpriteMapping after) {
+
     /**
      * Gets the color of this range
      */
@@ -341,7 +402,9 @@ public class GreyToSpriteTransformer implements ISpriteTransformer {
         grey);
     }
 
-    /** Gets the average value for the given grey value */
+    /**
+     * Gets the average value for the given grey value
+     */
     public int getAverage(int grey) {
       if (before == null) {
         assert after != null;
@@ -360,10 +423,14 @@ public class GreyToSpriteTransformer implements ISpriteTransformer {
 
   /* Event listeners */
 
-  /** If true, the event listeners are registered */
+  /**
+   * If true, the event listeners are registered
+   */
   private static boolean init = false;
 
-  /** Registers this transformer where relevant */
+  /**
+   * Registers this transformer where relevant
+   */
   public static void init() {
     if (!init) {
       init = true;
@@ -372,7 +439,9 @@ public class GreyToSpriteTransformer implements ISpriteTransformer {
     }
   }
 
-  /** Called before generating to set up the reader */
+  /**
+   * Called before generating to set up the reader
+   */
   private static void textureCallback(@Nullable ExistingFileHelper existingFileHelper, @Nullable ResourceManager manager) {
     if (READER != null) {
       MAPPINGS_TO_CLEAR.forEach(mapping -> mapping.image = null);

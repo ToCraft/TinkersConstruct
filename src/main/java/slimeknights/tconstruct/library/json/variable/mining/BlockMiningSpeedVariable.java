@@ -13,10 +13,12 @@ import javax.annotation.Nullable;
 
 /**
  * Uses a {@link BlockVariable} to fetch a value from the break speed event
- * @param block     Block variable logic
- * @param fallback  Fallback value if the event is null
+ *
+ * @param block    Block variable logic
+ * @param fallback Fallback value if the event is null
  */
 public record BlockMiningSpeedVariable(BlockVariable block, float fallback) implements MiningSpeedVariable {
+
   public static final RecordLoadable<BlockMiningSpeedVariable> LOADER = RecordLoadable.create(
     BlockVariable.LOADER.directField("block_type", BlockMiningSpeedVariable::block),
     FloatLoadable.ANY.requiredField("fallback", BlockMiningSpeedVariable::fallback),

@@ -28,10 +28,12 @@ import java.util.Locale;
  * Logic for slime vines. Have three stages unlike vanilla vines, and only grow down
  */
 public class SlimeVineBlock extends VineBlock {
+
   public static final EnumProperty<VineStage> STAGE = EnumProperty.create("stage", VineStage.class);
 
   @Getter
   private final SlimeType foliage;
+
   public SlimeVineBlock(Properties properties, SlimeType foliage) {
     super(properties);
     this.registerDefaultState(this.defaultBlockState().setValue(STAGE, VineStage.START));
@@ -73,6 +75,7 @@ public class SlimeVineBlock extends VineBlock {
 
   /**
    * Grows the vine one stage
+   *
    * @param worldIn World instance
    * @param random  Random instance
    * @param pos     Pos
@@ -156,8 +159,9 @@ public class SlimeVineBlock extends VineBlock {
 
   /**
    * Checks if the given vines have at least one face
-   * @param state  State to check
-   * @return  True if there is at least one face
+   *
+   * @param state State to check
+   * @return True if there is at least one face
    */
   private static boolean hasSides(BlockState state) {
     for (BooleanProperty booleanproperty : PROPERTY_BY_DIRECTION.values()) {
@@ -170,8 +174,9 @@ public class SlimeVineBlock extends VineBlock {
 
   /**
    * Checks if the given vine has no sides
-   * @param state  State to check
-   * @return  True if there are no sides
+   *
+   * @param state State to check
+   * @return True if there are no sides
    */
   private static boolean hasNoHorizontalSides(BlockState state) {
     for (Direction side : Direction.Plane.HORIZONTAL) {
@@ -184,10 +189,11 @@ public class SlimeVineBlock extends VineBlock {
 
   /**
    * Checks if the given vine is free floating
-   * @param world  World instance
-   * @param pos    Vine position
-   * @param state  Vine state
-   * @return  True if free floating, false if any side is "connected" to a block
+   *
+   * @param world World instance
+   * @param pos   Vine position
+   * @param state Vine state
+   * @return True if free floating, false if any side is "connected" to a block
    */
   private static boolean freeFloating(LevelAccessor world, BlockPos pos, BlockState state) {
     for (Direction side : Direction.Plane.HORIZONTAL) {
@@ -200,10 +206,11 @@ public class SlimeVineBlock extends VineBlock {
 
   /**
    * Gets the updated connections based on neighbors
-   * @param state  State to check
-   * @param world  World
-   * @param pos    Position of vines
-   * @return  Updated connections
+   *
+   * @param state State to check
+   * @param world World
+   * @param pos   Position of vines
+   * @return Updated connections
    */
   private BlockState updateConnections(BlockState state, BlockGetter world, BlockPos pos) {
     BlockPos up = pos.above();
@@ -223,10 +230,11 @@ public class SlimeVineBlock extends VineBlock {
 
   /**
    * Checks if the vine side can stay
-   * @param world  World
-   * @param pos    Pos to check
-   * @param side   Vine side to check
-   * @return  True if it can hold
+   *
+   * @param world World
+   * @param pos   Pos to check
+   * @param side  Vine side to check
+   * @return True if it can hold
    */
   private boolean hasAttachment(BlockGetter world, BlockPos pos, Direction side) {
     // down has no attachments
@@ -247,7 +255,9 @@ public class SlimeVineBlock extends VineBlock {
     return side != Direction.UP && (upState.is(this) && upState.getValue(PROPERTY_BY_DIRECTION.get(side)) && upState.getValue(STAGE) != VineStage.END);
   }
 
-  /** Stages of the vine, cycles through them as it grows */
+  /**
+   * Stages of the vine, cycles through them as it grows
+   */
   public enum VineStage implements StringRepresentable {
     START,
     MIDDLE,

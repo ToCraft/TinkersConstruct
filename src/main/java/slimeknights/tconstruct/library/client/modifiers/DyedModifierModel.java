@@ -19,10 +19,15 @@ import java.util.Collection;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/** Modifier model that copies dye from a key and is breakable */
+/**
+ * Modifier model that copies dye from a key and is breakable
+ */
 @RequiredArgsConstructor
 public class DyedModifierModel implements IBakedModifierModel {
-  /** Constant unbaked model instance, as they are all the same */
+
+  /**
+   * Constant unbaked model instance, as they are all the same
+   */
   public static final IUnbakedModifierModel UNBAKED_INSTANCE = (smallGetter, largeGetter) -> {
     Material smallTexture = smallGetter.apply("");
     Material largeTexture = largeGetter.apply("");
@@ -32,7 +37,9 @@ public class DyedModifierModel implements IBakedModifierModel {
     return null;
   };
 
-  /** Textures to show */
+  /**
+   * Textures to show
+   */
   @Nullable
   private final Material small;
   @Nullable
@@ -51,7 +58,7 @@ public class DyedModifierModel implements IBakedModifierModel {
   }
 
   @Override
-  public void addQuads(IToolStackView tool, ModifierEntry modifier, Function<Material,TextureAtlasSprite> spriteGetter, Transformation transforms, boolean isLarge, int startTintIndex, Consumer<Collection<BakedQuad>> quadConsumer, @Nullable ItemLayerPixels pixels) {
+  public void addQuads(IToolStackView tool, ModifierEntry modifier, Function<Material, TextureAtlasSprite> spriteGetter, Transformation transforms, boolean isLarge, int startTintIndex, Consumer<Collection<BakedQuad>> quadConsumer, @Nullable ItemLayerPixels pixels) {
     Material texture = isLarge ? large : small;
     if (texture != null) {
       IModDataView data = tool.getPersistentData();
@@ -62,6 +69,8 @@ public class DyedModifierModel implements IBakedModifierModel {
     }
   }
 
-  /** Data class to cache a colored texture */
+  /**
+   * Data class to cache a colored texture
+   */
   private record CacheKey(ModifierId modifier, int color) {}
 }

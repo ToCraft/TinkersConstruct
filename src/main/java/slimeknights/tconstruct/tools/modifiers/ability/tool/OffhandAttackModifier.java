@@ -26,6 +26,7 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 public class OffhandAttackModifier extends NoLevelsModifier implements EntityInteractionModifierHook, GeneralInteractionModifierHook, EquipmentChangeModifierHook, VolatileDataModifierHook {
+
   public static final ResourceLocation DUEL_WIELDING = TConstruct.getResource("duel_wielding");
 
   @Override
@@ -50,7 +51,9 @@ public class OffhandAttackModifier extends NoLevelsModifier implements EntityInt
     volatileData.putBoolean(DUEL_WIELDING, true);
   }
 
-  /** If true, we can use the attack */
+  /**
+   * If true, we can use the attack
+   */
   protected boolean canAttack(IToolStackView tool, Player player, InteractionHand hand) {
     return !tool.isBroken() && hand == InteractionHand.OFF_HAND && OffhandCooldownTracker.isAttackReady(player);
   }

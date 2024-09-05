@@ -23,6 +23,7 @@ import java.util.function.Function;
  * Extension of melting recipe to boost results of ores
  */
 public class OreMeltingRecipe extends MeltingRecipe {
+
   public static final RecordLoadable<OreMeltingRecipe> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(), LoadableRecipeSerializer.RECIPE_GROUP, INPUT, OUTPUT, TEMPERATURE, TIME, BYPRODUCTS,
     TinkerLoadables.ORE_RATE_TYPE.requiredField("rate", OreMeltingRecipe::getOreType),
@@ -33,6 +34,7 @@ public class OreMeltingRecipe extends MeltingRecipe {
   @Getter
   private final OreRateType oreType;
   private final List<OreRateType> byproductTypes;
+
   protected OreMeltingRecipe(ResourceLocation id, String group, Ingredient input, FluidStack output, int temperature, int time, List<FluidStack> byproducts, OreRateType oreType, List<OreRateType> byproductTypes) {
     super(id, group, input, output, temperature, time, byproducts);
     this.oreType = oreType;
@@ -50,7 +52,9 @@ public class OreMeltingRecipe extends MeltingRecipe {
     return TinkerSmeltery.oreMeltingSerializer.get();
   }
 
-  /** Scales the byproducts using the given rate */
+  /**
+   * Scales the byproducts using the given rate
+   */
   public static List<FluidStack> scaleByproducts(OreRate rate, List<FluidStack> byproducts, OreRateType rateType, List<OreRateType> byproductRates) {
     // empty means we are coming from network buffer, don't boost it again
     if (byproductRates.isEmpty()) {

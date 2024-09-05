@@ -16,6 +16,7 @@ import slimeknights.tconstruct.smeltery.block.entity.controller.MelterBlockEntit
 import java.util.List;
 
 public class MelterBlockEntityRenderer implements BlockEntityRenderer<MelterBlockEntity> {
+
   public MelterBlockEntityRenderer(Context context) {}
 
   @Override

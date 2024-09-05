@@ -27,19 +27,22 @@ import java.util.function.Consumer;
 @SuppressWarnings({"WeakerAccess", "unused", "UnusedReturnValue"})
 @RequiredArgsConstructor(staticName = "castingRecipe")
 public class ItemCastingRecipeBuilder extends AbstractRecipeBuilder<ItemCastingRecipeBuilder> {
+
   private final ItemOutput result;
   private final TypeAwareRecipeSerializer<? extends ItemCastingRecipe> recipeSerializer;
   private Ingredient cast = Ingredient.EMPTY;
   private FluidIngredient fluid = FluidIngredient.EMPTY;
-  @Setter @Accessors(chain = true)
+  @Setter
+  @Accessors(chain = true)
   private int coolingTime = -1;
   private boolean consumed = false;
   private boolean switchSlots = false;
 
   /**
    * Creates a new casting basin recipe
-   * @param result  Recipe result
-   * @return  Builder instance
+   *
+   * @param result Recipe result
+   * @return Builder instance
    */
   public static ItemCastingRecipeBuilder basinRecipe(ItemOutput result) {
     return castingRecipe(result, TinkerSmeltery.basinRecipeSerializer.get());
@@ -47,8 +50,9 @@ public class ItemCastingRecipeBuilder extends AbstractRecipeBuilder<ItemCastingR
 
   /**
    * Creates a new casting basin recipe
-   * @param result  Recipe result
-   * @return  Builder instance
+   *
+   * @param result Recipe result
+   * @return Builder instance
    */
   public static ItemCastingRecipeBuilder retexturedBasinRecipe(ItemOutput result) {
     return castingRecipe(result, TinkerSmeltery.retexturedBasinRecipeSerializer.get());
@@ -56,8 +60,9 @@ public class ItemCastingRecipeBuilder extends AbstractRecipeBuilder<ItemCastingR
 
   /**
    * Creates a new casting basin recipe
-   * @param resultIn  Recipe result
-   * @return  Builder instance
+   *
+   * @param resultIn Recipe result
+   * @return Builder instance
    */
   public static ItemCastingRecipeBuilder basinRecipe(ItemLike resultIn) {
     return basinRecipe(ItemOutput.fromItem(resultIn));
@@ -65,8 +70,9 @@ public class ItemCastingRecipeBuilder extends AbstractRecipeBuilder<ItemCastingR
 
   /**
    * Creates a new casting basin recipe
-   * @param result  Recipe result
-   * @return  Builder instance
+   *
+   * @param result Recipe result
+   * @return Builder instance
    */
   public static ItemCastingRecipeBuilder basinRecipe(TagKey<Item> result) {
     return basinRecipe(ItemOutput.fromTag(result));
@@ -74,8 +80,9 @@ public class ItemCastingRecipeBuilder extends AbstractRecipeBuilder<ItemCastingR
 
   /**
    * Creates a new casting table recipe
-   * @param resultIn  Recipe result
-   * @return  Builder instance
+   *
+   * @param resultIn Recipe result
+   * @return Builder instance
    */
   public static ItemCastingRecipeBuilder tableRecipe(ItemOutput resultIn) {
     return castingRecipe(resultIn, TinkerSmeltery.tableRecipeSerializer.get());
@@ -83,8 +90,9 @@ public class ItemCastingRecipeBuilder extends AbstractRecipeBuilder<ItemCastingR
 
   /**
    * Creates a new casting table recipe
-   * @param resultIn  Recipe result
-   * @return  Builder instance
+   *
+   * @param resultIn Recipe result
+   * @return Builder instance
    */
   public static ItemCastingRecipeBuilder retexturedTableRecipe(ItemOutput resultIn) {
     return castingRecipe(resultIn, TinkerSmeltery.retexturedTableRecipeSerializer.get());
@@ -92,8 +100,9 @@ public class ItemCastingRecipeBuilder extends AbstractRecipeBuilder<ItemCastingR
 
   /**
    * Creates a new casting table recipe
-   * @param resultIn  Recipe result
-   * @return  Builder instance
+   *
+   * @param resultIn Recipe result
+   * @return Builder instance
    */
   public static ItemCastingRecipeBuilder tableRecipe(ItemLike resultIn) {
     return tableRecipe(ItemOutput.fromItem(resultIn));
@@ -101,8 +110,9 @@ public class ItemCastingRecipeBuilder extends AbstractRecipeBuilder<ItemCastingR
 
   /**
    * Creates a new casting table recipe
-   * @param result  Recipe result
-   * @return  Builder instance
+   *
+   * @param result Recipe result
+   * @return Builder instance
    */
   public static ItemCastingRecipeBuilder tableRecipe(TagKey<Item> result) {
     return tableRecipe(ItemOutput.fromTag(result));
@@ -113,9 +123,10 @@ public class ItemCastingRecipeBuilder extends AbstractRecipeBuilder<ItemCastingR
 
   /**
    * Sets the fluid for this recipe
-   * @param fluid   Fluid instance
-   * @param amount  amount of fluid
-   * @return  Builder instance
+   *
+   * @param fluid  Fluid instance
+   * @param amount amount of fluid
+   * @return Builder instance
    */
   public ItemCastingRecipeBuilder setFluid(Fluid fluid, int amount) {
     return this.setFluid(FluidIngredient.of(fluid, amount));
@@ -123,9 +134,10 @@ public class ItemCastingRecipeBuilder extends AbstractRecipeBuilder<ItemCastingR
 
   /**
    * Sets the fluid for this recipe
-   * @param tagIn   Tag<Fluid> instance
-   * @param amount  amount of fluid
-   * @return  Builder instance
+   *
+   * @param tagIn  Tag<Fluid> instance
+   * @param amount amount of fluid
+   * @return Builder instance
    */
   public ItemCastingRecipeBuilder setFluid(TagKey<Fluid> tagIn, int amount) {
     return this.setFluid(FluidIngredient.of(tagIn, amount));
@@ -133,8 +145,9 @@ public class ItemCastingRecipeBuilder extends AbstractRecipeBuilder<ItemCastingR
 
   /**
    * Sets the fluid ingredient
-   * @param fluid  Fluid ingredient instance
-   * @return  Builder instance
+   *
+   * @param fluid Fluid ingredient instance
+   * @return Builder instance
    */
   public ItemCastingRecipeBuilder setFluid(FluidIngredient fluid) {
     this.fluid = fluid;
@@ -143,8 +156,9 @@ public class ItemCastingRecipeBuilder extends AbstractRecipeBuilder<ItemCastingR
 
   /**
    * Sets the recipe cooling time
-   * @param temperature  Recipe temperature
-   * @param amount       Recipe amount
+   *
+   * @param temperature Recipe temperature
+   * @param amount      Recipe amount
    */
   public ItemCastingRecipeBuilder setCoolingTime(int temperature, int amount) {
     return setCoolingTime(ICastingRecipe.calcCoolingTime(temperature, amount));
@@ -152,8 +166,9 @@ public class ItemCastingRecipeBuilder extends AbstractRecipeBuilder<ItemCastingR
 
   /**
    * Sets the fluid for this recipe, and cooling time if unset.
-   * @param fluidStack  Fluid input
-   * @return  Builder instance
+   *
+   * @param fluidStack Fluid input
+   * @return Builder instance
    */
   public ItemCastingRecipeBuilder setFluidAndTime(FluidStack fluidStack) {
     this.fluid = FluidIngredient.of(fluidStack);
@@ -165,9 +180,10 @@ public class ItemCastingRecipeBuilder extends AbstractRecipeBuilder<ItemCastingR
 
   /**
    * Sets the fluid for this recipe, and cooling time
-   * @param fluid      Fluid object instance
-   * @param forgeTag   If true, uses the forge tag
-   * @param amount     amount of fluid
+   *
+   * @param fluid    Fluid object instance
+   * @param forgeTag If true, uses the forge tag
+   * @param amount   amount of fluid
    */
   public ItemCastingRecipeBuilder setFluidAndTime(FluidObject<?> fluid, boolean forgeTag, int amount) {
     setFluid(fluid.ingredient(amount, forgeTag));
@@ -177,8 +193,9 @@ public class ItemCastingRecipeBuilder extends AbstractRecipeBuilder<ItemCastingR
 
   /**
    * Sets the fluid for this recipe using the forge tag, and cooling time
-   * @param fluid    Fluid object instance
-   * @param amount   amount of fluid
+   *
+   * @param fluid  Fluid object instance
+   * @param amount amount of fluid
    */
   public ItemCastingRecipeBuilder setFluidAndTime(FluidObject<?> fluid, int amount) {
     return setFluidAndTime(fluid, false, amount);
@@ -188,9 +205,10 @@ public class ItemCastingRecipeBuilder extends AbstractRecipeBuilder<ItemCastingR
 
   /**
    * Sets the cast from a tag
-   * @param tagIn     Cast tag
-   * @param consumed  If true, the cast is consumed
-   * @return  Builder instance
+   *
+   * @param tagIn    Cast tag
+   * @param consumed If true, the cast is consumed
+   * @return Builder instance
    */
   public ItemCastingRecipeBuilder setCast(TagKey<Item> tagIn, boolean consumed) {
     return this.setCast(Ingredient.of(tagIn), consumed);
@@ -198,9 +216,10 @@ public class ItemCastingRecipeBuilder extends AbstractRecipeBuilder<ItemCastingR
 
   /**
    * Sets the cast from a tag
-   * @param itemIn    Cast item
-   * @param consumed  If true, the cast is consumed
-   * @return  Builder instance
+   *
+   * @param itemIn   Cast item
+   * @param consumed If true, the cast is consumed
+   * @return Builder instance
    */
   public ItemCastingRecipeBuilder setCast(ItemLike itemIn, boolean consumed) {
     return this.setCast(Ingredient.of(itemIn), consumed);
@@ -208,9 +227,10 @@ public class ItemCastingRecipeBuilder extends AbstractRecipeBuilder<ItemCastingR
 
   /**
    * Sets the cast from an ingredient
-   * @param ingredient  Cast ingredient
-   * @param consumed    If true, the cast is consumed
-   * @return  Builder instance
+   *
+   * @param ingredient Cast ingredient
+   * @param consumed   If true, the cast is consumed
+   * @return Builder instance
    */
   public ItemCastingRecipeBuilder setCast(Ingredient ingredient, boolean consumed) {
     this.cast = ingredient;
@@ -221,7 +241,8 @@ public class ItemCastingRecipeBuilder extends AbstractRecipeBuilder<ItemCastingR
   /**
    * Set output of recipe to be put into the input slot.
    * Mostly used for cast creation
-   * @return  Builder instance
+   *
+   * @return Builder instance
    */
   public ItemCastingRecipeBuilder setSwitchSlots() {
     this.switchSlots = true;
@@ -230,11 +251,12 @@ public class ItemCastingRecipeBuilder extends AbstractRecipeBuilder<ItemCastingR
 
   /**
    * Builds a recipe using the registry name as the recipe name
-   * @param consumerIn  Recipe consumer
+   *
+   * @param consumerIn Recipe consumer
    */
   @Override
   public void save(Consumer<FinishedRecipe> consumerIn) {
-    this.save(consumerIn, Registry.ITEM.getKey(this.result.get().getItem()));
+    this.save(consumerIn, ForgeRegistries.ITEMS.getKey(this.result.get().getItem()));
   }
 
   @Override

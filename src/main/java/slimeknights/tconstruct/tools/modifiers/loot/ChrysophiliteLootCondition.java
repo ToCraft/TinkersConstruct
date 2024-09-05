@@ -15,8 +15,11 @@ import slimeknights.tconstruct.tools.modifiers.traits.skull.ChrysophiliteModifie
 
 import java.util.Set;
 
-/** Condition to check if the enemy has the chrysophilite modifier */
+/**
+ * Condition to check if the enemy has the chrysophilite modifier
+ */
 public class ChrysophiliteLootCondition implements LootItemCondition {
+
   public static final ChrysophiliteSerializer SERIALIZER = new ChrysophiliteSerializer();
   public static final ChrysophiliteLootCondition INSTANCE = new ChrysophiliteLootCondition();
 
@@ -37,8 +40,11 @@ public class ChrysophiliteLootCondition implements LootItemCondition {
     return TinkerModifiers.chrysophiliteLootCondition.get();
   }
 
-  /** Loot serializer instance */
+  /**
+   * Loot serializer instance
+   */
   private static class ChrysophiliteSerializer implements Serializer<ChrysophiliteLootCondition> {
+
     @Override
     public void serialize(JsonObject json, ChrysophiliteLootCondition loot, JsonSerializationContext context) {}
 

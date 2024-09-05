@@ -20,6 +20,7 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.ModelFile.UncheckedModelFile;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.registration.object.BuildingBlockObject;
 import slimeknights.mantle.registration.object.FenceBuildingBlockObject;
 import slimeknights.mantle.registration.object.WoodBlockObject;
@@ -33,6 +34,7 @@ import static slimeknights.mantle.util.IdExtender.INSTANCE;
 
 @SuppressWarnings({"UnusedReturnValue", "SameParameterValue"})
 public class TinkerBlockStateProvider extends BlockStateProvider {
+
   private final UncheckedModelFile GENERATED = new UncheckedModelFile("item/generated");
 
   public TinkerBlockStateProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
@@ -48,8 +50,8 @@ public class TinkerBlockStateProvider extends BlockStateProvider {
     addWood(TinkerWorld.bloodshroom, true);
     addWood(TinkerWorld.enderbark, true);
     basicBlock(TinkerWorld.enderbarkRoots.get(), models().withExistingParent("block/wood/enderbark/roots/empty", "block/mangrove_roots")
-                                                         .texture("side", blockTexture("wood/enderbark/roots"))
-                                                         .texture("top", blockTexture("wood/enderbark/roots_top")));
+      .texture("side", blockTexture("wood/enderbark/roots"))
+      .texture("top", blockTexture("wood/enderbark/roots_top")));
     TinkerWorld.slimyEnderbarkRoots.forEach((type, block) -> {
       String name = type.getSerializedName();
       cubeColumn(block, "block/wood/enderbark/roots/" + name, blockTexture("wood/enderbark/roots/" + name), blockTexture("wood/enderbark/roots/" + name + "_top"));
@@ -59,45 +61,55 @@ public class TinkerBlockStateProvider extends BlockStateProvider {
 
   /* Helpers */
 
-  /** Creates a texture in the block folder */
+  /**
+   * Creates a texture in the block folder
+   */
   protected ResourceLocation blockTexture(String path) {
     return new ResourceLocation(TConstruct.MOD_ID, ModelProvider.BLOCK_FOLDER + "/" + path);
   }
 
-  /** Creates a texture in the block folder */
+  /**
+   * Creates a texture in the block folder
+   */
   protected ResourceLocation itemTexture(String path) {
     return new ResourceLocation(TConstruct.MOD_ID, ModelProvider.ITEM_FOLDER + "/" + path);
   }
 
-  /** Creates all models for a building block object */
+  /**
+   * Creates all models for a building block object
+   */
   protected void addBuildingBlock(BuildingBlockObject block, String folder, String name, ResourceLocation texture) {
     ModelFile blockModel = basicBlock(block.get(), folder + name, texture);
     slab(block.getSlab(), folder + "slab", blockModel, texture, texture, texture);
     stairs(block.getStairs(), folder + "stairs", texture, texture, texture);
   }
 
-  /** Creates all models for a building block object */
+  /**
+   * Creates all models for a building block object
+   */
   protected void addFenceBuildingBlock(FenceBuildingBlockObject block, String folder, String name, ResourceLocation texture) {
     addBuildingBlock(block, folder, name, texture);
     fence(block.getFence(), folder + "fence/", texture);
   }
 
-  /** Creates all models for the given wood block object */
+  /**
+   * Creates all models for the given wood block object
+   */
   protected void addWood(WoodBlockObject wood, boolean trapdoorOrientable) {
     String plankPath = wood.getId().getPath();
     String name = plankPath.substring(0, plankPath.length() - "_planks".length());
     String folder = "block/wood/" + name + "/"; // forge model providers do not prefix with block if you have / in the path
     // helper to get textures for wood, since we put them in a nice folder
-    Function<String,ResourceLocation> texture = suffix -> blockTexture("wood/" + name + "/" + suffix);
+    Function<String, ResourceLocation> texture = suffix -> blockTexture("wood/" + name + "/" + suffix);
     ResourceLocation planks = texture.apply("planks");
 
     // planks and fences
     addFenceBuildingBlock(wood, folder, "planks", planks);
     fenceGate(wood.getFenceGate(), folder + "fence/gate", planks);
     // logs
-    axisBlock(wood.getLog(),          folder + "log/log",           texture.apply("log"), true);
-    axisBlock(wood.getStrippedLog(),  folder + "log/stripped",      texture.apply("stripped_log"), true);
-    axisBlock(wood.getWood(),         folder + "log/wood",          texture.apply("log"), false);
+    axisBlock(wood.getLog(), folder + "log/log", texture.apply("log"), true);
+    axisBlock(wood.getStrippedLog(), folder + "log/stripped", texture.apply("stripped_log"), true);
+    axisBlock(wood.getWood(), folder + "log/wood", texture.apply("log"), false);
     axisBlock(wood.getStrippedWood(), folder + "log/wood_stripped", texture.apply("stripped_log"), false);
     // doors
     door(wood.getDoor(), folder, texture.apply("door_bottom"), texture.apply("door_top"));
@@ -114,42 +126,55 @@ public class TinkerBlockStateProvider extends BlockStateProvider {
 
   /* forge seems to think all block models should be in the root folder. That's dumb, so we get to copy and paste their builders when its not practical to adapt */
 
-  /** Gets the resource location key for a block */
+  /**
+   * Gets the resource location key for a block
+   */
   @SuppressWarnings("deprecation")
   private ResourceLocation key(Block block) {
-    return Registry.BLOCK.getKey(block);
+    return ForgeRegistries.BLOCKS.getKey(block);
   }
 
-  /** Gets the resource path for a block */
+  /**
+   * Gets the resource path for a block
+   */
   private String name(Block block) {
     return key(block).getPath();
   }
 
-  /** Gets the resource location key for a block */
+  /**
+   * Gets the resource location key for a block
+   */
   @SuppressWarnings("deprecation")
   private ResourceLocation itemKey(ItemLike item) {
-    return Registry.ITEM.getKey(item.asItem());
+    return ForgeRegistries.ITEMS.getKey(item.asItem());
   }
 
-  /** Gets the resource location key for a block */
+  /**
+   * Gets the resource location key for a block
+   */
   private String itemName(ItemLike item) {
     return itemKey(item).getPath();
   }
 
-  /** Creates a model for a generated item with 1 layer */
+  /**
+   * Creates a model for a generated item with 1 layer
+   */
   protected ItemModelBuilder basicItem(ItemLike item, String texturePrefix) {
     return basicItem(itemKey(item), texturePrefix);
   }
 
-  /** Creates a model for a generated item with 1 layer */
+  /**
+   * Creates a model for a generated item with 1 layer
+   */
   protected ItemModelBuilder basicItem(ResourceLocation item, String texturePrefix) {
     return itemModels().getBuilder(item.toString()).parent(GENERATED).texture("layer0", itemTexture(texturePrefix + item.getPath()));
   }
 
   /**
    * Creates a model for a block with a simple model
-   * @param block   Block
-   * @param model   Model to use for the block and item
+   *
+   * @param block Block
+   * @param model Model to use for the block and item
    * @return model file for the basic block
    */
   public ModelFile basicBlock(Block block, ModelFile model) {
@@ -160,9 +185,10 @@ public class TinkerBlockStateProvider extends BlockStateProvider {
 
   /**
    * Creates a model for a cube with the same texture on all sides and an item form
-   * @param block     Block
-   * @param location  Location for the block model
-   * @param texture   Texture for all sides
+   *
+   * @param block    Block
+   * @param location Location for the block model
+   * @param texture  Texture for all sides
    * @return model file for the basic block
    */
   public ModelFile basicBlock(Block block, String location, ResourceLocation texture) {
@@ -171,10 +197,11 @@ public class TinkerBlockStateProvider extends BlockStateProvider {
 
   /**
    * Creates a model for a cube with the same texture on all sides and an item form
-   * @param block     Block
-   * @param location  Location for the block model
-   * @param side      Texture for sides
-   * @param top       Texture for top
+   *
+   * @param block    Block
+   * @param location Location for the block model
+   * @param side     Texture for sides
+   * @param top      Texture for top
    * @return model file for the basic block
    */
   public ModelFile cubeColumn(Block block, String location, ResourceLocation side, ResourceLocation top) {
@@ -183,28 +210,30 @@ public class TinkerBlockStateProvider extends BlockStateProvider {
 
   /**
    * Adds a block with axis textures
-   * @param block        Block to add, expected to be instance of RotatedPillarBlock
-   * @param location     Location for the model
-   * @param texture      Side texture
-   * @param horizontal   If true, makes a top texture by suffixing the side texture and includes a horizontal model.
-   *                     If false, uses the side for the top
+   *
+   * @param block      Block to add, expected to be instance of RotatedPillarBlock
+   * @param location   Location for the model
+   * @param texture    Side texture
+   * @param horizontal If true, makes a top texture by suffixing the side texture and includes a horizontal model.
+   *                   If false, uses the side for the top
    */
   public void axisBlock(Block block, String location, ResourceLocation texture, boolean horizontal) {
     ResourceLocation endTexture = horizontal ? INSTANCE.suffix(texture, "_top") : texture;
     ModelFile model = models().cubeColumn(TConstruct.resourceString(location), texture, endTexture);
-    axisBlock((RotatedPillarBlock)block, model,
-              horizontal ? models().cubeColumnHorizontal(TConstruct.resourceString(location + "_horizontal"), texture, endTexture) : model);
+    axisBlock((RotatedPillarBlock) block, model,
+      horizontal ? models().cubeColumnHorizontal(TConstruct.resourceString(location + "_horizontal"), texture, endTexture) : model);
     simpleBlockItem(block, model);
   }
 
   /**
    * Creates block and item model for a slab
-   * @param block           Slab block
-   * @param location        Location for slab models, top slab will suffix top
-   * @param doubleModel     Model for the double slab
-   * @param sideTexture     Side texture
-   * @param bottomTexture   Bottom texture
-   * @param topTexture      Top texture
+   *
+   * @param block         Slab block
+   * @param location      Location for slab models, top slab will suffix top
+   * @param doubleModel   Model for the double slab
+   * @param sideTexture   Side texture
+   * @param bottomTexture Bottom texture
+   * @param topTexture    Top texture
    */
   public void slab(SlabBlock block, String location, ModelFile doubleModel, ResourceLocation sideTexture, ResourceLocation bottomTexture, ResourceLocation topTexture) {
     ModelFile slab = models().slab(location, sideTexture, bottomTexture, topTexture);
@@ -217,11 +246,12 @@ public class TinkerBlockStateProvider extends BlockStateProvider {
 
   /**
    * Creates block and item model for stairs
-   * @param block           Stairs block
-   * @param location        Location for stair models, inner and outer will suffix
-   * @param sideTexture     Side texture
-   * @param bottomTexture   Bottom texture
-   * @param topTexture      Top texture
+   *
+   * @param block         Stairs block
+   * @param location      Location for stair models, inner and outer will suffix
+   * @param sideTexture   Side texture
+   * @param bottomTexture Bottom texture
+   * @param topTexture    Top texture
    */
   public void stairs(StairBlock block, String location, ResourceLocation sideTexture, ResourceLocation bottomTexture, ResourceLocation topTexture) {
     ModelFile stairs = models().stairs(location, sideTexture, bottomTexture, topTexture);
@@ -231,11 +261,13 @@ public class TinkerBlockStateProvider extends BlockStateProvider {
       models().stairsOuter(location + "_outer", sideTexture, bottomTexture, topTexture));
     simpleBlockItem(block, stairs);
   }
+
   /**
    * Adds a fence block with an item model
-   * @param block    Fence block
-   * @param prefix   Prefix for block files
-   * @param texture  Fence texture
+   *
+   * @param block   Fence block
+   * @param prefix  Prefix for block files
+   * @param texture Fence texture
    */
   public void fence(FenceBlock block, String prefix, ResourceLocation texture) {
     fourWayBlock(
@@ -257,30 +289,32 @@ public class TinkerBlockStateProvider extends BlockStateProvider {
 
   /**
    * Adds a door block without an item model
-   * @param block           Door block
-   * @param prefix          Prefix for model files
-   * @param bottomTexture   Bottom door texture
-   * @param topTexture      Top door texture
+   *
+   * @param block         Door block
+   * @param prefix        Prefix for model files
+   * @param bottomTexture Bottom door texture
+   * @param topTexture    Top door texture
    */
   public void door(DoorBlock block, String prefix, ResourceLocation bottomTexture, ResourceLocation topTexture) {
     doorBlock(
       block,
-      models().doorBottomLeft(     prefix + "door/bottom_left",       bottomTexture, topTexture),
-      models().doorBottomLeftOpen( prefix + "door/bottom_left_open",  bottomTexture, topTexture),
-      models().doorBottomRight(    prefix + "door/bottom_right",      bottomTexture, topTexture),
+      models().doorBottomLeft(prefix + "door/bottom_left", bottomTexture, topTexture),
+      models().doorBottomLeftOpen(prefix + "door/bottom_left_open", bottomTexture, topTexture),
+      models().doorBottomRight(prefix + "door/bottom_right", bottomTexture, topTexture),
       models().doorBottomRightOpen(prefix + "door/bottom_right_open", bottomTexture, topTexture),
-      models().doorTopLeft(        prefix + "door/top_left",          bottomTexture, topTexture),
-      models().doorTopLeftOpen(    prefix + "door/top_left_open",     bottomTexture, topTexture),
-      models().doorTopRight(       prefix + "door/top_right",         bottomTexture, topTexture),
-      models().doorTopRightOpen(   prefix + "door/top_right_open",    bottomTexture, topTexture));
+      models().doorTopLeft(prefix + "door/top_left", bottomTexture, topTexture),
+      models().doorTopLeftOpen(prefix + "door/top_left_open", bottomTexture, topTexture),
+      models().doorTopRight(prefix + "door/top_right", bottomTexture, topTexture),
+      models().doorTopRightOpen(prefix + "door/top_right_open", bottomTexture, topTexture));
   }
 
   /**
    * Adds a trapdoor block with an item model
-   * @param block    Trapdoor block
-   * @param prefix   Model location prefix
-   * @param texture  Trapdoor texture
-   * @param orientable  If true, its an oriented model.
+   *
+   * @param block      Trapdoor block
+   * @param prefix     Model location prefix
+   * @param texture    Trapdoor texture
+   * @param orientable If true, its an oriented model.
    */
   public void trapdoor(TrapDoorBlock block, String prefix, ResourceLocation texture, boolean orientable) {
     ModelFile bottom = orientable ? models().trapdoorOrientableBottom(prefix + "bottom", texture) : models().trapdoorBottom(prefix + "bottom", texture);
@@ -294,9 +328,10 @@ public class TinkerBlockStateProvider extends BlockStateProvider {
 
   /**
    * Adds a pressure plate with item model
-   * @param block     Pressure plate block
-   * @param location  Location for the model, pressed will be the location suffixed with down
-   * @param texture   Texture for the plate
+   *
+   * @param block    Pressure plate block
+   * @param location Location for the model, pressed will be the location suffixed with down
+   * @param texture  Texture for the plate
    */
   public void pressurePlate(PressurePlateBlock block, String location, ResourceLocation texture) {
     ModelFile pressurePlate = models().pressurePlate(location, texture);
@@ -306,9 +341,10 @@ public class TinkerBlockStateProvider extends BlockStateProvider {
 
   /**
    * Adds a button with item model
-   * @param block     Button block
-   * @param location  Location for the model, pressed will be the location suffixed with down
-   * @param texture   Texture for the button
+   *
+   * @param block    Button block
+   * @param location Location for the model, pressed will be the location suffixed with down
+   * @param texture  Texture for the button
    */
   public void button(ButtonBlock block, String location, ResourceLocation texture) {
     ModelFile button = models().button(location, texture);

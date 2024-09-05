@@ -14,7 +14,8 @@ import java.util.Map;
 @Getter
 @AllArgsConstructor
 public class UpdateMaterialTraitsPacket implements IThreadsafePacket {
-  protected final Map<MaterialId,MaterialTraits> materialToTraits;
+
+  protected final Map<MaterialId, MaterialTraits> materialToTraits;
 
   public UpdateMaterialTraitsPacket(FriendlyByteBuf buffer) {
     int materialCount = buffer.readInt();

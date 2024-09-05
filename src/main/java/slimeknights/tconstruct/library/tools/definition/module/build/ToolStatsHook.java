@@ -11,15 +11,20 @@ import java.util.Collection;
  * Overall, its what Mojang really should have done for many attributes.
  */
 public interface ToolStatsHook {
+
   /**
    * Adds raw stats to the tool. Called whenever tool stats are rebuilt. If you wish to do conditional stats, use a trait.
-   * @param context   Context about the tool beilt. Partial view of {@link IToolStackView} as the tool is not fully built. Note this hook runs after volatile data builds
-   * @param builder   Tool stat builder
+   *
+   * @param context Context about the tool beilt. Partial view of {@link IToolStackView} as the tool is not fully built. Note this hook runs after volatile data builds
+   * @param builder Tool stat builder
    */
   void addToolStats(IToolContext context, ModifierStatsBuilder builder);
 
-  /** Merger that runs all hooks */
+  /**
+   * Merger that runs all hooks
+   */
   record AllMerger(Collection<ToolStatsHook> modules) implements ToolStatsHook {
+
     @Override
     public void addToolStats(IToolContext context, ModifierStatsBuilder builder) {
       for (ToolStatsHook module : modules) {

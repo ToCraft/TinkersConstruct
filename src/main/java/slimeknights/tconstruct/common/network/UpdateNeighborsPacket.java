@@ -16,6 +16,7 @@ import slimeknights.mantle.network.packet.IThreadsafePacket;
  */
 @RequiredArgsConstructor
 public class UpdateNeighborsPacket implements IThreadsafePacket {
+
   private final BlockState state;
   private final BlockPos pos;
 
@@ -36,6 +37,7 @@ public class UpdateNeighborsPacket implements IThreadsafePacket {
   }
 
   private static class HandleClient {
+
     private static void handle(UpdateNeighborsPacket packet) {
       Level level = Minecraft.getInstance().level;
       if (level != null) {

@@ -20,7 +20,9 @@ import slimeknights.tconstruct.common.TinkerTags;
  * Slimy variant of nylium, mostly changes the way it bonemeals
  */
 public class SlimeNyliumBlock extends Block implements BonemealableBlock {
+
   private final FoliageType foliageType;
+
   public SlimeNyliumBlock(Properties properties, FoliageType foliageType) {
     super(properties);
     this.foliageType = foliageType;

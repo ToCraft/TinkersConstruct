@@ -11,6 +11,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -59,56 +61,93 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/** Modifier registry and JSON loader */
+/**
+ * Modifier registry and JSON loader
+ */
 @Log4j2
 public class ModifierManager extends SimpleJsonResourceReloadListener {
-  /** Location of dynamic modifiers */
+
+  /**
+   * Location of dynamic modifiers
+   */
   public static final String FOLDER = "tinkering/modifiers";
-  /** Location of modifier tags */
+  /**
+   * Location of modifier tags
+   */
   public static final String TAG_FOLDER = "tinkering/tags/modifiers";
 
   public static final ResourceLocation ENCHANTMENT_MAP = TConstruct.getResource("tinkering/enchantments_to_modifiers.json");
-  /** Registry key to make tag keys */
+  /**
+   * Registry key to make tag keys
+   */
   public static final ResourceKey<? extends Registry<Modifier>> REGISTRY_KEY = ResourceKey.createRegistryKey(TConstruct.getResource("modifiers"));
 
-  /** GSON instance for loading dynamic modifiers */
+  /**
+   * GSON instance for loading dynamic modifiers
+   */
   public static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().disableHtmlEscaping().create();
 
-  /** ID of the default modifier */
+  /**
+   * ID of the default modifier
+   */
   public static final ModifierId EMPTY = new ModifierId(TConstruct.MOD_ID, "empty");
 
-  /** Singleton instance of the modifier manager */
+  /**
+   * Singleton instance of the modifier manager
+   */
   public static final ModifierManager INSTANCE = new ModifierManager();
 
-  /** Default modifier to use when a modifier is not found */
+  /**
+   * Default modifier to use when a modifier is not found
+   */
   @Getter
   private final Modifier defaultValue;
 
-  /** If true, static modifiers have been registered, so static modifiers can safely be fetched */
+  /**
+   * If true, static modifiers have been registered, so static modifiers can safely be fetched
+   */
   @Getter
   private boolean modifiersRegistered = false;
-  /** All modifiers registered directly with the manager */
+  /**
+   * All modifiers registered directly with the manager
+   */
   @VisibleForTesting
-  final Map<ModifierId,Modifier> staticModifiers = new HashMap<>();
-  /** Map of all modifier types that are expected to load in datapacks */
-  private final Map<ModifierId,Class<?>> expectedDynamicModifiers = new HashMap<>();
-  /** @deprecated use {@link slimeknights.tconstruct.library.modifiers.modules.ModifierModule#LOADER} */
+  final Map<ModifierId, Modifier> staticModifiers = new HashMap<>();
+  /**
+   * Map of all modifier types that are expected to load in datapacks
+   */
+  private final Map<ModifierId, Class<?>> expectedDynamicModifiers = new HashMap<>();
+  /**
+   * @deprecated use {@link slimeknights.tconstruct.library.modifiers.modules.ModifierModule#LOADER}
+   */
   @Deprecated
   public static final GenericLoaderRegistry<Modifier> MODIFIER_LOADERS = new GenericLoaderRegistry<>("Modifier", false);
 
-  /** Modifiers loaded from JSON */
-  private Map<ModifierId,Modifier> dynamicModifiers = Collections.emptyMap();
-  /** Modifier tags loaded from JSON */
-  private Map<TagKey<Modifier>,List<Modifier>> tags = Collections.emptyMap();
-  /** Map from modifier to tags on the modifier */
-  private Map<ModifierId,Set<TagKey<Modifier>>> reverseTags = Collections.emptyMap();
+  /**
+   * Modifiers loaded from JSON
+   */
+  private Map<ModifierId, Modifier> dynamicModifiers = Collections.emptyMap();
+  /**
+   * Modifier tags loaded from JSON
+   */
+  private Map<TagKey<Modifier>, List<Modifier>> tags = Collections.emptyMap();
+  /**
+   * Map from modifier to tags on the modifier
+   */
+  private Map<ModifierId, Set<TagKey<Modifier>>> reverseTags = Collections.emptyMap();
 
-  /** List of tag to modifier mappings to try */
+  /**
+   * List of tag to modifier mappings to try
+   */
   private Map<TagKey<Enchantment>, Modifier> enchantmentTagMap = Collections.emptyMap();
-  /** Mapping from enchantment to modifiers, for conversions */
-  private Map<Enchantment,Modifier> enchantmentMap = Collections.emptyMap();
+  /**
+   * Mapping from enchantment to modifiers, for conversions
+   */
+  private Map<Enchantment, Modifier> enchantmentMap = Collections.emptyMap();
 
-  /** If true, dynamic modifiers have been loaded from datapacks, so its safe to fetch dynamic modifiers */
+  /**
+   * If true, dynamic modifiers have been loaded from datapacks, so its safe to fetch dynamic modifiers
+   */
   @Getter
   boolean dynamicModifiersLoaded = false;
   private IContext conditionContext = IContext.EMPTY;
@@ -121,38 +160,44 @@ public class ModifierManager extends SimpleJsonResourceReloadListener {
     staticModifiers.put(EMPTY, defaultValue);
   }
 
-  /** For internal use only */
+  /**
+   * For internal use only
+   */
   public void init() {
     FMLJavaModLoadingContext.get().getModEventBus().addListener(EventPriority.NORMAL, false, FMLCommonSetupEvent.class, e -> e.enqueueWork(this::fireRegistryEvent));
     MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, false, AddReloadListenerEvent.class, this::addDataPackListeners);
     MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, false, OnDatapackSyncEvent.class, e -> JsonUtils.syncPackets(e, new UpdateModifiersPacket(this.dynamicModifiers, this.tags, this.enchantmentMap, this.enchantmentTagMap)));
   }
 
-  /** Fires the modifier registry event */
+  /**
+   * Fires the modifier registry event
+   */
   private void fireRegistryEvent() {
     ModLoader.get().runEventGenerator(ModifierRegistrationEvent::new);
     modifiersRegistered = true;
   }
 
-  /** Adds the managers as datapack listeners */
+  /**
+   * Adds the managers as datapack listeners
+   */
   private void addDataPackListeners(final AddReloadListenerEvent event) {
     event.addListener(this);
     conditionContext = event.getConditionContext();
   }
 
   @Override
-  protected void apply(Map<ResourceLocation,JsonElement> splashList, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
+  protected void apply(Map<ResourceLocation, JsonElement> splashList, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
     long time = System.nanoTime();
 
     // load modifiers from JSON
-    Map<ModifierId,ModifierId> redirects = new HashMap<>();
+    Map<ModifierId, ModifierId> redirects = new HashMap<>();
     this.dynamicModifiers = splashList.entrySet().stream()
-                                      .map(entry -> loadModifier(entry.getKey(), entry.getValue().getAsJsonObject(), redirects))
-                                      .filter(Objects::nonNull)
-                                      .collect(Collectors.toMap(Modifier::getId, mod -> mod));
+      .map(entry -> loadModifier(entry.getKey(), entry.getValue().getAsJsonObject(), redirects))
+      .filter(Objects::nonNull)
+      .collect(Collectors.toMap(Modifier::getId, mod -> mod));
 
     // process redirects
-    Map<ModifierId,Modifier> resolvedRedirects = new HashMap<>(); // handled as a separate map to prevent redirects depending on order (no double redirects)
+    Map<ModifierId, Modifier> resolvedRedirects = new HashMap<>(); // handled as a separate map to prevent redirects depending on order (no double redirects)
     for (Entry<ModifierId, ModifierId> redirect : redirects.entrySet()) {
       ModifierId from = redirect.getKey();
       ModifierId to = redirect.getValue();
@@ -166,7 +211,7 @@ public class ModifierManager extends SimpleJsonResourceReloadListener {
     this.dynamicModifiers.putAll(resolvedRedirects);
 
     // validate required modifiers
-    for (Entry<ModifierId,Class<?>> entry : expectedDynamicModifiers.entrySet()) {
+    for (Entry<ModifierId, Class<?>> entry : expectedDynamicModifiers.entrySet()) {
       Modifier modifier = dynamicModifiers.get(entry.getKey());
       if (modifier == null) {
         log.error("Missing expected modifier '" + entry.getKey() + "'");
@@ -200,7 +245,7 @@ public class ModifierManager extends SimpleJsonResourceReloadListener {
     for (Resource resource : pResourceManager.getResourceStack(ENCHANTMENT_MAP)) {
       JsonObject enchantmentJson = JsonHelper.getJson(resource, ENCHANTMENT_MAP);
       if (enchantmentJson != null) {
-        for (Entry<String,JsonElement> entry : enchantmentJson.entrySet()) {
+        for (Entry<String, JsonElement> entry : enchantmentJson.entrySet()) {
           try {
             // parse the modifier first, its the same in both cases
             String key = entry.getKey();
@@ -216,7 +261,7 @@ public class ModifierManager extends SimpleJsonResourceReloadListener {
               if (tagId == null) {
                 throw new JsonSyntaxException("Invalid enchantment tag ID " + key.substring(1));
               }
-              this.enchantmentTagMap.put(TagKey.create(Registry.ENCHANTMENT_REGISTRY, tagId), modifier);
+              this.enchantmentTagMap.put(TagKey.create(Registries.ENCHANTMENT, tagId), modifier);
             } else {
               // assume its an ID
               ResourceLocation enchantId = ResourceLocation.tryParse(key);
@@ -236,7 +281,9 @@ public class ModifierManager extends SimpleJsonResourceReloadListener {
     MinecraftForge.EVENT_BUS.post(new ModifiersLoadedEvent());
   }
 
-  /** Loads a modifier from JSON */
+  /**
+   * Loads a modifier from JSON
+   */
   @Nullable
   private Modifier loadModifier(ResourceLocation key, JsonElement element, Map<ModifierId, ModifierId> redirects) {
     try {
@@ -270,8 +317,10 @@ public class ModifierManager extends SimpleJsonResourceReloadListener {
     }
   }
 
-  /** Updates the modifiers from the server */
-  void updateModifiersFromServer(Map<ModifierId,Modifier> modifiers, Map<TagKey<Modifier>,List<Modifier>> tags, Map<Enchantment,Modifier> enchantmentMap, Map<TagKey<Enchantment>,Modifier> enchantmentTagMappings) {
+  /**
+   * Updates the modifiers from the server
+   */
+  void updateModifiersFromServer(Map<ModifierId, Modifier> modifiers, Map<TagKey<Modifier>, List<Modifier>> tags, Map<Enchantment, Modifier> enchantmentMap, Map<TagKey<Enchantment>, Modifier> enchantmentTagMappings) {
     this.dynamicModifiers = modifiers;
     this.dynamicModifiersLoaded = true;
     this.tags = tags;
@@ -284,22 +333,30 @@ public class ModifierManager extends SimpleJsonResourceReloadListener {
 
   /* Query the registry */
 
-  /** Fetches a static modifier by ID, only use if you need access to modifiers before the world loads*/
+  /**
+   * Fetches a static modifier by ID, only use if you need access to modifiers before the world loads
+   */
   public Modifier getStatic(ModifierId id) {
     return staticModifiers.getOrDefault(id, defaultValue);
   }
 
-  /** Checks if the given static modifier exists */
+  /**
+   * Checks if the given static modifier exists
+   */
   public boolean containsStatic(ModifierId id) {
     return staticModifiers.containsKey(id) || expectedDynamicModifiers.containsKey(id);
   }
 
-  /** Checks if the registry contains the given modifier */
+  /**
+   * Checks if the registry contains the given modifier
+   */
   public boolean contains(ModifierId id) {
     return staticModifiers.containsKey(id) || dynamicModifiers.containsKey(id);
   }
 
-  /** Gets the modifier for the given ID */
+  /**
+   * Gets the modifier for the given ID
+   */
   public Modifier get(ModifierId id) {
     // highest priority is static modifiers, cannot be replaced
     Modifier modifier = staticModifiers.get(id);
@@ -312,7 +369,8 @@ public class ModifierManager extends SimpleJsonResourceReloadListener {
 
   /**
    * Gets the modifier for a given enchantment. Not currently synced to client side
-   * @param enchantment  Enchantment
+   *
+   * @param enchantment Enchantment
    * @return Closest modifier to the enchantment, or null if no match
    */
   @Nullable
@@ -322,32 +380,38 @@ public class ModifierManager extends SimpleJsonResourceReloadListener {
       return enchantmentMap.get(enchantment);
     }
     // did not find, check the tags
-    for (Entry<TagKey<Enchantment>,Modifier> mapping : enchantmentTagMap.entrySet()) {
-      if (RegistryHelper.contains(Registry.ENCHANTMENT, mapping.getKey(), enchantment)) {
+    for (Entry<TagKey<Enchantment>, Modifier> mapping : enchantmentTagMap.entrySet()) {
+      if (RegistryHelper.contains(BuiltInRegistries.ENCHANTMENT, mapping.getKey(), enchantment)) {
         return mapping.getValue();
       }
     }
     return null;
   }
 
-  /** Gets a stream of all enchantments that match the given modifiers */
+  /**
+   * Gets a stream of all enchantments that match the given modifiers
+   */
   public Stream<Enchantment> getEquivalentEnchantments(Predicate<ModifierId> modifiers) {
-    Predicate<Entry<?,Modifier>> predicate = entry -> modifiers.test(entry.getValue().getId());
+    Predicate<Entry<?, Modifier>> predicate = entry -> modifiers.test(entry.getValue().getId());
     return Stream.concat(
       enchantmentMap.entrySet().stream().filter(predicate).map(Entry::getKey),
-      enchantmentTagMap.entrySet().stream().filter(predicate).flatMap(entry -> RegistryHelper.getTagValueStream(Registry.ENCHANTMENT, entry.getKey()))
-    ).distinct().sorted(Comparator.comparing(enchantment -> Objects.requireNonNull(Registry.ENCHANTMENT.getKey(enchantment))));
+      enchantmentTagMap.entrySet().stream().filter(predicate).flatMap(entry -> RegistryHelper.getTagValueStream(BuiltInRegistries.ENCHANTMENT, entry.getKey()))
+    ).distinct().sorted(Comparator.comparing(enchantment -> Objects.requireNonNull(BuiltInRegistries.ENCHANTMENT.getKey(enchantment))));
   }
 
-  /** Gets a list of all modifier IDs */
+  /**
+   * Gets a list of all modifier IDs
+   */
   public Stream<ResourceLocation> getAllLocations() {
     // filter out redirects (redirects are any modifiers where the ID does not match the key
     return Stream.concat(staticModifiers.entrySet().stream(), dynamicModifiers.entrySet().stream())
-                 .filter(entry -> entry.getKey().equals(entry.getValue().getId()))
-                 .map(Entry::getKey);
+      .filter(entry -> entry.getKey().equals(entry.getValue().getId()))
+      .map(Entry::getKey);
   }
 
-  /** Gets a stream of all modifier values */
+  /**
+   * Gets a stream of all modifier values
+   */
   public Stream<Modifier> getAllValues() {
     return Stream.concat(staticModifiers.values().stream(), dynamicModifiers.values().stream()).distinct();
   }
@@ -355,17 +419,20 @@ public class ModifierManager extends SimpleJsonResourceReloadListener {
 
   /* Helpers */
 
-  /** Gets the modifier for the given ID */
+  /**
+   * Gets the modifier for the given ID
+   */
   public static Modifier getValue(ModifierId name) {
     return INSTANCE.get(name);
   }
 
   /**
    * Parses a modifier from JSON
-   * @param element   Element to deserialize
-   * @param key       Json key
-   * @return  Registry value
-   * @throws JsonSyntaxException  If something failed to parse
+   *
+   * @param element Element to deserialize
+   * @param key     Json key
+   * @return Registry value
+   * @throws JsonSyntaxException If something failed to parse
    */
   public static Modifier convertToModifier(JsonElement element, String key) {
     ModifierId name = new ModifierId(JsonHelper.convertToResourceLocation(element, key));
@@ -377,10 +444,11 @@ public class ModifierManager extends SimpleJsonResourceReloadListener {
 
   /**
    * Parses a modifier from JSON
-   * @param parent    Parent JSON object
-   * @param key       Json key
-   * @return  Registry value
-   * @throws JsonSyntaxException  If something failed to parse
+   *
+   * @param parent Parent JSON object
+   * @param key    Json key
+   * @return Registry value
+   * @throws JsonSyntaxException If something failed to parse
    */
   public static Modifier deserializeModifier(JsonObject parent, String key) {
     return convertToModifier(JsonHelper.getElement(parent, key), key);
@@ -388,8 +456,9 @@ public class ModifierManager extends SimpleJsonResourceReloadListener {
 
   /**
    * Reads a modifier from the buffer
-   * @param buffer  Buffer instance
-   * @return  Modifier instance
+   *
+   * @param buffer Buffer instance
+   * @return Modifier instance
    */
   public static Modifier fromNetwork(FriendlyByteBuf buffer) {
     return INSTANCE.get(new ModifierId(buffer.readUtf(Short.MAX_VALUE)));
@@ -397,8 +466,9 @@ public class ModifierManager extends SimpleJsonResourceReloadListener {
 
   /**
    * Reads a modifier from the buffer
-   * @param modifier  Modifier instance
-   * @param buffer    Buffer instance
+   *
+   * @param modifier Modifier instance
+   * @param buffer   Buffer instance
    */
   public static void toNetwork(Modifier modifier, FriendlyByteBuf buffer) {
     buffer.writeUtf(modifier.getId().toString());
@@ -407,14 +477,17 @@ public class ModifierManager extends SimpleJsonResourceReloadListener {
 
   /* Tags */
 
-  /** Creates a tag key for a modifier */
+  /**
+   * Creates a tag key for a modifier
+   */
   public static TagKey<Modifier> getTag(ResourceLocation id) {
     return TagKey.create(REGISTRY_KEY, id);
   }
 
   /**
    * Checks if the given modifier is in the given tag
-   * @return  True if the modifier is in the tag
+   *
+   * @return True if the modifier is in the tag
    */
   public static boolean isInTag(ModifierId modifier, TagKey<Modifier> tag) {
     return INSTANCE.reverseTags.getOrDefault(modifier, Collections.emptySet()).contains(tag);
@@ -422,8 +495,9 @@ public class ModifierManager extends SimpleJsonResourceReloadListener {
 
   /**
    * Gets all values contained in the given tag
-   * @param tag  Tag instance
-   * @return  Contained values
+   *
+   * @param tag Tag instance
+   * @return Contained values
    */
   public static List<Modifier> getTagValues(TagKey<Modifier> tag) {
     return INSTANCE.tags.getOrDefault(tag, List.of());
@@ -432,13 +506,20 @@ public class ModifierManager extends SimpleJsonResourceReloadListener {
 
   /* Events */
 
-  /** Event for registering modifiers */
+  /**
+   * Event for registering modifiers
+   */
   @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
   public class ModifierRegistrationEvent extends Event implements IModBusEvent {
-    /** Container receiving this event */
+
+    /**
+     * Container receiving this event
+     */
     private final ModContainer container;
 
-    /** Validates the namespace of the container registering */
+    /**
+     * Validates the namespace of the container registering
+     */
     private void checkModNamespace(ResourceLocation name) {
       // check mod container, should be the active mod
       // don't want mods registering stuff in Tinkers namespace, or Minecraft
@@ -450,8 +531,9 @@ public class ModifierManager extends SimpleJsonResourceReloadListener {
 
     /**
      * Registers a static modifier with the manager. Static modifiers cannot be configured by datapacks, so its generally encouraged to use dynamic modifiers
-     * @param name      Modifier name
-     * @param modifier  Modifier instance
+     *
+     * @param name     Modifier name
+     * @param modifier Modifier instance
      */
     public void registerStatic(ModifierId name, Modifier modifier) {
       checkModNamespace(name);
@@ -471,8 +553,9 @@ public class ModifierManager extends SimpleJsonResourceReloadListener {
 
     /**
      * Registers that the given modifier is expected to be loaded in datapacks
-     * @param name         Modifier name
-     * @param classFilter  Class type the modifier is expected to have. Can be an interface
+     *
+     * @param name        Modifier name
+     * @param classFilter Class type the modifier is expected to have. Can be an interface
      */
     public void registerExpected(ModifierId name, Class<?> classFilter) {
       checkModNamespace(name);
@@ -490,11 +573,16 @@ public class ModifierManager extends SimpleJsonResourceReloadListener {
     }
   }
 
-  /** Event fired when modifiers reload */
+  /**
+   * Event fired when modifiers reload
+   */
   public static class ModifiersLoadedEvent extends Event {}
 
-  /** Class for the empty modifier instance, mods should not need to extend this class */
+  /**
+   * Class for the empty modifier instance, mods should not need to extend this class
+   */
   private static class EmptyModifier extends Modifier {
+
     @Override
     public boolean shouldDisplay(boolean advanced) {
       return false;

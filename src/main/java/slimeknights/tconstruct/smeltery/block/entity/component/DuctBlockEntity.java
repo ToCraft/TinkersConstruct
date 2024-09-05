@@ -34,6 +34,7 @@ import javax.annotation.Nullable;
  * Filtered drain tile entity
  */
 public class DuctBlockEntity extends SmelteryFluidIO implements MenuProvider {
+
   private static final String TAG_ITEM = "item";
   private static final Component TITLE = TConstruct.makeTranslation("gui", "duct");
 
@@ -92,7 +93,9 @@ public class DuctBlockEntity extends SmelteryFluidIO implements MenuProvider {
     return RetexturedHelper.getModelDataBuilder(getTexture()).with(IDisplayFluidListener.PROPERTY, IDisplayFluidListener.normalizeFluid(itemHandler.getFluid())).build();
   }
 
-  /** Updates the fluid in model data */
+  /**
+   * Updates the fluid in model data
+   */
   public void updateFluid() {
     requestModelDataUpdate();
     assert level != null;

@@ -12,11 +12,15 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 
-/** Mutable use on context that can easily be moved to another location */
+/**
+ * Mutable use on context that can easily be moved to another location
+ */
 public class MutableUseOnContext extends UseOnContext {
+
   private final BlockPos.MutableBlockPos offsetPos;
   @Getter
   private Vec3 clickedLocation;
+
   public MutableUseOnContext(UseOnContext base) {
     this(base.getLevel(), base.getPlayer(), base.getHand(), base.getItemInHand(), base.getHitResult());
   }
@@ -32,7 +36,9 @@ public class MutableUseOnContext extends UseOnContext {
     return offsetPos;
   }
 
-  /** Sets the offset position */
+  /**
+   * Sets the offset position
+   */
   public void setOffsetPos(BlockPos offset) {
     clickedLocation = clickedLocation.add(
       offset.getX() - offsetPos.getX(),

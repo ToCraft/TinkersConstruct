@@ -21,6 +21,7 @@ import java.util.List;
 @NoArgsConstructor(staticName = "builder")
 @Accessors(fluent = true)
 public class ToolDefinitionDataBuilder {
+
   private final StatsNBT.Builder bonuses = StatsNBT.builder();
   private final ImmutableList.Builder<WithHooks<ToolModule>> modules = ImmutableList.builder();
 
@@ -54,20 +55,26 @@ public class ToolDefinitionDataBuilder {
 
   /* Modules */
 
-  /** Adds a module to the definition with the given hooks */
+  /**
+   * Adds a module to the definition with the given hooks
+   */
   @SafeVarargs
   public final <T extends ToolModule> ToolDefinitionDataBuilder module(T module, ModuleHook<? super T>... hooks) {
     modules.add(new WithHooks<>(module, List.of(hooks)));
     return this;
   }
 
-  /** Adds a module to the definition */
+  /**
+   * Adds a module to the definition
+   */
   public ToolDefinitionDataBuilder module(ToolModule module) {
     modules.add(new WithHooks<>(module, List.of()));
     return this;
   }
 
-  /** Adds a module to the definition */
+  /**
+   * Adds a module to the definition
+   */
   public ToolDefinitionDataBuilder module(ToolModule... modules) {
     for (ToolModule module : modules) {
       module(module);
@@ -76,7 +83,9 @@ public class ToolDefinitionDataBuilder {
   }
 
 
-  /** Builds the final definition JSON to serialize */
+  /**
+   * Builds the final definition JSON to serialize
+   */
   public ToolDefinitionData build() {
     return new ToolDefinitionData(modules.build(), ErrorFactory.RUNTIME);
   }

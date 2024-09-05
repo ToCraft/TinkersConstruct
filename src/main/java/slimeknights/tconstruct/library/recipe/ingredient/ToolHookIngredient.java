@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -27,8 +28,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
 
-/** Ingredient that only matches tools with a specific hook */
+/**
+ * Ingredient that only matches tools with a specific hook
+ */
 public class ToolHookIngredient extends AbstractIngredient {
+
   private final TagKey<Item> tag;
   private final ModuleHook<?> hook;
 
@@ -72,6 +76,7 @@ public class ToolHookIngredient extends AbstractIngredient {
 
   @RequiredArgsConstructor
   public static class ToolHookValue implements Value {
+
     private final TagKey<Item> tag;
     private final ModuleHook<?> hook;
 
@@ -80,7 +85,7 @@ public class ToolHookIngredient extends AbstractIngredient {
       List<ItemStack> list = new ArrayList<>();
 
       // filtered version of tag values
-      for(Holder<Item> holder : Registry.ITEM.getTagOrEmpty(tag)) {
+      for (Holder<Item> holder : BuiltInRegistries.ITEM.getTagOrEmpty(tag)) {
         if (holder.value() instanceof IModifiable modifiable && modifiable.getToolDefinition().getData().getHooks().hasHook(hook)) {
           list.add(new ItemStack(modifiable));
         }
@@ -101,7 +106,9 @@ public class ToolHookIngredient extends AbstractIngredient {
     }
   }
 
-  /** Serializer instance */
+  /**
+   * Serializer instance
+   */
   public enum Serializer implements IIngredientSerializer<ToolHookIngredient> {
     INSTANCE;
 

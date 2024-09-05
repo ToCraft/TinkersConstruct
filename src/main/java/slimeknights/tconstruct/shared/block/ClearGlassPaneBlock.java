@@ -12,6 +12,7 @@ import slimeknights.mantle.client.model.connected.ConnectedModelRegistry;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class ClearGlassPaneBlock extends BetterPaneBlock implements IMultipartConnectedBlock {
+
   public ClearGlassPaneBlock(Properties builder) {
     super(builder);
     this.registerDefaultState(IMultipartConnectedBlock.defaultConnections(this.defaultBlockState()));

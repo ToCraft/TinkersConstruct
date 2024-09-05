@@ -6,6 +6,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 
 @AllArgsConstructor
 public class DuctTankWrapper implements IFluidHandler {
+
   private final IFluidHandler parent;
   private final DuctItemHandler itemHandler;
 

@@ -15,6 +15,7 @@ import slimeknights.tconstruct.tools.TinkerTools;
 import java.util.function.Consumer;
 
 public class StationSlotLayoutProvider extends AbstractStationSlotLayoutProvider {
+
   public StationSlotLayoutProvider(DataGenerator generator) {
     super(generator);
   }
@@ -28,8 +29,8 @@ public class StationSlotLayoutProvider extends AbstractStationSlotLayoutProvider
       .icon(Patterns.REPAIR)
       .toolSlot(53, 41, modifiable)
       .addInputSlot(Patterns.QUARTZ, 11, 41)
-      .addInputSlot(Patterns.DUST,   31, 30)
-      .addInputSlot(Patterns.LAPIS,  31, 50)
+      .addInputSlot(Patterns.DUST, 31, 30)
+      .addInputSlot(Patterns.LAPIS, 31, 50)
       .build();
     Consumer<ItemLike> addAnvil = item ->
       define(item)
@@ -49,71 +50,71 @@ public class StationSlotLayoutProvider extends AbstractStationSlotLayoutProvider
     // pickaxes
     defineModifiable(TinkerTools.pickaxe)
       .sortIndex(SORT_HARVEST)
-      .addInputItem(TinkerToolParts.pickHead,    53, 22)
-      .addInputItem(TinkerToolParts.toolHandle,  15, 60)
+      .addInputItem(TinkerToolParts.pickHead, 53, 22)
+      .addInputItem(TinkerToolParts.toolHandle, 15, 60)
       .addInputItem(TinkerToolParts.toolBinding, 33, 42)
       .build();
     defineModifiable(TinkerTools.sledgeHammer)
       .sortIndex(SORT_HARVEST + SORT_LARGE)
-      .addInputItem(TinkerToolParts.hammerHead,  44, 29)
+      .addInputItem(TinkerToolParts.hammerHead, 44, 29)
       .addInputItem(TinkerToolParts.toughHandle, 21, 52)
-      .addInputItem(TinkerToolParts.largePlate,  50, 48)
-      .addInputItem(TinkerToolParts.largePlate,  25, 20)
+      .addInputItem(TinkerToolParts.largePlate, 50, 48)
+      .addInputItem(TinkerToolParts.largePlate, 25, 20)
       .build();
     defineModifiable(TinkerTools.veinHammer)
       .sortIndex(SORT_HARVEST + SORT_LARGE)
-      .addInputItem(TinkerToolParts.hammerHead,  44, 29)
+      .addInputItem(TinkerToolParts.hammerHead, 44, 29)
       .addInputItem(TinkerToolParts.toughHandle, 21, 52)
-      .addInputItem(TinkerToolParts.pickHead,    50, 48)
-      .addInputItem(TinkerToolParts.largePlate,  25, 20)
+      .addInputItem(TinkerToolParts.pickHead, 50, 48)
+      .addInputItem(TinkerToolParts.largePlate, 25, 20)
       .build();
 
     // shovels
     defineModifiable(TinkerTools.mattock)
       .sortIndex(SORT_HARVEST)
       .addInputItem(TinkerToolParts.smallAxeHead, 31, 22)
-      .addInputItem(TinkerToolParts.toolHandle,   22, 53)
-      .addInputItem(TinkerToolParts.roundPlate,   51, 34)
+      .addInputItem(TinkerToolParts.toolHandle, 22, 53)
+      .addInputItem(TinkerToolParts.roundPlate, 51, 34)
       .build();
     defineModifiable(TinkerTools.pickadze)
       .sortIndex(SORT_HARVEST)
-      .addInputItem(TinkerToolParts.pickHead,    31, 22)
-      .addInputItem(TinkerToolParts.toolHandle,  22, 53)
-      .addInputItem(TinkerToolParts.roundPlate,  51, 34)
+      .addInputItem(TinkerToolParts.pickHead, 31, 22)
+      .addInputItem(TinkerToolParts.toolHandle, 22, 53)
+      .addInputItem(TinkerToolParts.roundPlate, 51, 34)
       .build();
     defineModifiable(TinkerTools.excavator)
       .sortIndex(SORT_HARVEST + SORT_LARGE)
-      .addInputItem(TinkerToolParts.largePlate,  45, 26)
+      .addInputItem(TinkerToolParts.largePlate, 45, 26)
       .addInputItem(TinkerToolParts.toughHandle, 25, 46)
-      .addInputItem(TinkerToolParts.largePlate,  25, 26)
-      .addInputItem(TinkerToolParts.toughHandle,  7, 62)
+      .addInputItem(TinkerToolParts.largePlate, 25, 26)
+      .addInputItem(TinkerToolParts.toughHandle, 7, 62)
       .build();
 
     // axes
     defineModifiable(TinkerTools.handAxe)
       .sortIndex(SORT_HARVEST)
       .addInputItem(TinkerToolParts.smallAxeHead, 31, 22)
-      .addInputItem(TinkerToolParts.toolHandle,   22, 53)
-      .addInputItem(TinkerToolParts.toolBinding,  51, 34)
+      .addInputItem(TinkerToolParts.toolHandle, 22, 53)
+      .addInputItem(TinkerToolParts.toolBinding, 51, 34)
       .build();
     defineModifiable(TinkerTools.broadAxe)
       .sortIndex(SORT_HARVEST + SORT_LARGE)
       .addInputItem(TinkerToolParts.broadAxeHead, 25, 20)
-      .addInputItem(TinkerToolParts.toughHandle,  21, 52)
-      .addInputItem(TinkerToolParts.pickHead,     50, 48)
-      .addInputItem(TinkerToolParts.toolBinding,  44, 29)
+      .addInputItem(TinkerToolParts.toughHandle, 21, 52)
+      .addInputItem(TinkerToolParts.pickHead, 50, 48)
+      .addInputItem(TinkerToolParts.toolBinding, 44, 29)
       .build();
 
     // scythes
     defineModifiable(TinkerTools.kama)
       .sortIndex(SORT_HARVEST)
-      .addInputItem(TinkerToolParts.smallBlade,  31, 22)
-      .addInputItem(TinkerToolParts.toolHandle,  22, 53)
+      .addInputItem(TinkerToolParts.smallBlade, 31, 22)
+      .addInputItem(TinkerToolParts.toolHandle, 22, 53)
       .addInputItem(TinkerToolParts.toolBinding, 51, 34)
       .build();
     defineModifiable(TinkerTools.scythe)
       .sortIndex(SORT_HARVEST + SORT_LARGE)
-      .addInputItem(TinkerToolParts.broadBlade,  35, 20)
+      .addInputItem(TinkerToolParts.broadBlade, 35, 20)
       .addInputItem(TinkerToolParts.toughHandle, 12, 55)
       .addInputItem(TinkerToolParts.toolBinding, 50, 40)
       .addInputItem(TinkerToolParts.toughHandle, 30, 40)
@@ -133,22 +134,22 @@ public class StationSlotLayoutProvider extends AbstractStationSlotLayoutProvider
       .build();
     defineModifiable(TinkerTools.cleaver)
       .sortIndex(SORT_WEAPON + SORT_LARGE)
-      .addInputItem(TinkerToolParts.broadBlade,  45, 26)
-      .addInputItem(TinkerToolParts.toughHandle,  7, 62)
+      .addInputItem(TinkerToolParts.broadBlade, 45, 26)
+      .addInputItem(TinkerToolParts.toughHandle, 7, 62)
       .addInputItem(TinkerToolParts.toughHandle, 25, 46)
-      .addInputItem(TinkerToolParts.largePlate,  45, 46)
+      .addInputItem(TinkerToolParts.largePlate, 45, 46)
       .build();
     defineModifiable(TinkerTools.crossbow)
       .sortIndex(SORT_RANGED)
-      .addInputItem(TinkerToolParts.bowLimb,   10, 20)
-      .addInputItem(TinkerToolParts.bowGrip,   46, 56)
+      .addInputItem(TinkerToolParts.bowLimb, 10, 20)
+      .addInputItem(TinkerToolParts.bowGrip, 46, 56)
       .addInputItem(TinkerToolParts.bowstring, 28, 38)
       .build();
     defineModifiable(TinkerTools.longbow)
       .sortIndex(SORT_RANGED + SORT_LARGE)
-      .addInputItem(TinkerToolParts.bowLimb,   20, 55)
-      .addInputItem(TinkerToolParts.bowLimb,   45, 30)
-      .addInputItem(TinkerToolParts.bowGrip,   25, 35)
+      .addInputItem(TinkerToolParts.bowLimb, 20, 55)
+      .addInputItem(TinkerToolParts.bowLimb, 45, 30)
+      .addInputItem(TinkerToolParts.bowGrip, 25, 35)
       .addInputItem(TinkerToolParts.bowstring, 45, 55)
       .build();
     // use a single button for all plate armor, its all the same recipe and a single description is suitable
@@ -156,7 +157,7 @@ public class StationSlotLayoutProvider extends AbstractStationSlotLayoutProvider
       .sortIndex(SORT_ARMOR)
       .translationKey(TConstruct.makeTranslationKey("gui", "plate_armor"))
       .icon(Patterns.PLATE_ARMOR)
-      .addInputPattern(Patterns.PLATING,   33, 29, Ingredient.of(TinkerToolParts.plating.values().toArray(new Item[0])))
+      .addInputPattern(Patterns.PLATING, 33, 29, Ingredient.of(TinkerToolParts.plating.values().toArray(new Item[0])))
       .addInputItem(TinkerToolParts.maille, 33, 53)
       .build();
   }

@@ -27,22 +27,30 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode
 @ToString
 public class MaterialIdNBT {
-  /** Instance containing no materials, for errors with parsing NBT */
+
+  /**
+   * Instance containing no materials, for errors with parsing NBT
+   */
   public final static MaterialIdNBT EMPTY = new MaterialIdNBT(ImmutableList.of());
 
-  /** List of materials contained in this NBT */
+  /**
+   * List of materials contained in this NBT
+   */
   @Getter
   private final List<MaterialVariantId> materials;
 
-  /** Creates a new material NBT */
+  /**
+   * Creates a new material NBT
+   */
   public MaterialIdNBT(List<? extends MaterialVariantId> materials) {
     this.materials = ImmutableList.copyOf(materials);
   }
 
   /**
    * Gets the material at the given index
-   * @param index  Index
-   * @return  Material, or unknown if index is invalid
+   *
+   * @param index Index
+   * @return Material, or unknown if index is invalid
    */
   public MaterialVariantId getMaterial(int index) {
     if (index >= materials.size() || index < 0) {
@@ -51,7 +59,9 @@ public class MaterialIdNBT {
     return materials.get(index);
   }
 
-  /** Resolves all redirects, replacing with material redirects */
+  /**
+   * Resolves all redirects, replacing with material redirects
+   */
   public MaterialIdNBT resolveRedirects() {
     boolean changed = false;
     ImmutableList.Builder<MaterialVariantId> builder = ImmutableList.builder();
@@ -73,8 +83,9 @@ public class MaterialIdNBT {
 
   /**
    * Parses the material list from NBT
-   * @param nbt  NBT instance
-   * @return  MaterialNBT instance
+   *
+   * @param nbt NBT instance
+   * @return MaterialNBT instance
    */
   public static MaterialIdNBT readFromNBT(@Nullable Tag nbt) {
     if (nbt == null || nbt.getId() != Tag.TAG_LIST) {
@@ -95,19 +106,21 @@ public class MaterialIdNBT {
 
   /**
    * Writes this material list to NBT
-   * @return  List of materials
+   *
+   * @return List of materials
    */
   public ListTag serializeToNBT() {
     return materials.stream()
-                    .map(MaterialVariantId::toString)
-                    .map(StringTag::valueOf)
-                    .collect(Collectors.toCollection(ListTag::new));
+      .map(MaterialVariantId::toString)
+      .map(StringTag::valueOf)
+      .collect(Collectors.toCollection(ListTag::new));
   }
 
   /**
    * Parses the material list from a stack
-   * @param stack  Tool stack instance
-   * @return  MaterialNBT instance
+   *
+   * @param stack Tool stack instance
+   * @return MaterialNBT instance
    */
   public static MaterialIdNBT from(ItemStack stack) {
     CompoundTag nbt = stack.getTag();
@@ -117,13 +130,17 @@ public class MaterialIdNBT {
     return EMPTY;
   }
 
-  /** Writes this material list to the given stack */
+  /**
+   * Writes this material list to the given stack
+   */
   public ItemStack updateStack(ItemStack stack) {
     stack.getOrCreateTag().put(ToolStack.TAG_MATERIALS, serializeToNBT());
     return stack;
   }
 
-  /** Writes this material list to the given stack */
+  /**
+   * Writes this material list to the given stack
+   */
   @SuppressWarnings("UnusedReturnValue")
   public CompoundTag updateNBT(CompoundTag nbt) {
     nbt.put(ToolStack.TAG_MATERIALS, serializeToNBT());

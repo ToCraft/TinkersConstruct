@@ -32,47 +32,72 @@ import java.util.stream.Collectors;
 import static slimeknights.tconstruct.library.recipe.modifiers.adding.IDisplayModifierRecipe.modifiersForResult;
 import static slimeknights.tconstruct.library.recipe.modifiers.adding.IDisplayModifierRecipe.withModifiers;
 
-/** Shared logic between modifier and incremental modifier recipes */
+/**
+ * Shared logic between modifier and incremental modifier recipes
+ */
 public abstract class AbstractModifierRecipe implements ITinkerStationRecipe, IDisplayModifierRecipe {
-  /** Error for when the tool has does not have enough existing levels of this modifier, has a single parameter, modifier with level */
+
+  /**
+   * Error for when the tool has does not have enough existing levels of this modifier, has a single parameter, modifier with level
+   */
   protected static final String KEY_MIN_LEVEL = TConstruct.makeTranslationKey("recipe", "modifier.min_level");
   protected static final String KEY_MIN_LEVEL_TRAITS = KEY_MIN_LEVEL + ".traits";
-  /** Error for when the tool is at the max modifier level */
+  /**
+   * Error for when the tool is at the max modifier level
+   */
   protected static final String KEY_MAX_LEVEL = TConstruct.makeTranslationKey("recipe", "modifier.max_level");
   protected static final String KEY_MAX_LEVEL_TRAITS = KEY_MAX_LEVEL + ".traits";
-  /** Error for when the tool has too few upgrade slots */
+  /**
+   * Error for when the tool has too few upgrade slots
+   */
   protected static final String KEY_NOT_ENOUGH_SLOTS = TConstruct.makeTranslationKey("recipe", "modifier.not_enough_slots");
-  /** Error for when the tool has too few upgrade slots from a single slot */
+  /**
+   * Error for when the tool has too few upgrade slots from a single slot
+   */
   protected static final String KEY_NOT_ENOUGH_SLOT = TConstruct.makeTranslationKey("recipe", "modifier.not_enough_slot");
 
   /* Fields */
-  protected static final LoadableField<Ingredient,AbstractModifierRecipe> TOOLS_FIELD = IngredientLoadable.DISALLOW_EMPTY.requiredField("tools", r -> r.toolRequirement);
-  protected static final LoadableField<Integer,AbstractModifierRecipe> MAX_TOOL_SIZE_FIELD = IntLoadable.FROM_ONE.defaultField("max_tool_size", ITinkerStationRecipe.DEFAULT_TOOL_STACK_SIZE, r -> r.maxToolSize);
-  protected static final LoadableField<ModifierId,AbstractModifierRecipe> RESULT_FIELD = ModifierId.PARSER.requiredField("result", r -> r.result.getId());
-  protected static final LoadableField<IntRange,AbstractModifierRecipe> LEVEL_FIELD = ModifierEntry.VALID_LEVEL.defaultField("level", r -> r.level);
-  protected static final LoadableField<SlotCount,AbstractModifierRecipe> SLOTS_FIELD = SlotCount.LOADABLE.nullableField("slots", r -> r.slots);
-  protected static final LoadableField<Boolean,AbstractModifierRecipe> ALLOW_CRYSTAL_FIELD = BooleanLoadable.INSTANCE.defaultField("allow_crystal", true, r -> r.allowCrystal);
-  protected static final LoadableField<Boolean,AbstractModifierRecipe> CHECK_TRAIT_LEVEL_FIELD = BooleanLoadable.INSTANCE.defaultField("check_trait_level", false, false, r -> r.checkTraitLevel);
+  protected static final LoadableField<Ingredient, AbstractModifierRecipe> TOOLS_FIELD = IngredientLoadable.DISALLOW_EMPTY.requiredField("tools", r -> r.toolRequirement);
+  protected static final LoadableField<Integer, AbstractModifierRecipe> MAX_TOOL_SIZE_FIELD = IntLoadable.FROM_ONE.defaultField("max_tool_size", ITinkerStationRecipe.DEFAULT_TOOL_STACK_SIZE, r -> r.maxToolSize);
+  protected static final LoadableField<ModifierId, AbstractModifierRecipe> RESULT_FIELD = ModifierId.PARSER.requiredField("result", r -> r.result.getId());
+  protected static final LoadableField<IntRange, AbstractModifierRecipe> LEVEL_FIELD = ModifierEntry.VALID_LEVEL.defaultField("level", r -> r.level);
+  protected static final LoadableField<SlotCount, AbstractModifierRecipe> SLOTS_FIELD = SlotCount.LOADABLE.nullableField("slots", r -> r.slots);
+  protected static final LoadableField<Boolean, AbstractModifierRecipe> ALLOW_CRYSTAL_FIELD = BooleanLoadable.INSTANCE.defaultField("allow_crystal", true, r -> r.allowCrystal);
+  protected static final LoadableField<Boolean, AbstractModifierRecipe> CHECK_TRAIT_LEVEL_FIELD = BooleanLoadable.INSTANCE.defaultField("check_trait_level", false, false, r -> r.checkTraitLevel);
 
 
   @Getter
   private final ResourceLocation id;
-  /** Ingredient representing the required tool, typically a tag */
+  /**
+   * Ingredient representing the required tool, typically a tag
+   */
   protected final Ingredient toolRequirement;
-  /** Max size of the tool for this modifier. If the tool size is smaller, the stack will reduce by less */
+  /**
+   * Max size of the tool for this modifier. If the tool size is smaller, the stack will reduce by less
+   */
   protected final int maxToolSize;
-  /** Modifier this recipe is adding */
+  /**
+   * Modifier this recipe is adding
+   */
   protected final LazyModifier result;
-  /** Range of result levels that is valid on the tool */
+  /**
+   * Range of result levels that is valid on the tool
+   */
   @Getter
   private final IntRange level;
-  /** Gets the slots required by this recipe. If null, no slots required */
+  /**
+   * Gets the slots required by this recipe. If null, no slots required
+   */
   @Getter
   @Nullable
   private final SlotCount slots;
-  /** If true, this recipe can be applied using modifier crystals */
+  /**
+   * If true, this recipe can be applied using modifier crystals
+   */
   protected final boolean allowCrystal;
-  /** If true, validates the level against the trait level. False validates against recipe modifiers only. */
+  /**
+   * If true, validates the level against the trait level. False validates against recipe modifiers only.
+   */
   protected final boolean checkTraitLevel;
 
   protected AbstractModifierRecipe(ResourceLocation id, Ingredient toolRequirement, int maxToolSize,
@@ -91,8 +116,11 @@ public abstract class AbstractModifierRecipe implements ITinkerStationRecipe, ID
   @Override
   public abstract RecipeResult<ItemStack> getValidatedResult(ITinkerStationContainer inv);
 
-  /** @deprecated use {@link #getValidatedResult(ITinkerStationContainer)} */
-  @Override @Deprecated
+  /**
+   * @deprecated use {@link #getValidatedResult(ITinkerStationContainer)}
+   */
+  @Override
+  @Deprecated
   public ItemStack getResultItem() {
     return ItemStack.EMPTY;
   }
@@ -103,16 +131,20 @@ public abstract class AbstractModifierRecipe implements ITinkerStationRecipe, ID
   }
 
   /* JEI display */
-  /** Cache of input items shared between result and input */
+  /**
+   * Cache of input items shared between result and input
+   */
   @Nullable
   private List<ItemStack> toolInputs = null;
 
-  /** Gets or builds the list of tool inputs */
+  /**
+   * Gets or builds the list of tool inputs
+   */
   protected List<ItemStack> getToolInputs() {
     if (toolInputs == null) {
       toolInputs = Arrays.stream(this.toolRequirement.getItems()).map(stack -> {
         if (stack.getItem() instanceof IModifiableDisplay) {
-          return ((IModifiableDisplay)stack.getItem()).getRenderTool();
+          return ((IModifiableDisplay) stack.getItem()).getRenderTool();
         }
         return stack;
       }).collect(Collectors.toList());
@@ -120,13 +152,19 @@ public abstract class AbstractModifierRecipe implements ITinkerStationRecipe, ID
     return toolInputs;
   }
 
-  /** Cache of display tool inputs */
+  /**
+   * Cache of display tool inputs
+   */
   private List<ItemStack> displayInputs = null;
 
-  /** Cache of display output */
+  /**
+   * Cache of display output
+   */
   List<ItemStack> toolWithModifier = null;
 
-  /** Display result, may be a higher level than real result */
+  /**
+   * Display result, may be a higher level than real result
+   */
   private ModifierEntry displayResult;
 
   @Override
@@ -161,7 +199,9 @@ public abstract class AbstractModifierRecipe implements ITinkerStationRecipe, ID
 
   /* Helpers */
 
-  /** Checks if the inventory contains a crystal */
+  /**
+   * Checks if the inventory contains a crystal
+   */
   public static boolean matchesCrystal(ITinkerStationContainer container, ModifierId match) {
     boolean found = false;
     for (int i = 0; i < container.getInputCount(); i++) {
@@ -183,12 +223,16 @@ public abstract class AbstractModifierRecipe implements ITinkerStationRecipe, ID
     return found;
   }
 
-  /** Checks if the inventory contains a crystal */
+  /**
+   * Checks if the inventory contains a crystal
+   */
   protected boolean matchesCrystal(ITinkerStationContainer container) {
     return allowCrystal && matchesCrystal(container, result.getId());
   }
 
-  /** Validates that the given level is a valid result */
+  /**
+   * Validates that the given level is a valid result
+   */
   @Nullable
   protected Component validateLevel(int resultLevel) {
     if (resultLevel < this.level.min()) {
@@ -203,9 +247,10 @@ public abstract class AbstractModifierRecipe implements ITinkerStationRecipe, ID
 
   /**
    * Validate tool has the right number of slots, called internally by {@link #validatePrerequisites(IToolStackView, int)}
-   * @param tool   Tool instance
-   * @param slots  Required slots
-   * @return  Error message, or null if no error
+   *
+   * @param tool  Tool instance
+   * @param slots Required slots
+   * @return Error message, or null if no error
    */
   @Nullable
   protected static Component checkSlots(IToolStackView tool, @Nullable SlotCount slots) {
@@ -224,9 +269,10 @@ public abstract class AbstractModifierRecipe implements ITinkerStationRecipe, ID
 
   /**
    * Validates that this tool has a resulting level in the range and has enough modifier slots
-   * @param tool    Tool stack instance
-   * @param resultLevel  Level after adding this modifier
-   * @return  Error message, or null if no error
+   *
+   * @param tool        Tool stack instance
+   * @param resultLevel Level after adding this modifier
+   * @return Error message, or null if no error
    */
   @Nullable
   protected Component validatePrerequisites(IToolStackView tool, int resultLevel) {
@@ -239,8 +285,9 @@ public abstract class AbstractModifierRecipe implements ITinkerStationRecipe, ID
 
   /**
    * Validates that this tool has a resulting level in the range and has enough modifier slots
-   * @param tool    Tool stack instance
-   * @return  Error message, or null if no error
+   *
+   * @param tool Tool stack instance
+   * @return Error message, or null if no error
    */
   @Nullable
   protected Component validatePrerequisites(IToolStackView tool) {

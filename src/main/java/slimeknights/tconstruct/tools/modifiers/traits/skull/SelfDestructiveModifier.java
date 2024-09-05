@@ -23,7 +23,10 @@ import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.modifiers.effect.NoMilkEffect;
 
 public class SelfDestructiveModifier extends NoLevelsModifier implements KeybindInteractModifierHook, EquipmentChangeModifierHook {
-  /** Self damage source */
+
+  /**
+   * Self damage source
+   */
   private static final DamageSource SELF_DESTRUCT = (new DamageSource(TConstruct.prefix("self_destruct"))).bypassArmor().setExplosion();
 
   @Override
@@ -52,8 +55,11 @@ public class SelfDestructiveModifier extends NoLevelsModifier implements Keybind
     context.getEntity().removeEffect(TinkerModifiers.selfDestructiveEffect.get());
   }
 
-  /** Internal potion effect handling the explosion */
+  /**
+   * Internal potion effect handling the explosion
+   */
   public static class SelfDestructiveEffect extends NoMilkEffect {
+
     public SelfDestructiveEffect() {
       super(MobEffectCategory.HARMFUL, 0x59D24A, true);
       // make the player slow

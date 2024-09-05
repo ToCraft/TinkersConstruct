@@ -62,11 +62,12 @@ public class SideInventoryContainer<TILE extends BlockEntity> extends BaseContai
 
   /**
    * Creates a slot for this inventory
-   * @param itemHandler  Item handler
-   * @param index        Slot index
-   * @param x            Slot X position
-   * @param y            Slot Y position
-   * @return  Inventory slot
+   *
+   * @param itemHandler Item handler
+   * @param index       Slot index
+   * @param x           Slot X position
+   * @param y           Slot Y position
+   * @return Inventory slot
    */
   protected Slot createSlot(IItemHandler itemHandler, int index, int x, int y) {
     return new SmartItemHandlerSlot(itemHandler, index, x, y);

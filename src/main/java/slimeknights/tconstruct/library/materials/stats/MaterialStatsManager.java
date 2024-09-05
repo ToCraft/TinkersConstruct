@@ -41,10 +41,13 @@ import java.util.stream.Collectors;
  * So if the material's mod name is "foobar", the location for your material's stats is "data/foobar/materials/stats".
  */
 @Log4j2
-public class MaterialStatsManager extends MergingJsonDataLoader<Map<ResourceLocation,JsonObject>> {
+public class MaterialStatsManager extends MergingJsonDataLoader<Map<ResourceLocation, JsonObject>> {
+
   public static final String FOLDER = "tinkering/materials/stats";
 
-  /** Runnable to run after loading material stats */
+  /**
+   * Runnable to run after loading material stats
+   */
   private final Runnable onLoaded;
 
   /**
@@ -55,7 +58,9 @@ public class MaterialStatsManager extends MergingJsonDataLoader<Map<ResourceLoca
   @Getter
   private final IdAwareComponentRegistry<MaterialStatType<?>> statTypes = new IdAwareComponentRegistry<>("Unknown Material Stat Type");
 
-  /** Final map of material ID to material stat ID to material stats */
+  /**
+   * Final map of material ID to material stat ID to material stats
+   */
   private Map<MaterialId, Map<MaterialStatsId, IMaterialStats>> materialToStatsPerType = Collections.emptyMap();
 
   public MaterialStatsManager(Runnable onLoaded) {
@@ -65,7 +70,8 @@ public class MaterialStatsManager extends MergingJsonDataLoader<Map<ResourceLoca
 
   /**
    * Registers a new material stat type
-   * @param type   Type object
+   *
+   * @param type Type object
    */
   public <T extends IMaterialStats> void registerStatType(MaterialStatType<T> type) {
     statTypes.register(type);
@@ -73,8 +79,9 @@ public class MaterialStatsManager extends MergingJsonDataLoader<Map<ResourceLoca
 
   /**
    * Gets the stat type for the given ID
-   * @param id  Material stat ID
-   * @return  Stat type, or null if unknown
+   *
+   * @param id Material stat ID
+   * @return Stat type, or null if unknown
    */
   @SuppressWarnings("unchecked")
   @Nullable
@@ -84,10 +91,11 @@ public class MaterialStatsManager extends MergingJsonDataLoader<Map<ResourceLoca
 
   /**
    * Gets the stats for the given material and stats ID
-   * @param materialId  Material
-   * @param statId      Stats
-   * @param <T>  Stats type
-   * @return  Optional containing the stats, empty if no stats
+   *
+   * @param materialId Material
+   * @param statId     Stats
+   * @param <T>        Stats type
+   * @return Optional containing the stats, empty if no stats
    */
   public <T extends IMaterialStats> Optional<T> getStats(MaterialId materialId, MaterialStatsId statId) {
     Map<MaterialStatsId, IMaterialStats> materialStats = materialToStatsPerType.getOrDefault(materialId, Map.of());
@@ -99,8 +107,9 @@ public class MaterialStatsManager extends MergingJsonDataLoader<Map<ResourceLoca
 
   /**
    * Gets all stats for the given material ID
-   * @param materialId  Material
-   * @return  Collection of all stats
+   *
+   * @param materialId Material
+   * @return Collection of all stats
    */
   public Collection<IMaterialStats> getAllStats(MaterialId materialId) {
     return materialToStatsPerType.getOrDefault(materialId, Map.of()).values();
@@ -108,7 +117,8 @@ public class MaterialStatsManager extends MergingJsonDataLoader<Map<ResourceLoca
 
   /**
    * Updates the material stats from the server, should only be called on the client
-   * @param materialStats  Material stats list
+   *
+   * @param materialStats Material stats list
    */
   public void updateMaterialStatsFromServer(Map<MaterialId, Collection<IMaterialStats>> materialStats) {
     this.materialToStatsPerType = materialStats.entrySet().stream()
@@ -127,7 +137,7 @@ public class MaterialStatsManager extends MergingJsonDataLoader<Map<ResourceLoca
   protected void parse(Map<ResourceLocation, JsonObject> builder, ResourceLocation id, JsonElement element) throws JsonSyntaxException {
     MaterialStatJson json = JsonHelper.DEFAULT_GSON.fromJson(element, MaterialStatJson.class);
     // instead of simply replacing the whole JSON object, merge the two together
-    for (Entry<ResourceLocation,JsonElement> entry : json.getStats().entrySet()) {
+    for (Entry<ResourceLocation, JsonElement> entry : json.getStats().entrySet()) {
       ResourceLocation key = entry.getKey();
       JsonElement valueElement = entry.getValue();
       if (valueElement.isJsonNull()) {
@@ -136,7 +146,7 @@ public class MaterialStatsManager extends MergingJsonDataLoader<Map<ResourceLoca
         JsonObject value = GsonHelper.convertToJsonObject(valueElement, key.toString());
         JsonObject existing = builder.get(key);
         if (existing != null) {
-          for (Entry<String,JsonElement> jsonEntry : value.entrySet()) {
+          for (Entry<String, JsonElement> jsonEntry : value.entrySet()) {
             existing.add(jsonEntry.getKey(), jsonEntry.getValue());
           }
         } else {
@@ -147,17 +157,17 @@ public class MaterialStatsManager extends MergingJsonDataLoader<Map<ResourceLoca
   }
 
   @Override
-  protected void finishLoad(Map<ResourceLocation,Map<ResourceLocation, JsonObject>> map, ResourceManager manager) {
+  protected void finishLoad(Map<ResourceLocation, Map<ResourceLocation, JsonObject>> map, ResourceManager manager) {
     // Take the final structure and actually load the different material stats. This drops all invalid stats
     materialToStatsPerType = map.entrySet().stream()
-                                .collect(Collectors.toMap(
-                                  entry -> new MaterialId(entry.getKey()),
-                                  entry -> deserializeMaterialStatsFromContent(entry.getValue())));
+      .collect(Collectors.toMap(
+        entry -> new MaterialId(entry.getKey()),
+        entry -> deserializeMaterialStatsFromContent(entry.getValue())));
 
     log.debug("Loaded stats for materials:{}",
-              Util.toIndentedStringList(materialToStatsPerType.entrySet().stream()
-                                                              .map(entry -> String.format("%s - %s", entry.getKey(), Arrays.toString(entry.getValue().keySet().toArray())))
-                                                              .collect(Collectors.toList())));
+      Util.toIndentedStringList(materialToStatsPerType.entrySet().stream()
+        .map(entry -> String.format("%s - %s", entry.getKey(), Arrays.toString(entry.getValue().keySet().toArray())))
+        .collect(Collectors.toList())));
     onLoaded.run();
   }
 
@@ -166,27 +176,29 @@ public class MaterialStatsManager extends MergingJsonDataLoader<Map<ResourceLoca
     long time = System.nanoTime();
     super.onResourceManagerReload(manager);
     log.info("{} stats loaded for {} materials in {} ms",
-             materialToStatsPerType.values().stream().mapToInt(stats -> stats.keySet().size()).sum(),
-             materialToStatsPerType.size(), (System.nanoTime() - time) / 1000000f);
+      materialToStatsPerType.values().stream().mapToInt(stats -> stats.keySet().size()).sum(),
+      materialToStatsPerType.size(), (System.nanoTime() - time) / 1000000f);
   }
 
   /**
    * Gets the packet to send on player login
-   * @return  Packet object
+   *
+   * @return Packet object
    */
   public UpdateMaterialStatsPacket getUpdatePacket() {
     Map<MaterialId, Collection<IMaterialStats>> networkPayload =
       materialToStatsPerType.entrySet().stream()
-                            .collect(Collectors.toMap(
-                              Map.Entry::getKey,
-                              entry -> entry.getValue().values()));
+        .collect(Collectors.toMap(
+          Map.Entry::getKey,
+          entry -> entry.getValue().values()));
     return new UpdateMaterialStatsPacket(networkPayload);
   }
 
   /**
    * Builds a map of stat IDs and stat contents into material stats
-   * @param contentsMap  Contents of the JSON
-   * @return  Stats map
+   *
+   * @param contentsMap Contents of the JSON
+   * @return Stats map
    */
   private Map<MaterialStatsId, IMaterialStats> deserializeMaterialStatsFromContent(Map<ResourceLocation, JsonObject> contentsMap) {
     ImmutableMap.Builder<MaterialStatsId, IMaterialStats> builder = ImmutableMap.builder();

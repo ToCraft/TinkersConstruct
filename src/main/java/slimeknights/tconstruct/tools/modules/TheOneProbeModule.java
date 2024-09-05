@@ -14,7 +14,9 @@ import slimeknights.tconstruct.library.utils.RestrictedCompoundTag;
 
 import java.util.List;
 
-/** Module implementing the one probe on held tools and helmets */
+/**
+ * Module implementing the one probe on held tools and helmets
+ */
 public enum TheOneProbeModule implements ModifierModule, RawDataModifierHook {
   INSTANCE;
 

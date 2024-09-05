@@ -33,17 +33,28 @@ import java.util.function.BiFunction;
  */
 @RequiredArgsConstructor
 public class InventoryModifier extends Modifier implements InventoryModifierHook, VolatileDataModifierHook, ValidateModifierHook, ModifierRemovalHook {
-  /** Mod Data NBT mapper to get a compound list */
-  protected static final BiFunction<CompoundTag,String,ListTag> GET_COMPOUND_LIST = (nbt, name) -> nbt.getList(name, Tag.TAG_COMPOUND);
-  /** Error for if the container has items preventing modifier removal */
+
+  /**
+   * Mod Data NBT mapper to get a compound list
+   */
+  protected static final BiFunction<CompoundTag, String, ListTag> GET_COMPOUND_LIST = (nbt, name) -> nbt.getList(name, Tag.TAG_COMPOUND);
+  /**
+   * Error for if the container has items preventing modifier removal
+   */
   private static final Component HAS_ITEMS = TConstruct.makeTranslation("modifier", "inventory_cannot_remove");
-  /** NBT key to store the slot for a stack */
+  /**
+   * NBT key to store the slot for a stack
+   */
   protected static final String TAG_SLOT = "Slot";
 
-  /** Persistent data key for the inventory storage, if null uses the modifier ID */
+  /**
+   * Persistent data key for the inventory storage, if null uses the modifier ID
+   */
   @Nullable
   private final ResourceLocation inventoryKey;
-  /** Number of slots to add per modifier level */
+  /**
+   * Number of slots to add per modifier level
+   */
   protected final int slotsPerLevel;
 
   public InventoryModifier(int slotsPerLevel) {
@@ -56,7 +67,9 @@ public class InventoryModifier extends Modifier implements InventoryModifierHook
     hookBuilder.addHook(this, ToolInventoryCapability.HOOK, ModifierHooks.VOLATILE_DATA, ModifierHooks.REMOVE);
   }
 
-  /** Gets the inventory key used for NBT serializing */
+  /**
+   * Gets the inventory key used for NBT serializing
+   */
   protected ResourceLocation getInventoryKey() {
     return inventoryKey == null ? getId() : inventoryKey;
   }
@@ -69,9 +82,10 @@ public class InventoryModifier extends Modifier implements InventoryModifierHook
   /**
    * Same as {@link ValidateModifierHook#validate(IToolStackView, ModifierEntry)} but allows passing in a max slots count.
    * Allows the subclass to validate on a different max slots if needed
-   * @param tool      Tool to check
-   * @param maxSlots  Max slots to use in the check
-   * @return  True if the number of slots is valid
+   *
+   * @param tool     Tool to check
+   * @param maxSlots Max slots to use in the check
+   * @return True if the number of slots is valid
    */
   @Nullable
   protected Component validateForMaxSlots(IToolStackView tool, int maxSlots) {
@@ -85,7 +99,7 @@ public class InventoryModifier extends Modifier implements InventoryModifierHook
         }
         // first, see whether we have any available slots
         BitSet freeSlots = new BitSet(maxSlots);
-        freeSlots.set(0, maxSlots-1, true);
+        freeSlots.set(0, maxSlots - 1, true);
         for (int i = 0; i < listNBT.size(); i++) {
           freeSlots.set(listNBT.getCompound(i).getInt(TAG_SLOT), false);
         }
@@ -177,7 +191,9 @@ public class InventoryModifier extends Modifier implements InventoryModifierHook
     }
   }
 
-  /** Gets the number of slots for this modifier */
+  /**
+   * Gets the number of slots for this modifier
+   */
   public int getSlots(INamespacedNBTView volatileData, ModifierEntry modifier) {
     return modifier.intEffectiveLevel() * slotsPerLevel;
   }
@@ -187,7 +203,9 @@ public class InventoryModifier extends Modifier implements InventoryModifierHook
     return getSlots(tool.getVolatileData(), modifier);
   }
 
-  /** Writes a stack to NBT, including the slot */
+  /**
+   * Writes a stack to NBT, including the slot
+   */
   protected static CompoundTag write(ItemStack stack, int slot) {
     CompoundTag compound = new CompoundTag();
     stack.save(compound);

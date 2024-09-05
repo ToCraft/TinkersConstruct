@@ -1,7 +1,7 @@
 package slimeknights.tconstruct.fluids.data;
 
 import com.google.gson.JsonObject;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceKey;
@@ -13,17 +13,22 @@ import slimeknights.mantle.data.GenericDataProvider;
 
 import java.io.IOException;
 import java.util.Map.Entry;
+import java.util.concurrent.CompletableFuture;
 
-/** Quick and dirty data provider to generate blockstate files for fluids */
+/**
+ * Quick and dirty data provider to generate blockstate files for fluids
+ */
 public class FluidBlockstateModelProvider extends GenericDataProvider {
+
   private final String modId;
+
   public FluidBlockstateModelProvider(DataGenerator generator, String modId) {
     super(generator, PackType.CLIENT_RESOURCES, "blockstates");
     this.modId = modId;
   }
 
   @Override
-  public void run(CachedOutput cache) throws IOException {
+  public CompletableFuture<?> run(CachedOutput cache) {
     // statically created JSON to reference block/fluid, which is just a dummy model
     JsonObject normal = new JsonObject();
     normal.addProperty("model", "tconstruct:block/fluid");
@@ -33,12 +38,13 @@ public class FluidBlockstateModelProvider extends GenericDataProvider {
     blockstate.add("variants", variants);
 
     // loop over all liquid blocks, adding a blockstate for them
-    for (Entry<ResourceKey<Block>,Block> entry : Registry.BLOCK.entrySet()) {
+    for (Entry<ResourceKey<Block>, Block> entry : BuiltInRegistries.BLOCK.entrySet()) {
       ResourceLocation id = entry.getKey().location();
       if (id.getNamespace().equals(modId) && entry.getValue() instanceof LiquidBlock) {
         saveJson(cache, id, blockstate);
       }
     }
+    return CompletableFuture.completedFuture(null);
   }
 
   @Override

@@ -16,8 +16,12 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import java.util.List;
 
-/** Makes the tool effective based on the passed predicate */
-public record IsEffectiveModule(IJsonPredicate<BlockState> predicate, boolean ignoreTier) implements IsEffectiveToolHook, ToolModule {
+/**
+ * Makes the tool effective based on the passed predicate
+ */
+public record IsEffectiveModule(IJsonPredicate<BlockState> predicate,
+                                boolean ignoreTier) implements IsEffectiveToolHook, ToolModule {
+
   public static final RecordLoadable<IsEffectiveModule> LOADER = RecordLoadable.create(
     BlockPredicate.LOADER.directField("predicate_type", IsEffectiveModule::predicate),
     BooleanLoadable.INSTANCE.defaultField("ignore_tier", false, false, IsEffectiveModule::ignoreTier),
@@ -28,7 +32,9 @@ public record IsEffectiveModule(IJsonPredicate<BlockState> predicate, boolean ig
     this(predicate, false);
   }
 
-  /** Module for effectiveness based on a tag */
+  /**
+   * Module for effectiveness based on a tag
+   */
   public static IsEffectiveModule tag(TagKey<Block> tag) {
     return new IsEffectiveModule(BlockPredicate.tag(tag), false);
   }

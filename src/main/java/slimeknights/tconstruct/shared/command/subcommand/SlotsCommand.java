@@ -22,41 +22,49 @@ import slimeknights.tconstruct.shared.command.argument.SlotTypeArgument;
 
 import java.util.List;
 
-/** Command to apply extra modifier slots, comparable to the creative modifier */
+/**
+ * Command to apply extra modifier slots, comparable to the creative modifier
+ */
 public class SlotsCommand {
+
   private static final String ADD_SUCCESS = TConstruct.makeTranslationKey("command", "slots.success.add.single");
   private static final String ADD_SUCCESS_MULTIPLE = TConstruct.makeTranslationKey("command", "slots.success.add.multiple");
   private static final String SET_SUCCESS = TConstruct.makeTranslationKey("command", "slots.success.set.single");
   private static final String SET_SUCCESS_MULTIPLE = TConstruct.makeTranslationKey("command", "slots.success.set.multiple");
   private static final SimpleCommandExceptionType INVALID_SLOT_COUNT = new SimpleCommandExceptionType(TConstruct.makeTranslation("command", "slots.failure.invalid_count"));
-  private static final DynamicCommandExceptionType VALIDATION_ERROR = new DynamicCommandExceptionType(error -> (Component)error);
+  private static final DynamicCommandExceptionType VALIDATION_ERROR = new DynamicCommandExceptionType(error -> (Component) error);
 
   /**
    * Registers this sub command with the root command
-   * @param subCommand  Command builder
+   *
+   * @param subCommand Command builder
    */
   public static void register(LiteralArgumentBuilder<CommandSourceStack> subCommand) {
     subCommand.requires(sender -> sender.hasPermission(MantleCommand.PERMISSION_GAME_COMMANDS))
-              .then(Commands.argument("targets", EntityArgument.entities())
-                            // slots <target> add <slot_type> [<count>]
-                            .then(Commands.literal("add")
-                                          .then(Commands.argument("slot_type", SlotTypeArgument.slotType(false))
-                                                        .executes(context -> run(context, Operation.ADD, 1))
-                                                        .then(Commands.argument("count", IntegerArgumentType.integer())
-                                                                      .executes(context -> run(context, Operation.ADD)))))
-                            // slots <target> set <slot_type> <count>
-                            .then(Commands.literal("set")
-                                          .then(Commands.argument("slot_type", SlotTypeArgument.slotType(false))
-                                                        .then(Commands.argument("count", IntegerArgumentType.integer(0))
-                                                                      .executes(context -> run(context, Operation.SET))))));
+      .then(Commands.argument("targets", EntityArgument.entities())
+        // slots <target> add <slot_type> [<count>]
+        .then(Commands.literal("add")
+          .then(Commands.argument("slot_type", SlotTypeArgument.slotType(false))
+            .executes(context -> run(context, Operation.ADD, 1))
+            .then(Commands.argument("count", IntegerArgumentType.integer())
+              .executes(context -> run(context, Operation.ADD)))))
+        // slots <target> set <slot_type> <count>
+        .then(Commands.literal("set")
+          .then(Commands.argument("slot_type", SlotTypeArgument.slotType(false))
+            .then(Commands.argument("count", IntegerArgumentType.integer(0))
+              .executes(context -> run(context, Operation.SET))))));
   }
 
-  /** Runs the command with a count argument */
+  /**
+   * Runs the command with a count argument
+   */
   private static int run(CommandContext<CommandSourceStack> context, Operation op) throws CommandSyntaxException {
     return run(context, op, IntegerArgumentType.getInteger(context, "count"));
   }
 
-  /** Runs the command */
+  /**
+   * Runs the command
+   */
   private static int run(CommandContext<CommandSourceStack> context, Operation op, int count) throws CommandSyntaxException {
     if (count == 0 && op != Operation.SET) {
       throw INVALID_SLOT_COUNT.create();
@@ -105,5 +113,5 @@ public class SlotsCommand {
     return size;
   }
 
-  private enum Operation { ADD, SET }
+  private enum Operation {ADD, SET}
 }

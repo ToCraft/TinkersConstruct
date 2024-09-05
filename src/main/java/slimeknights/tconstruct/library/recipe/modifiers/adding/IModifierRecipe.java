@@ -5,12 +5,19 @@ import slimeknights.tconstruct.library.tools.SlotType;
 
 import javax.annotation.Nullable;
 
-/** Interface for all recipes that add a modifier, for looking up recipe usage */
+/**
+ * Interface for all recipes that add a modifier, for looking up recipe usage
+ */
 public interface IModifierRecipe {
-  /** Gets the modifier that this recipe adds */
+
+  /**
+   * Gets the modifier that this recipe adds
+   */
   Modifier getModifier();
 
-  /** Gets the type of slot used by this recipe */
+  /**
+   * Gets the type of slot used by this recipe
+   */
   @Nullable
   default SlotType getSlotType() {
     return null;

@@ -14,16 +14,23 @@ import slimeknights.tconstruct.library.utils.RomanNumeralHelper;
 import java.util.function.BiFunction;
 
 public interface ModifierLevelDisplay extends IHaveLoader {
-  /** Default display, listing name followed by a roman numeral for level */
+
+  /**
+   * Default display, listing name followed by a roman numeral for level
+   */
   ModifierLevelDisplay DEFAULT = simple((modifier, level) ->
     modifier.applyStyle(Component.translatable(modifier.getTranslationKey())
       .append(" ")
       .append(RomanNumeralHelper.getNumeral(level))));
 
-  /** Loader instance */
+  /**
+   * Loader instance
+   */
   DefaultingLoaderRegistry<ModifierLevelDisplay> LOADER = new DefaultingLoaderRegistry<>("Modifier Level Display", DEFAULT, true);
 
-  /** Gets the name for a modifier for the given level */
+  /**
+   * Gets the name for a modifier for the given level
+   */
   Component nameForLevel(Modifier modifier, int level);
 
   @Override
@@ -32,18 +39,24 @@ public interface ModifierLevelDisplay extends IHaveLoader {
 
   /* Non-default implementations */
 
-  /** Displays just the name, for modifiers where multiple levels has no effect */
+  /**
+   * Displays just the name, for modifiers where multiple levels has no effect
+   */
   ModifierLevelDisplay NO_LEVELS = simple((modifier, level) -> modifier.getDisplayName());
 
-  /** Displays just the name for the first level, for modifiers that can have multiple levels but don't by design */
-  ModifierLevelDisplay SINGLE_LEVEL = simple((modifier, level) ->  {
+  /**
+   * Displays just the name for the first level, for modifiers that can have multiple levels but don't by design
+   */
+  ModifierLevelDisplay SINGLE_LEVEL = simple((modifier, level) -> {
     if (level == 1) {
       return modifier.getDisplayName();
     }
     return DEFAULT.nameForLevel(modifier, level);
   });
 
-  /** Displays level with pluses instead of numbers */
+  /**
+   * Displays level with pluses instead of numbers
+   */
   ModifierLevelDisplay PLUSES = simple((modifier, level) -> {
     if (level > 1) {
       return modifier.applyStyle(Component.translatable(modifier.getTranslationKey()).append("+".repeat(level - 1)));
@@ -51,8 +64,10 @@ public interface ModifierLevelDisplay extends IHaveLoader {
     return modifier.getDisplayName();
   });
 
-  /** Creates a simple level display singleton */
-  static ModifierLevelDisplay simple(BiFunction<Modifier,Integer,Component> name) {
+  /**
+   * Creates a simple level display singleton
+   */
+  static ModifierLevelDisplay simple(BiFunction<Modifier, Integer, Component> name) {
     return SingletonLoader.singleton(loader -> new ModifierLevelDisplay() {
       @Override
       public Component nameForLevel(Modifier modifier, int level) {
@@ -68,10 +83,12 @@ public interface ModifierLevelDisplay extends IHaveLoader {
 
   /**
    * Name that is unique for the first several levels
-   * @param unique       Number of levels with unique names
-   * @param firstUnique  If true, first level has a unique name. If false, first level uses the levelless modifier name
+   *
+   * @param unique      Number of levels with unique names
+   * @param firstUnique If true, first level has a unique name. If false, first level uses the levelless modifier name
    */
   record UniqueForLevels(int unique, boolean firstUnique) implements ModifierLevelDisplay {
+
     public static final RecordLoadable<UniqueForLevels> LOADER = RecordLoadable.create(
       IntLoadable.FROM_ONE.requiredField("unique_until", UniqueForLevels::unique),
       BooleanLoadable.INSTANCE.defaultField("first_unique", false, UniqueForLevels::firstUnique),

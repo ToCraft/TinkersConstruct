@@ -10,6 +10,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryCodecs;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
@@ -34,13 +36,17 @@ import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 
-/** Extension of {@link MangroveRootPlacer} to allow more root variants */
+/**
+ * Extension of {@link MangroveRootPlacer} to allow more root variants
+ */
 public class ExtraRootVariantPlacer extends MangroveRootPlacer {
+
   public static final Codec<ExtraRootVariantPlacer> CODEC = RecordCodecBuilder.create(inst -> rootPlacerParts(inst).and(inst.group(
     MangroveRootPlacement.CODEC.fieldOf("mangrove_root_placement").forGetter(p -> p.mangroveRootPlacement),
     RootVariant.CODEC.listOf().fieldOf("root_variants").forGetter(p -> p.rootVariants))).apply(inst, ExtraRootVariantPlacer::new));
 
   private final List<RootVariant> rootVariants;
+
   public ExtraRootVariantPlacer(IntProvider pTrunkOffset, BlockStateProvider pRootProvider, Optional<AboveRootPlacement> pAboveRootPlacement, MangroveRootPlacement mangrovePlacement, List<RootVariant> rootVariants) {
     super(pTrunkOffset, pRootProvider, pAboveRootPlacement, mangrovePlacement);
     this.rootVariants = rootVariants;
@@ -52,7 +58,7 @@ public class ExtraRootVariantPlacer extends MangroveRootPlacer {
   }
 
   @Override
-  protected void placeRoot(LevelSimulatedReader level, BiConsumer<BlockPos,BlockState> placer, RandomSource pRandom, BlockPos pos, TreeConfiguration pTreeConfig) {
+  protected void placeRoot(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> placer, RandomSource pRandom, BlockPos pos, TreeConfiguration pTreeConfig) {
     for (RootVariant variant : rootVariants) {
       if (level.isStateAtPosition(pos, variant)) {
         placer.accept(pos, this.getPotentiallyWaterloggedState(level, pos, variant.state.getState(pRandom, pos)));
@@ -62,10 +68,13 @@ public class ExtraRootVariantPlacer extends MangroveRootPlacer {
     super.placeRoot(level, placer, pRandom, pos, pTreeConfig);
   }
 
-  /** Variant of roots to replace in the tree */
+  /**
+   * Variant of roots to replace in the tree
+   */
   public record RootVariant(HolderSet<Block> holder, BlockStateProvider state) implements Predicate<BlockState> {
+
     public static final Codec<RootVariant> CODEC = RecordCodecBuilder.create(inst -> inst.group(
-      RegistryCodecs.homogeneousList(Registry.BLOCK_REGISTRY).fieldOf("matches").forGetter(RootVariant::holder),
+      RegistryCodecs.homogeneousList(Registries.BLOCK).fieldOf("matches").forGetter(RootVariant::holder),
       BlockStateProvider.CODEC.fieldOf("state_provider").forGetter(RootVariant::state)).apply(inst, RootVariant::new));
 
     @Override
@@ -74,15 +83,20 @@ public class ExtraRootVariantPlacer extends MangroveRootPlacer {
     }
   }
 
-  /** Creates a new builder for a placer */
+  /**
+   * Creates a new builder for a placer
+   */
   public static Builder builder() {
     return new Builder();
   }
 
-  /** Builder for mangrove style roots */
+  /**
+   * Builder for mangrove style roots
+   */
   @Setter
   @Accessors(fluent = true)
   public static class Builder {
+
     private IntProvider trunkOffset = null;
     @Setter
     private BlockStateProvider roots = null;
@@ -96,7 +110,9 @@ public class ExtraRootVariantPlacer extends MangroveRootPlacer {
 
     private Builder() {}
 
-    /** Sets the root to a block */
+    /**
+     * Sets the root to a block
+     */
     @CanIgnoreReturnValue
     public Builder rootBlock(Block block) {
       return roots(BlockStateProvider.simple(block));
@@ -104,9 +120,10 @@ public class ExtraRootVariantPlacer extends MangroveRootPlacer {
 
     /**
      * Adds a new root variant
-     * @param holder  Replacement condition
-     * @param state   Replacement state
-     * @return  Builder instance
+     *
+     * @param holder Replacement condition
+     * @param state  Replacement state
+     * @return Builder instance
      */
     @CanIgnoreReturnValue
     public Builder rootVariant(HolderSet<Block> holder, BlockStateProvider state) {
@@ -116,9 +133,10 @@ public class ExtraRootVariantPlacer extends MangroveRootPlacer {
 
     /**
      * Creates a root variant with most common configuration
-     * @param rootVariant  Root variant
-     * @param replace      Block to replace
-     * @return  Builder instance
+     *
+     * @param rootVariant Root variant
+     * @param replace     Block to replace
+     * @return Builder instance
      */
     @CanIgnoreReturnValue
     public Builder rootVariant(Block rootVariant, Block... replace) {
@@ -127,22 +145,27 @@ public class ExtraRootVariantPlacer extends MangroveRootPlacer {
 
     /**
      * Adds root variants for slime types
-     * @param slimyRoots  Slimy roots to add
-     * @return  Builder instance
+     *
+     * @param slimyRoots Slimy roots to add
+     * @return Builder instance
      */
     @CanIgnoreReturnValue
-    public Builder slimyRoots(EnumObject<SlimeType,Block> slimyRoots) {
+    public Builder slimyRoots(EnumObject<SlimeType, Block> slimyRoots) {
       slimyRoots.forEach((type, block) -> rootVariant(block, block, TinkerWorld.congealedSlime.get(type)));
       return this;
     }
 
-    /** Sets the blocks that the roots can grow though */
+    /**
+     * Sets the blocks that the roots can grow though
+     */
     @CanIgnoreReturnValue
     public Builder canGrowThroughTag(TagKey<Block> tag) {
-      return canGrowThrough(Registry.BLOCK.getOrCreateTag(tag));
+      return canGrowThrough(BuiltInRegistries.BLOCK.getOrCreateTag(tag));
     }
 
-    /** Builds the final placer */
+    /**
+     * Builds the final placer
+     */
     public MangroveRootPlacer build() {
       if (trunkOffset == null) throw new IllegalStateException("Must set trunk offset");
       if (roots == null) throw new IllegalStateException("Must set roots");
@@ -157,7 +180,9 @@ public class ExtraRootVariantPlacer extends MangroveRootPlacer {
       return new ExtraRootVariantPlacer(trunkOffset, roots, Optional.ofNullable(aboveRootPlacement), mangrovePlacement, rootVariants.stream().skip(1).toList());
     }
 
-    /** Builds the placer into an optional */
+    /**
+     * Builds the placer into an optional
+     */
     public Optional<RootPlacer> buildOptional() {
       return Optional.of(build());
     }

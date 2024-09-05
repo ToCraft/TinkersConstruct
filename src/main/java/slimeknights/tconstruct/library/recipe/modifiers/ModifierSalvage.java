@@ -28,6 +28,7 @@ import javax.annotation.Nullable;
  * Shared logic for main types of salvage recipes
  */
 public class ModifierSalvage implements ICustomOutputRecipe<Container> {
+
   public static final RecordLoadable<ModifierSalvage> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(),
     IngredientLoadable.DISALLOW_EMPTY.requiredField("tools", r -> r.toolIngredient),
@@ -39,17 +40,27 @@ public class ModifierSalvage implements ICustomOutputRecipe<Container> {
 
   @Getter
   protected final ResourceLocation id;
-  /** Ingredient determining tools matched by this */
+  /**
+   * Ingredient determining tools matched by this
+   */
   protected final Ingredient toolIngredient;
-  /** Max size of the tool for this modifier. If the tool size is smaller, the salvage bonus will be reduced */
+  /**
+   * Max size of the tool for this modifier. If the tool size is smaller, the salvage bonus will be reduced
+   */
   @Getter
   protected final int maxToolSize;
-  /** Modifier represented by this recipe */
+  /**
+   * Modifier represented by this recipe
+   */
   @Getter
   protected final ModifierId modifier;
-  /** Level for this to be applicable */
+  /**
+   * Level for this to be applicable
+   */
   protected final IntRange level;
-  /** Slots restored by this recipe, if null no slots are restored */
+  /**
+   * Slots restored by this recipe, if null no slots are restored
+   */
   @Nullable
   protected final SlotCount slots;
 
@@ -65,6 +76,7 @@ public class ModifierSalvage implements ICustomOutputRecipe<Container> {
 
   /**
    * Checks if the given tool stack and level are applicable for this salvage
+   *
    * @param stack         Tool item stack
    * @param tool          Tool stack instance, for potential extensions
    * @param originalLevel Level to check
@@ -77,7 +89,8 @@ public class ModifierSalvage implements ICustomOutputRecipe<Container> {
 
   /**
    * Updates the tool data in light of removing this modifier
-   * @param tool  Tool instance
+   *
+   * @param tool Tool instance
    */
   public void updateTool(IToolStackView tool) {
     if (slots != null) {
@@ -90,7 +103,9 @@ public class ModifierSalvage implements ICustomOutputRecipe<Container> {
     return TinkerRecipeTypes.DATA.get();
   }
 
-  /** @deprecated Use {@link #matches(ItemStack, IToolStackView, int)} */
+  /**
+   * @deprecated Use {@link #matches(ItemStack, IToolStackView, int)}
+   */
   @Deprecated
   @Override
   public boolean matches(Container inv, Level level) {

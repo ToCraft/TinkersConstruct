@@ -33,11 +33,14 @@ import static slimeknights.tconstruct.library.modifiers.ModifierEntry.VALID_LEVE
 
 /**
  * Module to replace blocks with another block while walking.
- * @param replacements  List of replacements to perform
- * @param radius        Range to affect
- * @param tool          Tool condition
+ *
+ * @param replacements List of replacements to perform
+ * @param radius       Range to affect
+ * @param tool         Tool condition
  */
-public record ReplaceBlockWalkerModule(List<BlockReplacement> replacements, LevelingValue radius, IJsonPredicate<IToolContext> tool) implements ArmorWalkRadiusModule<Void>, ModifierModule {
+public record ReplaceBlockWalkerModule(List<BlockReplacement> replacements, LevelingValue radius,
+                                       IJsonPredicate<IToolContext> tool) implements ArmorWalkRadiusModule<Void>, ModifierModule {
+
   public static final RecordLoadable<ReplaceBlockWalkerModule> LOADER = RecordLoadable.create(
     BlockReplacement.LOADABLE.list().requiredField("replace", ReplaceBlockWalkerModule::replacements),
     LevelingValue.LOADABLE.requiredField("radius", ReplaceBlockWalkerModule::radius),
@@ -66,8 +69,8 @@ public record ReplaceBlockWalkerModule(List<BlockReplacement> replacements, Leve
           // target handles matching any desired states like fluid level
           BlockState state = replacement.state;
           if (replacement.target.matches(world.getBlockState(mutable))
-              && state.canSurvive(world, mutable) && world.isUnobstructed(state, mutable, CollisionContext.empty())
-              && !ForgeEventFactory.onBlockPlace(living, BlockSnapshot.create(world.dimension(), world, mutable), Direction.UP)) {
+            && state.canSurvive(world, mutable) && world.isUnobstructed(state, mutable, CollisionContext.empty())
+            && !ForgeEventFactory.onBlockPlace(living, BlockSnapshot.create(world.dimension(), world, mutable), Direction.UP)) {
             world.setBlockAndUpdate(mutable, state);
             world.scheduleTick(mutable, state.getBlock(), Mth.nextInt(living.getRandom(), 60, 120));
 
@@ -79,8 +82,11 @@ public record ReplaceBlockWalkerModule(List<BlockReplacement> replacements, Leve
     }
   }
 
-  /** Represents a single replacement handled by this module */
+  /**
+   * Represents a single replacement handled by this module
+   */
   private record BlockReplacement(IJsonPredicate<BlockState> target, BlockState state, IntRange level) {
+
     public static final RecordLoadable<BlockReplacement> LOADABLE = RecordLoadable.create(
       BlockPredicate.LOADER.defaultField("target", BlockReplacement::target),
       BlockStateLoadable.DIFFERENCE.directField(BlockReplacement::state), // pulling from this object directly means the keys used are block and properties
@@ -102,6 +108,7 @@ public record ReplaceBlockWalkerModule(List<BlockReplacement> replacements, Leve
 
   @SuppressWarnings("unused")  // API
   public static class Builder implements LevelingValue.Builder<ReplaceBlockWalkerModule> {
+
     private final ImmutableList.Builder<BlockReplacement> replacements = ImmutableList.builder();
     @Setter
     @Accessors(fluent = true)
@@ -109,28 +116,38 @@ public record ReplaceBlockWalkerModule(List<BlockReplacement> replacements, Leve
 
     private Builder() {}
 
-    /** Replaces at the given level range */
+    /**
+     * Replaces at the given level range
+     */
     private Builder replaceLevelRange(IJsonPredicate<BlockState> target, BlockState replacement, IntRange modifierLevel) {
       this.replacements.add(new BlockReplacement(target, replacement, modifierLevel));
       return this;
     }
 
-    /** Adds the given replacement only at the given level range */
+    /**
+     * Adds the given replacement only at the given level range
+     */
     public Builder replaceLevelRange(IJsonPredicate<BlockState> target, BlockState replacement, int min, int max) {
       return replaceLevelRange(target, replacement, VALID_LEVEL.range(min, max));
     }
 
-    /** Adds the given replacement only at the given level range */
+    /**
+     * Adds the given replacement only at the given level range
+     */
     public Builder replaceMinLevel(IJsonPredicate<BlockState> target, BlockState replacement, int max) {
       return replaceLevelRange(target, replacement, VALID_LEVEL.max(max));
     }
 
-    /** Adds the given replacement only at the given level range */
+    /**
+     * Adds the given replacement only at the given level range
+     */
     public Builder replaceMaxLevel(IJsonPredicate<BlockState> target, BlockState replacement, int min) {
       return replaceLevelRange(target, replacement, VALID_LEVEL.min(min));
     }
 
-    /** Adds the given replacement only at the given level range */
+    /**
+     * Adds the given replacement only at the given level range
+     */
     public Builder replaceAlways(IJsonPredicate<BlockState> target, BlockState replacement) {
       return replaceLevelRange(target, replacement, VALID_LEVEL);
     }

@@ -39,13 +39,14 @@ import java.util.EnumMap;
 import java.util.Optional;
 
 public class FaucetBlock extends Block implements EntityBlock {
+
   public static final DirectionProperty FACING = BlockStateProperties.FACING_HOPPER;
-  private static final EnumMap<Direction,VoxelShape> SHAPES = Maps.newEnumMap(ImmutableMap.of(
-    Direction.DOWN,  Shapes.join(box( 4, 10,  4, 12, 16, 12), box( 6, 10,  6, 10, 16, 10), BooleanOp.ONLY_FIRST),
-    Direction.NORTH, Shapes.join(box( 4,  4, 10, 12, 10, 16), box( 6,  6, 10, 10, 10, 16), BooleanOp.ONLY_FIRST),
-    Direction.SOUTH, Shapes.join(box( 4,  4,  0, 12, 10,  6), box( 6,  6,  0, 10, 10,  6), BooleanOp.ONLY_FIRST),
-    Direction.WEST,  Shapes.join(box(10,  4,  4, 16, 10, 12), box(10,  6,  6, 16, 10, 10), BooleanOp.ONLY_FIRST),
-    Direction.EAST,  Shapes.join(box( 0,  4,  4,  6, 10, 12), box( 0,  6,  6,  6, 10, 10), BooleanOp.ONLY_FIRST)));
+  private static final EnumMap<Direction, VoxelShape> SHAPES = Maps.newEnumMap(ImmutableMap.of(
+    Direction.DOWN, Shapes.join(box(4, 10, 4, 12, 16, 12), box(6, 10, 6, 10, 16, 10), BooleanOp.ONLY_FIRST),
+    Direction.NORTH, Shapes.join(box(4, 4, 10, 12, 10, 16), box(6, 6, 10, 10, 10, 16), BooleanOp.ONLY_FIRST),
+    Direction.SOUTH, Shapes.join(box(4, 4, 0, 12, 10, 6), box(6, 6, 0, 10, 10, 6), BooleanOp.ONLY_FIRST),
+    Direction.WEST, Shapes.join(box(10, 4, 4, 16, 10, 12), box(10, 6, 6, 16, 10, 10), BooleanOp.ONLY_FIRST),
+    Direction.EAST, Shapes.join(box(0, 4, 4, 6, 10, 12), box(0, 6, 6, 6, 10, 10), BooleanOp.ONLY_FIRST)));
 
   public FaucetBlock(Properties properties) {
     super(properties);
@@ -129,9 +130,10 @@ public class FaucetBlock extends Block implements EntityBlock {
 
   /**
    * Gets the facuet tile entity at the given position
-   * @param world  World instance
-   * @param pos    Faucet position
-   * @return  Optional of faucet, empty if missing or wrong type
+   *
+   * @param world World instance
+   * @param pos   Faucet position
+   * @return Optional of faucet, empty if missing or wrong type
    */
   private Optional<FaucetBlockEntity> getFaucet(Level world, BlockPos pos) {
     return BlockEntityHelper.get(FaucetBlockEntity.class, world, pos);
@@ -143,15 +145,16 @@ public class FaucetBlock extends Block implements EntityBlock {
 
   /**
    * Adds particles to the faucet
-   * @param state    Faucet state
-   * @param worldIn  World instance
-   * @param pos      Faucet position
+   *
+   * @param state   Faucet state
+   * @param worldIn World instance
+   * @param pos     Faucet position
    */
   private static void addParticles(BlockState state, LevelAccessor worldIn, BlockPos pos) {
     Direction direction = state.getValue(FACING);
-    double x = (double)pos.getX() + 0.5D - 0.3D * (double)direction.getStepX();
-    double y = (double)pos.getY() + 0.5D - 0.3D * (double)direction.getStepY();
-    double z = (double)pos.getZ() + 0.5D - 0.3D * (double)direction.getStepZ();
+    double x = (double) pos.getX() + 0.5D - 0.3D * (double) direction.getStepX();
+    double y = (double) pos.getY() + 0.5D - 0.3D * (double) direction.getStepY();
+    double z = (double) pos.getZ() + 0.5D - 0.3D * (double) direction.getStepZ();
     worldIn.addParticle(new DustParticleOptions(RED, 0.5f), x, y, z, 0.0D, 0.0D, 0.0D);
   }
 

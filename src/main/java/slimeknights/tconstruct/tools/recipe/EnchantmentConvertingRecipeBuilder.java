@@ -13,9 +13,12 @@ import slimeknights.tconstruct.library.recipe.worktable.AbstractSizedIngredientR
 
 import java.util.function.Consumer;
 
-/** Builder for an enchantment converting recipe */
+/**
+ * Builder for an enchantment converting recipe
+ */
 @RequiredArgsConstructor(staticName = "converting")
 public class EnchantmentConvertingRecipeBuilder extends AbstractSizedIngredientRecipeBuilder<EnchantmentConvertingRecipeBuilder> {
+
   private final String name;
   private final boolean matchBook;
   private boolean returnInput = false;

@@ -13,35 +13,60 @@ import net.minecraft.server.level.ServerLevel;
 
 import javax.annotation.Nullable;
 
-/** Context for harvest related modifier hooks */
+/**
+ * Context for harvest related modifier hooks
+ */
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class ToolHarvestContext {
-  /** World containing the harvested block */
+
+  /**
+   * World containing the harvested block
+   */
   private final ServerLevel world;
-  /** Living entity harvesting the block */
+  /**
+   * Living entity harvesting the block
+   */
   private final LivingEntity living;
-  /** Player harvesting the block, null if not a player */
+  /**
+   * Player harvesting the block, null if not a player
+   */
   @Nullable
   private final ServerPlayer player;
-  /** State being harvested */
+  /**
+   * State being harvested
+   */
   private final BlockState state;
-  /** Position being harvested */
+  /**
+   * Position being harvested
+   */
   private final BlockPos pos;
-  /** Side of the block being hit */
+  /**
+   * Side of the block being hit
+   */
   private final Direction sideHit;
-  /** If true, this block can be harvested by the tool */
+  /**
+   * If true, this block can be harvested by the tool
+   */
   @Accessors(fluent = true)
   private final boolean canHarvest;
-  /** If true, the tool is effective on the block */
+  /**
+   * If true, the tool is effective on the block
+   */
   private final boolean isEffective;
 
   /* AOE context */
-  /** If true, this block is not the originally targeted block */
+  /**
+   * If true, this block is not the originally targeted block
+   */
   private final boolean isAOE;
-  /** Originally targeted position for AOE blocks. Will be the same as {@link #pos} for the original block */
+  /**
+   * Originally targeted position for AOE blocks. Will be the same as {@link #pos} for the original block
+   */
   private final BlockPos targetedPos;
-  /** Originally targeted block state. Will be the same as {@link #state} for the original block */
+  /**
+   * Originally targeted block state. Will be the same as {@link #state} for the original block
+   */
   private final BlockState targetedState;
 
   public ToolHarvestContext(ServerLevel world, ServerPlayer player, BlockState state, BlockPos pos, Direction sideHit, boolean canHarvest, boolean isEffective) {
@@ -72,7 +97,9 @@ public class ToolHarvestContext {
     this.targetedState = state;
   }
 
-  /** Creates a copy of this context for the given position */
+  /**
+   * Creates a copy of this context for the given position
+   */
   public ToolHarvestContext forPosition(BlockPos pos, BlockState state) {
     return new ToolHarvestContext(this.world, this.living, this.player, state, pos, this.sideHit, state.canHarvestBlock(world, pos, player), true, true, this.targetedPos, this.targetedState);
   }

@@ -34,12 +34,16 @@ import java.util.List;
 
 /**
  * Module implementing the depth protection modifier
- * @param baselineHeight  Y level of neutral behavior, buff goes negative above
- * @param neutralRange    Distance above baseline with no effect
- * @param amount          Multiplier to the protection level to grant
+ *
+ * @param baselineHeight Y level of neutral behavior, buff goes negative above
+ * @param neutralRange   Distance above baseline with no effect
+ * @param amount         Multiplier to the protection level to grant
  */
 // TODO: consider formula support in protection module
-public record DepthProtectionModule(IJsonPredicate<DamageSource> source, IJsonPredicate<LivingEntity> entity, float baselineHeight, float neutralRange, LevelingValue amount, ModifierCondition<IToolStackView> condition) implements ModifierModule, ProtectionModifierHook, TooltipModifierHook, ConditionalModule<IToolStackView> {
+public record DepthProtectionModule(IJsonPredicate<DamageSource> source, IJsonPredicate<LivingEntity> entity,
+                                    float baselineHeight, float neutralRange, LevelingValue amount,
+                                    ModifierCondition<IToolStackView> condition) implements ModifierModule, ProtectionModifierHook, TooltipModifierHook, ConditionalModule<IToolStackView> {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<DepthProtectionModule>defaultHooks(ModifierHooks.PROTECTION, ModifierHooks.TOOLTIP);
   public static final RecordLoadable<DepthProtectionModule> LOADER = RecordLoadable.create(
     DamageSourcePredicate.LOADER.defaultField("damage_source", DepthProtectionModule::source),
@@ -60,9 +64,11 @@ public record DepthProtectionModule(IJsonPredicate<DamageSource> source, IJsonPr
     return LOADER;
   }
 
-  /** Gets the boost given the parameters */
+  /**
+   * Gets the boost given the parameters
+   */
   public static float getBonusMultiplier(LivingEntity entity, float baselineHeight, float neutralRange) {
-    float y = (float)entity.getY();
+    float y = (float) entity.getY();
     if (y < baselineHeight) {
       // just a linear scale of boosting from 0 to 2
       return Math.min((baselineHeight - y) / baselineHeight, 2);
@@ -72,7 +78,7 @@ public record DepthProtectionModule(IJsonPredicate<DamageSource> source, IJsonPr
     if (y > debuffHeight) {
       return Math.max((debuffHeight - y) / baselineHeight, -1);
     }
-    return  0;
+    return 0;
   }
 
   @Override
@@ -109,6 +115,7 @@ public record DepthProtectionModule(IJsonPredicate<DamageSource> source, IJsonPr
   @Setter
   @Accessors(fluent = true)
   public static class Builder extends ModuleBuilder.Stack<Builder> implements LevelingValue.Builder<DepthProtectionModule> {
+
     private IJsonPredicate<DamageSource> source = DamageSourcePredicate.CAN_PROTECT;
     private IJsonPredicate<LivingEntity> entity = LivingEntityPredicate.ANY;
     private float baselineHeight;

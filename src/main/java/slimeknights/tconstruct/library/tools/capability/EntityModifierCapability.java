@@ -25,9 +25,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-/** Capability to allow an entity to store modifiers, used on projectiles fired from modifiable items */
+/**
+ * Capability to allow an entity to store modifiers, used on projectiles fired from modifiable items
+ */
 public class EntityModifierCapability {
-  /** Default instance to use with orElse */
+
+  /**
+   * Default instance to use with orElse
+   */
   public static final EntityModifiers EMPTY = new EntityModifiers() {
     @Override
     public ModifierNBT getModifiers() {
@@ -42,20 +47,30 @@ public class EntityModifierCapability {
 
   /* Static helpers */
 
-  /** List of predicates to check if the entity supports this capability */
+  /**
+   * List of predicates to check if the entity supports this capability
+   */
   private static final List<Predicate<Entity>> ENTITY_PREDICATES = new ArrayList<>();
 
-  /** Capability ID */
+  /**
+   * Capability ID
+   */
   private static final ResourceLocation ID = TConstruct.getResource("modifiers");
-  /** Capability type */
+  /**
+   * Capability type
+   */
   public static final Capability<EntityModifiers> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {});
 
-  /** Gets the data or an empty instance if missing */
+  /**
+   * Gets the data or an empty instance if missing
+   */
   public static ModifierNBT getOrEmpty(Entity entity) {
     return entity.getCapability(CAPABILITY).orElse(EMPTY).getModifiers();
   }
 
-  /** Checks if the given entity supports this capability */
+  /**
+   * Checks if the given entity supports this capability
+   */
   public static boolean supportCapability(Entity entity) {
     for (Predicate<Entity> entityPredicate : ENTITY_PREDICATES) {
       if (entityPredicate.test(entity)) {
@@ -65,18 +80,24 @@ public class EntityModifierCapability {
     return false;
   }
 
-  /** Registers a predicate of entites that need this capability */
+  /**
+   * Registers a predicate of entites that need this capability
+   */
   public static void registerEntityPredicate(Predicate<Entity> predicate) {
     ENTITY_PREDICATES.add(predicate);
   }
 
-  /** Registers this capability with relevant busses*/
+  /**
+   * Registers this capability with relevant busses
+   */
   public static void register() {
     FMLJavaModLoadingContext.get().getModEventBus().addListener(EventPriority.NORMAL, false, RegisterCapabilitiesEvent.class, event -> event.register(ModifierNBT.class));
     MinecraftForge.EVENT_BUS.addGenericListener(Entity.class, EntityModifierCapability::attachCapability);
   }
 
-  /** Event listener to attach the capability */
+  /**
+   * Event listener to attach the capability
+   */
   private static void attachCapability(AttachCapabilitiesEvent<Entity> event) {
     if (supportCapability(event.getObject())) {
       Provider provider = new Provider();
@@ -85,11 +106,16 @@ public class EntityModifierCapability {
     }
   }
 
-  /** Capability provider instance */
+  /**
+   * Capability provider instance
+   */
   private static class Provider implements ICapabilitySerializable<ListTag>, Runnable, EntityModifiers {
-    @Getter @Setter
+
+    @Getter
+    @Setter
     private ModifierNBT modifiers = ModifierNBT.EMPTY;
     private LazyOptional<EntityModifiers> capability;
+
     private Provider() {
       this.capability = LazyOptional.of(() -> this);
     }
@@ -119,12 +145,19 @@ public class EntityModifierCapability {
     }
   }
 
-  /** Interface for callers to use */
+  /**
+   * Interface for callers to use
+   */
   public interface EntityModifiers {
-    /** Gets the stored modifiers */
+
+    /**
+     * Gets the stored modifiers
+     */
     ModifierNBT getModifiers();
 
-    /** Sets the stored modifiers */
+    /**
+     * Sets the stored modifiers
+     */
     void setModifiers(ModifierNBT nbt);
   }
 }

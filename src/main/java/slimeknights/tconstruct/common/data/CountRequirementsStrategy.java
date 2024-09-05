@@ -7,7 +7,9 @@ import java.util.Collection;
 import java.util.List;
 
 public class CountRequirementsStrategy implements RequirementsStrategy {
+
   private final int[] sizes;
+
   public CountRequirementsStrategy(int... sizes) {
     this.sizes = sizes;
   }

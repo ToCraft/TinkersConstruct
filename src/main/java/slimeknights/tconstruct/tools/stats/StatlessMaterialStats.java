@@ -10,13 +10,17 @@ import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
 
 import java.util.List;
 
-/** Shared code for material stats types with no stats */
+/**
+ * Shared code for material stats types with no stats
+ */
 public enum StatlessMaterialStats implements IMaterialStats {
   BINDING("binding"),
   BOWSTRING("bowstring"),
   MAILLE("maille"),
   SHIELD_CORE("shield_core"),
-  /** Internal stat type that forces a repair kit to appear, used for things that repair without having a head stat */
+  /**
+   * Internal stat type that forces a repair kit to appear, used for things that repair without having a head stat
+   */
   REPAIR_KIT("repair_kit");
 
   private static final List<Component> LOCALIZED = List.of(IMaterialStats.makeTooltip(TConstruct.getResource("extra.no_stats")));

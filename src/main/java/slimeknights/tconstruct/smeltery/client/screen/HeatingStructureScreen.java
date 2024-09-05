@@ -2,6 +2,7 @@ package slimeknights.tconstruct.smeltery.client.screen;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -23,6 +24,7 @@ import javax.annotation.Nullable;
 import java.util.Objects;
 
 public class HeatingStructureScreen extends MultiModuleScreen<HeatingStructureContainerMenu> implements IScreenWithFluidTank {
+
   public static final ResourceLocation BACKGROUND = TConstruct.getResource("textures/gui/smeltery.png");
   private static final ElementScreen SCALA = new ElementScreen(176, 76, 52, 52, 256, 256);
 
@@ -38,7 +40,7 @@ public class HeatingStructureScreen extends MultiModuleScreen<HeatingStructureCo
     HeatingStructureBlockEntity te = container.getTile();
     if (te != null) {
       this.te = te;
-      this.tank = new GuiSmelteryTank(this, te.getTank(), 8, 16, SCALA.w, SCALA.h, Objects.requireNonNull(Registry.BLOCK_ENTITY_TYPE.getKey(te.getType())));
+      this.tank = new GuiSmelteryTank(this, te.getTank(), 8, 16, SCALA.w, SCALA.h, Objects.requireNonNull(BuiltInRegistries.BLOCK_ENTITY_TYPE.getKey(te.getType())));
       int slots = te.getMeltingInventory().getSlots();
       this.sideInventory = new HeatingStructureSideInventoryScreen(this, container.getSideInventory(), playerInventory, slots, HeatingStructureContainerMenu.calcColumns(slots));
       addModule(sideInventory);
@@ -60,10 +62,11 @@ public class HeatingStructureScreen extends MultiModuleScreen<HeatingStructureCo
     super.containerTick();
     // if the smeltery becomes invalid or the slot size changes, kill the UI
     if (te == null || !te.getBlockState().getValue(ControllerBlock.IN_STRUCTURE)
-        || te.getMeltingInventory().getSlots() != sideInventory.getSlotCount()) {
+      || te.getMeltingInventory().getSlots() != sideInventory.getSlotCount()) {
       this.onClose();
     }
   }
+
   @Override
   protected void renderBg(PoseStack matrices, float partialTicks, int mouseX, int mouseY) {
     // draw stuff with background
@@ -116,7 +119,7 @@ public class HeatingStructureScreen extends MultiModuleScreen<HeatingStructureCo
   @Override
   public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
     if (mouseButton == 0 && tank != null) {
-      tank.handleClick((int)mouseX - cornerX, (int)mouseY - cornerY);
+      tank.handleClick((int) mouseX - cornerX, (int) mouseY - cornerY);
     }
     return super.mouseClicked(mouseX, mouseY, mouseButton);
   }

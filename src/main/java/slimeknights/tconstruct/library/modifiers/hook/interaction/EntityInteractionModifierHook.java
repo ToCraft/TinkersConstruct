@@ -20,37 +20,43 @@ import java.util.List;
  * Hooks for standard interaction logic though entities. See {@link GeneralInteractionModifierHook} for general interaction and {@link BlockInteractionModifierHook} for blocks.
  */
 public interface EntityInteractionModifierHook {
+
   /**
-	 * Called when interacting with an entity before standard entity interaction.
+   * Called when interacting with an entity before standard entity interaction.
    * In general, its better to use {@link #afterEntityUse(IToolStackView, ModifierEntry, Player, LivingEntity, InteractionHand, InteractionSource)} for behavior more consistent with vanilla.
-   * @param tool       Tool performing interaction
-   * @param modifier   Modifier instance
-   * @param player     Interacting player
-   * @param target     Target of interaction
-   * @param hand       Hand used for interaction
-   * @param source     Source of the interaction
-   * @return  Return PASS or FAIL to allow vanilla handling, any other to stop vanilla and later modifiers from running.
-	 */
+   *
+   * @param tool     Tool performing interaction
+   * @param modifier Modifier instance
+   * @param player   Interacting player
+   * @param target   Target of interaction
+   * @param hand     Hand used for interaction
+   * @param source   Source of the interaction
+   * @return Return PASS or FAIL to allow vanilla handling, any other to stop vanilla and later modifiers from running.
+   */
   default InteractionResult beforeEntityUse(IToolStackView tool, ModifierEntry modifier, Player player, Entity target, InteractionHand hand, InteractionSource source) {
     return InteractionResult.PASS;
   }
 
   /**
    * Called when interacting with an entity after standard entity interaction.
-   * @param tool       Tool performing interaction
-   * @param modifier   Modifier instance
-   * @param player     Interacting player
-   * @param target     Target of interaction
-   * @param hand       Hand used for interaction
-   * @param source     Source of the interaction
-   * @return  Return PASS or FAIL to allow vanilla handling, any other to stop vanilla and later modifiers from running.
+   *
+   * @param tool     Tool performing interaction
+   * @param modifier Modifier instance
+   * @param player   Interacting player
+   * @param target   Target of interaction
+   * @param hand     Hand used for interaction
+   * @param source   Source of the interaction
+   * @return Return PASS or FAIL to allow vanilla handling, any other to stop vanilla and later modifiers from running.
    */
   default InteractionResult afterEntityUse(IToolStackView tool, ModifierEntry modifier, Player player, LivingEntity target, InteractionHand hand, InteractionSource source) {
     return InteractionResult.PASS;
   }
 
-  /** Logic to merge multiple interaction hooks into one */
+  /**
+   * Logic to merge multiple interaction hooks into one
+   */
   record FirstMerger(Collection<EntityInteractionModifierHook> modules) implements EntityInteractionModifierHook {
+
     @Override
     public InteractionResult beforeEntityUse(IToolStackView tool, ModifierEntry modifier, Player player, Entity target, InteractionHand hand, InteractionSource source) {
       InteractionResult result = InteractionResult.PASS;
@@ -77,7 +83,9 @@ public interface EntityInteractionModifierHook {
   }
 
 
-  /** Logic to left click an entity using interaction modifiers */
+  /**
+   * Logic to left click an entity using interaction modifiers
+   */
   static boolean leftClickEntity(ItemStack stack, Player player, Entity target) {
     ToolStack tool = ToolStack.from(stack);
     if (stack.is(TinkerTags.Items.INTERACTABLE_LEFT)) {

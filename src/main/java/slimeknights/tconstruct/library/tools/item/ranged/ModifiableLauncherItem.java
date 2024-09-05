@@ -63,13 +63,20 @@ import java.util.function.Consumer;
 import static slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook.KEY_DRAWTIME;
 import static slimeknights.tconstruct.tools.modifiers.upgrades.ranged.ScopeModifier.SCOPE;
 
-/** Base class for any items that launch projectiles */
+/**
+ * Base class for any items that launch projectiles
+ */
 public abstract class ModifiableLauncherItem extends ProjectileWeaponItem implements IModifiableDisplay {
-  /** Tool definition for the given tool */
+
+  /**
+   * Tool definition for the given tool
+   */
   @Getter
   private final ToolDefinition toolDefinition;
 
-  /** Cached tool for rendering on UIs */
+  /**
+   * Cached tool for rendering on UIs
+   */
   private ItemStack toolForRendering;
 
   public ModifiableLauncherItem(Properties properties, ToolDefinition toolDefinition) {
@@ -119,7 +126,7 @@ public abstract class ModifiableLauncherItem extends ProjectileWeaponItem implem
   }
 
   @Override
-  public Map<Enchantment,Integer> getAllEnchantments(ItemStack stack) {
+  public Map<Enchantment, Integer> getAllEnchantments(ItemStack stack) {
     return EnchantmentModifierHook.getAllEnchantments(stack);
   }
 
@@ -257,7 +264,7 @@ public abstract class ModifiableLauncherItem extends ProjectileWeaponItem implem
   }
 
   @Override
-  public Multimap<Attribute,AttributeModifier> getAttributeModifiers(IToolStackView tool, EquipmentSlot slot) {
+  public Multimap<Attribute, AttributeModifier> getAttributeModifiers(IToolStackView tool, EquipmentSlot slot) {
     return AttributesModifierHook.getHeldAttributeModifiers(tool, slot);
   }
 
@@ -301,8 +308,7 @@ public abstract class ModifiableLauncherItem extends ProjectileWeaponItem implem
       if (getUseDuration(bow) - chargeRemaining == ModifierUtil.getPersistentInt(bow, KEY_DRAWTIME, -1)) {
         level.playSound(null, living.getX(), living.getY(), living.getZ(), SoundEvents.CROSSBOW_LOADING_MIDDLE, SoundSource.PLAYERS, 0.75F, 1.0F);
       }
-    }
-    else if (ModifierUtil.getModifierLevel(bow, TinkerModifiers.scope.getId()) > 0) {
+    } else if (ModifierUtil.getModifierLevel(bow, TinkerModifiers.scope.getId()) > 0) {
       int chargeTime = this.getUseDuration(bow) - chargeRemaining;
       if (chargeTime > 0) {
         float drawtime = ModifierUtil.getPersistentInt(bow, KEY_DRAWTIME, -1);
@@ -388,7 +394,9 @@ public abstract class ModifiableLauncherItem extends ProjectileWeaponItem implem
 
   /* Multishot helper */
 
-  /** Gets the angle to fire the first arrow, each additional arrow offsets an additional 10 degrees */
+  /**
+   * Gets the angle to fire the first arrow, each additional arrow offsets an additional 10 degrees
+   */
   public static float getAngleStart(int count) {
     return -5 * (count - 1);
   }

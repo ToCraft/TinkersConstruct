@@ -19,9 +19,12 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
 
-/** Argument type for a modifier */
+/**
+ * Argument type for a modifier
+ */
 @NoArgsConstructor(staticName = "modifierHook")
 public class ModifierHookArgument implements ArgumentType<ModuleHook<?>> {
+
   private static final Collection<String> EXAMPLES = Arrays.asList("tconstruct:tool_stats", "tconstruct:tooltip");
   private static final DynamicCommandExceptionType HOOK_NOT_FOUND = new DynamicCommandExceptionType(name -> TConstruct.makeTranslation("command", "modifier_hook.not_found", name));
 
@@ -35,7 +38,9 @@ public class ModifierHookArgument implements ArgumentType<ModuleHook<?>> {
     return hook;
   }
 
-  /** Gets a modifier from the command context */
+  /**
+   * Gets a modifier from the command context
+   */
   public static ModuleHook<?> getModifier(CommandContext<CommandSourceStack> context, String name) {
     return context.getArgument(name, ModuleHook.class);
   }

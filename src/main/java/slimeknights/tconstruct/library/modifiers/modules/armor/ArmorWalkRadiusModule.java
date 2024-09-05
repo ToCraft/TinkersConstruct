@@ -17,9 +17,11 @@ import java.util.List;
 
 /**
  * Implementation of the standard radius walk behavior used by most implementations
- * @param <T>  Context class
+ *
+ * @param <T> Context class
  */
 public interface ArmorWalkRadiusModule<T> extends ArmorWalkModifierHook, ModifierModule {
+
   List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<ArmorWalkRadiusModule<?>>defaultHooks(ModifierHooks.BOOT_WALK);
 
   @Override
@@ -34,6 +36,7 @@ public interface ArmorWalkRadiusModule<T> extends ArmorWalkModifierHook, Modifie
 
   /**
    * Called to modify a position
+   *
    * @param tool    Tool instance
    * @param entry   Modifier level
    * @param living  Entity walking

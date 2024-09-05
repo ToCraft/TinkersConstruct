@@ -10,8 +10,10 @@ import slimeknights.tconstruct.tables.block.entity.inventory.LazyResultContainer
  */
 @SuppressWarnings("WeakerAccess")
 public class LazyResultSlot extends Slot {
+
   protected final LazyResultContainer inventory;
   protected int amountCrafted = 0;
+
   public LazyResultSlot(LazyResultContainer inventory, int xPosition, int yPosition) {
     super(inventory, 0, xPosition, yPosition);
     this.inventory = inventory;

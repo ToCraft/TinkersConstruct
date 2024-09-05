@@ -3,10 +3,14 @@ package slimeknights.tconstruct.library.modifiers.fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 
-/** Base class for {@link FluidEffect} to simplify creating effects */
+/**
+ * Base class for {@link FluidEffect} to simplify creating effects
+ */
 public interface UnloadableFluidEffect<C extends FluidEffectContext> {
+
   /**
    * Called when this fluid is used on the given context
+   *
    * @param fluid   Fluid to use, generally is just for NBT, should not be altered
    * @param level   Strength of the effect to apply, will be 0+
    * @param context Context about the attacker and the entity hit. May be client side if {@code action} is {@link FluidAction#SIMULATE}

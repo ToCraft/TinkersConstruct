@@ -13,9 +13,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/** Json for serializing and deserializing material traits */
+/**
+ * Json for serializing and deserializing material traits
+ */
 @RequiredArgsConstructor
 public class MaterialTraitsJson {
+
   @SerializedName("default")
   @Getter
   @Nullable
@@ -23,11 +26,11 @@ public class MaterialTraitsJson {
   @Nullable
   private final Map<ResourceLocation, List<ModifierEntry>> perStat;
 
-  public Map<MaterialStatsId,List<ModifierEntry>> getPerStat() {
+  public Map<MaterialStatsId, List<ModifierEntry>> getPerStat() {
     if (perStat == null) {
       return Collections.emptyMap();
     }
-    Map<MaterialStatsId,List<ModifierEntry>> newMap = new HashMap<>(perStat.size());
+    Map<MaterialStatsId, List<ModifierEntry>> newMap = new HashMap<>(perStat.size());
     perStat.forEach((key, value) -> newMap.put(new MaterialStatsId(key), value));
     return newMap;
   }

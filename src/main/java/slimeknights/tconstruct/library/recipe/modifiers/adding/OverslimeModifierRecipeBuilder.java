@@ -16,10 +16,13 @@ import java.util.function.Consumer;
  */
 @RequiredArgsConstructor(staticName = "modifier")
 public class OverslimeModifierRecipeBuilder extends AbstractRecipeBuilder<OverslimeModifierRecipeBuilder> {
+
   private final Ingredient ingredient;
   private final int restoreAmount;
 
-  /** Creates a new builder for the given item */
+  /**
+   * Creates a new builder for the given item
+   */
   public static OverslimeModifierRecipeBuilder modifier(ItemLike item, int restoreAmount) {
     return modifier(Ingredient.of(item), restoreAmount);
   }
@@ -30,7 +33,7 @@ public class OverslimeModifierRecipeBuilder extends AbstractRecipeBuilder<Oversl
     if (stacks.length == 0) {
       throw new IllegalStateException("Empty ingredient not allowed");
     }
-    save(consumer, Registry.ITEM.getKey(stacks[0].getItem()));
+    save(consumer, ForgeRegistries.ITEMS.getKey(stacks[0].getItem()));
   }
 
   @Override

@@ -39,6 +39,7 @@ import slimeknights.tconstruct.tools.TinkerModifiers;
 
 @RequiredArgsConstructor
 public class ShearsAbilityModifier extends NoLevelsModifier implements EntityInteractionModifierHook, ToolActionModifierHook {
+
   private final int range;
   @Getter
   private final int priority;
@@ -59,12 +60,12 @@ public class ShearsAbilityModifier extends NoLevelsModifier implements EntityInt
   public boolean shouldDisplay(boolean advanced) {
     return priority > Short.MIN_VALUE;
   }
-  
+
   /**
    * Swings the given's player hand
    *
    * @param player the current player
-   * @param hand the given hand the tool is in
+   * @param hand   the given hand the tool is in
    */
   protected void swingTool(Player player, InteractionHand hand) {
     player.swing(hand);
@@ -82,7 +83,7 @@ public class ShearsAbilityModifier extends NoLevelsModifier implements EntityInt
   /**
    * Checks whether the tool counts as shears for modifier logic
    *
-   * @param tool  Current tool instance
+   * @param tool Current tool instance
    */
   protected boolean isShears(IToolStackView tool) {
     return true;
@@ -113,7 +114,7 @@ public class ShearsAbilityModifier extends NoLevelsModifier implements EntityInt
         int expanded = range + tool.getModifierLevel(TinkerModifiers.expanded.getId());
         if (expanded > 0) {
           for (LivingEntity aoeTarget : player.getCommandSenderWorld().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(expanded, 0.25D, expanded))) {
-            if (aoeTarget != player && aoeTarget != target && (!(aoeTarget instanceof ArmorStand) || !((ArmorStand)aoeTarget).isMarker())) {
+            if (aoeTarget != player && aoeTarget != target && (!(aoeTarget instanceof ArmorStand) || !((ArmorStand) aoeTarget).isMarker())) {
               if (shearEntity(stack, tool, world, player, aoeTarget, looting)) {
                 broken = ToolDamageUtil.damageAnimated(tool, 1, player, slotType);
                 runShearHook(tool, player, aoeTarget, false);
@@ -132,7 +133,9 @@ public class ShearsAbilityModifier extends NoLevelsModifier implements EntityInt
     return InteractionResult.PASS;
   }
 
-  /** Runs the hook after shearing an entity */
+  /**
+   * Runs the hook after shearing an entity
+   */
   private static void runShearHook(IToolStackView tool, Player player, Entity entity, boolean isTarget) {
     for (ModifierEntry entry : tool.getModifierList()) {
       entry.getHook(ModifierHooks.SHEAR_ENTITY).afterShearEntity(tool, entry, player, entity, isTarget);
@@ -143,10 +146,10 @@ public class ShearsAbilityModifier extends NoLevelsModifier implements EntityInt
    * Tries to shear an given entity, returns false if it fails and true if it succeeds
    *
    * @param itemStack the current item stack
-   * @param world the current world
-   * @param player the current player
-   * @param entity the entity to try to shear
-   * @param fortune the fortune to apply to the sheared entity
+   * @param world     the current world
+   * @param player    the current player
+   * @param entity    the entity to try to shear
+   * @param fortune   the fortune to apply to the sheared entity
    * @return if the sheering of the entity was performed or not
    */
   private static boolean shearEntity(ItemStack itemStack, IToolStackView tool, Level world, Player player, Entity entity, int fortune) {
@@ -159,7 +162,7 @@ public class ShearsAbilityModifier extends NoLevelsModifier implements EntityInt
     if (entity instanceof IForgeShearable target && target.isShearable(itemStack, world, entity.blockPosition())) {
       if (!world.isClientSide) {
         target.onSheared(player, itemStack, world, entity.blockPosition(), fortune)
-              .forEach(stack -> ModifierUtil.dropItem(entity, stack));
+          .forEach(stack -> ModifierUtil.dropItem(entity, stack));
       }
       return true;
     }

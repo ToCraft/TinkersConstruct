@@ -10,15 +10,18 @@ import javax.annotation.Nullable;
  * Inventory containing a single item and a fluid
  */
 public interface ICastingContainer extends ISingleStackContainer {
+
   /**
    * Gets the contained fluid in this inventory
-   * @return  Contained fluid
+   *
+   * @return Contained fluid
    */
   Fluid getFluid();
 
   /**
    * Gets the NBT for the contained fluid
-   * @return  Fluid's NBT
+   *
+   * @return Fluid's NBT
    */
   @Nullable
   default CompoundTag getFluidTag() {

@@ -21,17 +21,28 @@ import slimeknights.tconstruct.tools.TinkerTools;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/** Container for a tool inventory */
+/**
+ * Container for a tool inventory
+ */
 public class ToolContainerMenu extends AbstractContainerMenu {
-  /** Size of a single slot */
+
+  /**
+   * Size of a single slot
+   */
   public static final int SLOT_SIZE = 18;
-  /** Y start of the repeat slots background */
+  /**
+   * Y start of the repeat slots background
+   */
   public static final int REPEAT_BACKGROUND_START = 17;
 
-  /** Stack containing the tool being rendered */
+  /**
+   * Stack containing the tool being rendered
+   */
   @Getter
   private final ItemStack stack;
-  /** Item handler being rendered */
+  /**
+   * Item handler being rendered
+   */
   @Getter
   private final IItemHandler itemHandler;
   private final Player player;
@@ -41,14 +52,18 @@ public class ToolContainerMenu extends AbstractContainerMenu {
   private final int selectedHotbarSlot;
   @Getter
   private final boolean showOffhand;
-  /** Index of the first player inventory slot */
+  /**
+   * Index of the first player inventory slot
+   */
   private final int playerInventoryStart;
 
   public ToolContainerMenu(int id, Inventory playerInventory, ItemStack stack, IItemHandlerModifiable itemHandler, EquipmentSlot slotType) {
     this(TinkerTools.toolContainer.get(), id, playerInventory, stack, itemHandler, slotType);
   }
 
-  /** Creates a new instance of this container on the client side */
+  /**
+   * Creates a new instance of this container on the client side
+   */
   public static ToolContainerMenu forClient(int id, Inventory inventory, FriendlyByteBuf buffer) {
     EquipmentSlot slotType = buffer.readEnum(EquipmentSlot.class);
     ItemStack stack = inventory.player.getItemBySlot(slotType);
@@ -85,14 +100,14 @@ public class ToolContainerMenu extends AbstractContainerMenu {
 
     // add player slots
     int playerY = 32 + SLOT_SIZE * ((slots + 8) / 9);
-    for(int r = 0; r < 3; ++r) {
-      for(int c = 0; c < 9; ++c) {
+    for (int r = 0; r < 3; ++r) {
+      for (int c = 0; c < 9; ++c) {
         this.addSlot(new Slot(playerInventory, c + r * 9 + 9, 8 + c * 18, playerY + r * 18));
       }
     }
     int hotbarStart = playerY + 58;
     selectedHotbarSlot = slotType == EquipmentSlot.MAINHAND ? playerInventory.selected : (slotType == EquipmentSlot.OFFHAND ? 10 : -1);
-    for(int c = 0; c < 9; ++c) {
+    for (int c = 0; c < 9; ++c) {
       if (c == selectedHotbarSlot) {
         this.addSlot(new ReadOnlySlot(playerInventory, c, 8 + c * 18, hotbarStart));
       } else {

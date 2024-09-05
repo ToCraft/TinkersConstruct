@@ -34,6 +34,7 @@ import slimeknights.tconstruct.shared.TinkerCommons;
 import java.util.List;
 
 public class TastyModifier extends Modifier implements GeneralInteractionModifierHook, OnAttackedModifierHook, ProcessLootModifierHook {
+
   // TODO: consider making this modifier dynamic and letting addons swap out representative items and food rewards
   private static final Lazy<ItemStack> BACON_STACK = Lazy.of(() -> new ItemStack(TinkerCommons.bacon));
 
@@ -51,7 +52,9 @@ public class TastyModifier extends Modifier implements GeneralInteractionModifie
     return InteractionResult.PASS;
   }
 
-  /** Takes a nibble of the tool */
+  /**
+   * Takes a nibble of the tool
+   */
   private void eat(IToolStackView tool, ModifierEntry modifier, LivingEntity entity) {
     int level = modifier.intEffectiveLevel();
     if (level > 0 && entity instanceof Player player && player.canEat(false)) {

@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class FlexModifiableItem extends ModifiableItem implements IFlexItem {
+
   private final Map<String, FlexEventHandler> eventHandlers = new HashMap<>();
   private final Set<CreativeModeTab> tabs = new HashSet<>();
   private final boolean breakBlocksInCreative;

@@ -30,13 +30,17 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class TankBlockEntity extends SmelteryComponentBlockEntity implements ITankBlockEntity {
-  /** Max capacity for the tank */
+
+  /**
+   * Max capacity for the tank
+   */
   public static final int DEFAULT_CAPACITY = FluidType.BUCKET_VOLUME * 4;
 
   /**
    * Gets the capacity for the given block
-   * @param block  block
-   * @return  Capacity
+   *
+   * @param block block
+   * @return Capacity
    */
   public static int getCapacity(Block block) {
     if (block instanceof ITankBlock) {
@@ -47,37 +51,49 @@ public class TankBlockEntity extends SmelteryComponentBlockEntity implements ITa
 
   /**
    * Gets the capacity for the given item
-   * @param item  item
-   * @return  Capacity
+   *
+   * @param item item
+   * @return Capacity
    */
   public static int getCapacity(Item item) {
     if (item instanceof BlockItem) {
-      return getCapacity(((BlockItem)item).getBlock());
+      return getCapacity(((BlockItem) item).getBlock());
     }
     return DEFAULT_CAPACITY;
   }
 
-  /** Internal fluid tank instance */
+  /**
+   * Internal fluid tank instance
+   */
   @Getter
   protected final FluidTankAnimated tank;
-  /** Capability holder for the tank */
+  /**
+   * Capability holder for the tank
+   */
   private final LazyOptional<IFluidHandler> holder;
-  /** Last comparator strength to reduce block updates */
-  @Getter @Setter
+  /**
+   * Last comparator strength to reduce block updates
+   */
+  @Getter
+  @Setter
   private int lastStrength = -1;
 
   public TankBlockEntity(BlockPos pos, BlockState state) {
     this(pos, state, state.getBlock() instanceof ITankBlock tank
-                     ? tank
-                     : TinkerSmeltery.searedTank.get(TankType.FUEL_TANK));
+      ? tank
+      : TinkerSmeltery.searedTank.get(TankType.FUEL_TANK));
   }
 
-  /** Main constructor */
+  /**
+   * Main constructor
+   */
   public TankBlockEntity(BlockPos pos, BlockState state, ITankBlock block) {
     this(TinkerSmeltery.tank.get(), pos, state, block);
   }
 
-  /** Extendable constructor */
+  /**
+   * Extendable constructor
+   */
   @SuppressWarnings("WeakerAccess")
   protected TankBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, ITankBlock block) {
     super(type, pos, state);
@@ -137,7 +153,8 @@ public class TankBlockEntity extends SmelteryComponentBlockEntity implements ITa
 
   /**
    * Sets the tag on the stack based on the contained tank
-   * @param stack  Stack
+   *
+   * @param stack Stack
    */
   public void setTankTag(ItemStack stack) {
     TankItem.setTank(stack, tank);
@@ -145,7 +162,8 @@ public class TankBlockEntity extends SmelteryComponentBlockEntity implements ITa
 
   /**
    * Updates the tank from an NBT tag, used in the block
-   * @param nbt  tank NBT
+   *
+   * @param nbt tank NBT
    */
   public void updateTank(CompoundTag nbt) {
     if (nbt.isEmpty()) {
@@ -179,9 +197,14 @@ public class TankBlockEntity extends SmelteryComponentBlockEntity implements ITa
     }
   }
 
-  /** Interface for blocks to return their capacity */
+  /**
+   * Interface for blocks to return their capacity
+   */
   public interface ITankBlock {
-    /** Gets the capacity for this tank */
+
+    /**
+     * Gets the capacity for this tank
+     */
     int getCapacity();
   }
 }

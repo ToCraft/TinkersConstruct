@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.library.json;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -26,6 +27,7 @@ import slimeknights.tconstruct.library.tools.part.IToolPart;
 import java.util.Set;
 
 public class TinkerLoadables {
+
   /* Enums */
   public static final StringLoadable<Operation> OPERATION = new EnumLoadable<>(Operation.class);
   public static final StringLoadable<EquipmentSlot> EQUIPMENT_SLOT = new EnumLoadable<>(EquipmentSlot.class);
@@ -35,7 +37,7 @@ public class TinkerLoadables {
   public static final StringLoadable<OreRateType> ORE_RATE_TYPE = new EnumLoadable<>(OreRateType.class);
 
   /* Registries */
-  public static final StringLoadable<ResourceLocation> CUSTOM_STAT = new RegistryLoadable<>(Registry.CUSTOM_STAT);
+  public static final StringLoadable<ResourceLocation> CUSTOM_STAT = new RegistryLoadable<>(Registries.CUSTOM_STAT);
 
   /* Tag keys */
   public static final StringLoadable<TagKey<Modifier>> MODIFIER_TAGS = Loadables.tagKey(ModifierManager.REGISTRY_KEY);
@@ -46,7 +48,9 @@ public class TinkerLoadables {
   public static final StringLoadable<IModifiable> MODIFIABLE_ITEM = instance(Loadables.ITEM, IModifiable.class, "Expected item to be instance of IModifiable");
   public static final StringLoadable<IToolPart> TOOL_PART_ITEM = instance(Loadables.ITEM, IToolPart.class, "Expected item to be instance of IToolPart");
 
-  /** Tier loadable from the forge tier sorting registry */
+  /**
+   * Tier loadable from the forge tier sorting registry
+   */
   public static final StringLoadable<Tier> TIER = Loadables.RESOURCE_LOCATION.xmap((id, error) -> {
     Tier tier = TierSortingRegistry.byName(id);
     if (tier != null) {
@@ -61,7 +65,9 @@ public class TinkerLoadables {
     throw error.create("Attempt to serialize unregistered tier " + tier);
   });
 
-  /** Loadble requiring the argument to be an instance of the passed class */
+  /**
+   * Loadble requiring the argument to be an instance of the passed class
+   */
   @SuppressWarnings("unchecked")  // The type works when deserializing, so it works when serializing
   public static <B, T> StringLoadable<T> instance(StringLoadable<B> loadable, Class<T> typeClass, String errorMsg) {
     return loadable.comapFlatMap((base, error) -> {
@@ -69,6 +75,6 @@ public class TinkerLoadables {
         return typeClass.cast(base);
       }
       throw error.create(errorMsg);
-    }, t -> (B)t);
+    }, t -> (B) t);
   }
 }

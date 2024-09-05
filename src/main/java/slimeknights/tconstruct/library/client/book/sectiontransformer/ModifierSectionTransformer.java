@@ -6,8 +6,11 @@ import slimeknights.mantle.client.book.transformer.ContentGroupingSectionTransfo
 import slimeknights.tconstruct.library.client.book.content.ContentModifier;
 import slimeknights.tconstruct.library.modifiers.ModifierManager;
 
-/** Section transformer to generate an index with modifier names */
+/**
+ * Section transformer to generate an index with modifier names
+ */
 public class ModifierSectionTransformer extends ContentGroupingSectionTransformer {
+
   public static final ModifierSectionTransformer INSTANCE = new ModifierSectionTransformer("modifiers");
 
   public ModifierSectionTransformer(String name, boolean largeTitle, boolean centerTitle) {

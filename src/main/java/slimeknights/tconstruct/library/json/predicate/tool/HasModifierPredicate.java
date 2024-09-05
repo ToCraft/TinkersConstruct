@@ -13,11 +13,14 @@ import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 
 /**
  * Predicate that checks a tool for the given modifier.
- * @param modifier  Modifier to check for
- * @param level     Range of levels to check for, use {@link ModifierEntry#VALID_LEVEL} for simply checking for any level on the tool, 0 means not on the tool.
- * @param check     Whether to check upgrades or all modifiers
+ *
+ * @param modifier Modifier to check for
+ * @param level    Range of levels to check for, use {@link ModifierEntry#VALID_LEVEL} for simply checking for any level on the tool, 0 means not on the tool.
+ * @param check    Whether to check upgrades or all modifiers
  */
-public record HasModifierPredicate(IJsonPredicate<ModifierId> modifier, IntRange level, ModifierCheck check) implements ToolContextPredicate {
+public record HasModifierPredicate(IJsonPredicate<ModifierId> modifier, IntRange level,
+                                   ModifierCheck check) implements ToolContextPredicate {
+
   public static final RecordLoadable<HasModifierPredicate> LOADER = RecordLoadable.create(
     ModifierPredicate.LOADER.requiredField("modifier", HasModifierPredicate::modifier),
     ModifierEntry.ANY_LEVEL.defaultField("level", ModifierEntry.VALID_LEVEL, HasModifierPredicate::level),
@@ -58,7 +61,9 @@ public record HasModifierPredicate(IJsonPredicate<ModifierId> modifier, IntRange
     return LOADER;
   }
 
-  /** Enum of modifier type */
+  /**
+   * Enum of modifier type
+   */
   public enum ModifierCheck {
     UPGRADES {
       @Override
@@ -79,22 +84,30 @@ public record HasModifierPredicate(IJsonPredicate<ModifierId> modifier, IntRange
 
   /* Constructors */
 
-  /** Creates a predicate for a tool having the given upgrade (recipe modifier) */
+  /**
+   * Creates a predicate for a tool having the given upgrade (recipe modifier)
+   */
   public static HasModifierPredicate hasUpgrade(IJsonPredicate<ModifierId> modifier, int min) {
     return new HasModifierPredicate(modifier, ModifierEntry.VALID_LEVEL.min(min), ModifierCheck.UPGRADES);
   }
 
-  /** Creates a predicate for a tool having the given modifier (recipe or trait) */
+  /**
+   * Creates a predicate for a tool having the given modifier (recipe or trait)
+   */
   public static HasModifierPredicate hasModifier(IJsonPredicate<ModifierId> modifier, int min) {
     return new HasModifierPredicate(modifier, ModifierEntry.VALID_LEVEL.min(min), ModifierCheck.ALL);
   }
 
-  /** Creates a predicate for a tool having the given upgrade (recipe modifier) */
+  /**
+   * Creates a predicate for a tool having the given upgrade (recipe modifier)
+   */
   public static HasModifierPredicate hasUpgrade(ModifierId modifier, int min) {
     return new HasModifierPredicate(modifier, ModifierEntry.ANY_LEVEL.min(min), ModifierCheck.UPGRADES);
   }
 
-  /** Creates a predicate for a tool having the given modifier (recipe or trait) */
+  /**
+   * Creates a predicate for a tool having the given modifier (recipe or trait)
+   */
   public static HasModifierPredicate hasModifier(ModifierId modifier, int min) {
     return new HasModifierPredicate(modifier, ModifierEntry.ANY_LEVEL.min(min), ModifierCheck.ALL);
   }

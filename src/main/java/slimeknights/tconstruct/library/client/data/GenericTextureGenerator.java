@@ -16,9 +16,12 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-/** Data generator to create png image files */
+/**
+ * Data generator to create png image files
+ */
 @Log4j2
 public abstract class GenericTextureGenerator implements DataProvider {
+
   private final DataGenerator generator;
   @Nullable
   private final ExistingFileHelper existingFileHelper;
@@ -26,7 +29,9 @@ public abstract class GenericTextureGenerator implements DataProvider {
   @Nullable
   private final ExistingFileHelper.ResourceType resourceType;
 
-  /** Constructor which marks files as existing */
+  /**
+   * Constructor which marks files as existing
+   */
   public GenericTextureGenerator(DataGenerator generator, @Nullable ExistingFileHelper existingFileHelper, String folder) {
     this.generator = generator;
     this.folder = folder;
@@ -38,12 +43,16 @@ public abstract class GenericTextureGenerator implements DataProvider {
     }
   }
 
-  /** Constructor which does not mark files as existing */
+  /**
+   * Constructor which does not mark files as existing
+   */
   public GenericTextureGenerator(DataGenerator generator, String folder) {
     this(generator, null, folder);
   }
 
-  /** Saves the given image to the given location */
+  /**
+   * Saves the given image to the given location
+   */
   @SuppressWarnings("UnstableApiUsage")
   protected void saveImage(CachedOutput cache, ResourceLocation location, NativeImage image) {
     try {
@@ -58,7 +67,9 @@ public abstract class GenericTextureGenerator implements DataProvider {
     }
   }
 
-  /** Saves metadata for the given image */
+  /**
+   * Saves metadata for the given image
+   */
   protected void saveMetadata(CachedOutput cache, ResourceLocation location, JsonObject metadata) {
     try {
       Path path = this.generator.getOutputFolder().resolve(Paths.get(PackType.CLIENT_RESOURCES.getDirectory(), location.getNamespace(), folder, location.getPath() + ".png.mcmeta"));

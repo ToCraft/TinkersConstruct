@@ -21,34 +21,58 @@ import javax.annotation.Nullable;
  */
 @RequiredArgsConstructor
 public class ModifierEntry implements Comparable<ModifierEntry> {
-  /** Key for modifier IDs in NBT and JSON */
+
+  /**
+   * Key for modifier IDs in NBT and JSON
+   */
   public static final String TAG_MODIFIER = "name";
-  /** Key for modifier levels in NBT and JSON */
+  /**
+   * Key for modifier levels in NBT and JSON
+   */
   public static final String TAG_LEVEL = "level";
-  /** Key for incremental amount */
+  /**
+   * Key for incremental amount
+   */
   public static final String TAG_AMOUNT = "amount";
-  /** Key for incremental need */
+  /**
+   * Key for incremental need
+   */
   public static final String TAG_NEEDED = "needed";
-  /** Cache of effective level in NBT, for quick level lookups. Not used on deserialization */
+  /**
+   * Cache of effective level in NBT, for quick level lookups. Not used on deserialization
+   */
   public static final String TAG_EFFECTIVE = "effective";
 
-  /** Empty modifier instance, default for many methods */
+  /**
+   * Empty modifier instance, default for many methods
+   */
   public static final ModifierEntry EMPTY = new ModifierEntry(ModifierManager.EMPTY, 0);
 
-  /** Loadable instance for parsing. Does not handle incremental, we currently disallow incremental as traits */
+  /**
+   * Loadable instance for parsing. Does not handle incremental, we currently disallow incremental as traits
+   */
   public static final RecordLoadable<ModifierEntry> LOADABLE = RecordLoadable.create(
     ModifierId.PARSER.requiredField(TAG_MODIFIER, ModifierEntry::getId),
     IntLoadable.FROM_ONE.defaultField(TAG_LEVEL, 1, true, ModifierEntry::getLevel),
     ModifierEntry::new);
-  /** Range of levels for a modifier including 0 (not on the tool) */
+  /**
+   * Range of levels for a modifier including 0 (not on the tool)
+   */
   public static final IntRange ANY_LEVEL = new IntRange(0, Short.MAX_VALUE);
-  /** Range of levels for a modifier on a tool */
+  /**
+   * Range of levels for a modifier on a tool
+   */
   public static final IntRange VALID_LEVEL = new IntRange(1, Short.MAX_VALUE);
 
-  /** Modifier instance */
+  /**
+   * Modifier instance
+   */
   protected final LazyModifier modifier;
-  /** Current level */
-  @Getter @With
+  /**
+   * Current level
+   */
+  @Getter
+  @With
   protected final int level;
 
   public ModifierEntry(ModifierId id, int level) {
@@ -59,27 +83,37 @@ public class ModifierEntry implements Comparable<ModifierEntry> {
     this(new LazyModifier(modifier), level);
   }
 
-  /** Checks if the given modifier is bound */
+  /**
+   * Checks if the given modifier is bound
+   */
   public boolean isBound() {
     return modifier.isBound();
   }
 
-  /** Gets the contained modifier ID, prevents resolving the lazy modifier if not needed */
+  /**
+   * Gets the contained modifier ID, prevents resolving the lazy modifier if not needed
+   */
   public ModifierId getId() {
     return modifier.getId();
   }
 
-  /** Gets the contained modifier */
+  /**
+   * Gets the contained modifier
+   */
   public Modifier getModifier() {
     return modifier.get();
   }
 
-  /** Helper for efficiency, returns the lazy modifier instance directly, which can then be copied along */
+  /**
+   * Helper for efficiency, returns the lazy modifier instance directly, which can then be copied along
+   */
   public LazyModifier getLazyModifier() {
     return modifier;
   }
 
-  /** Gets the given hook from the modifier, returning default instance if not present */
+  /**
+   * Gets the given hook from the modifier, returning default instance if not present
+   */
   public final <T> T getHook(ModuleHook<T> hook) {
     return modifier.get().getHook(hook);
   }
@@ -96,7 +130,8 @@ public class ModifierEntry implements Comparable<ModifierEntry> {
 
   /**
    * Returns {@code level - 1} if we have an incremental amount level, level otherwise. Equivalent to flooring {@link #getEffectiveLevel()}
-   * @return  Level of the modifier, possibly reduced due to a partial level
+   *
+   * @return Level of the modifier, possibly reduced due to a partial level
    */
   public int intEffectiveLevel() {
     return level;
@@ -107,18 +142,23 @@ public class ModifierEntry implements Comparable<ModifierEntry> {
 
   /**
    * Gets the incremental amount
-   * @param fallback  Value to return if not incremental
+   *
+   * @param fallback Value to return if not incremental
    */
   public int getAmount(int fallback) {
     return fallback;
   }
 
-  /** Gets the amount needed for this incremental level, will be 0 for non-incremental */
+  /**
+   * Gets the amount needed for this incremental level, will be 0 for non-incremental
+   */
   public int getNeeded() {
     return 0;
   }
 
-  /** Gets the display name for this entry */
+  /**
+   * Gets the display name for this entry
+   */
   public Component getDisplayName() {
     return modifier.get().getDisplayName(level);
   }
@@ -128,9 +168,10 @@ public class ModifierEntry implements Comparable<ModifierEntry> {
 
   /**
    * Adds the given amount to the modifier
-   * @param amount  Amount to add, if 0 no change will be made
-   * @param needed  Amount needed, if 0 no change will be made
-   * @return  Modifier entry, will be
+   *
+   * @param amount Amount to add, if 0 no change will be made
+   * @param needed Amount needed, if 0 no change will be made
+   * @return Modifier entry, will be
    */
   public ModifierEntry addAmount(int amount, int needed) {
     // if a need but no amount, the level won't change so don't make a new instance
@@ -143,8 +184,9 @@ public class ModifierEntry implements Comparable<ModifierEntry> {
 
   /**
    * Combines this entry with the other entry
-   * @param other  Other entry to merge, precondition is the same modifier type
-   * @return  New merged modifier
+   *
+   * @param other Other entry to merge, precondition is the same modifier type
+   * @return New merged modifier
    */
   public ModifierEntry merge(ModifierEntry other) {
     if (!this.getId().equals(other.getId())) {
@@ -158,17 +200,23 @@ public class ModifierEntry implements Comparable<ModifierEntry> {
 
   /* Comparison */
 
-  /** Checks if this entry matches the given modifier */
+  /**
+   * Checks if this entry matches the given modifier
+   */
   public boolean matches(ModifierId id) {
     return modifier.getId().equals(id);
   }
 
-  /** Checks if this entry matches the given modifier */
+  /**
+   * Checks if this entry matches the given modifier
+   */
   public boolean matches(Modifier modifier) {
     return matches(modifier.getId());
   }
 
-  /** Checks if the modifier is in the given tag */
+  /**
+   * Checks if the modifier is in the given tag
+   */
   public boolean matches(TagKey<Modifier> tag) {
     return modifier.is(tag);
   }
@@ -189,7 +237,9 @@ public class ModifierEntry implements Comparable<ModifierEntry> {
 
   /* Serializing */
 
-  /** Reads a modifier entry from NBT */
+  /**
+   * Reads a modifier entry from NBT
+   */
   public static ModifierEntry readFromNBT(CompoundTag tag) {
     if (tag.contains(TAG_MODIFIER, Tag.TAG_STRING)) {
       ModifierId id = ModifierId.tryParse(tag.getString(TAG_MODIFIER));
@@ -202,7 +252,9 @@ public class ModifierEntry implements Comparable<ModifierEntry> {
     return EMPTY;
   }
 
-  /** Writes this tag to NBT */
+  /**
+   * Writes this tag to NBT
+   */
   public CompoundTag serializeToNBT() {
     CompoundTag tag = new CompoundTag();
     tag.putString(TAG_MODIFIER, modifier.getId().toString());
@@ -212,8 +264,9 @@ public class ModifierEntry implements Comparable<ModifierEntry> {
 
   /**
    * Reads this modifier entry from the packet buffer
-   * @param buffer  Buffer instance
-   * @return  Read entry
+   *
+   * @param buffer Buffer instance
+   * @return Read entry
    * @deprecated use {@link #LOADABLE}
    */
   @Deprecated
@@ -223,7 +276,8 @@ public class ModifierEntry implements Comparable<ModifierEntry> {
 
   /**
    * Writes this modifier entry to the packet buffer
-   * @param buffer  Buffer instance
+   *
+   * @param buffer Buffer instance
    * @deprecated use {@link #LOADABLE}
    */
   @Deprecated
@@ -232,13 +286,15 @@ public class ModifierEntry implements Comparable<ModifierEntry> {
   }
 
 
-  /** Object */
+  /**
+   * Object
+   */
 
   @Override
   public boolean equals(@Nullable Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    ModifierEntry entry = (ModifierEntry)o;
+    ModifierEntry entry = (ModifierEntry) o;
     return this.matches(entry.getId()) && level == entry.level;
   }
 

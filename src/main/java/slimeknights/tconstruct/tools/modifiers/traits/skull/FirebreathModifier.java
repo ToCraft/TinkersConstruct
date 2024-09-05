@@ -19,6 +19,7 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 
 public class FirebreathModifier extends NoLevelsModifier implements KeybindInteractModifierHook {
+
   @Override
   public boolean startInteract(IToolStackView tool, ModifierEntry modifier, Player player, EquipmentSlot slot, TooltipKey keyModifier) {
     // stopped by water and by cooldown

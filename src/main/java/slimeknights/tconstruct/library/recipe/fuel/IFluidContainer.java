@@ -7,9 +7,11 @@ import slimeknights.mantle.recipe.container.IEmptyContainer;
  * Inventory containing just a single fluid
  */
 public interface IFluidContainer extends IEmptyContainer {
+
   /**
    * Gets the fluid contained in this inventory
-   * @return  Contained fluid
+   *
+   * @return Contained fluid
    */
   Fluid getFluid();
 }

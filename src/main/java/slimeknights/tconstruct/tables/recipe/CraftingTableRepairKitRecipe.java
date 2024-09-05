@@ -25,16 +25,20 @@ import slimeknights.tconstruct.tables.TinkerTables;
 
 import javax.annotation.Nullable;
 
-/** Recipe using repair kits in the crafting table */
+/**
+ * Recipe using repair kits in the crafting table
+ */
 public class CraftingTableRepairKitRecipe extends CustomRecipe {
+
   public CraftingTableRepairKitRecipe(ResourceLocation id) {
     super(id);
   }
 
   /**
    * Checks if the tool is valid for this recipe
-   * @param stack  Tool to check
-   * @return  True if valid
+   *
+   * @param stack Tool to check
+   * @return True if valid
    */
   protected boolean toolMatches(ItemStack stack) {
     return stack.is(TinkerTags.Items.DURABILITY);
@@ -42,8 +46,9 @@ public class CraftingTableRepairKitRecipe extends CustomRecipe {
 
   /**
    * Gets the tool stack and the repair kit material from the crafting grid
-   * @param inv  Crafting inventory
-   * @return  Relevant inputs, or null if invalid
+   *
+   * @param inv Crafting inventory
+   * @return Relevant inputs, or null if invalid
    */
   @Nullable
   protected Pair<ToolStack, ItemStack> getRelevantInputs(CraftingContainer inv) {
@@ -93,7 +98,9 @@ public class CraftingTableRepairKitRecipe extends CustomRecipe {
     return inputs != null && MaterialRepairToolHook.canRepairWith(inputs.getFirst(), IMaterialItem.getMaterialFromStack(inputs.getSecond()).getId());
   }
 
-  /** Gets the amount to repair for the given material */
+  /**
+   * Gets the amount to repair for the given material
+   */
   protected float getRepairAmount(IToolStackView tool, ItemStack repairStack) {
     return MaterialRepairToolHook.repairAmount(tool, IMaterialItem.getMaterialFromStack(repairStack).getId());
   }
@@ -125,7 +132,7 @@ public class CraftingTableRepairKitRecipe extends CustomRecipe {
       }
 
       // repair the tool
-      ToolDamageUtil.repair(tool, (int)repairAmount);
+      ToolDamageUtil.repair(tool, (int) repairAmount);
     }
     // return final stack
     return tool.createStack();

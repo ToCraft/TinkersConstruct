@@ -26,25 +26,37 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-/** Common interface for modifier recipes that can show in JEI */
+/**
+ * Common interface for modifier recipes that can show in JEI
+ */
 public interface IDisplayModifierRecipe extends IModifierRecipe {
-  /** Gets the number of inputs for this recipe */
+
+  /**
+   * Gets the number of inputs for this recipe
+   */
   int getInputCount();
 
   /**
    * Gets an ingredients to display in JEI.
-   * @param  slot  Slot index to display
-   * @return  Display item list
+   *
+   * @param slot Slot index to display
+   * @return Display item list
    */
   List<ItemStack> getDisplayItems(int slot);
 
-  /** Gets the result tool before adding the modifier */
+  /**
+   * Gets the result tool before adding the modifier
+   */
   List<ItemStack> getToolWithoutModifier();
 
-  /** Gets the result tool with this modifier added */
+  /**
+   * Gets the result tool with this modifier added
+   */
   List<ItemStack> getToolWithModifier();
 
-  /** Gets the modifier output of this recipe */
+  /**
+   * Gets the modifier output of this recipe
+   */
   ModifierEntry getDisplayResult();
 
   @Override
@@ -54,7 +66,8 @@ public interface IDisplayModifierRecipe extends IModifierRecipe {
 
   /**
    * Gets the range this modifier is valid for
-   * @return  level range, defaults to {@link ModifierEntry#VALID_LEVEL}
+   *
+   * @return level range, defaults to {@link ModifierEntry#VALID_LEVEL}
    */
   default IntRange getLevel() {
     return ModifierEntry.VALID_LEVEL;
@@ -62,14 +75,17 @@ public interface IDisplayModifierRecipe extends IModifierRecipe {
 
   /**
    * Gets the swappable variant for this recipe. Mutually exclusive with level for recipe display.
-   * @return  Variant text for the modifier, or null if not a variant.
+   *
+   * @return Variant text for the modifier, or null if not a variant.
    */
   @Nullable
   default Component getVariant() {
     return null;
   }
 
-  /** Gets the slot type used by this modifier */
+  /**
+   * Gets the slot type used by this modifier
+   */
   @Nullable
   default SlotCount getSlots() {
     return null;
@@ -85,7 +101,9 @@ public interface IDisplayModifierRecipe extends IModifierRecipe {
     return count.type();
   }
 
-  /** If true, this recipe can be applied incrementally */
+  /**
+   * If true, this recipe can be applied incrementally
+   */
   default boolean isIncremental() {
     return false;
   }
@@ -93,14 +111,17 @@ public interface IDisplayModifierRecipe extends IModifierRecipe {
 
   /* Helpers */
 
-  /** Maps the stream from tool items to applicable tool stacks */
-  Function<Item,ItemStack> MAP_TOOL_FOR_RENDERING = IModifiableDisplay::getDisplayStack;
+  /**
+   * Maps the stream from tool items to applicable tool stacks
+   */
+  Function<Item, ItemStack> MAP_TOOL_FOR_RENDERING = IModifiableDisplay::getDisplayStack;
 
   /**
    * Gets the list of modifiers to display for the given result
-   * @param result  Resulting modifier
-   * @param self    Current modifier to display, will typically be result or a lower level of result
-   * @return  List of modifiers
+   *
+   * @param result Resulting modifier
+   * @param self   Current modifier to display, will typically be result or a lower level of result
+   * @return List of modifiers
    */
   static List<ModifierEntry> modifiersForResult(ModifierEntry result, @Nullable ModifierEntry self) {
     List<ModifierEntry> requirements = result.getHook(ModifierHooks.REQUIREMENTS).displayModifiers(result);

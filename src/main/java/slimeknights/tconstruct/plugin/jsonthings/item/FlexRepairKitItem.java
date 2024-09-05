@@ -13,13 +13,17 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/** Item for custom repair kits */
+/**
+ * Item for custom repair kits
+ */
 public class FlexRepairKitItem extends RepairKitItem implements IFlexItem {
-  private final Map<String,FlexEventHandler> eventHandlers = new HashMap<>();
+
+  private final Map<String, FlexEventHandler> eventHandlers = new HashMap<>();
   private final Set<CreativeModeTab> tabs = new HashSet<>();
 
   @Getter
   private final float repairAmount;
+
   public FlexRepairKitItem(Properties properties, float repairAmount) {
     super(properties);
     this.repairAmount = repairAmount;

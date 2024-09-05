@@ -19,7 +19,10 @@ import slimeknights.tconstruct.tools.item.ArmorSlotType;
 import slimeknights.tconstruct.world.TinkerWorld;
 
 public class EnderSlimeEntity extends ArmoredSlimeEntity {
-  /** Predicate for this ender slime to allow teleporting */
+
+  /**
+   * Predicate for this ender slime to allow teleporting
+   */
   private final ITeleportEventFactory teleportPredicate = (entity, x, y, z) -> new EnderSlimeTeleportEvent(entity, x, y, z, this);
 
   public EnderSlimeEntity(EntityType<? extends EnderSlimeEntity> type, Level worldIn) {

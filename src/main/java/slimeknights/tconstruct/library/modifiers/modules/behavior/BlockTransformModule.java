@@ -29,9 +29,12 @@ import java.util.List;
  * Shared logic for interaction actions which transform blocks
  */
 public interface BlockTransformModule extends ModifierModule, BlockInteractionModifierHook {
+
   List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<BlockTransformModule>defaultHooks(ModifierHooks.BLOCK_INTERACT);
 
-  /** If true, disallows targeting the bottom face of the block to transform */
+  /**
+   * If true, disallows targeting the bottom face of the block to transform
+   */
   boolean requireGround();
 
   @Override
@@ -124,6 +127,8 @@ public interface BlockTransformModule extends ModifierModule, BlockInteractionMo
     return didTransform ? InteractionResult.sidedSuccess(world.isClientSide) : InteractionResult.PASS;
   }
 
-  /** Applies this transformation */
+  /**
+   * Applies this transformation
+   */
   boolean transform(IToolStackView tool, UseOnContext context, BlockState original, boolean playSound);
 }

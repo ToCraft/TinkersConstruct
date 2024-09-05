@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
  * Base class for alloying recipes
  */
 public class AlloyRecipe implements ICustomOutputRecipe<IAlloyTank> {
+
   public static final RecordLoadable<AlloyRecipe> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(),
     FluidIngredient.LOADABLE.list(2).requiredField("inputs", r -> r.inputs),
@@ -48,13 +49,19 @@ public class AlloyRecipe implements ICustomOutputRecipe<IAlloyTank> {
    * Making the most strict first will produce the best behavior
    */
   private final List<FluidIngredient> inputs;
-  /** Recipe output */
+  /**
+   * Recipe output
+   */
   @Getter
   private final FluidStack output;
-  /** Required temperature to craft this */
+  /**
+   * Required temperature to craft this
+   */
   @Getter
   private final int temperature;
-  /** Cache of recipe input list */
+  /**
+   * Cache of recipe input list
+   */
   private List<List<FluidStack>> displayInputs;
 
   public AlloyRecipe(ResourceLocation id, List<FluidIngredient> inputs, FluidStack output, int temperature) {
@@ -66,7 +73,8 @@ public class AlloyRecipe implements ICustomOutputRecipe<IAlloyTank> {
 
   /**
    * Gets the list of inputs for display in JEI
-   * @return  List of input list for each "slot"
+   *
+   * @return List of input list for each "slot"
    */
   public List<List<FluidStack>> getDisplayInputs() {
     if (displayInputs == null) {
@@ -77,8 +85,9 @@ public class AlloyRecipe implements ICustomOutputRecipe<IAlloyTank> {
 
   /**
    * Creates the bitset used for marking fluids we do not care about
-   * @param inv  Alloy tank
-   * @return  Bitset
+   *
+   * @param inv Alloy tank
+   * @return Bitset
    */
   private static BitSet makeBitset(IAlloyTank inv) {
     int tanks = inv.getTanks();
@@ -94,10 +103,11 @@ public class AlloyRecipe implements ICustomOutputRecipe<IAlloyTank> {
 
   /**
    * Finds a match for the given ingredient
-   * @param ingredient  Ingredient to check
-   * @param inv         Alloy tank to search
-   * @param used        Bitset for already used matches, will be modified
-   * @return  Index of found match, or -1 if match not found
+   *
+   * @param ingredient Ingredient to check
+   * @param inv        Alloy tank to search
+   * @param used       Bitset for already used matches, will be modified
+   * @return Index of found match, or -1 if match not found
    */
   private static int findMatch(FluidIngredient ingredient, IAlloyTank inv, BitSet used, boolean checkSize) {
     FluidStack fluid;
@@ -132,8 +142,9 @@ public class AlloyRecipe implements ICustomOutputRecipe<IAlloyTank> {
   /**
    * Checks if this recipe can be performed.
    * Note that {@link #performRecipe(IMutableAlloyTank)} runs similar logic, so calling both is uneccessary.
-   * @param inv  Alloy tank inventory
-   * @return  True if this recipe can be performed
+   *
+   * @param inv Alloy tank inventory
+   * @return True if this recipe can be performed
    */
   public boolean canPerform(IAlloyTank inv) {
     // skip if temperature is too low
@@ -161,7 +172,8 @@ public class AlloyRecipe implements ICustomOutputRecipe<IAlloyTank> {
 
   /**
    * Attempts to perform the recipe. Will do nothing if either there is not enough input, or if there is not enough space for the output
-   * @param inv      Fluid inventory that can be read and modified
+   *
+   * @param inv Fluid inventory that can be read and modified
    */
   public void performRecipe(IMutableAlloyTank inv) {
     // skip if temperature is too low

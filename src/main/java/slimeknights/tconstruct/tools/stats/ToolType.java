@@ -11,7 +11,9 @@ import slimeknights.tconstruct.common.TinkerTags;
 import javax.annotation.Nullable;
 import java.util.Locale;
 
-/** Helper for registering the different effects for modifiers that change behavior based on the tool type */
+/**
+ * Helper for registering the different effects for modifiers that change behavior based on the tool type
+ */
 @RequiredArgsConstructor
 @Getter
 public enum ToolType implements StringRepresentable {

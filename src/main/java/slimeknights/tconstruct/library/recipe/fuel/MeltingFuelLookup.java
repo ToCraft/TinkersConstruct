@@ -15,29 +15,36 @@ import java.util.Map;
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MeltingFuelLookup {
-  private static final Map<Fluid,MeltingFuel> LOOKUP = new HashMap<>();
-  /** Listener to check when recipes reload */
+
+  private static final Map<Fluid, MeltingFuel> LOOKUP = new HashMap<>();
+  /**
+   * Listener to check when recipes reload
+   */
   private static final DuelSidedListener LISTENER = RecipeCacheInvalidator.addDuelSidedListener(LOOKUP::clear);
 
   /**
    * Adds a melting fuel to the lookup
-   * @param fluid  Fluid
-   * @param fuel   Fuel
+   *
+   * @param fluid Fluid
+   * @param fuel  Fuel
    */
   public static void addFuel(Fluid fluid, MeltingFuel fuel) {
     LISTENER.checkClear();
     LOOKUP.putIfAbsent(fluid, fuel);
   }
 
-  /** Checks if the given fluid is a fuel */
+  /**
+   * Checks if the given fluid is a fuel
+   */
   public static boolean isFuel(Fluid fluid) {
     return LOOKUP.containsKey(fluid);
   }
 
   /**
    * Gets the recipe for the given fluid
-   * @param fluid   Fluid found
-   * @return  Recipe, or null if no recipe for this type
+   *
+   * @param fluid Fluid found
+   * @return Recipe, or null if no recipe for this type
    */
   @Nullable
   public static MeltingFuel findFuel(Fluid fluid) {

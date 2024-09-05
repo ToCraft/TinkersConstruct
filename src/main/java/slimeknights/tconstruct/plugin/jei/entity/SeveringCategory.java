@@ -21,16 +21,20 @@ import slimeknights.tconstruct.plugin.jei.TConstructJEIConstants;
 import slimeknights.tconstruct.tools.TinkerTools;
 
 public class SeveringCategory implements IRecipeCategory<SeveringRecipe> {
+
   public static final ResourceLocation BACKGROUND_LOC = TConstruct.getResource("textures/gui/jei/tinker_station.png");
   private static final Component TITLE = TConstruct.makeTranslation("jei", "severing.title");
 
-  /** Renderer instance to use in this category */
+  /**
+   * Renderer instance to use in this category
+   */
   private final EntityIngredientRenderer entityRenderer = new EntityIngredientRenderer(32);
 
   @Getter
   private final IDrawable background;
   @Getter
   private final IDrawable icon;
+
   public SeveringCategory(IGuiHelper helper) {
     this.background = helper.createDrawable(BACKGROUND_LOC, 0, 78, 100, 38);
     this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, TinkerTools.cleaver.get().getRenderTool());
@@ -50,8 +54,8 @@ public class SeveringCategory implements IRecipeCategory<SeveringRecipe> {
   public void setRecipe(IRecipeLayoutBuilder builder, SeveringRecipe recipe, IFocusGroup focuses) {
     EntityIngredient input = recipe.getIngredient();
     IIngredientAcceptor<?> entities = builder.addSlot(RecipeIngredientRole.INPUT, 3, 3)
-           .setCustomRenderer(MantleJEIConstants.ENTITY_TYPE, entityRenderer)
-           .addIngredients(MantleJEIConstants.ENTITY_TYPE, input.getDisplay());
+      .setCustomRenderer(MantleJEIConstants.ENTITY_TYPE, entityRenderer)
+      .addIngredients(MantleJEIConstants.ENTITY_TYPE, input.getDisplay());
     IIngredientAcceptor<?> eggs = builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStacks(input.getEggs());
     builder.createFocusLink(entities, eggs);
 

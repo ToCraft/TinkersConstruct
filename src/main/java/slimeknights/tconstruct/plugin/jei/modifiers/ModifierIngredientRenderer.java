@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public record ModifierIngredientRenderer(int width, int height) implements IIngredientRenderer<ModifierEntry> {
+
   @Override
   public int getWidth() {
     return width;

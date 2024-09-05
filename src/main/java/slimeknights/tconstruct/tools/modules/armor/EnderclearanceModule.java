@@ -28,7 +28,9 @@ import slimeknights.tconstruct.library.utils.TeleportHelper;
 import javax.annotation.Nullable;
 import java.util.List;
 
-/** Module making the target teleport */
+/**
+ * Module making the target teleport
+ */
 public enum EnderclearanceModule implements ModifierModule, ProjectileHitModifierHook, MeleeHitModifierHook, OnAttackedModifierHook {
   INSTANCE;
 

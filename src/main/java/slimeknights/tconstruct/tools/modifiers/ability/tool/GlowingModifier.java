@@ -26,6 +26,7 @@ import slimeknights.tconstruct.shared.TinkerCommons;
 import javax.annotation.Nullable;
 
 public class GlowingModifier extends NoLevelsModifier implements BlockInteractionModifierHook, RemoveBlockModifierHook {
+
   @Override
   protected void registerHooks(Builder hookBuilder) {
     super.registerHooks(hookBuilder);
@@ -42,7 +43,7 @@ public class GlowingModifier extends NoLevelsModifier implements BlockInteractio
   public Component getDisplayName(IToolStackView tool, ModifierEntry entry) {
     return DualOptionInteraction.formatModifierName(tool, this, super.getDisplayName(tool, entry));
   }
-  
+
   @Override
   public InteractionResult afterBlockUse(IToolStackView tool, ModifierEntry modifier, UseOnContext context, InteractionSource source) {
     if (tool.getCurrentDurability() >= 10 && tool.getHook(ToolHooks.INTERACTION).canInteract(tool, modifier.getId(), source)) {

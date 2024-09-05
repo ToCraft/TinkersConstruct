@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class SoulSpeedModifier extends Modifier implements TooltipModifierHook {
+
   @Override
   protected void registerHooks(Builder hookBuilder) {
     super.registerHooks(hookBuilder);
@@ -30,11 +31,13 @@ public class SoulSpeedModifier extends Modifier implements TooltipModifierHook {
     hookBuilder.addHook(this, ModifierHooks.TOOLTIP);
   }
 
-  /** Gets the position this entity is standing on, cloned from protected living entity method */
+  /**
+   * Gets the position this entity is standing on, cloned from protected living entity method
+   */
   private static BlockPos getOnPosition(LivingEntity living) {
     Vec3 position = living.position();
     int x = Mth.floor(position.x);
-    int y = Mth.floor(position.y - (double)0.2F);
+    int y = Mth.floor(position.y - (double) 0.2F);
     int z = Mth.floor(position.z);
     BlockPos pos = new BlockPos(x, y, z);
     if (living.level.isEmptyBlock(pos)) {

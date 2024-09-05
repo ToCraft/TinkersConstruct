@@ -24,13 +24,17 @@ import slimeknights.tconstruct.world.block.SlimeVineBlock.VineStage;
 import javax.annotation.Nullable;
 
 public class SlimeGrassSeedItem extends TooltipItem {
+
   private final FoliageType foliage;
+
   public SlimeGrassSeedItem(Properties properties, FoliageType foliage) {
     super(properties);
     this.foliage = foliage;
   }
 
-  /** Gets the slime type for the given block */
+  /**
+   * Gets the slime type for the given block
+   */
   @Nullable
   private static DirtType getDirtType(Block block) {
     for (DirtType type : DirtType.values()) {
@@ -41,7 +45,9 @@ public class SlimeGrassSeedItem extends TooltipItem {
     return null;
   }
 
-  /** Gets the vines associated with these seeds */
+  /**
+   * Gets the vines associated with these seeds
+   */
   @Nullable
   private Block getVines() {
     return switch (foliage) {

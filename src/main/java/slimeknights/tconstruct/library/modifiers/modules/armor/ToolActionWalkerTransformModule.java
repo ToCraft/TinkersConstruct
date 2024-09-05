@@ -38,12 +38,15 @@ import java.util.List;
 
 /**
  * Boot module that transforms walked on blocks using a tool action
- * @param action     Transforming action
- * @param sound      Sound to play when transforming
- * @param radius     Radius to cover
- * @param condition  Standard module condition
+ *
+ * @param action    Transforming action
+ * @param sound     Sound to play when transforming
+ * @param radius    Radius to cover
+ * @param condition Standard module condition
  */
-public record ToolActionWalkerTransformModule(ToolAction action, SoundEvent sound, LevelingValue radius, ModifierCondition<IToolStackView> condition) implements ModifierModule, ArmorWalkRadiusModule<MutableUseOnContext>, ToolActionModifierHook, ConditionalModule<IToolStackView> {
+public record ToolActionWalkerTransformModule(ToolAction action, SoundEvent sound, LevelingValue radius,
+                                              ModifierCondition<IToolStackView> condition) implements ModifierModule, ArmorWalkRadiusModule<MutableUseOnContext>, ToolActionModifierHook, ConditionalModule<IToolStackView> {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<ToolActionWalkerTransformModule>defaultHooks(ModifierHooks.BOOT_WALK, ModifierHooks.TOOL_ACTION);
   public static final RecordLoadable<ToolActionWalkerTransformModule> LOADER = RecordLoadable.create(
     Loadables.TOOL_ACTION.requiredField("tool_action", ToolActionWalkerTransformModule::action),
@@ -101,17 +104,20 @@ public record ToolActionWalkerTransformModule(ToolAction action, SoundEvent soun
   public RecordLoadable<ToolActionWalkerTransformModule> getLoader() {
     return LOADER;
   }
-  
+
 
   /* Builder */
 
-  /** Creates a builder instance */
+  /**
+   * Creates a builder instance
+   */
   public static Builder builder(ToolAction action, SoundEvent sound) {
     return new Builder(action, sound);
   }
 
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   public static class Builder extends ModuleBuilder.Stack<Builder> implements LevelingValue.Builder<ToolActionWalkerTransformModule> {
+
     private final ToolAction action;
     private final SoundEvent sound;
 

@@ -15,8 +15,11 @@ import slimeknights.tconstruct.library.tools.item.ModifiableItem;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.utils.SlimeBounceHandler;
 
-/** Add velocity opposite of the targeted block */
+/**
+ * Add velocity opposite of the targeted block
+ */
 public class FlingingModifier extends SlingModifier {
+
   @Override
   public void onStoppedUsing(IToolStackView tool, ModifierEntry modifier, LivingEntity entity, int timeLeft) {
     super.onStoppedUsing(tool, modifier, entity, timeLeft);
@@ -31,8 +34,8 @@ public class FlingingModifier extends SlingModifier {
           float inaccuracy = ModifierUtil.getInaccuracy(tool, player) * 0.0075f;
           RandomSource random = player.getRandom();
           player.push((vec.x + random.nextGaussian() * inaccuracy) * -f,
-                      (vec.y + random.nextGaussian() * inaccuracy) * -f / 3f,
-                      (vec.z + random.nextGaussian() * inaccuracy) * -f);
+            (vec.y + random.nextGaussian() * inaccuracy) * -f / 3f,
+            (vec.z + random.nextGaussian() * inaccuracy) * -f);
           SlimeBounceHandler.addBounceHandler(player);
           if (!entity.level.isClientSide) {
             player.level.playSound(null, player.getX(), player.getY(), player.getZ(), Sounds.SLIME_SLING.getSound(), player.getSoundSource(), 1, 1);

@@ -2,7 +2,7 @@ package slimeknights.tconstruct.smeltery.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix4f;
+import org.joml.Matrix4f;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -18,17 +18,25 @@ import slimeknights.tconstruct.smeltery.client.screen.module.GuiSmelteryTank;
 
 import java.util.List;
 
-/** Helper class to render the smeltery tank */
+/**
+ * Helper class to render the smeltery tank
+ */
 public class SmelteryTankRenderer {
-  /** Distance between the liquid and the edge of the block */
+
+  /**
+   * Distance between the liquid and the edge of the block
+   */
   private static final float FLUID_OFFSET = 0.005f;
-  /** Amount to subtract from the height for fluid offset */
+  /**
+   * Amount to subtract from the height for fluid offset
+   */
   private static final int HEIGHT_OFFSET = (int) (FLUID_OFFSET * 2000d);
 
   /**
    * Gets the integer bounds for rendering a fluid with the given delta
-   * @param delta  Delta
-   * @return  Position array
+   *
+   * @param delta Delta
+   * @return Position array
    */
   private static float[] getBlockBounds(int delta) {
     return getBlockBounds(delta, FLUID_OFFSET, delta + 1f - FLUID_OFFSET);
@@ -36,34 +44,36 @@ public class SmelteryTankRenderer {
 
   /**
    * Gets the integer bounds for rendering a fluid with the given delta
-   * @param delta  Delta
-   * @param start  Start position
-   * @param end    End position
-   * @return  Position array
+   *
+   * @param delta Delta
+   * @param start Start position
+   * @param end   End position
+   * @return Position array
    */
   private static float[] getBlockBounds(int delta, float start, float end) {
     float[] bounds = new float[2 + delta];
     bounds[0] = start;
     int offset = (int) start;
-    for(int i = 1; i <= delta; i++) bounds[i] = i + offset;
-    bounds[delta+1] = end;
+    for (int i = 1; i <= delta; i++) bounds[i] = i + offset;
+    bounds[delta + 1] = end;
     return bounds;
   }
 
   /**
    * Renders the smeltery tank fluids, relative to tankMinPos
-   * @param matrices    Matrix stack instance
-   * @param buffer      Buffer instance
-   * @param tank        Smeltery tank
-   * @param brightness  Packed lighting values
-   * @param tankMinPos  Min position for fluid rendering
-   * @param tankMaxPos  Max position for fluid rendering
+   *
+   * @param matrices   Matrix stack instance
+   * @param buffer     Buffer instance
+   * @param tank       Smeltery tank
+   * @param brightness Packed lighting values
+   * @param tankMinPos Min position for fluid rendering
+   * @param tankMaxPos Max position for fluid rendering
    */
   public static void renderFluids(PoseStack matrices, MultiBufferSource buffer, SmelteryTank<?> tank,
                                   BlockPos tankMinPos, BlockPos tankMaxPos, int brightness) {
     List<FluidStack> fluids = tank.getFluids();
     // empty smeltery :(
-    if(!fluids.isEmpty()) {
+    if (!fluids.isEmpty()) {
       // determine x and z bounds, constant
       int xd = tankMaxPos.getX() - tankMinPos.getX();
       int zd = tankMaxPos.getZ() - tankMinPos.getZ();
@@ -92,6 +102,7 @@ public class SmelteryTankRenderer {
 
   /**
    * Renders a large fluid cuboid
+   *
    * @param matrices   Matrix stack intance
    * @param builder    Builder instance
    * @param fluid      Fluid to render
@@ -105,7 +116,7 @@ public class SmelteryTankRenderer {
    */
   private static void renderLargeFluidCuboid(PoseStack matrices, VertexConsumer builder, FluidStack fluid, int brightness,
                                              int xd, float[] xBounds, int zd, float[] zBounds, float yMin, float yMax) {
-    if(yMin >= yMax || fluid.isEmpty()) {
+    if (yMin >= yMax || fluid.isEmpty()) {
       return;
     }
     // fluid attributes
@@ -130,20 +141,25 @@ public class SmelteryTankRenderer {
     Vector3f from = new Vector3f();
     Vector3f to = new Vector3f();
     int rotation = upsideDown ? 180 : 0;
-    for(int y = 0; y <= yd; y++) {
-      for(int z = 0; z <= zd; z++) {
-        for(int x = 0; x <= xd; x++) {
+    for (int y = 0; y <= yd; y++) {
+      for (int z = 0; z <= zd; z++) {
+        for (int x = 0; x <= xd; x++) {
           from.set(xBounds[x], yBounds[y], zBounds[z]);
           to.set(xBounds[x + 1], yBounds[y + 1], zBounds[z + 1]);
-          if (x == 0)  FluidRenderer.putTexturedQuad(builder, matrix, still, from, to, Direction.WEST,  color, brightness, rotation, false);
-          if (x == xd) FluidRenderer.putTexturedQuad(builder, matrix, still, from, to, Direction.EAST,  color, brightness, rotation, false);
-          if (z == 0)  FluidRenderer.putTexturedQuad(builder, matrix, still, from, to, Direction.NORTH, color, brightness, rotation, false);
-          if (z == zd) FluidRenderer.putTexturedQuad(builder, matrix, still, from, to, Direction.SOUTH, color, brightness, rotation, false);
-          if (y == yd) FluidRenderer.putTexturedQuad(builder, matrix, still, from, to, Direction.UP,    color, brightness, rotation, false);
+          if (x == 0)
+            FluidRenderer.putTexturedQuad(builder, matrix, still, from, to, Direction.WEST, color, brightness, rotation, false);
+          if (x == xd)
+            FluidRenderer.putTexturedQuad(builder, matrix, still, from, to, Direction.EAST, color, brightness, rotation, false);
+          if (z == 0)
+            FluidRenderer.putTexturedQuad(builder, matrix, still, from, to, Direction.NORTH, color, brightness, rotation, false);
+          if (z == zd)
+            FluidRenderer.putTexturedQuad(builder, matrix, still, from, to, Direction.SOUTH, color, brightness, rotation, false);
+          if (y == yd)
+            FluidRenderer.putTexturedQuad(builder, matrix, still, from, to, Direction.UP, color, brightness, rotation, false);
           if (y == 0) {
             // increase Y position slightly to prevent z fighting on neighboring fluids
             from.setY(from.y() + 0.001f);
-            FluidRenderer.putTexturedQuad(builder, matrix, still,   from, to, Direction.DOWN,  color, brightness, rotation, false);
+            FluidRenderer.putTexturedQuad(builder, matrix, still, from, to, Direction.DOWN, color, brightness, rotation, false);
           }
         }
       }

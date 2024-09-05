@@ -13,14 +13,17 @@ import java.util.function.Function;
 
 /**
  * Field that writes into a list of objects inside the parent object. Requires the other list to be equal or smaller size from this list.
+ *
  * @param field  Field with an identity "getter" to fetch values from the nested array. The key inside this field determines the location in the list object.
  *               This field may not evaluate to null, use an appropriate default instead
  * @param key    Key in the parent that contains the list
  * @param getter Getter to fetch the list from the parent object
- * @param <T>  Field type
- * @param <P>  Parent type
+ * @param <T>    Field type
+ * @param <P>    Parent type
  */
-public record MergingListField<T,P>(LoadableField<T,T> field, String key, Function<P,List<T>> getter) implements LoadableField<List<T>,P> {
+public record MergingListField<T, P>(LoadableField<T, T> field, String key,
+                                     Function<P, List<T>> getter) implements LoadableField<List<T>, P> {
+
   public MergingListField {
     if (field instanceof NullableField) {
       throw new IllegalArgumentException("Merging list field does not support nulls, use a defaulting field with an appropriate default instead");

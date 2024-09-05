@@ -30,12 +30,16 @@ import java.util.List;
 
 /**
  * Module for common conditional stats, such as on ranged tools
- * @param stat        Stat to boost
- * @param holder      Condition on the tool holder
- * @param formula     Formula to apply
- * @param condition   Standard modifier module conditions
+ *
+ * @param stat      Stat to boost
+ * @param holder    Condition on the tool holder
+ * @param formula   Formula to apply
+ * @param condition Standard modifier module conditions
  */
-public record ConditionalStatModule(INumericToolStat<?> stat, IJsonPredicate<LivingEntity> holder, ConditionalStatFormula formula, ModifierCondition<IToolStackView> condition) implements ModifierModule, ConditionalStatModifierHook, ConditionalStatTooltip, ConditionalModule<IToolStackView> {
+public record ConditionalStatModule(INumericToolStat<?> stat, IJsonPredicate<LivingEntity> holder,
+                                    ConditionalStatFormula formula,
+                                    ModifierCondition<IToolStackView> condition) implements ModifierModule, ConditionalStatModifierHook, ConditionalStatTooltip, ConditionalModule<IToolStackView> {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<ConditionalStatModule>defaultHooks(ModifierHooks.CONDITIONAL_STAT, ModifierHooks.TOOLTIP);
   public static final RecordLoadable<ConditionalStatModule> LOADER = RecordLoadable.create(
     ToolStats.NUMERIC_LOADER.requiredField("stat", ConditionalStatModule::stat),
@@ -82,13 +86,18 @@ public record ConditionalStatModule(INumericToolStat<?> stat, IJsonPredicate<Liv
 
   /* Builder */
 
-  /** Creates a builder instance */
+  /**
+   * Creates a builder instance
+   */
   public static Builder stat(INumericToolStat<?> stat) {
     return new Builder(stat);
   }
 
-  /** Builder class */
-  public static class Builder extends VariableFormula.Builder<Builder,ConditionalStatModule,ConditionalStatVariable> {
+  /**
+   * Builder class
+   */
+  public static class Builder extends VariableFormula.Builder<Builder, ConditionalStatModule, ConditionalStatVariable> {
+
     private final INumericToolStat<?> stat;
     @Setter
     @Accessors(fluent = true)

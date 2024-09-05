@@ -9,6 +9,7 @@ import slimeknights.mantle.util.typed.TypedMap;
  * Singleton loader for record loadables, will likely be moved to Mantle once {@link slimeknights.mantle.data.registry.GenericLoaderRegistry.IGenericLoader} is removed.
  */
 public record SingletonRecordLoadable<T>(T instance) implements RecordLoadable<T> {
+
   @Override
   public T deserialize(JsonObject json, TypedMap context) {
     return instance;

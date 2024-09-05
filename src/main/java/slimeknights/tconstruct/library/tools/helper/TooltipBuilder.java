@@ -28,16 +28,23 @@ import java.util.function.UnaryOperator;
 
 import static java.awt.Color.HSBtoRGB;
 
-/** Builder for tool stats */
+/**
+ * Builder for tool stats
+ */
 @SuppressWarnings("UnusedReturnValue")
 @RequiredArgsConstructor
 public class TooltipBuilder {
+
   private static final TextColor MAX = valueToColor(1, 1);
   private static final UnaryOperator<Style> APPLY_MAX = style -> style.withColor(MAX);
 
-  /** Formatted broken string */
+  /**
+   * Formatted broken string
+   */
   private static final Component TOOLTIP_BROKEN = TConstruct.makeTranslation("tooltip", "tool.broken").withStyle(ChatFormatting.BOLD, ChatFormatting.DARK_RED);
-  /** Prefixed broken string */
+  /**
+   * Prefixed broken string
+   */
   private static final Component TOOLTIP_BROKEN_PREFIXED = ToolStats.DURABILITY.getPrefix().append(TOOLTIP_BROKEN);
 
   private final IToolStackView tool;
@@ -61,7 +68,9 @@ public class TooltipBuilder {
     return this;
   }
 
-  /** Formats the stat value */
+  /**
+   * Formats the stat value
+   */
   private <T> Component formatValue(IToolStat<T> stat) {
     return stat.formatValue(tool.getStats().get(stat));
   }
@@ -69,7 +78,7 @@ public class TooltipBuilder {
   /**
    * Adds the given stat to the tooltip
    *
-   * @param stat  Stat to add
+   * @param stat Stat to add
    * @return the tooltip builder
    */
   public TooltipBuilder add(IToolStat<?> stat) {
@@ -90,7 +99,7 @@ public class TooltipBuilder {
   /**
    * Adds the given stat to the tooltip if above 0
    *
-   * @param stat  Stat to add
+   * @param stat Stat to add
    * @return the tooltip builder
    */
   public TooltipBuilder addOptional(INumericToolStat<?> stat) {
@@ -112,7 +121,9 @@ public class TooltipBuilder {
     return this;
   }
 
-  /** Applies formatting for durability with a reference durability */
+  /**
+   * Applies formatting for durability with a reference durability
+   */
   public static Component formatDurability(int durability, int ref, boolean textIfBroken) {
     if (textIfBroken && durability == 0) {
       return TOOLTIP_BROKEN_PREFIXED;
@@ -135,9 +146,10 @@ public class TooltipBuilder {
 
   /**
    * Formats a fraction with color based on the percent
-   * @param value  Value
-   * @param max    Max value
-   * @return  Formatted amount
+   *
+   * @param value Value
+   * @param max   Max value
+   * @return Formatted amount
    */
   public static Component formatPartialAmount(int value, int max) {
     return Component.literal(Util.COMMA_FORMAT.format(value))
@@ -177,7 +189,8 @@ public class TooltipBuilder {
 
   /**
    * Adds the specific free slot to the tooltip
-   * @param slotType  Type of slot to add
+   *
+   * @param slotType Type of slot to add
    * @return the tooltip builder
    */
   public TooltipBuilder addFreeSlots(SlotType slotType) {

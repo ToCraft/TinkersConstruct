@@ -10,11 +10,16 @@ import slimeknights.tconstruct.library.json.variable.VariableLoaderRegistry;
 
 import static slimeknights.mantle.data.registry.GenericLoaderRegistry.SingletonLoader.singleton;
 
-/** Variable that fetches a property from an entity */
+/**
+ * Variable that fetches a property from an entity
+ */
 public interface EntityVariable extends IHaveLoader {
+
   GenericLoaderRegistry<EntityVariable> LOADER = new VariableLoaderRegistry<>("Entity Variable", Constant::new);
 
-  /** Gets a value from the given entity */
+  /**
+   * Gets a value from the given entity
+   */
   float getValue(LivingEntity entity);
 
   @Override
@@ -22,7 +27,9 @@ public interface EntityVariable extends IHaveLoader {
 
   /* Singletons */
 
-  /** Creates a new singleton variable getter */
+  /**
+   * Creates a new singleton variable getter
+   */
   static EntityVariable simple(ToFloatFunction<LivingEntity> getter) {
     return singleton(loader -> new EntityVariable() {
       @Override
@@ -37,14 +44,21 @@ public interface EntityVariable extends IHaveLoader {
     });
   }
 
-  /** Gets the current health of the entity. For max health, see {@link AttributeEntityVariable} */
+  /**
+   * Gets the current health of the entity. For max health, see {@link AttributeEntityVariable}
+   */
   EntityVariable HEALTH = simple(LivingEntity::getHealth);
-  /** Gets the height of the entities feet */
-  EntityVariable HEIGHT = simple(entity -> (float)entity.getY());
+  /**
+   * Gets the height of the entities feet
+   */
+  EntityVariable HEIGHT = simple(entity -> (float) entity.getY());
 
 
-  /** Constant value instance for this object */
+  /**
+   * Constant value instance for this object
+   */
   record Constant(float value) implements VariableLoaderRegistry.ConstantFloat, EntityVariable {
+
     public static final RecordLoadable<Constant> LOADER = VariableLoaderRegistry.constantLoader(Constant::new);
 
     @Override

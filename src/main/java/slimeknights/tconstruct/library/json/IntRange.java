@@ -17,6 +17,7 @@ import java.util.function.IntPredicate;
  * This object is setup to simplify JSON parsing by creating an instance representing the minimum and maximum range values, then using that object to parse from JSON.
  */
 public record IntRange(int min, int max) implements IntPredicate, Loadable<IntRange> {
+
   @Override
   public boolean test(int value) {
     return min <= value && value <= max;
@@ -26,7 +27,8 @@ public record IntRange(int min, int max) implements IntPredicate, Loadable<IntRa
 
   /**
    * Reads an integer within this range
-   * @param value  Value to validate
+   *
+   * @param value Value to validate
    * @throws IllegalArgumentException if the key is not an int or below the min
    */
   private void validateArgument(String key, int value) {
@@ -35,13 +37,17 @@ public record IntRange(int min, int max) implements IntPredicate, Loadable<IntRa
     }
   }
 
-  /** Creates an int range matching a single value, validated by this range */
+  /**
+   * Creates an int range matching a single value, validated by this range
+   */
   public IntRange exactly(int value) {
     validateArgument("value", value);
     return new IntRange(value, value);
   }
 
-  /** Creates an int range matching a range, validated by this range */
+  /**
+   * Creates an int range matching a range, validated by this range
+   */
   public IntRange range(int min, int max) {
     validateArgument("min", min);
     validateArgument("max", max);
@@ -51,13 +57,17 @@ public record IntRange(int min, int max) implements IntPredicate, Loadable<IntRa
     return new IntRange(min, max);
   }
 
-  /** Creates an int range with the passed minimum and this object's maximum */
+  /**
+   * Creates an int range with the passed minimum and this object's maximum
+   */
   public IntRange min(int min) {
     validateArgument("min", min);
     return new IntRange(min, this.max);
   }
 
-  /** Creates an int range with the passed maximum and this object's minimum */
+  /**
+   * Creates an int range with the passed maximum and this object's minimum
+   */
   public IntRange max(int max) {
     validateArgument("max", max);
     return new IntRange(this.min, max);
@@ -68,8 +78,9 @@ public record IntRange(int min, int max) implements IntPredicate, Loadable<IntRa
 
   /**
    * Reads an integer within this range
-   * @param key    Key to read
-   * @param value  Value to validate
+   *
+   * @param key   Key to read
+   * @param value Value to validate
    * @throws JsonSyntaxException if the key is not an int or below the min
    */
   private void validateJsonInt(String key, int value) {
@@ -117,7 +128,9 @@ public record IntRange(int min, int max) implements IntPredicate, Loadable<IntRa
     return object;
   }
 
-  /** Serializes this range into the given object parent */
+  /**
+   * Serializes this range into the given object parent
+   */
   public void serializeInto(JsonObject parent, String key, IntRange range) {
     if (!this.equals(range)) {
       parent.add(key, serialize(range));
@@ -127,20 +140,26 @@ public record IntRange(int min, int max) implements IntPredicate, Loadable<IntRa
 
   /* Network */
 
-  /** Reads a range from the buffer */
+  /**
+   * Reads a range from the buffer
+   */
   @Override
   public IntRange decode(FriendlyByteBuf buffer) {
     return fromNetwork(buffer);
   }
 
-  /** Reads a range from the buffer */
+  /**
+   * Reads a range from the buffer
+   */
   public static IntRange fromNetwork(FriendlyByteBuf buffer) {
     int min = buffer.readVarInt();
     int max = buffer.readVarInt();
     return new IntRange(min, max);
   }
 
-  /** Writes this range to the buffer */
+  /**
+   * Writes this range to the buffer
+   */
   public void toNetwork(FriendlyByteBuf buffer) {
     buffer.writeVarInt(min);
     buffer.writeVarInt(max);
@@ -156,21 +175,26 @@ public record IntRange(int min, int max) implements IntPredicate, Loadable<IntRa
 
   /**
    * Gets the value from the given parent, or returns this if missing
-   * @param parent  Parent instance
-   * @param key     Key to fetch
-   * @return  Valid int range
+   *
+   * @param parent Parent instance
+   * @param key    Key to fetch
+   * @return Valid int range
    */
   public IntRange getOrDefault(JsonObject parent, String key) {
     return Loadable.super.getOrDefault(parent, key, this);
   }
 
-  /** Creates a default field using this as the default. */
-  public <P> LoadableField<IntRange,P> defaultField(String key, boolean serializeDefault, Function<P,IntRange> getter) {
+  /**
+   * Creates a default field using this as the default.
+   */
+  public <P> LoadableField<IntRange, P> defaultField(String key, boolean serializeDefault, Function<P, IntRange> getter) {
     return defaultField(key, this, serializeDefault, getter);
   }
 
-  /** Creates a default field using this as the default, skipping serializing if its default. */
-  public <P> LoadableField<IntRange,P> defaultField(String key, Function<P,IntRange> getter) {
+  /**
+   * Creates a default field using this as the default, skipping serializing if its default.
+   */
+  public <P> LoadableField<IntRange, P> defaultField(String key, Function<P, IntRange> getter) {
     return defaultField(key, false, getter);
   }
 }

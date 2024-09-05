@@ -8,9 +8,14 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 public class TintedVertexBuilder implements VertexConsumer {
-  /** Base vertex builder */
+
+  /**
+   * Base vertex builder
+   */
   private final VertexConsumer inner;
-  /** Tint color from 0-255 */
+  /**
+   * Tint color from 0-255
+   */
   private final int tintRed, tintGreen, tintBlue, tintAlpha;
 
   @Override

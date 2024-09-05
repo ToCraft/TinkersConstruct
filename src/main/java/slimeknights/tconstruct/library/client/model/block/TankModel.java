@@ -62,9 +62,12 @@ import java.util.function.Function;
  */
 @AllArgsConstructor
 public class TankModel implements IUnbakedGeometry<TankModel> {
+
   protected static final ResourceLocation BAKE_LOCATION = TConstruct.getResource("dynamic_model_baking");
 
-  /** Shared loader instance */
+  /**
+   * Shared loader instance
+   */
   public static final IGeometryLoader<TankModel> LOADER = TankModel::deserialize;
 
   protected final SimpleBlockModel model;
@@ -74,7 +77,7 @@ public class TankModel implements IUnbakedGeometry<TankModel> {
   protected final boolean forceModelFluid;
 
   @Override
-  public Collection<Material> getMaterials(IGeometryBakingContext owner, Function<ResourceLocation,UnbakedModel> modelGetter, Set<Pair<String,String>> missingTextureErrors) {
+  public Collection<Material> getMaterials(IGeometryBakingContext owner, Function<ResourceLocation, UnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors) {
     Collection<Material> textures = new HashSet<>(model.getMaterials(owner, modelGetter, missingTextureErrors));
     if (gui != null) {
       textures.addAll(gui.getMaterials(owner, modelGetter, missingTextureErrors));
@@ -83,7 +86,7 @@ public class TankModel implements IUnbakedGeometry<TankModel> {
   }
 
   @Override
-  public BakedModel bake(IGeometryBakingContext owner, ModelBakery bakery, Function<Material,TextureAtlasSprite> spriteGetter, ModelState transform, ItemOverrides overrides, ResourceLocation location) {
+  public BakedModel bake(IGeometryBakingContext owner, ModelBakery bakery, Function<Material, TextureAtlasSprite> spriteGetter, ModelState transform, ItemOverrides overrides, ResourceLocation location) {
     BakedModel baked = model.bake(owner, bakery, spriteGetter, transform, overrides, location);
     // bake the GUI model if present
     BakedModel bakedGui = baked;
@@ -93,9 +96,14 @@ public class TankModel implements IUnbakedGeometry<TankModel> {
     return new Baked<>(owner, transform, baked, bakedGui, this);
   }
 
-  /** Override to add the fluid part to the item model */
+  /**
+   * Override to add the fluid part to the item model
+   */
   private static class FluidPartOverride extends ItemOverrides {
-    /** Shared override instance, since the logic is not model dependent */
+
+    /**
+     * Shared override instance, since the logic is not model dependent
+     */
     public static final FluidPartOverride INSTANCE = new FluidPartOverride();
 
     @Override
@@ -110,20 +118,22 @@ public class TankModel implements IUnbakedGeometry<TankModel> {
         return model;
       }
       // always baked model as this override is only used in our model
-      return ((Baked<?>)model).getCachedModel(tank.getFluid(), tank.getCapacity());
+      return ((Baked<?>) model).getCachedModel(tank.getFluid(), tank.getCapacity());
     }
   }
 
   /**
    * Baked variant to load in the custom overrides
-   * @param <T>  Parent model type, used to make this easier to extend
+   *
+   * @param <T> Parent model type, used to make this easier to extend
    */
   public static class Baked<T extends TankModel> extends BakedUniqueGuiModel {
+
     private final IGeometryBakingContext owner;
     private final ModelState originalTransforms;
     @SuppressWarnings("WeakerAccess")
     protected final T original;
-    private final Cache<FluidStack,BakedModel> cache = CacheBuilder
+    private final Cache<FluidStack, BakedModel> cache = CacheBuilder
       .newBuilder()
       .maximumSize(64)
       .build();
@@ -143,16 +153,17 @@ public class TankModel implements IUnbakedGeometry<TankModel> {
 
     /**
      * Bakes the model with the given fluid element
-     * @param owner        Owner for baking, should include the fluid texture
-     * @param baseModel    Base model for original elements
-     * @param fluid        Fluid element for baking
-     * @param color        Color for the fluid part
-     * @param luminosity   Luminosity for the fluid part
-     * @return  Baked model
+     *
+     * @param owner      Owner for baking, should include the fluid texture
+     * @param baseModel  Base model for original elements
+     * @param fluid      Fluid element for baking
+     * @param color      Color for the fluid part
+     * @param luminosity Luminosity for the fluid part
+     * @return Baked model
      */
     private BakedModel bakeWithFluid(IGeometryBakingContext owner, SimpleBlockModel baseModel, BlockElement fluid, int color, int luminosity) {
       // setup for baking, using dynamic location and sprite getter
-      Function<Material,TextureAtlasSprite> spriteGetter = Material::sprite;
+      Function<Material, TextureAtlasSprite> spriteGetter = Material::sprite;
       TextureAtlasSprite particle = spriteGetter.apply(owner.getMaterial("particle"));
       SimpleBakedModel.Builder builder = SimpleBlockModel.bakedBuilder(owner, ItemOverrides.EMPTY).particle(particle);
       IQuadTransformer quadTransformer = SimpleBlockModel.applyTransform(originalTransforms, owner.getRootTransform());
@@ -168,8 +179,9 @@ public class TankModel implements IUnbakedGeometry<TankModel> {
 
     /**
      * Gets the model with the fluid part added
-     * @param stack  Fluid stack to add
-     * @return  Model with the fluid part
+     *
+     * @param stack Fluid stack to add
+     * @return Model with the fluid part
      */
     private BakedModel getModel(FluidStack stack) {
       // fetch fluid data
@@ -177,7 +189,7 @@ public class TankModel implements IUnbakedGeometry<TankModel> {
       FluidType type = stack.getFluid().getFluidType();
       int color = attributes.getTintColor(stack);
       int luminosity = type.getLightLevel(stack);
-      Map<String,Material> textures = ImmutableMap.of(
+      Map<String, Material> textures = ImmutableMap.of(
         "fluid", new Material(InventoryMenu.BLOCK_ATLAS, attributes.getStillTexture(stack)),
         "flowing_fluid", new Material(InventoryMenu.BLOCK_ATLAS, attributes.getFlowingTexture(stack)));
       IGeometryBakingContext textured = new ExtraTextureContext(owner, textures);
@@ -198,14 +210,14 @@ public class TankModel implements IUnbakedGeometry<TankModel> {
 
     /**
      * Gets a cached model with the fluid part added
-     * @param fluid  Scaled contained fluid
-     * @return  Cached model
+     *
+     * @param fluid Scaled contained fluid
+     * @return Cached model
      */
     private BakedModel getCachedModel(FluidStack fluid) {
       try {
         return cache.get(fluid, () -> getModel(fluid));
-      }
-      catch(ExecutionException e) {
+      } catch (ExecutionException e) {
         TConstruct.LOG.error(e);
         return this;
       }
@@ -213,9 +225,10 @@ public class TankModel implements IUnbakedGeometry<TankModel> {
 
     /**
      * Gets a cached model with the fluid part added
-     * @param fluid     Fluid contained
-     * @param capacity  Tank capacity
-     * @return  Cached model
+     *
+     * @param fluid    Fluid contained
+     * @param capacity Tank capacity
+     * @return Cached model
      */
     private BakedModel getCachedModel(FluidStack fluid, int capacity) {
       int increments = original.fluid.getIncrements();
@@ -236,14 +249,17 @@ public class TankModel implements IUnbakedGeometry<TankModel> {
 
     /**
      * Gets the fluid location
-     * @return  Fluid location data
+     *
+     * @return Fluid location data
      */
     public IncrementalFluidCuboid getFluid() {
       return original.fluid;
     }
   }
 
-  /** Loader for this model */
+  /**
+   * Loader for this model
+   */
   public static TankModel deserialize(JsonObject json, JsonDeserializationContext context) {
     SimpleBlockModel model = SimpleBlockModel.deserialize(json, context);
     SimpleBlockModel gui = null;

@@ -5,23 +5,36 @@ import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceLocation;
 
 public class Material implements IMaterial {
-  /** Default white color */
+
+  /**
+   * Default white color
+   */
   protected static final TextColor WHITE = TextColor.fromRgb(0xFFFFFF);
 
-  /** This resource location uniquely identifies a material. */
+  /**
+   * This resource location uniquely identifies a material.
+   */
   @Getter
   private final MaterialId identifier;
-  /** Materials tier, mostly for sorting right now */
+  /**
+   * Materials tier, mostly for sorting right now
+   */
   @Getter
   private final int tier;
-  /** Materials order within the tier, for sorting */
+  /**
+   * Materials order within the tier, for sorting
+   */
   @Getter
   private final int sortOrder;
 
-  /** Material can be crafted into parts in the PartBuilder */
+  /**
+   * Material can be crafted into parts in the PartBuilder
+   */
   @Getter
   private final boolean craftable;
-  /** if true, this material is hidden */
+  /**
+   * if true, this material is hidden
+   */
   @Getter
   private final boolean hidden;
 

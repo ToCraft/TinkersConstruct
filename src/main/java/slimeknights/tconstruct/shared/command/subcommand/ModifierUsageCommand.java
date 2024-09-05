@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.common.util.TablePrinter;
 import slimeknights.mantle.command.MantleCommand;
@@ -36,32 +37,38 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/** Command that prints a list of all modifiers and how they are used in current datapacks */
+/**
+ * Command that prints a list of all modifiers and how they are used in current datapacks
+ */
 public class ModifierUsageCommand {
+
   private static final Component SUCCESS = Component.translatable("command.tconstruct.modifier_usage");
 
   /**
    * Registers this sub command with the root command
-   * @param subCommand  Command builder
+   *
+   * @param subCommand Command builder
    */
   public static void register(LiteralArgumentBuilder<CommandSourceStack> subCommand) {
     subCommand.requires(sender -> sender.hasPermission(MantleCommand.PERMISSION_EDIT_SPAWN))
-              .executes(context -> runForType(context, ModifierUsages.ALL, null))
-              // modifier_usage all
-              .then(Commands.literal("all").executes(context -> runForType(context, ModifierUsages.ALL, null)))
-              // modifier_usage recipe [<slot_type>]
-              .then(Commands.literal("recipe")
-                            .then(Commands.argument("slot_type", SlotTypeArgument.slotType()).executes(ModifierUsageCommand::runRecipeWithFilter))
-                            .executes(context -> runForType(context, ModifierUsages.RECIPE, null)))
-              // modifier_usage material_trait
-              .then(Commands.literal("material_trait").executes(context -> runForType(context, ModifierUsages.MATERIAL_TRAIT, null)))
-              // modifier_usage tool_trait
-              .then(Commands.literal("tool_trait").executes(context -> runForType(context, ModifierUsages.TOOL_TRAIT, null)))
-              // modifier_usage unused
-              .then(Commands.literal("unused").executes(context -> runForType(context, ModifierUsages.UNUSED, null)));
+      .executes(context -> runForType(context, ModifierUsages.ALL, null))
+      // modifier_usage all
+      .then(Commands.literal("all").executes(context -> runForType(context, ModifierUsages.ALL, null)))
+      // modifier_usage recipe [<slot_type>]
+      .then(Commands.literal("recipe")
+        .then(Commands.argument("slot_type", SlotTypeArgument.slotType()).executes(ModifierUsageCommand::runRecipeWithFilter))
+        .executes(context -> runForType(context, ModifierUsages.RECIPE, null)))
+      // modifier_usage material_trait
+      .then(Commands.literal("material_trait").executes(context -> runForType(context, ModifierUsages.MATERIAL_TRAIT, null)))
+      // modifier_usage tool_trait
+      .then(Commands.literal("tool_trait").executes(context -> runForType(context, ModifierUsages.TOOL_TRAIT, null)))
+      // modifier_usage unused
+      .then(Commands.literal("unused").executes(context -> runForType(context, ModifierUsages.UNUSED, null)));
   }
 
-  /** Runs the actual command */
+  /**
+   * Runs the actual command
+   */
   private static int runRecipeWithFilter(CommandContext<CommandSourceStack> context) {
     return runForType(context, ModifierUsages.RECIPE, SlotTypeArgument.getOptional(context, "slot_type"));
   }
@@ -70,24 +77,24 @@ public class ModifierUsageCommand {
     // material traits are used in material traits (kinda obvious)
     IMaterialRegistry matReg = MaterialRegistry.getInstance();
     Set<Modifier> materialTraits = matReg.getAllMaterials().stream()
-                                         .flatMap(mat -> {
-                                           MaterialId matId = mat.getIdentifier();
-                                           return Stream.concat(matReg.getDefaultTraits(matId).stream(),
-                                                                matReg.getAllStats(matId).stream()
-                                                                      .filter(stat -> matReg.hasUniqueTraits(matId, stat.getIdentifier()))
-                                                                      .flatMap(stat -> matReg.getTraits(matId, stat.getIdentifier()).stream()));
-                                         })
-                                         .map(ModifierEntry::getModifier)
-                                         .collect(Collectors.toSet());
+      .flatMap(mat -> {
+        MaterialId matId = mat.getIdentifier();
+        return Stream.concat(matReg.getDefaultTraits(matId).stream(),
+          matReg.getAllStats(matId).stream()
+            .filter(stat -> matReg.hasUniqueTraits(matId, stat.getIdentifier()))
+            .flatMap(stat -> matReg.getTraits(matId, stat.getIdentifier()).stream()));
+      })
+      .map(ModifierEntry::getModifier)
+      .collect(Collectors.toSet());
     // finally, tool traits we limit to anything in the modifiable tag
-    Set<Modifier> toolTraits = RegistryHelper.getTagValueStream(Registry.ITEM, TinkerTags.Items.MODIFIABLE)
-                                             .filter(item -> item instanceof IModifiable)
-                                             .flatMap(item -> {
-                                               ToolDefinition definition = ((IModifiable) item).getToolDefinition();
-                                               return ToolTraitHook.getTraits(definition, MaterialNBT.EMPTY).getModifiers().stream();
-                                             })
-                                             .map(ModifierEntry::getModifier)
-                                             .collect(Collectors.toSet());
+    Set<Modifier> toolTraits = RegistryHelper.getTagValueStream(BuiltInRegistries.ITEM, TinkerTags.Items.MODIFIABLE)
+      .filter(item -> item instanceof IModifiable)
+      .flatMap(item -> {
+        ToolDefinition definition = ((IModifiable) item).getToolDefinition();
+        return ToolTraitHook.getTraits(definition, MaterialNBT.EMPTY).getModifiers().stream();
+      })
+      .map(ModifierEntry::getModifier)
+      .collect(Collectors.toSet());
 
     // next, get our list of modifiers
     Stream<Modifier> modifierStream;
@@ -145,9 +152,9 @@ public class ModifierUsageCommand {
     finalList.forEach(modifier -> {
       // determine which recipes use this by slot type
       List<String> recipeUsages = SlotType.getAllSlotTypes().stream()
-                                          .filter(type -> ModifierRecipeLookup.isRecipeModifier(type, modifier.getId()))
-                                          .map(SlotType::getName)
-                                          .collect(Collectors.toList());
+        .filter(type -> ModifierRecipeLookup.isRecipeModifier(type, modifier.getId()))
+        .map(SlotType::getName)
+        .collect(Collectors.toList());
       String recipes;
       if (recipeUsages.isEmpty()) {
         recipes = ModifierRecipeLookup.isRecipeModifier(null, modifier.getId()) ? "slotless" : "";
@@ -164,7 +171,9 @@ public class ModifierUsageCommand {
     return finalList.size();
   }
 
-  /** Valid options for the modifier type argument */
+  /**
+   * Valid options for the modifier type argument
+   */
   @RequiredArgsConstructor
   private enum ModifierUsages {
     UNUSED("Unused modifiers:"),

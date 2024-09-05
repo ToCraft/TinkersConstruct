@@ -6,6 +6,7 @@ import slimeknights.tconstruct.library.recipe.melting.IMeltingContainer.IOreRate
 import slimeknights.tconstruct.library.recipe.melting.IMeltingRecipe;
 
 public class ByproductMeltingModuleInventory extends MeltingModuleInventory {
+
   public ByproductMeltingModuleInventory(MantleBlockEntity parent, IFluidHandler fluidHandler, IOreRate oreRate, int size) {
     super(parent, fluidHandler, oreRate, size);
   }

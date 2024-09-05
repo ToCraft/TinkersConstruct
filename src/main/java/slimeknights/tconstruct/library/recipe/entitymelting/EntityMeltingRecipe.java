@@ -26,6 +26,7 @@ import java.util.Collection;
  */
 @RequiredArgsConstructor
 public class EntityMeltingRecipe implements ICustomOutputRecipe<IEmptyContainer> {
+
   public static final RecordLoadable<EntityMeltingRecipe> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(),
     EntityIngredient.LOADABLE.requiredField("entity", r -> r.ingredient),
@@ -44,8 +45,9 @@ public class EntityMeltingRecipe implements ICustomOutputRecipe<IEmptyContainer>
 
   /**
    * Checks if the recipe matches the given type
-   * @param type  Type
-   * @return  True if it matches
+   *
+   * @param type Type
+   * @return True if it matches
    */
   public boolean matches(EntityType<?> type) {
     return ingredient.test(type);
@@ -53,8 +55,9 @@ public class EntityMeltingRecipe implements ICustomOutputRecipe<IEmptyContainer>
 
   /**
    * Gets the output for this recipe
-   * @param entity  Entity being melted
-   * @return  Fluid output
+   *
+   * @param entity Entity being melted
+   * @return Fluid output
    */
   public FluidStack getOutput(LivingEntity entity) {
     return output.copy();
@@ -62,7 +65,8 @@ public class EntityMeltingRecipe implements ICustomOutputRecipe<IEmptyContainer>
 
   /**
    * Gets a collection of inputs for filtering in JEI
-   * @return  Collection of types
+   *
+   * @return Collection of types
    */
   public Collection<EntityType<?>> getInputs() {
     return ingredient.getTypes();
@@ -78,7 +82,9 @@ public class EntityMeltingRecipe implements ICustomOutputRecipe<IEmptyContainer>
     return TinkerRecipeTypes.ENTITY_MELTING.get();
   }
 
-  /** @deprecated use {@link #matches(EntityType)}*/
+  /**
+   * @deprecated use {@link #matches(EntityType)}
+   */
   @Deprecated
   @Override
   public boolean matches(IEmptyContainer inv, Level worldIn) {

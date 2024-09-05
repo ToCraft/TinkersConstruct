@@ -12,8 +12,11 @@ import slimeknights.tconstruct.world.TinkerWorld;
 import static net.minecraft.world.level.block.MangrovePropaguleBlock.AGE;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HANGING;
 
-/** Recreation of {@link net.minecraft.world.level.block.MangroveLeavesBlock} with slimy leaves behavior */
+/**
+ * Recreation of {@link net.minecraft.world.level.block.MangroveLeavesBlock} with slimy leaves behavior
+ */
 public class SlimePropaguleLeavesBlock extends SlimeLeavesBlock implements BonemealableBlock {
+
   public SlimePropaguleLeavesBlock(Properties properties, FoliageType foliageType) {
     super(properties, foliageType);
   }

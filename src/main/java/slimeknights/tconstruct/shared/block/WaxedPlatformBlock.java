@@ -10,7 +10,9 @@ import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.shared.TinkerCommons;
 
 public class WaxedPlatformBlock extends PlatformBlock {
+
   private final WeatherState age;
+
   public WaxedPlatformBlock(WeatherState age, Properties prop) {
     super(prop);
     this.age = age;

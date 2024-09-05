@@ -14,9 +14,12 @@ import slimeknights.tconstruct.library.modifiers.util.LazyModifier;
 
 import java.util.function.Consumer;
 
-/** Recipe that supports not just adding multiple of an item, but also adding a partial amount */
+/**
+ * Recipe that supports not just adding multiple of an item, but also adding a partial amount
+ */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class IncrementalModifierRecipeBuilder extends AbstractModifierRecipeBuilder<IncrementalModifierRecipeBuilder> {
+
   private Ingredient input = Ingredient.EMPTY;
   private int amountPerItem;
   private int neededPerLevel;
@@ -28,8 +31,9 @@ public class IncrementalModifierRecipeBuilder extends AbstractModifierRecipeBuil
 
   /**
    * Creates a new recipe for 1 level of a modifier
-   * @param modifier  Modifier
-   * @return  Recipe for 1 level of the modifier
+   *
+   * @param modifier Modifier
+   * @return Recipe for 1 level of the modifier
    */
   public static IncrementalModifierRecipeBuilder modifier(ModifierId modifier) {
     return new IncrementalModifierRecipeBuilder(modifier);
@@ -37,8 +41,9 @@ public class IncrementalModifierRecipeBuilder extends AbstractModifierRecipeBuil
 
   /**
    * Creates a new recipe for 1 level of a modifier
-   * @param modifier  Modifier
-   * @return  Recipe for 1 level of the modifier
+   *
+   * @param modifier Modifier
+   * @return Recipe for 1 level of the modifier
    */
   public static IncrementalModifierRecipeBuilder modifier(LazyModifier modifier) {
     return modifier(modifier.getId());
@@ -49,10 +54,11 @@ public class IncrementalModifierRecipeBuilder extends AbstractModifierRecipeBuil
 
   /**
    * Adds an input to the recipe
+   *
    * @param input          Input
    * @param amountPerItem  Amount each item matches
    * @param neededPerLevel Total number needed for this modifier
-   * @return  Builder instance
+   * @return Builder instance
    */
   public IncrementalModifierRecipeBuilder setInput(Ingredient input, int amountPerItem, int neededPerLevel) {
     if (amountPerItem < 1) {
@@ -69,10 +75,11 @@ public class IncrementalModifierRecipeBuilder extends AbstractModifierRecipeBuil
 
   /**
    * Adds an input to the recipe
+   *
    * @param item           Item input
    * @param amountPerItem  Amount each item matches
    * @param neededPerLevel Total number needed for this modifier
-   * @return  Builder instance
+   * @return Builder instance
    */
   public IncrementalModifierRecipeBuilder setInput(ItemLike item, int amountPerItem, int neededPerLevel) {
     return setInput(Ingredient.of(item), amountPerItem, neededPerLevel);
@@ -80,10 +87,11 @@ public class IncrementalModifierRecipeBuilder extends AbstractModifierRecipeBuil
 
   /**
    * Adds an input to the recipe
+   *
    * @param tag            Tag input
    * @param amountPerItem  Amount each item matches
    * @param neededPerLevel Total number needed for this modifier
-   * @return  Builder instance
+   * @return Builder instance
    */
   public IncrementalModifierRecipeBuilder setInput(TagKey<Item> tag, int amountPerItem, int neededPerLevel) {
     return setInput(Ingredient.of(tag), amountPerItem, neededPerLevel);
@@ -92,18 +100,24 @@ public class IncrementalModifierRecipeBuilder extends AbstractModifierRecipeBuil
 
   /* Leftover */
 
-  /** Sets the leftover to the given output */
+  /**
+   * Sets the leftover to the given output
+   */
   public IncrementalModifierRecipeBuilder setLeftover(ItemOutput leftover) {
     this.leftover = leftover;
     return this;
   }
 
-  /** Sets the leftover to the given stack */
+  /**
+   * Sets the leftover to the given stack
+   */
   public IncrementalModifierRecipeBuilder setLeftover(ItemStack stack) {
     return setLeftover(ItemOutput.fromStack(stack));
   }
 
-  /** Sets the leftover to the given item */
+  /**
+   * Sets the leftover to the given item
+   */
   public IncrementalModifierRecipeBuilder setLeftover(ItemLike item) {
     return setLeftover(ItemOutput.fromItem(item));
   }

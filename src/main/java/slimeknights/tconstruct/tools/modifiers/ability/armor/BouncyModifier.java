@@ -15,7 +15,9 @@ import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability.Tin
 import slimeknights.tconstruct.library.utils.SlimeBounceHandler;
 
 public class BouncyModifier extends NoLevelsModifier {
+
   private static final TinkerDataKey<Integer> BOUNCY = TConstruct.createKey("bouncy");
+
   public BouncyModifier() {
     // TODO: move this out of constructor to generalized logic
     MinecraftForge.EVENT_BUS.addListener(BouncyModifier::onFall);
@@ -27,7 +29,9 @@ public class BouncyModifier extends NoLevelsModifier {
     hookBuilder.addModule(new ArmorLevelModule(BOUNCY, false, null));
   }
 
-  /** Called when an entity lands to handle the event */
+  /**
+   * Called when an entity lands to handle the event
+   */
   private static void onFall(LivingFallEvent event) {
     LivingEntity living = event.getEntity();
     // using fall distance as the event distance could be reduced by jump boost

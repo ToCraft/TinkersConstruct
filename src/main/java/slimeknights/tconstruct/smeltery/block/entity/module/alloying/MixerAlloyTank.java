@@ -29,29 +29,45 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class MixerAlloyTank implements IMutableAlloyTank {
   // parameters
-  /** Handler parent */
+  /**
+   * Handler parent
+   */
   private final MantleBlockEntity parent;
-  /** Tank for outputs */
+  /**
+   * Tank for outputs
+   */
   private final IFluidHandler outputTank;
 
-  /** Current temperature. Provided as a getter and setter as there are a few contexts with different source for temperature */
+  /**
+   * Current temperature. Provided as a getter and setter as there are a few contexts with different source for temperature
+   */
   @Getter
   @Setter
   private int temperature = 0;
 
   // side tank cache
-  /** Cache of tanks for each of the sides */
-  private final Map<Direction,LazyOptional<IFluidHandler>> inputs = new EnumMap<>(Direction.class);
-  /** Map of invalidation listeners for each side */
-  private final Map<Direction,NonNullConsumer<LazyOptional<IFluidHandler>>> listeners = new EnumMap<>(Direction.class);
-  /** Map of tank index to tank on the side */
+  /**
+   * Cache of tanks for each of the sides
+   */
+  private final Map<Direction, LazyOptional<IFluidHandler>> inputs = new EnumMap<>(Direction.class);
+  /**
+   * Map of invalidation listeners for each side
+   */
+  private final Map<Direction, NonNullConsumer<LazyOptional<IFluidHandler>>> listeners = new EnumMap<>(Direction.class);
+  /**
+   * Map of tank index to tank on the side
+   */
   @Nullable
   private IFluidHandler[] indexedList = null;
 
   // state
-  /** If true, tanks are marked for refresh later */
+  /**
+   * If true, tanks are marked for refresh later
+   */
   private boolean needsRefresh = true;
-  /** Number of currently held tanks */
+  /**
+   * Number of currently held tanks
+   */
   private int currentTanks = 0;
 
   @Override
@@ -60,7 +76,9 @@ public class MixerAlloyTank implements IMutableAlloyTank {
     return currentTanks;
   }
 
-  /** Gets the map of index to direction */
+  /**
+   * Gets the map of index to direction
+   */
   private IFluidHandler[] indexTanks() {
     // convert map into indexed list of fluid handlers, will be cleared next time a side updates
     if (indexedList == null) {
@@ -81,7 +99,9 @@ public class MixerAlloyTank implements IMutableAlloyTank {
     return indexedList;
   }
 
-  /** Gets the fluid handler for the given tank index */
+  /**
+   * Gets the fluid handler for the given tank index
+   */
   public IFluidHandler getFluidHandler(int tank) {
     checkTanks();
     // invalid index, nothing
@@ -168,9 +188,10 @@ public class MixerAlloyTank implements IMutableAlloyTank {
 
   /**
    * Called on block update or when a capability invalidates to mark that a direction needs updates
+   *
    * @param direction  Side updating
    * @param checkInput If true, validates that the side contains an input before reducing tank count. False when invalidated through the capability
-   * */
+   */
   public void refresh(Direction direction, boolean checkInput) {
     if (direction == Direction.DOWN) {
       return;

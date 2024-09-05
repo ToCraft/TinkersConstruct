@@ -35,10 +35,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
-/** Module for building tool stats using materials */
+/**
+ * Module for building tool stats using materials
+ */
 public class MaterialStatsModule implements ToolStatsHook, ToolTraitHook, ToolMaterialHook, MaterialRepairToolHook, ToolModule {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<MaterialStatsModule>defaultHooks(ToolHooks.TOOL_STATS, ToolHooks.TOOL_TRAITS, ToolHooks.TOOL_MATERIALS, ToolHooks.MATERIAL_REPAIR);
-  protected static final LoadableField<Integer,MaterialStatsModule> PRIMARY_PART_FIELD = IntLoadable.FROM_MINUS_ONE.defaultField("primary_part", 0, true, m -> m.primaryPart);
+  protected static final LoadableField<Integer, MaterialStatsModule> PRIMARY_PART_FIELD = IntLoadable.FROM_MINUS_ONE.defaultField("primary_part", 0, true, m -> m.primaryPart);
   public static final RecordLoadable<MaterialStatsModule> LOADER = RecordLoadable.create(
     new OptionallyNestedLoadable<>(MaterialStatsId.PARSER, "stat").list().requiredField("stat_types", m -> m.statTypes),
     new StatScaleField("stat", "stat_types"),
@@ -46,12 +49,15 @@ public class MaterialStatsModule implements ToolStatsHook, ToolTraitHook, ToolMa
     MaterialStatsModule::new);
 
   private final List<MaterialStatsId> statTypes;
-  @Getter @VisibleForTesting
+  @Getter
+  @VisibleForTesting
   final float[] scales;
   private int[] repairIndices;
   private final int primaryPart;
 
-  /** @deprecated use {@link #MaterialStatsModule(List,float[], int)} or {@link Builder}  */
+  /**
+   * @deprecated use {@link #MaterialStatsModule(List, float[], int)} or {@link Builder}
+   */
   @Deprecated
   public MaterialStatsModule(List<MaterialStatsId> statTypes, float[] scales) {
     this(statTypes, scales, 0);
@@ -86,7 +92,9 @@ public class MaterialStatsModule implements ToolStatsHook, ToolTraitHook, ToolMa
     return statTypes;
   }
 
-  /** Gets the repair indices, calculating them if needed */
+  /**
+   * Gets the repair indices, calculating them if needed
+   */
   private int[] getRepairIndices() {
     if (repairIndices == null) {
       IMaterialRegistry registry = MaterialRegistry.getInstance();
@@ -152,31 +160,41 @@ public class MaterialStatsModule implements ToolStatsHook, ToolTraitHook, ToolMa
 
   /* Builder */
 
-  /** Creates a new builder instance */
+  /**
+   * Creates a new builder instance
+   */
   public static Builder stats() {
     return new Builder();
   }
 
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   public static class Builder {
+
     private final ImmutableList.Builder<MaterialStatsId> stats = ImmutableList.builder();
     private final ImmutableList.Builder<Float> scales = ImmutableList.builder();
-    @Setter @Accessors(fluent = true)
+    @Setter
+    @Accessors(fluent = true)
     private int primaryPart = 0;
 
-    /** Adds a stat type */
+    /**
+     * Adds a stat type
+     */
     public Builder stat(MaterialStatsId stat, float scale) {
       stats.add(stat);
       scales.add(scale);
       return this;
     }
 
-    /** Adds a stat type */
+    /**
+     * Adds a stat type
+     */
     public Builder stat(MaterialStatsId stat) {
       return stat(stat, 1);
     }
 
-    /** Builds the array of scales from the list */
+    /**
+     * Builds the array of scales from the list
+     */
     static float[] buildScales(List<Float> list) {
       float[] scales = new float[list.size()];
       for (int i = 0; i < list.size(); i++) {
@@ -185,7 +203,9 @@ public class MaterialStatsModule implements ToolStatsHook, ToolTraitHook, ToolMa
       return scales;
     }
 
-    /** Builds the module */
+    /**
+     * Builds the module
+     */
     public MaterialStatsModule build() {
       List<MaterialStatsId> stats = this.stats.build();
       if (primaryPart >= stats.size() || primaryPart < -1) {

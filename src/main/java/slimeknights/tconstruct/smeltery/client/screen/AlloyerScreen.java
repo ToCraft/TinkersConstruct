@@ -19,6 +19,7 @@ import slimeknights.tconstruct.smeltery.menu.AlloyerContainerMenu;
 import javax.annotation.Nullable;
 
 public class AlloyerScreen extends AbstractContainerScreen<AlloyerContainerMenu> implements IScreenWithFluidTank {
+
   private static final int[] INPUT_TANK_START_X = {54, 22, 38, 70, 6};
   private static final ResourceLocation BACKGROUND = TConstruct.getResource("textures/gui/alloyer.png");
   private static final ElementScreen SCALA = new ElementScreen(176, 0, 34, 52, 256, 256);
@@ -29,6 +30,7 @@ public class AlloyerScreen extends AbstractContainerScreen<AlloyerContainerMenu>
   private final GuiFuelModule fuel;
   private final GuiTankModule outputTank;
   private GuiTankModule[] inputTanks = new GuiTankModule[0];
+
   public AlloyerScreen(AlloyerContainerMenu container, Inventory inv, Component name) {
     super(container, inv, name);
     AlloyerBlockEntity te = container.getTile();
@@ -43,7 +45,9 @@ public class AlloyerScreen extends AbstractContainerScreen<AlloyerContainerMenu>
     }
   }
 
-  /** Updates the tanks from the tile entity */
+  /**
+   * Updates the tanks from the tile entity
+   */
   private void updateTanks() {
     AlloyerBlockEntity te = menu.getTile();
     if (te != null) {

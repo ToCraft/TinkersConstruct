@@ -10,11 +10,16 @@ import slimeknights.tconstruct.library.recipe.modifiers.adding.SwappableModifier
 
 import java.util.function.Consumer;
 
-/** Builder for a modifier with a swappable string key */
+/**
+ * Builder for a modifier with a swappable string key
+ */
 public class SwappableModifierRecipeBuilder extends ModifierRecipeBuilder {
+
   private final String value;
-  @Setter @Accessors(fluent = true)
+  @Setter
+  @Accessors(fluent = true)
   private VariantFormatter variantFormatter = VariantFormatter.DEFAULT;
+
   protected SwappableModifierRecipeBuilder(ModifierId modifier, String value) {
     super(modifier);
     this.value = value;
@@ -22,12 +27,16 @@ public class SwappableModifierRecipeBuilder extends ModifierRecipeBuilder {
     this.allowCrystal = false;
   }
 
-  /** Creates a new builder */
+  /**
+   * Creates a new builder
+   */
   public static SwappableModifierRecipeBuilder modifier(ModifierId modifier, String value) {
     return new SwappableModifierRecipeBuilder(modifier, value);
   }
 
-  /** Creates a new builder */
+  /**
+   * Creates a new builder
+   */
   public static SwappableModifierRecipeBuilder modifier(LazyModifier modifier, String value) {
     return modifier(modifier.getId(), value);
   }

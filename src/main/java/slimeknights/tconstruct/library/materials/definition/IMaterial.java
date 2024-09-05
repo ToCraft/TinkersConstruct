@@ -3,7 +3,10 @@ package slimeknights.tconstruct.library.materials.definition;
 import slimeknights.tconstruct.TConstruct;
 
 public interface IMaterial extends Comparable<IMaterial> {
-  /** ID of fallback material */
+
+  /**
+   * ID of fallback material
+   */
   MaterialId UNKNOWN_ID = new MaterialId(TConstruct.MOD_ID, "unknown");
 
   /**
@@ -28,16 +31,22 @@ public interface IMaterial extends Comparable<IMaterial> {
    */
   boolean isCraftable();
 
-  /** If true, this material is hidden from display, such as in JEI and the books */
+  /**
+   * If true, this material is hidden from display, such as in JEI and the books
+   */
   boolean isHidden();
 
 
   /* Display */
 
-  /** Gets the progression tier of this material */
+  /**
+   * Gets the progression tier of this material
+   */
   int getTier();
 
-  /** Gets the sort location within this tier */
+  /**
+   * Gets the sort location within this tier
+   */
   int getSortOrder();
 
   @Override
@@ -52,7 +61,9 @@ public interface IMaterial extends Comparable<IMaterial> {
     return this.getIdentifier().compareTo(other.getIdentifier());
   }
 
-  /** Checks if the given material is the same material as the other, matches by ID */
+  /**
+   * Checks if the given material is the same material as the other, matches by ID
+   */
   default boolean matches(IMaterial other) {
     return this == other || this.getIdentifier().matches(other);
   }

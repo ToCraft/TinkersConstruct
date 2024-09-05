@@ -16,9 +16,11 @@ import slimeknights.tconstruct.smeltery.network.FluidUpdatePacket;
  * Common logic between the tank and the melter
  */
 public interface ITankBlockEntity extends IFluidTankUpdater, FluidUpdatePacket.IFluidPacketReceiver {
+
   /**
    * Gets the tank in this tile entity
-   * @return  Tank
+   *
+   * @return Tank
    */
   FluidTankAnimated getTank();
 
@@ -28,7 +30,8 @@ public interface ITankBlockEntity extends IFluidTankUpdater, FluidUpdatePacket.I
 
   /**
    * Gets the comparator strength for the tank
-   * @return  Tank comparator strength
+   *
+   * @return Tank comparator strength
    */
   default int comparatorStrength() {
     FluidTankAnimated tank = getTank();
@@ -37,13 +40,15 @@ public interface ITankBlockEntity extends IFluidTankUpdater, FluidUpdatePacket.I
 
   /**
    * Gets the last comparator strength for this tank
-   * @return  Last comparator strength
+   *
+   * @return Last comparator strength
    */
   int getLastStrength();
 
   /**
    * Updates the last comparator strength for this tank
-   * @param strength  Last comparator strength
+   *
+   * @param strength Last comparator strength
    */
   void setLastStrength(int strength);
 
@@ -62,7 +67,9 @@ public interface ITankBlockEntity extends IFluidTankUpdater, FluidUpdatePacket.I
    * Fluid tank updater
    */
 
-  /** If true, the fluid is rendered as part of the model */
+  /**
+   * If true, the fluid is rendered as part of the model
+   */
   default boolean isFluidInModel() {
     return Config.CLIENT.tankFluidModel.get();
   }
@@ -89,7 +96,9 @@ public interface ITankBlockEntity extends IFluidTankUpdater, FluidUpdatePacket.I
    * Tile entity methods
    */
 
-  /** @return tile entity world */
+  /**
+   * @return tile entity world
+   */
   default BlockEntity getTE() {
     return (BlockEntity) this;
   }
@@ -100,9 +109,10 @@ public interface ITankBlockEntity extends IFluidTankUpdater, FluidUpdatePacket.I
 
   /**
    * Implements logic for {@link net.minecraft.world.level.block.Block#getAnalogOutputSignal(BlockState, Level, BlockPos)}
-   * @param world  World instance
-   * @param pos    Block position
-   * @return  Comparator power
+   *
+   * @param world World instance
+   * @param pos   Block position
+   * @return Comparator power
    */
   static int getComparatorInputOverride(LevelAccessor world, BlockPos pos) {
     BlockEntity te = world.getBlockEntity(pos);

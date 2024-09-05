@@ -24,11 +24,14 @@ import java.util.List;
  * Logic to help in creating new tools
  */
 public final class ToolBuildHandler {
+
   private ToolBuildHandler() {}
 
   private static final MaterialId RENDER_MATERIAL = new MaterialId(TConstruct.MOD_ID, "ui_render");
 
-  /** Materials for use in multipart tool rendering */
+  /**
+   * Materials for use in multipart tool rendering
+   */
   private static final List<MaterialVariantId> RENDER_MATERIALS = Arrays.asList(
     MaterialVariantId.create(RENDER_MATERIAL, "head"),
     MaterialVariantId.create(RENDER_MATERIAL, "handle"),
@@ -38,9 +41,10 @@ public final class ToolBuildHandler {
 
   /**
    * Builds a tool stack from a material list and a given tool definition
-   * @param tool       Tool instance
-   * @param materials  Material list
-   * @return  Item stack with materials
+   *
+   * @param tool      Tool instance
+   * @param materials Material list
+   * @return Item stack with materials
    */
   public static ItemStack buildItemFromMaterials(IModifiable tool, MaterialNBT materials) {
     return ToolStack.createTool(tool.asItem(), tool.getToolDefinition(), materials).createStack();
@@ -48,8 +52,9 @@ public final class ToolBuildHandler {
 
   /**
    * Gets the render material for the given index
-   * @param index  Index
-   * @return  Render material
+   *
+   * @param index Index
+   * @return Render material
    */
   public static MaterialVariantId getRenderMaterial(int index) {
     return RENDER_MATERIALS.get(index % RENDER_MATERIALS.size());
@@ -57,16 +62,17 @@ public final class ToolBuildHandler {
 
   /**
    * Builds a tool using the render materials for the sake of display in UIs
-   * @param item        Tool item
-   * @param definition  Tool definition
-   * @return  Tool for rendering
+   *
+   * @param item       Tool item
+   * @param definition Tool definition
+   * @return Tool for rendering
    */
   public static ItemStack buildToolForRendering(Item item, ToolDefinition definition) {
     // if no parts, just return the item directly with the display tag
     ItemStack stack = new ItemStack(item);
     // during datagen we have no idea if we will or won't have materials, so just add them regardless, won't hurt anything
     if (!definition.isDataLoaded() || definition.hasMaterials()) {
-		  // use all 5 render materials for display stacks, having too many materials is not a problem and its easier than making this reload sensitive
+      // use all 5 render materials for display stacks, having too many materials is not a problem and its easier than making this reload sensitive
       stack = new MaterialIdNBT(RENDER_MATERIALS).updateStack(stack);
     }
     stack.getOrCreateTag().putBoolean(TooltipUtil.KEY_DISPLAY, true);
@@ -78,8 +84,9 @@ public final class ToolBuildHandler {
 
   /**
    * Adds all sub items to a tool
-   * @param item             item being created
-   * @param itemList         List to fill with items
+   *
+   * @param item     item being created
+   * @param itemList List to fill with items
    */
   public static void addDefaultSubItems(IModifiable item, List<ItemStack> itemList) {
     ToolDefinition definition = item.getToolDefinition();
@@ -115,7 +122,9 @@ public final class ToolBuildHandler {
     }
   }
 
-  /** Makes a single sub item for the given materials */
+  /**
+   * Makes a single sub item for the given materials
+   */
   public static boolean addSubItem(IModifiable item, List<ItemStack> items, MaterialVariant material) {
     List<MaterialStatsId> required = ToolMaterialHook.stats(item.getToolDefinition());
     MaterialNBT.Builder materials = MaterialNBT.builder();

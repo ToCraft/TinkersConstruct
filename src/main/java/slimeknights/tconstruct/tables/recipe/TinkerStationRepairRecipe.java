@@ -27,11 +27,16 @@ import slimeknights.tconstruct.tables.TinkerTables;
 
 import java.util.function.IntConsumer;
 
-/** Recipe for repairing tools */
+/**
+ * Recipe for repairing tools
+ */
 @RequiredArgsConstructor
 public class TinkerStationRepairRecipe implements ITinkerStationRecipe {
+
   protected static final RecipeResult<ItemStack> FULLY_REPAIRED = RecipeResult.failure(TConstruct.makeTranslationKey("recipe", "tool_repair.fully_repaired"));
-  /** No action int consumer for recipe result */
+  /**
+   * No action int consumer for recipe result
+   */
   private static final IntConsumer NO_ACTION = i -> {};
 
   @Getter
@@ -39,9 +44,10 @@ public class TinkerStationRepairRecipe implements ITinkerStationRecipe {
 
   /**
    * Gets the material for the given slot
-   * @param inv   Inventory instance
-   * @param slot  Slot
-   * @return  Material amount
+   *
+   * @param inv  Inventory instance
+   * @param slot Slot
+   * @return Material amount
    */
   protected static MaterialId getMaterialFrom(ITinkerStationContainer inv, int slot) {
     // try repair kit first
@@ -57,12 +63,16 @@ public class TinkerStationRepairRecipe implements ITinkerStationRecipe {
     return IMaterial.UNKNOWN_ID;
   }
 
-  /** Gets the amount to repair given the passed tool */
+  /**
+   * Gets the amount to repair given the passed tool
+   */
   protected float getRepairAmount(IToolStackView tool, MaterialId repairMaterial) {
     return MaterialRepairToolHook.repairAmount(tool, repairMaterial);
   }
 
-  /** Gets the amount to repair per item */
+  /**
+   * Gets the amount to repair per item
+   */
   protected float getRepairPerItem(ToolStack tool, ITinkerStationContainer inv, int slot, MaterialId repairMaterial) {
     // repair stat may be null in the modifier repair recipe
     float amount = getRepairAmount(tool, repairMaterial);
@@ -181,12 +191,13 @@ public class TinkerStationRepairRecipe implements ITinkerStationRecipe {
 
   /**
    * Gets the amount to repair from the given slot
-   * @param tool            Tool instance
-   * @param inv             Inventory instance
-   * @param repairNeeded    Amount of remaining repair needed
-   * @param slot            Input slot
-   * @param amountConsumer  Action to perform on repair, input is the amount consumed
-   * @return  Repair from this slot
+   *
+   * @param tool           Tool instance
+   * @param inv            Inventory instance
+   * @param repairNeeded   Amount of remaining repair needed
+   * @param slot           Input slot
+   * @param amountConsumer Action to perform on repair, input is the amount consumed
+   * @return Repair from this slot
    */
   protected int repairFromSlot(ToolStack tool, ITinkerStationContainer inv, int repairNeeded, int slot, IntConsumer amountConsumer) {
     ItemStack stack = inv.getInput(slot);
@@ -206,9 +217,9 @@ public class TinkerStationRepairRecipe implements ITinkerStationRecipe {
           }
 
           // apply this recipe as many times as we need (if stack has more than enough to repair) or can (if stack will not fully repair)
-          int applied = Math.min(stack.getCount(), (int)Math.ceil(repairNeeded / durabilityPerItem));
+          int applied = Math.min(stack.getCount(), (int) Math.ceil(repairNeeded / durabilityPerItem));
           amountConsumer.accept(applied);
-          return (int)(applied * durabilityPerItem);
+          return (int) (applied * durabilityPerItem);
         }
       }
     }
@@ -221,7 +232,9 @@ public class TinkerStationRepairRecipe implements ITinkerStationRecipe {
     return TinkerTables.tinkerStationRepairSerializer.get();
   }
 
-  /** @deprecated Use {@link #assemble(ITinkerStationContainer)} */
+  /**
+   * @deprecated Use {@link #assemble(ITinkerStationContainer)}
+   */
   @Deprecated
   @Override
   public ItemStack getResultItem() {

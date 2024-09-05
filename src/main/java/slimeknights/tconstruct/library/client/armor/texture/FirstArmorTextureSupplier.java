@@ -5,8 +5,11 @@ import slimeknights.mantle.data.loadable.record.RecordLoadable;
 
 import java.util.List;
 
-/** Armor texture supplier that returns the first matching option */
+/**
+ * Armor texture supplier that returns the first matching option
+ */
 public record FirstArmorTextureSupplier(List<ArmorTextureSupplier> options) implements ArmorTextureSupplier {
+
   public static final RecordLoadable<FirstArmorTextureSupplier> LOADER = RecordLoadable.create(ArmorTextureSupplier.LOADER.list(2).requiredField("options", f -> f.options), FirstArmorTextureSupplier::new);
 
   public FirstArmorTextureSupplier(ArmorTextureSupplier... options) {

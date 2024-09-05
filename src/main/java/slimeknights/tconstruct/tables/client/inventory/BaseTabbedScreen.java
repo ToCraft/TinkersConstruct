@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class BaseTabbedScreen<TILE extends BlockEntity, CONTAINER extends TabbedContainerMenu<TILE>> extends MultiModuleScreen<CONTAINER> {
+
   protected static final Component COMPONENT_WARNING = TConstruct.makeTranslation("gui", "warning");
   protected static final Component COMPONENT_ERROR = TConstruct.makeTranslation("gui", "error");
 
@@ -86,7 +87,7 @@ public class BaseTabbedScreen<TILE extends BlockEntity, CONTAINER extends Tabbed
       Component sideInventoryName = Component.empty();
       BlockEntity te = sideInventoryContainer.getTile();
       if (te instanceof MenuProvider) {
-        sideInventoryName = Objects.requireNonNullElse(((MenuProvider)te).getDisplayName(), Component.empty());
+        sideInventoryName = Objects.requireNonNullElse(((MenuProvider) te).getDisplayName(), Component.empty());
       }
 
       this.addModule(new SideInventoryScreen<>(this, sideInventoryContainer, inventory, sideInventoryName, sideInventoryContainer.getSlotCount(), sideInventoryContainer.getColumns()));

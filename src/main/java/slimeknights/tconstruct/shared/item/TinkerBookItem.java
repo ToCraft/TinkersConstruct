@@ -11,7 +11,9 @@ import slimeknights.mantle.item.LecternBookItem;
 import slimeknights.tconstruct.library.client.book.TinkerBook;
 
 public class TinkerBookItem extends LecternBookItem {
+
   private final BookType bookType;
+
   public TinkerBookItem(Properties props, BookType bookType) {
     super(props);
     this.bookType = bookType;
@@ -31,7 +33,9 @@ public class TinkerBookItem extends LecternBookItem {
     TinkerBook.getBook(bookType).openGui(pos, stack);
   }
 
-  /** Simple enum to allow selecting the book on the client */
+  /**
+   * Simple enum to allow selecting the book on the client
+   */
   public enum BookType {
     MATERIALS_AND_YOU,
     PUNY_SMELTING,

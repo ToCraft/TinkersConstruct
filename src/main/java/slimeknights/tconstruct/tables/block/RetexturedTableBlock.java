@@ -13,6 +13,7 @@ import slimeknights.mantle.block.RetexturedBlock;
 import javax.annotation.Nullable;
 
 public abstract class RetexturedTableBlock extends TabbedTableBlock {
+
   public RetexturedTableBlock(Properties builder) {
     super(builder);
   }

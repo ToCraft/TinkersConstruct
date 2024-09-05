@@ -14,6 +14,7 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 
 public class FlamewakeModifier extends AbstractWalkerModifier {
+
   @Override
   protected float getRadius(IToolStackView tool, int level) {
     return 1.5f + tool.getModifierLevel(TinkerModifiers.expanded.getId());

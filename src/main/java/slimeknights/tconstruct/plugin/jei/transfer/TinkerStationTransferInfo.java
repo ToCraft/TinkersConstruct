@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class TinkerStationTransferInfo implements IRecipeTransferInfo<TinkerStationContainerMenu,IDisplayModifierRecipe> {
+public class TinkerStationTransferInfo implements IRecipeTransferInfo<TinkerStationContainerMenu, IDisplayModifierRecipe> {
+
   @Override
   public Class<TinkerStationContainerMenu> getContainerClass() {
     return TinkerStationContainerMenu.class;
@@ -45,7 +46,7 @@ public class TinkerStationTransferInfo implements IRecipeTransferInfo<TinkerStat
     List<Slot> slots = new ArrayList<>();
     // skip over inputs, output slot, tool slot, armor, and offhand
     int start = container.getInputSlots().size() + 3 + ArmorSlotType.values().length;
-    for(int i = start; i < start + 36; i++) {
+    for (int i = start; i < start + 36; i++) {
       Slot slot = container.getSlot(i);
       slots.add(slot);
     }

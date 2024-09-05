@@ -14,16 +14,23 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-/** Module to handle running alloys via a fluid handler, can alloy multiple recipes at once */
+/**
+ * Module to handle running alloys via a fluid handler, can alloy multiple recipes at once
+ */
 public class MultiAlloyingModule implements IAlloyingModule {
+
   private final MantleBlockEntity parent;
   private final IAlloyTank alloyTank;
 
-  /** List of recipes that succeeded last time in {@link #doAlloy()}, only these will be used for the next iteration */
+  /**
+   * List of recipes that succeeded last time in {@link #doAlloy()}, only these will be used for the next iteration
+   */
   @Nullable
   private List<AlloyRecipe> lastRecipes;
 
-  /** Predicates for common behaviors */
+  /**
+   * Predicates for common behaviors
+   */
   private final Predicate<AlloyRecipe> canPerform, performRecipe;
 
   public MultiAlloyingModule(MantleBlockEntity parent, IMutableAlloyTank alloyTank) {
@@ -36,14 +43,17 @@ public class MultiAlloyingModule implements IAlloyingModule {
     };
   }
 
-  /** Gets a nonnull world instance from the parent */
+  /**
+   * Gets a nonnull world instance from the parent
+   */
   private Level getLevel() {
     return Objects.requireNonNull(parent.getLevel(), "Parent tile entity has null world");
   }
 
   /**
    * Gets a list of recipes that currently match the tank
-   * @return  List of recipes that match the tank
+   *
+   * @return List of recipes that match the tank
    */
   private List<AlloyRecipe> getRecipes() {
     if (lastRecipes == null) {
@@ -54,8 +64,9 @@ public class MultiAlloyingModule implements IAlloyingModule {
 
   /**
    * Runs all the recipes, removing any that no longer match
-   * @param predicate  Logic to run for recipes, return true to stop looping
-   * @return  True if any recipe returned true
+   *
+   * @param predicate Logic to run for recipes, return true to stop looping
+   * @return True if any recipe returned true
    */
   private boolean iterateRecipes(Predicate<AlloyRecipe> predicate) {
     List<AlloyRecipe> recipes = getRecipes();

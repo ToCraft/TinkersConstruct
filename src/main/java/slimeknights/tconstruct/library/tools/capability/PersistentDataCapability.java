@@ -31,14 +31,21 @@ import java.util.Optional;
  * Persists after death, will reassess if we need some data to not persist death
  */
 public class PersistentDataCapability {
+
   private PersistentDataCapability() {}
 
-  /** Capability ID */
+  /**
+   * Capability ID
+   */
   private static final ResourceLocation ID = TConstruct.getResource("persistent_data");
-  /** Capability type */
+  /**
+   * Capability type
+   */
   public static final Capability<NamespacedNBT> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {});
 
-  /** Gets the data or warns if its missing */
+  /**
+   * Gets the data or warns if its missing
+   */
   public static NamespacedNBT getOrWarn(Entity entity) {
     Optional<NamespacedNBT> data = entity.getCapability(CAPABILITY).resolve();
     if (data.isEmpty()) {
@@ -48,7 +55,9 @@ public class PersistentDataCapability {
     return data.get();
   }
 
-  /** Registers this capability */
+  /**
+   * Registers this capability
+   */
   public static void register() {
     FMLJavaModLoadingContext.get().getModEventBus().addListener(EventPriority.NORMAL, false, RegisterCapabilitiesEvent.class, PersistentDataCapability::register);
     MinecraftForge.EVENT_BUS.addGenericListener(Entity.class, PersistentDataCapability::attachCapability);
@@ -58,12 +67,16 @@ public class PersistentDataCapability {
     MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, false, PlayerEvent.PlayerLoggedInEvent.class, PersistentDataCapability::playerLoggedIn);
   }
 
-  /** Registers the capability with the event bus */
+  /**
+   * Registers the capability with the event bus
+   */
   private static void register(RegisterCapabilitiesEvent event) {
     event.register(NamespacedNBT.class);
   }
 
-  /** Event listener to attach the capability */
+  /**
+   * Event listener to attach the capability
+   */
   private static void attachCapability(AttachCapabilitiesEvent<Entity> event) {
     Entity entity = event.getObject();
     // must be on players, but also support anything else with modifiers, this is their data
@@ -74,12 +87,16 @@ public class PersistentDataCapability {
     }
   }
 
-  /** Syncs the data to the given player */
+  /**
+   * Syncs the data to the given player
+   */
   private static void sync(Player player) {
     player.getCapability(CAPABILITY).ifPresent(data -> TinkerNetwork.getInstance().sendTo(new SyncPersistentDataPacket(data.getCopy()), player));
   }
 
-  /** copy caps when the player respawns/returns from the end */
+  /**
+   * copy caps when the player respawns/returns from the end
+   */
   private static void playerClone(PlayerEvent.Clone event) {
     event.getOriginal().getCapability(CAPABILITY).ifPresent(oldData -> {
       CompoundTag nbt = oldData.getCopy();
@@ -89,25 +106,35 @@ public class PersistentDataCapability {
     });
   }
 
-  /** sync caps when the player respawns/returns from the end */
+  /**
+   * sync caps when the player respawns/returns from the end
+   */
   private static void playerRespawn(PlayerEvent.PlayerRespawnEvent event) {
     sync(event.getEntity());
   }
 
-  /** sync caps when the player changes dimensions */
+  /**
+   * sync caps when the player changes dimensions
+   */
   private static void playerChangeDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
     sync(event.getEntity());
   }
 
-  /** sync caps when the player logs in */
+  /**
+   * sync caps when the player logs in
+   */
   private static void playerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
     sync(event.getEntity());
   }
 
-  /** Capability provider instance */
+  /**
+   * Capability provider instance
+   */
   private static class Provider implements ICapabilitySerializable<CompoundTag>, Runnable {
+
     private Lazy<CompoundTag> nbt;
     private LazyOptional<NamespacedNBT> capability;
+
     private Provider() {
       this.nbt = Lazy.of(CompoundTag::new);
       this.capability = LazyOptional.of(() -> NamespacedNBT.readFromNBT(nbt.get()));

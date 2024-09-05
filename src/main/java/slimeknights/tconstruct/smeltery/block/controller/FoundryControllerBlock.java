@@ -20,6 +20,7 @@ import slimeknights.tconstruct.smeltery.block.entity.controller.HeatingStructure
 import javax.annotation.Nullable;
 
 public class FoundryControllerBlock extends HeatingControllerBlock {
+
   public FoundryControllerBlock(Properties builder) {
     super(builder);
   }

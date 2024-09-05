@@ -22,14 +22,23 @@ import slimeknights.tconstruct.smeltery.block.entity.multiblock.SmelteryMultiblo
 import javax.annotation.Nullable;
 
 public class SmelteryBlockEntity extends HeatingStructureBlockEntity {
-  /** Fluid capacity per internal block */
+
+  /**
+   * Fluid capacity per internal block
+   */
   private static final int CAPACITY_PER_BLOCK = FluidValues.INGOT * 12;
-  /** Number of wall blocks needed to increase the fuel cost by 1 */
+  /**
+   * Number of wall blocks needed to increase the fuel cost by 1
+   */
   private static final int BLOCKS_PER_FUEL = 15;
-  /** Name of the UI */
+  /**
+   * Name of the UI
+   */
   private static final Component NAME = TConstruct.makeTranslation("gui", "smeltery");
 
-  /** Module handling alloys */
+  /**
+   * Module handling alloys
+   */
   private final SmelteryAlloyTank alloyTank = new SmelteryAlloyTank(tank);
   @Getter
   private final MultiAlloyingModule alloyingModule = new MultiAlloyingModule(this, alloyTank);

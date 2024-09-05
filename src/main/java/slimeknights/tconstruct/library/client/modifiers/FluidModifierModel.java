@@ -33,21 +33,30 @@ import java.util.function.Function;
  * Model for tank modifiers, also displays the fluid
  */
 public class FluidModifierModel extends NormalModifierModel {
-  /** Location used for baking dynamic models, name does not matter so just using a constant */
+
+  /**
+   * Location used for baking dynamic models, name does not matter so just using a constant
+   */
   private static final ResourceLocation BAKE_LOCATION = TConstruct.getResource("dynamic_fluid_model");
 
   /**
    * The vanilla model bakery uses an orgin of 0.5,0.5,0.5, and forges dynamic fluid code uses the vanilla model bakery. (see{@link net.minecraft.client.renderer.block.model.FaceBakery} {@code #rotateVertexBy()} for vanilla bakery)
    * However, item layer wants an origin of 0,0,0, which is what we expect in our tool models. So cancel out the origin.
-  */
+   */
   private static final Vector3f ORIGIN = new Vector3f(-0.5f, -0.5f, -0.5f);
 
-  /** Constant unbaked model instance, as they are all the same */
+  /**
+   * Constant unbaked model instance, as they are all the same
+   */
   public static final IUnbakedModifierModel UNBAKED_INSTANCE = new Unbaked(ToolTankHelper.TANK_HELPER);
 
-  /** Logic for fetching the fluid */
+  /**
+   * Logic for fetching the fluid
+   */
   protected final ToolTankHelper helper;
-  /** Textures to show */
+  /**
+   * Textures to show
+   */
   protected final Material[] fluidTextures;
 
   protected FluidModifierModel(ToolTankHelper helper, @Nullable Material smallTexture, @Nullable Material largeTexture, Material[] fluidTextures) {
@@ -58,7 +67,7 @@ public class FluidModifierModel extends NormalModifierModel {
 
   public FluidModifierModel(ToolTankHelper helper, @Nullable Material smallTexture, @Nullable Material largeTexture,
                             @Nullable Material smallFull, @Nullable Material largeFull) {
-    this(helper, smallTexture, largeTexture, new Material[] { smallFull, largeFull });
+    this(helper, smallTexture, largeTexture, new Material[]{smallFull, largeFull});
   }
 
   @Nullable
@@ -78,7 +87,7 @@ public class FluidModifierModel extends NormalModifierModel {
   }
 
   @Override
-  public void addQuads(IToolStackView tool, ModifierEntry entry, Function<Material,TextureAtlasSprite> spriteGetter, Transformation transforms, boolean isLarge, int startTintIndex, Consumer<Collection<BakedQuad>> quadConsumer, @Nullable ItemLayerPixels pixels) {
+  public void addQuads(IToolStackView tool, ModifierEntry entry, Function<Material, TextureAtlasSprite> spriteGetter, Transformation transforms, boolean isLarge, int startTintIndex, Consumer<Collection<BakedQuad>> quadConsumer, @Nullable ItemLayerPixels pixels) {
     // first, determine stored fluid
     // modifier must be tank
     FluidStack fluid = helper.getFluid(tool);
@@ -112,13 +121,16 @@ public class FluidModifierModel extends NormalModifierModel {
     super.addQuads(tool, entry, spriteGetter, transforms, isLarge, startTintIndex, quadConsumer, pixels);
   }
 
-  /** Cache key for the model */
+  /**
+   * Cache key for the model
+   */
   private record FluidModifierCacheKey(Modifier modifier, Fluid fluid) {}
 
   public record Unbaked(ToolTankHelper helper) implements IUnbakedModifierModel {
+
     @Nullable
     @Override
-    public IBakedModifierModel forTool(Function<String,Material> smallGetter, Function<String,Material> largeGetter) {
+    public IBakedModifierModel forTool(Function<String, Material> smallGetter, Function<String, Material> largeGetter) {
       Material smallTexture = smallGetter.apply("");
       Material largeTexture = largeGetter.apply("");
       Material smallFluid = smallGetter.apply("_full");

@@ -15,9 +15,11 @@ import slimeknights.tconstruct.common.registration.GeodeItemObject;
 import slimeknights.tconstruct.common.registration.GeodeItemObject.BudSize;
 
 public class BuddingCrystalBlock extends CrystalBlock {
+
   private static final Direction[] DIRECTIONS = Direction.values();
 
   private final GeodeItemObject geode;
+
   public BuddingCrystalBlock(GeodeItemObject geode, SoundEvent chimeSound, Properties props) {
     super(chimeSound, props);
     this.geode = geode;

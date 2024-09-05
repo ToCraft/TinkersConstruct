@@ -25,9 +25,12 @@ import java.util.List;
 
 /**
  * Module that sets a stat to a particular value
- * @param <T>  Stat type
+ *
+ * @param <T> Stat type
  */
-public record SetStatModule<T>(IToolStat<T> stat, T value, ModifierCondition<IToolContext> condition) implements ModifierModule, ToolStatsModifierHook, ConditionalModule<IToolContext> {
+public record SetStatModule<T>(IToolStat<T> stat, T value,
+                               ModifierCondition<IToolContext> condition) implements ModifierModule, ToolStatsModifierHook, ConditionalModule<IToolContext> {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<SetStatModule<?>>defaultHooks(ModifierHooks.TOOL_STATS);
 
   @Override
@@ -47,7 +50,9 @@ public record SetStatModule<T>(IToolStat<T> stat, T value, ModifierCondition<ITo
     return LOADER;
   }
 
-  /** Loader instance, manually created as the value parsing another value is difficult with the builder */
+  /**
+   * Loader instance, manually created as the value parsing another value is difficult with the builder
+   */
   public static final RecordLoadable<SetStatModule<?>> LOADER = new RecordLoadable<>() {
     @Override
     public SetStatModule<?> deserialize(JsonObject json, TypedMap context) {
@@ -104,16 +109,21 @@ public record SetStatModule<T>(IToolStat<T> stat, T value, ModifierCondition<ITo
 
   /* Builder */
 
-  /** Creates a builder for the given stat */
+  /**
+   * Creates a builder for the given stat
+   */
   public static <T> Builder<T> set(IToolStat<T> stat) {
     return new Builder<>(stat);
   }
 
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   public static class Builder<T> extends ModuleBuilder.Context<Builder<T>> {
+
     private final IToolStat<T> stat;
 
-    /** Creates the instance with the passed value */
+    /**
+     * Creates the instance with the passed value
+     */
     public SetStatModule<T> value(T value) {
       return new SetStatModule<>(stat, value, condition);
     }

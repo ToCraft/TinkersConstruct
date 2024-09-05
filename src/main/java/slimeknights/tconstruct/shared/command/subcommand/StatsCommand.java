@@ -32,8 +32,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.BiPredicate;
 
-/** Command to modify a tool's stats */
+/**
+ * Command to modify a tool's stats
+ */
 public class StatsCommand {
+
   private static final String SUCCESS_KEY_PREFIX = TConstruct.makeTranslationKey("command", "stats.success.");
   private static final String RESET_ALL_SINGLE = TConstruct.makeTranslationKey("command", "stats.success.reset.all.single");
   private static final String RESET_ALL_MULTIPLE = TConstruct.makeTranslationKey("command", "stats.success.reset.all.multiple");
@@ -42,45 +45,48 @@ public class StatsCommand {
   private static final SimpleCommandExceptionType INVALID_ADD = new SimpleCommandExceptionType(TConstruct.makeTranslation("command", "stats.failure.invalid_add"));
   private static final SimpleCommandExceptionType INVALID_MULTIPLY = new SimpleCommandExceptionType(TConstruct.makeTranslation("command", "stats.failure.invalid_multiply"));
   private static final Dynamic2CommandExceptionType FAILED_TO_PARSE = new Dynamic2CommandExceptionType((stat, tag) -> TConstruct.makeTranslation("command", "stats.success.bonus.set.parse_fail", stat, tag));
-  private static final DynamicCommandExceptionType MODIFIER_ERROR = new DynamicCommandExceptionType(error -> (Component)error);
+  private static final DynamicCommandExceptionType MODIFIER_ERROR = new DynamicCommandExceptionType(error -> (Component) error);
 
   /**
    * Registers this sub command with the root command
-   * @param subCommand  Command builder
+   *
+   * @param subCommand Command builder
    */
   public static void register(LiteralArgumentBuilder<CommandSourceStack> subCommand) {
     subCommand.requires(sender -> sender.hasPermission(MantleCommand.PERMISSION_GAME_COMMANDS))
-              .then(Commands.argument("targets", EntityArgument.entities())
-                            // stats <target> bonus add|set <stat_type> <value>
-                            .then(Commands.literal("bonus")
-                                          .then(Commands.literal("add")
-                                                        // TODO: is there a way we can use this to set max stats? would require a way to parse the stat (we have)
-                                                        .then(Commands.argument("stat_type", ToolStatArgument.stat(INumericToolStat.class))
-                                                                      .then(Commands.argument("value", FloatArgumentType.floatArg())
-                                                                                    .executes(context -> update(context, Type.BONUS, Operation.MODIFY)))))
-                                          .then(Commands.literal("set")
-                                                        .then(Commands.argument("stat_type", ToolStatArgument.stat())
-                                                                      .then(Commands.argument("value", NbtTagArgument.nbtTag())
-                                                                                    .executes(context -> update(context, Type.BONUS, Operation.SET))))))
-                            // stats <target> multiplier multiply|set <float_stat> <value>
-                            .then(Commands.literal("multiplier")
-                                          .then(Commands.literal("multiply")
-                                                        .then(Commands.argument("float_stat", ToolStatArgument.stat(INumericToolStat.class))
-                                                                      .then(Commands.argument("value", FloatArgumentType.floatArg(0))
-                                                                                    .executes(context -> update(context, Type.MULTIPLY, Operation.MODIFY)))))
-                                          .then(Commands.literal("set")
-                                                        .then(Commands.argument("float_stat", ToolStatArgument.stat(INumericToolStat.class))
-                                                                      .then(Commands.argument("value", FloatArgumentType.floatArg(0))
-                                                                                    .executes(context -> update(context, Type.MULTIPLY, Operation.SET))))))
-                            // stats <target> reset [<stat_type>]
-                            .then(Commands.literal("reset")
-                                          .executes(StatsCommand::resetAll)
-                                          .then(Commands.argument("stat_type", ToolStatArgument.stat())
-                                                        .executes(StatsCommand::resetStat))));
+      .then(Commands.argument("targets", EntityArgument.entities())
+        // stats <target> bonus add|set <stat_type> <value>
+        .then(Commands.literal("bonus")
+          .then(Commands.literal("add")
+            // TODO: is there a way we can use this to set max stats? would require a way to parse the stat (we have)
+            .then(Commands.argument("stat_type", ToolStatArgument.stat(INumericToolStat.class))
+              .then(Commands.argument("value", FloatArgumentType.floatArg())
+                .executes(context -> update(context, Type.BONUS, Operation.MODIFY)))))
+          .then(Commands.literal("set")
+            .then(Commands.argument("stat_type", ToolStatArgument.stat())
+              .then(Commands.argument("value", NbtTagArgument.nbtTag())
+                .executes(context -> update(context, Type.BONUS, Operation.SET))))))
+        // stats <target> multiplier multiply|set <float_stat> <value>
+        .then(Commands.literal("multiplier")
+          .then(Commands.literal("multiply")
+            .then(Commands.argument("float_stat", ToolStatArgument.stat(INumericToolStat.class))
+              .then(Commands.argument("value", FloatArgumentType.floatArg(0))
+                .executes(context -> update(context, Type.MULTIPLY, Operation.MODIFY)))))
+          .then(Commands.literal("set")
+            .then(Commands.argument("float_stat", ToolStatArgument.stat(INumericToolStat.class))
+              .then(Commands.argument("value", FloatArgumentType.floatArg(0))
+                .executes(context -> update(context, Type.MULTIPLY, Operation.SET))))))
+        // stats <target> reset [<stat_type>]
+        .then(Commands.literal("reset")
+          .executes(StatsCommand::resetAll)
+          .then(Commands.argument("stat_type", ToolStatArgument.stat())
+            .executes(StatsCommand::resetStat))));
   }
 
-  /** Updates entities using the given operation */
-  private static List<LivingEntity> updateEntities(CommandContext<CommandSourceStack> context, BiPredicate<IToolStackView,StatOverrideModifier> updateAction) throws CommandSyntaxException {
+  /**
+   * Updates entities using the given operation
+   */
+  private static List<LivingEntity> updateEntities(CommandContext<CommandSourceStack> context, BiPredicate<IToolStackView, StatOverrideModifier> updateAction) throws CommandSyntaxException {
     return HeldModifiableItemIterator.apply(context, (living, stack) -> {
       ToolStack tool = ToolStack.copyFrom(stack);
 
@@ -111,7 +117,9 @@ public class StatsCommand {
     });
   }
 
-  /** Sets the given stat using NBT */
+  /**
+   * Sets the given stat using NBT
+   */
   private static <T> List<LivingEntity> setStat(CommandContext<CommandSourceStack> context, IToolStat<T> stat, Tag tag) throws CommandSyntaxException {
     T value = stat.read(tag);
     if (value == null) {
@@ -120,7 +128,9 @@ public class StatsCommand {
     return updateEntities(context, (tool, stats) -> stats.set(tool, stat, value));
   }
 
-  /** Modifies a tool stat with the given operation */
+  /**
+   * Modifies a tool stat with the given operation
+   */
   private static int update(CommandContext<CommandSourceStack> context, Type type, Operation op) throws CommandSyntaxException {
     // simplifies later operations if we skip operations that do nothing
     List<LivingEntity> successes;
@@ -140,7 +150,7 @@ public class StatsCommand {
           throw INVALID_MULTIPLY.create();
         }
       }
-      INumericToolStat<?> numeric = (INumericToolStat<?>)stat;
+      INumericToolStat<?> numeric = (INumericToolStat<?>) stat;
       if (type == Type.BONUS) {
         successes = updateEntities(context, (tool, stats) -> stats.addBonus(tool, numeric, value));
       } else if (op == Operation.SET) {
@@ -163,7 +173,9 @@ public class StatsCommand {
     return size;
   }
 
-  /** Resets all stats to default */
+  /**
+   * Resets all stats to default
+   */
   private static int resetStat(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
     IToolStat<?> stat = ToolStatArgument.getStat(context, "stat_type");
     List<LivingEntity> successes = updateEntities(context, (tool, stats) -> {
@@ -184,7 +196,9 @@ public class StatsCommand {
     return size;
   }
 
-  /** Resets all stats to default */
+  /**
+   * Resets all stats to default
+   */
   private static int resetAll(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
     List<LivingEntity> successes = HeldModifiableItemIterator.apply(context, (living, stack) -> {
       // remove modifier
@@ -229,6 +243,7 @@ public class StatsCommand {
     private final String key = name().toLowerCase(Locale.US);
     private final String stat;
   }
+
   private enum Operation {
     MODIFY, SET;
     private final String key = name().toLowerCase(Locale.US);

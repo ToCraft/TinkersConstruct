@@ -34,6 +34,7 @@ import java.util.stream.Collectors;
  */
 @RequiredArgsConstructor
 public class PartRecipe implements IPartBuilderRecipe, IMultiRecipe<ItemPartRecipe> {
+
   public static final RecordLoadable<PartRecipe> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(),
     LoadableRecipeSerializer.RECIPE_GROUP,
@@ -51,12 +52,18 @@ public class PartRecipe implements IPartBuilderRecipe, IMultiRecipe<ItemPartReci
   @Getter
   protected final Pattern pattern;
   protected final Ingredient patternItem;
-  /** Recipe material cost */
+  /**
+   * Recipe material cost
+   */
   @Getter
   protected final int cost;
-  /** Recipe result, used to fetch a material */
+  /**
+   * Recipe result, used to fetch a material
+   */
   protected final IMaterialItem output;
-  /** Count for the recipe output */
+  /**
+   * Count for the recipe output
+   */
   protected final int outputCount;
 
   @Override
@@ -90,9 +97,10 @@ public class PartRecipe implements IPartBuilderRecipe, IMultiRecipe<ItemPartReci
 
   /**
    * Checks if the recipe is valid for the given input. Assumes {@link #partialMatch(IPartBuilderContainer)} is true
-   * @param inv    Inventory instance
-   * @param world  World instance
-   * @return  True if this recipe matches
+   *
+   * @param inv   Inventory instance
+   * @param world World instance
+   * @return True if this recipe matches
    */
   @Override
   public boolean matches(IPartBuilderContainer inv, Level world) {
@@ -102,12 +110,14 @@ public class PartRecipe implements IPartBuilderRecipe, IMultiRecipe<ItemPartReci
       // material must be craftable, usable in the item, and have a cost we can afford
       MaterialVariant material = materialRecipe.getMaterial();
       return material.get().isCraftable() && output.canUseMaterial(material.getId())
-             && inv.getStack().getCount() >= materialRecipe.getItemsUsed(cost);
+        && inv.getStack().getCount() >= materialRecipe.getItemsUsed(cost);
     }
     return false;
   }
 
-  /** @deprecated use {@link #getRecipeOutput(MaterialVariantId)} */
+  /**
+   * @deprecated use {@link #getRecipeOutput(MaterialVariantId)}
+   */
   @Deprecated
   @Override
   public ItemStack getResultItem() {
@@ -116,8 +126,9 @@ public class PartRecipe implements IPartBuilderRecipe, IMultiRecipe<ItemPartReci
 
   /**
    * Gets the output of the recipe for display
-   * @param material  Material to use
-   * @return  Output of the recipe
+   *
+   * @param material Material to use
+   * @return Output of the recipe
    */
   @SuppressWarnings("WeakerAccess")
   public ItemStack getRecipeOutput(MaterialVariantId material) {
@@ -136,7 +147,9 @@ public class PartRecipe implements IPartBuilderRecipe, IMultiRecipe<ItemPartReci
     return this.getRecipeOutput(material.getVariant());
   }
 
-  /** Cache of recipes for display in JEI */
+  /**
+   * Cache of recipes for display in JEI
+   */
   @Nullable
   private List<ItemPartRecipe> multiRecipes;
 

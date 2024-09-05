@@ -22,6 +22,7 @@ import java.util.function.BiConsumer;
  * Helper class to draw the smeltery tank in UIs
  */
 public class GuiSmelteryTank {
+
   // fluid tooltips
   public static final Component TOOLTIP_CAPACITY = TConstruct.makeTranslation("gui", "melting.capacity");
   public static final Component TOOLTIP_AVAILABLE = TConstruct.makeTranslation("gui", "melting.available");
@@ -30,7 +31,7 @@ public class GuiSmelteryTank {
   private final AbstractContainerScreen<?> parent;
   private final SmelteryTank<?> tank;
   private final int x, y, width, height;
-  private final BiConsumer<Integer,List<Component>> formatter;
+  private final BiConsumer<Integer, List<Component>> formatter;
 
   private int[] liquidHeights;
 
@@ -46,8 +47,9 @@ public class GuiSmelteryTank {
 
   /**
    * Calculates the heights of the liquids
-   * @param   refresh  If true, refresh the heights
-   * @return  Array of liquid heights at each index
+   *
+   * @param refresh If true, refresh the heights
+   * @return Array of liquid heights at each index
    */
   private int[] calcLiquidHeights(boolean refresh) {
     assert tank != null;
@@ -59,9 +61,10 @@ public class GuiSmelteryTank {
 
   /**
    * Checks if a position is within the tank
-   * @param checkX  X position to check
-   * @param checkY  Y position to check
-   * @return  True if within the tank
+   *
+   * @param checkX X position to check
+   * @param checkY Y position to check
+   * @return True if within the tank
    */
   private boolean withinTank(int checkX, int checkY) {
     return x <= checkX && checkX < (x + width) && y <= checkY && checkY < (y + height);
@@ -69,7 +72,8 @@ public class GuiSmelteryTank {
 
   /**
    * Renders the smeltery tank
-   * @param matrices  Matrix stack instance
+   *
+   * @param matrices Matrix stack instance
    */
   public void renderFluids(PoseStack matrices) {
     // draw liquids
@@ -88,9 +92,10 @@ public class GuiSmelteryTank {
 
   /**
    * Gets the fluid under the mouse at the given Y position relative to the tank bottom
-   * @param heights  Fluids heights
-   * @param y  Y position to check
-   * @return  Fluid index under mouse, or -1 if no fluid
+   *
+   * @param heights Fluids heights
+   * @param y       Y position to check
+   * @return Fluid index under mouse, or -1 if no fluid
    */
   private int getFluidHovered(int[] heights, int y) {
     for (int i = 0; i < heights.length; i++) {
@@ -105,9 +110,10 @@ public class GuiSmelteryTank {
 
   /**
    * Gets the fluid under the mouse at the given Y mouse position
-   * @param heights  Fluids heights
-   * @param checkY   Mouse Y position
-   * @return  Fluid index under mouse, or -1 if no fluid
+   *
+   * @param heights Fluids heights
+   * @param checkY  Mouse Y position
+   * @return Fluid index under mouse, or -1 if no fluid
    */
   private int getFluidFromMouse(int[] heights, int checkY) {
     return getFluidHovered(heights, (y + height) - checkY - 1);
@@ -115,9 +121,10 @@ public class GuiSmelteryTank {
 
   /**
    * Renders a highlight on the hovered fluid
-   * @param matrices  Matrix stack instance
-   * @param mouseX    Mouse X
-   * @param mouseY    Mouse Y
+   *
+   * @param matrices Matrix stack instance
+   * @param mouseX   Mouse X
+   * @param mouseY   Mouse Y
    */
   public void renderHighlight(PoseStack matrices, int mouseX, int mouseY) {
     int checkX = mouseX - parent.leftPos;
@@ -147,9 +154,10 @@ public class GuiSmelteryTank {
 
   /**
    * Gets the tooltip for the tank based on the given mouse position
-   * @param matrices  Matrix stack instance
-   * @param mouseX    Mouse X
-   * @param mouseY    Mouse Y
+   *
+   * @param matrices Matrix stack instance
+   * @param mouseX   Mouse X
+   * @param mouseY   Mouse Y
    */
   public void drawTooltip(PoseStack matrices, int mouseX, int mouseY) {
     // Liquids
@@ -176,8 +184,7 @@ public class GuiSmelteryTank {
           formatter.accept(used, tooltip);
         }
         FluidTooltipHandler.appendShift(tooltip);
-      }
-      else {
+      } else {
         tooltip = FluidTooltipHandler.getFluidTooltip(tank.getFluidInTank(hovered));
       }
       parent.renderComponentTooltip(matrices, tooltip, mouseX, mouseY);
@@ -198,9 +205,10 @@ public class GuiSmelteryTank {
 
   /**
    * Gets the ingredient under the mouse
-   * @param checkX  Mouse X position
-   * @param checkY  Mouse Y position
-   * @return  Ingredient
+   *
+   * @param checkX Mouse X position
+   * @param checkY Mouse Y position
+   * @return Ingredient
    */
   @Nullable
   public FluidStack getIngredient(int checkX, int checkY) {
@@ -230,7 +238,7 @@ public class GuiSmelteryTank {
 
     int totalFluidAmount = 0;
     if (liquids.size() > 0) {
-      for(int i = 0; i < liquids.size(); i++) {
+      for (int i = 0; i < liquids.size(); i++) {
         FluidStack liquid = liquids.get(i);
 
         float h = (float) liquid.getAmount() / (float) capacity;
@@ -239,7 +247,7 @@ public class GuiSmelteryTank {
       }
 
       // if not completely full, leave a few pixels for the empty tank display
-      if(totalFluidAmount < capacity) {
+      if (totalFluidAmount < capacity) {
         height -= min;
       }
 
@@ -249,24 +257,24 @@ public class GuiSmelteryTank {
         sum = 0;
         int biggest = -1;
         int m = 0;
-        for(int i = 0; i < fluidHeights.length; i++) {
+        for (int i = 0; i < fluidHeights.length; i++) {
           sum += fluidHeights[i];
-          if(fluidHeights[i] > biggest) {
+          if (fluidHeights[i] > biggest) {
             biggest = fluidHeights[i];
             m = i;
           }
         }
 
         // we can't get a result without going negative
-        if(fluidHeights[m] == 0) {
+        if (fluidHeights[m] == 0) {
           break;
         }
 
         // remove a pixel from the biggest one
-        if(sum > height) {
+        if (sum > height) {
           fluidHeights[m]--;
         }
-      } while(sum > height);
+      } while (sum > height);
     }
 
     return fluidHeights;

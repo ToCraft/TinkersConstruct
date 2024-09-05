@@ -30,7 +30,8 @@ import slimeknights.tconstruct.tools.item.ModifierCrystalItem;
 import java.util.Collections;
 import java.util.List;
 
-public class ModifierWorktableScreen extends BaseTabbedScreen<ModifierWorktableBlockEntity,ModifierWorktableContainerMenu> {
+public class ModifierWorktableScreen extends BaseTabbedScreen<ModifierWorktableBlockEntity, ModifierWorktableContainerMenu> {
+
   protected static final Component TITLE = TConstruct.makeTranslation("gui", "modifier_worktable.title");
   protected static final Component TABLE_INFO = TConstruct.makeTranslation("gui", "modifier_worktable.info");
 
@@ -41,13 +42,19 @@ public class ModifierWorktableScreen extends BaseTabbedScreen<ModifierWorktableB
     new Pattern(TConstruct.MOD_ID, "quartz")
   };
 
-  /** Side panels, for tools and modifiers */
+  /**
+   * Side panels, for tools and modifiers
+   */
   protected InfoPanelScreen tinkerInfo;
   protected InfoPanelScreen modifierInfo;
 
-  /** Current scrollbar position */
+  /**
+   * Current scrollbar position
+   */
   private float sliderProgress = 0.0F;
-  /** Is {@code true} if the player clicked on the scroll wheel in the GUI */
+  /**
+   * Is {@code true} if the player clicked on the scroll wheel in the GUI
+   */
   private boolean clickedOnScrollBar;
 
   /**
@@ -61,11 +68,11 @@ public class ModifierWorktableScreen extends BaseTabbedScreen<ModifierWorktableB
     super(container, playerInventory, title);
 
     this.tinkerInfo = new InfoPanelScreen(this, container, playerInventory, title);
-    this.tinkerInfo.setTextScale(8/9f);
+    this.tinkerInfo.setTextScale(8 / 9f);
     this.addModule(this.tinkerInfo);
 
     this.modifierInfo = new InfoPanelScreen(this, container, playerInventory, title);
-    this.modifierInfo.setTextScale(7/9f);
+    this.modifierInfo.setTextScale(7 / 9f);
     this.addModule(this.modifierInfo);
 
     this.tinkerInfo.yOffset = 0;
@@ -96,9 +103,10 @@ public class ModifierWorktableScreen extends BaseTabbedScreen<ModifierWorktableB
 
   /**
    * Gets the button at the given mouse location
-   * @param mouseX  X position of button
-   * @param mouseY  Y position of button
-   * @return  Button index, or -1 if none
+   *
+   * @param mouseX X position of button
+   * @param mouseY Y position of button
+   * @return Button index, or -1 if none
    */
   private int getButtonAt(int mouseX, int mouseY) {
     if (tile != null) {
@@ -109,8 +117,8 @@ public class ModifierWorktableScreen extends BaseTabbedScreen<ModifierWorktableB
         int maxIndex = Math.min((this.modifierIndexOffset + 12), buttons.size());
         for (int l = this.modifierIndexOffset; l < maxIndex; ++l) {
           int relative = l - this.modifierIndexOffset;
-          double buttonX = mouseX - (double)(x + relative % 4 * 18);
-          double buttonY = mouseY - (double)(y + relative / 4 * 18);
+          double buttonX = mouseX - (double) (x + relative % 4 * 18);
+          double buttonY = mouseY - (double) (y + relative / 4 * 18);
           if (buttonX >= 0.0D && buttonY >= 0.0D && buttonX < 18.0D && buttonY < 18.0D) {
             return l;
           }
@@ -136,7 +144,9 @@ public class ModifierWorktableScreen extends BaseTabbedScreen<ModifierWorktableB
     }
   }
 
-  /** Draw backgrounds for all modifiers */
+  /**
+   * Draw backgrounds for all modifiers
+   */
   private void drawModifierBackgrounds(PoseStack matrices, int mouseX, int mouseY, int left, int top) {
     if (tile != null) {
       int selectedIndex = this.tile.getSelectedIndex();
@@ -156,7 +166,9 @@ public class ModifierWorktableScreen extends BaseTabbedScreen<ModifierWorktableB
     }
   }
 
-  /** Draw slot icons for all patterns */
+  /**
+   * Draw slot icons for all patterns
+   */
   private void drawModifierIcons(PoseStack matrices, int left, int top) {
     // use block texture list
     if (tile != null) {
@@ -224,13 +236,13 @@ public class ModifierWorktableScreen extends BaseTabbedScreen<ModifierWorktableB
   public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
     this.clickedOnScrollBar = false;
     if (this.tinkerInfo.handleMouseClicked(mouseX, mouseY, mouseButton)
-        || this.modifierInfo.handleMouseClicked(mouseX, mouseY, mouseButton)) {
+      || this.modifierInfo.handleMouseClicked(mouseX, mouseY, mouseButton)) {
       return false;
     }
 
     if (tile != null && !tile.getCurrentButtons().isEmpty()) {
       // handle button click
-      int index = getButtonAt((int)mouseX, (int)mouseY);
+      int index = getButtonAt((int) mouseX, (int) mouseY);
       assert this.minecraft != null && this.minecraft.player != null;
       if (index >= 0 && this.getMenu().clickMenuButton(this.minecraft.player, index)) {
         this.minecraft.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_STONECUTTER_SELECT_RECIPE, 1.0F));
@@ -253,7 +265,7 @@ public class ModifierWorktableScreen extends BaseTabbedScreen<ModifierWorktableB
   @Override
   public boolean mouseDragged(double mouseX, double mouseY, int clickedMouseButton, double timeSinceLastClick, double unknown) {
     if (this.tinkerInfo.handleMouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick)
-        || this.modifierInfo.handleMouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick)) {
+      || this.modifierInfo.handleMouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick)) {
       return false;
     }
 
@@ -272,7 +284,7 @@ public class ModifierWorktableScreen extends BaseTabbedScreen<ModifierWorktableB
   @Override
   public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
     if (this.tinkerInfo.handleMouseScrolled(mouseX, mouseY, delta)
-        || this.modifierInfo.handleMouseScrolled(mouseX, mouseY, delta)) {
+      || this.modifierInfo.handleMouseScrolled(mouseX, mouseY, delta)) {
       return false;
     }
     if (super.mouseScrolled(mouseX, mouseY, delta)) {
@@ -291,7 +303,7 @@ public class ModifierWorktableScreen extends BaseTabbedScreen<ModifierWorktableB
   @Override
   public boolean mouseReleased(double mouseX, double mouseY, int state) {
     if (this.tinkerInfo.handleMouseReleased(mouseX, mouseY, state)
-        || this.modifierInfo.handleMouseReleased(mouseX, mouseY, state)) {
+      || this.modifierInfo.handleMouseReleased(mouseX, mouseY, state)) {
       return false;
     }
     return super.mouseReleased(mouseX, mouseY, state);
@@ -326,7 +338,9 @@ public class ModifierWorktableScreen extends BaseTabbedScreen<ModifierWorktableB
     return TITLE;
   }
 
-  /** Displays a message with the default title */
+  /**
+   * Displays a message with the default title
+   */
   public void message(Component message) {
     this.tinkerInfo.setCaption(getInfoTitle());
     this.tinkerInfo.setText(message);
@@ -353,17 +367,23 @@ public class ModifierWorktableScreen extends BaseTabbedScreen<ModifierWorktableB
 
   /* Helpers */
 
-  /** Gets the number of part recipes */
+  /**
+   * Gets the number of part recipes
+   */
   private int getPartRecipeCount() {
     return tile == null ? 0 : tile.getCurrentButtons().size();
   }
 
-  /** If true, we can scroll */
+  /**
+   * If true, we can scroll
+   */
   private boolean canScroll() {
     return this.getPartRecipeCount() > 12;
   }
 
-  /** Gets the number of hidden part recipe rows */
+  /**
+   * Gets the number of hidden part recipe rows
+   */
   private int getHiddenRows() {
     return (this.getPartRecipeCount() + 4 - 1) / 4 - 3;
   }

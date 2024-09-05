@@ -9,33 +9,36 @@ import static net.minecraft.world.damagesource.CombatRules.getDamageAfterAbsorb;
  * Utinet.minecraft.world.damagesource.CombatRulesation logic
  */
 public class ArmorUtil {
+
   private ArmorUtil() {}
 
   /**
    * Inverse of {@link net.minecraft.world.damagesource.CombatRules#getDamageAfterAbsorb(float, float, float)}  with respect to damage
-   * @param damage     Damage returned by the vanilla function, must be 0 or more
-   * @param armor      Total armor value, tested between 0 and 30
-   * @param toughness  Total toughness value, tested between 0 and 20
-   * @return  Original damage to be dealt
+   *
+   * @param damage    Damage returned by the vanilla function, must be 0 or more
+   * @param armor     Total armor value, tested between 0 and 30
+   * @param toughness Total toughness value, tested between 0 and 20
+   * @return Original damage to be dealt
    */
   public static float getDamageBeforeArmorAbsorb(float damage, float armor, float toughness) {
     if (damage <= 0) {
       return 0;
     }
     float boostedToughness = toughness + 8f; // all usages of toughness in the inverse had 8 added, so do it once
-    float atProduct = armor*boostedToughness; // this product also showed up a lot in the inverse
+    float atProduct = armor * boostedToughness; // this product also showed up a lot in the inverse
     return 5 * Mth.clamp(
-      ((float)Math.sqrt(boostedToughness * (0.04f*armor*atProduct - 2f*atProduct + 25f*boostedToughness + 16f*damage))
-       + 0.2f*atProduct - 5f*boostedToughness) / 8f,
+      ((float) Math.sqrt(boostedToughness * (0.04f * armor * atProduct - 2f * atProduct + 25f * boostedToughness + 16f * damage))
+        + 0.2f * atProduct - 5f * boostedToughness) / 8f,
       damage * 25f / (125f - armor),
       damage);
   }
 
   /**
    * Extension of of {@link net.minecraft.world.damagesource.CombatRules#getDamageAfterMagicAbsorb(float, float)} to allow increasing damage via negative numbers
-   * @param damage            Damage to absorb (or increase)
-   * @param enchantModifiers  Enchantment modifier amount, between -20 and 20
-   * @return  Original damage to be dealt
+   *
+   * @param damage           Damage to absorb (or increase)
+   * @param enchantModifiers Enchantment modifier amount, between -20 and 20
+   * @return Original damage to be dealt
    */
   public static float getDamageAfterMagicAbsorb(float damage, float enchantModifiers) {
     return getDamageAfterMagicAbsorb(damage, enchantModifiers, 20f);
@@ -43,9 +46,10 @@ public class ArmorUtil {
 
   /**
    * Extension of of {@link net.minecraft.world.damagesource.CombatRules#getDamageAfterMagicAbsorb(float, float)} to allow increasing damage via negative numbers and a higher cap
-   * @param damage            Damage to absorb (or increase)
-   * @param enchantModifiers  Enchantment modifier amount, between -20 and 20
-   * @return  Original damage to be dealt
+   *
+   * @param damage           Damage to absorb (or increase)
+   * @param enchantModifiers Enchantment modifier amount, between -20 and 20
+   * @return Original damage to be dealt
    */
   public static float getDamageAfterMagicAbsorb(float damage, float enchantModifiers, float cap) {
     // saves a bit of effort for 0 ranges
@@ -57,28 +61,32 @@ public class ArmorUtil {
 
   /**
    * Inverse of {@link net.minecraft.world.damagesource.CombatRules#getDamageAfterMagicAbsorb(float, float)} with respect to damage
-   * @param damage            Damage returned by the vanilla function, must be 0 or more
-   * @param enchantModifiers  Enchantment modifier amount
-   * @return  Original damage to be dealt
+   *
+   * @param damage           Damage returned by the vanilla function, must be 0 or more
+   * @param enchantModifiers Enchantment modifier amount
+   * @return Original damage to be dealt
    */
   public static float getDamageBeforeMagicAbsorb(float damage, float enchantModifiers) {
     return damage / (1f - (Mth.clamp(enchantModifiers, 0f, 20f) / 25f));
   }
 
-  /** Same as {@link #getDamageForEvent(float, float, float, float, float, float)} but sets the cap to 20f */
+  /**
+   * Same as {@link #getDamageForEvent(float, float, float, float, float, float)} but sets the cap to 20f
+   */
   public static float getDamageForEvent(float originalDamage, float armor, float toughness, float vanillaModifiers, float finalModifiers) {
     return getDamageForEvent(originalDamage, armor, toughness, vanillaModifiers, finalModifiers, 20f);
   }
 
   /**
    * Calculates the final damage for use in {@link net.minecraftforge.event.entity.living.LivingHurtEvent}. Requires applying several inverse functions to cancel out vanilla formulas that are applied later
-   * @param originalDamage     Original damage to be dealt
-   * @param armor              Armor amount on the player
-   * @param toughness          Armor toughness attribute
-   * @param vanillaModifiers   Vanilla armor modifiers from enchantments
-   * @param finalModifiers     Armor modifiers from modifiers and vanilla
-   * @param modifierCap        Maximum protection value allowed
-   * @return  Damage to return in the event
+   *
+   * @param originalDamage   Original damage to be dealt
+   * @param armor            Armor amount on the player
+   * @param toughness        Armor toughness attribute
+   * @param vanillaModifiers Vanilla armor modifiers from enchantments
+   * @param finalModifiers   Armor modifiers from modifiers and vanilla
+   * @param modifierCap      Maximum protection value allowed
+   * @return Damage to return in the event
    */
   public static float getDamageForEvent(float originalDamage, float armor, float toughness, float vanillaModifiers, float finalModifiers, float modifierCap) {
     // if we are changing no values, nothing to do

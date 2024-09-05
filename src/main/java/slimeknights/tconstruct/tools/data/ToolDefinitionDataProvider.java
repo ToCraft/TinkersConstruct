@@ -75,6 +75,7 @@ import static slimeknights.tconstruct.tools.TinkerToolParts.toolHandle;
 import static slimeknights.tconstruct.tools.TinkerToolParts.toughHandle;
 
 public class ToolDefinitionDataProvider extends AbstractToolDefinitionDataProvider {
+
   public ToolDefinitionDataProvider(DataGenerator generator) {
     super(generator, TConstruct.MOD_ID);
   }
@@ -89,9 +90,9 @@ public class ToolDefinitionDataProvider extends AbstractToolDefinitionDataProvid
     define(ToolDefinitions.PICKAXE)
       // parts
       .module(PartStatsModule.parts()
-         .part(pickHead)
-         .part(toolHandle)
-         .part(toolBinding).build())
+        .part(pickHead)
+        .part(toolHandle)
+        .part(toolBinding).build())
       .module(defaultThreeParts)
       // stats
       .module(new SetStatsModule(StatsNBT.builder()
@@ -108,10 +109,10 @@ public class ToolDefinitionDataProvider extends AbstractToolDefinitionDataProvid
     define(ToolDefinitions.SLEDGE_HAMMER)
       // parts
       .module(PartStatsModule.parts()
-         .part(hammerHead, 0.5f)
-         .part(toughHandle)
-         .part(largePlate, 0.25f)
-         .part(largePlate, 0.25f).build())
+        .part(hammerHead, 0.5f)
+        .part(toughHandle)
+        .part(largePlate, 0.25f)
+        .part(largePlate, 0.25f).build())
       .module(defaultFourParts)
       // stats
       .module(new SetStatsModule(StatsNBT.builder()
@@ -133,10 +134,10 @@ public class ToolDefinitionDataProvider extends AbstractToolDefinitionDataProvid
     define(ToolDefinitions.VEIN_HAMMER)
       // parts
       .module(PartStatsModule.parts()
-         .part(hammerHead, 0.5f)
-         .part(toughHandle)
-         .part(pickHead, 0.25f)
-         .part(largePlate, 0.25f).build())
+        .part(hammerHead, 0.5f)
+        .part(toughHandle)
+        .part(pickHead, 0.25f)
+        .part(largePlate, 0.25f).build())
       .module(defaultFourParts)
       // stats
       .module(new SetStatsModule(StatsNBT.builder()
@@ -160,9 +161,9 @@ public class ToolDefinitionDataProvider extends AbstractToolDefinitionDataProvid
     define(ToolDefinitions.MATTOCK)
       // parts
       .module(PartStatsModule.parts()
-         .part(smallAxeHead, 0.5f)
-         .part(toolHandle)
-         .part(roundPlate, 0.5f).build())
+        .part(smallAxeHead, 0.5f)
+        .part(toolHandle)
+        .part(roundPlate, 0.5f).build())
       .module(defaultThreeParts)
       // stats
       .module(new SetStatsModule(StatsNBT.builder()
@@ -185,9 +186,9 @@ public class ToolDefinitionDataProvider extends AbstractToolDefinitionDataProvid
     define(ToolDefinitions.PICKADZE)
       // parts
       .module(PartStatsModule.parts()
-         .part(pickHead, 0.5f)
-         .part(toolHandle)
-         .part(roundPlate, 0.5f).build())
+        .part(pickHead, 0.5f)
+        .part(toolHandle)
+        .part(roundPlate, 0.5f).build())
       .module(defaultThreeParts)
       // stats
       .module(new SetStatsModule(StatsNBT.builder()
@@ -209,10 +210,10 @@ public class ToolDefinitionDataProvider extends AbstractToolDefinitionDataProvid
     define(ToolDefinitions.EXCAVATOR)
       // parts
       .module(PartStatsModule.parts()
-         .part(largePlate, 0.5f)
-         .part(toughHandle, 0.5f)
-         .part(largePlate, 0.5f)
-         .part(toughHandle, 0.5f).build())
+        .part(largePlate, 0.5f)
+        .part(toughHandle, 0.5f)
+        .part(largePlate, 0.5f)
+        .part(toughHandle, 0.5f).build())
       .module(defaultFourParts)
       // stats
       .module(new SetStatsModule(StatsNBT.builder()
@@ -238,9 +239,9 @@ public class ToolDefinitionDataProvider extends AbstractToolDefinitionDataProvid
     define(ToolDefinitions.HAND_AXE)
       // parts
       .module(PartStatsModule.parts()
-         .part(smallAxeHead)
-         .part(toolHandle)
-         .part(toolBinding).build())
+        .part(smallAxeHead)
+        .part(toolHandle)
+        .part(toolBinding).build())
       .module(defaultThreeParts)
       // stats
       .module(new SetStatsModule(StatsNBT.builder()
@@ -258,10 +259,10 @@ public class ToolDefinitionDataProvider extends AbstractToolDefinitionDataProvid
     define(ToolDefinitions.BROAD_AXE)
       // parts
       .module(PartStatsModule.parts()
-         .part(broadAxeHead, 0.75f)
-         .part(toughHandle)
-         .part(pickHead, 0.25f)
-         .part(toolBinding).build())
+        .part(broadAxeHead, 0.75f)
+        .part(toughHandle)
+        .part(pickHead, 0.25f)
+        .part(toolBinding).build())
       .module(defaultFourParts)
       // stats
       .module(new SetStatsModule(StatsNBT.builder()
@@ -291,9 +292,9 @@ public class ToolDefinitionDataProvider extends AbstractToolDefinitionDataProvid
     define(ToolDefinitions.KAMA)
       // parts
       .module(PartStatsModule.parts()
-         .part(smallBlade)
-         .part(toolHandle)
-         .part(toolBinding).build())
+        .part(smallBlade)
+        .part(toolHandle)
+        .part(toolBinding).build())
       .module(defaultThreeParts)
       // stats
       .module(new SetStatsModule(StatsNBT.builder()
@@ -316,10 +317,10 @@ public class ToolDefinitionDataProvider extends AbstractToolDefinitionDataProvid
     define(ToolDefinitions.SCYTHE)
       // parts
       .module(PartStatsModule.parts()
-         .part(TinkerToolParts.broadBlade)
-         .part(TinkerToolParts.toughHandle, 0.5f)
-         .part(TinkerToolParts.toolBinding)
-         .part(TinkerToolParts.toughHandle, 0.5f).build())
+        .part(TinkerToolParts.broadBlade)
+        .part(TinkerToolParts.toughHandle, 0.5f)
+        .part(TinkerToolParts.toolBinding)
+        .part(TinkerToolParts.toughHandle, 0.5f).build())
       .module(defaultFourParts)
       // stats
       .module(new SetStatsModule(StatsNBT.builder()
@@ -344,8 +345,8 @@ public class ToolDefinitionDataProvider extends AbstractToolDefinitionDataProvid
     define(ToolDefinitions.DAGGER)
       // parts
       .module(PartStatsModule.parts()
-         .part(smallBlade)
-         .part(toolHandle).build())
+        .part(smallBlade)
+        .part(toolHandle).build())
       .module(DefaultMaterialsModule.builder().material(tier1Material, tier1Material).build())
       // stats
       .module(new SetStatsModule(StatsNBT.builder()
@@ -375,9 +376,9 @@ public class ToolDefinitionDataProvider extends AbstractToolDefinitionDataProvid
     define(ToolDefinitions.SWORD)
       // parts
       .module(PartStatsModule.parts()
-         .part(smallBlade)
-         .part(toolHandle, 0.5f)
-         .part(toolHandle, 0.5f).build())
+        .part(smallBlade)
+        .part(toolHandle, 0.5f)
+        .part(toolHandle, 0.5f).build())
       .module(defaultThreeParts)
       // stats
       .module(new SetStatsModule(StatsNBT.builder()
@@ -397,10 +398,10 @@ public class ToolDefinitionDataProvider extends AbstractToolDefinitionDataProvid
     define(ToolDefinitions.CLEAVER)
       // parts
       .module(PartStatsModule.parts()
-         .part(broadBlade, 0.75f)
-         .part(toughHandle, 0.5f)
-         .part(toughHandle, 0.5f)
-         .part(largePlate, 0.25f).build())
+        .part(broadBlade, 0.75f)
+        .part(toughHandle, 0.5f)
+        .part(toughHandle, 0.5f)
+        .part(largePlate, 0.25f).build())
       .module(defaultFourParts)
       // stats
       .module(new SetStatsModule(StatsNBT.builder()
@@ -424,9 +425,9 @@ public class ToolDefinitionDataProvider extends AbstractToolDefinitionDataProvid
     define(ToolDefinitions.CROSSBOW)
       // parts
       .module(PartStatsModule.parts()
-         .part(bowLimb)
-         .part(bowGrip)
-         .part(bowstring).build())
+        .part(bowLimb)
+        .part(bowGrip)
+        .part(bowstring).build())
       .module(defaultThreeParts)
       // stats
       .module(new SetStatsModule(StatsNBT.builder()
@@ -438,10 +439,10 @@ public class ToolDefinitionDataProvider extends AbstractToolDefinitionDataProvid
     define(ToolDefinitions.LONGBOW)
       // parts
       .module(PartStatsModule.parts()
-         .part(bowLimb)
-         .part(bowLimb)
-         .part(bowGrip)
-         .part(bowstring).build())
+        .part(bowLimb)
+        .part(bowLimb)
+        .part(bowGrip)
+        .part(bowstring).build())
       .module(defaultFourParts)
       // stats
       .module(new SetStatsModule(StatsNBT.builder()
@@ -538,9 +539,9 @@ public class ToolDefinitionDataProvider extends AbstractToolDefinitionDataProvid
     // travelers armor
     ToolModule travelersSlots =
       ToolSlotsModule.builder()
-                     .slots(SlotType.UPGRADE, 3)
-                     .slots(SlotType.DEFENSE, 2)
-                     .slots(SlotType.ABILITY, 1).build();
+        .slots(SlotType.UPGRADE, 3)
+        .slots(SlotType.DEFENSE, 2)
+        .slots(SlotType.ABILITY, 1).build();
     defineArmor(ArmorDefinitions.TRAVELERS)
       .modules(slots -> SetStatsModule.armor(slots)
         .durabilityFactor(10)
@@ -566,15 +567,15 @@ public class ToolDefinitionDataProvider extends AbstractToolDefinitionDataProvid
     // plate armor
     ToolModule plateSlots =
       ToolSlotsModule.builder()
-                     .slots(SlotType.UPGRADE, 2)
-                     .slots(SlotType.DEFENSE, 3).build();
+        .slots(SlotType.UPGRADE, 2)
+        .slots(SlotType.DEFENSE, 3).build();
     defineArmor(ArmorDefinitions.PLATE)
       .modules(slots -> PartStatsModule.armor(slots)
-         .part(TinkerToolParts.plating, 1)
-         .part(TinkerToolParts.maille, 1))
+        .part(TinkerToolParts.plating, 1)
+        .part(TinkerToolParts.maille, 1))
       .module(DefaultMaterialsModule.builder()
-         .material(MaterialIds.cobalt)
-         .material(MaterialIds.ancientHide).build())
+        .material(MaterialIds.cobalt)
+        .material(MaterialIds.ancientHide).build())
       .module(ArmorSlotType.CHESTPLATE, new MultiplyStatsModule(MultiplierNBT.builder().set(ToolStats.ATTACK_DAMAGE, 0.4f).build()))
       .module(plateSlots);
     // plate shield
@@ -585,9 +586,9 @@ public class ToolDefinitionDataProvider extends AbstractToolDefinitionDataProvid
         .primaryPart(1).build())
       .module(new PartsModule(List.of(TinkerToolParts.shieldCore.get())))
       .module(DefaultMaterialsModule.builder()
-         .material(MaterialIds.wood)
-         .material(MaterialIds.cobalt)
-         .build())
+        .material(MaterialIds.wood)
+        .material(MaterialIds.cobalt)
+        .build())
       .module(new SetStatsModule(StatsNBT.builder()
         .set(ToolStats.BLOCK_AMOUNT, 100)
         .set(ToolStats.BLOCK_ANGLE, 180).build()))
@@ -600,11 +601,11 @@ public class ToolDefinitionDataProvider extends AbstractToolDefinitionDataProvid
     defineArmor(ArmorDefinitions.SLIMESUIT)
       // not using durabilityFactor as helmet stats give a bonus too, factor is 42
       .modules(slots -> SetStatsModule.armor(slots)
-         .setEach(ToolStats.DURABILITY, 546, 630, 672, 362))
+        .setEach(ToolStats.DURABILITY, 546, 630, 672, 362))
       .module(ArmorSlotType.CHESTPLATE, new MultiplyStatsModule(MultiplierNBT.builder().set(ToolStats.ATTACK_DAMAGE, 0.4f).build()))
       .module(ToolSlotsModule.builder()
-                             .slots(SlotType.UPGRADE, 5)
-                             .slots(SlotType.ABILITY, 1).build())
+        .slots(SlotType.UPGRADE, 5)
+        .slots(SlotType.ABILITY, 1).build())
       // repair
       .module(MaterialRepairModule.armor(MaterialIds.enderslime).durabilityFactor(4.2f))
       .module(ArmorSlotType.CHESTPLATE, MaterialRepairModule.of(MaterialIds.phantom, ArmorSlotType.CHESTPLATE, 42))

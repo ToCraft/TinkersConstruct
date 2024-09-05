@@ -12,6 +12,7 @@ import javax.annotation.Nullable;
  * Handles all the logic for partial levels on tools
  */
 public class IncrementalModifierEntry extends ModifierEntry {
+
   private final int amount;
   @Getter
   private final int needed;
@@ -31,11 +32,12 @@ public class IncrementalModifierEntry extends ModifierEntry {
 
   /**
    * Creates a new incremental modifier entry
-   * @param modifier  Modifier instance
-   * @param level     Modifier level, will be effectively as low as 1 less based on amount
-   * @param amount    Amount of progress towards the level
-   * @param needed    Amount of progress needed for a full level
-   * @return  Either an incremental or a regular modifier entry based on parameters
+   *
+   * @param modifier Modifier instance
+   * @param level    Modifier level, will be effectively as low as 1 less based on amount
+   * @param amount   Amount of progress towards the level
+   * @param needed   Amount of progress needed for a full level
+   * @return Either an incremental or a regular modifier entry based on parameters
    */
   public static ModifierEntry of(LazyModifier modifier, int level, int amount, int needed) {
     // If we have a full level, no need to be incremental
@@ -51,11 +53,12 @@ public class IncrementalModifierEntry extends ModifierEntry {
 
   /**
    * Creates a new incremental modifier entry
-   * @param modifier  Modifier instance
-   * @param level     Modifier level, will be effectively as low as 1 less based on amount
-   * @param amount    Amount of progress towards the level
-   * @param needed    Amount of progress needed for a full level
-   * @return  Either an incremental or a regular modifier entry based on parameters
+   *
+   * @param modifier Modifier instance
+   * @param level    Modifier level, will be effectively as low as 1 less based on amount
+   * @param amount   Amount of progress towards the level
+   * @param needed   Amount of progress needed for a full level
+   * @return Either an incremental or a regular modifier entry based on parameters
    */
   public static ModifierEntry of(ModifierId modifier, int level, int amount, int needed) {
     return of(new LazyModifier(modifier), level, amount, needed);
@@ -63,11 +66,12 @@ public class IncrementalModifierEntry extends ModifierEntry {
 
   /**
    * Creates a new incremental modifier entry
-   * @param modifier  Modifier instance
-   * @param level     Modifier level, will be effectively as low as 1 less based on amount
-   * @param amount    Amount of progress towards the level
-   * @param needed    Amount of progress needed for a full level, if 0 will be treated as full progress
-   * @return  Either an incremental or a regular modifier entry based on parameters
+   *
+   * @param modifier Modifier instance
+   * @param level    Modifier level, will be effectively as low as 1 less based on amount
+   * @param amount   Amount of progress towards the level
+   * @param needed   Amount of progress needed for a full level, if 0 will be treated as full progress
+   * @return Either an incremental or a regular modifier entry based on parameters
    */
   public static ModifierEntry of(Modifier modifier, int level, int amount, int needed) {
     return of(new LazyModifier(modifier), level, amount, needed);
@@ -151,13 +155,15 @@ public class IncrementalModifierEntry extends ModifierEntry {
     return tag;
   }
 
-  /** Object */
+  /**
+   * Object
+   */
 
   @Override
   public boolean equals(@Nullable Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    IncrementalModifierEntry entry = (IncrementalModifierEntry)o;
+    IncrementalModifierEntry entry = (IncrementalModifierEntry) o;
     return this.matches(entry.getId()) && level == entry.level && this.amount == entry.amount && this.needed == entry.needed;
   }
 
@@ -174,17 +180,21 @@ public class IncrementalModifierEntry extends ModifierEntry {
 
   /* Helpers */
 
-  /** Scales the level based on the given amount and needed amount per level */
+  /**
+   * Scales the level based on the given amount and needed amount per level
+   */
   public static float scaleLevel(float level, int amount, int neededPerLevel) {
     // if amount == needed per level, returns level
     if (amount < neededPerLevel) {
       // if amount == 0, returns level - 1, otherwise returns some fractional amount
-      return level + (amount - neededPerLevel) / (float)neededPerLevel;
+      return level + (amount - neededPerLevel) / (float) neededPerLevel;
     }
     return level;
   }
 
-  /** Gets the display name for an incremental modifier */
+  /**
+   * Gets the display name for an incremental modifier
+   */
   public static Component addAmountToName(Component name, int amount, int neededPerLevel) {
     return name.copy().append(": " + amount + " / " + neededPerLevel);
   }

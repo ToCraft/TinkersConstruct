@@ -31,7 +31,8 @@ import java.util.List;
  * Standard recipe to add a modifier
  */
 public class ModifierRecipe extends AbstractModifierRecipe {
-  protected static final LoadableField<List<SizedIngredient>,ModifierRecipe> INPUTS_FIELD = SizedIngredient.LOADABLE.list(1).requiredField("inputs", r -> r.inputs);
+
+  protected static final LoadableField<List<SizedIngredient>, ModifierRecipe> INPUTS_FIELD = SizedIngredient.LOADABLE.list(1).requiredField("inputs", r -> r.inputs);
   public static final RecordLoadable<ModifierRecipe> LOADER = RecordLoadable.create(ContextKey.ID.requiredField(), INPUTS_FIELD, TOOLS_FIELD, MAX_TOOL_SIZE_FIELD, RESULT_FIELD, LEVEL_FIELD, SLOTS_FIELD, ALLOW_CRYSTAL_FIELD, CHECK_TRAIT_LEVEL_FIELD, ModifierRecipe::new);
 
   /**
@@ -46,11 +47,12 @@ public class ModifierRecipe extends AbstractModifierRecipe {
     this.inputs = inputs;
   }
 
-    /**
-     * Creates the bitset used for marking inputs we do not care about
-     * @param inv  Alloy tank
-     * @return  Bitset
-     */
+  /**
+   * Creates the bitset used for marking inputs we do not care about
+   *
+   * @param inv Alloy tank
+   * @return Bitset
+   */
   protected static BitSet makeBitset(ITinkerableContainer inv) {
     int inputs = inv.getInputCount();
     BitSet used = new BitSet(inputs);
@@ -65,10 +67,11 @@ public class ModifierRecipe extends AbstractModifierRecipe {
 
   /**
    * Finds a match for the given ingredient
-   * @param ingredient  Ingredient to check
-   * @param inv         Alloy tank to search
-   * @param used        Bitset for already used matches, will be modified
-   * @return  Index of found match, or -1 if match not found
+   *
+   * @param ingredient Ingredient to check
+   * @param inv        Alloy tank to search
+   * @param used       Bitset for already used matches, will be modified
+   * @return Index of found match, or -1 if match not found
    */
   protected static int findMatch(SizedIngredient ingredient, ITinkerableContainer inv, BitSet used) {
     ItemStack stack;
@@ -87,8 +90,9 @@ public class ModifierRecipe extends AbstractModifierRecipe {
 
   /**
    * Tries to match the given list of ingredients to the inventory
-   * @param inv     Inventory to check
-   * @param inputs  List of inputs to check
+   *
+   * @param inv    Inventory to check
+   * @param inputs List of inputs to check
    * @return True if a match
    */
   public static boolean checkMatch(ITinkerableContainer inv, List<SizedIngredient> inputs) {
@@ -125,6 +129,7 @@ public class ModifierRecipe extends AbstractModifierRecipe {
 
   /**
    * Gets the recipe result, or an object containing an error message if the recipe matches but cannot be applied.
+   *
    * @return Validated result
    */
   @Override
@@ -157,7 +162,9 @@ public class ModifierRecipe extends AbstractModifierRecipe {
     return RecipeResult.success(tool.createStack(Math.min(inv.getTinkerableSize(), shrinkToolSlotBy())));
   }
 
-  /** Updates all inputs in the given container */
+  /**
+   * Updates all inputs in the given container
+   */
   public static void updateInputs(ITinkerableContainer.Mutable inv, List<SizedIngredient> inputs) {
     // bit corresponding to items that are already found
     BitSet used = makeBitset(inv);

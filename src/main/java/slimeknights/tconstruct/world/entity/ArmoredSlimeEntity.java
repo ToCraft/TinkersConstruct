@@ -28,6 +28,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoField;
 
 public abstract class ArmoredSlimeEntity extends Slime {
+
   public ArmoredSlimeEntity(EntityType<? extends Slime> type, Level world) {
     super(type, world);
     if (!world.isClientSide) {
@@ -37,7 +38,9 @@ public abstract class ArmoredSlimeEntity extends Slime {
     }
   }
 
-  /** Adds an attribute if possible */
+  /**
+   * Adds an attribute if possible
+   */
   private void tryAddAttribute(Attribute attribute, AttributeModifier modifier) {
     AttributeInstance instance = getAttribute(attribute);
     if (instance != null) {
@@ -120,7 +123,7 @@ public abstract class ArmoredSlimeEntity extends Slime {
 
       // spawn all children
       float dropChance = getEquipmentDropChance(EquipmentSlot.HEAD);
-      for(int i = 0; i < count; ++i) {
+      for (int i = 0; i < count; ++i) {
         float x = ((i % 2) - 0.5F) * offset;
         float z = ((i / 2) - 0.5F) * offset;
         Slime slime = this.getType().create(this.level);

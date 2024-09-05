@@ -13,11 +13,15 @@ import net.minecraft.world.level.material.FlowingFluid;
 import java.util.Map;
 import java.util.function.Supplier;
 
-/** Json Things version of {@link slimeknights.tconstruct.fluids.block.BurningLiquidBlock} */
+/**
+ * Json Things version of {@link slimeknights.tconstruct.fluids.block.BurningLiquidBlock}
+ */
 public class FlexBurningLiquidBlock extends FlexLiquidBlock {
+
   private final int burnTime;
   private final float damage;
-  public FlexBurningLiquidBlock(Properties properties, Map<Property<?>,Comparable<?>> propertyDefaultValues, Supplier<FlowingFluid> fluidSupplier, int burnTime, float damage) {
+
+  public FlexBurningLiquidBlock(Properties properties, Map<Property<?>, Comparable<?>> propertyDefaultValues, Supplier<FlowingFluid> fluidSupplier, int burnTime, float damage) {
     super(properties, propertyDefaultValues, fluidSupplier);
     this.burnTime = burnTime;
     this.damage = damage;

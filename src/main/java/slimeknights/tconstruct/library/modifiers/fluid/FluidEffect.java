@@ -12,14 +12,23 @@ import slimeknights.mantle.data.registry.GenericLoaderRegistry.SingletonLoader;
 import slimeknights.tconstruct.library.events.teleport.FluidEffectTeleportEvent;
 import slimeknights.tconstruct.library.utils.TeleportHelper;
 
-/** Represents an effect applied by a fluid to an entity or block */
+/**
+ * Represents an effect applied by a fluid to an entity or block
+ */
 public interface FluidEffect<C extends FluidEffectContext> extends IHaveLoader, UnloadableFluidEffect<C> {
-  /** Registry for fluid effect loaders */
+
+  /**
+   * Registry for fluid effect loaders
+   */
   GenericLoaderRegistry<FluidEffect<? super FluidEffectContext.Block>> BLOCK_EFFECTS = new GenericLoaderRegistry<>("Fluid block effect", false);
-  /** Registry for fluid effect loaders */
+  /**
+   * Registry for fluid effect loaders
+   */
   GenericLoaderRegistry<FluidEffect<? super FluidEffectContext.Entity>> ENTITY_EFFECTS = new GenericLoaderRegistry<>("Fluid entity effect", false);
 
-  /** Registers an effect to both blocks and entities */
+  /**
+   * Registers an effect to both blocks and entities
+   */
   static void registerGeneral(ResourceLocation id, IGenericLoader<? extends FluidEffect<FluidEffectContext>> loader) {
     BLOCK_EFFECTS.register(id, loader);
     ENTITY_EFFECTS.register(id, loader);
@@ -31,10 +40,14 @@ public interface FluidEffect<C extends FluidEffectContext> extends IHaveLoader, 
 
   /* Singletons */
 
-  /** Effect that does nothing */
+  /**
+   * Effect that does nothing
+   */
   FluidEffect<FluidEffectContext> EMPTY = simple(((fluid, scale, context, action) -> 0));
 
-  /** Effect which extinguishes fire from the entity */
+  /**
+   * Effect which extinguishes fire from the entity
+   */
   FluidEffect<FluidEffectContext.Entity> EXTINGUISH_FIRE = simple((fluid, level, context, action) -> {
     Entity target = context.getTarget();
     if (target.isOnFire() && level.isFull()) {
@@ -44,7 +57,9 @@ public interface FluidEffect<C extends FluidEffectContext> extends IHaveLoader, 
     return 0;
   });
 
-  /** Effect which randomly teleports the target */
+  /**
+   * Effect which randomly teleports the target
+   */
   FluidEffect<FluidEffectContext.Entity> TELEPORT = simple((fluid, level, context, action) -> {
     LivingEntity target = context.getLivingTarget();
     if (target != null && level.isFull()) {
@@ -55,7 +70,9 @@ public interface FluidEffect<C extends FluidEffectContext> extends IHaveLoader, 
   });
 
 
-  /** Creates a simple fluid effect with no JSON parameters */
+  /**
+   * Creates a simple fluid effect with no JSON parameters
+   */
   static <C extends FluidEffectContext> FluidEffect<C> simple(UnloadableFluidEffect<C> effect) {
     return SingletonLoader.singleton(loader -> new FluidEffect<C>() {
       @Override

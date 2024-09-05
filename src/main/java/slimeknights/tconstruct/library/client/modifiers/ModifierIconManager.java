@@ -38,17 +38,28 @@ import java.util.function.Consumer;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Log4j2
 public class ModifierIconManager implements IEarlySafeManagerReloadListener {
-  /** Icon file to load, has merging behavior but forge prevents multiple mods from loading the same file */
+
+  /**
+   * Icon file to load, has merging behavior but forge prevents multiple mods from loading the same file
+   */
   private static final String ICONS = "tinkering/modifier_icons.json";
-  /** First layer of the default icon, will be tinted */
+  /**
+   * First layer of the default icon, will be tinted
+   */
   private static final ResourceLocation DEFAULT_PAGES = TConstruct.getResource("gui/modifiers/default_pages");
-  /** Second layer of the default icon, will be tinted */
+  /**
+   * Second layer of the default icon, will be tinted
+   */
   private static final ResourceLocation DEFAULT_COVER = TConstruct.getResource("gui/modifiers/default_cover");
-  /** Instance of this manager */
+  /**
+   * Instance of this manager
+   */
   public static final ModifierIconManager INSTANCE = new ModifierIconManager();
 
-  /** Map of icons for each modifier */
-  private static Map<ModifierId,List<ResourceLocation>> modifierIcons = Collections.emptyMap();
+  /**
+   * Map of icons for each modifier
+   */
+  private static Map<ModifierId, List<ResourceLocation>> modifierIcons = Collections.emptyMap();
 
   /**
    * Initializes this manager, registering it relevant event busses
@@ -59,12 +70,16 @@ public class ModifierIconManager implements IEarlySafeManagerReloadListener {
     bus.addListener(ModifierIconManager::onResourceManagerRegister);
   }
 
-  /** Called on resource manager build to add the manager */
+  /**
+   * Called on resource manager build to add the manager
+   */
   private static void onResourceManagerRegister(RegisterClientReloadListenersEvent manager) {
     manager.registerReloadListener(INSTANCE);
   }
 
-  /** Called on texture stitch to add the new textures */
+  /**
+   * Called on texture stitch to add the new textures
+   */
   private static void textureStitch(TextureStitchEvent.Pre event) {
     if (event.getAtlas().location().equals(InventoryMenu.BLOCK_ATLAS)) {
       // temporary workaround to the fact that texture stitching might run before the resource loader
@@ -81,7 +96,7 @@ public class ModifierIconManager implements IEarlySafeManagerReloadListener {
   @Override
   public void onReloadSafe(ResourceManager manager) {
     // start building the model map
-    Map<ModifierId,List<ResourceLocation>> icons = new HashMap<>();
+    Map<ModifierId, List<ResourceLocation>> icons = new HashMap<>();
 
     // get a list of files from all namespaces
     List<JsonObject> jsonFiles = JsonHelper.getFileInAllDomainsAndPacks(manager, ICONS, null);
@@ -89,7 +104,7 @@ public class ModifierIconManager implements IEarlySafeManagerReloadListener {
     for (int i = jsonFiles.size() - 1; i >= 0; i--) {
       JsonObject json = jsonFiles.get(i);
       // right now just do simply key value pairs
-      for (Entry<String,JsonElement> entry : json.entrySet()) {
+      for (Entry<String, JsonElement> entry : json.entrySet()) {
         // get a valid name
         String key = entry.getKey();
         ModifierId name = ModifierId.tryParse(key);
@@ -129,12 +144,13 @@ public class ModifierIconManager implements IEarlySafeManagerReloadListener {
 
   /**
    * Renders a modifier icon at the given location
-   * @param matrices  Matrix stack instance
-   * @param modifier  Modifier to draw
-   * @param x         X offset
-   * @param y         Y offset
-   * @param z         Render depth offset, typically 100 is good
-   * @param size      Size to render, 16 is default
+   *
+   * @param matrices Matrix stack instance
+   * @param modifier Modifier to draw
+   * @param x        X offset
+   * @param y        Y offset
+   * @param z        Render depth offset, typically 100 is good
+   * @param size     Size to render, 16 is default
    */
   public static void renderIcon(PoseStack matrices, Modifier modifier, int x, int y, int z, int size) {
     RenderUtils.setup(InventoryMenu.BLOCK_ATLAS);

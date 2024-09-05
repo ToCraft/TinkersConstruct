@@ -9,15 +9,17 @@ import slimeknights.tconstruct.library.tools.part.PartCastItem;
 import java.util.function.Supplier;
 
 public class ItemDeferredRegisterExtension extends ItemDeferredRegister {
+
   public ItemDeferredRegisterExtension(String modID) {
     super(modID);
   }
 
   /**
    * Registers a set of three cast items at once
-   * @param name         Base name of cast
-   * @param constructor  Item constructor
-   * @return  Object containing casts
+   *
+   * @param name        Base name of cast
+   * @param constructor Item constructor
+   * @return Object containing casts
    */
   public CastItemObject registerCast(String name, Supplier<? extends Item> constructor) {
     ItemObject<Item> cast = register(name + "_cast", constructor);
@@ -28,9 +30,10 @@ public class ItemDeferredRegisterExtension extends ItemDeferredRegister {
 
   /**
    * Registers a set of three cast items at once
-   * @param name   Base name of cast
-   * @param props  Item properties
-   * @return  Object containing casts
+   *
+   * @param name  Base name of cast
+   * @param props Item properties
+   * @return Object containing casts
    */
   public CastItemObject registerCast(String name, Item.Properties props) {
     return registerCast(name, () -> new Item(props));
@@ -38,9 +41,10 @@ public class ItemDeferredRegisterExtension extends ItemDeferredRegister {
 
   /**
    * Registers a set of three cast items at once using the part item cast
-   * @param item   Part item base for the cast
-   * @param props  Item properties
-   * @return  Object containing casts
+   *
+   * @param item  Part item base for the cast
+   * @param props Item properties
+   * @return Object containing casts
    */
   public CastItemObject registerCast(ItemObject<? extends IMaterialItem> item, Item.Properties props) {
     return registerCast(item.getId().getPath(), () -> new PartCastItem(props, item));

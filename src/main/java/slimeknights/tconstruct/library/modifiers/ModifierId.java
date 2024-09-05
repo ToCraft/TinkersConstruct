@@ -9,6 +9,7 @@ import javax.annotation.Nullable;
  * This is just a copy of ResourceLocation for type safety.
  */
 public class ModifierId extends ResourceLocation {
+
   public static final IdParser<ModifierId> PARSER = new IdParser<>(ModifierId::new, "Modifier");
 
   public ModifierId(String resourceName) {
@@ -25,8 +26,9 @@ public class ModifierId extends ResourceLocation {
 
   /**
    * Creates a new modifier ID from the given string
-   * @param string  String
-   * @return  Material ID, or null if invalid
+   *
+   * @param string String
+   * @return Material ID, or null if invalid
    */
   @Nullable
   public static ModifierId tryParse(String string) {

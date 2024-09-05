@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
 public class MelterContainerMenu extends TriggeringBaseContainerMenu<MelterBlockEntity> {
+
   public static final ResourceLocation TOOLTIP_FORMAT = TConstruct.getResource("melter");
 
   @SuppressWarnings("MismatchedReadAndWriteOfArray")
@@ -30,6 +31,7 @@ public class MelterContainerMenu extends TriggeringBaseContainerMenu<MelterBlock
   private final Slot[] inputs;
   @Getter
   private boolean hasFuelSlot = false;
+
   public MelterContainerMenu(int id, @Nullable Inventory inv, @Nullable MelterBlockEntity melter) {
     super(TinkerSmeltery.melterContainer.get(), id, inv, melter);
 

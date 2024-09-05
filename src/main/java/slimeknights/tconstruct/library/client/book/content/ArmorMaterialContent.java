@@ -50,14 +50,21 @@ import static slimeknights.tconstruct.tools.stats.PlatingMaterialStats.SHIELD;
  * Content page for armor materials
  */
 public class ArmorMaterialContent extends AbstractMaterialContent {
-  /** Page ID for using this index directly */
+
+  /**
+   * Page ID for using this index directly
+   */
   public static final ResourceLocation ID = TConstruct.getResource("armor_material");
-  /** Supported stat type set */
+  /**
+   * Supported stat type set
+   */
   private static final Set<MaterialStatsId> SUPPORTED = Stream.concat(
     PlatingMaterialStats.TYPES.stream().map(MaterialStatType::getId),
     Stream.of(StatlessMaterialStats.MAILLE.getIdentifier(), StatlessMaterialStats.SHIELD_CORE.getIdentifier())
   ).collect(Collectors.toSet());
-  /** Plating stat types in top down order */
+  /**
+   * Plating stat types in top down order
+   */
   private static final List<MaterialStatsId> TOP_DOWN_STATS = List.of(HELMET.getId(), CHESTPLATE.getId(), LEGGINGS.getId(), BOOTS.getId(), SHIELD.getId());
 
   private static final Component PLATING_LABEL = TConstruct.makeTranslation("stat", "plating").withStyle(ChatFormatting.BOLD, ChatFormatting.UNDERLINE);
@@ -101,7 +108,9 @@ public class ArmorMaterialContent extends AbstractMaterialContent {
     return SUPPORTED.contains(statsId);
   }
 
-  /** Gets the tool to display for the given stat type, just hardcoding to plate armor for simplicity */
+  /**
+   * Gets the tool to display for the given stat type, just hardcoding to plate armor for simplicity
+   */
   private static void addPlatingItem(MaterialStatsId statType, List<ItemStack> stacks, MaterialVariantId variant) {
     for (ArmorSlotType slotType : ArmorSlotType.values()) {
       if (statType.equals(PlatingMaterialStats.TYPES.get(slotType.getIndex()).getId())) {
@@ -157,15 +166,17 @@ public class ArmorMaterialContent extends AbstractMaterialContent {
     // note we don't add separate traits for each plating type, we take a shortcut adding just helmet and shield
     // while this may be inaccurate if someone does weird stuff, we just don't have space for more
     y = Math.max(
-      this.addTraits(x - 3,          y, list, ARMOR_PLATING_LABEL, HELMET.getId()),
-      this.addTraits(x + STAT_WIDTH, y, list, SHIELD_LABEL,        SHIELD.getId()));
+      this.addTraits(x - 3, y, list, ARMOR_PLATING_LABEL, HELMET.getId()),
+      this.addTraits(x + STAT_WIDTH, y, list, SHIELD_LABEL, SHIELD.getId()));
     y = addAllMaterialStats(x, y, list, 1, false);
 
     // material description
     addDescription(x, y, list);
   }
 
-  /** Adds a stat to the description */
+  /**
+   * Adds a stat to the description
+   */
   private static void addStatLine(List<TextComponentData> lineData, List<PlatingMaterialStats> plating, FloatToolStat stat, ToFloatFunction<PlatingMaterialStats> statGetter) {
     String[] values = plating.stream().map(s -> Util.COMMA_FORMAT.format(statGetter.apply(s))).toArray(String[]::new);
     boolean allMatch = true;
@@ -177,12 +188,14 @@ public class ArmorMaterialContent extends AbstractMaterialContent {
     }
     String stats = allMatch ? values[0] : Strings.join(values, " / ");
     TextComponentData data = new TextComponentData(stat.getPrefix().append(Component.literal(stats).withStyle(style -> style.withColor(stat.getColor()))));
-    data.tooltips = new Component[] { stat.getDescription() };
+    data.tooltips = new Component[]{stat.getDescription()};
     lineData.add(data);
     lineData.add(new TextComponentData("\n"));
   }
 
-  /** Adds trait info to the listing */
+  /**
+   * Adds trait info to the listing
+   */
   private int addTraits(int x, int y, List<BookElement> list, Component title, MaterialStatsId statsId) {
     IMaterialRegistry registry = MaterialRegistry.getInstance();
     MaterialVariantId material = getMaterialVariant();

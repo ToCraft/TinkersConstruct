@@ -34,28 +34,43 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 public class PartBuilderBlockEntity extends RetexturedTableBlockEntity implements ILazyCrafter {
-  /** First slot containing materials */
+
+  /**
+   * First slot containing materials
+   */
   public static final int MATERIAL_SLOT = 0;
-  /** Second slot containing the patterns */
+  /**
+   * Second slot containing the patterns
+   */
   public static final int PATTERN_SLOT = 1;
-  /** Title for the GUI */
+  /**
+   * Title for the GUI
+   */
   private static final Component NAME = TConstruct.makeTranslation("gui", "part_builder");
 
-  /** Result inventory, lazy loads results */
+  /**
+   * Result inventory, lazy loads results
+   */
   @Getter
   private final LazyResultContainer craftingResult;
-  /** Crafting inventory for the recipe calls */
+  /**
+   * Crafting inventory for the recipe calls
+   */
   @Getter
   private final PartBuilderContainerWrapper inventoryWrapper;
 
   /* Current buttons to display */
   @Nullable
-  private Map<Pattern,IPartBuilderRecipe> recipes = null;
+  private Map<Pattern, IPartBuilderRecipe> recipes = null;
   @Nullable
   private List<Pattern> sortedButtons = null;
-  /** Currently selected recipe index */
+  /**
+   * Currently selected recipe index
+   */
   private Pattern selectedPattern = null;
-  /** Index of the currently selected pattern */
+  /**
+   * Index of the currently selected pattern
+   */
   private int selectedPatternIndex = -2;
 
   public PartBuilderBlockEntity(BlockPos pos, BlockState state) {
@@ -68,9 +83,10 @@ public class PartBuilderBlockEntity extends RetexturedTableBlockEntity implement
 
   /**
    * Gets a map of all recipes for the current inputs
-   * @return  List of recipes for the current inputs
+   *
+   * @return List of recipes for the current inputs
    */
-  protected Map<Pattern,IPartBuilderRecipe> getCurrentRecipes() {
+  protected Map<Pattern, IPartBuilderRecipe> getCurrentRecipes() {
     if (level == null) {
       return Collections.emptyMap();
     }
@@ -83,20 +99,22 @@ public class PartBuilderBlockEntity extends RetexturedTableBlockEntity implement
         record PatternRecipe(Pattern pattern, IPartBuilderRecipe recipe) {}
         // fetch all recipes that can match these inputs, the map ensures the patterns are unique
         recipes = level.getRecipeManager().byType(TinkerRecipeTypes.PART_BUILDER.get()).values().stream()
-                       .filter(r -> r.partialMatch(inventoryWrapper))
-                       .sorted(Comparator.comparing(Recipe::getId))
-                       .flatMap(r -> r.getPatterns(inventoryWrapper).map(p -> new PatternRecipe(p, r)))
-                       .collect(Collectors.toMap(PatternRecipe::pattern, PatternRecipe::recipe, (a, b) -> a));
+          .filter(r -> r.partialMatch(inventoryWrapper))
+          .sorted(Comparator.comparing(Recipe::getId))
+          .flatMap(r -> r.getPatterns(inventoryWrapper).map(p -> new PatternRecipe(p, r)))
+          .collect(Collectors.toMap(PatternRecipe::pattern, PatternRecipe::recipe, (a, b) -> a));
         sortedButtons = recipes.entrySet()
-                               .stream()
-                               .sorted(Comparator.<Entry<Pattern,IPartBuilderRecipe>>comparingInt(ent -> ent.getValue().getCost()).thenComparing(Entry::getKey))
-                               .map(Entry::getKey).collect(Collectors.toList());
+          .stream()
+          .sorted(Comparator.<Entry<Pattern, IPartBuilderRecipe>>comparingInt(ent -> ent.getValue().getCost()).thenComparing(Entry::getKey))
+          .map(Entry::getKey).collect(Collectors.toList());
       }
     }
     return recipes;
   }
 
-  /** Gets the list of sorted buttons */
+  /**
+   * Gets the list of sorted buttons
+   */
   public List<Pattern> getSortedButtons() {
     if (level == null) {
       return Collections.emptyList();
@@ -107,7 +125,9 @@ public class PartBuilderBlockEntity extends RetexturedTableBlockEntity implement
     return sortedButtons;
   }
 
-  /** Gets the index of the selected pattern */
+  /**
+   * Gets the index of the selected pattern
+   */
   public int getSelectedIndex() {
     if (selectedPatternIndex == -2) {
       if (selectedPattern != null) {
@@ -121,7 +141,8 @@ public class PartBuilderBlockEntity extends RetexturedTableBlockEntity implement
 
   /**
    * Gets the currently selected recipe
-   * @return  Selected recipe, or null if invalid or no recipe
+   *
+   * @return Selected recipe, or null if invalid or no recipe
    */
   @Nullable
   public IPartBuilderRecipe getPartRecipe() {
@@ -131,7 +152,9 @@ public class PartBuilderBlockEntity extends RetexturedTableBlockEntity implement
     return null;
   }
 
-  /** Gets the first available recipe */
+  /**
+   * Gets the first available recipe
+   */
   @Nullable
   public IPartBuilderRecipe getFirstRecipe() {
     List<Pattern> sortedButtons = getSortedButtons();
@@ -143,7 +166,8 @@ public class PartBuilderBlockEntity extends RetexturedTableBlockEntity implement
 
   /**
    * Gets the material recipe for the material slot
-   * @return  Material slot
+   *
+   * @return Material slot
    */
   @Nullable
   public IMaterialValue getMaterialRecipe() {
@@ -152,7 +176,8 @@ public class PartBuilderBlockEntity extends RetexturedTableBlockEntity implement
 
   /**
    * Refreshes the current recipe
-   * @param refreshRecipeList  If true, refreshes the full recipe list too
+   *
+   * @param refreshRecipeList If true, refreshes the full recipe list too
    */
   private void refresh(boolean refreshRecipeList) {
     if (refreshRecipeList) {
@@ -169,7 +194,8 @@ public class PartBuilderBlockEntity extends RetexturedTableBlockEntity implement
 
   /**
    * Selects a recipe in the table
-   * @param pattern  New pattern
+   *
+   * @param pattern New pattern
    */
   public void selectRecipe(@Nullable Pattern pattern) {
     if (pattern != null && getCurrentRecipes().containsKey(pattern)) {
@@ -182,7 +208,8 @@ public class PartBuilderBlockEntity extends RetexturedTableBlockEntity implement
 
   /**
    * Selects a pattern by index
-   * @param index  New index
+   *
+   * @param index New index
    */
   public void selectRecipe(int index) {
     if (index < 0) {
@@ -238,8 +265,9 @@ public class PartBuilderBlockEntity extends RetexturedTableBlockEntity implement
 
   /**
    * Shrinks the given slot
-   * @param slot    Slot
-   * @param amount  Amount to shrink
+   *
+   * @param slot   Slot
+   * @param amount Amount to shrink
    */
   private void shrinkSlot(int slot, int amount, Player player) {
     if (amount <= 0) {

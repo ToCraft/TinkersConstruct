@@ -30,15 +30,20 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class InsatiableModifier extends Modifier implements ProjectileHitModifierHook, ConditionalStatModifierHook, MeleeDamageModifierHook, MeleeHitModifierHook, TooltipModifierHook {
+
   public static final ToolType[] TYPES = {ToolType.MELEE, ToolType.RANGED};
 
-  /** Gets the current bonus for the entity */
+  /**
+   * Gets the current bonus for the entity
+   */
   private static float getBonus(LivingEntity attacker, int level, ToolType type) {
     int effectLevel = TinkerModifiers.insatiableEffect.get(type).getLevel(attacker) + 1;
     return level * effectLevel / 4f;
   }
 
-  /** Applies the effect to the target */
+  /**
+   * Applies the effect to the target
+   */
   public static void applyEffect(LivingEntity living, ToolType type, int duration, int add, int maxLevel) {
     TinkerEffect effect = TinkerModifiers.insatiableEffect.get(type);
     effect.apply(living, duration, Math.min(maxLevel, effect.getLevel(living) + add), true);
@@ -59,7 +64,7 @@ public class InsatiableModifier extends Modifier implements ProjectileHitModifie
   public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
     // 8 hits gets you to max, levels faster at higher levels
     if (!context.isExtraAttack() && context.isFullyCharged()) {
-      applyEffect(context.getAttacker(), ToolType.MELEE, 5*20, 1, 7);
+      applyEffect(context.getAttacker(), ToolType.MELEE, 5 * 20, 1, 7);
     }
   }
 
@@ -75,7 +80,7 @@ public class InsatiableModifier extends Modifier implements ProjectileHitModifie
   @Override
   public boolean onProjectileHitEntity(ModifierNBT modifiers, NamespacedNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target) {
     if (attacker != null) {
-      applyEffect(attacker, ToolType.RANGED, 10*20, 1, 7);
+      applyEffect(attacker, ToolType.RANGED, 10 * 20, 1, 7);
     }
     return false;
   }

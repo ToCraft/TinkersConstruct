@@ -11,10 +11,12 @@ import javax.annotation.Nullable;
 
 /**
  * Gets a variable from the entity in the variable context
- * @param entity    Entity variable getter
- * @param fallback  Fallback if entity is null (happens when the tooltip is called serverside mainly)
+ *
+ * @param entity   Entity variable getter
+ * @param fallback Fallback if entity is null (happens when the tooltip is called serverside mainly)
  */
 public record EntityConditionalStatVariable(EntityVariable entity, float fallback) implements ConditionalStatVariable {
+
   public static final RecordLoadable<EntityConditionalStatVariable> LOADER = RecordLoadable.create(
     EntityVariable.LOADER.directField("entity_type", EntityConditionalStatVariable::entity),
     FloatLoadable.ANY.requiredField("fallback", EntityConditionalStatVariable::fallback),

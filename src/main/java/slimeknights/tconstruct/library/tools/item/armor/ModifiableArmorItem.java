@@ -61,17 +61,27 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class ModifiableArmorItem extends ArmorItem implements IModifiableDisplay {
-  /** Volatile modifier tag to make piglins neutal when worn */
+
+  /**
+   * Volatile modifier tag to make piglins neutal when worn
+   */
   public static final ResourceLocation PIGLIN_NEUTRAL = TConstruct.getResource("piglin_neutral");
-  /** Volatile modifier tag to make this item an elytra */
+  /**
+   * Volatile modifier tag to make this item an elytra
+   */
   public static final ResourceLocation ELYTRA = TConstruct.getResource("elyta");
-  /** Volatile flag for a boot item to walk on powdered snow. Cold immunity is handled through a tag */
+  /**
+   * Volatile flag for a boot item to walk on powdered snow. Cold immunity is handled through a tag
+   */
   public static final ResourceLocation SNOW_BOOTS = TConstruct.getResource("snow_boots");
 
   @Getter
   private final ToolDefinition toolDefinition;
-  /** Cache of the tool built for rendering */
+  /**
+   * Cache of the tool built for rendering
+   */
   private ItemStack toolForRendering = null;
+
   public ModifiableArmorItem(ArmorMaterial materialIn, EquipmentSlot slot, Properties builderIn, ToolDefinition toolDefinition) {
     super(materialIn, slot, builderIn);
     this.toolDefinition = toolDefinition;
@@ -132,7 +142,7 @@ public class ModifiableArmorItem extends ArmorItem implements IModifiableDisplay
   }
 
   @Override
-  public Map<Enchantment,Integer> getAllEnchantments(ItemStack stack) {
+  public Map<Enchantment, Integer> getAllEnchantments(ItemStack stack) {
     return EnchantmentModifierHook.getAllEnchantments(stack);
   }
 
@@ -278,7 +288,7 @@ public class ModifiableArmorItem extends ArmorItem implements IModifiableDisplay
 
 
   @Override
-  public Multimap<Attribute,AttributeModifier> getAttributeModifiers(IToolStackView tool, EquipmentSlot slot) {
+  public Multimap<Attribute, AttributeModifier> getAttributeModifiers(IToolStackView tool, EquipmentSlot slot) {
     if (slot != getSlot()) {
       return ImmutableMultimap.of();
     }
@@ -295,7 +305,7 @@ public class ModifiableArmorItem extends ArmorItem implements IModifiableDisplay
         builder.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(uuid, "tconstruct.armor.knockback_resistance", knockbackResistance, AttributeModifier.Operation.ADDITION));
       }
       // grab attributes from modifiers
-      BiConsumer<Attribute,AttributeModifier> attributeConsumer = builder::put;
+      BiConsumer<Attribute, AttributeModifier> attributeConsumer = builder::put;
       for (ModifierEntry entry : tool.getModifierList()) {
         entry.getHook(ModifierHooks.ATTRIBUTES).addAttributes(tool, entry, slot, attributeConsumer);
       }
@@ -305,7 +315,7 @@ public class ModifiableArmorItem extends ArmorItem implements IModifiableDisplay
   }
 
   @Override
-  public Multimap<Attribute,AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
+  public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
     CompoundTag nbt = stack.getTag();
     if (slot != getSlot() || nbt == null) {
       return ImmutableMultimap.of();

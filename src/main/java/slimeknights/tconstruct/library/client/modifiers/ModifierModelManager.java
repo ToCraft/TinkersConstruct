@@ -36,23 +36,35 @@ import java.util.function.Predicate;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Log4j2
 public class ModifierModelManager implements IEarlySafeManagerReloadListener {
-  /** Modifier file to load, has merging behavior but forge prevents multiple mods from loading the same file */
+
+  /**
+   * Modifier file to load, has merging behavior but forge prevents multiple mods from loading the same file
+   */
   private static final String VISIBLE_MODIFIERS = "tinkering/modifiers.json";
-  /** Instance of this manager */
+  /**
+   * Instance of this manager
+   */
   public static final ModifierModelManager INSTANCE = new ModifierModelManager();
 
-  /** If true, the registration event has been fired */
+  /**
+   * If true, the registration event has been fired
+   */
   private static boolean eventFired = false;
 
-  /** Model overrides, if not in this map the default is used */
-  private static final Map<ResourceLocation,IUnbakedModifierModel> MODIFIER_MODEL_OPTIONS = new HashMap<>();
+  /**
+   * Model overrides, if not in this map the default is used
+   */
+  private static final Map<ResourceLocation, IUnbakedModifierModel> MODIFIER_MODEL_OPTIONS = new HashMap<>();
 
-  /** Map of models for each modifier */
-  private static Map<ModifierId,IUnbakedModifierModel> modifierModels = Collections.emptyMap();
+  /**
+   * Map of models for each modifier
+   */
+  private static Map<ModifierId, IUnbakedModifierModel> modifierModels = Collections.emptyMap();
 
   /**
    * Initializes this manager, registering it with the resource manager
-   * @param manager  Manager
+   *
+   * @param manager Manager
    */
   public static void init(RegisterClientReloadListenersEvent manager) {
     manager.registerReloadListener(INSTANCE);
@@ -60,9 +72,10 @@ public class ModifierModelManager implements IEarlySafeManagerReloadListener {
 
   /**
    * Gets the loader for the given name
-   * @param key    Key for errors
-   * @param name   Loader name
-   * @return  Unbaked model, or null if an error occurred (error is logged)
+   *
+   * @param key  Key for errors
+   * @param name Loader name
+   * @return Unbaked model, or null if an error occurred (error is logged)
    */
   @Nullable
   private static IUnbakedModifierModel getLoader(String key, String name) {
@@ -91,7 +104,7 @@ public class ModifierModelManager implements IEarlySafeManagerReloadListener {
     }
 
     // start building the model map
-    Map<ModifierId,IUnbakedModifierModel> models = new HashMap<>();
+    Map<ModifierId, IUnbakedModifierModel> models = new HashMap<>();
 
     // get a list of files from all namespaces
     List<JsonObject> jsonFiles = JsonHelper.getFileInAllDomainsAndPacks(manager, VISIBLE_MODIFIERS, null);
@@ -99,7 +112,7 @@ public class ModifierModelManager implements IEarlySafeManagerReloadListener {
     for (int i = jsonFiles.size() - 1; i >= 0; i--) {
       JsonObject json = jsonFiles.get(i);
       // right now just do simply key value pairs
-      for (Entry<String,JsonElement> entry : json.entrySet()) {
+      for (Entry<String, JsonElement> entry : json.entrySet()) {
         // get a valid name
         String key = entry.getKey();
         ModifierId name = ModifierId.tryParse(key);
@@ -139,9 +152,10 @@ public class ModifierModelManager implements IEarlySafeManagerReloadListener {
 
   /**
    * Gets the path to the texture for a given modifier
-   * @param modifierRoot  Modifier root location
-   * @param modifierId    Specific modifier ID
-   * @return  Path to the modifier
+   *
+   * @param modifierRoot Modifier root location
+   * @param modifierId   Specific modifier ID
+   * @return Path to the modifier
    */
   private static Material getModifierTexture(ResourceLocation modifierRoot, ResourceLocation modifierId, String suffix) {
     return ForgeHooksClient.getBlockMaterial(new ResourceLocation(modifierRoot.getNamespace(), modifierRoot.getPath() + modifierId.getNamespace() + "_" + modifierId.getPath() + suffix));
@@ -149,11 +163,12 @@ public class ModifierModelManager implements IEarlySafeManagerReloadListener {
 
   /**
    * Gets the texture for the given parameters
+   *
    * @param modifierRoots List of modifier root locations to try
    * @param textureAdder  Logic to add a texture to the model
    * @param modifier      Modifier to fetch
    * @param suffix        Additional suffix for the fetched texture
-   * @return  Texture, or null if missing
+   * @return Texture, or null if missing
    */
   @Nullable
   private static Material getTexture(List<ResourceLocation> modifierRoots, Predicate<Material> textureAdder, ResourceLocation modifier, String suffix) {
@@ -175,18 +190,18 @@ public class ModifierModelManager implements IEarlySafeManagerReloadListener {
   /**
    * Gets a map of all models for the given tool
    *
-   * @param smallModifierRoots  List of modifier roots for small tools
-   * @param largeModifierRoots  List of modifier roots for large tools, null if the tool is not large
-   * @return  Map of models
+   * @param smallModifierRoots List of modifier roots for small tools
+   * @param largeModifierRoots List of modifier roots for large tools, null if the tool is not large
+   * @return Map of models
    */
-  public static Map<ModifierId,IBakedModifierModel> getModelsForTool(List<ResourceLocation> smallModifierRoots, List<ResourceLocation> largeModifierRoots, Collection<Material> textures) {
+  public static Map<ModifierId, IBakedModifierModel> getModelsForTool(List<ResourceLocation> smallModifierRoots, List<ResourceLocation> largeModifierRoots, Collection<Material> textures) {
     // if we have no modifier models, or both lists of modifier roots are empty, nothing to do
     if (modifierModels.isEmpty() || (smallModifierRoots.isEmpty() && largeModifierRoots.isEmpty())) {
       return Collections.emptyMap();
     }
 
     // start building the map
-    ImmutableMap.Builder<ModifierId,IBakedModifierModel> modelMap = ImmutableMap.builder();
+    ImmutableMap.Builder<ModifierId, IBakedModifierModel> modelMap = ImmutableMap.builder();
 
     // create two texture adders, so we only log on the final option if missing
     Predicate<Material> textureAdder = DynamicTextureLoader.getTextureAdder(textures, Config.CLIENT.logMissingModifierTextures.get());
@@ -207,12 +222,16 @@ public class ModifierModelManager implements IEarlySafeManagerReloadListener {
     return modelMap.build();
   }
 
-  /** Event fired when its time to register models */
+  /**
+   * Event fired when its time to register models
+   */
   public static class ModifierModelRegistrationEvent extends Event implements IModBusEvent {
+
     /**
      * Register a unbaked model that modifiers can use
-     * @param name   Modifier model name
-     * @param model  Model instance
+     *
+     * @param name  Modifier model name
+     * @param model Model instance
      */
     public void registerModel(ResourceLocation name, IUnbakedModifierModel model) {
       MODIFIER_MODEL_OPTIONS.put(name, model);

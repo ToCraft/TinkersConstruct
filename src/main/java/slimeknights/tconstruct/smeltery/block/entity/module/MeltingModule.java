@@ -23,6 +23,7 @@ import java.util.function.Predicate;
  */
 @RequiredArgsConstructor
 public class MeltingModule implements IMeltingContainer, ContainerData {
+
   public static final int NO_SPACE = -1;
 
   private static final String TAG_CURRENT_TIME = "time";
@@ -32,29 +33,47 @@ public class MeltingModule implements IMeltingContainer, ContainerData {
   private static final int REQUIRED_TIME = 1;
   private static final int REQUIRED_TEMP = 2;
 
-  /** Tile entity containing this melting module */
+  /**
+   * Tile entity containing this melting module
+   */
   private final MantleBlockEntity parent;
-  /** Function that accepts fluid output from this module */
+  /**
+   * Function that accepts fluid output from this module
+   */
   private final Predicate<IMeltingRecipe> outputFunction;
-  /** Function that boosts the ores based on the rate type */
+  /**
+   * Function that boosts the ores based on the rate type
+   */
   private final IOreRate oreRate;
-  /** Slot index for updates */
+  /**
+   * Slot index for updates
+   */
   private final int slotIndex;
 
-  /** Current time of the item in the slot */
+  /**
+   * Current time of the item in the slot
+   */
   @Getter
   private int currentTime = 0;
-  /** Required time for the item in the slot */
+  /**
+   * Required time for the item in the slot
+   */
   @Getter
   private int requiredTime = 0;
-  /** Required temperature for the item in the slot */
+  /**
+   * Required temperature for the item in the slot
+   */
   @Getter
   private int requiredTemp = 0;
 
-  /** Last recipe this slot contained */
+  /**
+   * Last recipe this slot contained
+   */
   private IMeltingRecipe lastRecipe;
 
-  /** Current item in this slot */
+  /**
+   * Current item in this slot
+   */
   @Getter
   private ItemStack stack = ItemStack.EMPTY;
 
@@ -74,7 +93,8 @@ public class MeltingModule implements IMeltingContainer, ContainerData {
 
   /**
    * Sets the contents of this module
-   * @param newStack  New stack
+   *
+   * @param newStack New stack
    */
   public void setStack(ItemStack newStack) {
     // send a slot update to the client when items change, so we can update the TESR
@@ -94,7 +114,7 @@ public class MeltingModule implements IMeltingContainer, ContainerData {
     this.stack = newStack;
     int newTime = 0;
     int newTemp = 0;
-    if(!stack.isEmpty()) {
+    if (!stack.isEmpty()) {
       IMeltingRecipe recipe = findRecipe();
       if (recipe != null) {
         newTime = recipe.getTime(this) * 10;
@@ -109,8 +129,9 @@ public class MeltingModule implements IMeltingContainer, ContainerData {
 
   /**
    * Checks if this slot has an item it can heat
-   * @param  temperature  Temperature to try
-   * @return  True if this slot has an item it can heat
+   *
+   * @param temperature Temperature to try
+   * @return True if this slot has an item it can heat
    */
   public boolean canHeatItem(int temperature) {
     // must have a recipe and an item
@@ -127,7 +148,8 @@ public class MeltingModule implements IMeltingContainer, ContainerData {
 
   /**
    * Heats the item in this slot
-   * @param temperature     Heating structure temperature
+   *
+   * @param temperature Heating structure temperature
    */
   public void heatItem(int temperature) {
     // if the slot is able to be heated, heat it
@@ -161,7 +183,8 @@ public class MeltingModule implements IMeltingContainer, ContainerData {
 
   /**
    * Finds a melting recipe
-   * @return  Melting recipe found, or null if no match
+   *
+   * @return Melting recipe found, or null if no match
    */
   @Nullable
   private IMeltingRecipe findRecipe() {
@@ -186,7 +209,8 @@ public class MeltingModule implements IMeltingContainer, ContainerData {
 
   /**
    * Called when the slot finishes heating its item
-   * @return  True if the slot should clear its state
+   *
+   * @return True if the slot should clear its state
    */
   private boolean onItemFinishedHeating() {
     IMeltingRecipe recipe = findRecipe();
@@ -206,7 +230,8 @@ public class MeltingModule implements IMeltingContainer, ContainerData {
 
   /**
    * Writes this module to NBT
-   * @return  Module in NBT
+   *
+   * @return Module in NBT
    */
   public CompoundTag writeToTag() {
     CompoundTag nbt = new CompoundTag();
@@ -221,7 +246,8 @@ public class MeltingModule implements IMeltingContainer, ContainerData {
 
   /**
    * Reads this module from NBT
-   * @param nbt  NBT
+   *
+   * @param nbt NBT
    */
   public void readFromTag(CompoundTag nbt) {
     stack = ItemStack.of(nbt);

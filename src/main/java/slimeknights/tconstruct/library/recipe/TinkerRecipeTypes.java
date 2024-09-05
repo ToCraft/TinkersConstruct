@@ -1,10 +1,13 @@
 package slimeknights.tconstruct.library.recipe;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.recipe.alloying.AlloyRecipe;
@@ -23,8 +26,11 @@ import slimeknights.tconstruct.library.recipe.worktable.IModifierWorktableRecipe
  * Class containing all of Tinkers Construct recipe types
  */
 public class TinkerRecipeTypes {
-  /** Deferred instance */
-  private static final DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, TConstruct.MOD_ID);
+
+  /**
+   * Deferred instance
+   */
+  private static final DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(Registries.RECIPE_TYPE, TConstruct.MOD_ID);
 
   public static final RegistryObject<RecipeType<IPartBuilderRecipe>> PART_BUILDER = register("part_builder");
   public static final RegistryObject<RecipeType<MaterialRecipe>> MATERIAL = register("material");
@@ -46,19 +52,24 @@ public class TinkerRecipeTypes {
   // modifiers
   public static final RegistryObject<RecipeType<SeveringRecipe>> SEVERING = register("severing");
 
-  /** Internal recipe type for recipes that are not pulled by any specific crafting block */
+  /**
+   * Internal recipe type for recipes that are not pulled by any specific crafting block
+   */
   public static final RegistryObject<RecipeType<Recipe<?>>> DATA = register("data");
 
-  /** Initializes the deferred register */
+  /**
+   * Initializes the deferred register
+   */
   public static void init(IEventBus bus) {
     TYPES.register(bus);
   }
 
   /**
    * Registers a new recipe type, prefixing with the mod ID
-   * @param name  Recipe type name
-   * @param <T>   Recipe type
-   * @return  Registered recipe type
+   *
+   * @param name Recipe type name
+   * @param <T>  Recipe type
+   * @return Registered recipe type
    */
   static <T extends Recipe<?>> RegistryObject<RecipeType<T>> register(String name) {
     return TYPES.register(name, () -> new RecipeType<>() {

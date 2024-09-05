@@ -32,7 +32,8 @@ import slimeknights.tconstruct.tables.menu.PartBuilderContainerMenu;
 import java.util.List;
 import java.util.function.Function;
 
-public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity,PartBuilderContainerMenu> {
+public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity, PartBuilderContainerMenu> {
+
   private static final Component INFO_TEXT = TConstruct.makeTranslation("gui", "part_builder.info");
   private static final Component TRAIT_TITLE = TConstruct.makeTranslation("gui", "part_builder.trait").withStyle(ChatFormatting.UNDERLINE);
   private static final MutableComponent UNCRAFTABLE_MATERIAL = TConstruct.makeTranslation("gui", "part_builder.uncraftable").withStyle(ChatFormatting.RED);
@@ -40,11 +41,17 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity,P
 
   private static final ResourceLocation BACKGROUND = TConstruct.getResource("textures/gui/partbuilder.png");
 
-  /** Part builder side panel */
+  /**
+   * Part builder side panel
+   */
   protected PartInfoPanelScreen infoPanelScreen;
-  /** Current scrollbar position */
+  /**
+   * Current scrollbar position
+   */
   private float sliderProgress = 0.0F;
-  /** Is {@code true} if the player clicked on the scroll wheel in the GUI */
+  /**
+   * Is {@code true} if the player clicked on the scroll wheel in the GUI
+   */
   private boolean clickedOnScrollBar;
 
   /**
@@ -58,7 +65,7 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity,P
     super(container, playerInventory, title);
 
     this.infoPanelScreen = new PartInfoPanelScreen(this, container, playerInventory, title);
-    this.infoPanelScreen.setTextScale(7/9f);
+    this.infoPanelScreen.setTextScale(7 / 9f);
     this.infoPanelScreen.imageHeight = this.imageHeight;
     this.addModule(this.infoPanelScreen);
     addChestSideInventory(playerInventory);
@@ -82,9 +89,10 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity,P
 
   /**
    * Gets the button at the given mouse location
-   * @param mouseX  X position of button
-   * @param mouseY  Y position of button
-   * @return  Button index, or -1 if none
+   *
+   * @param mouseX X position of button
+   * @param mouseY Y position of button
+   * @return Button index, or -1 if none
    */
   private int getButtonAt(int mouseX, int mouseY) {
     List<Pattern> buttons = tile.getSortedButtons();
@@ -118,7 +126,9 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity,P
     }
   }
 
-  /** Draw backgrounds for all patterns */
+  /**
+   * Draw backgrounds for all patterns
+   */
   private void drawRecipesBackground(PoseStack matrices, int mouseX, int mouseY, int left, int top) {
     int max = Math.min(this.recipeIndexOffset + 12, this.getPartRecipeCount());
     for (int i = this.recipeIndexOffset; i < max; ++i) {
@@ -135,7 +145,9 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity,P
     }
   }
 
-  /** Draw slot icons for all patterns */
+  /**
+   * Draw slot icons for all patterns
+   */
   private void drawRecipesItems(PoseStack matrices, int left, int top) {
     // use block texture list
     assert this.minecraft != null;
@@ -203,7 +215,8 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity,P
 
   /**
    * Updates the data in the material display
-   * @param materialRecipe  New material recipe
+   *
+   * @param materialRecipe New material recipe
    */
   private void setDisplayForMaterial(IMaterialValue materialRecipe) {
     MaterialVariant materialVariant = materialRecipe.getMaterial();
@@ -281,7 +294,7 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity,P
     List<Pattern> buttons = tile.getSortedButtons();
     if (!buttons.isEmpty()) {
       // handle button click
-      int index = getButtonAt((int)mouseX, (int)mouseY);
+      int index = getButtonAt((int) mouseX, (int) mouseY);
       assert this.minecraft != null && this.minecraft.player != null;
       if (index >= 0 && this.getMenu().clickMenuButton(this.minecraft.player, index)) {
         this.minecraft.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_STONECUTTER_SELECT_RECIPE, 1.0F));
@@ -364,17 +377,23 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity,P
 
   /* Helpers */
 
-  /** Gets the number of part recipes */
+  /**
+   * Gets the number of part recipes
+   */
   private int getPartRecipeCount() {
     return tile.getSortedButtons().size();
   }
 
-  /** If true, we can scroll */
+  /**
+   * If true, we can scroll
+   */
   private boolean canScroll() {
     return this.getPartRecipeCount() > 12;
   }
 
-  /** Gets the number of hidden part recipe rows */
+  /**
+   * Gets the number of hidden part recipe rows
+   */
   private int getHiddenRows() {
     return (this.getPartRecipeCount() + 4 - 1) / 4 - 3;
   }

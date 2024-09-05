@@ -11,39 +11,57 @@ import slimeknights.tconstruct.world.block.FoliageType;
 
 import java.util.Locale;
 
-/** Types of slime available in tinkers, all types notably have balls, congealed, and blocks */
+/**
+ * Types of slime available in tinkers, all types notably have balls, congealed, and blocks
+ */
 @Getter
 public enum SlimeType implements StringRepresentable {
   EARTH(0x01cd4e, MaterialColor.GRASS, false),
-  SKY  (0x01cbcd, MaterialColor.DIAMOND, false),
+  SKY(0x01cbcd, MaterialColor.DIAMOND, false),
   ICHOR(0xff970d, MaterialColor.COLOR_ORANGE, true, 10),
   ENDER(0xaf4cf6, MaterialColor.COLOR_PURPLE, false);
 
-  /** Slime types added by the mod */
+  /**
+   * Slime types added by the mod
+   */
   public static final SlimeType[] TINKER = {SKY, ICHOR, ENDER};
-  /** Slime types that flow downwards, ichor flows up */
+  /**
+   * Slime types that flow downwards, ichor flows up
+   */
   public static final SlimeType[] LIQUID = {EARTH, SKY, ENDER};
-  /** Slime types that use overworld foliage */
+  /**
+   * Slime types that use overworld foliage
+   */
   public static final SlimeType[] OVERWORLD = {EARTH, SKY, ENDER};
-  /** Slime types that use nether foliage */
+  /**
+   * Slime types that use nether foliage
+   */
   public static final SlimeType[] NETHER = {ICHOR};
 
   /* Block color for this slime type */
   private final int color;
-  /** Color for this block on maps */
+  /**
+   * Color for this block on maps
+   */
   private final MaterialColor mapColor;
-  /** If true, this block type has fungus foliage instead of grass */
+  /**
+   * If true, this block type has fungus foliage instead of grass
+   */
   private final boolean nether;
-  /** Light level of slime blocks of this type */
+  /**
+   * Light level of slime blocks of this type
+   */
   private final int lightLevel;
   @Getter
   private final String serializedName = this.name().toLowerCase(Locale.ROOT);
 
   /* Tags */
-  /** Tag for slime balls of this type */
+  /**
+   * Tag for slime balls of this type
+   */
   private final TagKey<Item> slimeballTag;
 
-  SlimeType(int color,  MaterialColor mapColor, boolean nether, int lightLevel) {
+  SlimeType(int color, MaterialColor mapColor, boolean nether, int lightLevel) {
     this.color = color;
     this.mapColor = mapColor;
     this.nether = nether;
@@ -59,7 +77,9 @@ public enum SlimeType implements StringRepresentable {
   private FoliageType foliageType;
   private DirtType dirtType;
 
-  /** Gets the foliage type for this slime type */
+  /**
+   * Gets the foliage type for this slime type
+   */
   public FoliageType asFoliage() {
     if (foliageType == null) {
       foliageType = FoliageType.values()[this.ordinal()];
@@ -67,7 +87,9 @@ public enum SlimeType implements StringRepresentable {
     return foliageType;
   }
 
-  /** Gets the dirt type for this slime type */
+  /**
+   * Gets the dirt type for this slime type
+   */
   public DirtType asDirt() {
     if (dirtType == null) {
       dirtType = DirtType.values()[this.ordinal()];

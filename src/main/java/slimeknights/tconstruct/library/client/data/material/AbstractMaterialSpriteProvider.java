@@ -36,18 +36,29 @@ import java.util.stream.Collectors;
  * Logic for getting lists of materials for generating sprites, for use in {@link MaterialPartTextureGenerator}
  */
 public abstract class AbstractMaterialSpriteProvider {
-  /** All materials to generate */
+
+  /**
+   * All materials to generate
+   */
   private final Map<ResourceLocation, MaterialSpriteInfoBuilder> materialBuilders = new HashMap<>();
-  /** List of built materials */
+  /**
+   * List of built materials
+   */
   private Map<ResourceLocation, MaterialSpriteInfo> builtMaterials = null;
 
-  /** Gets the name of this material list */
+  /**
+   * Gets the name of this material list
+   */
   public abstract String getName();
 
-  /** Adds all materials to the list */
+  /**
+   * Adds all materials to the list
+   */
   protected abstract void addAllMaterials();
 
-  /** Gets a list of all materials for this provider */
+  /**
+   * Gets a list of all materials for this provider
+   */
   public Map<ResourceLocation, MaterialSpriteInfo> getMaterials() {
     if (builtMaterials == null) {
       addAllMaterials();
@@ -57,13 +68,17 @@ public abstract class AbstractMaterialSpriteProvider {
     return builtMaterials;
   }
 
-  /** Gets the info for the given material */
+  /**
+   * Gets the info for the given material
+   */
   @Nullable
   public MaterialSpriteInfo getMaterialInfo(ResourceLocation name) {
     return getMaterials().get(name);
   }
 
-  /** Adds a new texture to the data generator */
+  /**
+   * Adds a new texture to the data generator
+   */
   protected MaterialSpriteInfoBuilder buildMaterial(ResourceLocation name) {
     if (builtMaterials != null) {
       throw new IllegalStateException("Attempted to add a material when materials already built");
@@ -71,22 +86,33 @@ public abstract class AbstractMaterialSpriteProvider {
     return materialBuilders.computeIfAbsent(name, MaterialSpriteInfoBuilder::new);
   }
 
-  /** Adds a new material to the data generator */
+  /**
+   * Adds a new material to the data generator
+   */
   protected MaterialSpriteInfoBuilder buildMaterial(MaterialId name) {
-    return buildMaterial((ResourceLocation)name);
+    return buildMaterial((ResourceLocation) name);
   }
 
-  /** Adds a new material variant to the data generator */
+  /**
+   * Adds a new material variant to the data generator
+   */
   protected MaterialSpriteInfoBuilder buildMaterial(MaterialVariantId name) {
     return buildMaterial(name.getLocation('_'));
   }
 
-  /** Data for material rendering */
+  /**
+   * Data for material rendering
+   */
   public static class MaterialSpriteInfo extends MaterialGeneratorJson {
-    /** Material texture name for the material */
+
+    /**
+     * Material texture name for the material
+     */
     @Getter
     private transient final ResourceLocation texture;
-    /** List of fallbacks, first present one will be the base for building. If none exist, uses the default base */
+    /**
+     * List of fallbacks, first present one will be the base for building. If none exist, uses the default base
+     */
     @Getter
     private transient final String[] fallbacks;
 
@@ -109,54 +135,72 @@ public abstract class AbstractMaterialSpriteProvider {
       }
       // if material registry is loaded and we are not ignoring it, allow checking that
       if (!ignoreMaterialStats && MaterialRegistry.isFullyLoaded()) {
-        return  MaterialRegistry.getInstance().getMaterialStats(new MaterialId(texture), statType).isPresent();
+        return MaterialRegistry.getInstance().getMaterialStats(new MaterialId(texture), statType).isPresent();
       }
       return false;
     }
   }
 
-  /** Builder for material sprite info */
+  /**
+   * Builder for material sprite info
+   */
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   protected static class MaterialSpriteInfoBuilder {
+
     private static final String[] EMPTY_STRING_ARRAY = new String[0];
     private final ResourceLocation texture;
     private String[] fallbacks = EMPTY_STRING_ARRAY;
     private final ImmutableSet.Builder<MaterialStatsId> statTypes = ImmutableSet.builder();
 
-    /** Transformer to modify textures */
-    @Setter @Accessors(fluent = true)
+    /**
+     * Transformer to modify textures
+     */
+    @Setter
+    @Accessors(fluent = true)
     private ISpriteTransformer transformer;
 
-    /** Sets the fallbacks */
+    /**
+     * Sets the fallbacks
+     */
     public MaterialSpriteInfoBuilder fallbacks(String... fallbacks) {
       this.fallbacks = fallbacks;
       return this;
     }
 
-    /** Sets the transformer to a color mapping transform */
+    /**
+     * Sets the transformer to a color mapping transform
+     */
     @CanIgnoreReturnValue
     public MaterialSpriteInfoBuilder colorMapper(IColorMapping mapping) {
       return transformer(new RecolorSpriteTransformer(mapping));
     }
 
-    /** Adds a stat type as supported */
+    /**
+     * Adds a stat type as supported
+     */
     public MaterialSpriteInfoBuilder statType(MaterialStatsId statsId) {
       statTypes.add(statsId);
       return this;
     }
 
-    /** Adds a stat type as supported */
+    /**
+     * Adds a stat type as supported
+     */
     public MaterialSpriteInfoBuilder statType(MaterialStatsId... statsId) {
       statTypes.add(statsId);
       return this;
     }
 
-    /** Adds repair kits */
+    /**
+     * Adds repair kits
+     */
     public MaterialSpriteInfoBuilder repairKit() {
       return statType(StatlessMaterialStats.REPAIR_KIT.getIdentifier());
     }
 
-    /** Adds stat types for melee and harvest tools - head, handle and extra */
+    /**
+     * Adds stat types for melee and harvest tools - head, handle and extra
+     */
     public MaterialSpriteInfoBuilder meleeHarvest() {
       statType(HeadMaterialStats.ID);
       statType(HandleMaterialStats.ID);
@@ -165,7 +209,9 @@ public abstract class AbstractMaterialSpriteProvider {
       return this;
     }
 
-    /** Adds stat types for ranged tools - includes limb and grip */
+    /**
+     * Adds stat types for ranged tools - includes limb and grip
+     */
     public MaterialSpriteInfoBuilder ranged() {
       statType(LimbMaterialStats.ID);
       statType(GripMaterialStats.ID);
@@ -173,14 +219,18 @@ public abstract class AbstractMaterialSpriteProvider {
       return this;
     }
 
-    /** Adds stat types for maille */
+    /**
+     * Adds stat types for maille
+     */
     public MaterialSpriteInfoBuilder maille() {
       statType(StatlessMaterialStats.MAILLE.getIdentifier());
       statType(TinkerPartSpriteProvider.ARMOR_MAILLE);
       return this;
     }
 
-    /** Adds stat types for armor, all plating plus maille */
+    /**
+     * Adds stat types for armor, all plating plus maille
+     */
     public MaterialSpriteInfoBuilder armor() {
       statType(TinkerPartSpriteProvider.ARMOR_PLATING);
       for (MaterialStatType<?> type : PlatingMaterialStats.TYPES) {
@@ -191,12 +241,16 @@ public abstract class AbstractMaterialSpriteProvider {
       return this;
     }
 
-    /** Makes this work as the wood part for a shield */
+    /**
+     * Makes this work as the wood part for a shield
+     */
     public MaterialSpriteInfoBuilder shieldCore() {
       return statType(StatlessMaterialStats.SHIELD_CORE.getIdentifier());
     }
 
-    /** Builds a material sprite info */
+    /**
+     * Builds a material sprite info
+     */
     private MaterialSpriteInfo build() {
       if (transformer == null) {
         throw new IllegalStateException("Material must have a transformer for a sprite provider");

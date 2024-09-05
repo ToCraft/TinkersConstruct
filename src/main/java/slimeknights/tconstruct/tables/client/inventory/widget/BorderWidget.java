@@ -8,6 +8,7 @@ import slimeknights.mantle.client.screen.Widget;
 import slimeknights.tconstruct.tables.client.inventory.module.GenericScreen;
 
 public class BorderWidget extends Widget {
+
   // all elements based on generic screen
   public ElementScreen cornerTopLeft = GenericScreen.cornerTopLeft;
   public ElementScreen cornerTopRight = GenericScreen.cornerTopRight;
@@ -24,12 +25,16 @@ public class BorderWidget extends Widget {
   public int w = borderLeft.w;
   public int h = borderTop.h;
 
-  /** Sets the size so that the given point is the upper left corner of the inside */
+  /**
+   * Sets the size so that the given point is the upper left corner of the inside
+   */
   public void setPosInner(int x, int y) {
     this.setPosition(x - this.cornerTopLeft.w, y - this.cornerTopLeft.h);
   }
 
-  /** Sets the size so that it surrounds the given area */
+  /**
+   * Sets the size so that it surrounds the given area
+   */
   public void sedSizeInner(int width, int height) {
     this.setSize(width + this.borderLeft.w + this.borderRight.w, height + this.borderTop.h + this.borderBottom.h);
   }

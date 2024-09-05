@@ -18,9 +18,13 @@ import slimeknights.tconstruct.shared.TinkerCommons;
 
 import java.util.function.Consumer;
 
-/** Loot entry that returns an item from a tag */
+/**
+ * Loot entry that returns an item from a tag
+ */
 public class TagPreferenceLootEntry extends LootPoolSingletonContainer {
+
   private final TagKey<Item> tag;
+
   protected TagPreferenceLootEntry(TagKey<Item> tag, int weight, int quality, LootItemCondition[] conditions, LootItemFunction[] functions) {
     super(weight, quality, conditions, functions);
     this.tag = tag;
@@ -36,12 +40,15 @@ public class TagPreferenceLootEntry extends LootPoolSingletonContainer {
     TagPreference.getPreference(tag).ifPresent(item -> consumer.accept(new ItemStack(item)));
   }
 
-  /** Creates a new builder */
+  /**
+   * Creates a new builder
+   */
   public static LootPoolSingletonContainer.Builder<?> tagPreference(TagKey<Item> tag) {
     return simpleBuilder((weight, quality, conditions, functions) -> new TagPreferenceLootEntry(tag, weight, quality, conditions, functions));
   }
 
   public static class Serializer extends LootPoolSingletonContainer.Serializer<TagPreferenceLootEntry> {
+
     @Override
     public void serializeCustom(JsonObject json, TagPreferenceLootEntry object, JsonSerializationContext conditions) {
       super.serializeCustom(json, object, conditions);
@@ -50,7 +57,7 @@ public class TagPreferenceLootEntry extends LootPoolSingletonContainer {
 
     @Override
     protected TagPreferenceLootEntry deserialize(JsonObject json, JsonDeserializationContext context, int weight, int quality, LootItemCondition[] conditions, LootItemFunction[] functions) {
-      TagKey<Item> tag = TagKey.create(Registry.ITEM_REGISTRY, JsonHelper.getResourceLocation(json, "tag"));
+      TagKey<Item> tag = TagKey.create(Registries.ITEM, JsonHelper.getResourceLocation(json, "tag"));
       return new TagPreferenceLootEntry(tag, weight, quality, conditions, functions);
     }
   }

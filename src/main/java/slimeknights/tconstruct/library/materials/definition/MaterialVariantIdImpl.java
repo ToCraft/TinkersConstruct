@@ -2,7 +2,9 @@ package slimeknights.tconstruct.library.materials.definition;
 
 import net.minecraft.resources.ResourceLocation;
 
-/** Internal record to represent a material ID with a variant. Use {@link MaterialVariantId} to create if needed */
+/**
+ * Internal record to represent a material ID with a variant. Use {@link MaterialVariantId} to create if needed
+ */
 record MaterialVariantIdImpl(MaterialId material, String variant) implements MaterialVariantId {
 
   @Override

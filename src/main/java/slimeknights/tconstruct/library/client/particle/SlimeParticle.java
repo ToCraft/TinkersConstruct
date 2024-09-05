@@ -26,6 +26,7 @@ public class SlimeParticle extends BreakingItemParticle {
 
   @RequiredArgsConstructor
   public static class Factory implements ParticleProvider<SimpleParticleType> {
+
     private final ItemLike slime;
 
     public Factory(SlimeType type) {

@@ -12,7 +12,10 @@ import slimeknights.mantle.data.listener.ResourceValidator;
  * Stitches all GUI part textures into the texture sheet
  */
 public class PatternGuiTextureLoader extends ResourceValidator {
-  /** Initializes the loader */
+
+  /**
+   * Initializes the loader
+   */
   public static void init() {
     PatternGuiTextureLoader loader = new PatternGuiTextureLoader();
     IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -23,7 +26,9 @@ public class PatternGuiTextureLoader extends ResourceValidator {
     super("textures/gui/tinker_pattern", "textures", ".png");
   }
 
-  /** Called during texture stitch to add the textures in */
+  /**
+   * Called during texture stitch to add the textures in
+   */
   private void onTextureStitch(TextureStitchEvent.Pre event) {
     if (InventoryMenu.BLOCK_ATLAS.equals(event.getAtlas().location())) {
       // manually call reload to ensure it runs at the proper time

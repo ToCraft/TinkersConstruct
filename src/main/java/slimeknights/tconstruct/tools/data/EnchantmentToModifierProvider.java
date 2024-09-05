@@ -8,6 +8,7 @@ import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 
 public class EnchantmentToModifierProvider extends AbstractEnchantmentToModifierProvider {
+
   public EnchantmentToModifierProvider(DataGenerator generator) {
     super(generator);
   }
@@ -83,7 +84,9 @@ public class EnchantmentToModifierProvider extends AbstractEnchantmentToModifier
     addCompat(TinkerModifiers.reflecting.getId());
   }
 
-  /** Adds a compat enchantment */
+  /**
+   * Adds a compat enchantment
+   */
   private void addCompat(ModifierId modifier) {
     add(TConstruct.getResource("modifier_like/" + modifier.getPath()), modifier);
   }

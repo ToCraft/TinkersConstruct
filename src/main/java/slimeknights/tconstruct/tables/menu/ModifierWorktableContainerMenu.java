@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ModifierWorktableContainerMenu extends TabbedContainerMenu<ModifierWorktableBlockEntity> {
+
   // slots
   @Getter
   private final List<Slot> inputSlots;
@@ -40,7 +41,7 @@ public class ModifierWorktableContainerMenu extends TabbedContainerMenu<Modifier
       inputSlots = new ArrayList<>();
       inputSlots.add(this.addSlot(new WorktableSlot(this, tile, ModifierWorktableBlockEntity.TINKER_SLOT, 8, 15)));
       for (int index = 0; index < tile.getContainerSize() - 1; index++) {
-        inputSlots.add(this.addSlot(new WorktableSlot(this, tile, index + ModifierWorktableBlockEntity.INPUT_START, 8, 35 + 18*index)));
+        inputSlots.add(this.addSlot(new WorktableSlot(this, tile, index + ModifierWorktableBlockEntity.INPUT_START, 8, 35 + 18 * index)));
       }
 
       // listen for the button to change in the tile
@@ -96,11 +97,14 @@ public class ModifierWorktableContainerMenu extends TabbedContainerMenu<Modifier
     return slotIn != this.outputSlot && super.canTakeItemForPickAll(stack, slotIn);
   }
 
-  /** Slot to update recipe on change */
+  /**
+   * Slot to update recipe on change
+   */
   private static class WorktableSlot extends Slot {
 
     private final TabbedContainerMenu<?> menu;
     private final ModifierWorktableBlockEntity tile;
+
     public WorktableSlot(TabbedContainerMenu<?> menu, ModifierWorktableBlockEntity tile, int index, int xPosition, int yPosition) {
       super(tile, index, xPosition, yPosition);
       this.menu = menu;

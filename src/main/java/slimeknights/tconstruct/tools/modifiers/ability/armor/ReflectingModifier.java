@@ -32,6 +32,7 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.logic.InteractionHandler;
 
 public class ReflectingModifier extends Modifier {
+
   public ReflectingModifier() {
     MinecraftForge.EVENT_BUS.addListener(this::projectileImpact);
   }
@@ -46,7 +47,7 @@ public class ReflectingModifier extends Modifier {
       // living entity must be using one of our shields
       HitResult hit = event.getRayTraceResult();
       if (!RegistryHelper.contains(TinkerTags.EntityTypes.REFLECTING_BLACKLIST, projectile.getType())
-          && hit.getType() == Type.ENTITY && ((EntityHitResult) hit).getEntity() instanceof LivingEntity living && living.isUsingItem() && living != projectile.getOwner()) {
+        && hit.getType() == Type.ENTITY && ((EntityHitResult) hit).getEntity() instanceof LivingEntity living && living.isUsingItem() && living != projectile.getOwner()) {
         ItemStack stack = living.getUseItem();
         if (stack.is(TinkerTags.Items.SHIELDS)) {
           ToolStack tool = ToolStack.from(stack);
@@ -59,8 +60,8 @@ public class ReflectingModifier extends Modifier {
               int time = hook.getUseDuration(tool, activeModifier) - living.getUseItemRemainingTicks();
               // must be blocking, started blocking within the last 2*level seconds, and be within the block angle
               if (hook.getUseAction(tool, activeModifier) == UseAnim.BLOCK
-                  && (time >= 5 && time < 40 * reflectingLevel)
-                  && InteractionHandler.canBlock(living, projectile.position(), tool)) {
+                && (time >= 5 && time < 40 * reflectingLevel)
+                && InteractionHandler.canBlock(living, projectile.position(), tool)) {
 
                 // time to actually reflect, this code is strongly based on code from the Parry mod
                 // take ownership of the projectile so it counts as a player kill, except in the case of fishing bobbers

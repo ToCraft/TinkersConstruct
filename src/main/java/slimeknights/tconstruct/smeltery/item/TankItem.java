@@ -23,18 +23,22 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class TankItem extends BlockTooltipItem {
+
   private static final String KEY_FLUID = TConstruct.makeTranslationKey("block", "tank.fluid");
   private static final String KEY_MB = TConstruct.makeTranslationKey("block", "tank.mb");
   private static final String KEY_INGOTS = TConstruct.makeTranslationKey("block", "tank.ingots");
   private static final String KEY_MIXED = TConstruct.makeTranslationKey("block", "tank.mixed");
 
   private final boolean limitStackSize;
+
   public TankItem(Block blockIn, Properties builder, boolean limitStackSize) {
     super(blockIn, builder);
     this.limitStackSize = limitStackSize;
   }
 
-  /** Checks if the tank item is filled */
+  /**
+   * Checks if the tank item is filled
+   */
   private static boolean isFilled(ItemStack stack) {
     // has a container if not empty
     CompoundTag nbt = stack.getTag();
@@ -56,7 +60,7 @@ public class TankItem extends BlockTooltipItem {
     if (!limitStackSize) {
       return super.getMaxStackSize(stack);
     }
-    return isFilled(stack) ? 16: 64;
+    return isFilled(stack) ? 16 : 64;
   }
 
   @Override
@@ -84,8 +88,7 @@ public class TankItem extends BlockTooltipItem {
         }
 
       }
-    }
-    else {
+    } else {
       super.appendHoverText(stack, worldIn, tooltip, flagIn);
     }
   }
@@ -98,9 +101,10 @@ public class TankItem extends BlockTooltipItem {
 
   /**
    * Sets the tank to the given stack
-   * @param stack  Stack
-   * @param tank   Tank instance
-   * @return  Stack with tank
+   *
+   * @param stack Stack
+   * @param tank  Tank instance
+   * @return Stack with tank
    */
   public static ItemStack setTank(ItemStack stack, FluidTank tank) {
     if (tank.isEmpty()) {
@@ -119,8 +123,9 @@ public class TankItem extends BlockTooltipItem {
 
   /**
    * Gets the tank for the given stack
-   * @param stack  Tank stack
-   * @return  Tank stored in the stack
+   *
+   * @param stack Tank stack
+   * @return Tank stored in the stack
    */
   public static FluidTank getFluidTank(ItemStack stack) {
     FluidTank tank = new FluidTank(TankBlockEntity.getCapacity(stack.getItem()));

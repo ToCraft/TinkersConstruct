@@ -29,9 +29,13 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Supplier;
 
-/** Implements filling a bucket with an NBT fluid */
+/**
+ * Implements filling a bucket with an NBT fluid
+ */
 public class PotionBucketItem extends PotionItem {
+
   private final Supplier<? extends Fluid> supplier;
+
   public PotionBucketItem(Supplier<? extends Fluid> supplier, Properties builder) {
     super(builder);
     this.supplier = supplier;
@@ -121,6 +125,7 @@ public class PotionBucketItem extends PotionItem {
   }
 
   public static class PotionBucketWrapper extends FluidBucketWrapper {
+
     public PotionBucketWrapper(ItemStack container) {
       super(container);
     }
@@ -128,8 +133,8 @@ public class PotionBucketItem extends PotionItem {
     @Nonnull
     @Override
     public FluidStack getFluid() {
-      return new FluidStack(((PotionBucketItem)container.getItem()).getFluid(),
-                            FluidType.BUCKET_VOLUME, container.getTag());
+      return new FluidStack(((PotionBucketItem) container.getItem()).getFluid(),
+        FluidType.BUCKET_VOLUME, container.getTag());
     }
   }
 }

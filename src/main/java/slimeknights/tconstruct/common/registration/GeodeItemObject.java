@@ -25,15 +25,19 @@ import java.util.function.IntFunction;
 import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 
-/** Item object for geode related blocks. Main methods represent the block */
+/**
+ * Item object for geode related blocks. Main methods represent the block
+ */
 public class GeodeItemObject extends ItemObject<Item> {
+
   private final Supplier<? extends Block> block;
   private final Supplier<? extends Block> budding;
   private final Supplier<? extends Block> cluster;
   private final Supplier<? extends Block> smallBud;
   private final Supplier<? extends Block> mediumBud;
   private final Supplier<? extends Block> largeBud;
-  public GeodeItemObject(RegistryObject<? extends Item> shard, BlockDeferredRegister register, MaterialColor color, SoundType blockSound, SoundEvent chimeSound, Map<BudSize,SoundType> clusterSounds, int baseLight, Properties props) {
+
+  public GeodeItemObject(RegistryObject<? extends Item> shard, BlockDeferredRegister register, MaterialColor color, SoundType blockSound, SoundEvent chimeSound, Map<BudSize, SoundType> clusterSounds, int baseLight, Properties props) {
     super(shard);
     // allow the crystals to glow optionally
     IntFunction<ToIntFunction<BlockState>> light = extra -> {
@@ -47,23 +51,29 @@ public class GeodeItemObject extends ItemObject<Item> {
     budding = register.register("budding_" + name, () -> new BuddingCrystalBlock(this, chimeSound, BlockBehaviour.Properties.of(Material.AMETHYST, color).randomTicks().lightLevel(crystalLight).strength(1.5F).sound(blockSound).requiresCorrectToolForDrops()), blockItem);
     // buds
     Supplier<BlockBehaviour.Properties> budProps = () -> BlockBehaviour.Properties.of(Material.AMETHYST, color).noOcclusion().strength(1.5F);
-    cluster   = register.register(name + "_cluster", () -> new CrystalClusterBlock(chimeSound, 7, 3, budProps.get().lightLevel(light.apply(5)).sound(clusterSounds.get(BudSize.CLUSTER))), blockItem);
-    smallBud  = register.register("small_" + name + "_bud",  () -> new CrystalClusterBlock(chimeSound, 3, 3, budProps.get().lightLevel(light.apply(1)).sound(clusterSounds.get(BudSize.SMALL))),  blockItem);
+    cluster = register.register(name + "_cluster", () -> new CrystalClusterBlock(chimeSound, 7, 3, budProps.get().lightLevel(light.apply(5)).sound(clusterSounds.get(BudSize.CLUSTER))), blockItem);
+    smallBud = register.register("small_" + name + "_bud", () -> new CrystalClusterBlock(chimeSound, 3, 3, budProps.get().lightLevel(light.apply(1)).sound(clusterSounds.get(BudSize.SMALL))), blockItem);
     mediumBud = register.register("medium_" + name + "_bud", () -> new CrystalClusterBlock(chimeSound, 4, 3, budProps.get().lightLevel(light.apply(2)).sound(clusterSounds.get(BudSize.MEDIUM))), blockItem);
-    largeBud  = register.register("large_" + name + "_bud",  () -> new CrystalClusterBlock(chimeSound, 5, 3, budProps.get().lightLevel(light.apply(4)).sound(clusterSounds.get(BudSize.LARGE))),  blockItem);
+    largeBud = register.register("large_" + name + "_bud", () -> new CrystalClusterBlock(chimeSound, 5, 3, budProps.get().lightLevel(light.apply(4)).sound(clusterSounds.get(BudSize.LARGE))), blockItem);
   }
 
-  /** Gets the block form of this */
+  /**
+   * Gets the block form of this
+   */
   public Block getBlock() {
     return block.get();
   }
 
-  /** Gets the budding form of the crystal */
+  /**
+   * Gets the budding form of the crystal
+   */
   public Block getBudding() {
     return budding.get();
   }
 
-  /** Gets a specific size of bud */
+  /**
+   * Gets a specific size of bud
+   */
   public Block getBud(BudSize size) {
     return switch (size) {
       case SMALL -> smallBud.get();
@@ -73,7 +83,9 @@ public class GeodeItemObject extends ItemObject<Item> {
     };
   }
 
-  /** Variants for the bud */
+  /**
+   * Variants for the bud
+   */
   public enum BudSize {
     SMALL,
     MEDIUM,
@@ -87,7 +99,9 @@ public class GeodeItemObject extends ItemObject<Item> {
     @Getter
     private final int size = ordinal() + 1;
 
-    /** Gets the next bud size */
+    /**
+     * Gets the next bud size
+     */
     public BudSize getNext() {
       return switch (this) {
         case SMALL -> MEDIUM;

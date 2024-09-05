@@ -9,9 +9,12 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 
-/** Slot for accessing player armor */
+/**
+ * Slot for accessing player armor
+ */
 public class ArmorSlot extends Slot {
-  private static final ResourceLocation[] ARMOR_SLOT_BACKGROUNDS = new ResourceLocation[] {
+
+  private static final ResourceLocation[] ARMOR_SLOT_BACKGROUNDS = new ResourceLocation[]{
     InventoryMenu.EMPTY_ARMOR_SLOT_BOOTS,
     InventoryMenu.EMPTY_ARMOR_SLOT_LEGGINGS,
     InventoryMenu.EMPTY_ARMOR_SLOT_CHESTPLATE,

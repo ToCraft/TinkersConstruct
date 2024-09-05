@@ -22,10 +22,16 @@ import slimeknights.tconstruct.tools.TinkerTools;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Internal item used by crystalshot modifier */
+/**
+ * Internal item used by crystalshot modifier
+ */
 public class CrystalshotItem extends ArrowItem {
-  /** Possible variants for a random crystalshot, so addons can register their own if desired */
+
+  /**
+   * Possible variants for a random crystalshot, so addons can register their own if desired
+   */
   public static final List<String> RANDOM_VARIANTS;
+
   static {
     RANDOM_VARIANTS = new ArrayList<>();
     RANDOM_VARIANTS.add("amethyst");
@@ -35,8 +41,12 @@ public class CrystalshotItem extends ArrowItem {
     RANDOM_VARIANTS.add("enderslime");
     RANDOM_VARIANTS.add("quartz");
   }
-  /** NBT key for variants on the stack and entity */
+
+  /**
+   * NBT key for variants on the stack and entity
+   */
   private static final String TAG_VARIANT = "variant";
+
   public CrystalshotItem(Properties props) {
     super(props);
   }
@@ -64,7 +74,9 @@ public class CrystalshotItem extends ArrowItem {
   @Override
   public void fillItemCategory(CreativeModeTab pCategory, NonNullList<ItemStack> pItems) {}
 
-  /** Creates a crystal shot with the given variant */
+  /**
+   * Creates a crystal shot with the given variant
+   */
   public static ItemStack withVariant(String variant, int size) {
     ItemStack stack = new ItemStack(TinkerTools.crystalshotItem);
     stack.setCount(size);
@@ -73,6 +85,7 @@ public class CrystalshotItem extends ArrowItem {
   }
 
   public static class CrystalshotEntity extends AbstractArrow {
+
     private static final EntityDataAccessor<String> SYNC_VARIANT = SynchedEntityData.defineId(CrystalshotEntity.class, EntityDataSerializers.STRING);
 
     public CrystalshotEntity(EntityType<? extends CrystalshotEntity> type, Level level) {
@@ -100,7 +113,9 @@ public class CrystalshotItem extends ArrowItem {
       this.entityData.define(SYNC_VARIANT, "");
     }
 
-    /** Gets the texture variant of this shot */
+    /**
+     * Gets the texture variant of this shot
+     */
     public String getVariant() {
       String variant = this.entityData.get(SYNC_VARIANT);
       if (variant.isEmpty()) {
@@ -109,7 +124,9 @@ public class CrystalshotItem extends ArrowItem {
       return variant;
     }
 
-    /** Sets the arrow's variant */
+    /**
+     * Sets the arrow's variant
+     */
     public void setVariant(String variant) {
       this.entityData.set(SYNC_VARIANT, variant);
     }

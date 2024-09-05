@@ -33,6 +33,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class MomentumModifier extends Modifier implements ProjectileLaunchModifierHook, ConditionalStatModifierHook, BlockBreakModifierHook, BreakSpeedModifierHook, TooltipModifierHook {
+
   private static final Component SPEED = TConstruct.makeTranslation("modifier", "momentum.speed");
 
   @Override
@@ -46,12 +47,16 @@ public class MomentumModifier extends Modifier implements ProjectileLaunchModifi
     return 75;
   }
 
-  /** Gets the bonus for the modifier */
+  /**
+   * Gets the bonus for the modifier
+   */
   private static float getBonus(LivingEntity living, ToolType type, ModifierEntry modifier) {
     return modifier.getEffectiveLevel() * (TinkerModifiers.momentumEffect.get(type).getLevel(living) + 1);
   }
 
-  /** Applies the effect to the target */
+  /**
+   * Applies the effect to the target
+   */
   private static void applyEffect(LivingEntity living, ToolType type, int duration, int maxLevel) {
     TinkerEffect effect = TinkerModifiers.momentumEffect.get(type);
     effect.apply(living, duration, Math.min(maxLevel, effect.getLevel(living) + 1), true);
@@ -79,7 +84,7 @@ public class MomentumModifier extends Modifier implements ProjectileLaunchModifi
   public void onProjectileLaunch(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, Projectile projectile, @Nullable AbstractArrow arrow, NamespacedNBT persistentData, boolean primary) {
     if (primary && (arrow == null || arrow.isCritArrow())) {
       // 16 arrows gets you to max
-      applyEffect(shooter, ToolType.RANGED, 5*20, 15);
+      applyEffect(shooter, ToolType.RANGED, 5 * 20, 15);
     }
   }
 

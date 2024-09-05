@@ -11,9 +11,12 @@ import java.util.function.Predicate;
 
 /**
  * Predicate to check if a tool has the given stat within the range.
+ *
  * @see slimeknights.tconstruct.library.json.predicate.tool.StatInSetPredicate
  */
-public record StatInRangePredicate(INumericToolStat<?> stat, float min, float max) implements Predicate<StatsNBT>, ToolStackPredicate {
+public record StatInRangePredicate(INumericToolStat<?> stat, float min,
+                                   float max) implements Predicate<StatsNBT>, ToolStackPredicate {
+
   public static final RecordLoadable<StatInRangePredicate> LOADER = RecordLoadable.create(
     ToolStats.NUMERIC_LOADER.requiredField("stat", StatInRangePredicate::stat),
     FloatLoadable.ANY.defaultField("min", Float.NEGATIVE_INFINITY, StatInRangePredicate::min),
@@ -22,6 +25,7 @@ public record StatInRangePredicate(INumericToolStat<?> stat, float min, float ma
 
   /**
    * Creates a predicate matching the exact value
+   *
    * @param stat  Stat
    * @param value Value to match
    * @return Predicate
@@ -32,6 +36,7 @@ public record StatInRangePredicate(INumericToolStat<?> stat, float min, float ma
 
   /**
    * Creates a predicate matching the exact value
+   *
    * @param stat Stat
    * @param min  Min value
    * @return Predicate
@@ -42,6 +47,7 @@ public record StatInRangePredicate(INumericToolStat<?> stat, float min, float ma
 
   /**
    * Creates a predicate matching the exact value
+   *
    * @param stat Stat
    * @param max  Max value
    * @return Predicate

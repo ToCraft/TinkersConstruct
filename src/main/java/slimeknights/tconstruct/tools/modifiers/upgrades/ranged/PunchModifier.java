@@ -15,6 +15,7 @@ import slimeknights.tconstruct.tools.entity.FluidEffectProjectile;
 import javax.annotation.Nullable;
 
 public class PunchModifier extends Modifier implements ProjectileLaunchModifierHook {
+
   @Override
   protected void registerHooks(Builder hookBuilder) {
     hookBuilder.addHook(this, ModifierHooks.PROJECTILE_LAUNCH);

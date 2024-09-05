@@ -14,11 +14,14 @@ import slimeknights.tconstruct.library.modifiers.fluid.TimeAction;
 
 /**
  * Spilling effect to apply a potion effect
- * @param effect  Effect to apply
- * @param action  How the time scales
+ *
+ * @param effect Effect to apply
+ * @param action How the time scales
  * @see FluidMobEffect.Builder
  */
-public record MobEffectFluidEffect(FluidMobEffect effect, TimeAction action) implements FluidEffect<FluidEffectContext.Entity> {
+public record MobEffectFluidEffect(FluidMobEffect effect,
+                                   TimeAction action) implements FluidEffect<FluidEffectContext.Entity> {
+
   public static final RecordLoadable<MobEffectFluidEffect> LOADER = RecordLoadable.create(
     FluidMobEffect.LOADABLE.directField(e -> e.effect),
     TimeAction.LOADABLE.requiredField("action", e -> e.action),
@@ -40,7 +43,7 @@ public record MobEffectFluidEffect(FluidMobEffect effect, TimeAction action) imp
       MobEffectInstance existingInstance = target.getEffect(effect.effect());
       if (existingInstance != null && existingInstance.getAmplifier() >= effect.amplifier()) {
         if (this.action == TimeAction.ADD) {
-          int extraTime = (int)(effect.time() * scale.value());
+          int extraTime = (int) (effect.time() * scale.value());
           if (extraTime <= 0) {
             return 0;
           }
@@ -49,18 +52,18 @@ public record MobEffectFluidEffect(FluidMobEffect effect, TimeAction action) imp
           used = scale.value();
         } else {
           // set can produce time up to the maximum allowed by scale,
-          float existing = existingInstance.getDuration() / (float)effect.time();
+          float existing = existingInstance.getDuration() / (float) effect.time();
           float effective = scale.effective(existing);
           // no change? means we skip applying entirely
           if (effective < existing) {
             return 0;
           }
           used = effective - existing;
-          time = (int)(effect.time() * effective);
+          time = (int) (effect.time() * effective);
         }
       } else {
         // if no existing, time and set behave the same way, use maximum amount to compute time
-        time = (int)(effect.time() * scale.value());
+        time = (int) (effect.time() * scale.value());
         used = scale.value();
       }
       // if we got time, add the effect

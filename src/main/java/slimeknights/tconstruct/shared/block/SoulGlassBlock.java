@@ -9,6 +9,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class SoulGlassBlock extends GlassBlock {
+
   public SoulGlassBlock(Properties properties) {
     super(properties);
   }

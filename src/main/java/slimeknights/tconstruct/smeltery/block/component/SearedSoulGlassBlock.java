@@ -8,6 +8,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class SearedSoulGlassBlock extends SearedGlassBlock {
+
   public SearedSoulGlassBlock(Properties properties) {
     super(properties);
   }

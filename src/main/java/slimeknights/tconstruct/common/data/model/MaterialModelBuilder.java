@@ -8,12 +8,16 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import slimeknights.tconstruct.TConstruct;
 
 public class MaterialModelBuilder<T extends ModelBuilder<T>> extends CustomLoaderBuilder<T> {
+
   private JsonArray offset = null;
+
   public MaterialModelBuilder(T parent, ExistingFileHelper existingFileHelper) {
     super(TConstruct.getResource("material"), parent, existingFileHelper);
   }
 
-  /** Sets the offset */
+  /**
+   * Sets the offset
+   */
   public MaterialModelBuilder<T> offset(int x, int y) {
     this.offset = new JsonArray(2);
     this.offset.add(x);

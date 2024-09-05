@@ -29,14 +29,16 @@ import slimeknights.tconstruct.world.TinkerWorld;
 import java.util.List;
 
 public class SkySlimeEntity extends ArmoredSlimeEntity {
+
   private double bounceAmount = 0f;
+
   public SkySlimeEntity(EntityType<? extends SkySlimeEntity> type, Level worldIn) {
     super(type, worldIn);
   }
 
   @Override
   protected float getJumpPower() {
-    return (float)Math.sqrt(this.getSize()) * this.getBlockJumpFactor() / 2;
+    return (float) Math.sqrt(this.getSize()) * this.getBlockJumpFactor() / 2;
   }
 
   @Override
@@ -96,7 +98,7 @@ public class SkySlimeEntity extends ArmoredSlimeEntity {
       ModDataNBT persistentData = tool.getPersistentData();
       if (!isPlate) {
         // travelers dyes a random color
-        persistentData.putInt(TinkerModifiers.dyed.getId(), this.random.nextInt(0xFFFFFF+1));
+        persistentData.putInt(TinkerModifiers.dyed.getId(), this.random.nextInt(0xFFFFFF + 1));
         modifiers = modifiers.withModifier(TinkerModifiers.dyed.getId(), 1);
       }
 
@@ -123,7 +125,9 @@ public class SkySlimeEntity extends ArmoredSlimeEntity {
     }
   }
 
-  /** Gets a random defense modifier from the tag */
+  /**
+   * Gets a random defense modifier from the tag
+   */
   private static ModifierId randomModifier(RandomSource random, TagKey<Modifier> tag) {
     List<Modifier> options = ModifierManager.getTagValues(tag);
     return options.get(random.nextInt(options.size())).getId();

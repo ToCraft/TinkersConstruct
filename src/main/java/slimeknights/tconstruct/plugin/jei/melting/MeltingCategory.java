@@ -31,8 +31,11 @@ import slimeknights.tconstruct.smeltery.block.entity.module.FuelModule;
 
 import java.util.List;
 
-/** Shared by melter and smeltery */
+/**
+ * Shared by melter and smeltery
+ */
 public class MeltingCategory extends AbstractMeltingCategory {
+
   private static final Component TITLE = TConstruct.makeTranslation("jei", "melting.title");
   private static final String KEY_TEMPERATURE = TConstruct.makeTranslationKey("jei", "temperature");
   private static final String KEY_MULTIPLIER = TConstruct.makeTranslationKey("jei", "melting.multiplier");
@@ -41,13 +44,17 @@ public class MeltingCategory extends AbstractMeltingCategory {
   private static final Component TOOLTIP_SMELTERY = TConstruct.makeTranslation("jei", "melting.smeltery").withStyle(ChatFormatting.GRAY, ChatFormatting.UNDERLINE);
   private static final Component TOOLTIP_MELTER = TConstruct.makeTranslation("jei", "melting.melter").withStyle(ChatFormatting.GRAY, ChatFormatting.UNDERLINE);
 
-  /** Tooltip callback for items */
+  /**
+   * Tooltip callback for items
+   */
   private static final IRecipeSlotTooltipCallback ITEM_FUEL_TOOLTIP = (slot, list) -> {
     list.add(1, SOLID_TEMPERATURE);
     list.add(2, SOLID_MULTIPLIER);
   };
 
-  /** Tooltip callback for ores */
+  /**
+   * Tooltip callback for ores
+   */
   private static final IRecipeSlotTooltipCallback METAL_ORE_TOOLTIP = new MeltingFluidCallback(OreRateType.METAL);
   private static final IRecipeSlotTooltipCallback GEM_ORE_TOOLTIP = new MeltingFluidCallback(OreRateType.GEM);
 
@@ -109,20 +116,23 @@ public class MeltingCategory extends AbstractMeltingCategory {
     if (recipe.getTemperature() <= FuelModule.SOLID_TEMPERATURE) {
       fuelHeight = 15;
       builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 2, 22)
-             .addTooltipCallback(ITEM_FUEL_TOOLTIP)
-             .addItemStacks(MeltingFuelHandler.SOLID_FUELS.get());
+        .addTooltipCallback(ITEM_FUEL_TOOLTIP)
+        .addItemStacks(MeltingFuelHandler.SOLID_FUELS.get());
     }
 
     // liquid fuel
     builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 4, 4)
-           .addTooltipCallback(FUEL_TOOLTIP)
-           .setFluidRenderer(1, false, 12, fuelHeight)
-           .addIngredients(ForgeTypes.FLUID_STACK, MeltingFuelHandler.getUsableFuels(recipe.getTemperature()));
+      .addTooltipCallback(FUEL_TOOLTIP)
+      .setFluidRenderer(1, false, 12, fuelHeight)
+      .addIngredients(ForgeTypes.FLUID_STACK, MeltingFuelHandler.getUsableFuels(recipe.getTemperature()));
   }
 
-  /** Adds amounts to outputs and temperatures to fuels */
+  /**
+   * Adds amounts to outputs and temperatures to fuels
+   */
   @RequiredArgsConstructor
   private static class MeltingFluidCallback extends AbstractMeltingCategory.MeltingFluidCallback {
+
     @Getter
     private final OreRateType oreType;
 

@@ -10,7 +10,9 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 /**
  * Gets one of two entity properties based on the condition
  */
-public record ConditionalToolVariable(IJsonPredicate<IToolContext> condition, ToolVariable ifTrue, ToolVariable ifFalse) implements ToolVariable, ConditionalVariable<IJsonPredicate<IToolContext>,ToolVariable> {
+public record ConditionalToolVariable(IJsonPredicate<IToolContext> condition, ToolVariable ifTrue,
+                                      ToolVariable ifFalse) implements ToolVariable, ConditionalVariable<IJsonPredicate<IToolContext>, ToolVariable> {
+
   public static final IGenericLoader<ConditionalToolVariable> LOADER = ConditionalVariable.loadable(ToolContextPredicate.LOADER, ToolVariable.LOADER, ConditionalToolVariable::new);
 
   @Override

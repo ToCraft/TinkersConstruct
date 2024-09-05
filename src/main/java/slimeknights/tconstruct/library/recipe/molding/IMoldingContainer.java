@@ -7,22 +7,27 @@ import slimeknights.mantle.recipe.container.IRecipeContainer;
  * Inventory for molding recipes
  */
 public interface IMoldingContainer extends IRecipeContainer {
+
   /**
    * Gets the material being molded, typically sand
-   * @return  Material item
+   *
+   * @return Material item
    */
   ItemStack getMaterial();
 
   /**
    * Gets the item whose shape makes the pattern, typically in hand, often a tool part
-   * @return  Pattern item
+   *
+   * @return Pattern item
    */
   ItemStack getPattern();
 
 
   /* Required methods */
 
-  /** @deprecated use {@link #getMaterial()} and {@link #getPattern()} */
+  /**
+   * @deprecated use {@link #getMaterial()} and {@link #getPattern()}
+   */
   @Deprecated
   @Override
   default ItemStack getItem(int index) {

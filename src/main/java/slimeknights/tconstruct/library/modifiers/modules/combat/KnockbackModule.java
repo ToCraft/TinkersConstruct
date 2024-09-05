@@ -25,14 +25,21 @@ import java.util.List;
 
 /**
  * Module to add knockback to a melee attack
- * @param entity     Filter on entities to receive knockback
- * @param formula    Formula to compute the knockback amount
+ *
+ * @param entity  Filter on entities to receive knockback
+ * @param formula Formula to compute the knockback amount
  */
-public record KnockbackModule(IJsonPredicate<LivingEntity> entity, ModifierFormula formula, ModifierCondition<IToolStackView> condition) implements MeleeHitModifierHook, ModifierModule, ConditionalModule<IToolStackView> {
+public record KnockbackModule(IJsonPredicate<LivingEntity> entity, ModifierFormula formula,
+                              ModifierCondition<IToolStackView> condition) implements MeleeHitModifierHook, ModifierModule, ConditionalModule<IToolStackView> {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<KnockbackModule>defaultHooks(ModifierHooks.MELEE_HIT);
-  /** Setup for the formula */
+  /**
+   * Setup for the formula
+   */
   private static final FormulaLoadable FORMULA = new FormulaLoadable(FallbackFormula.ADD, "level", "knockback");
-  /** Loader instance */
+  /**
+   * Loader instance
+   */
   public static final RecordLoadable<KnockbackModule> LOADER = RecordLoadable.create(
     LivingEntityPredicate.LOADER.defaultField("entity", KnockbackModule::entity),
     FORMULA.directField(KnockbackModule::formula),
@@ -64,13 +71,18 @@ public record KnockbackModule(IJsonPredicate<LivingEntity> entity, ModifierFormu
 
   /* Builder */
 
-  /** Creates a builder instance */
+  /**
+   * Creates a builder instance
+   */
   public static Builder builder() {
     return new Builder();
   }
 
-  /** Builder class */
-  public static class Builder extends ModifierFormula.Builder<Builder,KnockbackModule> {
+  /**
+   * Builder class
+   */
+  public static class Builder extends ModifierFormula.Builder<Builder, KnockbackModule> {
+
     @Setter
     @Accessors(fluent = true)
     private IJsonPredicate<LivingEntity> entity = LivingEntityPredicate.ANY;

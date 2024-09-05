@@ -14,21 +14,31 @@ import javax.annotation.Nullable;
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public final class MultiblockResult {
-  /** Successful result, used when no error */
+
+  /**
+   * Successful result, used when no error
+   */
   public static final MultiblockResult SUCCESS = new MultiblockResult(true, null, Component.empty());
 
-  /** If true, this result was successful */
+  /**
+   * If true, this result was successful
+   */
   private final boolean success;
-  /** Position to highlight for errors */
+  /**
+   * Position to highlight for errors
+   */
   @Nullable
   private final BlockPos pos;
-  /** Message to display for errors */
+  /**
+   * Message to display for errors
+   */
   private final Component message;
 
   /**
    * Creates an error for the given arguments
-   * @param pos  Position that caused the issue, may be null if no position
-   * @return  Multiblock result
+   *
+   * @param pos Position that caused the issue, may be null if no position
+   * @return Multiblock result
    */
   public static MultiblockResult error(@Nullable BlockPos pos, Component error) {
     return new MultiblockResult(false, pos, error);
@@ -36,10 +46,11 @@ public final class MultiblockResult {
 
   /**
    * Creates an error for the given arguments
-   * @param pos     Position that caused the issue, may be null if no position
-   * @param key     Translation key
-   * @param params  Error parameters
-   * @return  Multiblock result
+   *
+   * @param pos    Position that caused the issue, may be null if no position
+   * @param key    Translation key
+   * @param params Error parameters
+   * @return Multiblock result
    */
   public static MultiblockResult error(@Nullable BlockPos pos, String key, Object... params) {
     return error(pos, Component.translatable(key, params));

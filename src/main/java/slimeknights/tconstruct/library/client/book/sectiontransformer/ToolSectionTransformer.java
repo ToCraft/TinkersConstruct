@@ -6,8 +6,11 @@ import slimeknights.mantle.client.book.data.PageData;
 import slimeknights.mantle.client.book.transformer.ContentGroupingSectionTransformer;
 import slimeknights.tconstruct.library.client.book.content.ContentTool;
 
-/** Section transformer to generate an index with tool names */
+/**
+ * Section transformer to generate an index with tool names
+ */
 public class ToolSectionTransformer extends ContentGroupingSectionTransformer {
+
   public static final ToolSectionTransformer INSTANCE = new ToolSectionTransformer("tools");
 
   public ToolSectionTransformer(String name, boolean largeTitle, boolean centerTitle) {
@@ -36,7 +39,7 @@ public class ToolSectionTransformer extends ContentGroupingSectionTransformer {
         builder.addGroup(page.getTitle(), page);
         return true;
       }
-    // anything other than hidden continues same column
+      // anything other than hidden continues same column
     } else if (!page.name.equals("hidden")) {
       builder.addPage(page.getTitle(), page);
     }

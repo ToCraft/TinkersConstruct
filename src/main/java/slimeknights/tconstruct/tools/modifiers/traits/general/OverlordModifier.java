@@ -11,6 +11,7 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.modifiers.slotless.OverslimeModifier;
 
 public class OverlordModifier extends Modifier implements ToolStatsModifierHook {
+
   @Override
   protected void registerHooks(Builder hookBuilder) {
     super.registerHooks(hookBuilder);

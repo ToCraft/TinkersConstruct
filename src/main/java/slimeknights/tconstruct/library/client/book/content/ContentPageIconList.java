@@ -72,7 +72,7 @@ public class ContentPageIconList extends PageContent {
       yOff = getTitleHeight();
     }
 
-    if(this.subText != null) {
+    if (this.subText != null) {
       int height = this.addText(list, this.subText, false, 0, yOff);
       yOff = height + 16;
     }

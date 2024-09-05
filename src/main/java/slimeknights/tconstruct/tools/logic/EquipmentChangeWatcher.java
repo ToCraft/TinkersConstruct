@@ -40,14 +40,21 @@ import java.util.Map;
  * Capability to make it easy for modifiers to store common data on the player, primarily used for armor
  */
 public class EquipmentChangeWatcher {
+
   private EquipmentChangeWatcher() {}
 
-  /** Capability ID */
+  /**
+   * Capability ID
+   */
   private static final ResourceLocation ID = TConstruct.getResource("equipment_watcher");
-  /** Capability type */
+  /**
+   * Capability type
+   */
   public static final Capability<PlayerLastEquipment> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {});
 
-  /** Registers this capability */
+  /**
+   * Registers this capability
+   */
   public static void register() {
     FMLJavaModLoadingContext.get().getModEventBus().addListener(EventPriority.NORMAL, false, RegisterCapabilitiesEvent.class, event -> event.register(PlayerLastEquipment.class));
 
@@ -64,12 +71,16 @@ public class EquipmentChangeWatcher {
 
   /* Events */
 
-  /** Serverside modifier hooks */
+  /**
+   * Serverside modifier hooks
+   */
   private static void onEquipmentChange(LivingEquipmentChangeEvent event) {
     runModifierHooks(event.getEntity(), event.getSlot(), event.getFrom(), event.getTo());
   }
 
-  /** Event listener to attach the capability */
+  /**
+   * Event listener to attach the capability
+   */
   private static void attachCapability(AttachCapabilitiesEvent<Entity> event) {
     Entity entity = event.getObject();
     if (entity.getCommandSenderWorld().isClientSide && entity instanceof Player) {
@@ -79,7 +90,9 @@ public class EquipmentChangeWatcher {
     }
   }
 
-  /** Client side modifier hooks */
+  /**
+   * Client side modifier hooks
+   */
   private static void onPlayerTick(PlayerTickEvent event) {
     // only run for client side players every 5 ticks
     if (event.phase == Phase.END && event.side == LogicalSide.CLIENT) {
@@ -90,7 +103,9 @@ public class EquipmentChangeWatcher {
 
   /* Helpers */
 
-  /** Shared modifier hook logic */
+  /**
+   * Shared modifier hook logic
+   */
   private static void runModifierHooks(LivingEntity entity, EquipmentSlot changedSlot, ItemStack original, ItemStack replacement) {
     EquipmentChangeContext context = new EquipmentChangeContext(entity, changedSlot, original, replacement);
 
@@ -132,11 +147,14 @@ public class EquipmentChangeWatcher {
 
   /* Required methods */
 
-  /** Data class that runs actual update logic */
+  /**
+   * Data class that runs actual update logic
+   */
   protected static class PlayerLastEquipment implements ICapabilityProvider, Runnable {
+
     @Nullable
     private final Player player;
-    private final Map<EquipmentSlot,ItemStack> lastItems = new EnumMap<>(EquipmentSlot.class);
+    private final Map<EquipmentSlot, ItemStack> lastItems = new EnumMap<>(EquipmentSlot.class);
     private LazyOptional<PlayerLastEquipment> capability;
 
     private PlayerLastEquipment(@Nullable Player player) {
@@ -147,7 +165,9 @@ public class EquipmentChangeWatcher {
       this.capability = LazyOptional.of(() -> this);
     }
 
-    /** Called on player tick to update the stacks and run the event */
+    /**
+     * Called on player tick to update the stacks and run the event
+     */
     public void update() {
       // run twice a second, should be plenty fast enough
       if (player != null) {
@@ -162,7 +182,9 @@ public class EquipmentChangeWatcher {
       }
     }
 
-    /** Called on capability invalidate to invalidate */
+    /**
+     * Called on capability invalidate to invalidate
+     */
     @Override
     public void run() {
       capability.invalidate();

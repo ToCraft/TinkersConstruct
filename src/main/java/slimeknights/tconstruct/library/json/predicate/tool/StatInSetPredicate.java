@@ -15,12 +15,14 @@ import java.util.Set;
 
 /**
  * Predicate which checks if a stat is in the given set of values
- * @param <T>     Stat type
- * @param stat    Stat to check
- * @param values  Set of values to match
+ *
+ * @param <T>    Stat type
+ * @param stat   Stat to check
+ * @param values Set of values to match
  * @see StatInRangePredicate
  */
 public record StatInSetPredicate<T>(IToolStat<T> stat, Set<T> values) implements ToolStackPredicate {
+
   public StatInSetPredicate(IToolStat<T> stat, T value) {
     this(stat, Set.of(value));
   }
@@ -35,7 +37,9 @@ public record StatInSetPredicate<T>(IToolStat<T> stat, Set<T> values) implements
     return LOADER;
   }
 
-  /** Loader instance, manually created as the value parsing another value is difficult with the builder */
+  /**
+   * Loader instance, manually created as the value parsing another value is difficult with the builder
+   */
   public static final RecordLoadable<StatInSetPredicate<?>> LOADER = new RecordLoadable<>() {
     @Override
     public StatInSetPredicate<?> deserialize(JsonObject json, TypedMap context) {

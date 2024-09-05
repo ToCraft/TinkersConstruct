@@ -12,7 +12,9 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.SkullBlock.Type;
 
 public class PiglinHeadBlock extends SkullBlock {
+
   protected static final VoxelShape PIGLIN_SHAPE = Block.box(3, 0, 3, 13, 8, 13);
+
   public PiglinHeadBlock(Type type, Properties properties) {
     super(type, properties);
   }

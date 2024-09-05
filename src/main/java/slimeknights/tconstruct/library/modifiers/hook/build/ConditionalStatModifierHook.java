@@ -8,21 +8,27 @@ import slimeknights.tconstruct.library.tools.stat.FloatToolStat;
 
 import java.util.Collection;
 
-/** Hook for modifying a stat conditioned on the holder. */
+/**
+ * Hook for modifying a stat conditioned on the holder.
+ */
 public interface ConditionalStatModifierHook {
+
   /**
    * Method to modify a stat as the tool is being used
-   * @param tool         Tool instance
-   * @param modifier     Modifier instance
-   * @param living       Entity holding the tool
-   * @param stat         Stat to be modified, safe to do instance equality
-   * @param baseValue    Value before this hook modified the stat
-   * @param multiplier   Global multiplier, same value contained in the tool, but fetched for convenience as it's commonly needed for stat bonuses
-   * @return  New value of the stat, or baseValue if you choose not to modify this stat
+   *
+   * @param tool       Tool instance
+   * @param modifier   Modifier instance
+   * @param living     Entity holding the tool
+   * @param stat       Stat to be modified, safe to do instance equality
+   * @param baseValue  Value before this hook modified the stat
+   * @param multiplier Global multiplier, same value contained in the tool, but fetched for convenience as it's commonly needed for stat bonuses
+   * @return New value of the stat, or baseValue if you choose not to modify this stat
    */
   float modifyStat(IToolStackView tool, ModifierEntry modifier, LivingEntity living, FloatToolStat stat, float baseValue, float multiplier);
 
-  /** Gets the given stat from the tool, as modified by this hook */
+  /**
+   * Gets the given stat from the tool, as modified by this hook
+   */
   static float getModifiedStat(IToolStackView tool, LivingEntity living, FloatToolStat stat, float value) {
     float multiplier = tool.getMultiplier(stat);
     for (ModifierEntry entry : tool.getModifierList()) {
@@ -31,13 +37,18 @@ public interface ConditionalStatModifierHook {
     return stat.clamp(value);
   }
 
-  /** Gets the given stat from the tool, as modified by this hook */
+  /**
+   * Gets the given stat from the tool, as modified by this hook
+   */
   static float getModifiedStat(IToolStackView tool, LivingEntity living, FloatToolStat stat) {
     return getModifiedStat(tool, living, stat, tool.getStats().get(stat));
   }
 
-  /** All hook merger: runs hooks of all children */
+  /**
+   * All hook merger: runs hooks of all children
+   */
   record AllMerger(Collection<ConditionalStatModifierHook> modules) implements ConditionalStatModifierHook {
+
     @Override
     public float modifyStat(IToolStackView tool, ModifierEntry modifier, LivingEntity living, FloatToolStat stat, float baseValue, float multiplier) {
       for (ConditionalStatModifierHook hook : modules) {

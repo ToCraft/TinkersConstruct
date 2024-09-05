@@ -15,9 +15,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/** Common code for a modifiable armor item in JSON Things */
+/**
+ * Common code for a modifiable armor item in JSON Things
+ */
 public class FlexModifiableArmorItem extends ModifiableArmorItem implements IFlexItem {
-  private final Map<String,FlexEventHandler> eventHandlers = new HashMap<>();
+
+  private final Map<String, FlexEventHandler> eventHandlers = new HashMap<>();
   private final Set<CreativeModeTab> tabs = new HashSet<>();
 
   public FlexModifiableArmorItem(ArmorMaterial materialIn, EquipmentSlot slot, Properties builderIn, ToolDefinition toolDefinition) {

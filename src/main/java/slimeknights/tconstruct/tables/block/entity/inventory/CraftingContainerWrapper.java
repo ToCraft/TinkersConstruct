@@ -10,7 +10,9 @@ import net.minecraft.world.item.ItemStack;
  * Extension of {@link CraftingContainer} to use instead wrap an existing {@link Container}
  */
 public class CraftingContainerWrapper extends CraftingContainer {
+
   private final Container crafter;
+
   public CraftingContainerWrapper(Container crafter, int width, int height) {
     //noinspection ConstantConditions
     super(null, width, height);
@@ -18,7 +20,9 @@ public class CraftingContainerWrapper extends CraftingContainer {
     this.crafter = crafter;
   }
 
-  /** Inventory redirection */
+  /**
+   * Inventory redirection
+   */
 
   @Override
   public ItemStack getItem(int index) {

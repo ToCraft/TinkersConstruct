@@ -15,14 +15,17 @@ import java.util.function.Function;
  * Model for tank modifiers, also displays the fluid
  */
 public class TankModifierModel extends FluidModifierModel {
-  /** Constant unbaked model instance, as they are all the same */
+
+  /**
+   * Constant unbaked model instance, as they are all the same
+   */
   public static final IUnbakedModifierModel UNBAKED_INSTANCE = new Unbaked(ToolTankHelper.TANK_HELPER);
 
   public TankModifierModel(ToolTankHelper helper,
                            @Nullable Material smallTexture, @Nullable Material largeTexture,
                            @Nullable Material smallPartial, @Nullable Material largePartial,
                            @Nullable Material smallFull, @Nullable Material largeFull) {
-    super(helper, smallTexture, largeTexture, new Material[] { smallPartial, largePartial, smallFull, largeFull });
+    super(helper, smallTexture, largeTexture, new Material[]{smallPartial, largePartial, smallFull, largeFull});
   }
 
   @Nullable
@@ -49,9 +52,10 @@ public class TankModifierModel extends FluidModifierModel {
   private record TankModifierCacheKey(Modifier modifier, Fluid fluid, boolean isPartial) {}
 
   public record Unbaked(ToolTankHelper helper) implements IUnbakedModifierModel {
+
     @Nullable
     @Override
-    public IBakedModifierModel forTool(Function<String,Material> smallGetter, Function<String,Material> largeGetter) {
+    public IBakedModifierModel forTool(Function<String, Material> smallGetter, Function<String, Material> largeGetter) {
       Material smallTexture = smallGetter.apply("");
       Material largeTexture = largeGetter.apply("");
       Material smallPartial = smallGetter.apply("_partial");

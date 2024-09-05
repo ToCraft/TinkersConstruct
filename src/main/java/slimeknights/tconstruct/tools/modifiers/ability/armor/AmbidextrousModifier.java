@@ -12,6 +12,7 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.tools.modifiers.ability.tool.OffhandAttackModifier;
 
 public class AmbidextrousModifier extends OffhandAttackModifier implements EquipmentChangeModifierHook {
+
   @Override
   protected void registerHooks(Builder hookBuilder) {
     super.registerHooks(hookBuilder);

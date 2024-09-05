@@ -17,22 +17,40 @@ import static slimeknights.tconstruct.library.json.math.ModifierFormula.LEVEL;
 import static slimeknights.tconstruct.library.json.math.ModifierFormula.MULTIPLIER;
 import static slimeknights.tconstruct.library.json.math.ModifierFormula.VALUE;
 
-/** Shared logic for various variable formulas */
+/**
+ * Shared logic for various variable formulas
+ */
 public interface VariableFormula<T extends IHaveLoader> {
-  /** used client side to satisfy the variable name parameter */
+
+  /**
+   * used client side to satisfy the variable name parameter
+   */
   String[] EMPTY_STRINGS = new String[0];
 
-  /** Gets the formula instance */
+  /**
+   * Gets the formula instance
+   */
   ModifierFormula formula();
-  /** Gets the list of variables in this context */
+
+  /**
+   * Gets the list of variables in this context
+   */
   List<T> variables();
-  /** Gets the names of variables in this context */
+
+  /**
+   * Gets the names of variables in this context
+   */
   String[] variableNames();
-  /** If true, this formula behaves as a multiplier, if false it behaves as a boost. Used for display mainly */
+
+  /**
+   * If true, this formula behaves as a multiplier, if false it behaves as a boost. Used for display mainly
+   */
   boolean percent();
 
 
-  /** Adds the level, base value, value, and multiplier into the array at their common locations */
+  /**
+   * Adds the level, base value, value, and multiplier into the array at their common locations
+   */
   static float[] statModuleArguments(int variables, float level, float baseValue, float value, float multiplier) {
     float[] arguments = new float[4 + variables];
     arguments[LEVEL] = level;
@@ -46,29 +64,43 @@ public interface VariableFormula<T extends IHaveLoader> {
   /* JSON */
 
 
-  /** Gets the variable names from the given map */
-  static String[] getNames(Map<String,?> variables) {
+  /**
+   * Gets the variable names from the given map
+   */
+  static String[] getNames(Map<String, ?> variables) {
     return variables.keySet().toArray(new String[0]);
   }
 
-  /** Shared builder logic for modifiers using custom variables and formulas */
-  abstract class Builder<T extends Builder<T,M,V>,M,V> extends ModifierFormula.Builder<T,M> {
-    /** If true, using a percent formula. If false, using a boost formula */
+  /**
+   * Shared builder logic for modifiers using custom variables and formulas
+   */
+  abstract class Builder<T extends Builder<T, M, V>, M, V> extends ModifierFormula.Builder<T, M> {
+
+    /**
+     * If true, using a percent formula. If false, using a boost formula
+     */
     protected boolean percent = false;
-    /** Map of variable names to variable objects */
-    protected final Map<String,V> variables = new LinkedHashMap<>();
+    /**
+     * Map of variable names to variable objects
+     */
+    protected final Map<String, V> variables = new LinkedHashMap<>();
+
     public Builder(String[] variables) {
       super(variables);
     }
 
-    /** Sets this to a percent boost formula */
+    /**
+     * Sets this to a percent boost formula
+     */
     @SuppressWarnings("unchecked")
     public T percent() {
       this.percent = true;
       return (T) this;
     }
 
-    /** Adds a variable to the builder */
+    /**
+     * Adds a variable to the builder
+     */
     @SuppressWarnings("unchecked")
     public T customVariable(String key, V variable) {
       // disallow a variable that is already there
@@ -88,13 +120,18 @@ public interface VariableFormula<T extends IHaveLoader> {
       return new FormulaVariableBuilder();
     }
 
-    /** Extended to add custom variable */
-    public class FormulaVariableBuilder extends FormulaBuilder<FormulaVariableBuilder,M> {
+    /**
+     * Extended to add custom variable
+     */
+    public class FormulaVariableBuilder extends FormulaBuilder<FormulaVariableBuilder, M> {
+
       protected FormulaVariableBuilder() {
         super(Builder.this);
       }
 
-      /** Pushes a custom variable onto the stack, from variables added via {@link #customVariable(String, Object)} */
+      /**
+       * Pushes a custom variable onto the stack, from variables added via {@link #customVariable(String, Object)}
+       */
       public FormulaVariableBuilder customVariable(String name) {
         if (!variables.containsKey(name)) {
           throw new IllegalArgumentException("Unknown custom variable " + name);
@@ -102,14 +139,19 @@ public interface VariableFormula<T extends IHaveLoader> {
         return operation(new SerializeVariableName(name));
       }
 
-      /** Pushes a custom variable onto the stack while also defining it */
+      /**
+       * Pushes a custom variable onto the stack while also defining it
+       */
       public FormulaVariableBuilder customVariable(String name, V variable) {
         Builder.this.customVariable(name, variable);
         return operation(new SerializeVariableName(name));
       }
 
-      /** Small hack, this is a stack operation that only exists in the serializer as it's easier than trying to track indices */
+      /**
+       * Small hack, this is a stack operation that only exists in the serializer as it's easier than trying to track indices
+       */
       private record SerializeVariableName(String name) implements StackOperation {
+
         @Override
         public void perform(FloatStack stack, float[] variables) {
           // we need to test the formula after building it, but are just going to test it with 0s

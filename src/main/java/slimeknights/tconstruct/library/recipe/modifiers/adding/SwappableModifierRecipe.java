@@ -52,15 +52,23 @@ public class SwappableModifierRecipe extends ModifierRecipe {
     SLOTS_FIELD, ALLOW_CRYSTAL_FIELD,
     SwappableModifierRecipe::new);
 
-  /** Value of the modifier being swapped, distinguishing this recipe from others for the same modifier */
+  /**
+   * Value of the modifier being swapped, distinguishing this recipe from others for the same modifier
+   */
   private final String value;
-  /** Logic to format the variant, needed for syncing */
+  /**
+   * Logic to format the variant, needed for syncing
+   */
   private final VariantFormatter variantFormatter;
-  /** Display component for the variant string */
+  /**
+   * Display component for the variant string
+   */
   @Getter
   private final Component variant;
 
-  /** @deprecated use {@link #SwappableModifierRecipe(ResourceLocation, List, Ingredient, int, ModifierId, String, VariantFormatter, SlotCount, boolean)}} */
+  /**
+   * @deprecated use {@link #SwappableModifierRecipe(ResourceLocation, List, Ingredient, int, ModifierId, String, VariantFormatter, SlotCount, boolean)}}
+   */
   @Deprecated
   public SwappableModifierRecipe(ResourceLocation id, List<SizedIngredient> inputs, Ingredient toolRequirement, int maxToolSize, ModifierId result, String value, @Nullable SlotCount slots, boolean allowCrystal) {
     this(id, inputs, toolRequirement, maxToolSize, result, value, VariantFormatter.DEFAULT, slots, allowCrystal);
@@ -143,19 +151,28 @@ public class SwappableModifierRecipe extends ModifierRecipe {
   }
 
 
-  /** Methods of formatting the variant string */
+  /**
+   * Methods of formatting the variant string
+   */
   @FunctionalInterface
   public interface VariantFormatter {
+
     NamedComponentRegistry<VariantFormatter> LOADER = new NamedComponentRegistry<>("Unknown variant formatter");
 
-    /** Formats the variant given the modifier */
+    /**
+     * Formats the variant given the modifier
+     */
     Component format(ModifierId modifier, String variant);
 
 
     /* Formatters */
-    /** Formats using the modifier ID as a base translation key */
+    /**
+     * Formats using the modifier ID as a base translation key
+     */
     VariantFormatter DEFAULT = LOADER.register(getResource("default"), (modifier, variant) -> Component.translatable(Util.makeTranslationKey("modifier", modifier) + "." + variant));
-    /** Formats using the material translation key */
+    /**
+     * Formats using the material translation key
+     */
     VariantFormatter MATERIAL = LOADER.register(getResource("material"), (modifier, variant) -> MaterialTooltipCache.getDisplayName(Objects.requireNonNullElse(MaterialVariantId.tryParse(variant), IMaterial.UNKNOWN_ID)));
   }
 }

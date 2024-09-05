@@ -7,6 +7,7 @@ import net.minecraftforge.network.NetworkEvent.Context;
 import slimeknights.mantle.network.packet.IThreadsafePacket;
 
 public class EntityMovementChangePacket implements IThreadsafePacket {
+
   private final int entityID;
   private final double x;
   private final double y;
@@ -49,8 +50,11 @@ public class EntityMovementChangePacket implements IThreadsafePacket {
     }
   }
 
-  /** Safely runs client side only code in a method only called on client */
+  /**
+   * Safely runs client side only code in a method only called on client
+   */
   private static class HandleClient {
+
     private static void handle(EntityMovementChangePacket packet) {
       assert Minecraft.getInstance().level != null;
       Entity entity = Minecraft.getInstance().level.getEntity(packet.entityID);

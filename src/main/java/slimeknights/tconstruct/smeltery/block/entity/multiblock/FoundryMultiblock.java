@@ -5,6 +5,7 @@ import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.smeltery.block.entity.controller.FoundryBlockEntity;
 
 public class FoundryMultiblock extends HeatingStructureMultiblock<FoundryBlockEntity> {
+
   public FoundryMultiblock(FoundryBlockEntity foundry) {
     super(foundry, true, true, false);
   }

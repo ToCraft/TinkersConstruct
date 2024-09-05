@@ -26,22 +26,32 @@ import java.util.Set;
 @EqualsAndHashCode
 @ToString
 public class MultiplierNBT {
-  /** Loadable instance to parse this from buffers and alike */
+
+  /**
+   * Loadable instance to parse this from buffers and alike
+   */
   public static final Loadable<MultiplierNBT> LOADABLE = ToolStats.NUMERIC_LOADER.mapWithValues(FloatLoadable.ANY, 0).flatXmap(MultiplierNBT::new, m -> m.stats);
-  /** Empty stats */
+  /**
+   * Empty stats
+   */
   public static final MultiplierNBT EMPTY = new MultiplierNBT(ImmutableMap.of());
 
-  /** All currently contained multipliers */
+  /**
+   * All currently contained multipliers
+   */
   private final Map<INumericToolStat<?>, Float> stats;
 
-  /** Creates a new builder */
+  /**
+   * Creates a new builder
+   */
   public static Builder builder() {
     return new Builder();
   }
 
   /**
    * Gets a set of all stats contained
-   * @return  Stat type set
+   *
+   * @return Stat type set
    */
   public Set<INumericToolStat<?>> getContainedStats() {
     return stats.keySet();
@@ -49,8 +59,9 @@ public class MultiplierNBT {
 
   /**
    * Checks if the NBT contains the given stat
-   * @param stat  Stat to check for
-   * @return  True if the stat is contained
+   *
+   * @param stat Stat to check for
+   * @return True if the stat is contained
    */
   public boolean hasStat(INumericToolStat<?> stat) {
     return stats.containsKey(stat);
@@ -58,8 +69,9 @@ public class MultiplierNBT {
 
   /**
    * Gets the given multiplier
-   * @param stat  Stat
-   * @return  Value, or default if the stat is missing
+   *
+   * @param stat Stat
+   * @return Value, or default if the stat is missing
    */
   public float get(INumericToolStat<?> stat) {
     return stats.getOrDefault(stat, 1f);
@@ -68,14 +80,16 @@ public class MultiplierNBT {
 
   /* NBT */
 
-  /** Reads the multipliers from NBT */
+  /**
+   * Reads the multipliers from NBT
+   */
   public static MultiplierNBT readFromNBT(@Nullable Tag inbt) {
     if (inbt == null || inbt.getId() != Tag.TAG_COMPOUND) {
       return EMPTY;
     }
     // simply try each key as a tool stat
     Builder builder = builder();
-    CompoundTag nbt = (CompoundTag)inbt;
+    CompoundTag nbt = (CompoundTag) inbt;
     for (String key : nbt.getAllKeys()) {
       if (nbt.contains(key, Tag.TAG_ANY_NUMERIC) && StatsNBT.readStatIdFromNBT(key) instanceof INumericToolStat<?> stat) {
         builder.set(stat, nbt.getFloat(key));
@@ -84,10 +98,12 @@ public class MultiplierNBT {
     return builder.build();
   }
 
-  /** Writes these stats to NBT */
+  /**
+   * Writes these stats to NBT
+   */
   public CompoundTag serializeToNBT() {
     CompoundTag nbt = new CompoundTag();
-    for (Entry<INumericToolStat<?>,Float> entry : stats.entrySet()) {
+    for (Entry<INumericToolStat<?>, Float> entry : stats.entrySet()) {
       nbt.putFloat(entry.getKey().getName().toString(), entry.getValue());
     }
     return nbt;
@@ -96,25 +112,34 @@ public class MultiplierNBT {
 
   /* Network */
 
-  /** Writes this to a packet buffer */
+  /**
+   * Writes this to a packet buffer
+   */
   @Deprecated
   public void toNetwork(FriendlyByteBuf buffer) {
     LOADABLE.encode(buffer, this);
   }
 
-  /** Reads this object from the network */
+  /**
+   * Reads this object from the network
+   */
   @Deprecated
   public static MultiplierNBT fromNetwork(FriendlyByteBuf buffer) {
     return LOADABLE.decode(buffer);
   }
 
-  /** Builder for a multiplier, mostly prevents nulls from being added */
+  /**
+   * Builder for a multiplier, mostly prevents nulls from being added
+   */
   public static class Builder {
+
     private final ImmutableMap.Builder<INumericToolStat<?>, Float> builder = ImmutableMap.builder();
 
     private Builder() {}
 
-    /** Sets the given stat in the builder */
+    /**
+     * Sets the given stat in the builder
+     */
     public Builder set(INumericToolStat<?> stat, float value) {
       if (value != 1f) {
         builder.put(stat, Math.max(value, 0));
@@ -122,9 +147,11 @@ public class MultiplierNBT {
       return this;
     }
 
-    /** Builds the stats from the given values */
+    /**
+     * Builds the stats from the given values
+     */
     public MultiplierNBT build() {
-      Map<INumericToolStat<?>,Float> map = builder.build();
+      Map<INumericToolStat<?>, Float> map = builder.build();
       if (map.isEmpty()) {
         return EMPTY;
       }

@@ -32,7 +32,10 @@ import java.util.regex.Pattern;
  */
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public final class SlotType {
-  /** Loadable for a slot type */
+
+  /**
+   * Loadable for a slot type
+   */
   public static final StringLoadable<SlotType> LOADABLE = StringLoadable.DEFAULT.comapFlatMap((name, error) -> {
     if (!isValidName(name)) {
       throw error.create("Invalid slot type name '" + name + '\'');
@@ -40,31 +43,53 @@ public final class SlotType {
     return SlotType.getOrCreate(name);
   }, SlotType::getName);
 
-  /** Key for uppercase slot name */
+  /**
+   * Key for uppercase slot name
+   */
   private static final String KEY_PREFIX = TConstruct.makeTranslationKey("stat", "slot.prefix.");
-  /** Key for lowercase slot name */
+  /**
+   * Key for lowercase slot name
+   */
   public static final String KEY_DISPLAY = TConstruct.makeTranslationKey("stat", "slot.display.");
-  /** Map of instances for each name */
-  private static final Map<String,SlotType> SLOT_TYPES = new HashMap<>();
-  /** List of all slots in the order they were added */
+  /**
+   * Map of instances for each name
+   */
+  private static final Map<String, SlotType> SLOT_TYPES = new HashMap<>();
+  /**
+   * List of all slots in the order they were added
+   */
   private static final List<SlotType> ALL_SLOTS = new ArrayList<>();
 
-  /** Regex to validate slot type strings */
+  /**
+   * Regex to validate slot type strings
+   */
   private static final Pattern VALIDATOR = Pattern.compile("^[a-z0-9_]*$");
 
-  /** Common slot type for modifiers with many levels */
+  /**
+   * Common slot type for modifiers with many levels
+   */
   public static final SlotType UPGRADE = create("upgrades", 0xFFCCBA47);
-  /** Slot type for protection based modifiers on armor */
+  /**
+   * Slot type for protection based modifiers on armor
+   */
   public static final SlotType DEFENSE = create("defense", 0xFFA8FFA0);
-  /** Rare slot type for powerful and rather exclusive modifiers */
+  /**
+   * Rare slot type for powerful and rather exclusive modifiers
+   */
   public static final SlotType ABILITY = create("abilities", 0xFFB8A0FF);
-  /** Slot type used in the soul forge */
+  /**
+   * Slot type used in the soul forge
+   */
   public static final SlotType SOUL = create("souls", -1);
 
-  /** Just makes sure static initialization is done early enough */
+  /**
+   * Just makes sure static initialization is done early enough
+   */
   public static void init() {}
 
-  /** Checks if the given slot name is valid */
+  /**
+   * Checks if the given slot name is valid
+   */
   @SuppressWarnings("BooleanMethodIsAlwaysInverted")
   public static boolean isValidName(String name) {
     return VALIDATOR.matcher(name).matches();
@@ -73,11 +98,12 @@ public final class SlotType {
   /**
    * Registers the given slot type.
    * Note that you will also want to define a texture for the creative modifier and JEI using {@link slimeknights.mantle.client.model.NBTKeyModel#registerExtraTexture(ResourceLocation, String, ResourceLocation)}
-   * @param name     Name of the slot type
-   * @param color    Color of the slot
-   * @return  Slot type instance for the name, only once instance for each name
+   *
+   * @param name  Name of the slot type
+   * @param color Color of the slot
+   * @return Slot type instance for the name, only once instance for each name
+   * @throws IllegalArgumentException Error if a name is invalid
    * @apiNote
-   * @throws IllegalArgumentException  Error if a name is invalid
    */
   public static SlotType create(String name, int color) {
     if (SLOT_TYPES.containsKey(name)) {
@@ -92,50 +118,66 @@ public final class SlotType {
     return type;
   }
 
-  /** Gets an existing slot type, or creates it if missing */
+  /**
+   * Gets an existing slot type, or creates it if missing
+   */
   public static SlotType getOrCreate(String name) {
     return create(name, -1);
   }
 
   /**
    * Gets the slot type for the given name, if present
-   * @param name  Name
-   * @return  Type name
+   *
+   * @param name Name
+   * @return Type name
    */
   @Nullable
   public static SlotType getIfPresent(String name) {
     return SLOT_TYPES.get(name);
   }
 
-  /** Reads the slot type from the packet buffer */
+  /**
+   * Reads the slot type from the packet buffer
+   */
   public static SlotType read(FriendlyByteBuf buffer) {
     return getOrCreate(buffer.readUtf());
   }
 
   /**
    * Gets a collection of all registered slot types. Persists between worlds, so a slot type existing does not mean its used
-   * @return  Collection of all slot types
+   *
+   * @return Collection of all slot types
    */
   public static Collection<SlotType> getAllSlotTypes() {
     return ALL_SLOTS;
   }
 
-  /** Name of this slot type, used for serialization */
+  /**
+   * Name of this slot type, used for serialization
+   */
   @Getter
   private final String name;
-  /** Gets the color of this slot type */
+  /**
+   * Gets the color of this slot type
+   */
   @Getter
   private final TextColor color;
 
-  /** Cached text component display names */
+  /**
+   * Cached text component display names
+   */
   private Component displayName = null;
 
-  /** Gets the display name for display in a title */
+  /**
+   * Gets the display name for display in a title
+   */
   public String getPrefix() {
     return KEY_PREFIX + name;
   }
 
-  /** Gets the display name for display in a sentence */
+  /**
+   * Gets the display name for display in a sentence
+   */
   public Component getDisplayName() {
     if (displayName == null) {
       displayName = Component.translatable(KEY_DISPLAY + name);
@@ -143,7 +185,9 @@ public final class SlotType {
     return displayName;
   }
 
-  /** Writes this slot type to the packet buffer */
+  /**
+   * Writes this slot type to the packet buffer
+   */
   public void write(FriendlyByteBuf buffer) {
     buffer.writeUtf(name);
   }
@@ -153,8 +197,11 @@ public final class SlotType {
     return "SlotType{" + name + '}';
   }
 
-  /** Data object representing a slot type and count */
+  /**
+   * Data object representing a slot type and count
+   */
   public record SlotCount(SlotType type, int count) {
+
     public static final Loadable<SlotCount> LOADABLE = new Loadable<>() {
       @Override
       public SlotCount convert(JsonElement element, String key) {
@@ -162,7 +209,7 @@ public final class SlotType {
         if (json.entrySet().size() != 1) {
           throw new JsonSyntaxException("Cannot set multiple slot types");
         }
-        Entry<String,JsonElement> entry = json.entrySet().iterator().next();
+        Entry<String, JsonElement> entry = json.entrySet().iterator().next();
         String typeString = entry.getKey();
         if (!SlotType.isValidName(typeString)) {
           throw new JsonSyntaxException("Invalid slot type name '" + typeString + "'");
@@ -191,13 +238,17 @@ public final class SlotType {
       }
 
       @Override
-      public <P> LoadableField<SlotCount,P> nullableField(String key, Function<P,SlotCount> getter) {
+      public <P> LoadableField<SlotCount, P> nullableField(String key, Function<P, SlotCount> getter) {
         return new NullableSlotCountField<>(key, getter);
       }
     };
 
-    /** Nullable field which compacts slot counts in the buffer */
-    private record NullableSlotCountField<P>(String key, Function<P,SlotCount> getter) implements LoadableField<SlotCount,P> {
+    /**
+     * Nullable field which compacts slot counts in the buffer
+     */
+    private record NullableSlotCountField<P>(String key,
+                                             Function<P, SlotCount> getter) implements LoadableField<SlotCount, P> {
+
       @Nullable
       @Override
       public SlotCount get(JsonObject json) {
@@ -245,7 +296,9 @@ public final class SlotType {
       return count.type();
     }
 
-    /** Gets the given type of slots from the given slot count object */
+    /**
+     * Gets the given type of slots from the given slot count object
+     */
     public static int get(@Nullable SlotCount slots, SlotType type) {
       if (slots != null && slots.type() == type) {
         return slots.count();

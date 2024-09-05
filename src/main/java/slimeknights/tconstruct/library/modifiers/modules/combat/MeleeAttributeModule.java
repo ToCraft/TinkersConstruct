@@ -31,14 +31,18 @@ import java.util.UUID;
 
 /**
  * Adds an attribute modifier to the mob before hitting, then removes the modifier after hitting.
- * @param unique     Unique string used to generate the UUID and as the attribute name
- * @param attribute  Attribute to apply
- * @param uuid       UUID generated via {@link UUID#nameUUIDFromBytes(byte[])}
- * @param operation  Attribute operation
- * @param amount     Amount of the attribute to apply
- * @param condition  Standard modifier conditions
+ *
+ * @param unique    Unique string used to generate the UUID and as the attribute name
+ * @param attribute Attribute to apply
+ * @param uuid      UUID generated via {@link UUID#nameUUIDFromBytes(byte[])}
+ * @param operation Attribute operation
+ * @param amount    Amount of the attribute to apply
+ * @param condition Standard modifier conditions
  */
-public record MeleeAttributeModule(String unique, Attribute attribute, UUID uuid, Operation operation, LevelingValue amount, ModifierCondition<IToolStackView> condition) implements ModifierModule, MeleeHitModifierHook, ConditionalModule<IToolStackView> {
+public record MeleeAttributeModule(String unique, Attribute attribute, UUID uuid, Operation operation,
+                                   LevelingValue amount,
+                                   ModifierCondition<IToolStackView> condition) implements ModifierModule, MeleeHitModifierHook, ConditionalModule<IToolStackView> {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<MeleeAttributeModule>defaultHooks(ModifierHooks.MELEE_HIT);
   public static final RecordLoadable<MeleeAttributeModule> LOADER = RecordLoadable.create(
     StringLoadable.DEFAULT.requiredField("unique", MeleeAttributeModule::unique),
@@ -96,13 +100,16 @@ public record MeleeAttributeModule(String unique, Attribute attribute, UUID uuid
   }
 
 
-  /** Creates a new builder instance */
+  /**
+   * Creates a new builder instance
+   */
   public static Builder builder(Attribute attribute, Operation operation) {
     return new Builder(attribute, operation);
   }
 
   @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
-  public static class Builder extends ModuleBuilder.Stack<Builder> implements LevelingValue.Builder<MeleeAttributeModule>  {
+  public static class Builder extends ModuleBuilder.Stack<Builder> implements LevelingValue.Builder<MeleeAttributeModule> {
+
     protected final Attribute attribute;
     protected final Operation operation;
     protected String unique;

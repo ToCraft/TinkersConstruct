@@ -18,6 +18,7 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 public class ParryingModifier extends OffhandAttackModifier implements ToolActionModifierHook {
+
   @Override
   protected void registerHooks(Builder hookBuilder) {
     super.registerHooks(hookBuilder);
@@ -62,7 +63,7 @@ public class ParryingModifier extends OffhandAttackModifier implements ToolActio
   @Override
   public void onFinishUsing(IToolStackView tool, ModifierEntry modifier, LivingEntity entity) {
     if (entity instanceof Player player) {
-      player.getCooldowns().addCooldown(tool.getItem(), (int)(20 / tool.getStats().get(ToolStats.ATTACK_SPEED)));
+      player.getCooldowns().addCooldown(tool.getItem(), (int) (20 / tool.getStats().get(ToolStats.ATTACK_SPEED)));
     }
   }
 

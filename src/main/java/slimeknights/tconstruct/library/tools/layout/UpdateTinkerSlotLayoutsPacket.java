@@ -16,7 +16,9 @@ import java.util.Collection;
  */
 @RequiredArgsConstructor
 public class UpdateTinkerSlotLayoutsPacket implements IThreadsafePacket {
-  @Getter(AccessLevel.PACKAGE) @VisibleForTesting
+
+  @Getter(AccessLevel.PACKAGE)
+  @VisibleForTesting
   private final Collection<StationSlotLayout> layouts;
 
   public UpdateTinkerSlotLayoutsPacket(FriendlyByteBuf buffer) {

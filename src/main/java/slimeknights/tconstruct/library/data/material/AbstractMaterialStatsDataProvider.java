@@ -20,10 +20,15 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/** Base data generator for use in addons, depends on the regular material provider */
+/**
+ * Base data generator for use in addons, depends on the regular material provider
+ */
 public abstract class AbstractMaterialStatsDataProvider extends GenericDataProvider {
-  /** All material stats generated so far */
-  private final Map<MaterialId,List<IMaterialStats>> allMaterialStats = new HashMap<>();
+
+  /**
+   * All material stats generated so far
+   */
+  private final Map<MaterialId, List<IMaterialStats>> allMaterialStats = new HashMap<>();
   /* Materials data provider for validation */
   private final AbstractMaterialDataProvider materials;
 
@@ -32,7 +37,9 @@ public abstract class AbstractMaterialStatsDataProvider extends GenericDataProvi
     this.materials = materials;
   }
 
-  /** Adds all relevant material stats */
+  /**
+   * Adds all relevant material stats
+   */
   protected abstract void addMaterialStats();
 
   @Override
@@ -56,19 +63,21 @@ public abstract class AbstractMaterialStatsDataProvider extends GenericDataProvi
 
   /**
    * Adds a set of material stats for the given material ID
-   * @param location  Material ID
-   * @param stats     Stats to add
+   *
+   * @param location Material ID
+   * @param stats    Stats to add
    */
   protected void addMaterialStats(MaterialId location, IMaterialStats... stats) {
     allMaterialStats.computeIfAbsent(location, materialId -> new ArrayList<>())
-                    .addAll(Arrays.asList(stats));
+      .addAll(Arrays.asList(stats));
   }
 
   /**
    * Adds material stats from the given armor builder
-   * @param location     Material ID
-   * @param statBuilder  Stat builder
-   * @param otherStats   Other stat types to add after the builder
+   *
+   * @param location    Material ID
+   * @param statBuilder Stat builder
+   * @param otherStats  Other stat types to add after the builder
    */
   protected void addArmorStats(MaterialId location, ArmorSlotType.ArmorBuilder<? extends IMaterialStats> statBuilder, IMaterialStats... otherStats) {
     IMaterialStats[] stats = new IMaterialStats[4];
@@ -83,9 +92,10 @@ public abstract class AbstractMaterialStatsDataProvider extends GenericDataProvi
 
   /**
    * Adds material stats from the given armor and shield builder
-   * @param location     Material ID
-   * @param statBuilder  Stat builder
-   * @param otherStats   Other stat types to add after the builder
+   *
+   * @param location    Material ID
+   * @param statBuilder Stat builder
+   * @param otherStats  Other stat types to add after the builder
    */
   protected void addArmorShieldStats(MaterialId location, ArmorSlotType.ArmorShieldBuilder<? extends IMaterialStats> statBuilder, IMaterialStats... otherStats) {
     addArmorStats(location, statBuilder, otherStats);
@@ -94,7 +104,9 @@ public abstract class AbstractMaterialStatsDataProvider extends GenericDataProvi
 
   /* Internal */
 
-  /** Converts a material and stats list to a JSON */
+  /**
+   * Converts a material and stats list to a JSON
+   */
   private MaterialStatJson convert(List<IMaterialStats> stats) {
     return new MaterialStatJson(stats.stream()
       .collect(Collectors.toMap(
@@ -102,9 +114,11 @@ public abstract class AbstractMaterialStatsDataProvider extends GenericDataProvi
         stat -> encodeStats(stat, stat.getType()))));
   }
 
-  /** Deals with generics for the stat encoder */
+  /**
+   * Deals with generics for the stat encoder
+   */
   @SuppressWarnings("unchecked")
   private static <T extends IMaterialStats> JsonElement encodeStats(IMaterialStats stats, MaterialStatType<T> type) {
-    return type.getLoadable().serialize((T)stats);
+    return type.getLoadable().serialize((T) stats);
   }
 }

@@ -27,8 +27,11 @@ import javax.annotation.Nullable;
 
 import static slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper.TANK_HELPER;
 
-/** Modifier to handle spilling recipes onto self when attacked */
+/**
+ * Modifier to handle spilling recipes onto self when attacked
+ */
 public abstract class UseFluidOnHitModifier extends Modifier {
+
   @Override
   protected void registerHooks(Builder hookBuilder) {
     super.registerHooks(hookBuilder);
@@ -36,17 +39,23 @@ public abstract class UseFluidOnHitModifier extends Modifier {
     hookBuilder.addModule(StatBoostModule.add(ToolTankHelper.CAPACITY_STAT).eachLevel(FluidType.BUCKET_VOLUME));
   }
 
-  /** Spawns particles at the given entity */
+  /**
+   * Spawns particles at the given entity
+   */
   public static void spawnParticles(Entity target, FluidStack fluid) {
     if (target.level instanceof ServerLevel) {
-      ((ServerLevel)target.level).sendParticles(new FluidParticleData(TinkerCommons.fluidParticle.get(), fluid), target.getX(), target.getY(0.5), target.getZ(), 10, 0.1, 0.2, 0.1, 0.2);
+      ((ServerLevel) target.level).sendParticles(new FluidParticleData(TinkerCommons.fluidParticle.get(), fluid), target.getX(), target.getY(0.5), target.getZ(), 10, 0.1, 0.2, 0.1, 0.2);
     }
   }
 
-  /** Overridable method to create the attack context and spawn particles */
+  /**
+   * Overridable method to create the attack context and spawn particles
+   */
   public abstract FluidEffectContext.Entity createContext(LivingEntity self, @Nullable Player player, @Nullable Entity attacker);
 
-  /** Logic for using the fluid */
+  /**
+   * Logic for using the fluid
+   */
   protected void useFluid(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source) {
     // 25% chance of working per level, 50% per level on shields
     float level = modifier.getEffectiveLevel();

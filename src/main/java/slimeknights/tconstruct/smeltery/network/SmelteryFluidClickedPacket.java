@@ -14,6 +14,7 @@ import slimeknights.tconstruct.smeltery.block.entity.tank.ISmelteryTankHandler;
  */
 @AllArgsConstructor
 public class SmelteryFluidClickedPacket implements IThreadsafePacket {
+
   private final int index;
 
   public SmelteryFluidClickedPacket(FriendlyByteBuf buffer) {

@@ -13,8 +13,9 @@ import slimeknights.tconstruct.gadgets.client.FancyItemFrameRenderer;
 import slimeknights.tconstruct.gadgets.client.RenderShuriken;
 
 @SuppressWarnings("unused")
-@EventBusSubscriber(modid=TConstruct.MOD_ID, value=Dist.CLIENT, bus=Bus.MOD)
+@EventBusSubscriber(modid = TConstruct.MOD_ID, value = Dist.CLIENT, bus = Bus.MOD)
 public class GadgetClientEvents extends ClientEventBase {
+
   @SubscribeEvent
   static void registerModels(RegisterAdditional event) {
     FancyItemFrameRenderer.LOCATIONS_MODEL.values().forEach(event::register);

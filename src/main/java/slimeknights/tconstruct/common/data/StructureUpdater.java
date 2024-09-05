@@ -27,6 +27,7 @@ import java.util.Map.Entry;
  * Based on https://github.com/BluSunrize/ImmersiveEngineering/blob/1.19.2/src/datagen/java/blusunrize/immersiveengineering/data/StructureUpdater.java
  */
 public class StructureUpdater extends GenericNBTProvider {
+
   private final String basePath;
   private final String modId;
   private final MultiPackResourceManager resources;
@@ -38,20 +39,22 @@ public class StructureUpdater extends GenericNBTProvider {
     try {
       Field resourceManager = ExistingFileHelper.class.getDeclaredField(packType == PackType.SERVER_DATA ? "serverData" : "clientResources");
       resourceManager.setAccessible(true);
-      resources = (MultiPackResourceManager)resourceManager.get(helper);
-    } catch (NoSuchFieldException|IllegalAccessException e) {
+      resources = (MultiPackResourceManager) resourceManager.get(helper);
+    } catch (NoSuchFieldException | IllegalAccessException e) {
       throw new RuntimeException(e);
     }
   }
 
   @Override
   public void run(CachedOutput cache) {
-    for(Entry<ResourceLocation,Resource> entry : resources.listResources(basePath, file -> file.getNamespace().equals(modId) && file.getPath().endsWith(".nbt")).entrySet()) {
+    for (Entry<ResourceLocation, Resource> entry : resources.listResources(basePath, file -> file.getNamespace().equals(modId) && file.getPath().endsWith(".nbt")).entrySet()) {
       process(localize(entry.getKey()), entry.getValue(), cache);
     }
   }
 
-  /** Updates the given structure */
+  /**
+   * Updates the given structure
+   */
   private void process(ResourceLocation location, Resource resource, CachedOutput cache) {
     try {
       CompoundTag inputNBT = NbtIo.readCompressed(resource.open());

@@ -26,7 +26,10 @@ import java.util.function.Function;
  * This model contains a single fluid region that is scaled in the TESR, and a list of two items displayed in the TESR
  */
 public class CastingModel extends InventoryModel {
-  /** Shared loader instance */
+
+  /**
+   * Shared loader instance
+   */
   public static final IGeometryLoader<InventoryModel> LOADER = CastingModel::deserialize;
 
   private final FluidCuboid fluid;
@@ -38,22 +41,28 @@ public class CastingModel extends InventoryModel {
   }
 
   @Override
-  public BakedModel bake(IGeometryBakingContext owner, ModelBakery bakery, Function<Material,TextureAtlasSprite> spriteGetter, ModelState transform, ItemOverrides overrides, ResourceLocation location) {
+  public BakedModel bake(IGeometryBakingContext owner, ModelBakery bakery, Function<Material, TextureAtlasSprite> spriteGetter, ModelState transform, ItemOverrides overrides, ResourceLocation location) {
     BakedModel baked = model.bake(owner, bakery, spriteGetter, transform, overrides, location);
     return new Baked(baked, items, fluid);
   }
 
-  /** Baked model, mostly a data wrapper around a normal model */
+  /**
+   * Baked model, mostly a data wrapper around a normal model
+   */
   public static class Baked extends InventoryModel.Baked {
+
     @Getter
     private final FluidCuboid fluid;
+
     private Baked(BakedModel originalModel, List<ModelItem> items, FluidCuboid fluid) {
       super(originalModel, items);
       this.fluid = fluid;
     }
   }
 
-  /** Deserializes this model from JSON */
+  /**
+   * Deserializes this model from JSON
+   */
   public static InventoryModel deserialize(JsonObject json, JsonDeserializationContext context) {
     SimpleBlockModel model = ColoredBlockModel.deserialize(json, context);
     List<ModelItem> items = ModelItem.listFromJson(json, "items");

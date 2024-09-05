@@ -28,30 +28,54 @@ import java.util.function.Function;
 import static slimeknights.tconstruct.tools.menu.ToolContainerMenu.REPEAT_BACKGROUND_START;
 import static slimeknights.tconstruct.tools.menu.ToolContainerMenu.SLOT_SIZE;
 
-/** Screen for a tool inventory */
+/**
+ * Screen for a tool inventory
+ */
 public class ToolContainerScreen extends AbstractContainerScreen<ToolContainerMenu> {
-  /** The ResourceLocation containing the chest GUI texture. */
+
+  /**
+   * The ResourceLocation containing the chest GUI texture.
+   */
   private static final ResourceLocation TEXTURE = TConstruct.getResource("textures/gui/tool.png");
 
-  /** Max number of rows in the repeat slots background */
+  /**
+   * Max number of rows in the repeat slots background
+   */
   private static final int REPEAT_BACKGROUND_ROWS = 6;
-  /** Start location of the player inventory */
+  /**
+   * Start location of the player inventory
+   */
   private static final int PLAYER_INVENTORY_START = REPEAT_BACKGROUND_START + (REPEAT_BACKGROUND_ROWS * SLOT_SIZE);
-  /** Height of the player inventory texture */
+  /**
+   * Height of the player inventory texture
+   */
   private static final int PLAYER_INVENTORY_HEIGHT = 97;
-  /** Start Y location of the slot start element */
+  /**
+   * Start Y location of the slot start element
+   */
   private static final int SLOTS_START = 256 - SLOT_SIZE;
-  /** Selected slot texture X position */
+  /**
+   * Selected slot texture X position
+   */
   private static final int SELECTED_X = 176;
 
-  /** Total number of slots in the inventory */
+  /**
+   * Total number of slots in the inventory
+   */
   private final int slots;
-  /** Number of rows in this inventory */
+  /**
+   * Number of rows in this inventory
+   */
   private final int inventoryRows;
-  /** Number of slots in the final row */
+  /**
+   * Number of slots in the final row
+   */
   private final int slotsInLastRow;
-  /** Tool instance being rendered */
+  /**
+   * Tool instance being rendered
+   */
   private final IToolStackView tool;
+
   public ToolContainerScreen(ToolContainerMenu menu, Inventory inv, Component title) {
     super(menu, inv, title);
     int slots = menu.getItemHandler().getSlots();
@@ -149,7 +173,7 @@ public class ToolContainerScreen extends AbstractContainerScreen<ToolContainerMe
     // prepare pattern drawing
     RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
     assert this.minecraft != null;
-    Function<ResourceLocation,TextureAtlasSprite> spriteGetter = this.minecraft.getTextureAtlas(InventoryMenu.BLOCK_ATLAS);
+    Function<ResourceLocation, TextureAtlasSprite> spriteGetter = this.minecraft.getTextureAtlas(InventoryMenu.BLOCK_ATLAS);
 
     // draw slot patterns for all empty slots
     int start = 0;

@@ -57,6 +57,7 @@ import java.util.Objects;
 import static slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper.TANK_HELPER;
 
 public class BucketingModifier extends Modifier implements BlockInteractionModifierHook, GeneralInteractionModifierHook, EquipmentChangeModifierHook {
+
   @Override
   protected void registerHooks(Builder hookBuilder) {
     super.registerHooks(hookBuilder);
@@ -74,11 +75,12 @@ public class BucketingModifier extends Modifier implements BlockInteractionModif
 
   /**
    * Checks if the block is unable to contain fluid
-   * @param world  Level
-   * @param pos    Position to try
-   * @param state  State
-   * @param fluid  Fluid to place
-   * @return  True if the block is unable to contain fluid, false if it can contain fluid
+   *
+   * @param world Level
+   * @param pos   Position to try
+   * @param state State
+   * @param fluid Fluid to place
+   * @return True if the block is unable to contain fluid, false if it can contain fluid
    */
   private static boolean cannotContainFluid(Level world, BlockPos pos, BlockState state, Fluid fluid) {
     Block block = state.getBlock();
@@ -188,7 +190,7 @@ public class BucketingModifier extends Modifier implements BlockInteractionModif
     boolean placed = false;
     if (world.dimensionType().ultraWarm() && fluid.is(FluidTags.WATER)) {
       world.playSound(player, target, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5F, 2.6F + (world.random.nextFloat() - world.random.nextFloat()) * 0.8F);
-      for(int l = 0; l < 8; ++l) {
+      for (int l = 0; l < 8; ++l) {
         world.addParticle(ParticleTypes.LARGE_SMOKE, target.getX() + Math.random(), target.getY() + Math.random(), target.getZ() + Math.random(), 0.0D, 0.0D, 0.0D);
       }
       placed = true;
@@ -203,7 +205,7 @@ public class BucketingModifier extends Modifier implements BlockInteractionModif
       }
     } else if (existing.getBlock() instanceof LiquidBlockContainer container) {
       // if not replaceable, it must be a liquid container
-      container.placeLiquid(world, target, existing, ((FlowingFluid)fluid).getSource(false));
+      container.placeLiquid(world, target, existing, ((FlowingFluid) fluid).getSource(false));
       world.playSound(null, target, FluidTransferHelper.getEmptySound(fluidStack), SoundSource.BLOCKS, 1.0F, 1.0F);
       placed = true;
     }

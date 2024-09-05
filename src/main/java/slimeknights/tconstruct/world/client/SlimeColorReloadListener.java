@@ -15,8 +15,10 @@ import java.io.IOException;
  * Color reload listener for all slime foliage types
  */
 public class SlimeColorReloadListener extends SimplePreparableReloadListener<int[]> {
+
   private final FoliageType color;
   private final ResourceLocation path;
+
   public SlimeColorReloadListener(FoliageType color) {
     this.color = color;
     this.path = TConstruct.getResource("textures/colormap/" + color.getSerializedName() + "_grass_color.png");

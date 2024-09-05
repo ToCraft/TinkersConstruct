@@ -26,13 +26,18 @@ import java.util.List;
 
 /**
  * Module for a extra slot modifier with multiple variants based on the slot type
- * @param key             Persistent data key containing the slot name. If null, uses the modifier ID.
- *                        Presently, changing this makes it incompatible with the swappable modifier recipe, this is added for future proofing.
- * @param slotCount       Number of slots to grant
+ *
+ * @param key       Persistent data key containing the slot name. If null, uses the modifier ID.
+ *                  Presently, changing this makes it incompatible with the swappable modifier recipe, this is added for future proofing.
+ * @param slotCount Number of slots to grant
  */
-public record SwappableSlotModule(@Nullable ResourceLocation key, int slotCount) implements VolatileDataModifierHook, DisplayNameModifierHook, ModifierRemovalHook, ModifierModule, ModuleWithKey {
+public record SwappableSlotModule(@Nullable ResourceLocation key,
+                                  int slotCount) implements VolatileDataModifierHook, DisplayNameModifierHook, ModifierRemovalHook, ModifierModule, ModuleWithKey {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<SwappableSlotModule>defaultHooks(ModifierHooks.VOLATILE_DATA, ModifierHooks.DISPLAY_NAME, ModifierHooks.REMOVE);
-  /** Format key for swappable variant */
+  /**
+   * Format key for swappable variant
+   */
   public static final String FORMAT = TConstruct.makeTranslationKey("modifier", "extra_modifier.type_format");
   public static final RecordLoadable<SwappableSlotModule> LOADER = RecordLoadable.create(
     ModuleWithKey.FIELD,
@@ -89,8 +94,12 @@ public record SwappableSlotModule(@Nullable ResourceLocation key, int slotCount)
     return LOADER;
   }
 
-  /** Module to add (or remove) additional slots based on the given swappable slot type */
-  public record BonusSlot(@Nullable ResourceLocation key, SlotType match, SlotType bonus, int slotCount) implements VolatileDataModifierHook, ModifierModule, ModuleWithKey {
+  /**
+   * Module to add (or remove) additional slots based on the given swappable slot type
+   */
+  public record BonusSlot(@Nullable ResourceLocation key, SlotType match, SlotType bonus,
+                          int slotCount) implements VolatileDataModifierHook, ModifierModule, ModuleWithKey {
+
     private static final List<ModuleHook<?>> DEFAULT_HOOKS = List.of(ModifierHooks.VOLATILE_DATA);
     public static final RecordLoadable<BonusSlot> LOADER = RecordLoadable.create(
       ModuleWithKey.FIELD,

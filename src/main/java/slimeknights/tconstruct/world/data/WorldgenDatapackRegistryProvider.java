@@ -7,6 +7,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
@@ -72,10 +73,13 @@ import static slimeknights.tconstruct.world.TinkerStructures.enderSlimeTreeTall;
 import static slimeknights.tconstruct.world.TinkerStructures.skySlimeIsland;
 import static slimeknights.tconstruct.world.TinkerStructures.skySlimeIslandTree;
 
-/** Provider for all our worldgen datapack registry stuff */
+/**
+ * Provider for all our worldgen datapack registry stuff
+ */
 @SuppressWarnings("SameParameterValue")
 @RequiredArgsConstructor
 public class WorldgenDatapackRegistryProvider implements DataProvider {
+
   private final DataGenerator generator;
   private final ExistingFileHelper existingFileHelper;
   private final RegistryAccess registryAccess = RegistryAccess.builtinCopy();
@@ -83,7 +87,7 @@ public class WorldgenDatapackRegistryProvider implements DataProvider {
 
   @Override
   public void run(CachedOutput cache) throws IOException {
-    Map<ResourceKey<Structure>,Structure> structures = new LinkedHashMap<>();
+    Map<ResourceKey<Structure>, Structure> structures = new LinkedHashMap<>();
     // earthslime island
     structures.put(earthSlimeIsland, IslandStructure.seaBuilder()
       .addDefaultTemplates(getResource("islands/earth/"))
@@ -121,14 +125,14 @@ public class WorldgenDatapackRegistryProvider implements DataProvider {
       .build(new StructureSettings(tag(TinkerTags.Biomes.ENDERSLIME_ISLANDS), monsterOverride(TinkerWorld.enderSlimeEntity.get(), 4, 4), Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE)));
 
     // structure sets
-    Map<String,StructureSet> structureSets = new LinkedHashMap<>();
-    structureSets.put("overworld_ocean_island", structureSet(new RandomSpreadStructurePlacement(35, 25, RandomSpreadType.LINEAR, 25988585),  entry(earthSlimeIsland, 1)));
-    structureSets.put("overworld_sky_island",   structureSet(new RandomSpreadStructurePlacement(40, 15, RandomSpreadType.LINEAR, 14357800),  entry(skySlimeIsland,   4), entry(clayIsland, 1)));
-    structureSets.put("nether_ocean_island",    structureSet(new RandomSpreadStructurePlacement(15, 10, RandomSpreadType.LINEAR, 65245622),  entry(bloodIsland,      1)));
-    structureSets.put("end_sky_island",         structureSet(new RandomSpreadStructurePlacement(25, 12, RandomSpreadType.LINEAR, 368963602), entry(endSlimeIsland,   1)));
+    Map<String, StructureSet> structureSets = new LinkedHashMap<>();
+    structureSets.put("overworld_ocean_island", structureSet(new RandomSpreadStructurePlacement(35, 25, RandomSpreadType.LINEAR, 25988585), entry(earthSlimeIsland, 1)));
+    structureSets.put("overworld_sky_island", structureSet(new RandomSpreadStructurePlacement(40, 15, RandomSpreadType.LINEAR, 14357800), entry(skySlimeIsland, 4), entry(clayIsland, 1)));
+    structureSets.put("nether_ocean_island", structureSet(new RandomSpreadStructurePlacement(15, 10, RandomSpreadType.LINEAR, 65245622), entry(bloodIsland, 1)));
+    structureSets.put("end_sky_island", structureSet(new RandomSpreadStructurePlacement(25, 12, RandomSpreadType.LINEAR, 368963602), entry(endSlimeIsland, 1)));
 
     // biome modifiers
-    Map<String,BiomeModifier> biomeModifiers = new LinkedHashMap<>();
+    Map<String, BiomeModifier> biomeModifiers = new LinkedHashMap<>();
     HolderSet<Biome> overworld = tag(BiomeTags.IS_OVERWORLD);
     HolderSet<Biome> nether = tag(BiomeTags.IS_NETHER);
     HolderSet<Biome> end = tag(BiomeTags.IS_END);
@@ -136,16 +140,16 @@ public class WorldgenDatapackRegistryProvider implements DataProvider {
     biomeModifiers.put("cobalt_ore", new AddFeaturesBiomeModifier(nether, direct(reference(TinkerWorld.placedSmallCobaltOre), reference(TinkerWorld.placedLargeCobaltOre)), Decoration.UNDERGROUND_DECORATION));
     // geodes
     biomeModifiers.put("earth_geode", new AddFeaturesBiomeModifier(overworld, direct(reference(TinkerWorld.placedEarthGeode)), Decoration.LOCAL_MODIFICATIONS));
-    biomeModifiers.put("sky_geode", new AddFeaturesBiomeModifier(and(overworld, not(Registry.BIOME_REGISTRY, or(tag(BiomeTags.IS_OCEAN), tag(BiomeTags.IS_DEEP_OCEAN), tag(BiomeTags.IS_BEACH), tag(BiomeTags.IS_RIVER)))), direct(reference(TinkerWorld.placedSkyGeode)), Decoration.LOCAL_MODIFICATIONS));
+    biomeModifiers.put("sky_geode", new AddFeaturesBiomeModifier(and(overworld, not(Registries.BIOME, or(tag(BiomeTags.IS_OCEAN), tag(BiomeTags.IS_DEEP_OCEAN), tag(BiomeTags.IS_BEACH), tag(BiomeTags.IS_RIVER)))), direct(reference(TinkerWorld.placedSkyGeode)), Decoration.LOCAL_MODIFICATIONS));
     biomeModifiers.put("ichor_geode", new AddFeaturesBiomeModifier(nether, direct(reference(TinkerWorld.placedIchorGeode)), Decoration.LOCAL_MODIFICATIONS));
-    biomeModifiers.put("ender_geode", new AddFeaturesBiomeModifier(and(end, not(Registry.BIOME_REGISTRY, direct(reference(Biomes.THE_END)))), direct(reference(TinkerWorld.placedEnderGeode)), Decoration.LOCAL_MODIFICATIONS));
+    biomeModifiers.put("ender_geode", new AddFeaturesBiomeModifier(and(end, not(Registries.BIOME, direct(reference(Biomes.THE_END)))), direct(reference(TinkerWorld.placedEnderGeode)), Decoration.LOCAL_MODIFICATIONS));
     // spawns
     biomeModifiers.put("spawn_overworld_slime", new AddSpawnsBiomeModifier(overworld, List.of(new SpawnerData(TinkerWorld.skySlimeEntity.get(), 100, 2, 4))));
     biomeModifiers.put("spawn_end_slime", new AddSpawnsBiomeModifier(end, List.of(new SpawnerData(TinkerWorld.enderSlimeEntity.get(), 10, 2, 4))));
 
     // run final loading
-    registryName(Registry.STRUCTURE_SET_REGISTRY, structureSets).run(cache);
-    registryKey(Registry.STRUCTURE_REGISTRY, structures).run(cache);
+    registryName(Registries.STRUCTURE_SET, structureSets).run(cache);
+    registryKey(Registries.STRUCTURE, structures).run(cache);
     registryName(ForgeRegistries.Keys.BIOME_MODIFIERS, biomeModifiers).run(cache);
   }
 
@@ -157,18 +161,24 @@ public class WorldgenDatapackRegistryProvider implements DataProvider {
 
   /* Registry helpers */
 
-  /** Creates a reference to the given registry object */
+  /**
+   * Creates a reference to the given registry object
+   */
   private <T> Holder<T> reference(ResourceKey<T> key) {
     ResourceKey<Registry<T>> registry = ResourceKey.createRegistryKey(key.registry());
     return registryAccess.registryOrThrow(registry).getOrCreateHolderOrThrow(Objects.requireNonNull(key));
   }
 
-  /** Creates a reference to the given registry object */
+  /**
+   * Creates a reference to the given registry object
+   */
   private <T> Holder<T> reference(Holder<T> object) {
     return reference(object.unwrapKey().orElseThrow());
   }
 
-  /** Creates a reference to the given registry object */
+  /**
+   * Creates a reference to the given registry object
+   */
   private <T> Holder<T> reference(RegistryObject<T> object) {
     return reference(Objects.requireNonNull(object.getKey()));
   }
@@ -176,18 +186,24 @@ public class WorldgenDatapackRegistryProvider implements DataProvider {
 
   /* Holder sets */
 
-  /** Creates a holder set tag for the given registry */
+  /**
+   * Creates a holder set tag for the given registry
+   */
   private <T> HolderSet<T> tag(TagKey<T> key) {
     return registryAccess.registryOrThrow(key.registry()).getOrCreateTag(key);
   }
 
-  /** Ands the holder sets together */
+  /**
+   * Ands the holder sets together
+   */
   @SafeVarargs
   private <T> AndHolderSet<T> and(HolderSet<T>... sets) {
     return new AndHolderSet<>(List.of(sets));
   }
 
-  /** Ors the holder sets together */
+  /**
+   * Ors the holder sets together
+   */
   @SafeVarargs
   private <T> OrHolderSet<T> or(HolderSet<T>... sets) {
     return new OrHolderSet<>(List.of(sets));
@@ -200,17 +216,23 @@ public class WorldgenDatapackRegistryProvider implements DataProvider {
 
   /* Datapack helpers */
 
-  /** Creates a datapack registry with the given entries */
+  /**
+   * Creates a datapack registry with the given entries
+   */
   private <T> DataProvider registryRL(ResourceKey<Registry<T>> registry, Map<ResourceLocation, T> entries) {
     return JsonCodecProvider.forDatapackRegistry(generator, existingFileHelper, TConstruct.MOD_ID, registryOps, registry, entries);
   }
 
-  /** Creates a datapack registry with the given entries */
+  /**
+   * Creates a datapack registry with the given entries
+   */
   private <T> DataProvider registryName(ResourceKey<Registry<T>> registry, Map<String, T> entries) {
     return registryRL(registry, entries.entrySet().stream().collect(Collectors.toMap(entry -> TConstruct.getResource(entry.getKey()), Entry::getValue)));
   }
 
-  /** Creates a datapack registry with the given entries */
+  /**
+   * Creates a datapack registry with the given entries
+   */
   private <T> DataProvider registryKey(ResourceKey<Registry<T>> registry, Map<ResourceKey<T>, T> entries) {
     return registryRL(registry, entries.entrySet().stream().collect(Collectors.toMap(entry -> entry.getKey().location(), Entry::getValue)));
   }
@@ -218,18 +240,24 @@ public class WorldgenDatapackRegistryProvider implements DataProvider {
 
   /* Object creation helpers */
 
-  /** Saves a structure set */
+  /**
+   * Saves a structure set
+   */
   private StructureSet structureSet(StructurePlacement placement, StructureSelectionEntry... structures) {
     return new StructureSet(List.of(structures), placement);
   }
 
-  /** Creates an entry for a registry object */
+  /**
+   * Creates an entry for a registry object
+   */
   private StructureSelectionEntry entry(ResourceKey<Structure> structure, int weight) {
     return new StructureSelectionEntry(reference(structure), weight);
   }
 
-  /** Creates a spawn override for a single mob */
-  private static Map<MobCategory,StructureSpawnOverride> monsterOverride(EntityType<?> entity, int min, int max) {
+  /**
+   * Creates a spawn override for a single mob
+   */
+  private static Map<MobCategory, StructureSpawnOverride> monsterOverride(EntityType<?> entity, int min, int max) {
     return Map.of(MobCategory.MONSTER, new StructureSpawnOverride(BoundingBoxType.STRUCTURE, WeightedRandomList.create(new MobSpawnSettings.SpawnerData(entity, 1, min, max))));
   }
 }

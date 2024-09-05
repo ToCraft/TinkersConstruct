@@ -14,11 +14,15 @@ import static slimeknights.tconstruct.tables.block.entity.table.TinkerStationBlo
 
 @RequiredArgsConstructor
 public class ModifierWorktableContainerWrapper implements ITinkerableContainer.Mutable {
+
   private final ModifierWorktableBlockEntity worktable;
-  @Nullable @Setter
+  @Nullable
+  @Setter
   private Player player;
 
-  /** Cached tool instance to save lookup effort */
+  /**
+   * Cached tool instance to save lookup effort
+   */
   @Nullable
   private ToolStack tool;
 

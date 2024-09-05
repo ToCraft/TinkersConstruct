@@ -13,25 +13,34 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import slimeknights.tconstruct.TConstruct;
 
-/** Capability logic */
+/**
+ * Capability logic
+ */
 public class PiggybackCapability {
+
   private static final ResourceLocation ID = TConstruct.getResource("piggyback");
   public static final Capability<PiggybackHandler> PIGGYBACK = CapabilityManager.get(new CapabilityToken<>() {});
 
   private PiggybackCapability() {}
 
-  /** Registers this capability */
+  /**
+   * Registers this capability
+   */
   public static void register() {
     FMLJavaModLoadingContext.get().getModEventBus().addListener(EventPriority.NORMAL, false, RegisterCapabilitiesEvent.class, PiggybackCapability::register);
     MinecraftForge.EVENT_BUS.addGenericListener(Entity.class, PiggybackCapability::attachCapability);
   }
 
-  /** Registers the capability with the event bus */
+  /**
+   * Registers the capability with the event bus
+   */
   private static void register(RegisterCapabilitiesEvent event) {
     event.register(PiggybackHandler.class);
   }
 
-  /** Event listener to attach the capability */
+  /**
+   * Event listener to attach the capability
+   */
   private static void attachCapability(AttachCapabilitiesEvent<Entity> event) {
     if (event.getObject() instanceof Player) {
       event.addCapability(ID, new PiggybackHandler((Player) event.getObject()));

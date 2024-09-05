@@ -18,8 +18,10 @@ import slimeknights.tconstruct.shared.block.TableBlock;
 import slimeknights.tconstruct.smeltery.block.entity.CastingBlockEntity;
 
 public abstract class AbstractCastingBlock extends TableBlock {
+
   @Getter
   private final boolean requireCast;
+
   protected AbstractCastingBlock(Properties builder, boolean requireCast) {
     super(builder);
     this.requireCast = requireCast;

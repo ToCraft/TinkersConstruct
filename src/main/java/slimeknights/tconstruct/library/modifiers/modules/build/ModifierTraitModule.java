@@ -17,7 +17,9 @@ import java.util.List;
 /**
  * Module for a modifier to have a nested modifier as a trait.
  */
-public record ModifierTraitModule(ModifierEntry modifier, boolean fixedLevel) implements ModifierTraitHook, ModifierModule {
+public record ModifierTraitModule(ModifierEntry modifier,
+                                  boolean fixedLevel) implements ModifierTraitHook, ModifierModule {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<ModifierTraitModule>defaultHooks(ModifierHooks.MODIFIER_TRAITS);
   public static final RecordLoadable<ModifierTraitModule> LOADER = RecordLoadable.create(
     ModifierEntry.LOADABLE.directField(ModifierTraitModule::modifier),

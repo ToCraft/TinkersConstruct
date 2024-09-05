@@ -21,8 +21,11 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import static slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper.TANK_HELPER;
 import static slimeknights.tconstruct.tools.modifiers.ability.fluid.UseFluidOnHitModifier.spawnParticles;
 
-/** Modifier applying fluid effects on melee hit */
+/**
+ * Modifier applying fluid effects on melee hit
+ */
 public class SpillingModifier extends Modifier implements MeleeHitModifierHook {
+
   @Override
   protected void registerHooks(Builder hookBuilder) {
     super.registerHooks(hookBuilder);

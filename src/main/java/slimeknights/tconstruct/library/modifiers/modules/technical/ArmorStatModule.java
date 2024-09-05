@@ -39,10 +39,14 @@ import java.util.List;
 
 /**
  * Modifier that to keep track of a stat that is contributed to by all armor pieces. Can scale the stat on different modifiers or for incremental and can use float values unlike {@link ArmorLevelModule}.
+ *
  * @see ArmorLevelModule
  * @see TinkerDataKey
  */
-public record ArmorStatModule(TinkerDataKey<Float> key, LevelingValue amount, boolean allowBroken, @Nullable TagKey<Item> heldTag, TooltipStyle tooltipStyle, ModifierCondition<IToolStackView> condition) implements HookProvider, EquipmentChangeModifierHook, ModifierModule, TooltipModifierHook, ConditionalModule<IToolStackView> {
+public record ArmorStatModule(TinkerDataKey<Float> key, LevelingValue amount, boolean allowBroken,
+                              @Nullable TagKey<Item> heldTag, TooltipStyle tooltipStyle,
+                              ModifierCondition<IToolStackView> condition) implements HookProvider, EquipmentChangeModifierHook, ModifierModule, TooltipModifierHook, ConditionalModule<IToolStackView> {
+
   private static final List<ModuleHook<?>> TOOLTIP_HOOKS = HookProvider.<ArmorStatModule>defaultHooks(ModifierHooks.EQUIPMENT_CHANGE, ModifierHooks.TOOLTIP);
   private static final List<ModuleHook<?>> NO_TOOLTIP_HOOKS = HookProvider.<ArmorStatModule>defaultHooks(ModifierHooks.EQUIPMENT_CHANGE);
   public static final RecordLoadable<ArmorStatModule> LOADER = RecordLoadable.create(
@@ -95,13 +99,14 @@ public record ArmorStatModule(TinkerDataKey<Float> key, LevelingValue amount, bo
 
   /* Helpers */
 
-  public enum TooltipStyle { NONE, BOOST, PERCENT }
+  public enum TooltipStyle {NONE, BOOST, PERCENT}
 
   /**
    * Adds to the armor stat for the given key. Make sure to subtract on unequip if you add on equip, it will not automatically be removed.
-   * @param context  Equipment change context
-   * @param key      Key to modify
-   * @param amount   Amount to add
+   *
+   * @param context Equipment change context
+   * @param key     Key to modify
+   * @param amount  Amount to add
    */
   public static void addStat(EquipmentChangeContext context, TinkerDataKey<Float> key, float amount) {
     context.getTinkerData().ifPresent(data -> {
@@ -116,11 +121,12 @@ public record ArmorStatModule(TinkerDataKey<Float> key, LevelingValue amount, bo
 
   /**
    * Adds to the armor stat for the given key if the tool is in a valid armor slot
-   * @param tool     Tool instance
-   * @param context  Equipment change context
-   * @param key      Key to modify
-   * @param amount   Amount to add
-   * @param heldTag  Tag to check to validate held items, null means held disallowed
+   *
+   * @param tool    Tool instance
+   * @param context Equipment change context
+   * @param key     Key to modify
+   * @param amount  Amount to add
+   * @param heldTag Tag to check to validate held items, null means held disallowed
    */
   public static void addStatIfArmor(IToolStackView tool, EquipmentChangeContext context, TinkerDataKey<Float> key, float amount, boolean allowBroken, @Nullable TagKey<Item> heldTag) {
     if (ArmorLevelModule.validSlot(tool, context.getChangedSlot(), heldTag) && (!tool.isBroken() || allowBroken)) {
@@ -130,9 +136,10 @@ public record ArmorStatModule(TinkerDataKey<Float> key, LevelingValue amount, bo
 
   /**
    * Gets the total level from the key in the entity modifier data
-   * @param living  Living entity
-   * @param key     Key to get
-   * @return  Level from the key
+   *
+   * @param living Living entity
+   * @param key    Key to get
+   * @return Level from the key
    */
   public static float getStat(LivingEntity living, TinkerDataKey<Float> key) {
     return living.getCapability(TinkerDataCapability.CAPABILITY).resolve().map(data -> data.get(key)).orElse(0f);
@@ -149,6 +156,7 @@ public record ArmorStatModule(TinkerDataKey<Float> key, LevelingValue amount, bo
   @Accessors(fluent = true)
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   public static class Builder extends ModuleBuilder.Stack<Builder> implements LevelingValue.Builder<ArmorStatModule> {
+
     private final TinkerDataKey<Float> key;
     private boolean allowBroken = false;
     @Nullable

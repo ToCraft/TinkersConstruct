@@ -17,6 +17,7 @@ import java.util.Optional;
  * Class to dynamically provide the right slot count to JEI
  */
 public class CraftingStationTransferInfo implements IRecipeTransferInfo<CraftingStationContainerMenu, CraftingRecipe> {
+
   @Override
   public Class<? extends CraftingStationContainerMenu> getContainerClass() {
     return CraftingStationContainerMenu.class;

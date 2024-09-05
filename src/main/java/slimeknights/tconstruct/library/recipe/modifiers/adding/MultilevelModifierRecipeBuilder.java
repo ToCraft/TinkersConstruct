@@ -33,6 +33,7 @@ import java.util.function.Consumer;
  */
 @RequiredArgsConstructor(staticName = "modifier")
 public class MultilevelModifierRecipeBuilder extends AbstractRecipeBuilder<MultilevelModifierRecipeBuilder> {
+
   private final ModifierId result;
   private final List<LevelEntry> levels = new ArrayList<>();
   // inputs
@@ -47,9 +48,10 @@ public class MultilevelModifierRecipeBuilder extends AbstractRecipeBuilder<Multi
 
   /**
    * Sets the list of tools this modifier can be applied to
-   * @param tools    Modifier tools list
-   * @param maxSize  Max stack size this recipe applies to
-   * @return  Builder instance
+   *
+   * @param tools   Modifier tools list
+   * @param maxSize Max stack size this recipe applies to
+   * @return Builder instance
    */
   public MultilevelModifierRecipeBuilder setTools(Ingredient tools, int maxSize) {
     this.tools = tools;
@@ -59,8 +61,9 @@ public class MultilevelModifierRecipeBuilder extends AbstractRecipeBuilder<Multi
 
   /**
    * Sets the list of tools this modifier can be applied to
-   * @param tools  Modifier tools list
-   * @return  Builder instance
+   *
+   * @param tools Modifier tools list
+   * @return Builder instance
    */
   public MultilevelModifierRecipeBuilder setTools(Ingredient tools) {
     return setTools(tools, ITinkerStationRecipe.DEFAULT_TOOL_STACK_SIZE);
@@ -68,8 +71,9 @@ public class MultilevelModifierRecipeBuilder extends AbstractRecipeBuilder<Multi
 
   /**
    * Sets the tag for applicable tools
-   * @param tag  Tag
-   * @return  Builder instance
+   *
+   * @param tag Tag
+   * @return Builder instance
    */
   public MultilevelModifierRecipeBuilder setTools(TagKey<Item> tag) {
     return this.setTools(Ingredient.of(tag));
@@ -77,8 +81,9 @@ public class MultilevelModifierRecipeBuilder extends AbstractRecipeBuilder<Multi
 
   /**
    * Adds an input to the recipe
-   * @param ingredient  Input
-   * @return  Builder instance
+   *
+   * @param ingredient Input
+   * @return Builder instance
    */
   public MultilevelModifierRecipeBuilder addInput(SizedIngredient ingredient) {
     this.inputs.add(ingredient);
@@ -87,8 +92,9 @@ public class MultilevelModifierRecipeBuilder extends AbstractRecipeBuilder<Multi
 
   /**
    * Adds an input to the recipe
-   * @param ingredient  Input
-   * @return  Builder instance
+   *
+   * @param ingredient Input
+   * @return Builder instance
    */
   public MultilevelModifierRecipeBuilder addInput(Ingredient ingredient) {
     return addInput(SizedIngredient.of(ingredient));
@@ -96,9 +102,10 @@ public class MultilevelModifierRecipeBuilder extends AbstractRecipeBuilder<Multi
 
   /**
    * Adds an input with the given amount, does not affect the salvage builder
-   * @param item    Item
-   * @param amount  Amount
-   * @return  Builder instance
+   *
+   * @param item   Item
+   * @param amount Amount
+   * @return Builder instance
    */
   public MultilevelModifierRecipeBuilder addInput(ItemLike item, int amount) {
     return addInput(SizedIngredient.fromItems(amount, item));
@@ -106,8 +113,9 @@ public class MultilevelModifierRecipeBuilder extends AbstractRecipeBuilder<Multi
 
   /**
    * Adds an input with a size of 1, does not affect the salvage builder
-   * @param item    Item
-   * @return  Builder instance
+   *
+   * @param item Item
+   * @return Builder instance
    */
   public MultilevelModifierRecipeBuilder addInput(ItemLike item) {
     return addInput(item, 1);
@@ -115,9 +123,10 @@ public class MultilevelModifierRecipeBuilder extends AbstractRecipeBuilder<Multi
 
   /**
    * Adds an input to the recipe
-   * @param tag     Tag input
-   * @param amount  Amount required
-   * @return  Builder instance
+   *
+   * @param tag    Tag input
+   * @param amount Amount required
+   * @return Builder instance
    */
   public MultilevelModifierRecipeBuilder addInput(TagKey<Item> tag, int amount) {
     return addInput(SizedIngredient.fromTag(tag, amount));
@@ -125,8 +134,9 @@ public class MultilevelModifierRecipeBuilder extends AbstractRecipeBuilder<Multi
 
   /**
    * Adds an input to the recipe
-   * @param tag     Tag input
-   * @return  Builder instance
+   *
+   * @param tag Tag input
+   * @return Builder instance
    */
   public MultilevelModifierRecipeBuilder addInput(TagKey<Item> tag) {
     return addInput(tag, 1);
@@ -135,7 +145,8 @@ public class MultilevelModifierRecipeBuilder extends AbstractRecipeBuilder<Multi
 
   /**
    * Allows using modifier crystals to apply this modifier
-   * @return  Builder instance
+   *
+   * @return Builder instance
    */
   public MultilevelModifierRecipeBuilder allowCrystal() {
     allowCrystal = true;
@@ -144,7 +155,8 @@ public class MultilevelModifierRecipeBuilder extends AbstractRecipeBuilder<Multi
 
   /**
    * Disallows using modifier crystals to apply this modifier
-   * @return  Builder instance
+   *
+   * @return Builder instance
    */
   public MultilevelModifierRecipeBuilder disallowCrystal() {
     allowCrystal = false;
@@ -153,7 +165,8 @@ public class MultilevelModifierRecipeBuilder extends AbstractRecipeBuilder<Multi
 
   /**
    * Makes the recipe check the trait level in addition to the level of recipe modifiers
-   * @return  Builder instance
+   *
+   * @return Builder instance
    */
   public MultilevelModifierRecipeBuilder checkTraitLevel() {
     checkTraitLevel = true;
@@ -163,7 +176,9 @@ public class MultilevelModifierRecipeBuilder extends AbstractRecipeBuilder<Multi
 
   /* Requirements */
 
-  /** Base logic for adding a level */
+  /**
+   * Base logic for adding a level
+   */
   private MultilevelModifierRecipeBuilder addLevelRange(@Nullable SlotCount slots, int minLevel, int maxLevel) {
     if (minLevel > maxLevel) {
       throw new JsonSyntaxException("minLevel must be less than or equal to maxLevel");
@@ -175,32 +190,44 @@ public class MultilevelModifierRecipeBuilder extends AbstractRecipeBuilder<Multi
     return this;
   }
 
-  /** Adds a level range for the given type and count */
+  /**
+   * Adds a level range for the given type and count
+   */
   public MultilevelModifierRecipeBuilder addLevelRange(SlotType slot, int slotCount, int minLevel, int maxLevel) {
     return addLevelRange(new SlotCount(slot, slotCount), minLevel, maxLevel);
   }
 
-  /** Adds a level for the given type and count */
+  /**
+   * Adds a level for the given type and count
+   */
   public MultilevelModifierRecipeBuilder addLevel(SlotType slot, int slotCount, int level) {
     return addLevelRange(slot, slotCount, level, level);
   }
 
-  /** Adds a level for the given type and count */
+  /**
+   * Adds a level for the given type and count
+   */
   public MultilevelModifierRecipeBuilder addMinLevel(SlotType slot, int slotCount, int level) {
     return addLevelRange(slot, slotCount, level, Short.MAX_VALUE);
   }
 
-  /** Adds slotless at the given level range */
+  /**
+   * Adds slotless at the given level range
+   */
   public MultilevelModifierRecipeBuilder addLevelRange(int minLevel, int maxLevel) {
     return addLevelRange(null, minLevel, maxLevel);
   }
 
-  /** Adds slotless at the given level */
+  /**
+   * Adds slotless at the given level
+   */
   public MultilevelModifierRecipeBuilder addLevel(int level) {
     return addLevelRange(level, level);
   }
 
-  /** Adds slotless at the given level */
+  /**
+   * Adds slotless at the given level
+   */
   public MultilevelModifierRecipeBuilder addMinLevel(int level) {
     return addLevelRange(level, Short.MAX_VALUE);
   }
@@ -208,7 +235,9 @@ public class MultilevelModifierRecipeBuilder extends AbstractRecipeBuilder<Multi
 
   /* Saving */
 
-  /** Saves all salvage recipes for this recipe */
+  /**
+   * Saves all salvage recipes for this recipe
+   */
   public MultilevelModifierRecipeBuilder saveSalvage(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
     if (levels.isEmpty()) {
       throw new IllegalStateException("Must have at least 1 level");
@@ -240,7 +269,9 @@ public class MultilevelModifierRecipeBuilder extends AbstractRecipeBuilder<Multi
     consumer.accept(new LoadableFinishedRecipe<>(new MultilevelModifierRecipe(id, inputs, tools, maxToolSize, result, allowCrystal, levels, checkTraitLevel), MultilevelModifierRecipe.LOADER, advancementId));
   }
 
-  /** Writes common JSON elements */
+  /**
+   * Writes common JSON elements
+   */
   private void writeCommon(JsonObject json) {
     Ingredient ingredient = tools;
     if (tools == Ingredient.EMPTY) {
@@ -251,8 +282,12 @@ public class MultilevelModifierRecipeBuilder extends AbstractRecipeBuilder<Multi
       json.addProperty("max_tool_size", maxToolSize);
     }
   }
-  /** Recipe for modifier salvage */
+
+  /**
+   * Recipe for modifier salvage
+   */
   private class FinishedSalvage extends AbstractFinishedRecipe {
+
     private final SlotCount slots;
     private final int minLevel;
     private final int maxLevel;

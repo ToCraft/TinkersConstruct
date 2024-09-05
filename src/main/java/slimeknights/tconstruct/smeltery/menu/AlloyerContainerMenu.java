@@ -23,10 +23,12 @@ import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
 public class AlloyerContainerMenu extends TriggeringBaseContainerMenu<AlloyerBlockEntity> {
+
   public static final ResourceLocation TOOLTIP_FORMAT = TConstruct.getResource("alloyer");
 
   @Getter
   private boolean hasFuelSlot = false;
+
   public AlloyerContainerMenu(int id, @Nullable Inventory inv, @Nullable AlloyerBlockEntity alloyer) {
     super(TinkerSmeltery.alloyerContainer.get(), id, inv, alloyer);
 

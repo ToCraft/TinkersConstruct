@@ -25,21 +25,30 @@ import java.util.function.Predicate;
  * Data class representing the size and contents of a multiblock
  */
 public class MultiblockStructureData {
+
   public static final String TAG_EXTRA_POS = "extra";
   public static final String TAG_MIN = "min";
   public static final String TAG_MAX = "max";
 
-  /** Smallest block position in the structure */
+  /**
+   * Smallest block position in the structure
+   */
   @Getter
   private final BlockPos minPos;
-  /** Largest block position in the structure */
+  /**
+   * Largest block position in the structure
+   */
   @Getter
   private final BlockPos maxPos;
 
-  /** Contains all positions not in the standard areas, typically inside */
+  /**
+   * Contains all positions not in the standard areas, typically inside
+   */
   protected final Set<BlockPos> extra;
 
-  /** Booleans to determine bound check parameters */
+  /**
+   * Booleans to determine bound check parameters
+   */
   private final boolean hasCeiling, hasFrame, hasFloor;
 
   /**
@@ -53,11 +62,15 @@ public class MultiblockStructureData {
   @Getter
   private final BlockPos maxInside;
 
-  /** Inside sizes */
+  /**
+   * Inside sizes
+   */
   @Getter
   private final int innerX, innerY, innerZ;
 
-  /** Bounding box representing the area inside the structure */
+  /**
+   * Bounding box representing the area inside the structure
+   */
   @Getter
   private final AABB bounds;
 
@@ -80,20 +93,22 @@ public class MultiblockStructureData {
 
   /**
    * Checks if a positon is within the cube made from two other positions
-   * @param pos  Position to check
-   * @param min  Min position
-   * @param max  Max position
-   * @return  True if within the positions
+   *
+   * @param pos Position to check
+   * @param min Min position
+   * @param max Max position
+   * @return True if within the positions
    */
   public static boolean isWithin(BlockPos pos, BlockPos min, BlockPos max) {
     return pos.getX() >= min.getX() && pos.getY() >= min.getY() && pos.getZ() >= min.getZ()
-           && pos.getX() <= max.getX() && pos.getY() <= max.getY() && pos.getZ() <= max.getZ();
+      && pos.getX() <= max.getX() && pos.getY() <= max.getY() && pos.getZ() <= max.getZ();
   }
 
   /**
    * Checks if the block position is within the bounds of the structure
-   * @param pos  Position to check
-   * @return  True if the position is within the bounds
+   *
+   * @param pos Position to check
+   * @return True if the position is within the bounds
    */
   public boolean withinBounds(BlockPos pos) {
     return isWithin(pos, minPos, maxPos);
@@ -101,8 +116,9 @@ public class MultiblockStructureData {
 
   /**
    * Checks if the position is within the inside of the structure
-   * @param pos  Position to check
-   * @return  True if within the central bounds
+   *
+   * @param pos Position to check
+   * @return True if within the central bounds
    */
   public boolean isInside(BlockPos pos) {
     return isWithin(pos, minInside, maxInside);
@@ -110,8 +126,9 @@ public class MultiblockStructureData {
 
   /**
    * Checks if the given block position is part of this structure.
-   * @param pos  Position to check
-   * @return  True if its part of this structure
+   *
+   * @param pos Position to check
+   * @return True if its part of this structure
    */
   public boolean contains(BlockPos pos) {
     return withinBounds(pos) && containsBase(pos);
@@ -119,8 +136,9 @@ public class MultiblockStructureData {
 
   /**
    * Checks if the given block position is part of this structure. Slightly simplier logic assuming the position is within bounds
-   * @param pos  Position to check
-   * @return  True if its part of this structure
+   *
+   * @param pos Position to check
+   * @return True if its part of this structure
    */
   private boolean containsBase(BlockPos pos) {
     // blocks in the inner region are added to the extra positions, fall back to that
@@ -136,7 +154,7 @@ public class MultiblockStructureData {
       if (pos.getX() == minPos.getX() || pos.getX() == maxPos.getX()) edges++;
       if (pos.getZ() == minPos.getZ() || pos.getZ() == maxPos.getZ()) edges++;
       if ((hasFloor && pos.getY() == minPos.getY()) ||
-          (hasCeiling && pos.getX() == maxPos.getX())) edges++;
+        (hasCeiling && pos.getX() == maxPos.getX())) edges++;
       if (edges < 2) {
         return true;
       }
@@ -149,18 +167,20 @@ public class MultiblockStructureData {
 
   /**
    * Checks if the block position is directly above the structure
-   * @param pos  Position to check
-   * @return  True if the position is exactly one block above the structure
+   *
+   * @param pos Position to check
+   * @return True if the position is exactly one block above the structure
    */
   public boolean isDirectlyAbove(BlockPos pos) {
     return pos.getX() >= minPos.getX() && pos.getZ() >= minPos.getZ()
-           && pos.getX() <= maxPos.getX() && pos.getZ() <= maxPos.getZ()
-           && pos.getY() == maxPos.getY() + 1;
+      && pos.getX() <= maxPos.getX() && pos.getZ() <= maxPos.getZ()
+      && pos.getY() == maxPos.getY() + 1;
   }
 
   /**
    * Iterates over each position contained in this structure
-   * @param consumer  Position consumer, note the position is mutable, so call {@link BlockPos#immutable()} if you have to store it
+   *
+   * @param consumer Position consumer, note the position is mutable, so call {@link BlockPos#immutable()} if you have to store it
    */
   public void forEachContained(Consumer<BlockPos.MutableBlockPos> consumer) {
     BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
@@ -176,7 +196,9 @@ public class MultiblockStructureData {
     }
   }
 
-  /** Updates the master at the given position */
+  /**
+   * Updates the master at the given position
+   */
   private static void updateMaster(Level world, BlockPos pos, IMasterLogic master, boolean add) {
     // update the structure property first, this may add or remove the block entity
     BlockState state = world.getBlockState(pos);
@@ -190,8 +212,9 @@ public class MultiblockStructureData {
 
   /**
    * Assigns the master to all servants in this structure
-   * @param master        Master to assign
-   * @param oldStructure  Previous structure instance. Reduces the number of masters assigned and removes old masters
+   *
+   * @param master       Master to assign
+   * @param oldStructure Previous structure instance. Reduces the number of masters assigned and removes old masters
    */
   public <T extends MantleBlockEntity & IMasterLogic> void assignMaster(T master, @Nullable MultiblockStructureData oldStructure) {
     Predicate<BlockPos> shouldUpdate;
@@ -224,7 +247,8 @@ public class MultiblockStructureData {
 
   /**
    * Clears the master on all blocks in this structure
-   * @param master  Master to remove
+   *
+   * @param master Master to remove
    */
   public <T extends MantleBlockEntity & IMasterLogic> void clearMaster(T master) {
     Level world = master.getLevel();
@@ -238,8 +262,9 @@ public class MultiblockStructureData {
 
   /**
    * Writes this structure to NBT for the client, client does not need a full list of positions, just render bounds
-   * @param controllerPos  Position of the controller for relative saving, use {@link BlockPos#ZERO} for absolute.
-   * @return  structure as NBT
+   *
+   * @param controllerPos Position of the controller for relative saving, use {@link BlockPos#ZERO} for absolute.
+   * @return structure as NBT
    */
   public CompoundTag writeClientTag(BlockPos controllerPos) {
     CompoundTag nbt = new CompoundTag();
@@ -250,8 +275,9 @@ public class MultiblockStructureData {
 
   /**
    * Writes the full NBT data for writing to disk
-   * @param controllerPos  Position of the controller for relative saving, use {@link BlockPos#ZERO} for absolute.
-   * @return  structure as NBT
+   *
+   * @param controllerPos Position of the controller for relative saving, use {@link BlockPos#ZERO} for absolute.
+   * @return structure as NBT
    */
   public CompoundTag writeToTag(BlockPos controllerPos) {
     CompoundTag nbt = writeClientTag(controllerPos);
@@ -263,9 +289,10 @@ public class MultiblockStructureData {
 
   /**
    * Writes a lit of positions to NBT
-   * @param collection  Position collection
-   * @param basePos     Base position for relative saving, use {@link BlockPos#ZERO} for absolute positions.
-   * @return  NBT list
+   *
+   * @param collection Position collection
+   * @param basePos    Base position for relative saving, use {@link BlockPos#ZERO} for absolute positions.
+   * @return NBT list
    */
   protected static ListTag writePosList(Collection<BlockPos> collection, BlockPos basePos) {
     ListTag list = new ListTag();

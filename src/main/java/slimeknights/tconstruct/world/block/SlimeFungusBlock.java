@@ -11,9 +11,12 @@ import slimeknights.tconstruct.common.TinkerTags;
 
 import java.util.function.Supplier;
 
-/** Update of fungus that grows on slime soil instead */
+/**
+ * Update of fungus that grows on slime soil instead
+ */
 public class SlimeFungusBlock extends FungusBlock {
-  public SlimeFungusBlock(Properties properties, Supplier<Holder<ConfiguredFeature<HugeFungusConfiguration,?>>> fungusFeature) {
+
+  public SlimeFungusBlock(Properties properties, Supplier<Holder<ConfiguredFeature<HugeFungusConfiguration, ?>>> fungusFeature) {
     super(properties, fungusFeature);
   }
 

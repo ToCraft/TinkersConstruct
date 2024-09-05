@@ -20,6 +20,7 @@ import slimeknights.tconstruct.gadgets.TinkerGadgets;
 import javax.annotation.Nonnull;
 
 public class EFLNEntity extends ThrowableItemProjectile implements IEntityAdditionalSpawnData {
+
   public EFLNEntity(EntityType<? extends EFLNEntity> type, Level level) {
     super(type, level);
   }

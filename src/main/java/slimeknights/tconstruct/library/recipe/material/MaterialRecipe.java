@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
  * Recipe to get the material from an ingredient
  */
 public class MaterialRecipe implements ICustomOutputRecipe<ISingleStackContainer>, IMaterialValue {
+
   public static final RecordLoadable<MaterialRecipe> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(),
     LoadableRecipeSerializer.RECIPE_GROUP,
@@ -39,7 +40,9 @@ public class MaterialRecipe implements ICustomOutputRecipe<ISingleStackContainer
     ItemOutput.Loadable.OPTIONAL_STACK.emptyField("leftover", r -> r.leftover),
     MaterialRecipe::new);
 
-  /** Vanilla requires 4 ingots for full repair, we drop it down to 3 to mesh better with nuggets and blocks and to fit small head costs better */
+  /**
+   * Vanilla requires 4 ingots for full repair, we drop it down to 3 to mesh better with nuggets and blocks and to fit small head costs better
+   */
   public static final float INGOTS_PER_REPAIR = 3f;
 
   @Getter
@@ -48,16 +51,24 @@ public class MaterialRecipe implements ICustomOutputRecipe<ISingleStackContainer
   protected final String group;
   @Getter
   protected final Ingredient ingredient;
-  /** Amount of material this recipe returns */
+  /**
+   * Amount of material this recipe returns
+   */
   @Getter
   protected final int value;
-  /** Amount of input items needed to craft this material */
+  /**
+   * Amount of input items needed to craft this material
+   */
   @Getter
   protected final int needed;
-  /** Material ID for the recipe return */
+  /**
+   * Material ID for the recipe return
+   */
   @Getter
   protected final MaterialVariant material;
-  /** Leftover stack of value 1, used if the value is more than 1 */
+  /**
+   * Leftover stack of value 1, used if the value is more than 1
+   */
   protected final ItemOutput leftover;
 
   /**
@@ -109,16 +120,20 @@ public class MaterialRecipe implements ICustomOutputRecipe<ISingleStackContainer
     return NonNullList.of(Ingredient.EMPTY, ingredient);
   }
 
-  /** Cache of the display items list */
+  /**
+   * Cache of the display items list
+   */
   private List<ItemStack> displayItems = null;
 
-  /** Gets a list of stacks for display in the recipe */
+  /**
+   * Gets a list of stacks for display in the recipe
+   */
   public List<ItemStack> getDisplayItems() {
     if (displayItems == null) {
       if (needed > 1) {
         displayItems = Arrays.stream(ingredient.getItems())
-                             .map(stack -> ItemHandlerHelper.copyStackWithSize(stack, needed))
-                             .collect(Collectors.toList());
+          .map(stack -> ItemHandlerHelper.copyStackWithSize(stack, needed))
+          .collect(Collectors.toList());
       } else {
         displayItems = Arrays.asList(ingredient.getItems());
       }
@@ -128,8 +143,9 @@ public class MaterialRecipe implements ICustomOutputRecipe<ISingleStackContainer
 
   /**
    * Gets the amount to repair per item for tool repair
-   * @param amount  Base material amount, typically the head durability stat
-   * @return  Float amount per item to repair
+   *
+   * @param amount Base material amount, typically the head durability stat
+   * @return Float amount per item to repair
    */
   public float scaleRepair(float amount) {
     // not cached as it may vary per stat type

@@ -22,9 +22,12 @@ import static slimeknights.mantle.data.registry.GenericLoaderRegistry.SingletonL
  * All tool variables automatically work as melee, mining speed, and conditional stat variables due to the superset parameter space.
  */
 public interface ToolVariable extends IHaveLoader, MeleeVariable, ConditionalStatVariable {
+
   GenericLoaderRegistry<ToolVariable> LOADER = new VariableLoaderRegistry<>("Tool Variable", ToolVariable.Constant::new);
 
-  /** Gets a value from the given tool */
+  /**
+   * Gets a value from the given tool
+   */
   float getValue(IToolStackView tool);
 
   @Override
@@ -46,7 +49,9 @@ public interface ToolVariable extends IHaveLoader, MeleeVariable, ConditionalSta
 
   /* Singletons */
 
-  /** Creates a new singleton variable getter */
+  /**
+   * Creates a new singleton variable getter
+   */
   static ToolVariable simple(ToFloatFunction<IToolStackView> getter) {
     return singleton(loader -> new ToolVariable() {
       @Override
@@ -61,20 +66,27 @@ public interface ToolVariable extends IHaveLoader, MeleeVariable, ConditionalSta
     });
   }
 
-  /** Current durability of the tool */
+  /**
+   * Current durability of the tool
+   */
   ToolVariable CURRENT_DURABILITY = simple(IToolStackView::getCurrentDurability);
 
 
-  /** Registers a variable with tools, melee, conditional stat, and mining speed */
+  /**
+   * Registers a variable with tools, melee, conditional stat, and mining speed
+   */
   static void register(ResourceLocation name, IGenericLoader<? extends ToolVariable> loader) {
     LOADER.register(name, loader);
     MeleeVariable.LOADER.register(name, loader);
     ConditionalStatVariable.register(name, loader);
   }
 
-  
-  /** Constant value instance for this object */
+
+  /**
+   * Constant value instance for this object
+   */
   record Constant(float value) implements VariableLoaderRegistry.ConstantFloat, ToolVariable {
+
     public static final RecordLoadable<ToolVariable.Constant> LOADER = VariableLoaderRegistry.constantLoader(ToolVariable.Constant::new);
 
     @Override

@@ -13,7 +13,10 @@ import slimeknights.tconstruct.tools.stats.StatlessMaterialStats;
 import javax.annotation.Nullable;
 
 public class RangedMaterialContent extends AbstractMaterialContent {
-  /** Page ID for using this index directly */
+
+  /**
+   * Page ID for using this index directly
+   */
   public static final ResourceLocation ID = TConstruct.getResource("ranged_material");
 
   public RangedMaterialContent(MaterialVariantId materialVariant, boolean detailed) {

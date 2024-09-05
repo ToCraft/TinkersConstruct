@@ -17,7 +17,10 @@ import javax.annotation.Nullable;
  */
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class RecipeResult<T> {
-  /** Single pass instance */
+
+  /**
+   * Single pass instance
+   */
   @SuppressWarnings("rawtypes")
   private static final RecipeResult<?> PASS = new RecipeResult(false);
 
@@ -26,13 +29,14 @@ public class RecipeResult<T> {
    */
   @SuppressWarnings("unchecked")
   public static <T> RecipeResult<T> pass() {
-    return (RecipeResult<T>)PASS;
+    return (RecipeResult<T>) PASS;
   }
 
   /**
    * Result containing the item result
-   * @param result  Result of this recipe
-   * @return  Validation result with the given item, or pass if null
+   *
+   * @param result Result of this recipe
+   * @return Validation result with the given item, or pass if null
    */
   public static <T> RecipeResult<T> success(@Nullable T result) {
     if (result == null) {
@@ -43,8 +47,9 @@ public class RecipeResult<T> {
 
   /**
    * Result for when this recipe is not craftable and has an error message
-   * @param component  Error message
-   * @return  Validation result with the given message
+   *
+   * @param component Error message
+   * @return Validation result with the given message
    */
   public static <T> RecipeResult<T> failure(Component component) {
     return new Failure<>(component);
@@ -52,21 +57,25 @@ public class RecipeResult<T> {
 
   /**
    * Result for when this recipe is not craftable and has an error message
-   * @param translationKey  Error message translation key
-   * @param params          Arguments to format into the translation key
-   * @return  Validation result with the given message
+   *
+   * @param translationKey Error message translation key
+   * @param params         Arguments to format into the translation key
+   * @return Validation result with the given message
    */
   public static <T> RecipeResult<T> failure(String translationKey, Object... params) {
     return failure(Component.translatable(translationKey, params));
   }
 
-  /** If true, this recipe passed and can be crafted for the given input */
+  /**
+   * If true, this recipe passed and can be crafted for the given input
+   */
   @Getter
   private final boolean success;
 
   /**
    * Gets the result, throws if unavailable
-   * @return  Result
+   *
+   * @return Result
    */
   public T getResult() {
     throw new UnsupportedOperationException("Cannot get result on failure");
@@ -74,7 +83,8 @@ public class RecipeResult<T> {
 
   /**
    * If true, this recipe failed with an error message. This message should be displayed on screen
-   * @return  true if the recipe failed with an error message
+   *
+   * @return true if the recipe failed with an error message
    */
   public boolean hasError() {
     return false;
@@ -82,15 +92,19 @@ public class RecipeResult<T> {
 
   /**
    * Returns the message for this result
-   * @return  result message
-   * @throws UnsupportedOperationException  if this result is success or pass
+   *
+   * @return result message
+   * @throws UnsupportedOperationException if this result is success or pass
    */
   public Component getMessage() {
     throw new UnsupportedOperationException("Cannot show error message on success");
   }
 
-  /** Class for success, which has an item stack */
+  /**
+   * Class for success, which has an item stack
+   */
   private static class Success<T> extends RecipeResult<T> {
+
     @Getter
     private final T result;
 
@@ -100,8 +114,11 @@ public class RecipeResult<T> {
     }
   }
 
-  /** Class for failure, which has a message */
+  /**
+   * Class for failure, which has a message
+   */
   private static class Failure<T> extends RecipeResult<T> {
+
     @Getter
     private final Component message;
 

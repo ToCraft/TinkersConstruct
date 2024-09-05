@@ -19,8 +19,11 @@ import slimeknights.tconstruct.tools.TinkerModifiers;
 
 import java.util.List;
 
-/** Attack logic for a sweep attack, similar to a sword */
+/**
+ * Attack logic for a sweep attack, similar to a sword
+ */
 public record SweepWeaponAttack(float range) implements MeleeHitToolHook, ToolModule {
+
   public static final RecordLoadable<SweepWeaponAttack> LOADER = RecordLoadable.create(FloatLoadable.FROM_ZERO.defaultField("range", 0f, true, SweepWeaponAttack::range), SweepWeaponAttack::new);
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<SweepWeaponAttack>defaultHooks(ToolHooks.MELEE_HIT);
 
@@ -49,7 +52,7 @@ public record SweepWeaponAttack(float range) implements MeleeHitToolHook, ToolMo
       Entity target = context.getTarget();
       for (LivingEntity aoeTarget : attacker.level.getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(range, 0.25D, range))) {
         if (aoeTarget != attacker && aoeTarget != target && !attacker.isAlliedTo(aoeTarget)
-            && !(aoeTarget instanceof ArmorStand armorStand && armorStand.isMarker()) && attacker.distanceToSqr(aoeTarget) < rangeSq) {
+          && !(aoeTarget instanceof ArmorStand armorStand && armorStand.isMarker()) && attacker.distanceToSqr(aoeTarget) < rangeSq) {
           float angle = attacker.getYRot() * ((float) Math.PI / 180F);
           aoeTarget.knockback(0.4F, Mth.sin(angle), -Mth.cos(angle));
           ToolAttackUtil.dealDefaultDamage(attacker, aoeTarget, sweepDamage);

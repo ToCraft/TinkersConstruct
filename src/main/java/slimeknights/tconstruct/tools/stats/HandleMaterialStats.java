@@ -19,8 +19,12 @@ import java.util.List;
 import static slimeknights.tconstruct.library.materials.stats.IMaterialStats.makeTooltip;
 import static slimeknights.tconstruct.library.materials.stats.IMaterialStats.makeTooltipKey;
 
-/** Stats for melee harvest handles */
-public record HandleMaterialStats(float durability, float miningSpeed, float meleeSpeed, float attackDamage) implements IMaterialStats {
+/**
+ * Stats for melee harvest handles
+ */
+public record HandleMaterialStats(float durability, float miningSpeed, float meleeSpeed,
+                                  float attackDamage) implements IMaterialStats {
+
   public static final MaterialStatsId ID = new MaterialStatsId(TConstruct.getResource("handle"));
   public static final MaterialStatType<HandleMaterialStats> TYPE = new MaterialStatType<>(ID, new HandleMaterialStats(0f, 0f, 0f, 0f), RecordLoadable.create(
     FloatLoadable.ANY.defaultField("durability", 0f, true, HandleMaterialStats::durability),
@@ -71,22 +75,30 @@ public record HandleMaterialStats(float durability, float miningSpeed, float mel
     ToolStats.MINING_SPEED.percent(builder, miningSpeed * scale);
   }
 
-  /** Applies formatting for durability */
+  /**
+   * Applies formatting for durability
+   */
   public static Component formatDurability(float quality) {
     return IToolStat.formatColoredPercentBoost(DURABILITY_PREFIX, quality);
   }
 
-  /** Applies formatting for attack speed */
+  /**
+   * Applies formatting for attack speed
+   */
   public static Component formatAttackDamage(float quality) {
     return IToolStat.formatColoredPercentBoost(ATTACK_DAMAGE_PREFIX, quality);
   }
 
-  /** Applies formatting for attack speed */
+  /**
+   * Applies formatting for attack speed
+   */
   public static Component formatAttackSpeed(float quality) {
     return IToolStat.formatColoredPercentBoost(ATTACK_SPEED_PREFIX, quality);
   }
 
-  /** Applies formatting for mining speed */
+  /**
+   * Applies formatting for mining speed
+   */
   public static Component formatMiningSpeed(float quality) {
     return IToolStat.formatColoredPercentBoost(MINING_SPEED_PREFIX, quality);
   }
@@ -112,6 +124,7 @@ public record HandleMaterialStats(float durability, float miningSpeed, float mel
   @Accessors(fluent = true)
   @Setter
   public static class Builder {
+
     private final boolean multiplier;
     private float durability;
     private float miningSpeed;
@@ -127,13 +140,17 @@ public record HandleMaterialStats(float durability, float miningSpeed, float mel
       this.attackDamage = defaultValue;
     }
 
-    /** Converts a multiplier to a percent in a way that minimizes round off error */
+    /**
+     * Converts a multiplier to a percent in a way that minimizes round off error
+     */
     private static float percent(float multiplier) {
       // round to the nearest 100 to get rid of floating point weirdness
       return (Math.round(multiplier * 100) - 100) / 100f;
     }
 
-    /** Builds the final stats */
+    /**
+     * Builds the final stats
+     */
     public HandleMaterialStats build() {
       if (multiplier) {
         return new HandleMaterialStats(percent(durability), percent(miningSpeed), percent(attackSpeed), percent(attackDamage));

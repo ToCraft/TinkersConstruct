@@ -26,7 +26,10 @@ import java.util.function.Consumer;
  * Tile entity that displays items in world. TODO: better name?
  */
 public abstract class TableBlockEntity extends InventoryBlockEntity {
-  /** tick sound was last played for each player */
+
+  /**
+   * tick sound was last played for each player
+   */
   private final Map<UUID, Integer> lastSoundTick = new HashMap<>();
 
   public TableBlockEntity(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state, Component name, int inventorySize) {
@@ -81,7 +84,9 @@ public abstract class TableBlockEntity extends InventoryBlockEntity {
       .forEach(action);
   }
 
-  /** Checks if we can play the sound right now */
+  /**
+   * Checks if we can play the sound right now
+   */
   protected boolean isSoundReady(Player player) {
     int lastSound = lastSoundTick.getOrDefault(player.getUUID(), 0);
     if (lastSound < player.tickCount) {
@@ -104,7 +109,8 @@ public abstract class TableBlockEntity extends InventoryBlockEntity {
 
   /**
    * Update the screen to the given player
-   * @param player  Player to send an update to
+   *
+   * @param player Player to send an update to
    */
   protected void syncScreen(Player player) {
     if (this.level != null && !this.level.isClientSide && player instanceof ServerPlayer serverPlayer) {

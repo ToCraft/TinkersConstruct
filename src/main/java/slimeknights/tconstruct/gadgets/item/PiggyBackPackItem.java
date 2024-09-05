@@ -37,7 +37,9 @@ import javax.annotation.Nonnull;
 import java.util.function.Consumer;
 
 public class PiggyBackPackItem extends TooltipItem {
+
   private static final int MAX_ENTITY_STACK = 3; // how many entities can be carried at once
+
   public PiggyBackPackItem(Properties props) {
     super(props);
   }
@@ -148,6 +150,7 @@ public class PiggyBackPackItem extends TooltipItem {
   }
 
   public static class CarryPotionEffect extends TinkerEffect {
+
     static final String UUID = "ff4de63a-2b24-11e6-b67b-9e71128cae77";
 
     public CarryPotionEffect() {

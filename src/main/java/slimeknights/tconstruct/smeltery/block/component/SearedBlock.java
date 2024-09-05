@@ -19,9 +19,11 @@ import slimeknights.tconstruct.smeltery.block.entity.component.SmelteryComponent
 import javax.annotation.Nullable;
 
 public class SearedBlock extends Block implements EntityBlock {
+
   public static final BooleanProperty IN_STRUCTURE = BooleanProperty.create("in_structure");
 
   protected final boolean requiredBlockEntity;
+
   public SearedBlock(Properties properties, boolean requiredBlockEntity) {
     super(properties);
     this.requiredBlockEntity = requiredBlockEntity;
@@ -29,7 +31,7 @@ public class SearedBlock extends Block implements EntityBlock {
   }
 
   @Override
-  protected void createBlockStateDefinition(Builder<Block,BlockState> builder) {
+  protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
     builder.add(IN_STRUCTURE);
   }
 

@@ -5,14 +5,19 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.network.chat.Component;
 
 public class RomanNumeralHelper {
+
   private static final String TRANSLATION_KEY_PREFIX = "roman_numeral.value.";
 
   private RomanNumeralHelper() {}
 
-  /** Cache of components for each numeral */
+  /**
+   * Cache of components for each numeral
+   */
   private static final Int2ObjectMap<Component> NUMERAL_CACHE = new Int2ObjectOpenHashMap<>();
 
-  /** Converts a value to a roman numeral string, based on https://stackoverflow.com/questions/12967896/converting-integers-to-roman-numerals-java */
+  /**
+   * Converts a value to a roman numeral string, based on https://stackoverflow.com/questions/12967896/converting-integers-to-roman-numerals-java
+   */
   private static String intToRomanNumeral(int value) {
     if (value < 1) {
       return Integer.toString(value);
@@ -89,8 +94,9 @@ public class RomanNumeralHelper {
 
   /**
    * Gets a text component for the given numeral
-   * @param value  Value of number
-   * @return  Numeral
+   *
+   * @param value Value of number
+   * @return Numeral
    */
   public static Component getNumeral(int value) {
     if (NUMERAL_CACHE.containsKey(value)) {

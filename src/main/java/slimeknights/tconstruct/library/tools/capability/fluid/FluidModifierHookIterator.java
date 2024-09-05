@@ -12,8 +12,11 @@ import java.util.Iterator;
 /**
  * Shared logic to iterate fluid capabilities for {@link ToolFluidCapability}
  */
-abstract class FluidModifierHookIterator<I> extends CompoundIndexHookIterator<FluidModifierHook,I> {
-  /** Entry from {@link #findHook(IToolStackView, int)}, will be set during or before iteration */
+abstract class FluidModifierHookIterator<I> extends CompoundIndexHookIterator<FluidModifierHook, I> {
+
+  /**
+   * Entry from {@link #findHook(IToolStackView, int)}, will be set during or before iteration
+   */
   protected ModifierEntry indexEntry = null;
 
   @Override
@@ -23,6 +26,7 @@ abstract class FluidModifierHookIterator<I> extends CompoundIndexHookIterator<Fl
 
   /**
    * Fills the tank with the given resource
+   *
    * @param tool     Tool to fill
    * @param resource Resource to fill with
    * @param action   Whether to simulate or execute
@@ -31,7 +35,7 @@ abstract class FluidModifierHookIterator<I> extends CompoundIndexHookIterator<Fl
   protected int fill(IToolStackView tool, FluidStack resource, FluidAction action) {
     int totalFilled = 0;
     Iterator<I> iterator = getIterator(tool);
-    while(iterator.hasNext()) {
+    while (iterator.hasNext()) {
       // try filling each modifier
       int filled = getHook(iterator.next()).fill(tool, indexEntry, resource, action);
       if (filled > 0) {
@@ -53,6 +57,7 @@ abstract class FluidModifierHookIterator<I> extends CompoundIndexHookIterator<Fl
 
   /**
    * Drains the tool of the specified resource
+   *
    * @param tool     Tool to drain
    * @param resource Resource to drain
    * @param action   Whether to simulate or execute
@@ -61,7 +66,7 @@ abstract class FluidModifierHookIterator<I> extends CompoundIndexHookIterator<Fl
   public FluidStack drain(IToolStackView tool, FluidStack resource, FluidAction action) {
     FluidStack drainedSoFar = FluidStack.EMPTY;
     Iterator<I> iterator = getIterator(tool);
-    while(iterator.hasNext()) {
+    while (iterator.hasNext()) {
       // try draining each modifier
       FluidStack drained = getHook(iterator.next()).drain(tool, indexEntry, resource, action);
       if (!drained.isEmpty()) {
@@ -90,6 +95,7 @@ abstract class FluidModifierHookIterator<I> extends CompoundIndexHookIterator<Fl
 
   /**
    * Drains the tool of the given amount
+   *
    * @param tool     Tool to drain
    * @param maxDrain Amount to drain
    * @param action   Whether to simulate or execute
@@ -99,7 +105,7 @@ abstract class FluidModifierHookIterator<I> extends CompoundIndexHookIterator<Fl
     FluidStack drainedSoFar = FluidStack.EMPTY;
     FluidStack toDrain = FluidStack.EMPTY;
     Iterator<I> iterator = getIterator(tool);
-    while(iterator.hasNext()) {
+    while (iterator.hasNext()) {
       I next = iterator.next();
       // try draining each modifier
       // if we have no drained anything yet, use the type insensitive hook

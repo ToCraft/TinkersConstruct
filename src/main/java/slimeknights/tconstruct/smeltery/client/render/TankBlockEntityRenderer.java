@@ -14,6 +14,7 @@ import slimeknights.tconstruct.smeltery.block.entity.ITankBlockEntity;
 
 @Log4j2
 public class TankBlockEntityRenderer<T extends BlockEntity & ITankBlockEntity> implements BlockEntityRenderer<T> {
+
   public TankBlockEntityRenderer(Context context) {}
 
   @Override

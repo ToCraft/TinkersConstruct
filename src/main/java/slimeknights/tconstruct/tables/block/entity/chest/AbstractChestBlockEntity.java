@@ -23,13 +23,17 @@ import slimeknights.tconstruct.tables.menu.TinkerChestContainerMenu;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/** Shared base logic for all Tinkers' chest tile entities */
+/**
+ * Shared base logic for all Tinkers' chest tile entities
+ */
 public abstract class AbstractChestBlockEntity extends NameableBlockEntity {
+
   private static final String KEY_ITEMS = "Items";
 
   @Getter
   private final IChestItemHandler itemHandler;
   private final LazyOptional<IItemHandler> capability;
+
   protected AbstractChestBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, Component name, IChestItemHandler itemHandler) {
     super(type, pos, state, name);
     itemHandler.setParent(this);
@@ -60,9 +64,10 @@ public abstract class AbstractChestBlockEntity extends NameableBlockEntity {
 
   /**
    * Checks if the given item should be inserted into the chest on interact
-   * @param player    Player inserting
-   * @param heldItem  Stack to insert
-   * @return  Return true
+   *
+   * @param player   Player inserting
+   * @param heldItem Stack to insert
+   * @return Return true
    */
   public boolean canInsert(Player player, ItemStack heldItem) {
     return true;
@@ -77,7 +82,9 @@ public abstract class AbstractChestBlockEntity extends NameableBlockEntity {
     tags.put(KEY_ITEMS, handlerNBT.getList(KEY_ITEMS, Tag.TAG_COMPOUND));
   }
 
-  /** Reads the inventory from NBT */
+  /**
+   * Reads the inventory from NBT
+   */
   public void readInventory(CompoundTag tags) {
     // copy in just the items key for deserializing, don't want to change the size
     CompoundTag handlerNBT = new CompoundTag();

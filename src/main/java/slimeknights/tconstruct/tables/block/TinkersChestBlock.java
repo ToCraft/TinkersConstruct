@@ -13,6 +13,7 @@ import slimeknights.mantle.util.BlockEntityHelper;
 import slimeknights.tconstruct.tables.block.entity.chest.TinkersChestBlockEntity;
 
 public class TinkersChestBlock extends ChestBlock {
+
   public TinkersChestBlock(Properties builder, BlockEntitySupplier<? extends BlockEntity> be, boolean dropsItems) {
     super(builder, be, dropsItems);
   }

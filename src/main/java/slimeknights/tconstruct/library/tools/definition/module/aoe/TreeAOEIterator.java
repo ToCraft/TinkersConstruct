@@ -21,16 +21,20 @@ import java.util.Set;
 
 /**
  * Tree harvest logic that destroys a tree
- * @param width  Absolute distance to the left or right to mine, 0 or more
- * @param depth  How far back to mine into the tree beyond the first block, 0 or more
+ *
+ * @param width Absolute distance to the left or right to mine, 0 or more
+ * @param depth How far back to mine into the tree beyond the first block, 0 or more
  */
 public record TreeAOEIterator(int width, int depth) implements AreaOfEffectIterator.Loadable {
+
   public static final RecordLoadable<TreeAOEIterator> LOADER = RecordLoadable.create(
     IntLoadable.FROM_ZERO.defaultField("width_bonus", 0, true, TreeAOEIterator::width),
     IntLoadable.FROM_ZERO.defaultField("depth_bonus", 0, true, TreeAOEIterator::depth),
     TreeAOEIterator::new);
 
-  /** Max distance between the branch and the trunk */
+  /**
+   * Max distance between the branch and the trunk
+   */
   private static final int MAX_BRANCH_DISTANCE = 10;
 
   @Override
@@ -46,17 +50,18 @@ public record TreeAOEIterator(int width, int depth) implements AreaOfEffectItera
 
   /**
    * Gets an iterator, either for a tree, or falling back to a cube
-   * @param tool            Tool used to mine the block
-   * @param stack           Stack used to mine the block
-   * @param player          Player instance
-   * @param state           State being mined
-   * @param world           World instance
-   * @param origin          AOE origin
-   * @param sideHit         Block side hit
-   * @param extraWidth      Mining width
-   * @param extraDepth      Mining depth
-   * @param matchType       Match type to use when not a tree
-   * @return  Correct iterator for the targeted block
+   *
+   * @param tool       Tool used to mine the block
+   * @param stack      Stack used to mine the block
+   * @param player     Player instance
+   * @param state      State being mined
+   * @param world      World instance
+   * @param origin     AOE origin
+   * @param sideHit    Block side hit
+   * @param extraWidth Mining width
+   * @param extraDepth Mining depth
+   * @param matchType  Match type to use when not a tree
+   * @return Correct iterator for the targeted block
    */
   public static Iterable<BlockPos> calculate(IToolStackView tool, ItemStack stack, Player player, BlockState state, Level world, BlockPos origin, Direction sideHit, int extraWidth, int extraDepth, AOEMatchType matchType) {
     Direction depthDir;
@@ -81,23 +86,33 @@ public record TreeAOEIterator(int width, int depth) implements AreaOfEffectItera
   /**
    * Iterator that continues up until the block does not match.
    * The way this works is it starts with the given dimensions to form the trunk. The trunk can then extend off into branches in the vertical or in horizontal directions.
-   *
+   * <p>
    * Horizontal branches detect in a 3x2x2 area from the stored direction and upwards and don't care about whether the logs have a block below. They also can only split into up to 3 pieces
    * Vertical branches check a 3x3x1 cross shape above, requiring nothing to be below the block. They can split into up to 5 pieces
    * The trunk can start new branches within a 3x3x1 square area, again requiring nothing to be below the block
    */
   public static class TreeIterator extends AbstractIterator<BlockPos> {
-    /** Queue of upcoming positions to try */
+
+    /**
+     * Queue of upcoming positions to try
+     */
     private final Queue<TreePos> upcomingPositions = new ArrayDeque<>();
-    /** Position for returns, saves some object allocation */
+    /**
+     * Position for returns, saves some object allocation
+     */
     private final BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
-    /** Branches that have been visited already */
+    /**
+     * Branches that have been visited already
+     */
     private final Set<BlockPos> branchVisited = new HashSet<>();
 
     private final Level world;
     private final Block filter;
-    /** Bounds for branch detection */
+    /**
+     * Bounds for branch detection
+     */
     private final int minX, maxX, minZ, maxZ;
+
     public TreeIterator(Level world, Block filter, BlockPos origin, Direction widthDir, int extraWidth, Direction depthDir, int extraDepth) {
       this.world = world;
       this.filter = filter;
@@ -135,17 +150,23 @@ public record TreeAOEIterator(int width, int depth) implements AreaOfEffectItera
       this.maxZ = maxZ;
     }
 
-    /** Checks if the position matches the filter block */
+    /**
+     * Checks if the position matches the filter block
+     */
     private boolean isValidBlock(BlockPos pos) {
       return world.getBlockState(pos).getBlock() == filter;
     }
 
-    /** Checks if the block position outside the original tree */
+    /**
+     * Checks if the block position outside the original tree
+     */
     private boolean outsideTrunk(BlockPos pos) {
       return (pos.getX() < minX || pos.getX() > maxX || pos.getZ() < minZ || pos.getZ() > maxZ);
     }
 
-    /** Checks if the block position is a branch position, meaning outside the original tree */
+    /**
+     * Checks if the block position is a branch position, meaning outside the original tree
+     */
     private boolean isBranch(BlockPos pos) {
       if (!outsideTrunk(pos)) {
         return false;
@@ -160,12 +181,16 @@ public record TreeAOEIterator(int width, int depth) implements AreaOfEffectItera
       return isValidBlock(pos);
     }
 
-    /** Adds a branch to the queue at the current mutable position */
+    /**
+     * Adds a branch to the queue at the current mutable position
+     */
     private void addBranch(Direction direction) {
       upcomingPositions.add(new TreePos(mutable, direction));
     }
 
-    /** Tries to find a branch at the current mutable position */
+    /**
+     * Tries to find a branch at the current mutable position
+     */
     private void tryBranch(Direction direction) {
       // block must not have log both above and below it to count
       if (isBranch(mutable)) {
@@ -277,11 +302,16 @@ public record TreeAOEIterator(int width, int depth) implements AreaOfEffectItera
     }
   }
 
-  /** Helper class for queue contents */
+  /**
+   * Helper class for queue contents
+   */
   private static class TreePos {
+
     private final BlockPos.MutableBlockPos pos;
     private final Direction direction;
-    /** If true, this position has been validated already for a log */
+    /**
+     * If true, this position has been validated already for a log
+     */
     private boolean isChecked;
 
     TreePos(BlockPos pos, boolean isChecked) {
@@ -298,7 +328,9 @@ public record TreeAOEIterator(int width, int depth) implements AreaOfEffectItera
       this.isChecked = true;
     }
 
-    /** Moves the tree position in the given direction */
+    /**
+     * Moves the tree position in the given direction
+     */
     public TreePos move() {
       pos.move(direction);
       isChecked = false;

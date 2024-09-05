@@ -13,6 +13,7 @@ import slimeknights.tconstruct.shared.TinkerCommons;
 
 @NoArgsConstructor
 public class BlockOrEntityCondition implements LootItemCondition {
+
   public static final BlockOrEntityCondition INSTANCE = new BlockOrEntityCondition();
 
   @Override
@@ -26,8 +27,9 @@ public class BlockOrEntityCondition implements LootItemCondition {
   }
 
   public static class ConditionSerializer implements Serializer<BlockOrEntityCondition> {
+
     @Override
-    public void serialize(JsonObject json, BlockOrEntityCondition loot, JsonSerializationContext context) { }
+    public void serialize(JsonObject json, BlockOrEntityCondition loot, JsonSerializationContext context) {}
 
     @Override
     public BlockOrEntityCondition deserialize(JsonObject loot, JsonDeserializationContext context) {

@@ -2,12 +2,19 @@ package slimeknights.tconstruct.library.module;
 
 import java.util.List;
 
-/** Interface to simplify building of modifier hook maps */
+/**
+ * Interface to simplify building of modifier hook maps
+ */
 public interface HookProvider {
-  /** Gets the default list of hooks this module implements. */
+
+  /**
+   * Gets the default list of hooks this module implements.
+   */
   List<ModuleHook<?>> getDefaultHooks();
 
-  /** Adds additional modules to the builder alongside this module */
+  /**
+   * Adds additional modules to the builder alongside this module
+   */
   default void addModules(ModuleHookMap.Builder builder) {}
 
   /**

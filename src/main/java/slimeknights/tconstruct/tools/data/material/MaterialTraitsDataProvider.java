@@ -13,6 +13,7 @@ import static slimeknights.tconstruct.library.materials.MaterialRegistry.MELEE_H
 import static slimeknights.tconstruct.library.materials.MaterialRegistry.RANGED;
 
 public class MaterialTraitsDataProvider extends AbstractMaterialTraitDataProvider {
+
   public MaterialTraitsDataProvider(DataGenerator gen, AbstractMaterialDataProvider materials) {
     super(gen, materials);
   }
@@ -93,7 +94,7 @@ public class MaterialTraitsDataProvider extends AbstractMaterialTraitDataProvide
     addDefaultTraits(MaterialIds.osmium, ModifierIds.dense);
     addDefaultTraits(MaterialIds.tungsten, ModifierIds.sharpweight);
     addTraits(MaterialIds.platinum, MELEE_HARVEST, ModifierIds.lustrous);
-    addTraits(MaterialIds.platinum, RANGED,        TinkerModifiers.olympic);
+    addTraits(MaterialIds.platinum, RANGED, TinkerModifiers.olympic);
     addDefaultTraits(MaterialIds.lead, ModifierIds.heavy);
     addTraits(MaterialIds.silver, MELEE_HARVEST, ModifierIds.smite);
     addTraits(MaterialIds.silver, RANGED, TinkerModifiers.holy);
@@ -108,20 +109,20 @@ public class MaterialTraitsDataProvider extends AbstractMaterialTraitDataProvide
     addDefaultTraits(MaterialIds.platedSlimewood, TinkerModifiers.overworked, TinkerModifiers.overslime);
 
     // slimeskull
-    addTraits(MaterialIds.glass,        SkullStats.ID, TinkerModifiers.selfDestructive.getId(), ModifierIds.creeperDisguise);
-    addTraits(MaterialIds.enderPearl,   SkullStats.ID, TinkerModifiers.enderdodging.getId(), ModifierIds.endermanDisguise);
-    addTraits(MaterialIds.bone,         SkullStats.ID, TinkerModifiers.strongBones.getId(), ModifierIds.skeletonDisguise);
-    addTraits(MaterialIds.venombone,    SkullStats.ID, TinkerModifiers.frosttouch.getId(), ModifierIds.strayDisguise);
+    addTraits(MaterialIds.glass, SkullStats.ID, TinkerModifiers.selfDestructive.getId(), ModifierIds.creeperDisguise);
+    addTraits(MaterialIds.enderPearl, SkullStats.ID, TinkerModifiers.enderdodging.getId(), ModifierIds.endermanDisguise);
+    addTraits(MaterialIds.bone, SkullStats.ID, TinkerModifiers.strongBones.getId(), ModifierIds.skeletonDisguise);
+    addTraits(MaterialIds.venombone, SkullStats.ID, TinkerModifiers.frosttouch.getId(), ModifierIds.strayDisguise);
     addTraits(MaterialIds.necroticBone, SkullStats.ID, TinkerModifiers.withered.getId(), ModifierIds.witherSkeletonDisguise);
-    addTraits(MaterialIds.string,       SkullStats.ID, TinkerModifiers.boonOfSssss.getId(), ModifierIds.spiderDisguise);
-    addTraits(MaterialIds.darkthread,   SkullStats.ID, ModifierIds.mithridatism, ModifierIds.caveSpiderDisguise);
-    addTraits(MaterialIds.rottenFlesh,  SkullStats.ID, TinkerModifiers.wildfire.getId(), ModifierIds.zombieDisguise);
-    addTraits(MaterialIds.iron,         SkullStats.ID, TinkerModifiers.plague.getId(), ModifierIds.huskDisguise);
-    addTraits(MaterialIds.copper,       SkullStats.ID, TinkerModifiers.breathtaking.getId(), ModifierIds.drownedDisguise);
-    addTraits(MaterialIds.blazingBone,  SkullStats.ID, TinkerModifiers.firebreath.getId(), ModifierIds.blazeDisguise);
-    addTraits(MaterialIds.gold,         SkullStats.ID, TinkerModifiers.chrysophilite.getId(), ModifierIds.piglinDisguise);
-    addTraits(MaterialIds.roseGold,     SkullStats.ID, TinkerModifiers.goldGuard.getId(), ModifierIds.piglinBruteDisguise);
-    addTraits(MaterialIds.pigIron,      SkullStats.ID, TinkerModifiers.revenge.getId(), ModifierIds.zombifiedPiglinDisguise);
+    addTraits(MaterialIds.string, SkullStats.ID, TinkerModifiers.boonOfSssss.getId(), ModifierIds.spiderDisguise);
+    addTraits(MaterialIds.darkthread, SkullStats.ID, ModifierIds.mithridatism, ModifierIds.caveSpiderDisguise);
+    addTraits(MaterialIds.rottenFlesh, SkullStats.ID, TinkerModifiers.wildfire.getId(), ModifierIds.zombieDisguise);
+    addTraits(MaterialIds.iron, SkullStats.ID, TinkerModifiers.plague.getId(), ModifierIds.huskDisguise);
+    addTraits(MaterialIds.copper, SkullStats.ID, TinkerModifiers.breathtaking.getId(), ModifierIds.drownedDisguise);
+    addTraits(MaterialIds.blazingBone, SkullStats.ID, TinkerModifiers.firebreath.getId(), ModifierIds.blazeDisguise);
+    addTraits(MaterialIds.gold, SkullStats.ID, TinkerModifiers.chrysophilite.getId(), ModifierIds.piglinDisguise);
+    addTraits(MaterialIds.roseGold, SkullStats.ID, TinkerModifiers.goldGuard.getId(), ModifierIds.piglinBruteDisguise);
+    addTraits(MaterialIds.pigIron, SkullStats.ID, TinkerModifiers.revenge.getId(), ModifierIds.zombifiedPiglinDisguise);
     // slimesuit
     noTraits(MaterialIds.earthslime);
     noTraits(MaterialIds.skyslime);

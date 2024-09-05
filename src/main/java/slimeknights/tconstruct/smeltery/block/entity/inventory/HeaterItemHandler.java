@@ -10,6 +10,7 @@ import slimeknights.tconstruct.library.recipe.TinkerRecipeTypes;
  * Item handler holding the heater inventory
  */
 public class HeaterItemHandler extends SingleItemHandler<MantleBlockEntity> {
+
   public HeaterItemHandler(MantleBlockEntity parent) {
     super(parent, 64);
   }

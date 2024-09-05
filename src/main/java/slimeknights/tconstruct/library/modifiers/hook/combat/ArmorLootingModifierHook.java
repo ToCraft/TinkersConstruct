@@ -11,14 +11,16 @@ import javax.annotation.Nullable;
 import java.util.Collection;
 
 public interface ArmorLootingModifierHook {
+
   /**
    * Gets the amount to boost the tool's luck by
-   * @param tool          Tool instance
-   * @param modifier      Modifier entry calling the hook
-   * @param context       Looting context
-   * @param equipment     Other equipment available to the holder
-   * @param slot          Slot being queried for looting
-   * @param looting       Looting value set from previous modifiers
+   *
+   * @param tool      Tool instance
+   * @param modifier  Modifier entry calling the hook
+   * @param context   Looting context
+   * @param equipment Other equipment available to the holder
+   * @param slot      Slot being queried for looting
+   * @param looting   Looting value set from previous modifiers
    * @return New looting value
    */
   int updateArmorLooting(IToolStackView tool, ModifierEntry modifier, LootingContext context, EquipmentContext equipment, EquipmentSlot slot, int looting);
@@ -26,10 +28,11 @@ public interface ArmorLootingModifierHook {
 
   /**
    * Gets the looting bonuses from armor
-   * @param tool      Tool who triggered looting, null if a projectile caused looting
-   * @param context   Looting context
-   * @param looting   Looting from before this hook, may be negative
-   * @return  Updated looting value, may be negative
+   *
+   * @param tool    Tool who triggered looting, null if a projectile caused looting
+   * @param context Looting context
+   * @param looting Looting from before this hook, may be negative
+   * @return Updated looting value, may be negative
    */
   static int getLooting(@Nullable IToolStackView tool, LootingContext context, int looting) {
     // first, build the context
@@ -56,8 +59,11 @@ public interface ArmorLootingModifierHook {
   }
 
 
-  /** Merger that runs each hook after the previous */
+  /**
+   * Merger that runs each hook after the previous
+   */
   record ComposeMerger(Collection<ArmorLootingModifierHook> modules) implements ArmorLootingModifierHook {
+
     @Override
     public int updateArmorLooting(IToolStackView tool, ModifierEntry modifier, LootingContext context, EquipmentContext equipment, EquipmentSlot slot, int looting) {
       for (ArmorLootingModifierHook module : modules) {

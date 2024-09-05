@@ -28,14 +28,23 @@ import slimeknights.tconstruct.library.tools.item.armor.ModifiableArmorItem;
 import javax.annotation.Nullable;
 import java.util.function.Function;
 
-/** Common shared logic for material armor models */
+/**
+ * Common shared logic for material armor models
+ */
 public abstract class AbstractArmorModel extends Model {
-  /** Base model instance for rendering */
+
+  /**
+   * Base model instance for rendering
+   */
   @Nullable
   protected HumanoidModel<?> base;
-  /** If true, applies the enchantment glint to extra layers */
+  /**
+   * If true, applies the enchantment glint to extra layers
+   */
   protected boolean hasGlint = false;
-  /** If true, uses the legs texture */
+  /**
+   * If true, uses the legs texture
+   */
   protected TextureType textureType = TextureType.ARMOR;
 
   protected boolean hasWings = false;
@@ -44,7 +53,9 @@ public abstract class AbstractArmorModel extends Model {
     super(RenderType::entityCutoutNoCull);
   }
 
-  /** Sets up the model given the passed arguments */
+  /**
+   * Sets up the model given the passed arguments
+   */
   protected void setup(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel<?> base) {
     this.base = base;
     this.hasGlint = stack.hasFoil();
@@ -61,25 +72,31 @@ public abstract class AbstractArmorModel extends Model {
     }
   }
 
-  /** Renders a colored model */
+  /**
+   * Renders a colored model
+   */
   protected void renderColored(Model model, PoseStack matrices, VertexConsumer buffer, int packedLightIn, int packedOverlayIn, int color, float red, float green, float blue, float alpha) {
     if (color != -1) {
-      alpha *= (float)(color >> 24 & 255) / 255.0F;
-      red *= (float)(color >> 16 & 255) / 255.0F;
-      green *= (float)(color >> 8 & 255) / 255.0F;
-      blue *= (float)(color & 255) / 255.0F;
+      alpha *= (float) (color >> 24 & 255) / 255.0F;
+      red *= (float) (color >> 16 & 255) / 255.0F;
+      green *= (float) (color >> 8 & 255) / 255.0F;
+      blue *= (float) (color & 255) / 255.0F;
     }
     model.renderToBuffer(matrices, buffer, packedLightIn, packedOverlayIn, red, green, blue, alpha);
   }
 
-  /** Renders a single armor texture */
+  /**
+   * Renders a single armor texture
+   */
   protected void renderTexture(Model model, PoseStack matrices, int packedLightIn, int packedOverlayIn, ArmorTexture texture, float red, float green, float blue, float alpha) {
     assert buffer != null;
     VertexConsumer overlayBuffer = ItemRenderer.getArmorFoilBuffer(buffer, getRenderType(texture.path()), false, hasGlint);
     renderColored(model, matrices, overlayBuffer, packedLightIn, packedOverlayIn, texture.color(), red, green, blue, alpha);
   }
 
-  /** Renders the wings layer */
+  /**
+   * Renders the wings layer
+   */
   protected void renderWings(PoseStack matrices, int packedLightIn, int packedOverlayIn, ArmorTexture texture, float red, float green, float blue, float alpha) {
     matrices.pushPose();
     matrices.translate(0.0D, 0.0D, 0.125D);
@@ -90,21 +107,29 @@ public abstract class AbstractArmorModel extends Model {
 
   /* Helpers */
 
-  /** Cache of parsed resource locations, similar to the armor layer one */
-  public static final Function<String,ResourceLocation> RESOURCE_LOCATION_CACHE = Util.memoize(ResourceLocation::tryParse);
+  /**
+   * Cache of parsed resource locations, similar to the armor layer one
+   */
+  public static final Function<String, ResourceLocation> RESOURCE_LOCATION_CACHE = Util.memoize(ResourceLocation::tryParse);
 
-  /** Buffer from the render living event, stored as we lose access to it later */
+  /**
+   * Buffer from the render living event, stored as we lose access to it later
+   */
   @Nullable
   public static MultiBufferSource buffer;
 
-  /** Initializes the wrapper */
+  /**
+   * Initializes the wrapper
+   */
   public static void init() {
     // register listeners to set and clear the buffer
     MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, false, RenderLivingEvent.Pre.class, event -> buffer = event.getMultiBufferSource());
     MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, false, RenderLivingEvent.Post.class, event -> buffer = null);
   }
 
-  /** Gets a render type for the given texture */
+  /**
+   * Gets a render type for the given texture
+   */
   public static RenderType getRenderType(String texture) {
     ResourceLocation location = RESOURCE_LOCATION_CACHE.apply(texture);
     if (location != null) {
@@ -113,11 +138,15 @@ public abstract class AbstractArmorModel extends Model {
     return RenderType.armorCutoutNoCull(MissingTextureAtlasSprite.getLocation());
   }
 
-  /** Wings model to render */
+  /**
+   * Wings model to render
+   */
   @Nullable
   private static ElytraModel<LivingEntity> wingsModel;
 
-  /** Gets or creates the elytra model */
+  /**
+   * Gets or creates the elytra model
+   */
   private ElytraModel<LivingEntity> getWings() {
     if (wingsModel == null) {
       wingsModel = new ElytraModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.ELYTRA));
@@ -125,9 +154,11 @@ public abstract class AbstractArmorModel extends Model {
     return wingsModel;
   }
 
-  /** Handles the unchecked cast to copy entity model properties */
+  /**
+   * Handles the unchecked cast to copy entity model properties
+   */
   @SuppressWarnings("unchecked")
   public static <T extends LivingEntity> void copyProperties(EntityModel<T> base, EntityModel<?> other) {
-    base.copyPropertiesTo((EntityModel<T>)other);
+    base.copyPropertiesTo((EntityModel<T>) other);
   }
 }

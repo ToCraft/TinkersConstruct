@@ -14,9 +14,11 @@ import java.util.List;
 
 /**
  * Effect to create a lingering cloud at the hit block
+ *
  * @see FluidMobEffect.Builder
  */
 public record MobEffectCloudFluidEffect(List<FluidMobEffect> effects) implements FluidEffect<FluidEffectContext.Block> {
+
   public static final RecordLoadable<MobEffectCloudFluidEffect> LOADER = RecordLoadable.create(
     FluidMobEffect.LOADABLE.list(1).requiredField("effects", e -> e.effects),
     MobEffectCloudFluidEffect::new);
@@ -26,7 +28,9 @@ public record MobEffectCloudFluidEffect(List<FluidMobEffect> effects) implements
     return LOADER;
   }
 
-  /** Makes a cloud for the given context and size */
+  /**
+   * Makes a cloud for the given context and size
+   */
   public static AreaEffectCloud makeCloud(FluidEffectContext.Block context) {
     Vec3 location = context.getHitResult().getLocation();
     AreaEffectCloud cloud = new AreaEffectCloud(context.getLevel(), location.x(), location.y(), location.z());
@@ -46,7 +50,7 @@ public record MobEffectCloudFluidEffect(List<FluidMobEffect> effects) implements
         AreaEffectCloud cloud = makeCloud(context);
         boolean hasEffects = false;
         for (FluidMobEffect effect : effects) {
-          int time = (int)(effect.time() * scale);
+          int time = (int) (effect.time() * scale);
           if (time > 10) {
             cloud.addEffect(effect.effectWithTime(time));
             hasEffects = true;

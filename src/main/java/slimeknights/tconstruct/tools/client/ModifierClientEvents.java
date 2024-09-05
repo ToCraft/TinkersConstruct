@@ -45,9 +45,12 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Modifier event hooks that run client side */
+/**
+ * Modifier event hooks that run client side
+ */
 @EventBusSubscriber(modid = TConstruct.MOD_ID, value = Dist.CLIENT, bus = Bus.FORGE)
 public class ModifierClientEvents {
+
   @SubscribeEvent
   static void onTooltipEvent(ItemTooltipEvent event) {
     // suppress durability from advanced, we display our own
@@ -62,7 +65,9 @@ public class ModifierClientEvents {
     }
   }
 
-  /** Determines whether to render the given hand based on modifiers */
+  /**
+   * Determines whether to render the given hand based on modifiers
+   */
   @SubscribeEvent
   static void renderHand(RenderHandEvent event) {
     InteractionHand hand = event.getHand();
@@ -84,7 +89,9 @@ public class ModifierClientEvents {
     }
   }
 
-  /** Handles the zoom modifier zooming */
+  /**
+   * Handles the zoom modifier zooming
+   */
   @SubscribeEvent
   static void handleZoom(ComputeFovModifierEvent event) {
     event.getPlayer().getCapability(TinkerDataCapability.CAPABILITY).ifPresent(data -> {
@@ -119,16 +126,22 @@ public class ModifierClientEvents {
 
   /* Renders the next shield strap item above the offhand item */
 
-  /** Cache of the current item to render */
+  /**
+   * Cache of the current item to render
+   */
   private static final int SLOT_BACKGROUND_SIZE = 22;
 
   @Nonnull
   private static ItemStack nextOffhand = ItemStack.EMPTY;
 
-  /** Items to render for the item frame modifier */
+  /**
+   * Items to render for the item frame modifier
+   */
   private static final List<ItemStack> itemFrames = new ArrayList<>();
 
-  /** Update the slot in the first shield slot */
+  /**
+   * Update the slot in the first shield slot
+   */
   @SubscribeEvent
   static void equipmentChange(ToolEquipmentChangeEvent event) {
     EquipmentChangeContext context = event.getContext();
@@ -162,7 +175,9 @@ public class ModifierClientEvents {
     }
   }
 
-  /** Render the item in the first shield slot */
+  /**
+   * Render the item in the first shield slot
+   */
   @SubscribeEvent
   static void renderHotbar(RenderGuiOverlayEvent.Post event) {
     Minecraft mc = Minecraft.getInstance();
@@ -235,7 +250,8 @@ public class ModifierClientEvents {
 
           // draw items
           int i = 0;
-          xStart += 3; yStart += 3; // offset from item start instead of frame start
+          xStart += 3;
+          yStart += 3; // offset from item start instead of frame start
           for (int r = 0; r < lastRow; r++) {
             for (int c = 0; c < columns; c++) {
               mc.gui.renderSlot(xStart + c * SLOT_BACKGROUND_SIZE, yStart + r * SLOT_BACKGROUND_SIZE, partialTicks, player, itemFrames.get(i), i);

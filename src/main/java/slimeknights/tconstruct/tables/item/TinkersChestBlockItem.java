@@ -15,8 +15,11 @@ import slimeknights.tconstruct.tables.block.entity.chest.TinkersChestBlockEntity
 
 import javax.annotation.Nullable;
 
-/** Dyeable chest block */
+/**
+ * Dyeable chest block
+ */
 public class TinkersChestBlockItem extends BlockItem implements DyeableLeatherItem {
+
   public TinkersChestBlockItem(Block blockIn, Properties builder) {
     super(blockIn, builder);
   }

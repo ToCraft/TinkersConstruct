@@ -12,11 +12,15 @@ import net.minecraftforge.fluids.FluidStack;
 import slimeknights.mantle.client.render.FluidRenderer;
 import slimeknights.tconstruct.shared.particle.FluidParticleData;
 
-/** Particle type that renders a fluid still texture */
+/**
+ * Particle type that renders a fluid still texture
+ */
 public class FluidParticle extends TextureSheetParticle {
+
   private final FluidStack fluid;
   private final float uCoord;
   private final float vCoord;
+
   protected FluidParticle(ClientLevel world, double x, double y, double z, double motionX, double motionY, double motionZ, FluidStack fluid) {
     super(world, x, y, z, motionX, motionY, motionZ);
     this.fluid = fluid;
@@ -25,9 +29,9 @@ public class FluidParticle extends TextureSheetParticle {
     this.gravity = 1.0F;
     int color = attributes.getTintColor(fluid);
     this.alpha = ((color >> 24) & 0xFF) / 255f;
-    this.rCol   = ((color >> 16) & 0xFF) / 255f;
-    this.gCol = ((color >>  8) & 0xFF) / 255f;
-    this.bCol  = ( color        & 0xFF) / 255f;
+    this.rCol = ((color >> 16) & 0xFF) / 255f;
+    this.gCol = ((color >> 8) & 0xFF) / 255f;
+    this.bCol = (color & 0xFF) / 255f;
     this.quadSize /= 2.0F;
     this.uCoord = this.random.nextFloat() * 3.0F;
     this.vCoord = this.random.nextFloat() * 3.0F;
@@ -63,8 +67,11 @@ public class FluidParticle extends TextureSheetParticle {
     return FluidRenderer.withBlockLight(super.getLightColor(partialTick), fluid.getFluid().getFluidType().getLightLevel(fluid));
   }
 
-  /** Factory to create a fluid particle */
+  /**
+   * Factory to create a fluid particle
+   */
   public static class Factory implements ParticleProvider<FluidParticleData> {
+
     @Override
     public Particle createParticle(FluidParticleData data, ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
       FluidStack fluid = data.getFluid();

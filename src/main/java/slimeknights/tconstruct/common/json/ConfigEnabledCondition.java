@@ -26,10 +26,11 @@ import java.util.function.BooleanSupplier;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ConfigEnabledCondition implements ICondition, LootItemCondition {
+
   public static final ResourceLocation ID = TConstruct.getResource("config");
   public static final ConfigSerializer SERIALIZER = new ConfigSerializer();
   /* Map of config names to condition cache */
-  private static final Map<String,ConfigEnabledCondition> PROPS = new HashMap<>();
+  private static final Map<String, ConfigEnabledCondition> PROPS = new HashMap<>();
 
   private final String configName;
   private final BooleanSupplier supplier;
@@ -55,6 +56,7 @@ public class ConfigEnabledCondition implements ICondition, LootItemCondition {
   }
 
   private static class ConfigSerializer implements Serializer<ConfigEnabledCondition>, IConditionSerializer<ConfigEnabledCondition> {
+
     @Override
     public ResourceLocation getID() {
       return ID;
@@ -88,6 +90,7 @@ public class ConfigEnabledCondition implements ICondition, LootItemCondition {
 
   /**
    * Adds a condition
+   *
    * @param prop     Property name
    * @param supplier Boolean supplier
    * @return Added condition
@@ -100,6 +103,7 @@ public class ConfigEnabledCondition implements ICondition, LootItemCondition {
 
   /**
    * Adds a condition
+   *
    * @param prop     Property name
    * @param supplier Config value
    * @return Added condition

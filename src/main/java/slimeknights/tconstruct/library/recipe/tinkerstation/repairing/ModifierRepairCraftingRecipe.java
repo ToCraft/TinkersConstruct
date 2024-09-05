@@ -24,6 +24,7 @@ import slimeknights.tconstruct.tools.TinkerModifiers;
 import javax.annotation.Nullable;
 
 public class ModifierRepairCraftingRecipe extends CustomRecipe implements IModifierRepairRecipe {
+
   public static final RecordLoadable<ModifierRepairCraftingRecipe> LOADER = RecordLoadable.create(ContextKey.ID.requiredField(), MODIFIER_FIELD, INGREDIENT_FIELD, REPAIR_AMOUNT_FIELD, ModifierRepairCraftingRecipe::new);
 
   @Getter
@@ -32,6 +33,7 @@ public class ModifierRepairCraftingRecipe extends CustomRecipe implements IModif
   private final Ingredient ingredient;
   @Getter
   private final int repairAmount;
+
   public ModifierRepairCraftingRecipe(ResourceLocation idIn, ModifierId modifier, Ingredient ingredient, int repairAmount) {
     super(idIn);
     this.modifier = modifier;
@@ -41,8 +43,9 @@ public class ModifierRepairCraftingRecipe extends CustomRecipe implements IModif
 
   /**
    * Gets the tool stack and the repair kit material from the crafting grid
-   * @param inv  Crafting inventory
-   * @return  Relevant inputs, or null if invalid
+   *
+   * @param inv Crafting inventory
+   * @return Relevant inputs, or null if invalid
    */
   @Nullable
   protected Pair<ToolStack, Integer> getRelevantInputs(CraftingContainer inv) {
@@ -112,7 +115,7 @@ public class ModifierRepairCraftingRecipe extends CustomRecipe implements IModif
 
     // repair the tool
     tool = tool.copy();
-    ToolDamageUtil.repair(tool, (int)repairAmount);
+    ToolDamageUtil.repair(tool, (int) repairAmount);
     return tool.createStack();
   }
 
@@ -134,7 +137,7 @@ public class ModifierRepairCraftingRecipe extends CustomRecipe implements IModif
             break;
           }
         }
-        repairPerItem = (int)repairFloat;
+        repairPerItem = (int) repairFloat;
       }
     }
 

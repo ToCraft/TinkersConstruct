@@ -37,26 +37,41 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
-/** Recipe to break a tool into tool parts */
+/**
+ * Recipe to break a tool into tool parts
+ */
 @SuppressWarnings("deprecation")  // Forge is dumb
 @RequiredArgsConstructor
 public class PartBuilderToolRecycle implements IPartBuilderRecipe {
-  /** Title for the screen */
+
+  /**
+   * Title for the screen
+   */
   private static final Component TOOL_RECYCLING = TConstruct.makeTranslation("recipe", "tool_recycling");
-  /** General instructions for recycling */
+  /**
+   * General instructions for recycling
+   */
   private static final List<Component> INSTRUCTIONS = Collections.singletonList(TConstruct.makeTranslation("recipe", "tool_recycling.info"));
-  /** Error for trying to recycle a tool that cannot be */
+  /**
+   * Error for trying to recycle a tool that cannot be
+   */
   private static final List<Component> NO_MODIFIERS = Collections.singletonList(TConstruct.makeTranslation("recipe", "tool_recycling.no_modifiers").withStyle(ChatFormatting.RED));
-  /** Default tool field */
+  /**
+   * Default tool field
+   */
   public static final SizedIngredient DEFAULT_TOOLS = SizedIngredient.fromTag(TinkerTags.Items.MULTIPART_TOOL);
-  /** Loader instance */
+  /**
+   * Loader instance
+   */
   public static final RecordLoadable<PartBuilderToolRecycle> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(),
     SizedIngredient.LOADABLE.defaultField("tools", DEFAULT_TOOLS, true, r -> r.toolRequirement),
     IngredientLoadable.DISALLOW_EMPTY.requiredField("pattern", r -> r.pattern),
     PartBuilderToolRecycle::new);
 
-  /** Should never be needed, but just in case better than null */
+  /**
+   * Should never be needed, but just in case better than null
+   */
   private static final Pattern ERROR = new Pattern(TConstruct.MOD_ID, "missingno");
   @Getter
   private final ResourceLocation id;
@@ -72,9 +87,9 @@ public class PartBuilderToolRecycle implements IPartBuilderRecipe {
   public Stream<Pattern> getPatterns(IPartBuilderContainer inv) {
     if (inv.getStack().getItem() instanceof IModifiable modifiable) {
       return ToolPartsHook.parts(modifiable.getToolDefinition()).stream()
-                          .map(part -> Registry.ITEM.getKey(part.asItem()))
-                          .distinct()
-                          .map(Pattern::new);
+        .map(part -> ForgeRegistries.ITEMS.getKey(part.asItem()))
+        .distinct()
+        .map(Pattern::new);
     }
     return Stream.empty();
   }
@@ -108,7 +123,7 @@ public class PartBuilderToolRecycle implements IPartBuilderRecipe {
     List<IToolPart> requirements = ToolPartsHook.parts(tool.getDefinition());
     for (int i = 0; i < requirements.size(); i++) {
       IToolPart part = requirements.get(i);
-      if (pattern.equals(Registry.ITEM.getKey(part.asItem()))) {
+      if (pattern.equals(ForgeRegistries.ITEMS.getKey(part.asItem()))) {
         matchIndex = i;
         match = part;
         break;
@@ -141,7 +156,7 @@ public class PartBuilderToolRecycle implements IPartBuilderRecipe {
     List<IToolPart> requirements = ToolPartsHook.parts(tool.getDefinition());
     for (int i = 0; i < requirements.size(); i++) {
       IToolPart part = requirements.get(i);
-      if (found || !pattern.equals(Registry.ITEM.getKey(part.asItem()))) {
+      if (found || !pattern.equals(ForgeRegistries.ITEMS.getKey(part.asItem()))) {
         parts.add(part);
         indices.add(i);
       } else {
@@ -155,7 +170,9 @@ public class PartBuilderToolRecycle implements IPartBuilderRecipe {
     return parts.get(index).withMaterial(tool.getMaterial(indices.getInt(index)).getVariant());
   }
 
-  /** @deprecated use {@link #assemble(IPartBuilderContainer, Pattern)} */
+  /**
+   * @deprecated use {@link #assemble(IPartBuilderContainer, Pattern)}
+   */
   @Deprecated
   @Override
   public ItemStack getResultItem() {
@@ -180,6 +197,7 @@ public class PartBuilderToolRecycle implements IPartBuilderRecipe {
 
   @RequiredArgsConstructor
   public static class Finished implements FinishedRecipe {
+
     @Getter
     private final ResourceLocation id;
     private final SizedIngredient tools;

@@ -13,13 +13,15 @@ import slimeknights.tconstruct.tables.menu.slot.PlayerSensitiveLazyResultSlot;
 import javax.annotation.Nullable;
 
 public class CraftingStationContainerMenu extends TabbedContainerMenu<CraftingStationBlockEntity> {
+
   private final PlayerSensitiveLazyResultSlot resultSlot;
 
   /**
    * Standard constructor
-   * @param id    Window ID
-   * @param inv   Player inventory
-   * @param tile  Relevant tile entity
+   *
+   * @param id   Window ID
+   * @param inv  Player inventory
+   * @param tile Relevant tile entity
    */
   public CraftingStationContainerMenu(int id, Inventory inv, @Nullable CraftingStationBlockEntity tile) {
     super(TinkerTables.craftingStationContainer.get(), id, inv, tile);
@@ -49,9 +51,10 @@ public class CraftingStationContainerMenu extends TabbedContainerMenu<CraftingSt
 
   /**
    * Factory constructor
-   * @param id   Window ID
-   * @param inv  Player inventory
-   * @param buf  Buffer for fetching tile
+   *
+   * @param id  Window ID
+   * @param inv Player inventory
+   * @param buf Buffer for fetching tile
    */
   public CraftingStationContainerMenu(int id, Inventory inv, FriendlyByteBuf buf) {
     this(id, inv, getTileEntityFromBuf(buf, CraftingStationBlockEntity.class));

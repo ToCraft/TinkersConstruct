@@ -19,12 +19,16 @@ import slimeknights.tconstruct.tools.TinkerModifiers;
 import javax.annotation.Nullable;
 import java.util.List;
 
-/** Dynamic item holding a modifier */
+/**
+ * Dynamic item holding a modifier
+ */
 public class ModifierCrystalItem extends Item {
+
   private static final Component TOOLTIP_MISSING = TConstruct.makeTranslation("item", "modifier_crystal.missing").withStyle(ChatFormatting.GRAY);
   private static final Component TOOLTIP_APPLY = TConstruct.makeTranslation("item", "modifier_crystal.tooltip").withStyle(ChatFormatting.GRAY);
   private static final String MODIFIER_KEY = TConstruct.makeTranslationKey("item", "modifier_crystal.modifier_id");
   private static final String TAG_MODIFIER = "modifier";
+
   public ModifierCrystalItem(Properties props) {
     super(props);
   }
@@ -72,19 +76,25 @@ public class ModifierCrystalItem extends Item {
 
   /* Helpers */
 
-  /** Creates a stack with the given modifier */
+  /**
+   * Creates a stack with the given modifier
+   */
   public static ItemStack withModifier(ModifierId modifier, int count) {
     ItemStack stack = new ItemStack(TinkerModifiers.modifierCrystal.get(), count);
     stack.getOrCreateTag().putString(TAG_MODIFIER, modifier.toString());
     return stack;
   }
 
-  /** Creates a stack with the given modifier */
+  /**
+   * Creates a stack with the given modifier
+   */
   public static ItemStack withModifier(ModifierId modifier) {
     return withModifier(modifier, 1);
   }
 
-  /** Gets the modifier stored on this stack */
+  /**
+   * Gets the modifier stored on this stack
+   */
   @Nullable
   public static ModifierId getModifier(ItemStack stack) {
     CompoundTag tag = stack.getTag();

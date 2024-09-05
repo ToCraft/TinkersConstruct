@@ -9,17 +9,20 @@ import net.minecraft.nbt.Tag;
 
 import javax.annotation.Nullable;
 
-/** Helpers related to Tag */
+/**
+ * Helpers related to Tag
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class TagUtil {
   /* Helper functions */
 
   /**
    * Reads a block position from Tag
-   * @param parent  Parent tag
-   * @param key     Position key
-   * @param offset  Amount to offset position by
-   * @return  Block position, or null if invalid or missing
+   *
+   * @param parent Parent tag
+   * @param key    Position key
+   * @param offset Amount to offset position by
+   * @return Block position, or null if invalid or missing
    */
   @Nullable
   public static BlockPos readOptionalPos(CompoundTag parent, String key, BlockPos offset) {
@@ -31,8 +34,9 @@ public final class TagUtil {
 
   /**
    * Checks if the given tag is a numeric type
-   * @param tag  Tag to check
-   * @return  True if the type matches
+   *
+   * @param tag Tag to check
+   * @return True if the type matches
    */
   public static boolean isNumeric(Tag tag) {
     byte type = tag.getId();

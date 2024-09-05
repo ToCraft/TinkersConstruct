@@ -16,12 +16,16 @@ import java.util.Collection;
 import java.util.List;
 
 public class CheeseItem extends Item {
+
   public static final Component TOOLTIP = TConstruct.makeTranslation("item", "cheese.tooltip");
+
   public CheeseItem(Properties pProperties) {
     super(pProperties);
   }
 
-  /** Removes a random effect from the given entity */
+  /**
+   * Removes a random effect from the given entity
+   */
   public static void removeRandomEffect(LivingEntity living) {
     if (!living.level.isClientSide) {
       Collection<MobEffectInstance> effects = living.getActiveEffects();

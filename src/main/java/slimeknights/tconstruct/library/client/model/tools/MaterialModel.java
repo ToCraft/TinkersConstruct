@@ -55,19 +55,28 @@ import java.util.function.Predicate;
  */
 @AllArgsConstructor
 public class MaterialModel implements IUnbakedGeometry<MaterialModel> {
-  /** Shared loader instance */
+
+  /**
+   * Shared loader instance
+   */
   public static final IGeometryLoader<MaterialModel> LOADER = MaterialModel::deserialize;
 
-  /** If null, uses dynamic material */
+  /**
+   * If null, uses dynamic material
+   */
   @Nullable
   private final MaterialVariantId material;
-  /** Tint index and index of part in tool */
+  /**
+   * Tint index and index of part in tool
+   */
   private final int index;
-  /** Transform matrix to apply to child parts */
+  /**
+   * Transform matrix to apply to child parts
+   */
   private final Vec2 offset;
 
   @Override
-  public Collection<Material> getMaterials(IGeometryBakingContext owner, Function<ResourceLocation,UnbakedModel> modelGetter, Set<Pair<String,String>> missingTextureErrors) {
+  public Collection<Material> getMaterials(IGeometryBakingContext owner, Function<ResourceLocation, UnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors) {
     Set<Material> allTextures = Sets.newHashSet();
     getMaterialTextures(allTextures, owner, "texture", material);
     return allTextures;
@@ -75,10 +84,11 @@ public class MaterialModel implements IUnbakedGeometry<MaterialModel> {
 
   /**
    * Gets the list of material textures for the given owner texture
-   * @param allTextures  Collection of textures
-   * @param owner        Model owner
-   * @param textureName  Texture name to add
-   * @param material     List of materials
+   *
+   * @param allTextures Collection of textures
+   * @param owner       Model owner
+   * @param textureName Texture name to add
+   * @param material    List of materials
    */
   public static void getMaterialTextures(Collection<Material> allTextures, IGeometryBakingContext owner, String textureName, @Nullable MaterialVariantId material) {
     Material texture = owner.getMaterial(textureName);
@@ -99,10 +109,11 @@ public class MaterialModel implements IUnbakedGeometry<MaterialModel> {
 
   /**
    * Gets the tinted sprite info for the given material
-   * @param spriteGetter  Sprite getter instance
-   * @param texture       Base texture
-   * @param material      Material variant
-   * @return  Tinted sprite or fallback
+   *
+   * @param spriteGetter Sprite getter instance
+   * @param texture      Base texture
+   * @param material     Material variant
+   * @return Tinted sprite or fallback
    */
   public static TintedSprite getMaterialSprite(Function<Material, TextureAtlasSprite> spriteGetter, Material texture, MaterialVariantId material) {
     // if the base material is non-null, try to find the sprite for that material
@@ -116,13 +127,14 @@ public class MaterialModel implements IUnbakedGeometry<MaterialModel> {
 
   /**
    * Gets quads for the given material variant of the texture
-   * @param spriteGetter    Sprite getter instance
-   * @param texture         Base texture
-   * @param material        Material variant
-   * @param tintIndex       Tint index for quads
-   * @param transformation  Transformation to apply
-   * @param pixels          Pixels to prevent z-fighting for multiple layers
-   * @return  Quad list
+   *
+   * @param spriteGetter   Sprite getter instance
+   * @param texture        Base texture
+   * @param material       Material variant
+   * @param tintIndex      Tint index for quads
+   * @param transformation Transformation to apply
+   * @param pixels         Pixels to prevent z-fighting for multiple layers
+   * @return Quad list
    */
   public static ImmutableList<BakedQuad> getQuadsForMaterial(Function<Material, TextureAtlasSprite> spriteGetter, Material texture, MaterialVariantId material, int tintIndex, Transformation transformation, @Nullable ItemLayerPixels pixels) {
     TintedSprite sprite = getMaterialSprite(spriteGetter, texture, material);
@@ -131,13 +143,14 @@ public class MaterialModel implements IUnbakedGeometry<MaterialModel> {
 
   /**
    * Same as {@link #bake(IGeometryBakingContext, ModelBakery, Function, ModelState, ItemOverrides, ResourceLocation)} , but uses fewer arguments and does not require an instance
-   * @param owner          Model configuration
-   * @param spriteGetter   Sprite getter function
-   * @param transform      Transform to apply to the quad fetching. Should not include rotation or it will look wrong in UIs
-   * @param material       Material used, if null uses default
-   * @param index          Tint index to use if tinted sprite is used
-   * @param overrides      Override instance to use, will either be empty or {@link MaterialOverrideHandler}
-   * @return  Baked model
+   *
+   * @param owner        Model configuration
+   * @param spriteGetter Sprite getter function
+   * @param transform    Transform to apply to the quad fetching. Should not include rotation or it will look wrong in UIs
+   * @param material     Material used, if null uses default
+   * @param index        Tint index to use if tinted sprite is used
+   * @param overrides    Override instance to use, will either be empty or {@link MaterialOverrideHandler}
+   * @return Baked model
    */
   private static BakedModel bakeInternal(IGeometryBakingContext owner, Function<Material, TextureAtlasSprite> spriteGetter, Transformation transform, MaterialVariantId material, int index, ItemOverrides overrides) {
     TintedSprite materialSprite = getMaterialSprite(spriteGetter, owner.getMaterial("texture"), material);
@@ -174,6 +187,7 @@ public class MaterialModel implements IUnbakedGeometry<MaterialModel> {
    * Dynamic override handler to swap in the material texture
    */
   private static final class MaterialOverrideHandler extends ItemOverrides {
+
     // contains all the baked models since they'll never change, cleared automatically as the baked model is discarded
     private final Map<MaterialVariantId, BakedModel> cache = new ConcurrentHashMap<>();
 
@@ -181,6 +195,7 @@ public class MaterialModel implements IUnbakedGeometry<MaterialModel> {
     private final IGeometryBakingContext owner;
     private final int index;
     private final Transformation itemTransform;
+
     private MaterialOverrideHandler(IGeometryBakingContext owner, int index, Transformation itemTransform) {
       this.owner = owner;
       this.index = index;
@@ -197,8 +212,9 @@ public class MaterialModel implements IUnbakedGeometry<MaterialModel> {
 
     /**
      * Bakes a copy of this model using the given material
-     * @param material  New material for the model
-     * @return  Baked model
+     *
+     * @param material New material for the model
+     * @return Baked model
      */
     private BakedModel bakeDynamic(MaterialVariantId material) {
       // bake internal does not require an instance to bake, we can pass in whatever material we want
@@ -210,7 +226,9 @@ public class MaterialModel implements IUnbakedGeometry<MaterialModel> {
 
   /* Helpers */
 
-  /** Loads a material model from JSON */
+  /**
+   * Loads a material model from JSON
+   */
   public static MaterialModel deserialize(JsonObject json, JsonDeserializationContext context) {
     // need tint index for tool models, doubles as part index
     int index = GsonHelper.getAsInt(json, "index", 0);
@@ -231,10 +249,11 @@ public class MaterialModel implements IUnbakedGeometry<MaterialModel> {
 
   /**
    * Converts a JSON float array to the specified object
-   * @param json    JSON object
-   * @param name    Name of the array in the object to fetch
-   * @return  Vector3f of data
-   * @throws JsonParseException  If there is no array or the length is wrong
+   *
+   * @param json JSON object
+   * @param name Name of the array in the object to fetch
+   * @return Vector3f of data
+   * @throws JsonParseException If there is no array or the length is wrong
    */
   public static Vec2 getVec2(JsonObject json, String name) {
     JsonArray array = GsonHelper.getAsJsonArray(json, name);
@@ -242,7 +261,7 @@ public class MaterialModel implements IUnbakedGeometry<MaterialModel> {
       throw new JsonParseException("Expected " + 2 + " " + name + " values, found: " + array.size());
     }
     float[] vec = new float[2];
-    for(int i = 0; i < 2; ++i) {
+    for (int i = 0; i < 2; ++i) {
       vec[i] = GsonHelper.convertToFloat(array.get(i), name + "[" + i + "]");
     }
     return new Vec2(vec[0], vec[1]);

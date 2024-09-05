@@ -21,9 +21,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/** Base data generator for use in addons */
+/**
+ * Base data generator for use in addons
+ */
 @SuppressWarnings({"unused", "SameParameterValue"})  // API
 public abstract class AbstractMaterialTraitDataProvider extends GenericDataProvider {
+
   private static final Gson GSON = (new GsonBuilder())
     .registerTypeAdapter(ModifierEntry.class, ModifierEntry.LOADABLE)
     .registerTypeAdapter(ResourceLocation.class, new ResourceLocation.Serializer())
@@ -31,8 +34,10 @@ public abstract class AbstractMaterialTraitDataProvider extends GenericDataProvi
     .disableHtmlEscaping()
     .create();
 
-  /** Map of material ID to builder, there is at most one builder for each ID */
-  private final Map<MaterialId,MaterialTraits.Builder> allMaterialTraits = new HashMap<>();
+  /**
+   * Map of material ID to builder, there is at most one builder for each ID
+   */
+  private final Map<MaterialId, MaterialTraits.Builder> allMaterialTraits = new HashMap<>();
   /* Materials data provider for validation */
   private final AbstractMaterialDataProvider materials;
 
@@ -41,7 +46,9 @@ public abstract class AbstractMaterialTraitDataProvider extends GenericDataProvi
     this.materials = materials;
   }
 
-  /** Adds all relevant material stats */
+  /**
+   * Adds all relevant material stats
+   */
   protected abstract void addMaterialTraits();
 
   @Override
@@ -66,8 +73,9 @@ public abstract class AbstractMaterialTraitDataProvider extends GenericDataProvi
 
   /**
    * Gets the material traits object from the map, or creates one if needed
-   * @param location  Material ID
-   * @return  MaterialTraits object, creating one if needed
+   *
+   * @param location Material ID
+   * @return MaterialTraits object, creating one if needed
    */
   private MaterialTraits.Builder getOrCreateMaterialTraits(MaterialId location) {
     return allMaterialTraits.computeIfAbsent(location, id -> new MaterialTraits.Builder());
@@ -75,7 +83,8 @@ public abstract class AbstractMaterialTraitDataProvider extends GenericDataProvi
 
   /**
    * Declares the given material with no traits
-   * @param location  Material ID
+   *
+   * @param location Material ID
    */
   protected void noTraits(MaterialId location) {
     getOrCreateMaterialTraits(location);
@@ -83,8 +92,9 @@ public abstract class AbstractMaterialTraitDataProvider extends GenericDataProvi
 
   /**
    * Adds a set of material stats for the given material ID
-   * @param location  Material ID
-   * @param traits    Traits to add
+   *
+   * @param location Material ID
+   * @param traits   Traits to add
    */
   protected void addDefaultTraits(MaterialId location, ModifierEntry... traits) {
     getOrCreateMaterialTraits(location).setDefaultTraits(Arrays.asList(traits));
@@ -92,8 +102,9 @@ public abstract class AbstractMaterialTraitDataProvider extends GenericDataProvi
 
   /**
    * Adds a set of material stats for the given material ID
-   * @param location  Material ID
-   * @param traits    Traits to add
+   *
+   * @param location Material ID
+   * @param traits   Traits to add
    */
   protected void addDefaultTraits(MaterialId location, ModifierId... traits) {
     getOrCreateMaterialTraits(location).setDefaultTraits(Arrays.stream(traits).map(trait -> new ModifierEntry(trait, 1)).collect(Collectors.toList()));
@@ -101,8 +112,9 @@ public abstract class AbstractMaterialTraitDataProvider extends GenericDataProvi
 
   /**
    * Adds a set of material stats for the given material ID
-   * @param location  Material ID
-   * @param traits    Traits to add
+   *
+   * @param location Material ID
+   * @param traits   Traits to add
    */
   protected void addDefaultTraits(MaterialId location, LazyModifier... traits) {
     getOrCreateMaterialTraits(location).setDefaultTraits(Arrays.stream(traits).map(trait -> new ModifierEntry(trait.getId(), 1)).collect(Collectors.toList()));
@@ -110,9 +122,10 @@ public abstract class AbstractMaterialTraitDataProvider extends GenericDataProvi
 
   /**
    * Adds a set of material stats for the given material ID and stat ID
-   * @param location  Material ID
-   * @param statsId   Stats to add the trait for
-   * @param traits    Traits to add
+   *
+   * @param location Material ID
+   * @param statsId  Stats to add the trait for
+   * @param traits   Traits to add
    */
   protected void addTraits(MaterialId location, MaterialStatsId statsId, ModifierEntry... traits) {
     getOrCreateMaterialTraits(location).setTraits(statsId, Arrays.asList(traits));
@@ -120,9 +133,10 @@ public abstract class AbstractMaterialTraitDataProvider extends GenericDataProvi
 
   /**
    * Adds a set of material stats for the given material ID
-   * @param location  Material ID
-   * @param statsId   Stats to add the trait for
-   * @param traits    Traits to add
+   *
+   * @param location Material ID
+   * @param statsId  Stats to add the trait for
+   * @param traits   Traits to add
    */
   protected void addTraits(MaterialId location, MaterialStatsId statsId, ModifierId... traits) {
     getOrCreateMaterialTraits(location).setTraits(statsId, Arrays.stream(traits).map(trait -> new ModifierEntry(trait, 1)).collect(Collectors.toList()));
@@ -130,9 +144,10 @@ public abstract class AbstractMaterialTraitDataProvider extends GenericDataProvi
 
   /**
    * Adds a set of material stats for the given material ID
-   * @param location  Material ID
-   * @param statsId   Stats to add the trait for
-   * @param traits    Traits to add
+   *
+   * @param location Material ID
+   * @param statsId  Stats to add the trait for
+   * @param traits   Traits to add
    */
   protected void addTraits(MaterialId location, MaterialStatsId statsId, LazyModifier... traits) {
     getOrCreateMaterialTraits(location).setTraits(statsId, Arrays.stream(traits).map(trait -> new ModifierEntry(trait.getId(), 1)).collect(Collectors.toList()));

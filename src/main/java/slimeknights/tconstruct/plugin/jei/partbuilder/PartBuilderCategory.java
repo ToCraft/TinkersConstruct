@@ -31,6 +31,7 @@ import slimeknights.tconstruct.tables.TinkerTables;
 import java.awt.Color;
 
 public class PartBuilderCategory implements IRecipeCategory<IDisplayPartBuilderRecipe> {
+
   private static final ResourceLocation BACKGROUND_LOC = TConstruct.getResource("textures/gui/jei/tinker_station.png");
   private static final Component TITLE = TConstruct.makeTranslation("jei", "part_builder.title");
   private static final String KEY_COST = TConstruct.makeTranslationKey("jei", "part_builder.cost");
@@ -39,6 +40,7 @@ public class PartBuilderCategory implements IRecipeCategory<IDisplayPartBuilderR
   private final IDrawable background;
   @Getter
   private final IDrawable icon;
+
   public PartBuilderCategory(IGuiHelper helper) {
     this.background = helper.createDrawable(BACKGROUND_LOC, 0, 117, 121, 46);
     this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(TinkerTables.partBuilder));
@@ -76,7 +78,7 @@ public class PartBuilderCategory implements IRecipeCategory<IDisplayPartBuilderR
     if (!material.isEmpty()) {
       builder.addSlot(RecipeIngredientRole.INPUT, 25, 16).addItemStacks(MaterialItemList.getItems(material.getVariant()));
     }
-    builder.addSlot(RecipeIngredientRole.INPUT,  4, 16).addItemStacks(recipe.getPatternItems());
+    builder.addSlot(RecipeIngredientRole.INPUT, 4, 16).addItemStacks(recipe.getPatternItems());
     // patterns
     builder.addSlot(RecipeIngredientRole.INPUT, 46, 16).addIngredient(TConstructJEIConstants.PATTERN_TYPE, recipe.getPattern());
     // TODO: material input?

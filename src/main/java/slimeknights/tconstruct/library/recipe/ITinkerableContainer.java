@@ -5,8 +5,11 @@ import net.minecraft.world.item.Items;
 import slimeknights.mantle.recipe.container.IRecipeContainer;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
-/** Container that contains a tinkerable stack and a number of inputs after */
+/**
+ * Container that contains a tinkerable stack and a number of inputs after
+ */
 public interface ITinkerableContainer extends IRecipeContainer {
+
   /**
    * Gets the stack in the tinkerable slot.
    *
@@ -14,33 +17,41 @@ public interface ITinkerableContainer extends IRecipeContainer {
    */
   ItemStack getTinkerableStack();
 
-  /** Gets the tinkerable item as a tool stack instance, or returns null if not valid */
+  /**
+   * Gets the tinkerable item as a tool stack instance, or returns null if not valid
+   */
   default ToolStack getTinkerable() {
     return ToolStack.from(getTinkerableStack());
   }
 
-  /** Gets the size of the tinkerable stack, common operation */
+  /**
+   * Gets the size of the tinkerable stack, common operation
+   */
   default int getTinkerableSize() {
     return getTinkerableStack().getCount();
   }
 
   /**
    * Gets the stack in the given input slot
-   * @param index  Slot index
-   * @return  Stack
+   *
+   * @param index Slot index
+   * @return Stack
    */
   ItemStack getInput(int index);
 
   /**
    * Gets the number of input slots
-   * @return  Input slot count
+   *
+   * @return Input slot count
    */
   int getInputCount();
 
 
   /* Base methods */
 
-  /** @deprecated use {@link #getInput(int)} */
+  /**
+   * @deprecated use {@link #getInput(int)}
+   */
   @Deprecated
   @Override
   default ItemStack getItem(int index) {
@@ -64,7 +75,9 @@ public interface ITinkerableContainer extends IRecipeContainer {
     return true;
   }
 
-  /** @deprecated use {@link #getInputCount()} */
+  /**
+   * @deprecated use {@link #getInputCount()}
+   */
   @Deprecated
   @Override
   default int getContainerSize() {
@@ -72,24 +85,28 @@ public interface ITinkerableContainer extends IRecipeContainer {
   }
 
   interface Mutable extends ITinkerableContainer {
+
     /**
      * Sets the input in the given slot
-     * @param index  Slot to set
-     * @param stack  New stack
+     *
+     * @param index Slot to set
+     * @param stack New stack
      */
     void setInput(int index, ItemStack stack);
 
     /**
      * Gives an extra recipe result to the user of the inventory
-     * @param stack  Extra stack
+     *
+     * @param stack Extra stack
      */
     void giveItem(ItemStack stack);
 
 
     /**
      * Shrinks a slot by the given count, returning the properly sized container
-     * @param slot    Slot to shrink
-     * @param amount  Amount to shrink by
+     *
+     * @param slot   Slot to shrink
+     * @param amount Amount to shrink by
      */
     default void shrinkInput(int slot, int amount, ItemStack container) {
       ItemStack stack = getInput(slot);
@@ -116,8 +133,9 @@ public interface ITinkerableContainer extends IRecipeContainer {
 
     /**
      * Shrinks a slot by the given count, returning the properly sized container
-     * @param slot    Slot to shrink
-     * @param amount  Amount to shrink by
+     *
+     * @param slot   Slot to shrink
+     * @param amount Amount to shrink by
      */
     default void shrinkInput(int slot, int amount) {
       ItemStack stack = getInput(slot);

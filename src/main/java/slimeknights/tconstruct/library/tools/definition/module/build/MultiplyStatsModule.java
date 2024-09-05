@@ -12,8 +12,11 @@ import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
 
 import java.util.List;
 
-/** Module to set global multipliers on the tool */
+/**
+ * Module to set global multipliers on the tool
+ */
 public record MultiplyStatsModule(MultiplierNBT multipliers) implements ToolStatsHook, ToolModule {
+
   public static final RecordLoadable<MultiplyStatsModule> LOADER = RecordLoadable.create(MultiplierNBT.LOADABLE.requiredField("multipliers", MultiplyStatsModule::multipliers), MultiplyStatsModule::new);
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<MultiplyStatsModule>defaultHooks(ToolHooks.TOOL_STATS);
 

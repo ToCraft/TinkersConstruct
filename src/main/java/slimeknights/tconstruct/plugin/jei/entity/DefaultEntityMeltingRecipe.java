@@ -18,9 +18,11 @@ import java.util.Set;
  * Extension of entity melting recipe for the sake of displaying entities in the default "recipe"
  */
 public class DefaultEntityMeltingRecipe extends EntityMeltingRecipe {
+
   /**
    * Gets a list of entity types, filtered by the recipe list
-   * @param recipes  Recipe list
+   *
+   * @param recipes Recipe list
    * @return List of entity types
    */
   private static EntityIngredient getEntityList(List<EntityMeltingRecipe> recipes) {
@@ -41,6 +43,7 @@ public class DefaultEntityMeltingRecipe extends EntityMeltingRecipe {
   }
 
   private final Lazy<EntityIngredient> entities;
+
   public DefaultEntityMeltingRecipe(List<EntityMeltingRecipe> recipes) {
     super(TConstruct.getResource("__default"), EntityIngredient.EMPTY, EntityMeltingModule.getDefaultFluid(), 2);
     entities = Lazy.of(() -> getEntityList(recipes));

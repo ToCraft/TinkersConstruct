@@ -14,9 +14,12 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.utils.JsonUtils;
 
-/** Variant of ItemPredicate for matching Tinker tools using {@link ToolStackItemPredicate} */
+/**
+ * Variant of ItemPredicate for matching Tinker tools using {@link ToolStackItemPredicate}
+ */
 @RequiredArgsConstructor(staticName = "ofTool")
 public class ToolStackItemPredicate extends ItemPredicate {
+
   public static final ResourceLocation ID = TConstruct.getResource("tool_stack");
 
   private final IJsonPredicate<IToolStackView> predicate;
@@ -38,7 +41,9 @@ public class ToolStackItemPredicate extends ItemPredicate {
     return json;
   }
 
-  /** Deserializes the tool predicate from JSON */
+  /**
+   * Deserializes the tool predicate from JSON
+   */
   public static ToolStackItemPredicate deserialize(JsonObject json) {
     return new ToolStackItemPredicate(ToolStackPredicate.LOADER.getIfPresent(json, "predicate"));
   }

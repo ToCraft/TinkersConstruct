@@ -40,27 +40,46 @@ import java.util.Set;
  */
 @RequiredArgsConstructor(staticName = "from")
 public class ToolStack implements IToolStackView {
-  /** Error messages for when there are not enough remaining modifiers */
+
+  /**
+   * Error messages for when there are not enough remaining modifiers
+   */
   private static final String KEY_VALIDATE_SLOTS = TConstruct.makeTranslationKey("recipe", "modifier.validate_slots");
 
   // persistent NBT
-  /** Tag for list of materials */
+  /**
+   * Tag for list of materials
+   */
   public static final String TAG_MATERIALS = "tic_materials";
-  /** Tag for extra arbitrary modifier data */
+  /**
+   * Tag for extra arbitrary modifier data
+   */
   public static final String TAG_PERSISTENT_MOD_DATA = "tic_persistent";
-  /** Tag for recipe based modifier */
+  /**
+   * Tag for recipe based modifier
+   */
   public static final String TAG_UPGRADES = "tic_upgrades";
-  /** Tag marking a tool as broken */
+  /**
+   * Tag marking a tool as broken
+   */
   public static final String TAG_BROKEN = "tic_broken";
 
   // volatile NBT
-  /** Tag for calculated stats */
+  /**
+   * Tag for calculated stats
+   */
   protected static final String TAG_STATS = "tic_stats";
-  /** Tag for tool stat global multipliers */
+  /**
+   * Tag for tool stat global multipliers
+   */
   protected static final String TAG_MULTIPLIERS = "tic_multipliers";
-  /** Tag for arbitrary modifier data rebuilt on stat rebuild */
+  /**
+   * Tag for arbitrary modifier data rebuilt on stat rebuild
+   */
   public static final String TAG_VOLATILE_MOD_DATA = "tic_volatile_data"; // TODO: consider dropping "_data" from the key for consistency
-  /** Tag for merged modifiers of upgrades and traits */
+  /**
+   * Tag for merged modifiers of upgrades and traits
+   */
   public static final String TAG_MODIFIERS = "tic_modifiers";
 
   // vanilla tags
@@ -68,50 +87,78 @@ public class ToolStack implements IToolStackView {
   private static final String TAG_UNBREAKABLE = "Unbreakable";
   private static final String TAG_HIDE_FLAGS = "HideFlags";
 
-  /** List of tags to disallow editing for the relevant modifier hooks, disallows all tags we touch. Ignores unbreakable as we only look at that tag for vanilla compat */
+  /**
+   * List of tags to disallow editing for the relevant modifier hooks, disallows all tags we touch. Ignores unbreakable as we only look at that tag for vanilla compat
+   */
   private static final Set<String> RESTRICTED_TAGS = ImmutableSet.of(TAG_MATERIALS, TAG_STATS, TAG_MULTIPLIERS, TAG_PERSISTENT_MOD_DATA, TAG_VOLATILE_MOD_DATA, TAG_UPGRADES, TAG_MODIFIERS, TAG_BROKEN, TAG_DAMAGE, TAG_HIDE_FLAGS);
 
-  /** Item representing this tool */
+  /**
+   * Item representing this tool
+   */
   @Getter
   private final Item item;
-  /** Tool definition, describing part count and alike */
+  /**
+   * Tool definition, describing part count and alike
+   */
   @Getter
   private final ToolDefinition definition;
-  /** Original tool NBT */
+  /**
+   * Original tool NBT
+   */
   @Getter(AccessLevel.PROTECTED)
   private final CompoundTag nbt;
-  /** Public view of the internal NBT, to give to modifier hooks */
+  /**
+   * Public view of the internal NBT, to give to modifier hooks
+   */
   private RestrictedCompoundTag restrictedNBT;
 
   // durability
-  /** Current damage of the tool, -1 means unloaded */
+  /**
+   * Current damage of the tool, -1 means unloaded
+   */
   private int damage = -1;
-  /** If true, tool is broken. Null means unloaded */
+  /**
+   * If true, tool is broken. Null means unloaded
+   */
   @Nullable
   private Boolean broken;
 
   // tool data: these properties describe the tool
-  /** Data object containing materials */
+  /**
+   * Data object containing materials
+   */
   @Nullable
   private MaterialNBT materials;
-  /** Upgrades are modifiers that come from recipes. Abilities are included with these in NBT */
+  /**
+   * Upgrades are modifiers that come from recipes. Abilities are included with these in NBT
+   */
   @Nullable
   private ModifierNBT upgrades;
-  /** Data object containing modifier data that persists on stat rebuild */
+  /**
+   * Data object containing modifier data that persists on stat rebuild
+   */
   @Nullable
   private ModDataNBT persistentModData;
 
   // nbt cache: these values are calculated tool data
-  /** Combination of modifiers from upgrades and material traits */
+  /**
+   * Combination of modifiers from upgrades and material traits
+   */
   @Nullable
   private ModifierNBT modifiers;
-  /** Data object containing the original tool stats */
+  /**
+   * Data object containing the original tool stats
+   */
   @Nullable
   private StatsNBT stats;
-  /** Data object containing stat multipliers for each stat */
+  /**
+   * Data object containing stat multipliers for each stat
+   */
   @Nullable
   private MultiplierNBT multipliers;
-  /** Data object containing modifier data that is recreated when the modifier list changes */
+  /**
+   * Data object containing modifier data that is recreated when the modifier list changes
+   */
   @Nullable
   private IModDataView volatileModData;
 
@@ -119,15 +166,16 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Creates a tool stack from an item stack
-   * @param stack    Base stack
-   * @param copyNbt  If true, NBT is copied from the stack
-   * @return  Tool stack
+   *
+   * @param stack   Base stack
+   * @param copyNbt If true, NBT is copied from the stack
+   * @return Tool stack
    */
   private static ToolStack from(ItemStack stack, boolean copyNbt) {
     Item item = stack.getItem();
     ToolDefinition definition = item instanceof IModifiable mod
-                                ? mod.getToolDefinition()
-                                : ToolDefinition.EMPTY;
+      ? mod.getToolDefinition()
+      : ToolDefinition.EMPTY;
     CompoundTag nbt = stack.getTag();
     if (nbt == null) {
       nbt = new CompoundTag();
@@ -154,8 +202,9 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Creates a tool stack from the given item stack, not copying NBT
-   * @param stack  Stack
-   * @return  Tool stack
+   *
+   * @param stack Stack
+   * @return Tool stack
    */
   public static ToolStack from(ItemStack stack) {
     return from(stack, false);
@@ -163,8 +212,9 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Creates a tool stack from the given item stack, copying the NBT
-   * @param stack  Stack
-   * @return  Tool stack
+   *
+   * @param stack Stack
+   * @return Tool stack
    */
   public static ToolStack copyFrom(ItemStack stack) {
     return from(stack, true);
@@ -172,9 +222,10 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Creates a new tool stack for a completely new tool
-   * @param item        Item
-   * @param definition  Tool definition
-   * @return  Tool stack
+   *
+   * @param item       Item
+   * @param definition Tool definition
+   * @return Tool stack
    */
   public static ToolStack createTool(Item item, ToolDefinition definition, MaterialNBT materials) {
     ToolStack tool = from(item, definition, new CompoundTag());
@@ -190,7 +241,8 @@ public class ToolStack implements IToolStackView {
   /**
    * Creates a copy of this tool to prevent modifications to the original.
    * Will copy over cached parsed NBT when possible, making this more efficient than calling {@link #copyFrom(ItemStack)}.
-   * @return  Copy of this tool
+   *
+   * @return Copy of this tool
    */
   public ToolStack copy() {
     ToolStack tool = from(item, definition, nbt.copy());
@@ -205,7 +257,9 @@ public class ToolStack implements IToolStackView {
     return tool;
   }
 
-  /** Clears all cached data, used with capabilities to prevent cached data from being out of sync due to external changes */
+  /**
+   * Clears all cached data, used with capabilities to prevent cached data from being out of sync due to external changes
+   */
   public void clearCache() {
     this.damage = -1;
     this.broken = null;
@@ -218,22 +272,27 @@ public class ToolStack implements IToolStackView {
     this.persistentModData = null;
   }
 
-  /** Creates an item stack from this tool stack */
+  /**
+   * Creates an item stack from this tool stack
+   */
   public ItemStack createStack(int size) {
     ItemStack stack = new ItemStack(item, size);
     stack.setTag(nbt);
     return stack;
   }
 
-  /** Creates an item stack from this tool stack */
+  /**
+   * Creates an item stack from this tool stack
+   */
   public ItemStack createStack() {
     return createStack(1);
   }
 
   /**
    * Sets the NBT on the given stack
-   * @param stack  Stack instance
-   * @return  New NBT
+   *
+   * @param stack Stack instance
+   * @return New NBT
    */
   public ItemStack updateStack(ItemStack stack) {
     if (stack.getItem() != item) {
@@ -245,7 +304,8 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Gets a restricted view of the tools NBT
-   * @return  Tool NBT without access to internal tags
+   *
+   * @return Tool NBT without access to internal tags
    */
   public RestrictedCompoundTag getRestrictedNBT() {
     if (restrictedNBT == null) {
@@ -258,7 +318,8 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Checks if this tool is currently broken
-   * @return  True if broken
+   *
+   * @return True if broken
    */
   @Override
   public boolean isBroken() {
@@ -275,7 +336,8 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Sets the broken state on the tool
-   * @param broken  New broken value
+   *
+   * @param broken New broken value
    */
   protected void setBrokenRaw(boolean broken) {
     this.broken = broken;
@@ -291,7 +353,8 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Gets damage, ignoring broken checks
-   * @return  Damage ignoring broken state
+   *
+   * @return Damage ignoring broken state
    */
   protected int getDamageRaw() {
     if (damage == -1) {
@@ -302,7 +365,8 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Gets the tools current damage from NBT
-   * @return  Current damage
+   *
+   * @return Current damage
    */
   @Override
   public int getDamage() {
@@ -317,7 +381,8 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Gets the current durability remaining for this tool
-   * @return  Tool durability
+   *
+   * @return Tool durability
    */
   @Override
   public int getCurrentDurability() {
@@ -330,7 +395,8 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Sets the tools damage
-   * @param  damage  New damage
+   *
+   * @param damage New damage
    */
   @Override
   public void setDamage(int damage) {
@@ -349,6 +415,7 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Gets the tool stats if parsed, or parses from NBT if not yet parsed
+   *
    * @return stats
    */
   @Override
@@ -361,7 +428,8 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Sets the tool stats, and stores it in NBT
-   * @param stats  Stats instance
+   *
+   * @param stats Stats instance
    */
   protected void setStats(StatsNBT stats) {
     this.stats = stats;
@@ -383,7 +451,8 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Sets the tool multipliers, and stores it in NBT
-   * @param multipliers  Stats instance
+   *
+   * @param multipliers Stats instance
    */
   protected void setMultipliers(MultiplierNBT multipliers) {
     if (multipliers.getContainedStats().isEmpty()) {
@@ -411,7 +480,8 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Sets the materials without updating the tool stats
-   * @param materials  New materials
+   *
+   * @param materials New materials
    */
   protected void setMaterialsRaw(MaterialNBT materials) {
     this.materials = materials;
@@ -424,7 +494,8 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Sets the materials on this tool stack, updating tool stats
-   * @param materials  New materials NBT
+   *
+   * @param materials New materials NBT
    */
   public void setMaterials(MaterialNBT materials) {
     setMaterialsRaw(materials);
@@ -433,9 +504,10 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Replaces the material at the given index
-   * @param index        Index to replace
-   * @param replacement  New material
-   * @throws IndexOutOfBoundsException  If the index is invalid
+   *
+   * @param index       Index to replace
+   * @param replacement New material
+   * @throws IndexOutOfBoundsException If the index is invalid
    */
   public void replaceMaterial(int index, MaterialVariantId replacement) {
     setMaterials(getMaterials().replaceMaterial(index, replacement));
@@ -447,7 +519,8 @@ public class ToolStack implements IToolStackView {
   /**
    * Gets a list of modifiers added from recipes.
    * In general you should use {@link #getModifiers()} when performing modifier actions to include traits.
-   * @return  Recipe modifier list
+   *
+   * @return Recipe modifier list
    */
   @Override
   public ModifierNBT getUpgrades() {
@@ -459,7 +532,8 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Updates the upgrades list on the tool
-   * @param modifiers  New upgrades
+   *
+   * @param modifiers New upgrades
    */
   public void setUpgrades(ModifierNBT modifiers) {
     this.upgrades = modifiers;
@@ -469,8 +543,9 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Adds a single modifier to this tool
-   * @param modifier  Modifier to add
-   * @param level     Level to add
+   *
+   * @param modifier Modifier to add
+   * @param level    Level to add
    */
   public void addModifier(ModifierId modifier, int level) {
     if (level <= 0) {
@@ -481,9 +556,10 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Adds a single modifier to this tool
-   * @param modifier  Modifier to add
-   * @param amount    Amount to add
-   * @param needed    Amount needed for a full level
+   *
+   * @param modifier Modifier to add
+   * @param amount   Amount to add
+   * @param needed   Amount needed for a full level
    */
   public void addModifierAmount(ModifierId modifier, int amount, int needed) {
     if (needed <= 0) {
@@ -496,8 +572,9 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Removes a single modifier to this tool
-   * @param modifier  Modifier to remove
-   * @param level     Level to remove
+   *
+   * @param modifier Modifier to remove
+   * @param level    Level to remove
    */
   public void removeModifier(ModifierId modifier, int level) {
     if (level <= 0) {
@@ -519,7 +596,8 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Updates the list of all modifiers in NBT, called in {@link #rebuildStats()}
-   * @param modifiers  New modifiers
+   *
+   * @param modifiers New modifiers
    */
   protected void setModifiers(ModifierNBT modifiers) {
     this.modifiers = modifiers;
@@ -561,7 +639,8 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Updates the volatile mod data in NBT, called in {@link #rebuildStats()}
-   * @param modData  New data
+   *
+   * @param modData New data
    */
   protected void setVolatileModData(ModDataNBT modData) {
     CompoundTag data = modData.getData();
@@ -596,7 +675,9 @@ public class ToolStack implements IToolStackView {
     return null;
   }
 
-  /** Called on inventory tick to ensure the tool has all required data including materials and starting slots, prevents tools with no stats from existing */
+  /**
+   * Called on inventory tick to ensure the tool has all required data including materials and starting slots, prevents tools with no stats from existing
+   */
   public void ensureHasData() {
     // if we try initializing before datapacks load we will get garbage data
     if (definition.isDataLoaded()) {
@@ -677,8 +758,9 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Checks if the given tool stats have been initialized, used as a marker to indicate slots are not yet applied
-   * @param stack  Stack to check
-   * @return  True if initialized
+   *
+   * @param stack Stack to check
+   * @return True if initialized
    */
   public static boolean isInitialized(ItemStack stack) {
     CompoundTag tag = stack.getTag();
@@ -687,8 +769,9 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Checks if the given tool stats have been initialized, used as a marker to indicate slots are not yet applied
-   * @param tag  Tag to check
-   * @return  True if initialized
+   *
+   * @param tag Tag to check
+   * @return True if initialized
    */
   public static boolean isInitialized(CompoundTag tag) {
     return tag.contains(TAG_STATS, Tag.TAG_COMPOUND);
@@ -696,8 +779,9 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Checks if the given tool stats have been initialized, used as a marker to indicate slots are not yet applied
-   * @param stack  Stack to check
-   * @return  True if initialized
+   *
+   * @param stack Stack to check
+   * @return True if initialized
    */
   public static boolean hasMaterials(ItemStack stack) {
     CompoundTag nbt = stack.getTag();
@@ -706,6 +790,7 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Ensures the given item stack is initialized. Called in crafting hooks
+   *
    * @param stack ItemStack to initialize
    */
   public static void ensureInitialized(ItemStack stack) {
@@ -716,8 +801,9 @@ public class ToolStack implements IToolStackView {
 
   /**
    * Ensures the given item stack is initialized. Intended to be called in {@link Item#onCraftedBy(ItemStack, Level, Player)}
-   * @param stack           ItemStack to initialize
-   * @param toolDefinition  Tool definition
+   *
+   * @param stack          ItemStack to initialize
+   * @param toolDefinition Tool definition
    */
   public static void ensureInitialized(ItemStack stack, ToolDefinition toolDefinition) {
     // must be loaded
@@ -736,9 +822,10 @@ public class ToolStack implements IToolStackView {
   /**
    * Rebuilds the item stack when loaded from NBT
    * stops things from being wrong if modifiers or materials change
-   * @param item        Item to build
-   * @param tag         Stack tag
-   * @param definition  Tool definition
+   *
+   * @param item       Item to build
+   * @param tag        Stack tag
+   * @param definition Tool definition
    */
   public static void verifyTag(Item item, CompoundTag tag, ToolDefinition definition) {
     // this function is sometimes called before datapack contents load, do nothing then

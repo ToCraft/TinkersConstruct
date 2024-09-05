@@ -38,17 +38,20 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class ModifierRemovalRecipe extends AbstractWorktableRecipe {
+
   public static final String BASE_KEY = TConstruct.makeTranslationKey("recipe", "remove_modifier");
   private static final Component DESCRIPTION = TConstruct.makeTranslation("recipe", "remove_modifier.description");
   private static final Component NO_MODIFIERS = TConstruct.makeTranslation("recipe", "remove_modifier.no_modifiers");
   public static final SizedIngredient DEFAULT_TOOLS = SizedIngredient.of(AbstractWorktableRecipe.DEFAULT_TOOLS);
 
-  protected static final LoadableField<String,ModifierRemovalRecipe> NAME_FIELD = StringLoadable.DEFAULT.defaultField("name", "modifiers", true, r -> r.name);
-  protected static final LoadableField<SizedIngredient,ModifierRemovalRecipe> TOOLS_FIELD = SizedIngredient.LOADABLE.defaultField("tools", DEFAULT_TOOLS, true, r -> r.sizedTool);
-  protected static final LoadableField<List<ItemStack>,ModifierRemovalRecipe> LEFTOVERS_FIELD = ItemStackLoadable.REQUIRED_STACK_NBT.list(0).defaultField("leftovers", List.of(), r -> r.leftovers);
-  protected static final LoadableField<IJsonPredicate<ModifierId>,ModifierRemovalRecipe> MODIFIER_PREDICATE_FIELD = ModifierPredicate.LOADER.defaultField("modifier_predicate", false, r -> r.modifierPredicate);
+  protected static final LoadableField<String, ModifierRemovalRecipe> NAME_FIELD = StringLoadable.DEFAULT.defaultField("name", "modifiers", true, r -> r.name);
+  protected static final LoadableField<SizedIngredient, ModifierRemovalRecipe> TOOLS_FIELD = SizedIngredient.LOADABLE.defaultField("tools", DEFAULT_TOOLS, true, r -> r.sizedTool);
+  protected static final LoadableField<List<ItemStack>, ModifierRemovalRecipe> LEFTOVERS_FIELD = ItemStackLoadable.REQUIRED_STACK_NBT.list(0).defaultField("leftovers", List.of(), r -> r.leftovers);
+  protected static final LoadableField<IJsonPredicate<ModifierId>, ModifierRemovalRecipe> MODIFIER_PREDICATE_FIELD = ModifierPredicate.LOADER.defaultField("modifier_predicate", false, r -> r.modifierPredicate);
 
-  /** Recipe loadable */
+  /**
+   * Recipe loadable
+   */
   public static final RecordLoadable<ModifierRemovalRecipe> LOADER = RecordLoadable.create(ContextKey.ID.requiredField(), NAME_FIELD, TOOLS_FIELD, INPUTS_FIELD, LEFTOVERS_FIELD, MODIFIER_PREDICATE_FIELD, ModifierRemovalRecipe::new);
 
   private final String name;
@@ -71,7 +74,9 @@ public class ModifierRemovalRecipe extends AbstractWorktableRecipe {
     this.entryPredicate = mod -> modifierPredicate.matches(mod.getId());
   }
 
-  /** Gets the base key for the title translation */
+  /**
+   * Gets the base key for the title translation
+   */
   protected String getBaseKey() {
     return BASE_KEY;
   }
@@ -84,7 +89,9 @@ public class ModifierRemovalRecipe extends AbstractWorktableRecipe {
     return ModifierRecipe.checkMatch(inv, inputs);
   }
 
-  /** Filters the given modifier list */
+  /**
+   * Filters the given modifier list
+   */
   protected List<ModifierEntry> filter(@Nullable IToolStackView tool, List<ModifierEntry> modifiers) {
     if (modifierPredicate != ModifierPredicate.ANY) {
       return modifiers.stream().filter(entryPredicate).toList();
@@ -168,7 +175,9 @@ public class ModifierRemovalRecipe extends AbstractWorktableRecipe {
 
   /* JEI */
 
-  /** Gets a list of tools to display */
+  /**
+   * Gets a list of tools to display
+   */
   @Override
   public List<ItemStack> getInputTools() {
     if (tools == null) {

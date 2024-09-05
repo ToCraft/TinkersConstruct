@@ -23,6 +23,7 @@ import java.util.Objects;
  * Fluid IO extension to display controller fluid
  */
 public class DrainBlockEntity extends SmelteryFluidIO implements IDisplayFluidListener {
+
   @Getter
   private FluidStack displayFluid = FluidStack.EMPTY;
 
@@ -60,7 +61,9 @@ public class DrainBlockEntity extends SmelteryFluidIO implements IDisplayFluidLi
 
   /* Updating */
 
-  /** Attaches this TE to the master as a display fluid listener */
+  /**
+   * Attaches this TE to the master as a display fluid listener
+   */
   private void attachFluidListener() {
     BlockPos masterPos = getMasterPos();
     if (masterPos != null && level != null && level.isClientSide) {

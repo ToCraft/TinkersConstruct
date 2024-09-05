@@ -17,6 +17,7 @@ import slimeknights.tconstruct.library.client.model.FluidContainerModel;
 
 @EventBusSubscriber(modid = TConstruct.MOD_ID, value = Dist.CLIENT, bus = Bus.MOD)
 public class FluidClientEvents extends ClientEventBase {
+
   @SubscribeEvent
   static void clientSetup(final FMLClientSetupEvent event) {
     setTranslucent(TinkerFluids.honey);

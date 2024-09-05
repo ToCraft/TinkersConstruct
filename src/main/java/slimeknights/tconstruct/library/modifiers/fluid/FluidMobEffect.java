@@ -17,12 +17,14 @@ import java.util.stream.Collectors;
 
 /**
  * Common logic for effects between {@link slimeknights.tconstruct.library.modifiers.fluid.entity.MobEffectFluidEffect} and {@link slimeknights.tconstruct.library.modifiers.fluid.block.MobEffectCloudFluidEffect}
- * @param effect  Effect to apply
- * @param level   Potion level starting at 1. Fixed with respect to fluid amount.
- * @param time    Potion time in ticks, scales with fluid amount.
- * @param curativeItems  Items allowed to cure the effect
+ *
+ * @param effect        Effect to apply
+ * @param level         Potion level starting at 1. Fixed with respect to fluid amount.
+ * @param time          Potion time in ticks, scales with fluid amount.
+ * @param curativeItems Items allowed to cure the effect
  */
 public record FluidMobEffect(MobEffect effect, int time, int level, @Nullable List<Item> curativeItems) {
+
   public static final RecordLoadable<FluidMobEffect> LOADABLE = RecordLoadable.create(
     Loadables.MOB_EFFECT.requiredField("effect", e -> e.effect),
     IntLoadable.FROM_ONE.requiredField("time", e -> e.time),
@@ -30,12 +32,16 @@ public record FluidMobEffect(MobEffect effect, int time, int level, @Nullable Li
     Loadables.ITEM.list(0).nullableField("curative_items", e -> e.curativeItems),
     FluidMobEffect::new);
 
-  /** Gets the amplifier for a mob effect */
+  /**
+   * Gets the amplifier for a mob effect
+   */
   public int amplifier() {
     return level - 1;
   }
 
-  /** Creates the final effect */
+  /**
+   * Creates the final effect
+   */
   public MobEffectInstance effectWithTime(int time) {
     MobEffectInstance instance = new MobEffectInstance(effect, time, this.level - 1);
     if (curativeItems != null) {
@@ -44,34 +50,45 @@ public record FluidMobEffect(MobEffect effect, int time, int level, @Nullable Li
     return instance;
   }
 
-  /** Creates the final effect */
+  /**
+   * Creates the final effect
+   */
   public MobEffectInstance makeEffect(float scale) {
-    return effectWithTime((int)(this.time * scale));
+    return effectWithTime((int) (this.time * scale));
   }
 
-  /** Creates a new builder instance */
+  /**
+   * Creates a new builder instance
+   */
   public static Builder builder() {
     return new Builder();
   }
 
   public static class Builder {
+
     private final ImmutableList.Builder<FluidMobEffect> effects = ImmutableList.builder();
 
     private Builder() {}
 
-    /** Adds an effect to the builder with the passed cures. If none are passed, effect will have no cure*/
+    /**
+     * Adds an effect to the builder with the passed cures. If none are passed, effect will have no cure
+     */
     public Builder effectCure(MobEffect effect, int time, int level, Item... curativeItems) {
       effects.add(new FluidMobEffect(effect, time, level, List.of(curativeItems)));
       return this;
     }
 
-    /** Adds an effect to the builder with default cures */
+    /**
+     * Adds an effect to the builder with default cures
+     */
     public Builder effect(MobEffect effect, int time, int level) {
       effects.add(new FluidMobEffect(effect, time, level, null));
       return this;
     }
 
-    /** Adds an effect to the builder */
+    /**
+     * Adds an effect to the builder
+     */
     public Builder effect(MobEffect effect, int time) {
       return effect(effect, time, 1);
     }
@@ -84,7 +101,9 @@ public record FluidMobEffect(MobEffect effect, int time, int level, @Nullable Li
       return effects;
     }
 
-    /** Builds the cloud effect for blocks */
+    /**
+     * Builds the cloud effect for blocks
+     */
     public MobEffectCloudFluidEffect buildCloud() {
       return new MobEffectCloudFluidEffect(getEffects());
     }

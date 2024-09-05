@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class GoldGuardModifier extends NoLevelsModifier implements EquipmentChangeModifierHook, TooltipModifierHook {
+
   private static final UUID GOLD_GUARD_UUID = UUID.fromString("fbae11f1-b547-47e8-ae0c-f2cf24a46d93");
   private static final ComputableDataKey<GoldGuardGold> TOTAL_GOLD = TConstruct.createKey("gold_guard", GoldGuardGold::new);
 
@@ -87,15 +88,20 @@ public class GoldGuardModifier extends NoLevelsModifier implements EquipmentChan
         AttributeModifier modifier = instance.getModifier(GOLD_GUARD_UUID);
         if (modifier != null) {
           tooltip.add(applyStyle(Component.literal(Util.BONUS_FORMAT.format(modifier.getAmount()) + " ")
-                                   .append(Component.translatable(getTranslationKey() + "." + "health"))));
+            .append(Component.translatable(getTranslationKey() + "." + "health"))));
         }
       }
     }
   }
 
-  /** Internal logic to update gold on the player */
+  /**
+   * Internal logic to update gold on the player
+   */
   private static class GoldGuardGold extends ChrysophiliteModifier.TotalGold {
-    /** Adds the health boost to the player */
+
+    /**
+     * Adds the health boost to the player
+     */
     private void updateAttribute(LivingEntity living) {
       // update attribute
       AttributeInstance instance = living.getAttribute(Attributes.MAX_HEALTH);
@@ -108,7 +114,9 @@ public class GoldGuardModifier extends NoLevelsModifier implements EquipmentChan
       }
     }
 
-    /** Sets the slot to having gold or not and updates the attribute */
+    /**
+     * Sets the slot to having gold or not and updates the attribute
+     */
     public void setGold(EquipmentSlot slotType, boolean value, LivingEntity living) {
       if (setGold(slotType, value)) {
         updateAttribute(living);

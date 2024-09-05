@@ -15,14 +15,18 @@ import java.util.stream.Collectors;
  * Allows getting a list of items for display for a given material
  */
 public class MaterialItemList {
+
   private static List<MaterialRecipe> RECIPE_LIST = Collections.emptyList();
 
-  /** Material recipes */
-  private static final Map<MaterialVariantId,List<ItemStack>> ITEM_LISTS = new HashMap<>();
+  /**
+   * Material recipes
+   */
+  private static final Map<MaterialVariantId, List<ItemStack>> ITEM_LISTS = new HashMap<>();
 
   /**
    * Sets the list of recipes
-   * @param recipes  Recipes
+   *
+   * @param recipes Recipes
    */
   public static void setRecipes(List<MaterialRecipe> recipes) {
     RECIPE_LIST = recipes.stream().filter(r -> !r.getMaterial().isUnknown()).collect(Collectors.toList());
@@ -31,8 +35,9 @@ public class MaterialItemList {
 
   /**
    * Gets a list of items
-   * @param material  Materials
-   * @return  List of items
+   *
+   * @param material Materials
+   * @return List of items
    */
   public static List<ItemStack> getItems(MaterialVariantId material) {
     List<ItemStack> list = ITEM_LISTS.get(material);

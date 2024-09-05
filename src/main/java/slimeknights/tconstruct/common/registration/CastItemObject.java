@@ -2,9 +2,12 @@ package slimeknights.tconstruct.common.registration;
 
 import lombok.Getter;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.registration.object.ItemObject;
 
 import java.util.Arrays;
@@ -18,6 +21,7 @@ import static slimeknights.mantle.util.RegistryHelper.getHolder;
  * Deferred wrapper holding gold, sand, and red sand casts
  */
 public class CastItemObject extends ItemObject<Item> {
+
   @Getter
   private final ResourceLocation name;
   private final Supplier<? extends Item> sand;
@@ -28,10 +32,10 @@ public class CastItemObject extends ItemObject<Item> {
   private final TagKey<Item> multiUseTag;
 
   public CastItemObject(ResourceLocation name, Item gold, Item sand, Item redSand) {
-    super(Registry.ITEM, gold);
+    super(BuiltInRegistries.ITEM, gold);
     this.name = name;
-    this.sand = getHolder(Registry.ITEM, sand);
-    this.redSand = getHolder(Registry.ITEM, redSand);
+    this.sand = getHolder(BuiltInRegistries.ITEM, sand);
+    this.redSand = getHolder(BuiltInRegistries.ITEM, redSand);
     this.singleUseTag = makeTag("single_use");
     this.multiUseTag = makeTag("multi_use");
   }
@@ -47,15 +51,17 @@ public class CastItemObject extends ItemObject<Item> {
 
   /**
    * Gets the single use tag for this object
-   * @return  Single use tag
+   *
+   * @return Single use tag
    */
   protected TagKey<Item> makeTag(String type) {
-    return TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(name.getNamespace(), "casts/" + type + "/" + name.getPath()));
+    return TagKey.create(Registries.ITEM, new ResourceLocation(name.getNamespace(), "casts/" + type + "/" + name.getPath()));
   }
 
   /**
    * Gets the yellow sand variant
-   * @return  Yellow sand variant
+   *
+   * @return Yellow sand variant
    */
   public Item getSand() {
     return Objects.requireNonNull(this.sand.get(), "CastItemObject missing sand");
@@ -63,7 +69,8 @@ public class CastItemObject extends ItemObject<Item> {
 
   /**
    * Gets the red sand variant
-   * @return  Red sand variant
+   *
+   * @return Red sand variant
    */
   public Item getRedSand() {
     return Objects.requireNonNull(this.redSand.get(), "CastItemObject missing red sand");
@@ -71,7 +78,8 @@ public class CastItemObject extends ItemObject<Item> {
 
   /**
    * Gets a list of all variants
-   * @return  All variants
+   *
+   * @return All variants
    */
   public List<Item> values() {
     return Arrays.asList(this.get(), this.getSand(), this.getRedSand());

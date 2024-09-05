@@ -11,8 +11,11 @@ import java.io.IOException;
 
 import static slimeknights.tconstruct.TConstruct.getResource;
 
-/** Provider for tool models, mostly used for duplicating displays */
+/**
+ * Provider for tool models, mostly used for duplicating displays
+ */
 public class ToolItemModelProvider extends AbstractToolItemModelProvider {
+
   public ToolItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
     super(generator, existingFileHelper, TConstruct.MOD_ID);
   }

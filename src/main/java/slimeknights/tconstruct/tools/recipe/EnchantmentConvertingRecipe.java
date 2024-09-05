@@ -42,13 +42,18 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-/** Recipe for converting enchanted books into modifier crystals */
+/**
+ * Recipe for converting enchanted books into modifier crystals
+ */
 public class EnchantmentConvertingRecipe extends AbstractWorktableRecipe {
+
   private static final Component DESCRIPTION_LOST = TConstruct.makeTranslation("recipe", "enchantment_converting.description.lost");
   private static final Component DESCRIPTION_KEEP = TConstruct.makeTranslation("recipe", "enchantment_converting.description.keep");
   private static final Component NO_ENCHANTMENT = TConstruct.makeTranslation("recipe", "enchantment_converting.no_enchantments");
   private static final RecipeResult<LazyToolStack> TOO_FEW = RecipeResult.failure(TConstruct.makeTranslationKey("recipe", "enchantment_converting.too_few"));
-  /** Loader instance */
+  /**
+   * Loader instance
+   */
   public static final RecordLoadable<EnchantmentConvertingRecipe> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(),
     StringLoadable.DEFAULT.requiredField("name", r -> r.name),
@@ -58,17 +63,27 @@ public class EnchantmentConvertingRecipe extends AbstractWorktableRecipe {
     ModifierPredicate.LOADER.defaultField("modifier_predicate", false, r -> r.modifierPredicate),
     EnchantmentConvertingRecipe::new);
 
-  /** Name of recipe, used for title */
+  /**
+   * Name of recipe, used for title
+   */
   private final String name;
-  /** Cached title component */
+  /**
+   * Cached title component
+   */
   @Getter
   private final Component title;
-  /** If true, matches enchanted books. If false, matches tools */
+  /**
+   * If true, matches enchanted books. If false, matches tools
+   */
   private final boolean matchBook;
-  /** If true, the input book/tool is returned, disenchanted */
+  /**
+   * If true, the input book/tool is returned, disenchanted
+   */
   private final boolean returnInput;
 
-  /** Modifiers valid for this recipe */
+  /**
+   * Modifiers valid for this recipe
+   */
   private final IJsonPredicate<ModifierId> modifierPredicate;
 
   private List<ModifierEntry> displayModifiers;
@@ -82,8 +97,10 @@ public class EnchantmentConvertingRecipe extends AbstractWorktableRecipe {
     this.modifierPredicate = modifierPredicate;
   }
 
-  /** Gets the enchantment map from the given stack */
-  private Map<Enchantment,Integer> getEnchantments(ItemStack stack) {
+  /**
+   * Gets the enchantment map from the given stack
+   */
+  private Map<Enchantment, Integer> getEnchantments(ItemStack stack) {
     return EnchantmentHelper.deserializeEnchantments(matchBook ? EnchantedBookItem.getEnchantments(stack) : stack.getEnchantmentTags());
   }
 
@@ -179,8 +196,8 @@ public class EnchantmentConvertingRecipe extends AbstractWorktableRecipe {
       ItemStack current = inv.getTinkerableStack();
       // returnInput drops just 1 level of the enchantment
       // worth noting, its possible multiple match, if thats the case we just extract the first we find
-      Map<Enchantment,Integer> enchantments = getEnchantments(current);
-      for (Entry<Enchantment,Integer> entry : enchantments.entrySet()) {
+      Map<Enchantment, Integer> enchantments = getEnchantments(current);
+      for (Entry<Enchantment, Integer> entry : enchantments.entrySet()) {
         Enchantment enchantment = entry.getKey();
         Modifier enchantmentModifier = ModifierManager.INSTANCE.get(enchantment);
         if (enchantmentModifier != null && enchantmentModifier.getId().equals(modifier)) {
@@ -235,9 +252,9 @@ public class EnchantmentConvertingRecipe extends AbstractWorktableRecipe {
     if (tools == null) {
       Set<ModifierId> modifiers = getModifierOptions(null).stream().map(ModifierEntry::getId).collect(Collectors.toSet());
       tools = ModifierManager.INSTANCE.getEquivalentEnchantments(modifiers::contains)
-                                      .flatMap(enchantment -> IntStream.rangeClosed(1, enchantment.getMaxLevel())
-                                                                       .mapToObj(level -> EnchantedBookItem.createForEnchantment(new EnchantmentInstance(enchantment, level))))
-                                      .toList();
+        .flatMap(enchantment -> IntStream.rangeClosed(1, enchantment.getMaxLevel())
+          .mapToObj(level -> EnchantedBookItem.createForEnchantment(new EnchantmentInstance(enchantment, level))))
+        .toList();
     }
     return tools;
   }
@@ -245,10 +262,14 @@ public class EnchantmentConvertingRecipe extends AbstractWorktableRecipe {
 
   /* Helpers */
 
-  /** Cached list of all enchantable tools, since its item instance controlled only needs to be computed once per launch */
+  /**
+   * Cached list of all enchantable tools, since its item instance controlled only needs to be computed once per launch
+   */
   private static List<ItemStack> ALL_ENCHANTABLE_TOOLS;
 
-  /** Gets a list of all enchantable tools. This is expensive, but only needs to be done once fortunately. */
+  /**
+   * Gets a list of all enchantable tools. This is expensive, but only needs to be done once fortunately.
+   */
   private static List<ItemStack> getAllEnchantableTools() {
     if (ALL_ENCHANTABLE_TOOLS == null) {
       ALL_ENCHANTABLE_TOOLS = ForgeRegistries.ITEMS.getValues().stream().map(item -> {

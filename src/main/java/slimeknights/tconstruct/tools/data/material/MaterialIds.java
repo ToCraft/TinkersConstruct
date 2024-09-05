@@ -10,6 +10,7 @@ import static slimeknights.tconstruct.library.materials.definition.MaterialVaria
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class MaterialIds {
+
   // tier 1
   public static final MaterialId wood = id("wood");
   public static final MaterialId flint = id("flint");
@@ -95,31 +96,31 @@ public final class MaterialIds {
   /*
    * Variants
    */
-  public static final MaterialVariantId basalt  = create(flint, "basalt");
+  public static final MaterialVariantId basalt = create(flint, "basalt");
   // wood
-  public static final MaterialVariantId oak      = create(wood, "oak");
-  public static final MaterialVariantId spruce   = create(wood, "spruce");
-  public static final MaterialVariantId birch    = create(wood, "birch");
-  public static final MaterialVariantId jungle   = create(wood, "jungle");
-  public static final MaterialVariantId acacia   = create(wood, "acacia");
-  public static final MaterialVariantId darkOak  = create(wood, "dark_oak");
+  public static final MaterialVariantId oak = create(wood, "oak");
+  public static final MaterialVariantId spruce = create(wood, "spruce");
+  public static final MaterialVariantId birch = create(wood, "birch");
+  public static final MaterialVariantId jungle = create(wood, "jungle");
+  public static final MaterialVariantId acacia = create(wood, "acacia");
+  public static final MaterialVariantId darkOak = create(wood, "dark_oak");
   public static final MaterialVariantId mangrove = create(wood, "mangrove");
-  public static final MaterialVariantId crimson  = create(wood, "crimson");
-  public static final MaterialVariantId warped   = create(wood, "warped");
+  public static final MaterialVariantId crimson = create(wood, "crimson");
+  public static final MaterialVariantId warped = create(wood, "warped");
   // stone
-  public static final MaterialVariantId stone      = create(rock, "stone");
-  public static final MaterialVariantId andesite   = create(rock, "andesite");
-  public static final MaterialVariantId diorite    = create(rock, "diorite");
-  public static final MaterialVariantId granite    = create(rock, "granite");
+  public static final MaterialVariantId stone = create(rock, "stone");
+  public static final MaterialVariantId andesite = create(rock, "andesite");
+  public static final MaterialVariantId diorite = create(rock, "diorite");
+  public static final MaterialVariantId granite = create(rock, "granite");
   public static final MaterialVariantId blackstone = create(rock, "blackstone");
-  public static final MaterialVariantId deepslate  = create(rock, "deepslate");
-  public static final MaterialVariantId endstone   = create(whitestone, "end");
+  public static final MaterialVariantId deepslate = create(rock, "deepslate");
+  public static final MaterialVariantId endstone = create(whitestone, "end");
   // slimewood
   public static final MaterialVariantId slimewoodComposite = create(slimewood, "composite");
-  public static final MaterialVariantId greenheart         = create(slimewood, "greenheart");
-  public static final MaterialVariantId skyroot            = create(slimewood, "skyroot");
-  public static final MaterialVariantId bloodshroom        = create(slimewood, "bloodshroom");
-  public static final MaterialVariantId enderbark          = create(slimewood, "enderbark");
+  public static final MaterialVariantId greenheart = create(slimewood, "greenheart");
+  public static final MaterialVariantId skyroot = create(slimewood, "skyroot");
+  public static final MaterialVariantId bloodshroom = create(slimewood, "bloodshroom");
+  public static final MaterialVariantId enderbark = create(slimewood, "enderbark");
   // oxidized
   public static final MaterialVariantId wroughtIron = create(iron, "wrought");
   public static final MaterialVariantId oxidizedIron = create(iron, "oxidized");
@@ -127,8 +128,9 @@ public final class MaterialIds {
 
   /**
    * Creates a new material ID
-   * @param name  ID name
-   * @return  Material ID object
+   *
+   * @param name ID name
+   * @return Material ID object
    */
   private static MaterialId id(String name) {
     return new MaterialId(TConstruct.MOD_ID, name);

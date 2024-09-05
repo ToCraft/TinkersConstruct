@@ -16,6 +16,7 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 
 public class ScopeModifier extends Modifier implements EquipmentChangeModifierHook {
+
   public static final ResourceLocation SCOPE = TConstruct.getResource("longbow_scope");
 
   @Override
@@ -36,9 +37,10 @@ public class ScopeModifier extends Modifier implements EquipmentChangeModifierHo
 
   /**
    * Implementation of using tick that supports scopes
+   *
    * @param tool       Tool performing interaction
    * @param entity     Interacting entity
-   * @param chargeTime  Amount of ticks the tool has charged for, typically just use duration - tiee left
+   * @param chargeTime Amount of ticks the tool has charged for, typically just use duration - tiee left
    */
   public static void scopingUsingTick(IToolStackView tool, LivingEntity entity, int chargeTime) {
     if (entity.level.isClientSide && tool.getModifierLevel(TinkerModifiers.scope.getId()) > 0) {
@@ -51,7 +53,8 @@ public class ScopeModifier extends Modifier implements EquipmentChangeModifierHo
 
   /**
    * Cancels the scoping effect for the given entity
-   * @param entity  Entity
+   *
+   * @param entity Entity
    */
   public static void stopScoping(LivingEntity entity) {
     if (entity.level.isClientSide) {

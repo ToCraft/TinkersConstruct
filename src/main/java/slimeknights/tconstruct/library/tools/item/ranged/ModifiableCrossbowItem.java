@@ -59,9 +59,13 @@ import java.util.function.Predicate;
 import static slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook.KEY_DRAWTIME;
 
 public class ModifiableCrossbowItem extends ModifiableLauncherItem {
-  /** Key containing the stored crossbow ammo */
+
+  /**
+   * Key containing the stored crossbow ammo
+   */
   public static final ResourceLocation KEY_CROSSBOW_AMMO = TConstruct.getResource("crossbow_ammo");
   private static final String PROJECTILE_KEY = "item.minecraft.crossbow.projectile";
+
   public ModifiableCrossbowItem(Properties properties, ToolDefinition toolDefinition) {
     super(properties, toolDefinition);
   }
@@ -98,7 +102,9 @@ public class ModifiableCrossbowItem extends ModifiableLauncherItem {
 
   /* Arrow launching */
 
-  /** Gets the arrow pitch */
+  /**
+   * Gets the arrow pitch
+   */
   private static float getRandomShotPitch(float angle, RandomSource pRandom) {
     if (angle == 0) {
       return 1.0f;
@@ -163,10 +169,11 @@ public class ModifiableCrossbowItem extends ModifiableLauncherItem {
 
   /**
    * Fires the crossbow
-   * @param tool       Tool instance
-   * @param player     Player firing
-   * @param hand       Hand fired from
-   * @param heldAmmo   Ammo used to fire, should be non-empty
+   *
+   * @param tool     Tool instance
+   * @param player   Player firing
+   * @param hand     Hand fired from
+   * @param heldAmmo Ammo used to fire, should be non-empty
    */
   public static void fireCrossbow(IToolStackView tool, Player player, InteractionHand hand, CompoundTag heldAmmo) {
     // ammo already loaded? time to fire
@@ -196,7 +203,7 @@ public class ModifiableCrossbowItem extends ModifiableLauncherItem {
           speed = 1.5f;
           damage += 3;
         } else {
-          ArrowItem arrowItem = ammo.getItem() instanceof ArrowItem a ? a : (ArrowItem)Items.ARROW;
+          ArrowItem arrowItem = ammo.getItem() instanceof ArrowItem a ? a : (ArrowItem) Items.ARROW;
           arrow = arrowItem.createArrow(level, ammo, player);
           projectile = arrow;
           arrow.setCritArrow(true);
@@ -206,7 +213,7 @@ public class ModifiableCrossbowItem extends ModifiableLauncherItem {
           damage += 1;
 
           // vanilla arrows have a base damage of 2, cancel that out then add in our base damage to account for custom arrows with higher base damage
-          float baseArrowDamage = (float)(arrow.getBaseDamage() - 2 + tool.getStats().get(ToolStats.PROJECTILE_DAMAGE));
+          float baseArrowDamage = (float) (arrow.getBaseDamage() - 2 + tool.getStats().get(ToolStats.PROJECTILE_DAMAGE));
           arrow.setBaseDamage(ConditionalStatModifierHook.getModifiedStat(tool, player, ToolStats.PROJECTILE_DAMAGE, baseArrowDamage));
 
           // fortunately, don't need to deal with vanilla infinity here, our infinity was dealt with during loading

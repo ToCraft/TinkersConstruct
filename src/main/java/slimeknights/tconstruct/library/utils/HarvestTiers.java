@@ -18,14 +18,21 @@ import java.util.Map;
  * Harvest level display names
  */
 public class HarvestTiers {
+
   private HarvestTiers() {}
 
-  /** Cache of name for each tier */
+  /**
+   * Cache of name for each tier
+   */
   private static final Map<Tier, Component> harvestLevelNames = Maps.newHashMap();
-  /** Listener to clear name cache so we get new colors */
+  /**
+   * Listener to clear name cache so we get new colors
+   */
   public static final ISafeManagerReloadListener RELOAD_LISTENER = manager -> harvestLevelNames.clear();
 
-  /** Makes a translation key for the given name */
+  /**
+   * Makes a translation key for the given name
+   */
   private static MutableComponent makeLevelKey(Tier tier) {
     String key = Util.makeTranslationKey("harvest_tier", TierSortingRegistry.getName(tier));
     TextColor color = ResourceColorManager.getTextColor(key);
@@ -34,14 +41,17 @@ public class HarvestTiers {
 
   /**
    * Gets the harvest level name for the given level number
-   * @param tier  Tier
-   * @return  Level name
+   *
+   * @param tier Tier
+   * @return Level name
    */
   public static Component getName(Tier tier) {
-    return harvestLevelNames.computeIfAbsent(tier, n ->  makeLevelKey(tier));
+    return harvestLevelNames.computeIfAbsent(tier, n -> makeLevelKey(tier));
   }
 
-  /** Gets the larger of two tiers */
+  /**
+   * Gets the larger of two tiers
+   */
   public static Tier max(Tier a, Tier b) {
     List<Tier> sorted = TierSortingRegistry.getSortedTiers();
     // note indexOf returns -1 if the tier is missing, so the larger of an unsorted tier and a sorted one is the sorted one
@@ -51,7 +61,9 @@ public class HarvestTiers {
     return a;
   }
 
-  /** Gets the smaller of two tiers */
+  /**
+   * Gets the smaller of two tiers
+   */
   public static Tier min(Tier a, Tier b) {
     List<Tier> sorted = TierSortingRegistry.getSortedTiers();
     // note indexOf returns -1 if the tier is missing, so the smaller of an unsorted tier and a sorted one is the unsorted one
@@ -61,7 +73,9 @@ public class HarvestTiers {
     return a;
   }
 
-  /** Gets the smallest tier in the sorting registry */
+  /**
+   * Gets the smallest tier in the sorting registry
+   */
   public static Tier minTier() {
     List<Tier> sortedTiers = TierSortingRegistry.getSortedTiers();
     if (sortedTiers.isEmpty()) {

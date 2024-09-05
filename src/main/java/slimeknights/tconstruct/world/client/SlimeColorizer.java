@@ -11,8 +11,11 @@ import java.util.Map;
  * Data class to handle all slime colors
  */
 public class SlimeColorizer {
-  /** Map of slime foliage type to color */
-  private static final Map<FoliageType,int[]> COLOR_MAP = Util.make(new EnumMap<>(FoliageType.class), map -> {
+
+  /**
+   * Map of slime foliage type to color
+   */
+  private static final Map<FoliageType, int[]> COLOR_MAP = Util.make(new EnumMap<>(FoliageType.class), map -> {
     for (FoliageType type : FoliageType.values()) {
       map.put(type, new int[65536]);
     }
@@ -23,8 +26,9 @@ public class SlimeColorizer {
 
   /**
    * Updates the colors for the given type
-   * @param type    Type to update
-   * @param colors  New colors
+   *
+   * @param type   Type to update
+   * @param colors New colors
    */
   public static void setGrassColor(FoliageType type, int[] colors) {
     COLOR_MAP.put(type, colors);
@@ -32,10 +36,11 @@ public class SlimeColorizer {
 
   /**
    * Gets the color for the given position
-   * @param type  Foliage type
-   * @param x     X position
-   * @param z     Z position
-   * @return      Color
+   *
+   * @param type Foliage type
+   * @param x    X position
+   * @param z    Z position
+   * @return Color
    */
   public static int getColor(FoliageType type, int x, int z) {
     return getColor(COLOR_MAP.get(type), x, z);
@@ -50,10 +55,11 @@ public class SlimeColorizer {
 
   /**
    * Gets the color for the given position from the buffer
-   * @param buffer  Color buffer
-   * @param posX    X position
-   * @param posZ    Z position
-   * @return        Color
+   *
+   * @param buffer Color buffer
+   * @param posX   X position
+   * @param posZ   Z position
+   * @return Color
    */
   private static int getColor(int[] buffer, int posX, int posZ) {
     float x = Math.abs((LOOP - (Math.abs(posX) % (2 * LOOP))) / LOOP);

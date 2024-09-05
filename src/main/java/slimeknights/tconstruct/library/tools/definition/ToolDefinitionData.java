@@ -18,9 +18,14 @@ import java.util.List;
  * Contains info about how to craft a tool and how it behaves.
  */
 public class ToolDefinitionData {
-  /** Empty tool data definition instance */
+
+  /**
+   * Empty tool data definition instance
+   */
   public static final ToolDefinitionData EMPTY = new ToolDefinitionData(List.of(), ErrorFactory.RUNTIME);
-  /** Loadable to parse definition data from JSON */
+  /**
+   * Loadable to parse definition data from JSON
+   */
   public static final RecordLoadable<ToolDefinitionData> LOADABLE = RecordLoadable.create(ToolModule.WITH_HOOKS.list(0).defaultField("modules", List.of(), d -> d.modules), ErrorFactory.FIELD, ToolDefinitionData::new);
 
   private final List<WithHooks<ToolModule>> modules;
@@ -38,7 +43,9 @@ public class ToolDefinitionData {
 
   /* Getters */
 
-  /** Gets the given module from the tool */
+  /**
+   * Gets the given module from the tool
+   */
   public <T> T getHook(ModuleHook<T> hook) {
     return hooks.getOrDefault(hook);
   }
@@ -46,13 +53,17 @@ public class ToolDefinitionData {
 
   /* Packet buffers */
 
-  /** Writes a tool definition stat object to a packet buffer */
+  /**
+   * Writes a tool definition stat object to a packet buffer
+   */
   @Deprecated
   public void write(FriendlyByteBuf buffer) {
     LOADABLE.encode(buffer, this);
   }
 
-  /** Reads a tool definition stat object from a packet buffer */
+  /**
+   * Reads a tool definition stat object from a packet buffer
+   */
   @Deprecated
   public static ToolDefinitionData read(FriendlyByteBuf buffer) {
     return LOADABLE.decode(buffer);

@@ -20,13 +20,20 @@ import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import java.util.Optional;
 import java.util.function.Function;
 
-/** Logic to create material texture variants for armor */
+/**
+ * Logic to create material texture variants for armor
+ */
 @RequiredArgsConstructor
 public abstract class MaterialArmorTextureSupplier implements ArmorTextureSupplier {
-  /** Field for parsing the variant from JSON */
-  private static final LoadableField<ResourceLocation,MaterialArmorTextureSupplier> PREFIX_FIELD = Loadables.RESOURCE_LOCATION.requiredField("prefix", m -> m.prefix);
 
-  /** Makes a texture for the given variant and material, returns null if its missing */
+  /**
+   * Field for parsing the variant from JSON
+   */
+  private static final LoadableField<ResourceLocation, MaterialArmorTextureSupplier> PREFIX_FIELD = Loadables.RESOURCE_LOCATION.requiredField("prefix", m -> m.prefix);
+
+  /**
+   * Makes a texture for the given variant and material, returns null if its missing
+   */
   private static ArmorTexture tryTexture(ResourceLocation name, int color, String material) {
     ResourceLocation texture = LocationExtender.INSTANCE.suffix(name, material);
     if (TEXTURE_VALIDATOR.test(texture)) {
@@ -35,8 +42,10 @@ public abstract class MaterialArmorTextureSupplier implements ArmorTextureSuppli
     return ArmorTexture.EMPTY;
   }
 
-  /** Makes a material getter for the given base and type */
-  public static Function<String,ArmorTexture> materialGetter(ResourceLocation name) {
+  /**
+   * Makes a material getter for the given base and type
+   */
+  public static Function<String, ArmorTexture> materialGetter(ResourceLocation name) {
     // if the base texture does not exist, means we decided to skip this piece. Notably used for skipping some layers of wings
     if (!TEXTURE_VALIDATOR.test(name)) {
       return material -> ArmorTexture.EMPTY;
@@ -75,17 +84,20 @@ public abstract class MaterialArmorTextureSupplier implements ArmorTextureSuppli
 
   private final ResourceLocation prefix;
   private final Function<String, ArmorTexture>[] textures;
+
   @SuppressWarnings("unchecked")
   public MaterialArmorTextureSupplier(ResourceLocation prefix) {
     this.prefix = prefix;
-    this.textures = new Function[] {
+    this.textures = new Function[]{
       materialGetter(LocationExtender.INSTANCE.suffix(prefix, "armor")),
       materialGetter(LocationExtender.INSTANCE.suffix(prefix, "leggings")),
       materialGetter(LocationExtender.INSTANCE.suffix(prefix, "wings"))
     };
   }
 
-  /** Gets the material from a given stack */
+  /**
+   * Gets the material from a given stack
+   */
   protected abstract String getMaterial(ItemStack stack);
 
   @Override
@@ -97,8 +109,11 @@ public abstract class MaterialArmorTextureSupplier implements ArmorTextureSuppli
     return ArmorTexture.EMPTY;
   }
 
-  /** Material supplier using persistent data */
+  /**
+   * Material supplier using persistent data
+   */
   public static class PersistentData extends MaterialArmorTextureSupplier {
+
     public static final RecordLoadable<PersistentData> LOADER = RecordLoadable.create(
       PREFIX_FIELD,
       Loadables.RESOURCE_LOCATION.requiredField("material_key", d -> d.key),
@@ -126,14 +141,18 @@ public abstract class MaterialArmorTextureSupplier implements ArmorTextureSuppli
     }
   }
 
-  /** Material supplier using material data */
+  /**
+   * Material supplier using material data
+   */
   public static class Material extends MaterialArmorTextureSupplier {
+
     public static final RecordLoadable<Material> LOADER = RecordLoadable.create(
       PREFIX_FIELD,
       IntLoadable.FROM_ZERO.requiredField("index", m -> m.index),
       Material::new);
 
     private final int index;
+
     public Material(ResourceLocation prefix, int index) {
       super(prefix);
       this.index = index;

@@ -17,10 +17,15 @@ import javax.annotation.Nullable;
 import java.util.Objects;
 
 public class PartBuilderContainerWrapper implements IPartBuilderContainer {
+
   private final PartBuilderBlockEntity builder;
-  /** If true, the material recipe is out of date*/
+  /**
+   * If true, the material recipe is out of date
+   */
   private boolean materialNeedsUpdate = true;
-  /** Cached material recipe, may be null if not a material item */
+  /**
+   * Cached material recipe, may be null if not a material item
+   */
   @Nullable
   private IMaterialValue material = null;
 
@@ -38,12 +43,16 @@ public class PartBuilderContainerWrapper implements IPartBuilderContainer {
     return builder.getItem(PartBuilderBlockEntity.PATTERN_SLOT);
   }
 
-  /** Gets the tiles world */
+  /**
+   * Gets the tiles world
+   */
   protected Level getWorld() {
     return Objects.requireNonNull(builder.getLevel(), "Tile entity world must be nonnull");
   }
 
-  /** Refreshes the stored material */
+  /**
+   * Refreshes the stored material
+   */
   public void refreshMaterial() {
     this.materialNeedsUpdate = true;
     this.material = null;

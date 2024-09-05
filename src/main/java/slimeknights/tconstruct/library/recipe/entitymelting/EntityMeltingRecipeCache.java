@@ -17,7 +17,8 @@ import java.util.Map;
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class EntityMeltingRecipeCache {
-  private static final Map<EntityType<?>,EntityMeltingRecipe> CACHE = new HashMap<>();
+
+  private static final Map<EntityType<?>, EntityMeltingRecipe> CACHE = new HashMap<>();
 
   static {
     RecipeCacheInvalidator.addReloadListener(client -> CACHE.clear());
@@ -25,9 +26,10 @@ public class EntityMeltingRecipeCache {
 
   /**
    * Gets the recipe for the given type
-   * @param manager  Recipe manager
-   * @param type     Entity type
-   * @return  Recipe, or null if no recipe for this type
+   *
+   * @param manager Recipe manager
+   * @param type    Entity type
+   * @return Recipe, or null if no recipe for this type
    */
   @Nullable
   public static EntityMeltingRecipe findRecipe(RecipeManager manager, EntityType<?> type) {

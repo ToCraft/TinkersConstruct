@@ -15,10 +15,13 @@ import slimeknights.tconstruct.library.modifiers.fluid.FluidEffectContext.Entity
 
 /**
  * Effect to award a stat to a player
- * @param stat    Stat to award
- * @param amount  Amount to reward, can be negative
+ *
+ * @param stat   Stat to award
+ * @param amount Amount to reward, can be negative
  */
-public record AwardStatFluidEffect(ResourceLocation stat, int amount) implements FluidEffect<FluidEffectContext.Entity> {
+public record AwardStatFluidEffect(ResourceLocation stat,
+                                   int amount) implements FluidEffect<FluidEffectContext.Entity> {
+
   public static final RecordLoadable<AwardStatFluidEffect> LOADER = RecordLoadable.create(
     TinkerLoadables.CUSTOM_STAT.requiredField("stat", e -> e.stat),
     IntLoadable.ANY_SHORT.requiredField("amount", e -> e.amount),

@@ -19,6 +19,7 @@ import slimeknights.tconstruct.smeltery.block.entity.controller.AlloyerBlockEnti
 import javax.annotation.Nullable;
 
 public class AlloyerBlock extends TinyMultiblockControllerBlock {
+
   public AlloyerBlock(Properties builder) {
     super(builder);
   }

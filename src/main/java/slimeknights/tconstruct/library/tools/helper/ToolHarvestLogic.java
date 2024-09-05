@@ -39,13 +39,15 @@ import java.util.Objects;
  * TODO: needs big updates
  */
 public class ToolHarvestLogic {
+
   private ToolHarvestLogic() {}
 
   /**
    * Gets the amount of damage this tool should take for the given block state
-   * @param tool   Tool to check
-   * @param state  State to check
-   * @return  Damage to deal
+   *
+   * @param tool  Tool to check
+   * @param state State to check
+   * @return Damage to deal
    */
   public static int getDamage(ToolStack tool, Level world, BlockPos pos, BlockState state) {
     if (state.getDestroySpeed(world, pos) == 0 || !tool.hasTag(TinkerTags.Items.HARVEST)) {
@@ -58,9 +60,10 @@ public class ToolHarvestLogic {
 
   /**
    * Actually removes a block from the world. Cloned from {@link net.minecraft.server.level.ServerPlayerGameMode}
-   * @param tool     Tool used in breaking
-   * @param context  Harvest context
-   * @return  True if the block was removed
+   *
+   * @param tool    Tool used in breaking
+   * @param context Harvest context
+   * @return True if the block was removed
    */
   private static boolean removeBlock(IToolStackView tool, ToolHarvestContext context) {
     Boolean removed = null;
@@ -88,10 +91,11 @@ public class ToolHarvestLogic {
 
   /**
    * Called to break a block using this tool
-   * @param tool      Tool instance
-   * @param stack     Stack instance for vanilla functions
-   * @param context   Harvest context
-   * @return  True if broken
+   *
+   * @param tool    Tool instance
+   * @param stack   Stack instance for vanilla functions
+   * @param context Harvest context
+   * @return True if broken
    */
   protected static boolean breakBlock(ToolStack tool, ItemStack stack, ToolHarvestContext context) {
     // have to rerun the event to get the EXP, also ensures extra blocks broken get EXP properly
@@ -148,9 +152,10 @@ public class ToolHarvestLogic {
 
   /**
    * Breaks a secondary block
-   * @param tool      Tool instance
-   * @param stack     Stack instance for vanilla functions
-   * @param context   Tool harvest context
+   *
+   * @param tool    Tool instance
+   * @param stack   Stack instance for vanilla functions
+   * @param context Tool harvest context
    */
   public static void breakExtraBlock(ToolStack tool, ItemStack stack, ToolHarvestContext context) {
     // break the actual block
@@ -171,10 +176,11 @@ public class ToolHarvestLogic {
    * Used in {@link net.minecraftforge.common.extensions.IForgeItem#onBlockStartBreak(ItemStack, BlockPos, Player)}.
    * See also {@link net.minecraft.client.multiplayer.MultiPlayerGameMode#destroyBlock(BlockPos)} (client)
    * and {@link net.minecraft.server.level.ServerPlayerGameMode#destroyBlock(BlockPos)} (server)
-   * @param stack   Stack instance
-   * @param pos     Position to break
-   * @param player  Player instance
-   * @return  True if the block break is overridden.
+   *
+   * @param stack  Stack instance
+   * @param pos    Position to break
+   * @param player Player instance
+   * @return True if the block break is overridden.
    */
   public static boolean handleBlockBreak(ItemStack stack, BlockPos pos, Player player) {
     // TODO: offhand harvest reconsidering
@@ -210,15 +216,15 @@ public class ToolHarvestLogic {
       // no harvest context
       player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
       ToolHarvestContext context = new ToolHarvestContext(world, serverPlayer, state, pos, sideHit,
-                                                          !player.isCreative() && state.canHarvestBlock(world, pos, player), false);
+        !player.isCreative() && state.canHarvestBlock(world, pos, player), false);
       breakBlock(tool, ItemStack.EMPTY, context);
       player.setItemInHand(InteractionHand.MAIN_HAND, stack);
     } else {
       // add in harvest info
       // must not be broken, and the tool definition must be effective
       ToolHarvestContext context = new ToolHarvestContext(world, serverPlayer, state, pos, sideHit,
-                                                          !player.isCreative() && state.canHarvestBlock(world, pos, player),
-                                                          IsEffectiveToolHook.isEffective(tool, state));
+        !player.isCreative() && state.canHarvestBlock(world, pos, player),
+        IsEffectiveToolHook.isEffective(tool, state));
       // tell modifiers we are about to harvest, lets them add for instance modifiers conditioned on harvesting
       for (ModifierEntry entry : tool.getModifierList()) {
         entry.getHook(ModifierHooks.BLOCK_HARVEST).startHarvest(tool, entry, context);
@@ -255,7 +261,9 @@ public class ToolHarvestLogic {
     return true;
   }
 
-  /** Handles {@link net.minecraft.world.item.Item#mineBlock(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.level.block.state.BlockState, net.minecraft.core.BlockPos, net.minecraft.world.entity.LivingEntity)} for modifiable items */
+  /**
+   * Handles {@link net.minecraft.world.item.Item#mineBlock(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.level.block.state.BlockState, net.minecraft.core.BlockPos, net.minecraft.world.entity.LivingEntity)} for modifiable items
+   */
   public static boolean mineBlock(ItemStack stack, Level worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
     ToolStack tool = ToolStack.from(stack);
     if (tool.isBroken()) {

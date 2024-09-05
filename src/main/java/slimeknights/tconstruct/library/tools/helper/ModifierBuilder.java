@@ -8,20 +8,25 @@ import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 
 import java.util.List;
 
-/** Shared logic for both types of modifier NBT builders */
+/**
+ * Shared logic for both types of modifier NBT builders
+ */
 public interface ModifierBuilder {
+
   /**
    * Adds an entry to the builder
-   * @param entry  Entry to add
-   * @return  Builder instance
+   *
+   * @param entry Entry to add
+   * @return Builder instance
    */
   ModifierBuilder add(ModifierEntry entry);
 
   /**
    * Adds a single modifier to the builder
-   * @param modifier  Modifier
-   * @param level     Modifier level
-   * @return  Builder instance
+   *
+   * @param modifier Modifier
+   * @param level    Modifier level
+   * @return Builder instance
    */
   default ModifierBuilder add(ModifierId modifier, int level) {
     if (level <= 0) {
@@ -36,9 +41,10 @@ public interface ModifierBuilder {
 
   /**
    * Adds a single modifier to the builder
-   * @param modifier  Modifier
-   * @param level     Modifier level
-   * @return  Builder instance
+   *
+   * @param modifier Modifier
+   * @param level    Modifier level
+   * @return Builder instance
    */
   default ModifierBuilder add(Modifier modifier, int level) {
     if (level <= 0) {
@@ -53,8 +59,9 @@ public interface ModifierBuilder {
 
   /**
    * Adds an entry to the builder
-   * @param entries  Entries to add
-   * @return  Builder instance
+   *
+   * @param entries Entries to add
+   * @return Builder instance
    */
   default ModifierBuilder add(List<ModifierEntry> entries) {
     for (ModifierEntry entry : entries) {
@@ -65,14 +72,17 @@ public interface ModifierBuilder {
 
   /**
    * Adds all modifiers from the given modifier NBT
-   * @param nbt  NBT object
-   * @return  Builder instance
+   *
+   * @param nbt NBT object
+   * @return Builder instance
    */
   default ModifierBuilder add(ModifierNBT nbt) {
     add(nbt.getModifiers());
     return this;
   }
 
-  /** Builds the NBT */
+  /**
+   * Builds the NBT
+   */
   ModifierNBT build();
 }

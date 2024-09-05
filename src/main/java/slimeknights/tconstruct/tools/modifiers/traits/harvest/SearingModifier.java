@@ -33,15 +33,23 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class SearingModifier extends Modifier implements BreakSpeedModifierHook, TooltipModifierHook {
-  /** Container for melting recipe lookup */
+
+  /**
+   * Container for melting recipe lookup
+   */
   private static final SearingContainer CONTAINER = new SearingContainer();
-  /** Cache of item forms of blocks which have a boost */
+  /**
+   * Cache of item forms of blocks which have a boost
+   */
   private static final Map<Item, Boolean> BOOSTED_BLOCKS = new ConcurrentHashMap<>();
+
   static {
     RecipeCacheInvalidator.addReloadListener(client -> BOOSTED_BLOCKS.clear());
   }
 
-  /** Checks if the modifier is effective on the given block state */
+  /**
+   * Checks if the modifier is effective on the given block state
+   */
   private static boolean isEffective(Level world, Item item) {
     CONTAINER.setStack(new ItemStack(item));
     boolean effective = world.getRecipeManager().getRecipeFor(TinkerRecipeTypes.MELTING.get(), CONTAINER, world).isPresent();
@@ -76,9 +84,13 @@ public class SearingModifier extends Modifier implements BreakSpeedModifierHook,
     TooltipModifierHook.addStatBoost(tool, this, ToolStats.MINING_SPEED, TinkerTags.Items.HARVEST, 7 * modifier.getLevel(), tooltip);
   }
 
-  /** Container implementation for recipe lookup */
+  /**
+   * Container implementation for recipe lookup
+   */
   private static class SearingContainer implements IMeltingContainer {
-    @Getter @Setter
+
+    @Getter
+    @Setter
     private ItemStack stack = ItemStack.EMPTY;
 
     @Override

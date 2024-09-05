@@ -27,10 +27,12 @@ import static java.util.Objects.requireNonNullElse;
  */
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public class StationSlotLayout {
+
   private static final ResourceLocation EMPTY_NAME = TConstruct.getResource("empty");
   public static final StationSlotLayout EMPTY = new StationSlotLayout("", LayoutIcon.EMPTY, null, LayoutSlot.EMPTY, Collections.emptyList());
 
-  @Getter @Setter(AccessLevel.PROTECTED)
+  @Getter
+  @Setter(AccessLevel.PROTECTED)
   private transient ResourceLocation name = EMPTY_NAME;
   private final String translation_key;
   private final LayoutIcon icon;
@@ -39,44 +41,60 @@ public class StationSlotLayout {
   private final LayoutSlot tool_slot;
   private final List<LayoutSlot> input_slots;
 
-  /** Creates a new builder instance */
+  /**
+   * Creates a new builder instance
+   */
   public static Builder builder() {
     return new Builder();
   }
 
-  /** If true, this layout is the primary layout for a station */
+  /**
+   * If true, this layout is the primary layout for a station
+   */
   public boolean isMain() {
     return sortIndex == null;
   }
 
-  /** Gets the sort index for the given layout */
+  /**
+   * Gets the sort index for the given layout
+   */
   public int getSortIndex() {
     return requireNonNullElse(sortIndex, 255);
   }
 
-  /** Gets the icon for this layout */
+  /**
+   * Gets the icon for this layout
+   */
   public LayoutIcon getIcon() {
     return requireNonNullElse(icon, LayoutIcon.EMPTY);
   }
 
   /* Slots */
 
-  /** Gets the contents of the tool slot */
+  /**
+   * Gets the contents of the tool slot
+   */
   public LayoutSlot getToolSlot() {
     return requireNonNullElse(tool_slot, LayoutSlot.EMPTY);
   }
 
-  /** Gets positions for all input slots */
+  /**
+   * Gets positions for all input slots
+   */
   public List<LayoutSlot> getInputSlots() {
     return requireNonNullElse(input_slots, Collections.emptyList());
   }
 
-  /** Gets the number of input slots */
+  /**
+   * Gets the number of input slots
+   */
   public int getInputCount() {
     return getInputSlots().size();
   }
 
-  /** Gets the slot for the given index, includes the tool slot */
+  /**
+   * Gets the slot for the given index, includes the tool slot
+   */
   public LayoutSlot getSlot(int index) {
     if (index == 0) {
       return getToolSlot();
@@ -91,7 +109,9 @@ public class StationSlotLayout {
 
   /* Buffers */
 
-  /** Reads a slot from the packet buffer */
+  /**
+   * Reads a slot from the packet buffer
+   */
   public static StationSlotLayout read(FriendlyByteBuf buffer) {
     ResourceLocation name = buffer.readResourceLocation();
     String translationKey = buffer.readUtf(Short.MAX_VALUE);
@@ -111,7 +131,9 @@ public class StationSlotLayout {
     return layout;
   }
 
-  /** Writes a slot to the packet buffer */
+  /**
+   * Writes a slot to the packet buffer
+   */
   public void write(FriendlyByteBuf buffer) {
     buffer.writeResourceLocation(name);
     buffer.writeUtf(getTranslationKey());
@@ -133,17 +155,25 @@ public class StationSlotLayout {
 
   /* Text */
 
-  /** Gets the translation key for this slot, suffixing description at the end forms the full description */
+  /**
+   * Gets the translation key for this slot, suffixing description at the end forms the full description
+   */
   public String getTranslationKey() {
     return requireNonNullElse(translation_key, "");
   }
 
-  /** Cache of display name */
+  /**
+   * Cache of display name
+   */
   private transient Component displayName = null;
-  /** Cache of display name */
+  /**
+   * Cache of display name
+   */
   private transient Component description = null;
 
-  /** Gets the display name from the unlocalized name of {@link #getTranslationKey()} */
+  /**
+   * Gets the display name from the unlocalized name of {@link #getTranslationKey()}
+   */
   public Component getDisplayName() {
     if (displayName == null) {
       displayName = Component.translatable(getTranslationKey());
@@ -151,7 +181,9 @@ public class StationSlotLayout {
     return displayName;
   }
 
-  /** Gets the description from the unlocalized name of {@link #getTranslationKey()} */
+  /**
+   * Gets the description from the unlocalized name of {@link #getTranslationKey()}
+   */
   public Component getDescription() {
     if (description == null) {
       description = Component.translatable(getTranslationKey() + ".description");
@@ -161,6 +193,7 @@ public class StationSlotLayout {
 
   @Accessors(fluent = true)
   public static class Builder {
+
     private static final Pattern PICKAXE = new Pattern(TConstruct.MOD_ID, "pickaxe");
 
     @Setter
@@ -172,7 +205,9 @@ public class StationSlotLayout {
 
     private Builder() {}
 
-    /** Sets the sort index of this layout, unused for non-main layouts */
+    /**
+     * Sets the sort index of this layout, unused for non-main layouts
+     */
     public Builder sortIndex(int index) {
       sortIndex = index;
       return this;
@@ -180,20 +215,26 @@ public class StationSlotLayout {
 
     /* Icons */
 
-    /** Sets the given item as both the name and icon */
+    /**
+     * Sets the given item as both the name and icon
+     */
     public Builder item(ItemStack stack) {
       icon(stack);
       translationKey = stack.getDescriptionId();
       return this;
     }
 
-    /** Sets the icon of this layout to a stack */
+    /**
+     * Sets the icon of this layout to a stack
+     */
     public Builder icon(ItemStack stack) {
       icon = LayoutIcon.ofItem(stack);
       return this;
     }
 
-    /** Sets the icon of this layout to a pattern */
+    /**
+     * Sets the icon of this layout to a pattern
+     */
     public Builder icon(Pattern pattern) {
       icon = LayoutIcon.ofPattern(pattern);
       return this;
@@ -202,54 +243,74 @@ public class StationSlotLayout {
 
     /* Slots */
 
-    /** Sets the tool slot properties */
+    /**
+     * Sets the tool slot properties
+     */
     public Builder toolSlot(Pattern icon, @Nullable String name, int x, int y, @Nullable Ingredient filter) {
       toolSlot = new LayoutSlot(icon, name, x, y, filter);
       return this;
     }
 
-    /** Sets the tool slot properties */
+    /**
+     * Sets the tool slot properties
+     */
     public Builder toolSlot(int x, int y, @Nullable Ingredient filter) {
       return toolSlot(PICKAXE, null, x, y, filter);
     }
 
-    /** Sets the tool slot properties */
+    /**
+     * Sets the tool slot properties
+     */
     public Builder toolSlot(int x, int y) {
       return toolSlot(x, y, null);
     }
 
-    /** Adds an input slot with the given properties */
+    /**
+     * Adds an input slot with the given properties
+     */
     public Builder addInputSlot(@Nullable Pattern icon, @Nullable String name, int x, int y, @Nullable Ingredient filter) {
       inputSlots.add(new LayoutSlot(icon, name, x, y, filter));
       return this;
     }
 
-    /** Adds an input slot with the given properties */
+    /**
+     * Adds an input slot with the given properties
+     */
     public Builder addInputSlot(@Nullable Pattern icon, @Nullable String name, int x, int y) {
       return addInputSlot(icon, name, x, y, null);
     }
 
-    /** Adds an input slot with the given properties */
+    /**
+     * Adds an input slot with the given properties
+     */
     public Builder addInputSlot(@Nullable Pattern icon, int x, int y) {
       return addInputSlot(icon, null, x, y);
     }
 
-    /** Adds an input as the given item */
+    /**
+     * Adds an input as the given item
+     */
     public Builder addInputItem(Pattern icon, ItemLike item, int x, int y) {
       return addInputSlot(icon, item.asItem().getDescriptionId(), x, y, Ingredient.of(item));
     }
 
-    /** Adds an input as the given item */
+    /**
+     * Adds an input as the given item
+     */
     public Builder addInputItem(ItemLike item, int x, int y) {
-      return addInputItem(new Pattern(Registry.ITEM.getKey(item.asItem())), item, x, y);
+      return addInputItem(new Pattern(ForgeRegistries.ITEMS.getKey(item.asItem())), item, x, y);
     }
 
-    /** Adds an input slot with the given properties */
+    /**
+     * Adds an input slot with the given properties
+     */
     public Builder addInputPattern(Pattern icon, int x, int y, Ingredient ingredient) {
       return addInputSlot(icon, icon.getTranslationKey(), x, y, ingredient);
     }
 
-    /** Builds a station slot layout */
+    /**
+     * Builds a station slot layout
+     */
     public StationSlotLayout build() {
       return new StationSlotLayout(translationKey, icon, sortIndex, toolSlot, inputSlots.build());
     }

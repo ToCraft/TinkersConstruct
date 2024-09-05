@@ -12,39 +12,60 @@ import slimeknights.tconstruct.library.utils.Util;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/** Object for common context for weapon attack hooks */
+/**
+ * Object for common context for weapon attack hooks
+ */
 @Getter
 @RequiredArgsConstructor
 public class ToolAttackContext {
-  /** Entity doing the attacking */
+
+  /**
+   * Entity doing the attacking
+   */
   @Nonnull
   private final LivingEntity attacker;
-  /** Player doing the attacking, null if not a player */
+  /**
+   * Player doing the attacking, null if not a player
+   */
   @Nullable
   private final Player playerAttacker;
-  /** Hand containing the tool */
+  /**
+   * Hand containing the tool
+   */
   @Nonnull
   private final InteractionHand hand;
   @Nonnull
   private final EquipmentSlot slotType;
-  /** Originally targeted entity, may be different from {@link #getTarget()} for multipart entities */
+  /**
+   * Originally targeted entity, may be different from {@link #getTarget()} for multipart entities
+   */
   @Nonnull
   private final Entity target;
-  /** Target entity */
+  /**
+   * Target entity
+   */
   @Nullable
   private final LivingEntity livingTarget;
-  /** If true, attack is a critical hit */
+  /**
+   * If true, attack is a critical hit
+   */
   private final boolean isCritical;
-  /** Current attack cooldown */
+  /**
+   * Current attack cooldown
+   */
   private final float cooldown;
-  /** If true, this is a secondary attack, such as for scythes */
+  /**
+   * If true, this is a secondary attack, such as for scythes
+   */
   private final boolean isExtraAttack;
 
   public ToolAttackContext(LivingEntity attacker, @Nullable Player playerAttacker, InteractionHand hand, Entity target, @Nullable LivingEntity livingTarget, boolean isCritical, float cooldown, boolean isExtraAttack) {
     this(attacker, playerAttacker, hand, Util.getSlotType(hand), target, livingTarget, isCritical, cooldown, isExtraAttack);
   }
 
-  /** Returns true if this attack is fully charged */
+  /**
+   * Returns true if this attack is fully charged
+   */
   public boolean isFullyCharged() {
     return getCooldown() > 0.9f;
   }

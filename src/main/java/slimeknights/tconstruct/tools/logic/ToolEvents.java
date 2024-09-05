@@ -80,6 +80,7 @@ import java.util.Objects;
 @SuppressWarnings("unused")
 @EventBusSubscriber(modid = TConstruct.MOD_ID, bus = Bus.FORGE)
 public class ToolEvents {
+
   @SubscribeEvent
   static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
     Player player = event.getEntity();
@@ -231,15 +232,16 @@ public class ToolEvents {
 
   /**
    * Determines how much to damage armor based on the given damage to the player
-   * @param damage  Amount to damage the player
-   * @return  Amount to damage the armor
+   *
+   * @param damage Amount to damage the player
+   * @return Amount to damage the armor
    */
   private static int getArmorDamage(float damage) {
     damage /= 4;
     if (damage < 1) {
       return 1;
     }
-    return (int)damage;
+    return (int) damage;
   }
 
   // low priority to minimize conflict as we apply reduction as if we are the final change to damage before vanilla
@@ -305,7 +307,7 @@ public class ToolEvents {
       float armor = 0, toughness = 0;
       if (!source.isBypassArmor()) {
         armor = entity.getArmorValue();
-        toughness = (float)entity.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
+        toughness = (float) entity.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
       }
 
       // set the final dealt damage
@@ -357,13 +359,15 @@ public class ToolEvents {
 
     // when damaging ender dragons, may drop scales - must be player caused explosion, end crystals and TNT are examples
     if (Config.COMMON.dropDragonScales.get() && entity.getType() == EntityType.ENDER_DRAGON && event.getAmount() > 0
-        && source.isExplosion() && source.getEntity() != null && source.getEntity().getType() == EntityType.PLAYER) {
+      && source.isExplosion() && source.getEntity() != null && source.getEntity().getType() == EntityType.PLAYER) {
       // drops 1 - 8 scales
       ModifierUtil.dropItem(entity, new ItemStack(TinkerModifiers.dragonScale, 1 + entity.level.random.nextInt(8)));
     }
   }
 
-  /** Called the modifier hook when an entity's position changes */
+  /**
+   * Called the modifier hook when an entity's position changes
+   */
   @SubscribeEvent
   static void livingWalk(LivingTickEvent event) {
     LivingEntity living = event.getEntity();
@@ -380,7 +384,9 @@ public class ToolEvents {
     }
   }
 
-  /** Handles visibility effects of mob disguise and projectile protection */
+  /**
+   * Handles visibility effects of mob disguise and projectile protection
+   */
   @SubscribeEvent
   static void livingVisibility(LivingVisibilityEvent event) {
     // always nonnull in vanilla, not sure when it would be nullable but I dont see a need for either modifier
@@ -402,7 +408,9 @@ public class ToolEvents {
     });
   }
 
-  /** Implements projectile hit hook */
+  /**
+   * Implements projectile hit hook
+   */
   @SubscribeEvent
   static void projectileHit(ProjectileImpactEvent event) {
     Projectile projectile = event.getProjectile();
@@ -413,9 +421,9 @@ public class ToolEvents {
       HitResult.Type type = hit.getType();
       // extract a firing entity as that is a common need
       LivingEntity attacker = projectile.getOwner() instanceof LivingEntity l ? l : null;
-      switch(type) {
+      switch (type) {
         case ENTITY -> {
-          EntityHitResult entityHit = (EntityHitResult)hit;
+          EntityHitResult entityHit = (EntityHitResult) hit;
           // cancel all effects on endermen unless we have enderference, endermen like to teleport away
           // yes, hardcoded to enderference, if you need your own enderference for whatever reason, talk to us
           if (entityHit.getEntity().getType() != EntityType.ENDERMAN || modifiers.getLevel(TinkerModifiers.enderference.getId()) > 0) {
@@ -429,7 +437,7 @@ public class ToolEvents {
           }
         }
         case BLOCK -> {
-          BlockHitResult blockHit = (BlockHitResult)hit;
+          BlockHitResult blockHit = (BlockHitResult) hit;
           for (ModifierEntry entry : modifiers.getModifiers()) {
             if (entry.getHook(ModifierHooks.PROJECTILE_HIT).onProjectileHitBlock(modifiers, nbt, entry, projectile, blockHit, attacker)) {
               event.setCanceled(true);

@@ -12,6 +12,7 @@ import net.minecraft.world.level.levelgen.feature.HugeFungusFeature;
 import slimeknights.tconstruct.world.worldgen.trees.config.SlimeFungusConfig;
 
 public class SlimeFungusFeature extends HugeFungusFeature {
+
   public SlimeFungusFeature(Codec<HugeFungusConfiguration> codec) {
     super(codec);
   }

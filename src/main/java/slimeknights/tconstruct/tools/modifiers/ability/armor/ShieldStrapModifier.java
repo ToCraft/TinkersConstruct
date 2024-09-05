@@ -23,8 +23,10 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import javax.annotation.Nullable;
 
 public class ShieldStrapModifier extends InventoryMenuModifier {
+
   private static final ResourceLocation KEY = TConstruct.getResource("shield_strap");
   private static final Pattern PATTERN = new Pattern(TConstruct.MOD_ID, "shield_plus");
+
   public ShieldStrapModifier() {
     super(KEY, 1);
   }

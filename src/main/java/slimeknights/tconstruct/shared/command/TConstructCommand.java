@@ -23,9 +23,12 @@ import slimeknights.tconstruct.shared.command.subcommand.StatsCommand;
 import java.util.function.Consumer;
 
 public class TConstructCommand {
+
   private static final ArgumentTypeDeferredRegister ARGUMENT_TYPE = new ArgumentTypeDeferredRegister(TConstruct.MOD_ID);
 
-  /** Registers all TConstruct command related content */
+  /**
+   * Registers all TConstruct command related content
+   */
   public static void init() {
     ARGUMENT_TYPE.register(FMLJavaModLoadingContext.get().getModEventBus());
     ARGUMENT_TYPE.registerSingleton("slot_type", SlotTypeArgument.class, SlotTypeArgument::slotType);
@@ -38,14 +41,18 @@ public class TConstructCommand {
     MinecraftForge.EVENT_BUS.addListener(TConstructCommand::registerCommand);
   }
 
-  /** Registers a sub command for the root Mantle command */
+  /**
+   * Registers a sub command for the root Mantle command
+   */
   private static void register(LiteralArgumentBuilder<CommandSourceStack> root, String name, Consumer<LiteralArgumentBuilder<CommandSourceStack>> consumer) {
     LiteralArgumentBuilder<CommandSourceStack> subCommand = Commands.literal(name);
     consumer.accept(subCommand);
     root.then(subCommand);
   }
 
-  /** Event listener to register the Mantle command */
+  /**
+   * Event listener to register the Mantle command
+   */
   private static void registerCommand(RegisterCommandsEvent event) {
     LiteralArgumentBuilder<CommandSourceStack> builder = Commands.literal(TConstruct.MOD_ID);
 

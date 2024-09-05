@@ -2,6 +2,7 @@ package slimeknights.tconstruct.smeltery.client.screen;
 
 import net.minecraft.client.gui.screens.MenuScreens.ScreenConstructor;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -15,18 +16,20 @@ import javax.annotation.Nullable;
 /**
  * Screen factory for the single item container, one container for multiple backgrounds
  */
-public class SingleItemScreenFactory implements ScreenConstructor<SingleItemContainerMenu,BackgroundContainerScreen<SingleItemContainerMenu>> {
+public class SingleItemScreenFactory implements ScreenConstructor<SingleItemContainerMenu, BackgroundContainerScreen<SingleItemContainerMenu>> {
+
   private static final int HEIGHT = 133;
   private static final ResourceLocation DEFAULT = TConstruct.getResource("textures/gui/blank.png");
 
   /**
    * Gets the background path for the given tile
-   * @param tile  Tile
-   * @return  Background path
+   *
+   * @param tile Tile
+   * @return Background path
    */
   private static ResourceLocation getBackground(@Nullable BlockEntity tile) {
     if (tile != null) {
-      ResourceLocation id = Registry.BLOCK_ENTITY_TYPE.getKey(tile.getType());
+      ResourceLocation id = BuiltInRegistries.BLOCK_ENTITY_TYPE.getKey(tile.getType());
       if (id != null) {
         return new ResourceLocation(id.getNamespace(), String.format("textures/gui/%s.png", id.getPath()));
       }

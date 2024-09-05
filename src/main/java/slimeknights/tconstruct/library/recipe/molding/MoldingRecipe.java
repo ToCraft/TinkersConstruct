@@ -17,8 +17,11 @@ import slimeknights.mantle.recipe.helper.ItemOutput;
 import slimeknights.mantle.recipe.helper.LoadableRecipeSerializer;
 import slimeknights.mantle.recipe.helper.TypeAwareRecipeSerializer;
 
-/** Recipe to combine two items on the top of a casting table, changing the first */
+/**
+ * Recipe to combine two items on the top of a casting table, changing the first
+ */
 public class MoldingRecipe implements ICommonRecipe<IMoldingContainer> {
+
   public static final RecordLoadable<MoldingRecipe> LOADER = RecordLoadable.create(
     LoadableRecipeSerializer.TYPED_SERIALIZER.requiredField(),
     ContextKey.ID.requiredField(),

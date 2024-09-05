@@ -5,6 +5,7 @@ import net.minecraft.world.entity.LivingEntity;
 import slimeknights.tconstruct.tools.modifiers.upgrades.general.MagneticModifier;
 
 public class RepulsiveEffect extends NoMilkEffect {
+
   public RepulsiveEffect() {
     super(MobEffectCategory.BENEFICIAL, 0x727272, false);
   }

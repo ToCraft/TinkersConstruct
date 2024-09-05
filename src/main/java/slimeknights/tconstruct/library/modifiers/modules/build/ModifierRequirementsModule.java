@@ -36,7 +36,10 @@ import static slimeknights.tconstruct.library.modifiers.ModifierEntry.VALID_LEVE
  * Module to validate prerequisites for adding a modifier to a tool.
  */
 public class ModifierRequirementsModule implements ValidateModifierHook, ModifierModule, RequirementsModifierHook {
-  /** Loader for this module */
+
+  /**
+   * Loader for this module
+   */
   public static final RecordLoadable<ModifierRequirementsModule> LOADER = RecordLoadable.create(
     ToolContextPredicate.LOADER.requiredField("requirement", m -> m.requirement),
     VALID_LEVEL.defaultField("modifier_level", m -> m.level),
@@ -46,15 +49,25 @@ public class ModifierRequirementsModule implements ValidateModifierHook, Modifie
 
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<ModifierRequirementsModule>defaultHooks(ModifierHooks.VALIDATE, ModifierHooks.REQUIREMENTS);
 
-  /** Requirements to check, if they fail, the error will be displayed */
+  /**
+   * Requirements to check, if they fail, the error will be displayed
+   */
   private final IJsonPredicate<IToolContext> requirement;
-  /** Level range for the modifier, if outside this range it is considered valid */
+  /**
+   * Level range for the modifier, if outside this range it is considered valid
+   */
   private final IntRange level;
-  /** Translation key of the message to display */
+  /**
+   * Translation key of the message to display
+   */
   private final String translationKey;
-  /** Modifiers for display */
+  /**
+   * Modifiers for display
+   */
   private final List<ModifierEntry> display;
-  /** Message to display */
+  /**
+   * Message to display
+   */
   private final Component errorMessage;
 
   public ModifierRequirementsModule(IJsonPredicate<IToolContext> requirement, IntRange level, String translationKey, List<ModifierEntry> display) {
@@ -95,7 +108,9 @@ public class ModifierRequirementsModule implements ValidateModifierHook, Modifie
     return DEFAULT_HOOKS;
   }
 
-  /** Creates a new builder instance */
+  /**
+   * Creates a new builder instance
+   */
   public static Builder builder() {
     return new Builder();
   }
@@ -103,6 +118,7 @@ public class ModifierRequirementsModule implements ValidateModifierHook, Modifie
   @Setter
   @Accessors(fluent = true)
   public static class Builder {
+
     private final ImmutableList.Builder<IJsonPredicate<IToolContext>> requirements = ImmutableList.builder();
     private final ImmutableList.Builder<ModifierEntry> displayModifiers = ImmutableList.builder();
     private int minLevel = 1;
@@ -111,58 +127,76 @@ public class ModifierRequirementsModule implements ValidateModifierHook, Modifie
 
     private Builder() {}
 
-    /** Sets the translation key from a modifier ID */
+    /**
+     * Sets the translation key from a modifier ID
+     */
     public Builder modifierKey(ModifierId id) {
       this.translationKey = Util.makeTranslationKey("modifier", id) + ".requirements";
       return this;
     }
 
-    /** Sets the translation key from a modifier ID */
+    /**
+     * Sets the translation key from a modifier ID
+     */
     public Builder modifierKey(LazyModifier id) {
       this.translationKey = Util.makeTranslationKey("modifier", id.getId()) + ".requirements";
       return this;
     }
 
-    /** Adds a display modifier to the tool */
+    /**
+     * Adds a display modifier to the tool
+     */
     @CanIgnoreReturnValue
     public Builder displayModifier(ModifierId id, int level) {
       this.displayModifiers.add(new ModifierEntry(id, level));
       return this;
     }
 
-    /** Adds a requirement to the builder */
+    /**
+     * Adds a requirement to the builder
+     */
     public Builder requirement(IJsonPredicate<IToolContext> requirement) {
       this.requirements.add(requirement);
       return this;
     }
 
-    /** Adds a displayed upgrade requirement to the builder */
+    /**
+     * Adds a displayed upgrade requirement to the builder
+     */
     public Builder requireUpgrade(ModifierId id, int level) {
       displayModifier(id, level);
       this.requirements.add(HasModifierPredicate.hasUpgrade(id, level));
       return this;
     }
 
-    /** Adds a displayed modifier requirement to the builder */
+    /**
+     * Adds a displayed modifier requirement to the builder
+     */
     public Builder requireModifier(ModifierId id, int level) {
       displayModifier(id, level);
       this.requirements.add(HasModifierPredicate.hasModifier(id, level));
       return this;
     }
 
-    /** Adds an undisplayed upgrade requirement to the builder */
+    /**
+     * Adds an undisplayed upgrade requirement to the builder
+     */
     public Builder requireUpgrade(TagKey<Modifier> tag, int level) {
       this.requirements.add(HasModifierPredicate.hasUpgrade(new TagModifierPredicate(tag), level));
       return this;
     }
 
-    /** Adds an undisplayed modifier requirement to the builder */
+    /**
+     * Adds an undisplayed modifier requirement to the builder
+     */
     public Builder requireModifier(TagKey<Modifier> tag, int level) {
       this.requirements.add(HasModifierPredicate.hasUpgrade(new TagModifierPredicate(tag), level));
       return this;
     }
 
-    /** Builds the final module */
+    /**
+     * Builds the final module
+     */
     public ModifierRequirementsModule build() {
       if (translationKey == null) {
         throw new IllegalStateException("Must set translation key");

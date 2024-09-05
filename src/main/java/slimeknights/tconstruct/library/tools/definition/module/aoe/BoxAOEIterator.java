@@ -25,18 +25,23 @@ import java.util.function.Predicate;
 
 /**
  * AOE harvest logic that mines blocks in a rectangle
- * @param base        Base size of the AOE
- * @param expansions  Values to boost the size by for each expansion
- * @param direction   Direction for expanding
+ *
+ * @param base       Base size of the AOE
+ * @param expansions Values to boost the size by for each expansion
+ * @param direction  Direction for expanding
  */
-public record BoxAOEIterator(BoxSize base, List<BoxSize> expansions, IBoxExpansion direction) implements AreaOfEffectIterator.Loadable {
+public record BoxAOEIterator(BoxSize base, List<BoxSize> expansions,
+                             IBoxExpansion direction) implements AreaOfEffectIterator.Loadable {
+
   public static final RecordLoadable<BoxAOEIterator> LOADER = RecordLoadable.create(
     BoxSize.LOADER.defaultField("bonus", BoxSize.ZERO, BoxAOEIterator::base),
     BoxSize.LOADER.list(0).defaultField("expansions", List.of(), BoxAOEIterator::expansions),
     IBoxExpansion.REGISTRY.requiredField("expansion_direction", BoxAOEIterator::direction),
     BoxAOEIterator::new);
 
-  /** Creates a builder for this iterator */
+  /**
+   * Creates a builder for this iterator
+   */
   public static BoxAOEIterator.Builder builder(int width, int height, int depth) {
     return new Builder(new BoxSize(width, height, depth));
   }
@@ -46,7 +51,9 @@ public record BoxAOEIterator(BoxSize base, List<BoxSize> expansions, IBoxExpansi
     return LOADER;
   }
 
-  /** Gets the size for a given level of expanded */
+  /**
+   * Gets the size for a given level of expanded
+   */
   private BoxSize sizeFor(int level) {
     int size = expansions.size();
     if (level == 0 || size == 0) {
@@ -59,18 +66,18 @@ public record BoxAOEIterator(BoxSize base, List<BoxSize> expansions, IBoxExpansi
     if (level >= size) {
       int cycles = level / size;
       for (BoxSize expansion : expansions) {
-        width  += expansion.width  * cycles;
+        width += expansion.width * cycles;
         height += expansion.height * cycles;
-        depth  += expansion.depth  * cycles;
+        depth += expansion.depth * cycles;
       }
     }
     // partial iteration through the list for the remaining expansions
     int remainder = level % size;
     for (int i = 0; i < remainder; i++) {
       BoxSize expansion = expansions.get(i);
-      width  += expansion.width;
+      width += expansion.width;
       height += expansion.height;
-      depth  += expansion.depth;
+      depth += expansion.depth;
     }
     return new BoxSize(width, height, depth);
   }
@@ -83,16 +90,15 @@ public record BoxAOEIterator(BoxSize base, List<BoxSize> expansions, IBoxExpansi
   }
 
   /**
-   *
-   * @param tool          Tool used for harvest
-   * @param stack         Item stack used for harvest (for vanilla hooks)
-   * @param world         World containing the block
-   * @param player        Player harvesting
-   * @param origin        Center of harvest
-   * @param sideHit       Block side hit
-   * @param extraSize     Extra size to iterate
-   * @param matchType     Type of harvest being performed
-   * @return  List of block positions
+   * @param tool      Tool used for harvest
+   * @param stack     Item stack used for harvest (for vanilla hooks)
+   * @param world     World containing the block
+   * @param player    Player harvesting
+   * @param origin    Center of harvest
+   * @param sideHit   Block side hit
+   * @param extraSize Extra size to iterate
+   * @param matchType Type of harvest being performed
+   * @return List of block positions
    */
   public static Iterable<BlockPos> calculate(IToolStackView tool, ItemStack stack, Level world, Player player, BlockPos origin, Direction sideHit, BoxSize extraSize, IBoxExpansion expansionDirection, AOEMatchType matchType) {
     // skip if no work
@@ -104,13 +110,22 @@ public record BoxAOEIterator(BoxSize base, List<BoxSize> expansions, IBoxExpansi
     return () -> new RectangleIterator(origin, expansion.width(), extraSize.width, expansion.height(), extraSize.height, expansion.traverseDown(), expansion.depth(), extraSize.depth, posPredicate);
   }
 
-  /** Iterator used for getting the blocks */
+  /**
+   * Iterator used for getting the blocks
+   */
   public static class RectangleIterator extends AbstractIterator<BlockPos> {
-    /** Primary direction of iteration */
+
+    /**
+     * Primary direction of iteration
+     */
     private final Direction widthDir;
-    /** Secondary direction of iteration, mostly interchangeable with primary */
+    /**
+     * Secondary direction of iteration, mostly interchangeable with primary
+     */
     private final Direction heightDir;
-    /** Direction of iteration away from the player */
+    /**
+     * Direction of iteration away from the player
+     */
     private final Direction depthDir;
 
     /* Bounding box size in the direction of width */
@@ -120,33 +135,48 @@ public record BoxAOEIterator(BoxSize base, List<BoxSize> expansions, IBoxExpansi
     /* Bounding box size in the direction of depth */
     private final int maxDepth;
 
-    /** Current position in the direction of width */
+    /**
+     * Current position in the direction of width
+     */
     private int currentWidth = 0;
-    /** Current position in the direction of height */
+    /**
+     * Current position in the direction of height
+     */
     private int currentHeight = 0;
-    /** Current position in the direction of depth */
+    /**
+     * Current position in the direction of depth
+     */
     private int currentDepth = 0;
 
-    /** Original position, skipped in iteration */
+    /**
+     * Original position, skipped in iteration
+     */
     protected final BlockPos origin;
-    /** Position modified as we iterate */
+    /**
+     * Position modified as we iterate
+     */
     protected final BlockPos.MutableBlockPos mutablePos;
-    /** Predicate to check before returning a position */
+    /**
+     * Predicate to check before returning a position
+     */
     protected final Predicate<BlockPos> posPredicate;
-    /** Last returned values for the three coords */
+    /**
+     * Last returned values for the three coords
+     */
     protected int lastX, lastY, lastZ;
 
     /**
      * Iterates through a rectangular solid
-     * @param origin         Center position
-     * @param widthDir       Direction for width traversal
-     * @param extraWidth     Radius in width direction
-     * @param heightDir      Direction for height traversal
-     * @param extraHeight    Amount in the height direction
-     * @param traverseDown   If true, navigates extraHeight both up and down
-     * @param depthDir       Direction to travel backwards
-     * @param extraDepth     Extra amount to traverse in the backwards direction
-     * @param posPredicate   Predicate to validate positions
+     *
+     * @param origin       Center position
+     * @param widthDir     Direction for width traversal
+     * @param extraWidth   Radius in width direction
+     * @param heightDir    Direction for height traversal
+     * @param extraHeight  Amount in the height direction
+     * @param traverseDown If true, navigates extraHeight both up and down
+     * @param depthDir     Direction to travel backwards
+     * @param extraDepth   Extra amount to traverse in the backwards direction
+     * @param posPredicate Predicate to validate positions
      */
     public RectangleIterator(BlockPos origin, Direction widthDir, int extraWidth, Direction heightDir, int extraHeight, boolean traverseDown, Direction depthDir, int extraDepth, Predicate<BlockPos> posPredicate) {
       this.origin = origin;
@@ -180,6 +210,7 @@ public record BoxAOEIterator(BoxSize base, List<BoxSize> expansions, IBoxExpansi
 
     /**
      * Updates the mutable block position
+     *
      * @return False if at the end of data
      */
     protected boolean incrementPosition() {
@@ -230,8 +261,11 @@ public record BoxAOEIterator(BoxSize base, List<BoxSize> expansions, IBoxExpansi
     }
   }
 
-  /** Record encoding how AOE expands with each level */
+  /**
+   * Record encoding how AOE expands with each level
+   */
   private record BoxSize(int width, int height, int depth) {
+
     public static final BoxSize ZERO = new BoxSize(0, 0, 0);
 
     public static final RecordLoadable<BoxSize> LOADER = RecordLoadable.create(
@@ -240,43 +274,62 @@ public record BoxAOEIterator(BoxSize base, List<BoxSize> expansions, IBoxExpansi
       IntLoadable.FROM_ZERO.defaultField("depth", 0, BoxSize::depth),
       BoxSize::new);
 
-    /** If true, the box is 0 in all dimensions */
+    /**
+     * If true, the box is 0 in all dimensions
+     */
     public boolean isZero() {
       return width == 0 && height == 0 && depth == 0;
     }
   }
 
-  /** Builder to create a rectangle AOE iterator */
+  /**
+   * Builder to create a rectangle AOE iterator
+   */
   @RequiredArgsConstructor
   public static class Builder {
+
     private final BoxSize base;
-    /** Direction to expand the AOE */
-    @Nonnull @Setter @Accessors(fluent = true)
+    /**
+     * Direction to expand the AOE
+     */
+    @Nonnull
+    @Setter
+    @Accessors(fluent = true)
     private IBoxExpansion direction = IBoxExpansion.SIDE_HIT;
     private final ImmutableList.Builder<BoxSize> expansions = ImmutableList.builder();
 
-    /** Adds an expansion to the AOE logic */
+    /**
+     * Adds an expansion to the AOE logic
+     */
     public Builder addExpansion(int width, int height, int depth) {
       expansions.add(new BoxSize(width, height, depth));
       return this;
     }
 
-    /** Adds an expansion to the AOE logic */
+    /**
+     * Adds an expansion to the AOE logic
+     */
     public Builder addWidth(int width) {
       return addExpansion(width, 0, 0);
     }
 
-    /** Adds an expansion to the AOE logic */
+    /**
+     * Adds an expansion to the AOE logic
+     */
     public Builder addHeight(int height) {
       return addExpansion(0, height, 0);
     }
 
-    /** Adds an expansion to the AOE logic */
+    /**
+     * Adds an expansion to the AOE logic
+     */
     public Builder addDepth(int depth) {
       return addExpansion(0, 0, depth);
     }
 
-    /** Builds the AOE iterator */
+    /**
+     * Builds the AOE iterator
+     */
     public BoxAOEIterator build() {
       return new BoxAOEIterator(base, expansions.build(), direction);
     }

@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class StoneshieldModifier extends DurabilityShieldModifier implements ProcessLootModifierHook {
+
   @Override
   protected void registerHooks(Builder hookBuilder) {
     hookBuilder.addHook(this, ModifierHooks.PROCESS_LOOT);
@@ -23,7 +24,7 @@ public class StoneshieldModifier extends DurabilityShieldModifier implements Pro
 
   @Override
   public int getShieldCapacity(IToolStackView tool, ModifierEntry modifier) {
-    return (int)(modifier.getEffectiveLevel() * 100 * tool.getMultiplier(ToolStats.DURABILITY));
+    return (int) (modifier.getEffectiveLevel() * 100 * tool.getMultiplier(ToolStats.DURABILITY));
   }
 
   @Override

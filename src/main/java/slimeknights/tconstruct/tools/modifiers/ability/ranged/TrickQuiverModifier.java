@@ -27,14 +27,21 @@ import javax.annotation.Nullable;
 import java.util.function.Predicate;
 
 public class TrickQuiverModifier extends InventoryMenuModifier implements BowAmmoModifierHook {
+
   private static final ResourceLocation INVENTORY_KEY = TConstruct.getResource("trick_quiver");
   private static final ResourceLocation SELECTED_SLOT = TConstruct.getResource("trick_quiver_selected");
   private static final Pattern TRICK_ARROW = new Pattern(TConstruct.getResource("tipped_arrow"));
-  /** Message when disabling the trick quiver */
+  /**
+   * Message when disabling the trick quiver
+   */
   private static final Component DISABLED = TConstruct.makeTranslation("modifier", "trick_quiver.disabled");
-  /** Message displayed when the selected slot is empty */
+  /**
+   * Message displayed when the selected slot is empty
+   */
   private static final String EMPTY = TConstruct.makeTranslationKey("modifier", "trick_quiver.empty");
-  /** Message to display selected slot */
+  /**
+   * Message to display selected slot
+   */
   private static final String SELECTED = TConstruct.makeTranslationKey("modifier", "trick_quiver.selected");
 
   public TrickQuiverModifier() {

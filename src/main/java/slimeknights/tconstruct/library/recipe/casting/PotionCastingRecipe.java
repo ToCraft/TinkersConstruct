@@ -30,6 +30,7 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 public class PotionCastingRecipe implements ICastingRecipe, IMultiRecipe<DisplayCastingRecipe> {
+
   public static final RecordLoadable<PotionCastingRecipe> LOADER = RecordLoadable.create(
     LoadableRecipeSerializer.TYPED_SERIALIZER.requiredField(), ContextKey.ID.requiredField(), LoadableRecipeSerializer.RECIPE_GROUP,
     IngredientLoadable.DISALLOW_EMPTY.requiredField("bottle", r -> r.bottle),
@@ -44,13 +45,21 @@ public class PotionCastingRecipe implements ICastingRecipe, IMultiRecipe<Display
   private final ResourceLocation id;
   @Getter
   private final String group;
-  /** Input on the casting table, always consumed */
+  /**
+   * Input on the casting table, always consumed
+   */
   private final Ingredient bottle;
-  /** Potion ingredient, typically just the potion tag */
+  /**
+   * Potion ingredient, typically just the potion tag
+   */
   private final FluidIngredient fluid;
-  /** Potion item result, will be given the proper NBT */
+  /**
+   * Potion item result, will be given the proper NBT
+   */
   private final Item result;
-  /** Cooling time for this recipe, used for tipped arrows */
+  /**
+   * Cooling time for this recipe, used for tipped arrows
+   */
   private final int coolingTime;
 
   @Override
@@ -101,9 +110,9 @@ public class PotionCastingRecipe implements ICastingRecipe, IMultiRecipe<Display
         .map(potion -> {
           ItemStack result = PotionUtils.setPotion(new ItemStack(this.result), potion);
           return new DisplayCastingRecipe(getType(), bottles, fluid.getFluids().stream()
-                                                              .map(fluid -> new FluidStack(fluid.getFluid(), fluid.getAmount(), result.getTag()))
-                                                              .toList(),
-                                          result, coolingTime, true);
+            .map(fluid -> new FluidStack(fluid.getFluid(), fluid.getAmount(), result.getTag()))
+            .toList(),
+            result, coolingTime, true);
         }).toList();
     }
     return displayRecipes;
@@ -117,7 +126,9 @@ public class PotionCastingRecipe implements ICastingRecipe, IMultiRecipe<Display
     return NonNullList.of(Ingredient.EMPTY, bottle);
   }
 
-  /** @deprecated use {@link #assemble(Container)} */
+  /**
+   * @deprecated use {@link #assemble(Container)}
+   */
   @Deprecated
   @Override
   public ItemStack getResultItem() {

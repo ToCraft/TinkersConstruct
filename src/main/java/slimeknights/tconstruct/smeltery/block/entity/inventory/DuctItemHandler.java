@@ -23,7 +23,8 @@ public class DuctItemHandler extends SingleItemHandler<DuctBlockEntity> {
 
   /**
    * Sets the stack in this duct
-   * @param newStack  New stack
+   *
+   * @param newStack New stack
    */
   @Override
   public void setStack(ItemStack newStack) {
@@ -51,13 +52,14 @@ public class DuctItemHandler extends SingleItemHandler<DuctBlockEntity> {
     }
     // the item must contain fluid (no empty cans or buckets)
     return stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM)
-                .filter(cap -> !cap.getFluidInTank(0).isEmpty())
-                .isPresent();
+      .filter(cap -> !cap.getFluidInTank(0).isEmpty())
+      .isPresent();
   }
 
   /**
    * Gets the fluid filter for this duct
-   * @return  Fluid filter
+   *
+   * @return Fluid filter
    */
   public FluidStack getFluid() {
     ItemStack stack = getStack();
@@ -65,7 +67,7 @@ public class DuctItemHandler extends SingleItemHandler<DuctBlockEntity> {
       return FluidStack.EMPTY;
     }
     return FluidUtil.getFluidHandler(stack)
-                    .map(handler -> handler.getFluidInTank(0))
-                    .orElse(FluidStack.EMPTY);
+      .map(handler -> handler.getFluidInTank(0))
+      .orElse(FluidStack.EMPTY);
   }
 }

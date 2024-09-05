@@ -21,6 +21,7 @@ import javax.annotation.Nullable;
  * Multiblock that displays the error from the tile entity on right click
  */
 public abstract class HeatingControllerBlock extends ControllerBlock {
+
   protected HeatingControllerBlock(Properties builder) {
     super(builder);
   }

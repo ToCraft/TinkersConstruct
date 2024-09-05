@@ -12,8 +12,12 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import java.util.function.BiFunction;
 
-/** Loadable for a modifier formula */
-public record FormulaLoadable(FallbackFormula fallback, String... variables) implements RecordLoadable<ModifierFormula> {
+/**
+ * Loadable for a modifier formula
+ */
+public record FormulaLoadable(FallbackFormula fallback,
+                              String... variables) implements RecordLoadable<ModifierFormula> {
+
   @Override
   public ModifierFormula deserialize(JsonObject json, TypedMap context) {
     return ModifierFormula.deserialize(json, variables, fallback);
@@ -34,15 +38,21 @@ public record FormulaLoadable(FallbackFormula fallback, String... variables) imp
     object.toNetwork(buffer);
   }
 
-  /** Creates a builder instance */
-  public <T> Builder<T> builder(BiFunction<ModifierFormula,ModifierCondition<IToolStackView>,T> constructor) {
+  /**
+   * Creates a builder instance
+   */
+  public <T> Builder<T> builder(BiFunction<ModifierFormula, ModifierCondition<IToolStackView>, T> constructor) {
     return new Builder<>(constructor, variables);
   }
 
-  /** Builder for this module */
-  public static class Builder<T> extends ModifierFormula.Builder<Builder<T>,T> {
-    private final BiFunction<ModifierFormula,ModifierCondition<IToolStackView>,T> constructor;
-    private Builder(BiFunction<ModifierFormula,ModifierCondition<IToolStackView>,T> constructor, String[] variableNames) {
+  /**
+   * Builder for this module
+   */
+  public static class Builder<T> extends ModifierFormula.Builder<Builder<T>, T> {
+
+    private final BiFunction<ModifierFormula, ModifierCondition<IToolStackView>, T> constructor;
+
+    private Builder(BiFunction<ModifierFormula, ModifierCondition<IToolStackView>, T> constructor, String[] variableNames) {
       super(variableNames);
       this.constructor = constructor;
     }

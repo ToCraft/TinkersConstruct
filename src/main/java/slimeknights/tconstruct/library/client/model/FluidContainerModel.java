@@ -79,12 +79,17 @@ import java.util.function.Function;
  * Does not handle covers as I have never seen a need for them, and it means less code duplication (plus the forge model does the whole cover is mask thing wrong compared to 1.18).
  */
 public record FluidContainerModel(FluidStack fluid, boolean flipGas) implements IUnbakedGeometry<FluidContainerModel> {
+
   public static final IGeometryLoader<FluidContainerModel> LOADER = FluidContainerModel::deserialize;
 
-  /** Clone of same named field from {@link net.minecraftforge.client.model.DynamicFluidContainerModel} */
+  /**
+   * Clone of same named field from {@link net.minecraftforge.client.model.DynamicFluidContainerModel}
+   */
   public static final Transformation FLUID_TRANSFORM = new Transformation(Vector3f.ZERO, Quaternion.ONE, new Vector3f(1, 1, 1.002f), Quaternion.ONE);
 
-  /** Deserializes this model from JSON */
+  /**
+   * Deserializes this model from JSON
+   */
   public static FluidContainerModel deserialize(JsonObject json, JsonDeserializationContext context) {
     FluidStack fluidStack = FluidStack.EMPTY;
     // parse the fluid with an optional tag
@@ -107,7 +112,9 @@ public record FluidContainerModel(FluidStack fluid, boolean flipGas) implements 
     return new FluidContainerModel(fluidStack, flipGas);
   }
 
-  /** Adds a material to the set if its defined */
+  /**
+   * Adds a material to the set if its defined
+   */
   private static void addMaterial(Set<Material> textures, IGeometryBakingContext owner, String key) {
     if (owner.hasMaterial(key)) {
       textures.add(owner.getMaterial(key));
@@ -115,7 +122,7 @@ public record FluidContainerModel(FluidStack fluid, boolean flipGas) implements 
   }
 
   @Override
-  public Collection<Material> getMaterials(IGeometryBakingContext owner, Function<ResourceLocation,UnbakedModel> modelGetter, Set<Pair<String,String>> missingTextureErrors) {
+  public Collection<Material> getMaterials(IGeometryBakingContext owner, Function<ResourceLocation, UnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors) {
     Set<Material> textures = Sets.newHashSet();
     addMaterial(textures, owner, "particle");
     addMaterial(textures, owner, "base");
@@ -123,16 +130,18 @@ public record FluidContainerModel(FluidStack fluid, boolean flipGas) implements 
     return textures;
   }
 
-  /** Gets the given sprite, or null if the texture is not present in the model */
+  /**
+   * Gets the given sprite, or null if the texture is not present in the model
+   */
   @Nullable
-  private static TextureAtlasSprite getSprite(IGeometryBakingContext context, Function<Material,TextureAtlasSprite> spriteGetter, String key) {
+  private static TextureAtlasSprite getSprite(IGeometryBakingContext context, Function<Material, TextureAtlasSprite> spriteGetter, String key) {
     if (context.hasMaterial(key)) {
       return spriteGetter.apply(context.getMaterial(key));
     }
     return null;
   }
 
-  private static BakedModel bakeInternal(IGeometryBakingContext context, Function<Material,TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides, ResourceLocation modelLocation, FluidStack fluid, boolean flipGas) {
+  private static BakedModel bakeInternal(IGeometryBakingContext context, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides, ResourceLocation modelLocation, FluidStack fluid, boolean flipGas) {
     // get basic sprites
     IClientFluidTypeExtensions clientFluid = IClientFluidTypeExtensions.of(fluid.getFluid());
     TextureAtlasSprite baseSprite = getSprite(context, spriteGetter, "base");
@@ -191,7 +200,7 @@ public record FluidContainerModel(FluidStack fluid, boolean flipGas) implements 
   }
 
   @Override
-  public BakedModel bake(IGeometryBakingContext context, ModelBakery bakery, Function<Material,TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides, ResourceLocation modelLocation) {
+  public BakedModel bake(IGeometryBakingContext context, ModelBakery bakery, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides, ResourceLocation modelLocation) {
     // We need to disable GUI 3D and block lighting for this to render properly
     context = StandaloneGeometryBakingContext.builder(context).withGui3d(false).withUseBlockLight(false).build(modelLocation);
     // only do contained fluid if we did not set the fluid in the model properties
@@ -201,12 +210,15 @@ public record FluidContainerModel(FluidStack fluid, boolean flipGas) implements 
     return bakeInternal(context, spriteGetter, modelState, overrides, modelLocation, fluid, flipGas);
   }
 
-  /** Handles swapping the model based on the contained fluid */
+  /**
+   * Handles swapping the model based on the contained fluid
+   */
   @RequiredArgsConstructor
   private static final class ContainedFluidOverrideHandler extends ItemOverrides {
+
     private static final ResourceLocation BAKE_LOCATION = TConstruct.getResource("copper_can_dynamic");
 
-    private final Map<FluidStack,BakedModel> cache = Maps.newHashMap(); // contains all the baked models since they'll never change
+    private final Map<FluidStack, BakedModel> cache = Maps.newHashMap(); // contains all the baked models since they'll never change
 
     private final IGeometryBakingContext context;
     private final ItemOverrides nested;
@@ -214,7 +226,9 @@ public record FluidContainerModel(FluidStack fluid, boolean flipGas) implements 
     private final boolean flipGas;
 
 
-    /** Gets the model directly, for creating the cached models */
+    /**
+     * Gets the model directly, for creating the cached models
+     */
     private BakedModel getUncahcedModel(FluidStack fluid) {
       return bakeInternal(context, Material::sprite, modelState, ItemOverrides.EMPTY, BAKE_LOCATION, fluid, flipGas);
     }

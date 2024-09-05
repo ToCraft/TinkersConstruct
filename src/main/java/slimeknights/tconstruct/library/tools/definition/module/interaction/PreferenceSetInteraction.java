@@ -17,7 +17,9 @@ import java.util.List;
 /**
  * Interaction that makes only a limited set work in the preferred hand, the rest working in the other hand
  */
-public record PreferenceSetInteraction(InteractionSource preferredSource, IJsonPredicate<ModifierId> preferenceModifiers) implements InteractionToolModule, ToolModule {
+public record PreferenceSetInteraction(InteractionSource preferredSource,
+                                       IJsonPredicate<ModifierId> preferenceModifiers) implements InteractionToolModule, ToolModule {
+
   public static final RecordLoadable<PreferenceSetInteraction> LOADER = RecordLoadable.create(
     TinkerLoadables.INTERACTION_SOURCE.requiredField("preferred_source", PreferenceSetInteraction::preferredSource),
     ModifierPredicate.LOADER.requiredField("preferred_modifiers", PreferenceSetInteraction::preferenceModifiers),

@@ -8,7 +8,9 @@ import slimeknights.tconstruct.tables.block.entity.inventory.LazyResultContainer
  * Extension of lazy result slot that adds player access when possible
  */
 public class PlayerSensitiveLazyResultSlot extends LazyResultSlot {
+
   private final Player player;
+
   public PlayerSensitiveLazyResultSlot(Player player, LazyResultContainer inventory, int xPosition, int yPosition) {
     super(inventory, xPosition, yPosition);
     this.player = player;

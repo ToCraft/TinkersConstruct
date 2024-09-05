@@ -19,15 +19,20 @@ import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 import javax.annotation.Nonnull;
 
-/** Global loot modifier for modifiers */
+/**
+ * Global loot modifier for modifiers
+ */
 public class ModifierLootModifier extends LootModifier {
+
   public static final Codec<ModifierLootModifier> CODEC = RecordCodecBuilder.create(inst -> codecStart(inst).apply(inst, ModifierLootModifier::new));
 
   protected ModifierLootModifier(LootItemCondition[] conditionsIn) {
     super(conditionsIn);
   }
 
-  /** Creates a builder for datagen */
+  /**
+   * Creates a builder for datagen
+   */
   public static GenericLootModifierBuilder<ModifierLootModifier> builder() {
     return new GenericLootModifierBuilder<>(ModifierLootModifier::new);
   }

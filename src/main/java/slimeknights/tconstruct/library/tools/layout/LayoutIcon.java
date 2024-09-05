@@ -22,12 +22,19 @@ import slimeknights.tconstruct.library.recipe.partbuilder.Pattern;
 
 import javax.annotation.Nullable;
 
-/** Data holder for a button icon, currently supports item stack icons and pattern icons */
+/**
+ * Data holder for a button icon, currently supports item stack icons and pattern icons
+ */
 public abstract class LayoutIcon {
-  /** JSON serializer for a layout button icon */
+
+  /**
+   * JSON serializer for a layout button icon
+   */
   public static final Serializer SERIALIZER = new Serializer();
 
-  /** Empty icon, used primarily as a fallback */
+  /**
+   * Empty icon, used primarily as a fallback
+   */
   public static final LayoutIcon EMPTY = new LayoutIcon() {
     @Nullable
     @Override
@@ -46,25 +53,34 @@ public abstract class LayoutIcon {
     }
   };
 
-  /** Creates a stack icon */
+  /**
+   * Creates a stack icon
+   */
   public static LayoutIcon ofItem(ItemStack stack) {
     return new ItemStackIcon(stack);
   }
 
-  /** Creates an icon from a pattern */
+  /**
+   * Creates an icon from a pattern
+   */
   public static LayoutIcon ofPattern(Pattern pattern) {
     return new PatternIcon(pattern);
   }
 
-  /** Gets the value of this icon, done this way to separate the drawing logic out */
+  /**
+   * Gets the value of this icon, done this way to separate the drawing logic out
+   */
   @Nullable
   public abstract <T> T getValue(Class<T> clazz);
 
-  /** Reads the button icon from the buffer */
+  /**
+   * Reads the button icon from the buffer
+   */
   public static LayoutIcon read(FriendlyByteBuf buffer) {
     Type type = buffer.readEnum(Type.class);
     switch (type) {
-      case EMPTY: return EMPTY;
+      case EMPTY:
+        return EMPTY;
       case ITEM: {
         ItemStack stack = buffer.readItem();
         return new ItemStackIcon(stack);
@@ -77,15 +93,23 @@ public abstract class LayoutIcon {
     throw new DecoderException("Invalid LayoutButtonIcon " + type);
   }
 
-  /** Writes this to the packet buffer */
+  /**
+   * Writes this to the packet buffer
+   */
   public abstract void write(FriendlyByteBuf buffer);
 
-  /** Writes this object to json */
+  /**
+   * Writes this object to json
+   */
   public abstract JsonObject toJson();
 
-  /** Icon drawing an item stack */
-  @RequiredArgsConstructor @VisibleForTesting
+  /**
+   * Icon drawing an item stack
+   */
+  @RequiredArgsConstructor
+  @VisibleForTesting
   protected static class ItemStackIcon extends LayoutIcon {
+
     private final ItemStack stack;
 
     @SuppressWarnings("unchecked")
@@ -106,7 +130,7 @@ public abstract class LayoutIcon {
     @Override
     public JsonObject toJson() {
       JsonObject json = new JsonObject();
-      json.addProperty("item", Registry.ITEM.getKey(stack.getItem()).toString());
+      json.addProperty("item", ForgeRegistries.ITEMS.getKey(stack.getItem()).toString());
       CompoundTag tag = stack.getTag();
       if (tag != null) {
         json.addProperty("nbt", tag.toString());
@@ -115,9 +139,13 @@ public abstract class LayoutIcon {
     }
   }
 
-  /** Icon drawing a static patttern sprite */
-  @RequiredArgsConstructor @VisibleForTesting
+  /**
+   * Icon drawing a static patttern sprite
+   */
+  @RequiredArgsConstructor
+  @VisibleForTesting
   protected static class PatternIcon extends LayoutIcon {
+
     private final Pattern pattern;
 
     @SuppressWarnings("unchecked")
@@ -143,15 +171,20 @@ public abstract class LayoutIcon {
     }
   }
 
-  /** enum of icon types for serialization */
+  /**
+   * enum of icon types for serialization
+   */
   private enum Type {
     EMPTY,
     ITEM,
     PATTERN
   }
 
-  /** Serializer class */
+  /**
+   * Serializer class
+   */
   protected static class Serializer implements JsonSerializer<LayoutIcon>, JsonDeserializer<LayoutIcon> {
+
     @Override
     public LayoutIcon deserialize(JsonElement json, java.lang.reflect.Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
       JsonObject object = GsonHelper.convertToJsonObject(json, "button_icon");

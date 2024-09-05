@@ -14,7 +14,9 @@ import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
 import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability.ComputableDataKey;
 
 public class ShulkingModifier extends AbstractProtectionModifier<ModifierMaxLevel> {
+
   private static final ComputableDataKey<ModifierMaxLevel> KEY = TConstruct.createKey("shulking", ModifierMaxLevel::new);
+
   public ShulkingModifier() {
     super(KEY);
     // TODO: move to data key registry and ModifierEvent

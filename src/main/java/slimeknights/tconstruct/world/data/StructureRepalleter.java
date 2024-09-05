@@ -27,22 +27,22 @@ public class StructureRepalleter extends AbstractStructureRepalleter {
 
     // earth foliage with earth or sky dirt
     Replacement earth = replacement().addMapping(Blocks.CLAY, TinkerWorld.slimeDirt.get(DirtType.EARTH))
-                                     .addMapping(Blocks.SAND, TinkerWorld.congealedSlime.get(SlimeType.EARTH))
-                                     .addMapping(Blocks.WATER, Objects.requireNonNull(TinkerFluids.earthSlime.getBlock()));
+      .addMapping(Blocks.SAND, TinkerWorld.congealedSlime.get(SlimeType.EARTH))
+      .addMapping(Blocks.WATER, Objects.requireNonNull(TinkerFluids.earthSlime.getBlock()));
     repalette(sizes, "islands/earth/", false,
-              earth.copy().addMapping(Blocks.DIRT, TinkerWorld.slimeDirt.get(DirtType.EARTH))
-                          .addMapping(Blocks.GRASS_BLOCK, TinkerWorld.earthSlimeGrass.get(FoliageType.EARTH)),
-              earth.copy().addMapping(Blocks.DIRT, TinkerWorld.slimeDirt.get(DirtType.SKY))
-                          .addMapping(Blocks.GRASS_BLOCK, TinkerWorld.skySlimeGrass.get(FoliageType.EARTH)));
+      earth.copy().addMapping(Blocks.DIRT, TinkerWorld.slimeDirt.get(DirtType.EARTH))
+        .addMapping(Blocks.GRASS_BLOCK, TinkerWorld.earthSlimeGrass.get(FoliageType.EARTH)),
+      earth.copy().addMapping(Blocks.DIRT, TinkerWorld.slimeDirt.get(DirtType.SKY))
+        .addMapping(Blocks.GRASS_BLOCK, TinkerWorld.skySlimeGrass.get(FoliageType.EARTH)));
     // sky foliage with earth or sky dirt
     Replacement sky = replacement().addMapping(Blocks.CLAY, TinkerWorld.slimeDirt.get(DirtType.SKY))
-                                   .addMapping(Blocks.SAND, TinkerWorld.congealedSlime.get(SlimeType.SKY))
-                                   .addMapping(Blocks.WATER, Objects.requireNonNull(TinkerFluids.skySlime.getBlock()));
+      .addMapping(Blocks.SAND, TinkerWorld.congealedSlime.get(SlimeType.SKY))
+      .addMapping(Blocks.WATER, Objects.requireNonNull(TinkerFluids.skySlime.getBlock()));
     repalette(sizes, "islands/sky/", false,
-              sky.copy().addMapping(Blocks.DIRT, TinkerWorld.slimeDirt.get(DirtType.EARTH))
-                        .addMapping(Blocks.GRASS_BLOCK, TinkerWorld.earthSlimeGrass.get(FoliageType.SKY)),
-              sky.copy().addMapping(Blocks.DIRT, TinkerWorld.slimeDirt.get(DirtType.SKY))
-                        .addMapping(Blocks.GRASS_BLOCK, TinkerWorld.skySlimeGrass.get(FoliageType.SKY)));
+      sky.copy().addMapping(Blocks.DIRT, TinkerWorld.slimeDirt.get(DirtType.EARTH))
+        .addMapping(Blocks.GRASS_BLOCK, TinkerWorld.earthSlimeGrass.get(FoliageType.SKY)),
+      sky.copy().addMapping(Blocks.DIRT, TinkerWorld.slimeDirt.get(DirtType.SKY))
+        .addMapping(Blocks.GRASS_BLOCK, TinkerWorld.skySlimeGrass.get(FoliageType.SKY)));
     // blood
     repalette(sizes, "islands/blood/", false, replacement()
       .addMapping(Blocks.CLAY, Blocks.MAGMA_BLOCK)
@@ -59,7 +59,9 @@ public class StructureRepalleter extends AbstractStructureRepalleter {
       .addMapping(Blocks.GRASS_BLOCK, TinkerWorld.enderSlimeGrass.get(FoliageType.ENDER)));
   }
 
-  /** Replaettes all sizes from the given list */
+  /**
+   * Replaettes all sizes from the given list
+   */
   private void repalette(String[] sizes, String target, boolean reprocess, Replacement... replacements) {
     for (String size : sizes) {
       repalette(TConstruct.getResource("islands/dirt/" + size), target + size, reprocess, replacements);

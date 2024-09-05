@@ -21,12 +21,17 @@ import java.util.Collection;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/** Model for a modifier that has variants based on a material */
+/**
+ * Model for a modifier that has variants based on a material
+ */
 @RequiredArgsConstructor
 public class MaterialModifierModel implements IBakedModifierModel {
-  /** Fetches relevant material textures after checking if the texture exists */
+
+  /**
+   * Fetches relevant material textures after checking if the texture exists
+   */
   @Nullable
-  private static Material stitchMaterialTextures(Function<String,Material> textureGetter) {
+  private static Material stitchMaterialTextures(Function<String, Material> textureGetter) {
     Material baseTexture = textureGetter.apply("");
     if (baseTexture != null) {
       for (MaterialRenderInfo info : MaterialRenderInfoLoader.INSTANCE.getAllRenderInfos()) {
@@ -42,7 +47,9 @@ public class MaterialModifierModel implements IBakedModifierModel {
     return baseTexture;
   }
 
-  /** Constant unbaked model instance, as they are all the same */
+  /**
+   * Constant unbaked model instance, as they are all the same
+   */
   public static final IUnbakedModifierModel UNBAKED_INSTANCE = (smallGetter, largeGetter) -> {
     Material smallTexture = stitchMaterialTextures(smallGetter);
     Material largeTexture = stitchMaterialTextures(largeGetter);
@@ -74,7 +81,7 @@ public class MaterialModifierModel implements IBakedModifierModel {
   }
 
   @Override
-  public void addQuads(IToolStackView tool, ModifierEntry modifier, Function<Material,TextureAtlasSprite> spriteGetter, Transformation transforms, boolean isLarge, int startTintIndex, Consumer<Collection<BakedQuad>> quadConsumer, @Nullable ItemLayerPixels pixels) {
+  public void addQuads(IToolStackView tool, ModifierEntry modifier, Function<Material, TextureAtlasSprite> spriteGetter, Transformation transforms, boolean isLarge, int startTintIndex, Consumer<Collection<BakedQuad>> quadConsumer, @Nullable ItemLayerPixels pixels) {
     Material texture = isLarge ? large : small;
     if (texture != null) {
       MaterialVariantId material = getMaterial(tool, modifier.getModifier());
@@ -84,6 +91,8 @@ public class MaterialModifierModel implements IBakedModifierModel {
     }
   }
 
-  /** Data class to cache a mateirla texture */
+  /**
+   * Data class to cache a mateirla texture
+   */
   private record CacheKey(ModifierId modifier, String material) {}
 }

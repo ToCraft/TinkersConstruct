@@ -18,6 +18,7 @@ import java.util.List;
  * If you have a usecase of something more complex in JSON, feel free to request it, but for now just programming what we use.
  */
 public record DurabilityBarColorModule(int color) implements DurabilityDisplayModifierHook, ModifierModule {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<DurabilityBarColorModule>defaultHooks(ModifierHooks.DURABILITY_DISPLAY);
   public static final RecordLoadable<DurabilityBarColorModule> LOADER = RecordLoadable.create(ColorLoadable.NO_ALPHA.requiredField("color", DurabilityBarColorModule::color), DurabilityBarColorModule::new);
 
@@ -25,6 +26,7 @@ public record DurabilityBarColorModule(int color) implements DurabilityDisplayMo
   public List<ModuleHook<?>> getDefaultHooks() {
     return DEFAULT_HOOKS;
   }
+
   @Nullable
   @Override
   public Boolean showDurabilityBar(IToolStackView tool, ModifierEntry modifier) {

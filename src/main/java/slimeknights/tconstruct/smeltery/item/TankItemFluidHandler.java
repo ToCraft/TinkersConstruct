@@ -21,16 +21,21 @@ import javax.annotation.Nullable;
  */
 @RequiredArgsConstructor
 public class TankItemFluidHandler implements IFluidHandlerItem, ICapabilityProvider {
+
   private final LazyOptional<IFluidHandlerItem> holder = LazyOptional.of(() -> this);
   @Getter
   private final ItemStack container;
 
-  /** Gets the tank on the stack */
+  /**
+   * Gets the tank on the stack
+   */
   private FluidTank getTank() {
     return TankItem.getFluidTank(container);
   }
 
-  /** Updates the container from the given tank */
+  /**
+   * Updates the container from the given tank
+   */
   private void updateContainer(FluidTank tank) {
     TankItem.setTank(container, tank);
   }

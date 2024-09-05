@@ -24,6 +24,7 @@ import slimeknights.tconstruct.tools.TinkerModifiers;
 
 @RequiredArgsConstructor
 public class ModifierRepairTinkerStationRecipe implements ITinkerStationRecipe, IModifierRepairRecipe {
+
   public static final RecordLoadable<ModifierRepairTinkerStationRecipe> LOADER = RecordLoadable.create(ContextKey.ID.requiredField(), MODIFIER_FIELD, INGREDIENT_FIELD, REPAIR_AMOUNT_FIELD, ModifierRepairTinkerStationRecipe::new);
 
   @Getter
@@ -95,7 +96,7 @@ public class ModifierRepairTinkerStationRecipe implements ITinkerStationRecipe, 
       }
     }
     // also scale by relevant modifier level
-    int amountPerItem = (int)(tool.getModifierLevel(modifier) * repairAmount * repairFactor);
+    int amountPerItem = (int) (tool.getModifierLevel(modifier) * repairAmount * repairFactor);
     if (amountPerItem < 0) {
       return;
     }

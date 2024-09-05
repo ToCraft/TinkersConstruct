@@ -18,23 +18,32 @@ import static slimeknights.tconstruct.tables.block.entity.table.TinkerStationBlo
 import static slimeknights.tconstruct.tables.block.entity.table.TinkerStationBlockEntity.TINKER_SLOT;
 
 public class TinkerStationContainerWrapper implements IMutableTinkerStationContainer {
+
   private final TinkerStationBlockEntity station;
-  /** Cache of the material recipes found in each slot */
+  /**
+   * Cache of the material recipes found in each slot
+   */
   private MaterialRecipe[] materials;
-  /** Cache of whether each slot has been searched for a material */
+  /**
+   * Cache of whether each slot has been searched for a material
+   */
   private boolean[] searchedMaterial;
 
-  /** Cached tool instance to save lookup effort */
+  /**
+   * Cached tool instance to save lookup effort
+   */
   @Nullable
   private ToolStack tool;
 
   private MaterialRecipe lastMaterialRecipe;
-  @Nullable @Setter
+  @Nullable
+  @Setter
   private Player player;
 
   /**
    * Creates a new wrapper instance for the station
-   * @param station  Station instance
+   *
+   * @param station Station instance
    */
   public TinkerStationContainerWrapper(TinkerStationBlockEntity station) {
     this.station = station;
@@ -45,8 +54,9 @@ public class TinkerStationContainerWrapper implements IMutableTinkerStationConta
 
   /**
    * Finds a material recipe for the given slot
-   * @param stack  Stack in slot
-   * @return  Material recipe found, or null if missing
+   *
+   * @param stack Stack in slot
+   * @return Material recipe found, or null if missing
    */
   @Nullable
   private MaterialRecipe findMaterialRecipe(ItemStack stack) {
@@ -82,7 +92,9 @@ public class TinkerStationContainerWrapper implements IMutableTinkerStationConta
     }
   }
 
-  /** Refreshes the size of this based on the size of the tinker station */
+  /**
+   * Refreshes the size of this based on the size of the tinker station
+   */
   public void resize() {
     int count = station.getInputCount();
     if (count != materials.length) {

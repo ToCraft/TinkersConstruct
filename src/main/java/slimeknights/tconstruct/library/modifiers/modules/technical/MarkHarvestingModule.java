@@ -7,7 +7,9 @@ import slimeknights.tconstruct.library.module.ModuleHook;
 
 import java.util.List;
 
-/** Simple module with hooks form of {@link BlockHarvestModifierHook.MarkHarvesting}. */
+/**
+ * Simple module with hooks form of {@link BlockHarvestModifierHook.MarkHarvesting}.
+ */
 public enum MarkHarvestingModule implements BlockHarvestModifierHook.MarkHarvesting, HookProvider {
   INSTANCE;
 

@@ -14,10 +14,12 @@ import javax.annotation.Nullable;
 
 /**
  * Gets the targeted block light level. Will use the targeted position if possible, otherwise the players position
- * @param lightLayer   Block light layer to use
- * @param fallback     Fallback value if missing event and player
+ *
+ * @param lightLayer Block light layer to use
+ * @param fallback   Fallback value if missing event and player
  */
 public record BlockLightVariable(LightLayer lightLayer, float fallback) implements MiningSpeedVariable {
+
   public static final RecordLoadable<BlockLightVariable> LOADER = RecordLoadable.create(
     TinkerLoadables.LIGHT_LAYER.requiredField("light_layer", BlockLightVariable::lightLayer),
     FloatLoadable.ANY.requiredField("fallback", BlockLightVariable::fallback),

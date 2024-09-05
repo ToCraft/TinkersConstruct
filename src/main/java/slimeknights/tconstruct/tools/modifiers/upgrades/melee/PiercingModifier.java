@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class PiercingModifier extends Modifier implements ToolStatsModifierHook, MeleeHitModifierHook, TooltipModifierHook {
+
   @Override
   protected void registerHooks(Builder hookBuilder) {
     super.registerHooks(hookBuilder);

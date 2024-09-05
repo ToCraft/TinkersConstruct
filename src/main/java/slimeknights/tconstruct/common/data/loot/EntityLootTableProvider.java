@@ -34,10 +34,10 @@ public class EntityLootTableProvider extends EntityLoot {
   @Override
   protected Iterable<EntityType<?>> getKnownEntities() {
     return ForgeRegistries.ENTITY_TYPES.getEntries().stream()
-                                   // remove earth slime entity, we redirect to the vanilla loot table
-                                   .filter(entry -> TConstruct.MOD_ID.equals(entry.getKey().location().getNamespace()))
-                                   .<EntityType<?>>map(Entry::getValue)
-                                   .toList();
+      // remove earth slime entity, we redirect to the vanilla loot table
+      .filter(entry -> TConstruct.MOD_ID.equals(entry.getKey().location().getNamespace()))
+      .<EntityType<?>>map(Entry::getValue)
+      .toList();
   }
 
   @Override
@@ -45,28 +45,27 @@ public class EntityLootTableProvider extends EntityLoot {
     this.add(TinkerWorld.skySlimeEntity.get(), dropSlimeballs(SlimeType.SKY));
     this.add(TinkerWorld.enderSlimeEntity.get(), dropSlimeballs(SlimeType.ENDER));
     this.add(TinkerWorld.terracubeEntity.get(),
-                           LootTable.lootTable().withPool(LootPool.lootPool()
-                                                                   .setRolls(ConstantValue.exactly(1))
-                                                                   .add(LootItem.lootTableItem(Items.CLAY_BALL)
-                                                                                          .apply(SetItemCountFunction.setCount(UniformGenerator.between(-2.0F, 1.0F)))
-                                                                                          .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
-                                                                                          .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))))));
+      LootTable.lootTable().withPool(LootPool.lootPool()
+        .setRolls(ConstantValue.exactly(1))
+        .add(LootItem.lootTableItem(Items.CLAY_BALL)
+          .apply(SetItemCountFunction.setCount(UniformGenerator.between(-2.0F, 1.0F)))
+          .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+          .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))))));
 
     LootItemCondition.Builder killedByFrog = killedByFrog();
     this.add(TinkerWorld.terracubeEntity.get(),
-             LootTable.lootTable()
-                      .withPool(LootPool.lootPool()
-                                        .setRolls(ConstantValue.exactly(1))
-                                        .add(LootItem.lootTableItem(Items.CLAY_BALL)
-                                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(-2.0F, 1.0F)))
-                                                     .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
-                                                     .when(killedByFrog.invert())
-                                                     .when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(SlimePredicate.sized(MinMaxBounds.Ints.atLeast(2))))))
-                                        .add(LootItem.lootTableItem(TinkerSmeltery.searedCobble) // TODO: can I come up with something more exciting?
-                                                     .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
-                                                     .when(killedByFrog))
-                                        .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))));
-
+      LootTable.lootTable()
+        .withPool(LootPool.lootPool()
+          .setRolls(ConstantValue.exactly(1))
+          .add(LootItem.lootTableItem(Items.CLAY_BALL)
+            .apply(SetItemCountFunction.setCount(UniformGenerator.between(-2.0F, 1.0F)))
+            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+            .when(killedByFrog.invert())
+            .when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(SlimePredicate.sized(MinMaxBounds.Ints.atLeast(2))))))
+          .add(LootItem.lootTableItem(TinkerSmeltery.searedCobble) // TODO: can I come up with something more exciting?
+            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+            .when(killedByFrog))
+          .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))));
 
 
   }
@@ -80,14 +79,14 @@ public class EntityLootTableProvider extends EntityLoot {
     Item slimeball = TinkerCommons.slimeball.get(type);
     return LootTable.lootTable().withPool(
       LootPool.lootPool()
-              .setRolls(ConstantValue.exactly(1))
-              .add(LootItem.lootTableItem(slimeball)
-                           .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
-                           .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
-                           .when(killedByFrog().invert()))
-              .add(LootItem.lootTableItem(slimeball)
-                           .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
-                           .when(killedByFrog))
-              .when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(SlimePredicate.sized(MinMaxBounds.Ints.exactly(1))))));
+        .setRolls(ConstantValue.exactly(1))
+        .add(LootItem.lootTableItem(slimeball)
+          .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
+          .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+          .when(killedByFrog().invert()))
+        .add(LootItem.lootTableItem(slimeball)
+          .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+          .when(killedByFrog))
+        .when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(SlimePredicate.sized(MinMaxBounds.Ints.exactly(1))))));
   }
 }

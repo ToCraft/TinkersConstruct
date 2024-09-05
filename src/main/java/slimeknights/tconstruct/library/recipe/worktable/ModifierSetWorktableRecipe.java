@@ -38,13 +38,22 @@ import java.util.function.BiFunction;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/** Recipe to add or remove a modifier from a set in persistent data */
+/**
+ * Recipe to add or remove a modifier from a set in persistent data
+ */
 public class ModifierSetWorktableRecipe extends AbstractWorktableRecipe {
-  /** Message to display if there are no matching modifiers on the tool */
+
+  /**
+   * Message to display if there are no matching modifiers on the tool
+   */
   private static final Component NO_MATCHES = TConstruct.makeTranslation("recipe", "modifier_set_worktable.empty");
-  /** Logic to fetch a list of strings from the persistent data */
+  /**
+   * Logic to fetch a list of strings from the persistent data
+   */
   private static final BiFunction<CompoundTag, String, ListTag> LIST_GETTER = (tag, name) -> tag.getList(name, Tag.TAG_STRING);
-  /** Loader instance */
+  /**
+   * Loader instance
+   */
   public static final RecordLoadable<ModifierSetWorktableRecipe> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(),
     Loadables.RESOURCE_LOCATION.requiredField("data_key", r -> r.dataKey),
@@ -55,22 +64,38 @@ public class ModifierSetWorktableRecipe extends AbstractWorktableRecipe {
     BooleanLoadable.INSTANCE.defaultField("allow_traits", false, r -> r.allowTraits),
     ModifierSetWorktableRecipe::new);
 
-  /** Title to display in the UI and JEI */
+  /**
+   * Title to display in the UI and JEI
+   */
   @Getter
   private final Component title;
-  /** Description to display when valid */
+  /**
+   * Description to display when valid
+   */
   private final Component description;
-  /** Key of the set to fill with modifier names */
+  /**
+   * Key of the set to fill with modifier names
+   */
   private final ResourceLocation dataKey;
-  /** Predicate of modifiers to support in this recipe */
+  /**
+   * Predicate of modifiers to support in this recipe
+   */
   private final IJsonPredicate<ModifierId> modifierPredicate;
-  /** Filter of modifiers to display */
+  /**
+   * Filter of modifiers to display
+   */
   private final Predicate<ModifierEntry> entryFilter;
-  /** If true, adds the matched modifier to the set, if false removes it */
+  /**
+   * If true, adds the matched modifier to the set, if false removes it
+   */
   private final boolean addToSet;
-  /** If true, traits can be targeted. If false, only recipe modifiers */
+  /**
+   * If true, traits can be targeted. If false, only recipe modifiers
+   */
   private final boolean allowTraits;
-  /** Cached list of modifiers shown in JEI */
+  /**
+   * Cached list of modifiers shown in JEI
+   */
   private List<ModifierEntry> filteredModifiers = null;
 
   public ModifierSetWorktableRecipe(ResourceLocation id, ResourceLocation dataKey, List<SizedIngredient> inputs, Ingredient toolRequirement, IJsonPredicate<ModifierId> modifierPredicate, boolean addToSet, boolean allowTraits) {
@@ -85,7 +110,9 @@ public class ModifierSetWorktableRecipe extends AbstractWorktableRecipe {
     this.allowTraits = allowTraits;
   }
 
-  /** Gets the modifiers from the container */
+  /**
+   * Gets the modifiers from the container
+   */
   private List<ModifierEntry> getModifiers(ITinkerableContainer inv) {
     if (allowTraits) {
       return inv.getTinkerable().getModifiers().getModifiers();
@@ -148,12 +175,16 @@ public class ModifierSetWorktableRecipe extends AbstractWorktableRecipe {
     return TinkerModifiers.modifierSetWorktableSerializer.get();
   }
 
-  /** Gets the set of modifiers in persistent data at the given key */
+  /**
+   * Gets the set of modifiers in persistent data at the given key
+   */
   public static Set<ModifierId> getModifierSet(IModDataView modData, ResourceLocation key) {
     return modData.get(key, LIST_GETTER).stream().map(tag -> ModifierId.tryParse(tag.getAsString())).filter(Objects::nonNull).collect(Collectors.toSet());
   }
 
-  /** Checks if the given modifier is in the set. Faster to use {@link #getModifierSet(IModDataView, ResourceLocation)} for multiple consecutive queries */
+  /**
+   * Checks if the given modifier is in the set. Faster to use {@link #getModifierSet(IModDataView, ResourceLocation)} for multiple consecutive queries
+   */
   public static boolean isInSet(IModDataView modData, ResourceLocation key, ModifierId modifier) {
     if (!modData.contains(key, Tag.TAG_LIST)) {
       return false;

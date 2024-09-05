@@ -8,7 +8,9 @@ import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.core.particles.SimpleParticleType;
 
-/** Simple particle used on attack */
+/**
+ * Simple particle used on attack
+ */
 public class AttackParticle extends TextureSheetParticle {
 
   private final SpriteSet spriteList;
@@ -21,7 +23,7 @@ public class AttackParticle extends TextureSheetParticle {
     this.gCol = f;
     this.bCol = f;
     this.lifetime = 4;
-    this.quadSize = 1.0F - (float)pQuadSizeMultiplier * 0.5F;
+    this.quadSize = 1.0F - (float) pQuadSizeMultiplier * 0.5F;
     this.setSpriteFromAge(spriteList);
   }
 
@@ -43,14 +45,16 @@ public class AttackParticle extends TextureSheetParticle {
 
     if (this.age++ >= this.lifetime) {
       this.remove();
-    }
-    else {
+    } else {
       this.setSpriteFromAge(this.spriteList);
     }
   }
 
-  /** Render factory instance */
+  /**
+   * Render factory instance
+   */
   public static class Factory implements ParticleProvider<SimpleParticleType> {
+
     private final SpriteSet spriteSet;
 
     public Factory(SpriteSet spriteSet) {

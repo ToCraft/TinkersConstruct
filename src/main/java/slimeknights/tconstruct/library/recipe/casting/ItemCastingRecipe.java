@@ -19,13 +19,18 @@ import slimeknights.mantle.recipe.ingredient.FluidIngredient;
 import java.util.Arrays;
 import java.util.List;
 
-/** Casting recipe that takes a fluid and optional cast and outputs an item. */
+/**
+ * Casting recipe that takes a fluid and optional cast and outputs an item.
+ */
 public class ItemCastingRecipe extends AbstractCastingRecipe implements IDisplayableCastingRecipe {
+
   /* Shared fields */
-  protected static final LoadableField<FluidIngredient,ItemCastingRecipe> FLUID_FIELD = FluidIngredient.LOADABLE.requiredField("fluid", ItemCastingRecipe::getFluid);
-  protected static final LoadableField<ItemOutput,ItemCastingRecipe> RESULT_FIELD = ItemOutput.Loadable.REQUIRED_ITEM.requiredField("result", r -> r.result);
-  protected static final LoadableField<Integer,ItemCastingRecipe> COOLING_TIME_FIELD = IntLoadable.FROM_ONE.requiredField("cooling_time", ItemCastingRecipe::getCoolingTime);
-  /** Loader instance */
+  protected static final LoadableField<FluidIngredient, ItemCastingRecipe> FLUID_FIELD = FluidIngredient.LOADABLE.requiredField("fluid", ItemCastingRecipe::getFluid);
+  protected static final LoadableField<ItemOutput, ItemCastingRecipe> RESULT_FIELD = ItemOutput.Loadable.REQUIRED_ITEM.requiredField("result", r -> r.result);
+  protected static final LoadableField<Integer, ItemCastingRecipe> COOLING_TIME_FIELD = IntLoadable.FROM_ONE.requiredField("cooling_time", ItemCastingRecipe::getCoolingTime);
+  /**
+   * Loader instance
+   */
   public static final RecordLoadable<ItemCastingRecipe> LOADER = RecordLoadable.create(
     LoadableRecipeSerializer.TYPED_SERIALIZER.requiredField(), ContextKey.ID.requiredField(),
     LoadableRecipeSerializer.RECIPE_GROUP, CAST_FIELD, FLUID_FIELD, RESULT_FIELD, COOLING_TIME_FIELD, CAST_CONSUMED_FIELD, SWITCH_SLOTS_FIELD,
@@ -38,6 +43,7 @@ public class ItemCastingRecipe extends AbstractCastingRecipe implements IDisplay
   protected final ItemOutput result;
   @Getter
   protected final int coolingTime;
+
   public ItemCastingRecipe(TypeAwareRecipeSerializer<?> serializer, ResourceLocation id, String group, Ingredient cast, FluidIngredient fluid, ItemOutput result, int coolingTime, boolean consumed, boolean switchSlots) {
     super(serializer.getType(), id, group, cast, consumed, switchSlots);
     this.serializer = serializer;
@@ -86,7 +92,8 @@ public class ItemCastingRecipe extends AbstractCastingRecipe implements IDisplay
 
   /**
    * Gets a list of valid fluid inputs for this recipe, for display in JEI
-   * @return  List of fluids
+   *
+   * @return List of fluids
    */
   @Override
   public List<FluidStack> getFluids() {

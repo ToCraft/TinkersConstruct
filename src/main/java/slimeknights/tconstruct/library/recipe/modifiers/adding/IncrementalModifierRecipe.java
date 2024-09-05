@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class IncrementalModifierRecipe extends AbstractModifierRecipe {
+
   public static final RecordLoadable<IncrementalModifierRecipe> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(),
     IngredientLoadable.DISALLOW_EMPTY.requiredField("input", r -> r.input),
@@ -46,13 +47,21 @@ public class IncrementalModifierRecipe extends AbstractModifierRecipe {
     IncrementalModifierRecipe::new);
 
 
-  /** Input ingredient, size controlled by later integers */
+  /**
+   * Input ingredient, size controlled by later integers
+   */
   private final Ingredient input;
-  /** Number each input item counts as */
+  /**
+   * Number each input item counts as
+   */
   private final int amountPerInput;
-  /** Number needed for each level */
+  /**
+   * Number needed for each level
+   */
   private final int neededPerLevel;
-  /** Item stack to use when a partial amount is leftover */
+  /**
+   * Item stack to use when a partial amount is leftover
+   */
   private final ItemOutput leftover;
 
   public IncrementalModifierRecipe(ResourceLocation id, Ingredient input, int amountPerInput, int neededPerLevel, Ingredient toolRequirement, int maxToolSize, ModifierId result, IntRange level, @Nullable SlotCount slots, ItemOutput leftover, boolean allowCrystal, boolean checkTraitLevel) {
@@ -114,8 +123,9 @@ public class IncrementalModifierRecipe extends AbstractModifierRecipe {
 
   /**
    * Updates the input stacks upon crafting this recipe
-   * @param result  Result from {@link #assemble(ITinkerStationContainer)}. Generally should not be modified
-   * @param inv     Inventory instance to modify inputs
+   *
+   * @param result Result from {@link #assemble(ITinkerStationContainer)}. Generally should not be modified
+   * @param inv    Inventory instance to modify inputs
    */
   @Override
   public void updateInputs(ItemStack result, IMutableTinkerStationContainer inv, boolean isServer) {
@@ -162,10 +172,14 @@ public class IncrementalModifierRecipe extends AbstractModifierRecipe {
     return true;
   }
 
-  /** Cache of the list of items for each slot */
+  /**
+   * Cache of the list of items for each slot
+   */
   private List<List<ItemStack>> slotCache;
 
-  /** Gets the list of input stacks for display */
+  /**
+   * Gets the list of input stacks for display
+   */
   private List<List<ItemStack>> getInputs() {
     if (slotCache == null) {
       ImmutableList.Builder<List<ItemStack>> builder = ImmutableList.builder();
@@ -212,9 +226,10 @@ public class IncrementalModifierRecipe extends AbstractModifierRecipe {
 
   /**
    * Checks if the inventory contains only the given ingredient
-   * @param inv         Inventory to check
-   * @param ingredient  Ingredient to try
-   * @return  True if the inventory contains just this item
+   *
+   * @param inv        Inventory to check
+   * @param ingredient Ingredient to try
+   * @return True if the inventory contains just this item
    */
   public static boolean containsOnlyIngredient(ITinkerableContainer inv, Ingredient ingredient) {
     boolean found = false;
@@ -236,10 +251,11 @@ public class IncrementalModifierRecipe extends AbstractModifierRecipe {
 
   /**
    * Determines how much value there is in the inventory
-   * @param inv            Inventory
-   * @param ingredient     Ingredient matching items
-   * @param amountPerItem  Amount each item in the inventory is worth
-   * @return  Total value in the inventory
+   *
+   * @param inv           Inventory
+   * @param ingredient    Ingredient matching items
+   * @param amountPerItem Amount each item in the inventory is worth
+   * @return Total value in the inventory
    */
   public static int getAvailableAmount(ITinkerStationContainer inv, Ingredient ingredient, int amountPerItem) {
     int available = 0;
@@ -254,11 +270,12 @@ public class IncrementalModifierRecipe extends AbstractModifierRecipe {
 
   /**
    * Updates the inputs based on the given ingredient
-   * @param inv             Inventory instance
-   * @param ingredient      Ingredient
-   * @param amountNeeded    Total number needed
-   * @param amountPerInput  Number each item gives
-   * @param leftover        Itemstack to use if amountNeeded is too much to match amountPerInput
+   *
+   * @param inv            Inventory instance
+   * @param ingredient     Ingredient
+   * @param amountNeeded   Total number needed
+   * @param amountPerInput Number each item gives
+   * @param leftover       Itemstack to use if amountNeeded is too much to match amountPerInput
    */
   public static void updateInputs(IMutableTinkerStationContainer inv, Ingredient ingredient, int amountNeeded, int amountPerInput, ItemStack leftover) {
     int itemsNeeded = amountNeeded / amountPerInput;
@@ -287,7 +304,9 @@ public class IncrementalModifierRecipe extends AbstractModifierRecipe {
     }
   }
 
-  /** @deprecated use {@link slimeknights.tconstruct.library.utils.JsonUtils#getAsItemStack(JsonObject, String)} */
+  /**
+   * @deprecated use {@link slimeknights.tconstruct.library.utils.JsonUtils#getAsItemStack(JsonObject, String)}
+   */
   @Deprecated
   public static ItemStack deseralizeResultItem(JsonObject parent, String name) {
     return JsonUtils.getAsItemStack(parent, name);

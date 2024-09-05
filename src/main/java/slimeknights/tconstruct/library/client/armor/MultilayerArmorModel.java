@@ -12,8 +12,11 @@ import slimeknights.tconstruct.library.client.armor.texture.ArmorTextureSupplier
 import slimeknights.tconstruct.library.client.armor.texture.ArmorTextureSupplier.ArmorTexture;
 import slimeknights.tconstruct.library.client.armor.texture.ArmorTextureSupplier.TextureType;
 
-/** Armor model that just applies the list of textures */
+/**
+ * Armor model that just applies the list of textures
+ */
 public class MultilayerArmorModel extends AbstractArmorModel {
+
   public static final MultilayerArmorModel INSTANCE = new MultilayerArmorModel();
 
   protected ItemStack armorStack = ItemStack.EMPTY;
@@ -21,7 +24,9 @@ public class MultilayerArmorModel extends AbstractArmorModel {
 
   protected MultilayerArmorModel() {}
 
-  /** Prepares this model */
+  /**
+   * Prepares this model
+   */
   public Model setup(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel<?> base, ArmorModel model) {
     this.model = model;
     if (!model.layers().isEmpty()) {

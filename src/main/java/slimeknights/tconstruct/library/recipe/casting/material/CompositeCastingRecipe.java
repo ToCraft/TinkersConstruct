@@ -25,6 +25,7 @@ import java.util.List;
  * Casting recipe taking a part of a material and a fluid and outputting the part with a new material
  */
 public class CompositeCastingRecipe extends MaterialCastingRecipe {
+
   public static final RecordLoadable<CompositeCastingRecipe> LOADER = RecordLoadable.create(
     LoadableRecipeSerializer.TYPED_SERIALIZER.requiredField(), ContextKey.ID.requiredField(),
     LoadableRecipeSerializer.RECIPE_GROUP, RESULT_FIELD, ITEM_COST_FIELD,
@@ -33,6 +34,7 @@ public class CompositeCastingRecipe extends MaterialCastingRecipe {
 
   @Nullable
   private final MaterialStatsId castingStatConflict;
+
   public CompositeCastingRecipe(TypeAwareRecipeSerializer<?> serializer, ResourceLocation id, String group, IMaterialItem result, int itemCost, @Nullable MaterialStatsId castingStatConflict) {
     super(serializer, id, group, Ingredient.of(result), itemCost, result, true, false);
     this.castingStatConflict = castingStatConflict;
@@ -63,24 +65,24 @@ public class CompositeCastingRecipe extends MaterialCastingRecipe {
         MaterialVariant output = recipe.getOutput();
         MaterialVariant input = recipe.getInput();
         if (!output.isUnknown() && input != null && !input.isUnknown()
-            && !output.get().isHidden() && !input.get().isHidden()
-            && result.canUseMaterial(output.getId()) && result.canUseMaterial(input.getId())) {
+          && !output.get().isHidden() && !input.get().isHidden()
+          && result.canUseMaterial(output.getId()) && result.canUseMaterial(input.getId())) {
           List<FluidStack> fluids = recipe.getFluids();
           if (castingStatConflict != null) {
             // if we require non-casting, filter out all fluids that match a casting recipe
             fluids = fluids.stream()
-                           .filter(fluid -> {
-                             MaterialFluidRecipe fluidRecipe = MaterialCastingLookup.getCastingFluid(fluid.getFluid());
-                             // its fine if we have a recipe as long as the material is not usable by this part
-                             return fluidRecipe == MaterialFluidRecipe.EMPTY || !castingStatConflict.canUseMaterial(fluidRecipe.getOutput().getId());
-                           })
-                           .toList();
+              .filter(fluid -> {
+                MaterialFluidRecipe fluidRecipe = MaterialCastingLookup.getCastingFluid(fluid.getFluid());
+                // its fine if we have a recipe as long as the material is not usable by this part
+                return fluidRecipe == MaterialFluidRecipe.EMPTY || !castingStatConflict.canUseMaterial(fluidRecipe.getOutput().getId());
+              })
+              .toList();
           }
           if (!fluids.isEmpty()) {
             fluids = resizeFluids(recipe.getFluids());
             recipes.add(new DisplayCastingRecipe(type, List.of(result.withMaterial(input.getVariant())), fluids, result.withMaterial(output.getVariant()),
-                                                 ICastingRecipe.calcCoolingTime(recipe.getTemperature(), itemCost * fluids.stream().mapToInt(FluidStack::getAmount).max().orElse(0)),
-                                                 isConsumed()));
+              ICastingRecipe.calcCoolingTime(recipe.getTemperature(), itemCost * fluids.stream().mapToInt(FluidStack::getAmount).max().orElse(0)),
+              isConsumed()));
           }
         }
       }

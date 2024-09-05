@@ -30,7 +30,8 @@ import slimeknights.tconstruct.smeltery.block.entity.module.MeltingModuleInvento
 import slimeknights.tconstruct.smeltery.block.entity.multiblock.HeatingStructureMultiblock.StructureData;
 
 public class HeatingStructureBlockEntityRenderer implements BlockEntityRenderer<HeatingStructureBlockEntity> {
-  private static final float ITEM_SCALE = 15f/16f;
+
+  private static final float ITEM_SCALE = 15f / 16f;
 
   public HeatingStructureBlockEntityRenderer(Context context) {}
 
@@ -82,7 +83,7 @@ public class HeatingStructureBlockEntityRenderer implements BlockEntityRenderer<
     int zd = 1 + maxPos.getZ() - minPos.getZ();
     int layer = xd * zd;
     Direction facing = state.getValue(ControllerBlock.FACING);
-    Quaternion itemRotation = Vector3f.YP.rotationDegrees(-90.0F * (float)facing.get2DDataValue());
+    Quaternion itemRotation = Vector3f.YP.rotationDegrees(-90.0F * (float) facing.get2DDataValue());
     MeltingModuleInventory inventory = smeltery.getMeltingInventory();
     Minecraft mc = Minecraft.getInstance();
     ItemRenderer itemRenderer = mc.getItemRenderer();

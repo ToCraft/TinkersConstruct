@@ -36,7 +36,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class MagneticModifier extends Modifier implements PlantHarvestModifierHook, ShearsModifierHook, BlockBreakModifierHook, MeleeHitModifierHook, ProjectileLaunchModifierHook {
-  /** Player modifier data key for haste */
+
+  /**
+   * Player modifier data key for haste
+   */
   private static final TinkerDataKey<Integer> MAGNET = TConstruct.createKey("magnet");
 
   public MagneticModifier() {
@@ -90,7 +93,9 @@ public class MagneticModifier extends Modifier implements PlantHarvestModifierHo
 
   // armor
 
-  /** Called to perform the magnet for armor */
+  /**
+   * Called to perform the magnet for armor
+   */
   private static void onLivingTick(LivingTickEvent event) {
     // TOOD: this will run on any held armor that is also melee/harvest, is that a problem?
     LivingEntity entity = event.getEntity();
@@ -102,7 +107,9 @@ public class MagneticModifier extends Modifier implements PlantHarvestModifierHo
     }
   }
 
-  /** Performs the magnetic effect */
+  /**
+   * Performs the magnetic effect
+   */
   public static <T extends Entity> void applyVelocity(LivingEntity entity, int amplifier, Class<T> targetClass, int minRange, float speed, int maxPush) {
     // super magnetic - inspired by botanias code
     double x = entity.getX();
@@ -119,9 +126,9 @@ public class MagneticModifier extends Modifier implements PlantHarvestModifierHo
       }
       // calculate direction: item -> player
       Vec3 vec = entity.position()
-                       .subtract(target.getX(), target.getY(), target.getZ())
-                       .normalize()
-                       .scale(speed * (amplifier + 1));
+        .subtract(target.getX(), target.getY(), target.getZ())
+        .normalize()
+        .scale(speed * (amplifier + 1));
       if (!target.isNoGravity()) {
         vec = vec.add(0, 0.04f, 0);
       }
@@ -136,7 +143,9 @@ public class MagneticModifier extends Modifier implements PlantHarvestModifierHo
     }
   }
 
-  /** Performs the magnetic effect */
+  /**
+   * Performs the magnetic effect
+   */
   public static void applyMagnet(LivingEntity entity, int amplifier) {
     applyVelocity(entity, amplifier, ItemEntity.class, 3, 0.05f, 100);
   }

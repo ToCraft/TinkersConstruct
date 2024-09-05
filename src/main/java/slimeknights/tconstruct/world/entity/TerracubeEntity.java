@@ -23,6 +23,7 @@ import slimeknights.tconstruct.world.TinkerWorld;
  * Clay based slime cube
  */
 public class TerracubeEntity extends ArmoredSlimeEntity {
+
   public TerracubeEntity(EntityType<? extends TerracubeEntity> type, Level worldIn) {
     super(type, worldIn);
   }
@@ -51,7 +52,7 @@ public class TerracubeEntity extends ArmoredSlimeEntity {
 
   @Override
   protected float getAttackDamage() {
-    return (float)this.getAttributeValue(Attributes.ATTACK_DAMAGE) + 2;
+    return (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) + 2;
   }
 
   @Override

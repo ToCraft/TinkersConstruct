@@ -28,6 +28,7 @@ public class SlimeTallGrassBlock extends BushBlock implements IForgeShearable {
 
   @Getter
   private final FoliageType foliageType;
+
   public SlimeTallGrassBlock(Properties properties, FoliageType foliageType) {
     super(properties);
     this.foliageType = foliageType;

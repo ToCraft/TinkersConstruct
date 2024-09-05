@@ -34,10 +34,15 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.TinkerTools;
 
-/** Add velocity to the target away from yourself */
+/**
+ * Add velocity to the target away from yourself
+ */
 public class BonkingModifier extends SlingModifier implements MeleeHitModifierHook, MeleeDamageModifierHook {
+
   private static final float RANGE = 5F;
-  /** If true, bonking is in progress, suppresses knockback and boosts damage */
+  /**
+   * If true, bonking is in progress, suppresses knockback and boosts damage
+   */
   private static boolean isBonking = false;
 
   @Override
@@ -61,7 +66,7 @@ public class BonkingModifier extends SlingModifier implements MeleeHitModifierHo
       } else {
         speed = ConditionalStatModifierHook.getModifiedStat(tool, player, ToolStats.DRAW_SPEED);
       }
-      tool.getPersistentData().putInt(GeneralInteractionModifierHook.KEY_DRAWTIME, (int)Math.ceil(30f / speed));
+      tool.getPersistentData().putInt(GeneralInteractionModifierHook.KEY_DRAWTIME, (int) Math.ceil(30f / speed));
       GeneralInteractionModifierHook.startUsing(tool, modifier.getId(), player, hand);
     }
     return InteractionResult.SUCCESS;
@@ -96,7 +101,7 @@ public class BonkingModifier extends SlingModifier implements MeleeHitModifierHo
 
         EntityHitResult hit = ProjectileUtil.getEntityHitResult(player.level, player, start, direction, bb, (e) -> e instanceof LivingEntity);
         if (hit != null) {
-          LivingEntity target = (LivingEntity)hit.getEntity();
+          LivingEntity target = (LivingEntity) hit.getEntity();
           double targetDist = start.distanceToSqr(target.getEyePosition(1F));
 
           // cancel if there's a block in the way

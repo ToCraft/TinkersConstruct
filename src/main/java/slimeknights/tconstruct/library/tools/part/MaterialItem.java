@@ -27,13 +27,16 @@ import java.util.List;
  * itemstack of this item has.
  */
 public class MaterialItem extends Item implements IMaterialItem {
+
   private static final String ADDED_BY = TConstruct.makeTranslationKey("tooltip", "part.added_by");
 
   public MaterialItem(Properties properties) {
     super(properties);
   }
 
-  /** Gets the material ID for the given NBT compound */
+  /**
+   * Gets the material ID for the given NBT compound
+   */
   private static MaterialVariantId getMaterialId(@Nullable CompoundTag nbt) {
     if (nbt != null) {
       String str = nbt.getString(MATERIAL_TAG);
@@ -133,14 +136,15 @@ public class MaterialItem extends Item implements IMaterialItem {
     if (!IMaterial.UNKNOWN_ID.equals(material)) {
       return material.getId().getNamespace();
     }
-    return Registry.ITEM.getKey(this).getNamespace();
+    return ForgeRegistries.ITEMS.getKey(this).getNamespace();
   }
 
 
   /**
    * Adds the mod that added the material to the tooltip
-   * @param tooltip   Tooltip list
-   * @param material  Material to add
+   *
+   * @param tooltip  Tooltip list
+   * @param material Material to add
    */
   protected static void addModTooltip(IMaterial material, List<Component> tooltip) {
     if (material != IMaterial.UNKNOWN) {

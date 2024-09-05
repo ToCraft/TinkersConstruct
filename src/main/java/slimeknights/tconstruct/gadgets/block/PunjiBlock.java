@@ -43,12 +43,12 @@ public class PunjiBlock extends Block {
   public PunjiBlock(Properties properties) {
     super(properties);
     this.registerDefaultState(this.stateDefinition.any()
-                                            .setValue(FACING, Direction.DOWN)
-                                            .setValue(NORTH, false)
-                                            .setValue(EAST, false)
-                                            .setValue(NORTHEAST, false)
-                                            .setValue(NORTHWEST, false)
-                                            .setValue(WATERLOGGED, false));
+      .setValue(FACING, Direction.DOWN)
+      .setValue(NORTH, false)
+      .setValue(EAST, false)
+      .setValue(NORTHEAST, false)
+      .setValue(NORTHWEST, false)
+      .setValue(WATERLOGGED, false));
   }
 
   @Nullable
@@ -83,7 +83,7 @@ public class PunjiBlock extends Block {
     // always update northeast and northwest, never gets direct updates
     BlockPos northPos = pos.relative(north);
     return state.setValue(NORTHEAST, isConnected(world, direction, northPos.relative(east)))
-                .setValue(NORTHWEST, isConnected(world, direction, northPos.relative(east.getOpposite())));
+      .setValue(NORTHWEST, isConnected(world, direction, northPos.relative(east.getOpposite())));
   }
 
   @Override
@@ -120,19 +120,20 @@ public class PunjiBlock extends Block {
     Direction north = getLocalNorth(direction);
     Direction east = getLocalEast(direction);
     BlockPos northPos = pos.relative(north);
-    return state.setValue(NORTH,     isConnected(world, direction, northPos))
-                .setValue(EAST,      isConnected(world, direction, pos.relative(east)))
-                .setValue(NORTHEAST, isConnected(world, direction, northPos.relative(east)))
-                .setValue(NORTHWEST, isConnected(world, direction, northPos.relative(east.getOpposite())))
-                .setValue(WATERLOGGED, context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER);
+    return state.setValue(NORTH, isConnected(world, direction, northPos))
+      .setValue(EAST, isConnected(world, direction, pos.relative(east)))
+      .setValue(NORTHEAST, isConnected(world, direction, northPos.relative(east)))
+      .setValue(NORTHWEST, isConnected(world, direction, northPos.relative(east.getOpposite())))
+      .setValue(WATERLOGGED, context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER);
   }
 
   /**
    * Checks if this should connect to the block at the position
-   * @param world   World instance
-   * @param facing  Punji stick facing
-   * @param target  Position to check
-   * @return  True if connected
+   *
+   * @param world  World instance
+   * @param facing Punji stick facing
+   * @param target Position to check
+   * @return True if connected
    */
   private boolean isConnected(LevelReader world, Direction facing, BlockPos target) {
     BlockState state = world.getBlockState(target);
@@ -141,8 +142,9 @@ public class PunjiBlock extends Block {
 
   /**
    * Gets the facing relative north
-   * @param facing  Punji stick facing
-   * @return  North for the given facing
+   *
+   * @param facing Punji stick facing
+   * @return North for the given facing
    */
   private static Direction getLocalNorth(Direction facing) {
     return switch (facing) {
@@ -154,8 +156,9 @@ public class PunjiBlock extends Block {
 
   /**
    * Gets the facing relative east
-   * @param facing  Punji stick facing
-   * @return  East for the given facing
+   *
+   * @param facing Punji stick facing
+   * @return East for the given facing
    */
   private static Direction getLocalEast(Direction facing) {
     if (facing.getAxis() == Axis.Y) {

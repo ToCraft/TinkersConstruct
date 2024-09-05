@@ -18,6 +18,7 @@ import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
 import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability.TinkerDataKey;
 
 public class DoubleJumpModifier extends Modifier {
+
   private static final ResourceLocation JUMPS = TConstruct.getResource("jumps");
   private static final TinkerDataKey<Integer> EXTRA_JUMPS = TConstruct.createKey("extra_jumps");
 
@@ -54,8 +55,9 @@ public class DoubleJumpModifier extends Modifier {
 
   /**
    * Causes the player to jump an extra time, if possible
-   * @param entity  Entity instance who wishes to jump again
-   * @return  True if the entity jumpped, false if not
+   *
+   * @param entity Entity instance who wishes to jump again
+   * @return True if the entity jumpped, false if not
    */
   public static boolean extraJump(Player entity) {
     // validate preconditions, no using when swimming, elytra, or on the ground
@@ -82,7 +84,9 @@ public class DoubleJumpModifier extends Modifier {
     return false;
   }
 
-  /** Event handler to reset the number of times we have jumpped in mid air */
+  /**
+   * Event handler to reset the number of times we have jumpped in mid air
+   */
   private static void onLand(LivingFallEvent event) {
     event.getEntity().getCapability(PersistentDataCapability.CAPABILITY).ifPresent(data -> data.remove(JUMPS));
   }

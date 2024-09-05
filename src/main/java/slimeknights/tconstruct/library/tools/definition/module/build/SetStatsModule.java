@@ -14,8 +14,11 @@ import slimeknights.tconstruct.tools.item.ArmorSlotType;
 
 import java.util.List;
 
-/** Module to set stats on the tool */
+/**
+ * Module to set stats on the tool
+ */
 public record SetStatsModule(StatsNBT stats) implements ToolStatsHook, ToolModule {
+
   public static final RecordLoadable<SetStatsModule> LOADER = RecordLoadable.create(StatsNBT.LOADABLE.requiredField("stats", SetStatsModule::stats), SetStatsModule::new);
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<SetStatsModule>defaultHooks(ToolHooks.TOOL_STATS);
 
@@ -29,7 +32,9 @@ public record SetStatsModule(StatsNBT stats) implements ToolStatsHook, ToolModul
     return DEFAULT_HOOKS;
   }
 
-  /** Sets the stat into the builder */
+  /**
+   * Sets the stat into the builder
+   */
   private <T> void setStat(IToolStat<T> stat, ModifierStatsBuilder builder) {
     stat.update(builder, stats.get(stat));
   }
@@ -42,7 +47,9 @@ public record SetStatsModule(StatsNBT stats) implements ToolStatsHook, ToolModul
   }
 
 
-  /** Creates a builder instance */
+  /**
+   * Creates a builder instance
+   */
   public static ArmorBuilder armor(List<ArmorSlotType> slots) {
     return new ArmorBuilder(slots);
   }
@@ -59,7 +66,9 @@ public record SetStatsModule(StatsNBT stats) implements ToolStatsHook, ToolModul
       }
     }
 
-    /** Gets the builder for the given slot */
+    /**
+     * Gets the builder for the given slot
+     */
     protected StatsNBT.Builder getBuilder(ArmorSlotType slotType) {
       StatsNBT.Builder builder = builders[slotType.getIndex()];
       if (builder == null) {
@@ -68,18 +77,24 @@ public record SetStatsModule(StatsNBT stats) implements ToolStatsHook, ToolModul
       return builder;
     }
 
-    /** Adds a bonus to the builder */
+    /**
+     * Adds a bonus to the builder
+     */
     public <T> ArmorBuilder set(ArmorSlotType slotType, IToolStat<T> stat, T value) {
       getBuilder(slotType).set(stat, value);
       return this;
     }
 
-    /** Adds a bonus to the builder */
+    /**
+     * Adds a bonus to the builder
+     */
     public ArmorBuilder set(ArmorSlotType slotType, IToolStat<Float> stat, float value) {
       return set(slotType, stat, (Float) value);
     }
 
-    /** Sets the same bonus on all pieces */
+    /**
+     * Sets the same bonus on all pieces
+     */
     public <T> ArmorBuilder setAll(IToolStat<T> stat, T value) {
       for (ArmorSlotType slotType : slotTypes) {
         set(slotType, stat, value);
@@ -87,12 +102,16 @@ public record SetStatsModule(StatsNBT stats) implements ToolStatsHook, ToolModul
       return this;
     }
 
-    /** Sets the same bonus on all pieces */
+    /**
+     * Sets the same bonus on all pieces
+     */
     public ArmorBuilder setAll(IToolStat<Float> stat, float value) {
       return setAll(stat, (Float) value);
     }
 
-    /** Sets a different bonus on all pieces, float overload as it comes up commonly */
+    /**
+     * Sets a different bonus on all pieces, float overload as it comes up commonly
+     */
     public final ArmorBuilder setEach(IToolStat<Float> stat, float... values) {
       if (values.length != slotTypes.size()) {
         throw new IllegalStateException("Wrong number of stats set");
@@ -105,8 +124,9 @@ public record SetStatsModule(StatsNBT stats) implements ToolStatsHook, ToolModul
 
     /**
      * Sets the durability for all parts like vanilla armor materials
-     * @param maxDamageFactor  Durability modifier applied to the base value for each slot
-     * @return  Builder
+     *
+     * @param maxDamageFactor Durability modifier applied to the base value for each slot
+     * @return Builder
      */
     public ArmorBuilder durabilityFactor(float maxDamageFactor) {
       for (ArmorSlotType slotType : slotTypes) {
@@ -115,7 +135,9 @@ public record SetStatsModule(StatsNBT stats) implements ToolStatsHook, ToolModul
       return this;
     }
 
-    /** Builds the final module */
+    /**
+     * Builds the final module
+     */
     @Override
     public SetStatsModule build(ArmorSlotType slot) {
       return new SetStatsModule(getBuilder(slot).build());

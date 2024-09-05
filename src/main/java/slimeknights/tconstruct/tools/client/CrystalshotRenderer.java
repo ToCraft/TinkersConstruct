@@ -11,8 +11,10 @@ import java.util.Map;
 import java.util.function.Function;
 
 public class CrystalshotRenderer extends ArrowRenderer<CrystalshotEntity> {
-  private static final Map<String,ResourceLocation> TEXTURES = new HashMap<>();
-  private static final Function<String,ResourceLocation> TEXTURE_GETTER = variant -> TConstruct.getResource("textures/entity/arrow/" + variant + ".png");
+
+  private static final Map<String, ResourceLocation> TEXTURES = new HashMap<>();
+  private static final Function<String, ResourceLocation> TEXTURE_GETTER = variant -> TConstruct.getResource("textures/entity/arrow/" + variant + ".png");
+
   public CrystalshotRenderer(Context context) {
     super(context);
   }

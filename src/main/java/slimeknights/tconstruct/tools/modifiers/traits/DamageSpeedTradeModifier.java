@@ -35,6 +35,7 @@ import java.util.function.BiConsumer;
  * Shared logic for jagged and stonebound. Trait boosts attack damage as it lowers mining speed.
  */
 public class DamageSpeedTradeModifier extends Modifier implements AttributesModifierHook, TooltipModifierHook, BreakSpeedModifierHook {
+
   private static final Component MINING_SPEED = TConstruct.makeTranslation("modifier", "fake_attribute.mining_speed");
   private final float multiplier;
   private final Lazy<UUID> uuid = Lazy.of(() -> UUID.nameUUIDFromBytes(getId().toString().getBytes()));
@@ -51,13 +52,16 @@ public class DamageSpeedTradeModifier extends Modifier implements AttributesModi
 
   /**
    * Creates a new instance of
-   * @param multiplier  Multiplier. Positive boosts damage, negative boosts mining speed
+   *
+   * @param multiplier Multiplier. Positive boosts damage, negative boosts mining speed
    */
   public DamageSpeedTradeModifier(float multiplier) {
     this.multiplier = multiplier;
   }
 
-  /** Gets the multiplier for this modifier at the current durability and level */
+  /**
+   * Gets the multiplier for this modifier at the current durability and level
+   */
   private double getMultiplier(IToolStackView tool, int level) {
     return Math.sqrt(tool.getDamage() * level / tool.getMultiplier(ToolStats.DURABILITY)) * multiplier;
   }
@@ -71,7 +75,7 @@ public class DamageSpeedTradeModifier extends Modifier implements AttributesModi
   }
 
   @Override
-  public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute,AttributeModifier> consumer) {
+  public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
     if (slot == EquipmentSlot.MAINHAND) {
       double boost = getMultiplier(tool, modifier.getLevel());
       if (boost != 0) {
@@ -84,7 +88,7 @@ public class DamageSpeedTradeModifier extends Modifier implements AttributesModi
   @Override
   public void onBreakSpeed(IToolStackView tool, ModifierEntry modifier, BreakSpeed event, Direction sideHit, boolean isEffective, float miningSpeedModifier) {
     if (isEffective) {
-      event.setNewSpeed((float)(event.getNewSpeed() * (1 - getMultiplier(tool, modifier.getLevel()))));
+      event.setNewSpeed((float) (event.getNewSpeed() * (1 - getMultiplier(tool, modifier.getLevel()))));
     }
   }
 }

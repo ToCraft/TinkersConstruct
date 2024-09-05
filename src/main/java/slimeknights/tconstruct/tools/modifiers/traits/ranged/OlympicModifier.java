@@ -31,10 +31,13 @@ import slimeknights.tconstruct.shared.TinkerMaterials;
 import javax.annotation.Nullable;
 
 public class OlympicModifier extends Modifier implements ProjectileLaunchModifierHook, ProjectileHitModifierHook {
+
   private static final ResourceLocation OLYMPIC_START = TConstruct.getResource("olympic_start");
   private static final TagKey<Item> PLATINUM_NUGGET = ItemTags.create(new ResourceLocation("forge", "nuggets/platinum"));
 
-  /** Gets the nugget for the given distance */
+  /**
+   * Gets the nugget for the given distance
+   */
   private static Item getNugget(double distanceSq) {
     // 50 meters - platinum
     if (distanceSq > 2500) {

@@ -8,9 +8,13 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
 import java.util.EnumMap;
 
-/** Pane block with sensible culling */
+/**
+ * Pane block with sensible culling
+ */
 public class BetterPaneBlock extends IronBarsBlock {
-  public static final EnumMap<Direction,BooleanProperty> DIRECTIONS;
+
+  public static final EnumMap<Direction, BooleanProperty> DIRECTIONS;
+
   static {
     DIRECTIONS = new EnumMap<>(Direction.class);
     DIRECTIONS.put(Direction.NORTH, NORTH);

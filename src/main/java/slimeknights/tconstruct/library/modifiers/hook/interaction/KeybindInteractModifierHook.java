@@ -13,13 +13,15 @@ import java.util.Collection;
  * If you wish to use this hook for another slot, please discuss it with us, so we can implement a solution that will benefit all addons rather than having dupliate keybinds.
  */
 public interface KeybindInteractModifierHook {
+
   /**
    * Called when the helmet keybinding is pressed to interact with this helmet modifier
+   *
    * @param tool     Tool instance
    * @param modifier Entry calling this hook
    * @param player   Player wearing the helmet
    * @param slot     Slot containing the tool
-   * @return  True if no other modifiers should process
+   * @return True if no other modifiers should process
    */
   default boolean startInteract(IToolStackView tool, ModifierEntry modifier, Player player, EquipmentSlot slot, TooltipKey keyModifier) {
     return false;
@@ -27,6 +29,7 @@ public interface KeybindInteractModifierHook {
 
   /**
    * Called when the helmet keybinding is released to interact with this modifier
+   *
    * @param tool     Tool instance
    * @param modifier Entry calling this hook
    * @param player   Player wearing the helmet
@@ -35,8 +38,11 @@ public interface KeybindInteractModifierHook {
   default void stopInteract(IToolStackView tool, ModifierEntry modifier, Player player, EquipmentSlot slot) {}
 
 
-  /** Merger that uses the first on start interact, but runs all on stop */
+  /**
+   * Merger that uses the first on start interact, but runs all on stop
+   */
   record InteractMerger(Collection<KeybindInteractModifierHook> modules) implements KeybindInteractModifierHook {
+
     @Override
     public boolean startInteract(IToolStackView tool, ModifierEntry modifier, Player player, EquipmentSlot slot, TooltipKey keyModifier) {
       for (KeybindInteractModifierHook module : modules) {

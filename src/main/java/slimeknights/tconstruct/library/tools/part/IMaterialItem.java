@@ -11,7 +11,10 @@ import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
  * Items implementing this interface contain a material
  */
 public interface IMaterialItem extends ItemLike {
-  /** Tag used in NBT for the material ID */
+
+  /**
+   * Tag used in NBT for the material ID
+   */
   String MATERIAL_TAG = "Material";
 
   /**
@@ -21,7 +24,9 @@ public interface IMaterialItem extends ItemLike {
    */
   MaterialVariantId getMaterial(ItemStack stack);
 
-  /** Returns the item with the given material, bypassing material validation */
+  /**
+   * Returns the item with the given material, bypassing material validation
+   */
   default ItemStack withMaterialForDisplay(MaterialVariantId materialId) {
     ItemStack stack = new ItemStack(this);
     // FIXME: it is odd that we assume the NBT format in this method but not in getMaterial, should be consistent in the implementation location
@@ -29,7 +34,9 @@ public interface IMaterialItem extends ItemLike {
     return stack;
   }
 
-  /** Returns the item with the given material, validating it */
+  /**
+   * Returns the item with the given material, validating it
+   */
   default ItemStack withMaterial(MaterialVariantId material) {
     if (canUseMaterial(material.getId())) {
       return withMaterialForDisplay(material);
@@ -44,15 +51,18 @@ public interface IMaterialItem extends ItemLike {
     return true;
   }
 
-  /** Returns true if the material can be used for this toolpart, simply an alias for {@link #canUseMaterial(MaterialId)} */
+  /**
+   * Returns true if the material can be used for this toolpart, simply an alias for {@link #canUseMaterial(MaterialId)}
+   */
   default boolean canUseMaterial(IMaterial mat) {
     return canUseMaterial(mat.getIdentifier());
   }
 
   /**
    * Gets the material from a given item stack
-   * @param stack  Item stack containing a material item
-   * @return  Material, or unknown if none
+   *
+   * @param stack Item stack containing a material item
+   * @return Material, or unknown if none
    */
   static MaterialVariantId getMaterialFromStack(ItemStack stack) {
     if ((stack.getItem() instanceof IMaterialItem)) {
@@ -63,9 +73,10 @@ public interface IMaterialItem extends ItemLike {
 
   /**
    * Gets the given item stack with this material applied
-   * @param stack     Stack instance
-   * @param material  Material
-   * @return  Stack with material, or original stack if not a material item
+   *
+   * @param stack    Stack instance
+   * @param material Material
+   * @return Stack with material, or original stack if not a material item
    */
   static ItemStack withMaterial(ItemStack stack, MaterialVariantId material) {
     Item item = stack.getItem();

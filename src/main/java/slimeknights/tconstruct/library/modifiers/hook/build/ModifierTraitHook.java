@@ -14,32 +14,49 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-/** Hook for a modifier to add in other modifiers */
+/**
+ * Hook for a modifier to add in other modifiers
+ */
 public interface ModifierTraitHook {
+
   /**
    * Add all traits from this modifier to the builder.
    * This hook may be called multiple times during the building process if multiple modifiers have the same trait, use {@code firstEncounter} to distinguish.
    * Do not call this method directly, call it through {@link TraitBuilder}.
-   * @param context         Tool building context, note that volatile data has not yet been filled and modifiers does not include traits
-   * @param modifier        Modifier entry
-   * @param builder         Builder handling traits, use methods on this object to add traits
-   * @param firstEncounter  If true, this is the first time this modifier has been seen while rebuilding the stats
+   *
+   * @param context        Tool building context, note that volatile data has not yet been filled and modifiers does not include traits
+   * @param modifier       Modifier entry
+   * @param builder        Builder handling traits, use methods on this object to add traits
+   * @param firstEncounter If true, this is the first time this modifier has been seen while rebuilding the stats
    */
   void addTraits(IToolContext context, ModifierEntry modifier, TraitBuilder builder, boolean firstEncounter);
 
-  /** Builder that handles adding traits that can themselves contain traits */
+  /**
+   * Builder that handles adding traits that can themselves contain traits
+   */
   @RequiredArgsConstructor
   class TraitBuilder implements ModifierBuilder {
-    /** Set of all modifiers that have been encountered during this rebuild */
+
+    /**
+     * Set of all modifiers that have been encountered during this rebuild
+     */
     private final Set<Modifier> seenModifiers = new HashSet<>();
-    /** Modifiers that are currently adding their traits, prevents adding traits for a modifier inside itself, which will recurse infinitely */
+    /**
+     * Modifiers that are currently adding their traits, prevents adding traits for a modifier inside itself, which will recurse infinitely
+     */
     private final Set<Modifier> currentStack = new LinkedHashSet<>();
-    /** Context for tool building */
+    /**
+     * Context for tool building
+     */
     private final IToolContext context;
-    /** Builder instance */
+    /**
+     * Builder instance
+     */
     private final ModifierNBT.Builder builder;
 
-    /** Adds the given modifier to the builder and adds all its traits */
+    /**
+     * Adds the given modifier to the builder and adds all its traits
+     */
     @Override
     public TraitBuilder add(ModifierEntry entry) {
       builder.add(entry);
@@ -47,13 +64,17 @@ public interface ModifierTraitHook {
       return this;
     }
 
-    /** @deprecated use {@link #add(ModifierEntry)} */
+    /**
+     * @deprecated use {@link #add(ModifierEntry)}
+     */
     @Deprecated(forRemoval = true)
     public void addEntry(ModifierEntry entry) {
       add(entry);
     }
 
-    /** Adds all traits for the given modifier entry */
+    /**
+     * Adds all traits for the given modifier entry
+     */
     private void addTraits(ModifierEntry entry) {
       Modifier modifier = entry.getModifier();
       // if the modifier lacks the trait hook, then we can skip tracking it, no need to add it to any data structures
@@ -72,7 +93,9 @@ public interface ModifierTraitHook {
       }
     }
 
-    /** Checks if the given modifier has been seen before */
+    /**
+     * Checks if the given modifier has been seen before
+     */
     public boolean hasSeenModifier(Modifier modifier) {
       return seenModifiers.contains(modifier);
     }
@@ -83,8 +106,11 @@ public interface ModifierTraitHook {
     }
   }
 
-  /** Merger that runs all hooks */
+  /**
+   * Merger that runs all hooks
+   */
   record AllMerger(Collection<ModifierTraitHook> modules) implements ModifierTraitHook {
+
     @Override
     public void addTraits(IToolContext context, ModifierEntry modifier, TraitBuilder builder, boolean firstEncounter) {
       for (ModifierTraitHook module : modules) {

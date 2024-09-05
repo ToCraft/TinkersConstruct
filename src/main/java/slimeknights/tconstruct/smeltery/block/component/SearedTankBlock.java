@@ -31,9 +31,11 @@ import javax.annotation.Nullable;
 import java.util.Locale;
 
 public class SearedTankBlock extends SearedBlock implements ITankBlock, EntityBlock {
+
   @Getter
   private final int capacity;
   private final PushReaction pushReaction;
+
   public SearedTankBlock(Properties properties, int capacity, PushReaction pushReaction) {
     super(properties, true);
     this.capacity = capacity;

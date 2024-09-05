@@ -13,9 +13,12 @@ import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-/** Base class for protection modifiers that want to keep track of the largest level for a bonus */
+/**
+ * Base class for protection modifiers that want to keep track of the largest level for a bonus
+ */
 @RequiredArgsConstructor
 public abstract class AbstractProtectionModifier<T extends ModifierMaxLevel> extends Modifier implements EquipmentChangeModifierHook {
+
   private final ComputableDataKey<T> key;
   private final boolean allowClient;
 
@@ -29,10 +32,14 @@ public abstract class AbstractProtectionModifier<T extends ModifierMaxLevel> ext
     hookBuilder.addHook(this, ModifierHooks.EQUIPMENT_CHANGE);
   }
 
-  /** Called when the last piece of equipment is removed to reset the data */
+  /**
+   * Called when the last piece of equipment is removed to reset the data
+   */
   protected void reset(T data, EquipmentChangeContext context) {}
 
-  /** Called to apply updates to the piece */
+  /**
+   * Called to apply updates to the piece
+   */
   protected void set(T data, EquipmentSlot slot, float scaledLevel, EquipmentChangeContext context) {
     data.set(slot, scaledLevel);
   }

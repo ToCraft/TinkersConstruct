@@ -10,6 +10,7 @@ import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
  */
 @RequiredArgsConstructor
 public class MaterialValue implements IMaterialValue {
+
   @Getter
   private final MaterialVariant material;
   @Getter

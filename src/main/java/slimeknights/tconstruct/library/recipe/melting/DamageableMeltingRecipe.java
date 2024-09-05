@@ -19,26 +19,38 @@ import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import java.util.List;
 import java.util.function.Function;
 
-/** Melting recipe that scale output based on input damage */
+/**
+ * Melting recipe that scale output based on input damage
+ */
 public class DamageableMeltingRecipe extends MeltingRecipe {
-  /** Loader instance */
+
+  /**
+   * Loader instance
+   */
   public static final RecordLoadable<DamageableMeltingRecipe> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(), LoadableRecipeSerializer.RECIPE_GROUP, INPUT, OUTPUT, TEMPERATURE, TIME, BYPRODUCTS,
     new MergingField<>(IntLoadable.FROM_ONE.defaultField("unit_size", 1, r -> r.unitSize), "result", MissingMode.IGNORE),
     new MergingListField<>(IntLoadable.FROM_ONE.defaultField("unit_size", 1, Function.identity()), "byproducts", r -> r.byproductSizes),
     DamageableMeltingRecipe::new);
 
-  /** Sizes of each unit in the recipe. Index 0 is the main output, 1 and onwards is secondary outputs */
+  /**
+   * Sizes of each unit in the recipe. Index 0 is the main output, 1 and onwards is secondary outputs
+   */
   private final int unitSize;
-  /** Sizes of byproducts */
+  /**
+   * Sizes of byproducts
+   */
   private final List<Integer> byproductSizes;
+
   public DamageableMeltingRecipe(ResourceLocation id, String group, Ingredient input, FluidStack output, int temperature, int time, List<FluidStack> byproducts, int unitSize, List<Integer> byproductSizes) {
     super(id, group, input, output, temperature, time, byproducts);
     this.unitSize = unitSize;
     this.byproductSizes = byproductSizes;
   }
 
-  /** Scales a fluid stack based on the damage */
+  /**
+   * Scales a fluid stack based on the damage
+   */
   private static FluidStack scaleOutput(FluidStack fluid, int damage, int maxDamage, int unitSize) {
     int amount = fluid.getAmount() * (maxDamage - damage) / maxDamage;
     // mimimum output is one unit

@@ -21,11 +21,14 @@ import slimeknights.tconstruct.tools.TinkerModifiers;
 
 /**
  * Module to cover the ground in the given block
- * @param state      State used to cover the ground
- * @param radius     Radius to cover
- * @param condition  Standard module condition
+ *
+ * @param state     State used to cover the ground
+ * @param radius    Radius to cover
+ * @param condition Standard module condition
  */
-public record CoverGroundWalkerModule(BlockState state, LevelingValue radius, ModifierCondition<IToolStackView> condition) implements ModifierModule, ArmorWalkRadiusModule<Void>, ConditionalModule<IToolStackView> {
+public record CoverGroundWalkerModule(BlockState state, LevelingValue radius,
+                                      ModifierCondition<IToolStackView> condition) implements ModifierModule, ArmorWalkRadiusModule<Void>, ConditionalModule<IToolStackView> {
+
   public static final RecordLoadable<CoverGroundWalkerModule> LOADER = RecordLoadable.create(
     BlockStateLoadable.DIFFERENCE.directField(CoverGroundWalkerModule::state),
     LevelingValue.LOADABLE.requiredField("radius", CoverGroundWalkerModule::radius),
@@ -59,18 +62,23 @@ public record CoverGroundWalkerModule(BlockState state, LevelingValue radius, Mo
 
   /* Builder */
 
-  /** Creates a builder instance for the given state */
+  /**
+   * Creates a builder instance for the given state
+   */
   public static Builder state(BlockState state) {
     return new Builder(state);
   }
 
-  /** Creates a builder instance for the given block */
+  /**
+   * Creates a builder instance for the given block
+   */
   public static Builder block(Block block) {
     return state(block.defaultBlockState());
   }
 
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   public static class Builder extends ModuleBuilder.Stack<Builder> implements LevelingValue.Builder<CoverGroundWalkerModule> {
+
     private final BlockState state;
 
     @Override

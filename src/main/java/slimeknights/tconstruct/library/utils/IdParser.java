@@ -10,12 +10,17 @@ import slimeknights.mantle.data.loadable.primitive.StringLoadable;
 import javax.annotation.Nullable;
 import java.util.function.Function;
 
-/** Helper to parse variants of resource locations, doubles as a loadable. */
-public record IdParser<T extends ResourceLocation>(Function<String, T> constructor, String name) implements StringLoadable<T> {
+/**
+ * Helper to parse variants of resource locations, doubles as a loadable.
+ */
+public record IdParser<T extends ResourceLocation>(Function<String, T> constructor,
+                                                   String name) implements StringLoadable<T> {
+
   /**
    * Creates a new ID from the given string
-   * @param string  String
-   * @return  ID, or null if invalid
+   *
+   * @param string String
+   * @return ID, or null if invalid
    */
   @Nullable
   public T tryParse(String string) {

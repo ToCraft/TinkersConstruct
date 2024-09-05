@@ -28,6 +28,7 @@ import slimeknights.tconstruct.smeltery.block.entity.FaucetBlockEntity;
 import java.util.function.Function;
 
 public class FaucetBlockEntityRenderer implements BlockEntityRenderer<FaucetBlockEntity> {
+
   public FaucetBlockEntityRenderer(Context context) {}
 
   @Override
@@ -71,7 +72,7 @@ public class FaucetBlockEntityRenderer implements BlockEntityRenderer<FaucetBloc
       FaucetFluidLoader.renderFaucetFluids(world, tileEntity.getBlockPos(), direction, matrices, buffer, still, flowing, color, combinedLightIn);
 
       // if rotated, pop back rotation
-      if(isRotated) {
+      if (isRotated) {
         matrices.popPose();
       }
     }

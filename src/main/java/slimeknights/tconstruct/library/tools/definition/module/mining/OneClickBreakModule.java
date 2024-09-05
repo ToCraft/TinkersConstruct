@@ -14,12 +14,17 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import java.util.List;
 
-/** Module for making tool break the given predicate in one click without instant breaking */
+/**
+ * Module for making tool break the given predicate in one click without instant breaking
+ */
 public record OneClickBreakModule(IJsonPredicate<BlockState> predicate) implements MiningSpeedToolHook, ToolModule {
+
   public static final RecordLoadable<OneClickBreakModule> LOADER = RecordLoadable.create(BlockPredicate.LOADER.directField("predicate_type", OneClickBreakModule::predicate), OneClickBreakModule::new);
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<OneClickBreakModule>defaultHooks(ToolHooks.MINING_SPEED);
 
-  /** Modifies the given tag */
+  /**
+   * Modifies the given tag
+   */
   public static OneClickBreakModule tag(TagKey<Block> tag) {
     return new OneClickBreakModule(BlockPredicate.tag(tag));
   }

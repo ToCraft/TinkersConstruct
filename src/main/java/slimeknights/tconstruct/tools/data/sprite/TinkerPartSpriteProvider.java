@@ -12,6 +12,7 @@ import slimeknights.tconstruct.tools.stats.StatlessMaterialStats;
  * Do not use both this and {@link TinkerMaterialSpriteProvider} in a single generator for an addon, if you need to use both make two instances of {@link slimeknights.tconstruct.library.client.data.material.MaterialPartTextureGenerator}
  */
 public class TinkerPartSpriteProvider extends AbstractPartSpriteProvider {
+
   public static final MaterialStatsId WOOD = new MaterialStatsId(TConstruct.MOD_ID, "wood");
   public static final MaterialStatsId SLIMESUIT = new MaterialStatsId(TConstruct.MOD_ID, "slimesuit");
   public static final MaterialStatsId ARMOR_PLATING = new MaterialStatsId(TConstruct.MOD_ID, "armor_plating");

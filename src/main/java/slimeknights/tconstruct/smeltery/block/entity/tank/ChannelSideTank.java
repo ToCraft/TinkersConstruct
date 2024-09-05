@@ -8,25 +8,28 @@ import slimeknights.tconstruct.smeltery.block.entity.ChannelBlockEntity;
 
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 
-/** Tank for each side connection, for the sake of rendering */
+/**
+ * Tank for each side connection, for the sake of rendering
+ */
 public class ChannelSideTank extends FillOnlyFluidHandler {
-	private final ChannelBlockEntity channel;
-	private final Direction side;
 
-	public ChannelSideTank(ChannelBlockEntity channel, ChannelTank tank, Direction side) {
-		super(tank);
-		// only horizontals
-		assert side.getAxis() != Axis.Y;
-		this.channel = channel;
-		this.side = side;
-	}
+  private final ChannelBlockEntity channel;
+  private final Direction side;
 
-	@Override
-	public int fill(FluidStack resource, FluidAction action) {
-		int filled = super.fill(resource, action);
-		if (action.execute() && filled > 0) {
-			channel.setFlow(side, true);
-		}
-		return filled;
-	}
+  public ChannelSideTank(ChannelBlockEntity channel, ChannelTank tank, Direction side) {
+    super(tank);
+    // only horizontals
+    assert side.getAxis() != Axis.Y;
+    this.channel = channel;
+    this.side = side;
+  }
+
+  @Override
+  public int fill(FluidStack resource, FluidAction action) {
+    int filled = super.fill(resource, action);
+    if (action.execute() && filled > 0) {
+      channel.setFlow(side, true);
+    }
+    return filled;
+  }
 }

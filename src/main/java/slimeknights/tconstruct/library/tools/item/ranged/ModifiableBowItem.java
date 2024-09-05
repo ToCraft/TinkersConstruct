@@ -39,6 +39,7 @@ import java.util.function.Predicate;
 import static slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook.KEY_DRAWTIME;
 
 public class ModifiableBowItem extends ModifiableLauncherItem {
+
   public ModifiableBowItem(Properties properties, ToolDefinition toolDefinition) {
     super(properties, toolDefinition);
   }
@@ -146,7 +147,7 @@ public class ModifiableBowItem extends ModifiableLauncherItem {
       }
 
       // prepare the arrows
-      ArrowItem arrowItem = ammo.getItem() instanceof ArrowItem arrow ? arrow : (ArrowItem)Items.ARROW;
+      ArrowItem arrowItem = ammo.getItem() instanceof ArrowItem arrow ? arrow : (ArrowItem) Items.ARROW;
       float inaccuracy = ModifierUtil.getInaccuracy(tool, living);
       float startAngle = getAngleStart(ammo.getCount());
       int primaryIndex = ammo.getCount() / 2;
@@ -160,7 +161,7 @@ public class ModifiableBowItem extends ModifiableLauncherItem {
 
         // vanilla arrows have a base damage of 2, cancel that out then add in our base damage to account for custom arrows with higher base damage
         // calculate it just once as all four arrows are the same item, they should have the same damage
-        float baseArrowDamage = (float)(arrow.getBaseDamage() - 2 + tool.getStats().get(ToolStats.PROJECTILE_DAMAGE));
+        float baseArrowDamage = (float) (arrow.getBaseDamage() - 2 + tool.getStats().get(ToolStats.PROJECTILE_DAMAGE));
         arrow.setBaseDamage(ConditionalStatModifierHook.getModifiedStat(tool, player, ToolStats.PROJECTILE_DAMAGE, baseArrowDamage));
 
         // just store all modifiers on the tool for simplicity

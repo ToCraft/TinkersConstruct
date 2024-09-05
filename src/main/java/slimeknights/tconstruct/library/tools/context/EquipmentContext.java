@@ -15,20 +15,33 @@ import javax.annotation.Nullable;
 
 import static slimeknights.tconstruct.common.TinkerTags.Items.MODIFIABLE;
 
-/** Context for a modifier hook that runs on multiple equipment slots */
+/**
+ * Context for a modifier hook that runs on multiple equipment slots
+ */
 @RequiredArgsConstructor
 public class EquipmentContext {
-  /** Entity who changed equipment */
+
+  /**
+   * Entity who changed equipment
+   */
   @Getter
   private final LivingEntity entity;
-  /** Determines if the tool in the given slot was fetched */
+  /**
+   * Determines if the tool in the given slot was fetched
+   */
   protected final boolean[] fetchedTool = new boolean[6];
-  /** Array of tools currently on the entity */
+  /**
+   * Array of tools currently on the entity
+   */
   protected final IToolStackView[] toolsInSlots = new IToolStackView[6];
-  /** Cached tinker data capability, saves capability lookup times slightly */
+  /**
+   * Cached tinker data capability, saves capability lookup times slightly
+   */
   private LazyOptional<TinkerDataCapability.Holder> tinkerData = null;
 
-  /** Creates a context with an existing tool instance */
+  /**
+   * Creates a context with an existing tool instance
+   */
   public static EquipmentContext withTool(LivingEntity living, IToolStackView tool, EquipmentSlot slot) {
     EquipmentContext context = new EquipmentContext(living);
     int index = slot.getFilterFlag();
@@ -37,7 +50,9 @@ public class EquipmentContext {
     return context;
   }
 
-  /** Gets a tool stack if the stack is modifiable, null otherwise */
+  /**
+   * Gets a tool stack if the stack is modifiable, null otherwise
+   */
   @Nullable
   protected static IToolStackView getToolStackIfModifiable(ItemStack stack) {
     if (!stack.isEmpty() && stack.is(MODIFIABLE)) {
@@ -48,8 +63,9 @@ public class EquipmentContext {
 
   /**
    * Gets the tool stack in the given slot
-   * @param slotType  Slot type
-   * @return  Tool stack in the given slot, or null if the slot is not modifiable
+   *
+   * @param slotType Slot type
+   * @return Tool stack in the given slot, or null if the slot is not modifiable
    */
   @Nullable
   public IToolStackView getToolInSlot(EquipmentSlot slotType) {
@@ -61,13 +77,17 @@ public class EquipmentContext {
     return toolsInSlots[index];
   }
 
-  /** Same as {@link #getToolInSlot(EquipmentSlot)}, but validates that the tool can be used in this slot */
+  /**
+   * Same as {@link #getToolInSlot(EquipmentSlot)}, but validates that the tool can be used in this slot
+   */
   @Nullable
   public IToolStackView getValidTool(EquipmentSlot slotType) {
     return ModifierUtil.validArmorSlot(entity, slotType) ? getToolInSlot(slotType) : null;
   }
 
-  /** Checks if any of the armor items are modifiable, limiting to the passed slots. Filters out holding armor to get its effects. */
+  /**
+   * Checks if any of the armor items are modifiable, limiting to the passed slots. Filters out holding armor to get its effects.
+   */
   public boolean hasModifiableArmor(EquipmentSlot... slots) {
     for (EquipmentSlot slotType : slots) {
       if (ModifierUtil.validArmorSlot(entity, slotType) && getToolInSlot(slotType) != null) {
@@ -77,12 +97,16 @@ public class EquipmentContext {
     return false;
   }
 
-  /** Checks if any of the armor items are modifiable. Filters out holding armor to get its effects. */
+  /**
+   * Checks if any of the armor items are modifiable. Filters out holding armor to get its effects.
+   */
   public boolean hasModifiableArmor() {
     return hasModifiableArmor(EquipmentSlot.values());
   }
 
-  /** Gets the tinker data capability */
+  /**
+   * Gets the tinker data capability
+   */
   public LazyOptional<TinkerDataCapability.Holder> getTinkerData() {
     if (tinkerData == null) {
       tinkerData = entity.getCapability(TinkerDataCapability.CAPABILITY);

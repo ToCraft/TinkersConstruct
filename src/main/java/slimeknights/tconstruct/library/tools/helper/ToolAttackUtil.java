@@ -50,17 +50,21 @@ import java.util.function.BiConsumer;
 import java.util.function.DoubleSupplier;
 
 public class ToolAttackUtil {
+
   private static final UUID OFFHAND_DAMAGE_MODIFIER_UUID = UUID.fromString("fd666e50-d2cc-11eb-b8bc-0242ac130003");
-  private static final float DEGREE_TO_RADIANS = (float)Math.PI / 180F;
+  private static final float DEGREE_TO_RADIANS = (float) Math.PI / 180F;
   private static final AttributeModifier ANTI_KNOCKBACK_MODIFIER = new AttributeModifier(TConstruct.MOD_ID + ".anti_knockback", 1f, Operation.ADDITION);
-  /** Function to ignore attack cooldown */
+  /**
+   * Function to ignore attack cooldown
+   */
   public static final DoubleSupplier NO_COOLDOWN = () -> 1.0;
 
   /**
    * Gets the cooldown function for the given player and hand
-   * @param player  Player instance
-   * @param hand    Attacking hand
-   * @return  Cooldown function
+   *
+   * @param player Player instance
+   * @param hand   Attacking hand
+   * @return Cooldown function
    */
   public static DoubleSupplier getCooldownFunction(Player player, InteractionHand hand) {
     if (hand == InteractionHand.OFF_HAND) {
@@ -71,12 +75,13 @@ public class ToolAttackUtil {
 
   /**
    * Gets the attack damage for the given hand, acting as though it was used in the main hand
-   *
+   * <p>
    * If your goal is damage for display, you are better off checking the tool attack damage stat directly, then displaying relevant attribute modifiers in the tooltip
+   *
    * @param tool     Held tool
    * @param holder   Entity holding the tool
    * @param slotType Slot with tool
-   * @return  Attack damage
+   * @return Attack damage
    */
   public static float getAttributeAttackDamage(IToolStackView tool, LivingEntity holder, EquipmentSlot slotType) {
     if (slotType == EquipmentSlot.MAINHAND || holder.level.isClientSide) {
@@ -85,7 +90,7 @@ public class ToolAttackUtil {
 
     // first, get a map of existing damage modifiers to exclude
     ItemStack mainStack = holder.getMainHandItem();
-    Multimap<Attribute,AttributeModifier> mainModifiers = null;
+    Multimap<Attribute, AttributeModifier> mainModifiers = null;
     if (!mainStack.isEmpty()) {
       mainModifiers = new SingleKeyMultimap<>(Attributes.ATTACK_DAMAGE, holder.getMainHandItem().getAttributeModifiers(EquipmentSlot.MAINHAND).get(Attributes.ATTACK_DAMAGE));
     }
@@ -101,7 +106,7 @@ public class ToolAttackUtil {
     for (ModifierEntry entry : tool.getModifierList()) {
       entry.getHook(ModifierHooks.ATTRIBUTES).addAttributes(tool, entry, EquipmentSlot.MAINHAND, attributeConsumer);
     }
-    Multimap<Attribute,AttributeModifier> offhandModifiers = new SingleKeyMultimap<>(Attributes.ATTACK_DAMAGE, listBuilder.build());
+    Multimap<Attribute, AttributeModifier> offhandModifiers = new SingleKeyMultimap<>(Attributes.ATTACK_DAMAGE, listBuilder.build());
 
     // remove the old, add the new
     AttributeMap modifiers = holder.getAttributes();
@@ -115,7 +120,9 @@ public class ToolAttackUtil {
     return damage;
   }
 
-  /** Performs a standard attack */
+  /**
+   * Performs a standard attack
+   */
   public static boolean dealDefaultDamage(LivingEntity attacker, Entity target, float damage) {
     if (attacker instanceof Player player) {
       return target.hurt(DamageSource.playerAttack(player), damage);
@@ -137,7 +144,9 @@ public class ToolAttackUtil {
     return attackEntity(tool, attacker, InteractionHand.MAIN_HAND, targetEntity, getCooldownFunction(attacker, InteractionHand.MAIN_HAND), false);
   }
 
-  /** Normal attacking from a tool in the hand */
+  /**
+   * Normal attacking from a tool in the hand
+   */
   public static boolean attackEntity(IToolStackView tool, LivingEntity attackerLiving, InteractionHand hand,
                                      Entity targetEntity, DoubleSupplier cooldownFunction, boolean isExtraAttack) {
     return attackEntity(tool, attackerLiving, hand, targetEntity, cooldownFunction, isExtraAttack, Util.getSlotType(hand));
@@ -145,8 +154,9 @@ public class ToolAttackUtil {
 
   /**
    * Gets a living entity from the given entity, getting the parent if needed
-   * @param entity  Entity instance
-   * @return  Living entity, or null if its not living
+   *
+   * @param entity Entity instance
+   * @return Living entity, or null if its not living
    */
   @Nullable
   public static LivingEntity getLivingEntity(Entity entity) {
@@ -186,14 +196,14 @@ public class ToolAttackUtil {
     // missing: enchantment modifiers, we handle ourselves
 
     // determine cooldown
-    float cooldown = (float)cooldownFunction.getAsDouble();
+    float cooldown = (float) cooldownFunction.getAsDouble();
     boolean fullyCharged = cooldown > 0.9f;
 
     // calculate if it's a critical hit
     // that is, in the air, not blind, targeting living, and not sprinting
     boolean isCritical = !isExtraAttack && fullyCharged && attackerLiving.fallDistance > 0.0F && !attackerLiving.isOnGround() && !attackerLiving.onClimbable()
-                         && !attackerLiving.isInWater() && !attackerLiving.hasEffect(MobEffects.BLINDNESS)
-                         && !attackerLiving.isPassenger() && targetLiving != null && !attackerLiving.isSprinting();
+      && !attackerLiving.isInWater() && !attackerLiving.hasEffect(MobEffects.BLINDNESS)
+      && !attackerLiving.isPassenger() && targetLiving != null && !attackerLiving.isSprinting();
 
     // shared context for all modifier hooks
     ToolAttackContext context = new ToolAttackContext(attackerLiving, attackerPlayer, hand, sourceSlot, targetEntity, targetLiving, isCritical, cooldown, isExtraAttack);
@@ -213,7 +223,7 @@ public class ToolAttackUtil {
 
     // forge patches in the knockback attribute for use on players
     // vanilla halves the knockback attribute later, we half it in all our hooks, so halving the attribute makes it equivelent
-    float knockback = (float)attackerLiving.getAttributeValue(Attributes.ATTACK_KNOCKBACK) / 2f;
+    float knockback = (float) attackerLiving.getAttributeValue(Attributes.ATTACK_KNOCKBACK) / 2f;
     // vanilla applies 0.4 knockback to living via the attack hook
     if (targetLiving != null) {
       knockback += 0.4f;
@@ -359,7 +369,7 @@ public class ToolAttackUtil {
       attackerLiving.level.playSound(null, attackerLiving.getX(), attackerLiving.getY(), attackerLiving.getZ(), sound, attackerLiving.getSoundSource(), 1.0F, 1.0F);
     }
     if (damageDealt > 2.0F && attackerLiving.level instanceof ServerLevel server) {
-      int particleCount = (int)(damageDealt * 0.5f);
+      int particleCount = (int) (damageDealt * 0.5f);
       server.sendParticles(ParticleTypes.DAMAGE_INDICATOR, targetEntity.getX(), targetEntity.getY(0.5), targetEntity.getZ(), particleCount, 0.1, 0, 0.1, 0.2);
     }
 
@@ -416,10 +426,11 @@ public class ToolAttackUtil {
 
   /**
    * Applies a secondary attack to an entity, notably not running AOE attacks from the tool logic
-   * @param tool            Tool instance
-   * @param attackerLiving  Attacker
-   * @param targetEntity    Target
-   * @return  True if hit
+   *
+   * @param tool           Tool instance
+   * @param attackerLiving Attacker
+   * @param targetEntity   Target
+   * @return True if hit
    */
   public static boolean extraEntityAttack(IToolStackView tool, LivingEntity attackerLiving, InteractionHand hand, Entity targetEntity) {
     return attackEntity(tool, attackerLiving, hand, targetEntity, NO_COOLDOWN, true);
@@ -429,44 +440,51 @@ public class ToolAttackUtil {
    * Spawns a given particle at the given entity's position with an offset
    *
    * @param particleData the selected particle
-   * @param entity the entity
-   * @param height the height offset for the particle position
+   * @param entity       the entity
+   * @param height       the height offset for the particle position
    */
   public static void spawnAttackParticle(ParticleOptions particleData, Entity entity, double height) {
     if (entity.level instanceof ServerLevel server) {
       double xd = -Mth.sin(entity.getYRot() / 180.0F * (float) Math.PI) * Mth.cos(entity.getXRot() / 180.0F * (float) Math.PI);
-      double zd =  Mth.cos(entity.getYRot() / 180.0F * (float) Math.PI) * Mth.cos(entity.getXRot() / 180.0F * (float) Math.PI);
+      double zd = Mth.cos(entity.getYRot() / 180.0F * (float) Math.PI) * Mth.cos(entity.getXRot() / 180.0F * (float) Math.PI);
       double yd = -Mth.sin(entity.getXRot() / 180.0F * (float) Math.PI);
 
       server.sendParticles(particleData, entity.getX() + xd, entity.getY() + entity.getBbHeight() * height, entity.getZ() + zd, 0, xd, yd, zd, 0.0D);
     }
   }
 
-  /** Gets the knockback attribute instance if the modifier is not already present */
+  /**
+   * Gets the knockback attribute instance if the modifier is not already present
+   */
   private static Optional<AttributeInstance> getKnockbackAttribute(@Nullable LivingEntity living) {
     return Optional.ofNullable(living)
-                   .map(e -> e.getAttribute(Attributes.KNOCKBACK_RESISTANCE))
-                   .filter(attribute -> !attribute.hasModifier(ANTI_KNOCKBACK_MODIFIER));
+      .map(e -> e.getAttribute(Attributes.KNOCKBACK_RESISTANCE))
+      .filter(attribute -> !attribute.hasModifier(ANTI_KNOCKBACK_MODIFIER));
   }
 
-  /** Enable the anti-knockback modifier */
+  /**
+   * Enable the anti-knockback modifier
+   */
   private static void disableKnockback(AttributeInstance instance) {
     instance.addTransientModifier(ANTI_KNOCKBACK_MODIFIER);
   }
 
-  /** Disables the anti knockback modifier */
+  /**
+   * Disables the anti knockback modifier
+   */
   private static void enableKnockback(AttributeInstance instance) {
     instance.removeModifier(ANTI_KNOCKBACK_MODIFIER);
   }
 
   /**
    * Adds secondary damage to an entity
-   * @param source       Damage source
-   * @param damage       Damage amount
-   * @param target       Target entity
-   * @param living       If the target is living, the living target. May be a different entity from target for multipart entities
-   * @param noKnockback  If true, prevents extra knockback
-   * @return  True if damaged
+   *
+   * @param source      Damage source
+   * @param damage      Damage amount
+   * @param target      Target entity
+   * @param living      If the target is living, the living target. May be a different entity from target for multipart entities
+   * @param noKnockback If true, prevents extra knockback
+   * @return True if damaged
    */
   @SuppressWarnings("UnusedReturnValue")
   public static boolean attackEntitySecondary(DamageSource source, float damage, Entity target, @Nullable LivingEntity living, boolean noKnockback) {

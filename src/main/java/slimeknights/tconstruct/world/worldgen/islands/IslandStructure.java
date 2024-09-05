@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.SimpleWeightedRandomList;
@@ -30,26 +30,29 @@ import slimeknights.tconstruct.world.block.FoliageType;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-/** Base logic for all island variants */
+/**
+ * Base logic for all island variants
+ */
 public class IslandStructure extends Structure {
+
   public static final Codec<IslandStructure> CODEC = RecordCodecBuilder.create(inst ->
     inst.group(settingsCodec(inst)).and(inst.group(
-               IslandPlacement.CODEC.fieldOf("placement").forGetter(s -> s.placement),
-               SimpleWeightedRandomList.wrappedCodec(ResourceLocation.CODEC).fieldOf("templates").forGetter(s -> s.templates),
-               SimpleWeightedRandomList.wrappedCodec(ConfiguredFeature.CODEC).fieldOf("trees").forGetter(s -> s.trees),
-               Registry.BLOCK.byNameCodec().optionalFieldOf("vines").forGetter(s -> s.vines),
-               SimpleWeightedRandomList.wrappedCodec(Registry.BLOCK.byNameCodec()).fieldOf("grasses").forGetter(s -> s.grasses)))
-        .apply(inst, IslandStructure::new));
+        IslandPlacement.CODEC.fieldOf("placement").forGetter(s -> s.placement),
+        SimpleWeightedRandomList.wrappedCodec(ResourceLocation.CODEC).fieldOf("templates").forGetter(s -> s.templates),
+        SimpleWeightedRandomList.wrappedCodec(ConfiguredFeature.CODEC).fieldOf("trees").forGetter(s -> s.trees),
+        BuiltInRegistries.BLOCK.byNameCodec().optionalFieldOf("vines").forGetter(s -> s.vines),
+        SimpleWeightedRandomList.wrappedCodec(BuiltInRegistries.BLOCK.byNameCodec()).fieldOf("grasses").forGetter(s -> s.grasses)))
+      .apply(inst, IslandStructure::new));
 
   @Getter
   private final IslandPlacement placement;
   private final SimpleWeightedRandomList<ResourceLocation> templates;
-  private final SimpleWeightedRandomList<Holder<ConfiguredFeature<?,?>>> trees;
+  private final SimpleWeightedRandomList<Holder<ConfiguredFeature<?, ?>>> trees;
   private final Optional<Block> vines;
   @Getter
   private final SimpleWeightedRandomList<Block> grasses;
 
-  public IslandStructure(StructureSettings settings, IslandPlacement placement, SimpleWeightedRandomList<ResourceLocation> templates, SimpleWeightedRandomList<Holder<ConfiguredFeature<?,?>>> trees, Optional<Block> vines, SimpleWeightedRandomList<Block> grasses) {
+  public IslandStructure(StructureSettings settings, IslandPlacement placement, SimpleWeightedRandomList<ResourceLocation> templates, SimpleWeightedRandomList<Holder<ConfiguredFeature<?, ?>>> trees, Optional<Block> vines, SimpleWeightedRandomList<Block> grasses) {
     super(settings);
     this.placement = placement;
     this.templates = templates;
@@ -63,7 +66,9 @@ public class IslandStructure extends Structure {
     return TinkerStructures.island.get();
   }
 
-  /** Gets the vines for this island */
+  /**
+   * Gets the vines for this island
+   */
   @Nullable
   public Block getVines() {
     return vines.orElse(null);
@@ -81,7 +86,7 @@ public class IslandStructure extends Structure {
     // find variant
     return onTopOfChunkCenter(context, Types.WORLD_SURFACE, builder -> {
       this.generatePieces(builder, context);
-     });
+    });
   }
 
   private void generatePieces(StructurePiecesBuilder builder, Structure.GenerationContext context) {
@@ -99,12 +104,16 @@ public class IslandStructure extends Structure {
 
   /* Builder */
 
-  /** Creates a builder for a sea based island */
+  /**
+   * Creates a builder for a sea based island
+   */
   public static Builder seaBuilder() {
     return new Builder(IslandPlacement.SEA);
   }
 
-  /** Creates a builder for a sky based island */
+  /**
+   * Creates a builder for a sky based island
+   */
   public static Builder skyBuilder() {
     return new Builder(IslandPlacement.SKY);
   }
@@ -112,23 +121,28 @@ public class IslandStructure extends Structure {
   @SuppressWarnings("UnusedReturnValue")  // its a builder my dude
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   public static class Builder {
-    private static final String[] SIZES = new String[] { "0x1x0", "2x2x4", "4x1x6", "8x1x11", "11x1x11" };
+
+    private static final String[] SIZES = new String[]{"0x1x0", "2x2x4", "4x1x6", "8x1x11", "11x1x11"};
 
     private final IslandPlacement placement;
     private final SimpleWeightedRandomList.Builder<ResourceLocation> templates = SimpleWeightedRandomList.builder();
-    private final SimpleWeightedRandomList.Builder<Holder<ConfiguredFeature<?,?>>> trees = SimpleWeightedRandomList.builder();
+    private final SimpleWeightedRandomList.Builder<Holder<ConfiguredFeature<?, ?>>> trees = SimpleWeightedRandomList.builder();
     private final SimpleWeightedRandomList.Builder<Block> grasses = SimpleWeightedRandomList.builder();
     @Nullable
     @Accessors(fluent = true)
     private Block vines;
 
-    /** Adds the given template to the builder */
+    /**
+     * Adds the given template to the builder
+     */
     public Builder addTemplate(ResourceLocation template, int weight) {
       this.templates.add(template, weight);
       return this;
     }
 
-    /** Adds the default 5 templates around the given prefix to the builder */
+    /**
+     * Adds the default 5 templates around the given prefix to the builder
+     */
     public Builder addDefaultTemplates(ResourceLocation prefix) {
       for (String size : SIZES) {
         addTemplate(LocationExtender.INSTANCE.suffix(prefix, size), 1);
@@ -136,48 +150,64 @@ public class IslandStructure extends Structure {
       return this;
     }
 
-    /** Adds a new tree to the builder with the given weight */
-    public Builder addTree(Holder<? extends ConfiguredFeature<?,?>> tree, int weight) {
+    /**
+     * Adds a new tree to the builder with the given weight
+     */
+    public Builder addTree(Holder<? extends ConfiguredFeature<?, ?>> tree, int weight) {
       trees.add(Holder.hackyErase(tree), weight);
       return this;
     }
 
-    /** Adds a new tree to the builder with the given weight */
+    /**
+     * Adds a new tree to the builder with the given weight
+     */
     @SuppressWarnings("OptionalGetWithoutIsPresent")
-    public Builder addTree(RegistryObject<? extends ConfiguredFeature<?,?>> tree, int weight) {
+    public Builder addTree(RegistryObject<? extends ConfiguredFeature<?, ?>> tree, int weight) {
       return addTree(tree.getHolder().get(), weight);
     }
 
-    /** Adds a new grass type to the builder with the given weight */
+    /**
+     * Adds a new grass type to the builder with the given weight
+     */
     public Builder vines(Block block) {
       this.vines = block;
       return this;
     }
 
-    /** Adds a new grass type to the builder with the given weight */
+    /**
+     * Adds a new grass type to the builder with the given weight
+     */
     public Builder vines(RegistryObject<? extends Block> block) {
       return vines(block.get());
     }
 
-    /** Adds a new grass type to the builder with the given weight */
+    /**
+     * Adds a new grass type to the builder with the given weight
+     */
     public Builder addGrass(Block block, int weight) {
       this.grasses.add(block, weight);
       return this;
     }
 
-    /** Adds a new grass type to the builder with the given weight */
+    /**
+     * Adds a new grass type to the builder with the given weight
+     */
     public Builder addGrass(RegistryObject<? extends Block> block, int weight) {
       return addGrass(block.get(), weight);
     }
 
-    /** Adds slimy grass of the given type to the builder */
+    /**
+     * Adds slimy grass of the given type to the builder
+     */
     public Builder addSlimyGrass(FoliageType foliage) {
       addGrass(TinkerWorld.slimeTallGrass.get(foliage), 7);
       addGrass(TinkerWorld.slimeFern.get(foliage), 1);
       return this;
     }
 
-    /** Builds the final config */
+    /**
+     * Builds the final config
+     */
     public IslandStructure build(StructureSettings settings) {
       return new IslandStructure(settings, placement, templates.build(), trees.build(), Optional.ofNullable(vines), grasses.build());
     }

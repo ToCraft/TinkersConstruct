@@ -31,23 +31,36 @@ import slimeknights.tconstruct.tools.item.ArmorSlotType;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Collection of custom item types added by Tinkers */
+/**
+ * Collection of custom item types added by Tinkers
+ */
 @SuppressWarnings("unused")
 public class FlexItemTypes {
-  /** Standard tools that need standard properties */
+
+  /**
+   * Standard tools that need standard properties
+   */
   static final List<Item> TOOL_ITEMS = new ArrayList<>();
-  /** All crossbow items that need their predicate registered */
+  /**
+   * All crossbow items that need their predicate registered
+   */
   static final List<Item> CROSSBOW_ITEMS = new ArrayList<>();
-  /** All armor items that need the broken predicate */
+  /**
+   * All armor items that need the broken predicate
+   */
   static final List<Item> ARMOR_ITEMS = new ArrayList<>();
 
-  /** Adds a thing to a list so we can fetch the instances later */
+  /**
+   * Adds a thing to a list so we can fetch the instances later
+   */
   private static <T> T add(List<? super T> list, T item) {
     list.add(item);
     return item;
   }
 
-  /** Initializes the item types */
+  /**
+   * Initializes the item types
+   */
   public static void init() {
     /* Register a tool part to create new tools */
     register("tool_part", data -> {
@@ -79,7 +92,7 @@ public class FlexItemTypes {
     /* Registries a cast item that shows a part cost in the tooltip */
     register("part_cast", data -> {
       ResourceLocation partId = JsonHelper.getResourceLocation(data, "part");
-      return (props, builder) -> new FlexPartCastItem(props, builder, Lazy.of(() -> ((ResourceLocationLoadable<Item>)Loadables.ITEM).fromKey(partId, "part")));
+      return (props, builder) -> new FlexPartCastItem(props, builder, Lazy.of(() -> ((ResourceLocationLoadable<Item>) Loadables.ITEM).fromKey(partId, "part")));
     });
 
 
@@ -103,7 +116,9 @@ public class FlexItemTypes {
     });
   }
 
-  /** Local helper to register our stuff */
+  /**
+   * Local helper to register our stuff
+   */
   private static <T extends Item & IFlexItem> void register(String name, IItemSerializer<T> factory) {
     FlexItemType.register(TConstruct.resourceString(name), factory);
   }

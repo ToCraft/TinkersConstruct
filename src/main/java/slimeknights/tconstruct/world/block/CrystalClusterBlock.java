@@ -10,7 +10,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class CrystalClusterBlock extends AmethystClusterBlock {
+
   private final SoundEvent chimeSound;
+
   public CrystalClusterBlock(SoundEvent chimeSound, int height, int width, Properties props) {
     super(height, width, props);
     this.chimeSound = chimeSound;

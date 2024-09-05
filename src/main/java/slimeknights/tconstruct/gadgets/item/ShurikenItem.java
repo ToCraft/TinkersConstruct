@@ -33,7 +33,7 @@ public class ShurikenItem extends SnowballItem {
     ItemStack stack = player.getItemInHand(hand);
     level.playSound(null, player.getX(), player.getY(), player.getZ(), Sounds.SHURIKEN_THROW.getSound(), SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
     player.getCooldowns().addCooldown(stack.getItem(), 4);
-    if(!level.isClientSide()) {
+    if (!level.isClientSide()) {
       ShurikenEntityBase entity = this.entity.apply(level, player);
       entity.setItem(stack);
       entity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);

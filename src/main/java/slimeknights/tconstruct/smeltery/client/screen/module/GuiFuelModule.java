@@ -23,6 +23,7 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 public class GuiFuelModule {
+
   private static final ScalableElementScreen FIRE = new ScalableElementScreen(176, 136, 14, 14, 256, 256);
 
   // tooltips
@@ -34,20 +35,27 @@ public class GuiFuelModule {
 
   private final AbstractContainerScreen<?> screen;
   private final FuelModule fuelModule;
-  /** location to draw the tank */
+  /**
+   * location to draw the tank
+   */
   private final int x, y, width, height;
-  /** location to draw the fire */
+  /**
+   * location to draw the fire
+   */
   private final int fireX, fireY;
-  /** If true, UI has a fuel slot */
+  /**
+   * If true, UI has a fuel slot
+   */
   private final boolean hasFuelSlot;
 
   private FuelInfo fuelInfo = FuelInfo.EMPTY;
 
   /**
    * Checks if the fuel tank is hovered
-   * @param checkX  X position to check
-   * @param checkY  Y position to check
-   * @return  True if hovered
+   *
+   * @param checkX X position to check
+   * @param checkY Y position to check
+   * @return True if hovered
    */
   private boolean isHovered(int checkX, int checkY) {
     return GuiUtil.isHovered(checkX, checkY, x - 1, y - 1, width + 2, height + 2);
@@ -55,7 +63,8 @@ public class GuiFuelModule {
 
   /**
    * Draws the fuel at the correct location
-   * @param matrices  Matrix stack instance
+   *
+   * @param matrices Matrix stack instance
    */
   public void draw(PoseStack matrices) {
     // draw fire
@@ -77,9 +86,10 @@ public class GuiFuelModule {
 
   /**
    * Highlights the hovered fuel
-   * @param matrices  Matrix stack instance
-   * @param checkX    Top corner relative mouse X
-   * @param checkY    Top corner relative mouse Y
+   *
+   * @param matrices Matrix stack instance
+   * @param checkX   Top corner relative mouse X
+   * @param checkY   Top corner relative mouse Y
    */
   public void renderHighlight(PoseStack matrices, int checkX, int checkY) {
     if (isHovered(checkX, checkY)) {
@@ -97,9 +107,10 @@ public class GuiFuelModule {
 
   /**
    * Adds the tooltip for the fuel
-   * @param matrices  Matrix stack instance
-   * @param mouseX    Mouse X position
-   * @param mouseY    Mouse Y position
+   *
+   * @param matrices Matrix stack instance
+   * @param mouseX   Mouse X position
+   * @param mouseY   Mouse Y position
    */
   public void addTooltip(PoseStack matrices, int mouseX, int mouseY, boolean hasTank) {
     int checkX = mouseX - screen.leftPos;
@@ -144,9 +155,10 @@ public class GuiFuelModule {
 
   /**
    * Gets the fluid stack under the mouse
-   * @param checkX  Mouse X position
-   * @param checkY  Mouse Y position
-   * @return  Fluid stack under mouse
+   *
+   * @param checkX Mouse X position
+   * @param checkY Mouse Y position
+   * @return Fluid stack under mouse
    */
   @Nullable
   public FluidStack getIngredient(int checkX, int checkY) {

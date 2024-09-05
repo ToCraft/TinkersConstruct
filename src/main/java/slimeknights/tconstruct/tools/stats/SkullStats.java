@@ -12,8 +12,11 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import java.util.List;
 
-/** Stats for slimeskull skulls */
+/**
+ * Stats for slimeskull skulls
+ */
 public record SkullStats(int durability, int armor) implements IRepairableMaterialStats {
+
   public static final MaterialStatsId ID = new MaterialStatsId(TConstruct.getResource("skull"));
   public static final MaterialStatType<SkullStats> TYPE = new MaterialStatType<>(ID, new SkullStats(1, 0), RecordLoadable.create(
     IRepairableMaterialStats.DURABILITY_FIELD,

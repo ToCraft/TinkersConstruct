@@ -21,6 +21,7 @@ import javax.annotation.Nullable;
  * Armor texture supplier that supplies a fixed texture, optionally filtered on a modifier
  */
 public class FixedArmorTextureSupplier implements ArmorTextureSupplier {
+
   public static final RecordLoadable<FixedArmorTextureSupplier> LOADER = RecordLoadable.create(
     Loadables.RESOURCE_LOCATION.requiredField("prefix", s -> s.prefix),
     StringLoadable.DEFAULT.defaultField("suffix", "", s -> s.suffix),
@@ -33,19 +34,22 @@ public class FixedArmorTextureSupplier implements ArmorTextureSupplier {
   @Nullable
   private final ModifierId modifier;
   private final ArmorTexture[] textures;
+
   public FixedArmorTextureSupplier(ResourceLocation prefix, String suffix, int color, @Nullable ModifierId modifier) {
     this.prefix = prefix;
     this.suffix = suffix;
     this.modifier = modifier;
     // ensure the texture exists to add it. Not an issue during datagen as this section is not serialized
-    this.textures = new ArmorTexture[] {
+    this.textures = new ArmorTexture[]{
       getTexture(prefix, "armor" + suffix, color),
       getTexture(prefix, "leggings" + suffix, color),
       getTexture(prefix, "wings" + suffix, color),
     };
   }
 
-  /** Gets the texture for the given name */
+  /**
+   * Gets the texture for the given name
+   */
   public static ArmorTexture getTexture(ResourceLocation base, String suffix, int color) {
     ResourceLocation name = LocationExtender.INSTANCE.suffix(base, suffix);
     if (TEXTURE_VALIDATOR.test(name)) {
@@ -72,7 +76,9 @@ public class FixedArmorTextureSupplier implements ArmorTextureSupplier {
 
   /* Builder */
 
-  /** Creates a new builder instance */
+  /**
+   * Creates a new builder instance
+   */
   public static Builder builder(ResourceLocation base, String variant) {
     return new Builder(LocationExtender.INSTANCE.suffix(base, variant));
   }
@@ -81,13 +87,16 @@ public class FixedArmorTextureSupplier implements ArmorTextureSupplier {
   @Setter
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   public static class Builder {
+
     private final ResourceLocation name;
     @Nullable
     private ModifierId modifier;
     private int color = -1;
     private String suffix = "";
 
-    /** Sets the suffix to a material variant */
+    /**
+     * Sets the suffix to a material variant
+     */
     public Builder materialSuffix(MaterialVariantId id) {
       this.suffix = '_' + id.getSuffix();
       return this;

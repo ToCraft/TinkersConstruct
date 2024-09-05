@@ -15,7 +15,9 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
  * Block orientable in 4 directions
  */
 public class OrientableBlock extends Block {
+
   public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+
   public OrientableBlock(Properties properties) {
     super(properties);
   }

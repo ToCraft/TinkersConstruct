@@ -44,13 +44,16 @@ import javax.annotation.Nullable;
  * In general, if you need to send packets you should use your own network class
  */
 public class TinkerNetwork extends NetworkWrapper {
+
   private static TinkerNetwork instance = null;
 
   private TinkerNetwork() {
     super(TConstruct.getResource("network"));
   }
 
-  /** Gets the instance of the network */
+  /**
+   * Gets the instance of the network
+   */
   public static TinkerNetwork getInstance() {
     if (instance == null) {
       throw new IllegalStateException("Attempt to call network getInstance before network is setup");
@@ -109,8 +112,9 @@ public class TinkerNetwork extends NetworkWrapper {
 
   /**
    * Sends a vanilla packet to the given player
-   * @param player  Player
-   * @param packet  Packet
+   *
+   * @param player Player
+   * @param packet Packet
    */
   public void sendVanillaPacket(Entity player, Packet<?> packet) {
     if (player instanceof ServerPlayer serverPlayer) {
@@ -120,9 +124,10 @@ public class TinkerNetwork extends NetworkWrapper {
 
   /**
    * Same as {@link #sendToClientsAround(Object, ServerLevel, BlockPos)}, but checks that the world is a serverworld
-   * @param msg       Packet to send
-   * @param world     World instance
-   * @param position  Target position
+   *
+   * @param msg      Packet to send
+   * @param world    World instance
+   * @param position Target position
    */
   public void sendToClientsAround(Object msg, @Nullable LevelAccessor world, BlockPos position) {
     if (world instanceof ServerLevel server) {
@@ -132,8 +137,9 @@ public class TinkerNetwork extends NetworkWrapper {
 
   /**
    * Sends a packet to all entities tracking the given entity
-   * @param msg     Packet
-   * @param entity  Entity to check
+   *
+   * @param msg    Packet
+   * @param entity Entity to check
    */
   @Override
   public void sendToTrackingAndSelf(Object msg, Entity entity) {
@@ -142,8 +148,9 @@ public class TinkerNetwork extends NetworkWrapper {
 
   /**
    * Sends a packet to all entities tracking the given entity
-   * @param msg     Packet
-   * @param entity  Entity to check
+   *
+   * @param msg    Packet
+   * @param entity Entity to check
    */
   @Override
   public void sendToTracking(Object msg, Entity entity) {
@@ -152,9 +159,10 @@ public class TinkerNetwork extends NetworkWrapper {
 
   /**
    * Sends a packet to the whole player list
-   * @param targetedPlayer  Main player to target, if null uses whole list
-   * @param playerList      Player list to use if main player is null
-   * @param msg             Message to send
+   *
+   * @param targetedPlayer Main player to target, if null uses whole list
+   * @param playerList     Player list to use if main player is null
+   * @param msg            Message to send
    */
   public void sendToPlayerList(@Nullable ServerPlayer targetedPlayer, PlayerList playerList, Object msg) {
     if (targetedPlayer != null) {

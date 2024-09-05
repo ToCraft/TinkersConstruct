@@ -14,9 +14,11 @@ import slimeknights.tconstruct.library.modifiers.fluid.FluidEffectContext.Entity
 
 /**
  * Effect to clear all effects using the given stack
- * @param stack  Stack used for curing, standard is milk bucket
+ *
+ * @param stack Stack used for curing, standard is milk bucket
  */
 public record CureEffectsFluidEffect(ItemStack stack) implements FluidEffect<FluidEffectContext.Entity> {
+
   public static final RecordLoadable<CureEffectsFluidEffect> LOADER = RecordLoadable.create(ItemStackLoadable.REQUIRED_ITEM.requiredField("item", e -> e.stack), CureEffectsFluidEffect::new);
 
   public CureEffectsFluidEffect(ItemLike item) {

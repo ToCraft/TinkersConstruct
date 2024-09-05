@@ -15,8 +15,10 @@ import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
 public class HeatingStructureContainerMenu extends TriggeringMultiModuleContainerMenu<HeatingStructureBlockEntity> {
+
   @Getter
   private final SideInventoryContainer<HeatingStructureBlockEntity> sideInventory;
+
   public HeatingStructureContainerMenu(int id, @Nullable Inventory inv, @Nullable HeatingStructureBlockEntity structure) {
     super(TinkerSmeltery.smelteryContainer.get(), id, inv, structure);
     if (inv != null && structure != null) {
@@ -41,8 +43,9 @@ public class HeatingStructureContainerMenu extends TriggeringMultiModuleContaine
 
   /**
    * Calculates the number of columns to use for the screen
-   * @param slots  Number of slots
-   * @return  Number of columns
+   *
+   * @param slots Number of slots
+   * @return Number of columns
    */
   public static int calcColumns(int slots) {
     // every 7 slots gives us a new column, up to a maximum of 4 columns

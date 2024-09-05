@@ -28,15 +28,24 @@ import java.util.function.Function;
 
 import static slimeknights.tconstruct.TConstruct.getResource;
 
-/** Loot table object to get a randomized material. */
+/**
+ * Loot table object to get a randomized material.
+ */
 public abstract class RandomMaterial implements IHaveLoader {
-  /** Loader for random materials */
+
+  /**
+   * Loader for random materials
+   */
   public static final GenericLoaderRegistry<RandomMaterial> LOADER = new GenericLoaderRegistry<>("Random Material", false);
 
-  /** If true, this has been initialized */
+  /**
+   * If true, this has been initialized
+   */
   private static boolean initialized = false;
 
-  /** Initializes material types */
+  /**
+   * Initializes material types
+   */
   public static void init() {
     if (initialized) return;
     initialized = true;
@@ -45,25 +54,35 @@ public abstract class RandomMaterial implements IHaveLoader {
     LOADER.register(getResource("random"), Randomized.LOADER);
   }
 
-  /** Creates an instance for a fixed material */
+  /**
+   * Creates an instance for a fixed material
+   */
   public static RandomMaterial fixed(MaterialId materialId) {
     return new Fixed(materialId);
   }
 
-  /** Creates an instance for a fixed material */
+  /**
+   * Creates an instance for a fixed material
+   */
   public static RandomMaterial firstWithStat() {
     return First.INSTANCE;
   }
 
-  /** Creates a builder for a random material */
+  /**
+   * Creates a builder for a random material
+   */
   public static RandomBuilder random() {
     return new RandomBuilder();
   }
 
-  /** Gets a random material */
+  /**
+   * Gets a random material
+   */
   public abstract MaterialVariantId getMaterial(MaterialStatsId statType, RandomSource random);
 
-  /** Builds the material list from the given random materials and stat types */
+  /**
+   * Builds the material list from the given random materials and stat types
+   */
   public static MaterialNBT build(List<MaterialStatsId> statTypes, List<RandomMaterial> materials, RandomSource random) {
     MaterialNBT.Builder builder = MaterialNBT.builder();
     int max = Math.min(materials.size(), statTypes.size());
@@ -78,9 +97,12 @@ public abstract class RandomMaterial implements IHaveLoader {
   }
 
 
-  /** Constant material */
+  /**
+   * Constant material
+   */
   @RequiredArgsConstructor
   private static class Fixed extends RandomMaterial {
+
     private static final RecordLoadable<Fixed> LOADER = RecordLoadable.create(MaterialVariantId.LOADABLE.requiredField("material", r -> r.material), Fixed::new);
 
     private final MaterialVariantId material;
@@ -96,9 +118,12 @@ public abstract class RandomMaterial implements IHaveLoader {
     }
   }
 
-  /** Constant material */
+  /**
+   * Constant material
+   */
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   private static class First extends RandomMaterial {
+
     private static final First INSTANCE = new First();
     public static final SingletonLoader<First> LOADER = new SingletonLoader<>(INSTANCE);
 
@@ -114,9 +139,12 @@ public abstract class RandomMaterial implements IHaveLoader {
     }
   }
 
-  /** Produces a random material from a material tier */
+  /**
+   * Produces a random material from a material tier
+   */
   @RequiredArgsConstructor
-  private static class Randomized extends RandomMaterial implements Function<MaterialStatsId,List<MaterialId>> {
+  private static class Randomized extends RandomMaterial implements Function<MaterialStatsId, List<MaterialId>> {
+
     public static final IntRange TIER_RANGE = new IntRange(0, Integer.MAX_VALUE);
     public static final RecordLoadable<Randomized> LOADER = RecordLoadable.create(
       TIER_RANGE.defaultField("tier", r -> r.tier),
@@ -124,16 +152,24 @@ public abstract class RandomMaterial implements IHaveLoader {
       TinkerLoadables.MATERIAL_TAGS.nullableField("tag", r -> r.tag),
       Randomized::new);
 
-    /** Minimum material tier */
+    /**
+     * Minimum material tier
+     */
     private final IntRange tier;
-    /** If true, hidden materials are allowed */
+    /**
+     * If true, hidden materials are allowed
+     */
     private final boolean allowHidden;
-    /** Material tag condition */
+    /**
+     * Material tag condition
+     */
     @Nullable
     private final TagKey<IMaterial> tag;
 
-    /** Cached list of material choices, automatically deleted when loot tables reload */
-    private final Map<MaterialStatsId,List<MaterialId>> materialChoices = new ConcurrentHashMap<>();
+    /**
+     * Cached list of material choices, automatically deleted when loot tables reload
+     */
+    private final Map<MaterialStatsId, List<MaterialId>> materialChoices = new ConcurrentHashMap<>();
 
     @Override
     public List<MaterialId> apply(MaterialStatsId statType) {
@@ -145,8 +181,8 @@ public abstract class RandomMaterial implements IHaveLoader {
         .filter(material -> {
           MaterialId id = material.getIdentifier();
           return this.tier.test(material.getTier()) && (allowHidden || !material.isHidden())
-                 && (tag == null || registry.isInTag(id, tag))
-                 && registry.getMaterialStats(id, statType).isPresent();
+            && (tag == null || registry.isInTag(id, tag))
+            && registry.getMaterialStats(id, statType).isPresent();
         })
         .map(IMaterial::getIdentifier)
         .toList();
@@ -175,44 +211,63 @@ public abstract class RandomMaterial implements IHaveLoader {
 
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   public static class RandomBuilder {
-    /** Material tier */
+
+    /**
+     * Material tier
+     */
     private IntRange tier = Randomized.TIER_RANGE;
     private boolean allowHidden = false;
-    /** Material tag condition */
-    @Nullable @Setter @Accessors(fluent = true)
+    /**
+     * Material tag condition
+     */
+    @Nullable
+    @Setter
+    @Accessors(fluent = true)
     private TagKey<IMaterial> tag;
 
-    /** Sets the required tier */
+    /**
+     * Sets the required tier
+     */
     public RandomBuilder tier(int tier) {
       this.tier = Randomized.TIER_RANGE.exactly(tier);
       return this;
     }
 
-    /** Sets the required tier to a range between min and max, inclusive */
+    /**
+     * Sets the required tier to a range between min and max, inclusive
+     */
     public RandomBuilder tier(int min, int max) {
       this.tier = Randomized.TIER_RANGE.range(min, max);
       return this;
     }
 
-    /** Sets the required tier to be at least min */
+    /**
+     * Sets the required tier to be at least min
+     */
     public RandomBuilder minTier(int min) {
       this.tier = Randomized.TIER_RANGE.min(min);
       return this;
     }
 
-    /** Sets the required tier to be at most max */
+    /**
+     * Sets the required tier to be at most max
+     */
     public RandomBuilder maxTier(int max) {
       this.tier = Randomized.TIER_RANGE.max(max);
       return this;
     }
 
-    /** Makes hidden materials allowed */
+    /**
+     * Makes hidden materials allowed
+     */
     public RandomBuilder allowHidden() {
       this.allowHidden = true;
       return this;
     }
 
-    /** Builds the instance */
+    /**
+     * Builds the instance
+     */
     public RandomMaterial build() {
       return new Randomized(tier, allowHidden, tag);
     }

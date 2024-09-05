@@ -19,6 +19,7 @@ import slimeknights.tconstruct.fluids.util.ConstantFluidContainerWrapper;
 @SuppressWarnings("unused")
 @EventBusSubscriber(modid = TConstruct.MOD_ID, bus = Bus.FORGE)
 public class FluidEvents {
+
   @SubscribeEvent
   static void onFurnaceFuel(FurnaceFuelBurnTimeEvent event) {
     if (event.getItemStack().getItem() == TinkerFluids.blazingBlood.asItem()) {

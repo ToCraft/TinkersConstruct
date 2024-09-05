@@ -46,14 +46,23 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-/** Events to implement modifier specific behaviors, such as those defined by {@link TinkerDataKeys}. General hooks will typically be in {@link ToolEvents} */
+/**
+ * Events to implement modifier specific behaviors, such as those defined by {@link TinkerDataKeys}. General hooks will typically be in {@link ToolEvents}
+ */
 @EventBusSubscriber(modid = TConstruct.MOD_ID, bus = Bus.FORGE)
 public class ModifierEvents {
-  /** NBT key for items to preserve their slot in soulbound */
+
+  /**
+   * NBT key for items to preserve their slot in soulbound
+   */
   private static final String SOULBOUND_SLOT = "tic_soulbound_slot";
-  /** Multiplier for experience drops from events */
+  /**
+   * Multiplier for experience drops from events
+   */
   private static final TinkerDataKey<Float> PROJECTILE_EXPERIENCE = TConstruct.createKey("projectile_experience");
-  /** Volatile data flag making a modifier grant the tool soulbound */
+  /**
+   * Volatile data flag making a modifier grant the tool soulbound
+   */
   public static final ResourceLocation SOULBOUND = TConstruct.getResource("soulbound");
 
   @SubscribeEvent
@@ -72,7 +81,9 @@ public class ModifierEvents {
     });
   }
 
-  /** Reduce fall distance for fall damage */
+  /**
+   * Reduce fall distance for fall damage
+   */
   @SubscribeEvent
   static void onLivingFall(LivingFallEvent event) {
     LivingEntity entity = event.getEntity();
@@ -82,7 +93,9 @@ public class ModifierEvents {
     }
   }
 
-  /** Called on jumping to boost the jump height of the entity */
+  /**
+   * Called on jumping to boost the jump height of the entity
+   */
   @SubscribeEvent
   public static void onLivingJump(LivingJumpEvent event) {
     LivingEntity entity = event.getEntity();
@@ -92,7 +105,9 @@ public class ModifierEvents {
     }
   }
 
-  /** Prevents effects on the entity */
+  /**
+   * Prevents effects on the entity
+   */
   @SubscribeEvent
   static void isPotionApplicable(MobEffectEvent.Applicable event) {
     event.getEntity().getCapability(TinkerDataCapability.CAPABILITY).ifPresent(data -> {
@@ -102,7 +117,9 @@ public class ModifierEvents {
     });
   }
 
-  /** Called when the player dies to store the item in the original inventory */
+  /**
+   * Called when the player dies to store the item in the original inventory
+   */
   @SubscribeEvent
   static void onLivingDeath(LivingDeathEvent event) {
     // if a projectile kills the target, mark the projectile level
@@ -143,12 +160,13 @@ public class ModifierEvents {
 
   /**
    * Boosts the original based on the level
-   * @param original  Original amount
-   * @param bonus     Bonus percent
-   * @return  Boosted XP
+   *
+   * @param original Original amount
+   * @param bonus    Bonus percent
+   * @return Boosted XP
    */
   private static int boost(int original, float bonus) {
-    return (int) (original  * (1 + bonus));
+    return (int) (original * (1 + bonus));
   }
 
   @SubscribeEvent
@@ -185,7 +203,9 @@ public class ModifierEvents {
 
   /* Soulbound */
 
-  /** Called when the player dies to store the item in the original inventory */
+  /**
+   * Called when the player dies to store the item in the original inventory
+   */
   @SubscribeEvent
   static void onPlayerDropItems(LivingDropsEvent event) {
     // only care about real players with keep inventory off
@@ -234,7 +254,9 @@ public class ModifierEvents {
     }
   }
 
-  /** Called when the new player is created to fetch the soulbound item from the old */
+  /**
+   * Called when the new player is created to fetch the soulbound item from the old
+   */
   @SubscribeEvent
   static void onPlayerClone(PlayerEvent.Clone event) {
     if (!event.isWasDeath()) {
@@ -250,7 +272,7 @@ public class ModifierEvents {
     Inventory originalInv = original.getInventory();
     Inventory cloneInv = clone.getInventory();
     int size = Math.min(originalInv.getContainerSize(), cloneInv.getContainerSize()); // not needed probably, but might as well be safe
-    for(int i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++) {
       ItemStack stack = originalInv.getItem(i);
       if (!stack.isEmpty()) {
         CompoundTag tag = stack.getTag();

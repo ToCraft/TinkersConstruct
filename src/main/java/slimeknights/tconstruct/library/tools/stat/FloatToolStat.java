@@ -22,18 +22,29 @@ import javax.annotation.Nullable;
  * Tool stat representing a float value, used for most numbers
  */
 public class FloatToolStat implements INumericToolStat<Float> {
-  /** Name of this tool stat */
+
+  /**
+   * Name of this tool stat
+   */
   @Getter
   private final ToolStatId name;
-  /** Color for this stat type */
+  /**
+   * Color for this stat type
+   */
   @Getter
   private final TextColor color;
-  /** Gets the default value for this stat */
+  /**
+   * Gets the default value for this stat
+   */
   private final float defaultValue;
-  /** Min value for this stat */
+  /**
+   * Min value for this stat
+   */
   @Getter
   private final float minValue;
-  /** Max value for this stat */
+  /**
+   * Max value for this stat
+   */
   @Getter
   private final float maxValue;
   @Nullable
@@ -103,7 +114,7 @@ public class FloatToolStat implements INumericToolStat<Float> {
 
   @Override
   public Float build(ModifierStatsBuilder parent, Object builderObj) {
-    FloatBuilder builder = (FloatBuilder)builderObj;
+    FloatBuilder builder = (FloatBuilder) builderObj;
     return (builder.base + builder.add) * (1 + builder.percent) * builder.multiply;
   }
 
@@ -141,7 +152,9 @@ public class FloatToolStat implements INumericToolStat<Float> {
     buffer.writeFloat(value);
   }
 
-  /** Generic friendly way to format the value */
+  /**
+   * Generic friendly way to format the value
+   */
   @Override
   public Component formatValue(float value) {
     return IToolStat.formatNumber(getTranslationKey(), getColor(), value);
@@ -152,15 +165,26 @@ public class FloatToolStat implements INumericToolStat<Float> {
     return "FloatToolStat{" + name + '}';
   }
 
-  /** Internal builder to store the add and multiply value */
+  /**
+   * Internal builder to store the add and multiply value
+   */
   protected static class FloatBuilder {
-    /** Base value of the stat, may get zeroed out */
+
+    /**
+     * Base value of the stat, may get zeroed out
+     */
     private float base;
-    /** Value summed with the base, applies first */
+    /**
+     * Value summed with the base, applies first
+     */
     private float add = 0;
-    /** Percent multiplier, applies second */
+    /**
+     * Percent multiplier, applies second
+     */
     private float percent = 0;
-    /** Value multiplied by the sum, applies second */
+    /**
+     * Value multiplied by the sum, applies second
+     */
     private float multiply = 1;
 
     public FloatBuilder(float base) {

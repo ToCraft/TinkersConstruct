@@ -31,8 +31,9 @@ import slimeknights.tconstruct.smeltery.client.screen.MelterScreen;
 import slimeknights.tconstruct.smeltery.client.screen.SingleItemScreenFactory;
 
 @SuppressWarnings("unused")
-@EventBusSubscriber(modid= TConstruct.MOD_ID, value= Dist.CLIENT, bus= Bus.MOD)
+@EventBusSubscriber(modid = TConstruct.MOD_ID, value = Dist.CLIENT, bus = Bus.MOD)
 public class SmelteryClientEvents extends ClientEventBase {
+
   @SubscribeEvent
   static void addResourceListener(RegisterClientReloadListenersEvent event) {
     FaucetFluidLoader.initialize(event);

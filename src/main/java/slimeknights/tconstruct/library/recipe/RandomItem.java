@@ -17,11 +17,13 @@ import java.util.Random;
  * Class that represents an item that has a random element to the result
  */
 public abstract class RandomItem {
+
   /**
    * Produces a random result with a range from the min count to the result stack size
-   * @param result    Result, stack size determines max output
-   * @param minCount  Minimum count for randomness
-   * @return  Random item
+   *
+   * @param result   Result, stack size determines max output
+   * @param minCount Minimum count for randomness
+   * @return Random item
    */
   public static RandomItem range(ItemOutput result, int minCount) {
     return new Range(result, minCount);
@@ -29,8 +31,9 @@ public abstract class RandomItem {
 
   /**
    * Produces a random result with a range from the 0 to the result stack size
-   * @param result    Result, stack size determines max output
-   * @return  Random item
+   *
+   * @param result Result, stack size determines max output
+   * @return Random item
    */
   public static RandomItem range(ItemOutput result) {
     return range(result, 0);
@@ -38,9 +41,10 @@ public abstract class RandomItem {
 
   /**
    * Produces a random result with a percent chance
-   * @param result    Result
-   * @param chance    Percent chance of a result
-   * @return  Random item
+   *
+   * @param result Result
+   * @param chance Percent chance of a result
+   * @return Random item
    */
   public static RandomItem chance(ItemOutput result, float chance) {
     return new Chance(result, chance);
@@ -48,8 +52,9 @@ public abstract class RandomItem {
 
   /**
    * Produces a constant result
-   * @param result    Result
-   * @return  Random item
+   *
+   * @param result Result
+   * @return Random item
    */
   public static RandomItem constant(ItemOutput result) {
     return chance(result, 1.0f);
@@ -57,21 +62,27 @@ public abstract class RandomItem {
 
   /**
    * Gets a copy of the item for the given random object
-   * @param random  Random instance for randomization
-   * @return  Item stack, or empty if the random failed
+   *
+   * @param random Random instance for randomization
+   * @return Item stack, or empty if the random failed
    */
   public abstract ItemStack get(Random random);
 
-  /** Serializes this object to JSON */
+  /**
+   * Serializes this object to JSON
+   */
   public abstract JsonElement serialize();
 
-  /** Writes this object to the packet buffer */
+  /**
+   * Writes this object to the packet buffer
+   */
   public abstract void write(FriendlyByteBuf buffer);
 
   /**
    * Reads a random item from JSON
-   * @param element  JSON element
-   * @return  Random item
+   *
+   * @param element JSON element
+   * @return Random item
    */
   public static RandomItem fromJson(JsonElement element, String name) {
     // we serialize max to count for ranges as it looks cleaner, put it back
@@ -105,7 +116,9 @@ public abstract class RandomItem {
     return constant(result);
   }
 
-  /** Reads the object from the packet buffer */
+  /**
+   * Reads the object from the packet buffer
+   */
   public static RandomItem read(FriendlyByteBuf buffer) {
     ItemOutput result = ItemOutput.read(buffer);
     RandomType type = buffer.readEnum(RandomType.class);
@@ -122,12 +135,19 @@ public abstract class RandomItem {
     throw new DecoderException("Invalid random type " + type + " for RandomItem");
   }
 
-  /** Item that outputs with a uniform range */
+  /**
+   * Item that outputs with a uniform range
+   */
   @RequiredArgsConstructor
   private static class Range extends RandomItem {
-    /** Item result, max count will be up to the the result stack size */
+
+    /**
+     * Item result, max count will be up to the the result stack size
+     */
     private final ItemOutput result;
-    /** Minimum count of the item */
+    /**
+     * Minimum count of the item
+     */
     private final int minCount;
 
     @Override
@@ -169,12 +189,19 @@ public abstract class RandomItem {
     }
   }
 
-  /** Item that outputs with a percent chance */
+  /**
+   * Item that outputs with a percent chance
+   */
   @RequiredArgsConstructor
   private static class Chance extends RandomItem {
-    /** Item result */
+
+    /**
+     * Item result
+     */
     private final ItemOutput result;
-    /** Percent chance of the result, from 0 to 1 */
+    /**
+     * Percent chance of the result, from 0 to 1
+     */
     private final float chance;
 
     @Override
@@ -212,6 +239,8 @@ public abstract class RandomItem {
     }
   }
 
-  /** Enum of types for packet writing */
-  private enum RandomType { RANGE, CHANCE }
+  /**
+   * Enum of types for packet writing
+   */
+  private enum RandomType {RANGE, CHANCE}
 }

@@ -25,8 +25,9 @@ import slimeknights.tconstruct.tables.client.inventory.TinkerChestScreen;
 import slimeknights.tconstruct.tables.client.inventory.TinkerStationScreen;
 
 @SuppressWarnings("unused")
-@EventBusSubscriber(modid=TConstruct.MOD_ID, value=Dist.CLIENT, bus=Bus.MOD)
+@EventBusSubscriber(modid = TConstruct.MOD_ID, value = Dist.CLIENT, bus = Bus.MOD)
 public class TableClientEvents extends ClientEventBase {
+
   @SubscribeEvent
   static void registerModelLoader(RegisterGeometryLoaders event) {
     event.register("table", TableModel.LOADER);
@@ -56,7 +57,7 @@ public class TableClientEvents extends ClientEventBase {
       if (world != null && pos != null) {
         BlockEntity te = world.getBlockEntity(pos);
         if (te instanceof TinkersChestBlockEntity) {
-          return ((TinkersChestBlockEntity)te).getColor();
+          return ((TinkersChestBlockEntity) te).getColor();
         }
       }
       return -1;
@@ -65,6 +66,6 @@ public class TableClientEvents extends ClientEventBase {
 
   @SubscribeEvent
   static void registerItemColors(final RegisterColorHandlersEvent.Item event) {
-    event.register((stack, index) -> ((DyeableLeatherItem)stack.getItem()).getColor(stack), TinkerTables.tinkersChest.asItem());
+    event.register((stack, index) -> ((DyeableLeatherItem) stack.getItem()).getColor(stack), TinkerTables.tinkersChest.asItem());
   }
 }

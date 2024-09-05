@@ -14,7 +14,9 @@ import javax.annotation.Nonnull;
  * Same as {@link CustomResultSlot}, but does not require an crafting inventory
  */
 public class CraftingResultSlot extends ResultSlot {
+
   private final IContainerCraftingCustom callback;
+
   @SuppressWarnings("ConstantConditions")
   public CraftingResultSlot(IContainerCraftingCustom callback, Player player, Container inv, int index, int x, int y) {
     // pass in null for CraftingInventory

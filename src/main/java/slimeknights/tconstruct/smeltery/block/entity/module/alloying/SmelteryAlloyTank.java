@@ -13,12 +13,16 @@ import slimeknights.tconstruct.smeltery.block.entity.tank.SmelteryTank;
  */
 @RequiredArgsConstructor
 public class SmelteryAlloyTank implements IMutableAlloyTank {
+
   /**
    * Handler parent
    */
   private final SmelteryTank handler;
-  /** Current temperature. Provided as a getter and setter as there are a few contexts with different source for temperature */
-  @Getter @Setter
+  /**
+   * Current temperature. Provided as a getter and setter as there are a few contexts with different source for temperature
+   */
+  @Getter
+  @Setter
   private int temperature = 0;
 
   @Override

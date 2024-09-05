@@ -40,8 +40,11 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/** Recipe for casting a tool using molten metal on either a tool part or a non-tool part (2 materials or 1) */
+/**
+ * Recipe for casting a tool using molten metal on either a tool part or a non-tool part (2 materials or 1)
+ */
 public class ToolCastingRecipe extends AbstractMaterialCastingRecipe implements IMultiRecipe<IDisplayableCastingRecipe> {
+
   public static final RecordLoadable<ToolCastingRecipe> LOADER = RecordLoadable.create(
     LoadableRecipeSerializer.TYPED_SERIALIZER.requiredField(),
     ContextKey.ID.requiredField(), LoadableRecipeSerializer.RECIPE_GROUP, CAST_FIELD, ITEM_COST_FIELD,
@@ -49,9 +52,12 @@ public class ToolCastingRecipe extends AbstractMaterialCastingRecipe implements 
     ToolCastingRecipe::new);
 
   private final IModifiable result;
-  /** Last composite casting recipe to match, speeds up recipe lookup for cooling time and fluid amount */
+  /**
+   * Last composite casting recipe to match, speeds up recipe lookup for cooling time and fluid amount
+   */
   @Nullable
   private MaterialFluidRecipe cachedPartSwapping = null;
+
   public ToolCastingRecipe(TypeAwareRecipeSerializer<?> serializer, ResourceLocation id, String group, Ingredient cast, int itemCost, IModifiable result) {
     super(serializer, id, group, cast, itemCost, true, false);
     this.result = result;
@@ -141,7 +147,7 @@ public class ToolCastingRecipe extends AbstractMaterialCastingRecipe implements 
             }
           }
           if (repairDurability > 0) {
-            ToolDamageUtil.repair(tool, (int)repairDurability);
+            ToolDamageUtil.repair(tool, (int) repairDurability);
           }
         }
       }
@@ -173,7 +179,7 @@ public class ToolCastingRecipe extends AbstractMaterialCastingRecipe implements 
         List<ItemStack> castItems = Arrays.asList(getCast().getItems());
         MaterialStatsId requirement = requirements.get(requirements.size() - 1);
         // if we have two item requirement, fill in the part in display
-        Function<MaterialVariant,MaterialNBT> materials;
+        Function<MaterialVariant, MaterialNBT> materials;
         if (requirements.size() > 1) {
           MaterialVariant firstMaterial = MaterialVariant.of(MaterialRegistry.firstWithStatType(requirements.get(0)));
           materials = mat -> new MaterialNBT(List.of(firstMaterial, mat));
@@ -191,8 +197,8 @@ public class ToolCastingRecipe extends AbstractMaterialCastingRecipe implements 
             int fluidAmount = fluids.stream().mapToInt(FluidStack::getAmount).max().orElse(0);
             // TODO: would be nice to have a list of outputs based on the different inputs
             return new DisplayCastingRecipe(type, castItems, fluids,
-                                            ToolBuildHandler.buildItemFromMaterials(result, materials.apply(recipe.getOutput())),
-                                            ICastingRecipe.calcCoolingTime(recipe.getTemperature(), itemCost * fluidAmount), isConsumed());
+              ToolBuildHandler.buildItemFromMaterials(result, materials.apply(recipe.getOutput())),
+              ICastingRecipe.calcCoolingTime(recipe.getTemperature(), itemCost * fluidAmount), isConsumed());
           })
           .collect(Collectors.toList());
       }

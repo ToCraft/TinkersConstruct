@@ -20,26 +20,37 @@ import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
-/** Argument of a modifier slot type */
+/**
+ * Argument of a modifier slot type
+ */
 @RequiredArgsConstructor(staticName = "slotType")
 public class SlotTypeArgument implements ArgumentType<OptionalSlotType> {
+
   private static final Collection<String> EXAMPLES = Arrays.asList("upgrades", "abilities");
   private static final DynamicCommandExceptionType SLOT_TYPE_NOT_FOUND = new DynamicCommandExceptionType(name -> Component.translatable("command.tconstruct.slot_type.not_found", name));
 
-  /** If true, slotless is allowed, producing null for a filter */
+  /**
+   * If true, slotless is allowed, producing null for a filter
+   */
   private final boolean allowSlotless;
 
-  /** Makes a slot type argument for no types */
+  /**
+   * Makes a slot type argument for no types
+   */
   public static SlotTypeArgument slotType() {
     return slotType(true);
   }
 
-  /** Gets a modifier from the command context */
+  /**
+   * Gets a modifier from the command context
+   */
   public static OptionalSlotType getOptional(CommandContext<CommandSourceStack> context, String name) {
     return context.getArgument(name, OptionalSlotType.class);
   }
 
-  /** Gets a modifier from the command context */
+  /**
+   * Gets a modifier from the command context
+   */
   public static SlotType getSlotType(CommandContext<CommandSourceStack> context, String name) throws CommandSyntaxException {
     SlotType slot = getOptional(context, name).slotType();
     if (slot == null) {
@@ -75,6 +86,8 @@ public class SlotTypeArgument implements ArgumentType<OptionalSlotType> {
     return EXAMPLES;
   }
 
-  /** Object holding a nullable slot type */
+  /**
+   * Object holding a nullable slot type
+   */
   public record OptionalSlotType(@Nullable SlotType slotType) {}
 }

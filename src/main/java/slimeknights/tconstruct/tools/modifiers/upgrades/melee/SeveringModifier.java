@@ -18,6 +18,7 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import java.util.List;
 
 public class SeveringModifier extends Modifier implements ProcessLootModifierHook {
+
   @Override
   protected void registerHooks(Builder hookBuilder) {
     hookBuilder.addHook(this, ModifierHooks.PROCESS_LOOT);

@@ -24,6 +24,7 @@ import java.util.List;
  * Extension of {@link MaterialItem} which adds stats to the tooltip and has a set stat type
  */
 public class ToolPartItem extends MaterialItem implements IToolPart {
+
   private static final Component MISSING_INFO = TConstruct.makeTranslation("tooltip", "part.missing_info");
   private static final String MISSING_MATERIAL_KEY = TConstruct.makeTranslationKey("tooltip", "part.missing_material");
   private static final String MISSING_STATS_KEY = TConstruct.makeTranslationKey("tooltip", "part.missing_stats");
@@ -90,8 +91,9 @@ public class ToolPartItem extends MaterialItem implements IToolPart {
 
   /**
    * Adds the stat info for the given part to the tooltip
-   * @param tooltip   Tooltip list
-   * @param material  Material to add
+   *
+   * @param tooltip  Tooltip list
+   * @param material Material to add
    */
   protected void addStatInfoTooltip(MaterialId material, List<Component> tooltip) {
     MaterialRegistry.getInstance().getMaterialStats(material, this.materialStatId).ifPresent((stat) -> {

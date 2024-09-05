@@ -10,11 +10,18 @@ import slimeknights.tconstruct.library.module.WithHooks;
 
 import javax.annotation.Nullable;
 
-/** Interface for a module in a composable modifier. This is the serializable version of {@link HookProvider}. */
+/**
+ * Interface for a module in a composable modifier. This is the serializable version of {@link HookProvider}.
+ */
 public interface ModifierModule extends IHaveLoader, HookProvider {
-  /** Loader instance to register new modules. Note that loaders should not use the key "hooks" else composable modifiers will not parse */
+
+  /**
+   * Loader instance to register new modules. Note that loaders should not use the key "hooks" else composable modifiers will not parse
+   */
   GenericLoaderRegistry<ModifierModule> LOADER = new GenericLoaderRegistry<>("Modifier Module", false);
-  /** Loadable for modules including hooks */
+  /**
+   * Loadable for modules including hooks
+   */
   RecordLoadable<WithHooks<ModifierModule>> WITH_HOOKS = WithHooks.makeLoadable(LOADER, ModifierHooks.LOADER);
 
   /**
@@ -26,6 +33,7 @@ public interface ModifierModule extends IHaveLoader, HookProvider {
    *   <li>If one module has nonnull priority, that priority will be used</li>
    *   <li>If two or more modules has nonnull priority, the first will be used and a warning will be logged</li>
    * </ol>>
+   *
    * @return Priority
    */
   @Nullable

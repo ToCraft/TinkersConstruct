@@ -15,7 +15,7 @@ import java.util.function.Consumer;
 public class AdvancementLootTableProvider implements Consumer<BiConsumer<ResourceLocation, Builder>> {
 
   @Override
-  public void accept(BiConsumer<ResourceLocation,Builder> consumer) {
+  public void accept(BiConsumer<ResourceLocation, Builder> consumer) {
     consumer.accept(TConstruct.getResource("gameplay/starting_book"), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(TinkerCommons.materialsAndYou))));
   }
 }

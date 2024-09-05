@@ -18,24 +18,32 @@ import java.util.function.Consumer;
  */
 @NoArgsConstructor(staticName = "builder")
 public class ModifierStatsBuilder {
-  /** Map of all stats in the builder */
-  private final Map<IToolStat<?>,Object> map = new HashMap<>();
-  /** Map of multipliers set */
-  private final Map<INumericToolStat<?>,Float> multipliers = new HashMap<>();
+
+  /**
+   * Map of all stats in the builder
+   */
+  private final Map<IToolStat<?>, Object> map = new HashMap<>();
+  /**
+   * Map of multipliers set
+   */
+  private final Map<INumericToolStat<?>, Float> multipliers = new HashMap<>();
 
   /**
    * Updates the given stat in the builder
-   * @param stat   New value
-   * @param consumer  Consumer for your builder instance. Will be the same object type as the builder from {@link IToolStat#makeBuilder()}
+   *
+   * @param stat     New value
+   * @param consumer Consumer for your builder instance. Will be the same object type as the builder from {@link IToolStat#makeBuilder()}
    */
   @SuppressWarnings("unchecked")
   public <B> void updateStat(IToolStat<?> stat, Consumer<B> consumer) {
-    consumer.accept((B)map.computeIfAbsent(stat, IToolStat::makeBuilder));
+    consumer.accept((B) map.computeIfAbsent(stat, IToolStat::makeBuilder));
   }
 
-  /** Multiplies the given multiplier value by the parameter */
+  /**
+   * Multiplies the given multiplier value by the parameter
+   */
   public void multiplier(INumericToolStat<?> stat, double value) {
-    multipliers.put(stat, (float)(multipliers.getOrDefault(stat, 1f) * value));
+    multipliers.put(stat, (float) (multipliers.getOrDefault(stat, 1f) * value));
   }
 
 
@@ -53,7 +61,9 @@ public class ModifierStatsBuilder {
     return stat.build(this, map.get(stat));
   }
 
-  /** Builds the given stat, method exists to make generic easier */
+  /**
+   * Builds the given stat, method exists to make generic easier
+   */
   private <T> void buildStat(StatsNBT.Builder builder, IToolStat<T> stat) {
     T value = stat.build(this, map.get(stat));
     if (!value.equals(stat.getDefaultValue())) {
@@ -71,8 +81,9 @@ public class ModifierStatsBuilder {
 
   /**
    * Builds the stats with a filter
-   * @param filter  Item the stats must match to be included
-   * @return  Built stats
+   *
+   * @param filter Item the stats must match to be included
+   * @return Built stats
    */
   public StatsNBT build(@Nullable Item filter) {
     if (map.isEmpty()) {
@@ -92,7 +103,8 @@ public class ModifierStatsBuilder {
 
   /**
    * Builds the stats unfiltered
-   * @return  Built stats
+   *
+   * @return Built stats
    */
   public StatsNBT build() {
     return build(null);
@@ -100,12 +112,13 @@ public class ModifierStatsBuilder {
 
   /**
    * Builds the stat multiplier object for global stat multipliers
-   * @param filter  Item the stats must match to be included
-   * @return  Multipliers stats
+   *
+   * @param filter Item the stats must match to be included
+   * @return Multipliers stats
    */
   public MultiplierNBT buildMultipliers(@Nullable Item filter) {
     MultiplierNBT.Builder builder = MultiplierNBT.builder();
-    for (Entry<INumericToolStat<?>,Float> entry : multipliers.entrySet()) {
+    for (Entry<INumericToolStat<?>, Float> entry : multipliers.entrySet()) {
       INumericToolStat<?> stat = entry.getKey();
       if (disableFilter || filter == null || stat.supports(filter)) {
         builder.set(stat, entry.getValue());
@@ -116,7 +129,8 @@ public class ModifierStatsBuilder {
 
   /**
    * Builds the stat multiplier object for global stat multipliers unfiltered
-   * @return  Multipliers stats
+   *
+   * @return Multipliers stats
    */
   public MultiplierNBT buildMultipliers() {
     return buildMultipliers(null);
@@ -126,7 +140,9 @@ public class ModifierStatsBuilder {
   /* Testing */
   private static boolean disableFilter = false;
 
-  /** Disables the stat filters in the builder. Used when testing where tags don't exist, not meant to be used by mods. */
+  /**
+   * Disables the stat filters in the builder. Used when testing where tags don't exist, not meant to be used by mods.
+   */
   @Internal
   @VisibleForTesting
   public static void disableFilter() {

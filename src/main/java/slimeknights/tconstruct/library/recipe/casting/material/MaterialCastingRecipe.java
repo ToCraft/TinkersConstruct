@@ -28,7 +28,8 @@ import java.util.stream.Collectors;
  * Casting recipe that takes an arbitrary fluid of a given amount and set the material on the output based on that fluid
  */
 public class MaterialCastingRecipe extends AbstractMaterialCastingRecipe implements IMultiRecipe<IDisplayableCastingRecipe> {
-  protected static final LoadableField<IMaterialItem,MaterialCastingRecipe> RESULT_FIELD = TinkerLoadables.MATERIAL_ITEM.requiredField("result", r -> r.result);
+
+  protected static final LoadableField<IMaterialItem, MaterialCastingRecipe> RESULT_FIELD = TinkerLoadables.MATERIAL_ITEM.requiredField("result", r -> r.result);
   public static final RecordLoadable<MaterialCastingRecipe> LOADER = RecordLoadable.create(
     LoadableRecipeSerializer.TYPED_SERIALIZER.requiredField(),
     ContextKey.ID.requiredField(), LoadableRecipeSerializer.RECIPE_GROUP, CAST_FIELD,
@@ -80,7 +81,7 @@ public class MaterialCastingRecipe extends AbstractMaterialCastingRecipe impleme
           List<FluidStack> fluids = resizeFluids(recipe.getFluids());
           int fluidAmount = fluids.stream().mapToInt(FluidStack::getAmount).max().orElse(0);
           return new DisplayCastingRecipe(type, castItems, fluids, result.withMaterial(recipe.getOutput().getVariant()),
-                                          ICastingRecipe.calcCoolingTime(recipe.getTemperature(), itemCost * fluidAmount), isConsumed());
+            ICastingRecipe.calcCoolingTime(recipe.getTemperature(), itemCost * fluidAmount), isConsumed());
         })
         .collect(Collectors.toList());
     }

@@ -32,15 +32,20 @@ import java.awt.Color;
 import java.util.Collections;
 import java.util.List;
 
-/** Shared logic between melting and foundry */
+/**
+ * Shared logic between melting and foundry
+ */
 public abstract class AbstractMeltingCategory implements IRecipeCategory<MeltingRecipe> {
+
   protected static final ResourceLocation BACKGROUND_LOC = TConstruct.getResource("textures/gui/jei/melting.png");
   protected static final String KEY_COOLING_TIME = TConstruct.makeTranslationKey("jei", "melting.time");
   protected static final String KEY_TEMPERATURE = TConstruct.makeTranslationKey("jei", "temperature");
   protected static final String KEY_MULTIPLIER = TConstruct.makeTranslationKey("jei", "melting.multiplier");
   protected static final Component TOOLTIP_ORE = Component.translatable(TConstruct.makeTranslationKey("jei", "melting.ore"));
 
-  /** Tooltip for fuel display */
+  /**
+   * Tooltip for fuel display
+   */
   public static final IRecipeTooltipReplacement FUEL_TOOLTIP = (slot, tooltip) -> {
     //noinspection SimplifyOptionalCallChains  Not for int streams
     slot.getDisplayedIngredient(ForgeTypes.FLUID_STACK).ifPresent(stack -> {
@@ -55,7 +60,7 @@ public abstract class AbstractMeltingCategory implements IRecipeCategory<Melting
   private final IDrawable background;
   protected final IDrawableStatic tankOverlay;
   protected final IDrawableStatic plus;
-  protected final LoadingCache<Integer,IDrawableAnimated> cachedArrows;
+  protected final LoadingCache<Integer, IDrawableAnimated> cachedArrows;
 
   public AbstractMeltingCategory(IGuiHelper helper) {
     this.background = helper.createDrawable(BACKGROUND_LOC, 0, 0, 132, 40);
@@ -87,8 +92,8 @@ public abstract class AbstractMeltingCategory implements IRecipeCategory<Melting
 
   @Override
   public List<Component> getTooltipStrings(MeltingRecipe recipe, IRecipeSlotsView slots, double mouseXD, double mouseYD) {
-    int mouseX = (int)mouseXD;
-    int mouseY = (int)mouseYD;
+    int mouseX = (int) mouseXD;
+    int mouseY = (int) mouseYD;
     if (recipe.getOreType() != null && GuiUtil.isHovered(mouseX, mouseY, 87, 31, 16, 16)) {
       return Collections.singletonList(TOOLTIP_ORE);
     }
@@ -99,16 +104,19 @@ public abstract class AbstractMeltingCategory implements IRecipeCategory<Melting
     return Collections.emptyList();
   }
 
-  /** Adds amounts to outputs and temperatures to fuels */
+  /**
+   * Adds amounts to outputs and temperatures to fuels
+   */
   @RequiredArgsConstructor
   public static class MeltingFluidCallback implements IRecipeTooltipReplacement {
+
     public static final MeltingFluidCallback INSTANCE = new MeltingFluidCallback();
 
     /**
      * Adds teh tooltip for ores
      *
-     * @param stack  Fluid to draw
-     * @param list   Tooltip so far
+     * @param stack Fluid to draw
+     * @param list  Tooltip so far
      * @return true if the amount is not in buckets
      */
     protected boolean appendMaterial(FluidStack stack, List<Component> list) {

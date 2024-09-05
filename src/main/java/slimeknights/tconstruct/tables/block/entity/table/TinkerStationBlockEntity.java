@@ -35,20 +35,34 @@ import slimeknights.tconstruct.tables.network.UpdateTinkerStationRecipePacket;
 import javax.annotation.Nullable;
 
 public class TinkerStationBlockEntity extends RetexturedTableBlockEntity implements ILazyCrafter {
-  /** Slot index of the tool slot */
+
+  /**
+   * Slot index of the tool slot
+   */
   public static final int TINKER_SLOT = 0;
-  /** Slot index of the first input slot */
+  /**
+   * Slot index of the first input slot
+   */
   public static final int INPUT_SLOT = 1;
-  /** Name of the TE */
+  /**
+   * Name of the TE
+   */
   private static final Component NAME = TConstruct.makeTranslation("gui", "tinker_station");
 
-  /** Last crafted crafting recipe */
-  @Nullable @Getter
+  /**
+   * Last crafted crafting recipe
+   */
+  @Nullable
+  @Getter
   private ITinkerStationRecipe lastRecipe;
-  /** Result inventory, lazy loads results */
+  /**
+   * Result inventory, lazy loads results
+   */
   @Getter
   private final LazyResultContainer craftingResult;
-  /** Crafting inventory for the recipe calls */
+  /**
+   * Crafting inventory for the recipe calls
+   */
   private final TinkerStationContainerWrapper inventoryWrapper;
 
   @Nullable
@@ -81,7 +95,8 @@ public class TinkerStationBlockEntity extends RetexturedTableBlockEntity impleme
 
   /**
    * Gets the number of item input slots, ignoring the tool
-   * @return  Input count
+   *
+   * @return Input count
    */
   public int getInputCount() {
     return getContainerSize() - 1;
@@ -199,7 +214,7 @@ public class TinkerStationBlockEntity extends RetexturedTableBlockEntity impleme
     this.craftingResult.clearContent();
     this.inventoryWrapper.refreshInput(slot);
   }
-  
+
   @Override
   protected void playCraftSound(Player player) {
     if (isSoundReady(player)) {
@@ -210,7 +225,9 @@ public class TinkerStationBlockEntity extends RetexturedTableBlockEntity impleme
 
   /* Item name */
 
-  /** Sets the name of the item */
+  /**
+   * Sets the name of the item
+   */
   public void setItemName(String name) {
     this.itemName = name;
     ItemStack result = craftingResult.getResult();
@@ -235,7 +252,8 @@ public class TinkerStationBlockEntity extends RetexturedTableBlockEntity impleme
 
   /**
    * Sends the current recipe to the given player
-   * @param player  Player to send an update to
+   *
+   * @param player Player to send an update to
    */
   public void syncRecipe(Player player) {
     // must have a last recipe and a server level
@@ -246,7 +264,8 @@ public class TinkerStationBlockEntity extends RetexturedTableBlockEntity impleme
 
   /**
    * Updates the recipe from the server
-   * @param recipe  New recipe
+   *
+   * @param recipe New recipe
    */
   public void updateRecipe(ITinkerStationRecipe recipe) {
     this.lastRecipe = recipe;

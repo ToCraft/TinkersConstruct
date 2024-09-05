@@ -10,9 +10,12 @@ import slimeknights.tconstruct.library.modifiers.util.LazyModifier;
 
 import java.util.function.Consumer;
 
-/** Builds a recipe to repair a tool using a modifier */
+/**
+ * Builds a recipe to repair a tool using a modifier
+ */
 @RequiredArgsConstructor(staticName = "repair")
 public class ModifierRepairRecipeBuilder extends AbstractRecipeBuilder<ModifierRepairRecipeBuilder> {
+
   private final ModifierId modifier;
   private final Ingredient ingredient;
   private final int repairAmount;
@@ -26,7 +29,9 @@ public class ModifierRepairRecipeBuilder extends AbstractRecipeBuilder<ModifierR
     save(consumer, modifier);
   }
 
-  /** Builds the recipe for the crafting table using a repair kit */
+  /**
+   * Builds the recipe for the crafting table using a repair kit
+   */
   public ModifierRepairRecipeBuilder buildCraftingTable(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
     ResourceLocation advancementId = buildOptionalAdvancement(id, "tinker_station");
     consumer.accept(new LoadableFinishedRecipe<>(new ModifierRepairCraftingRecipe(id, modifier, ingredient, repairAmount), ModifierRepairCraftingRecipe.LOADER, advancementId));

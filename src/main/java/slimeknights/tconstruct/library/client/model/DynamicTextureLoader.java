@@ -23,24 +23,35 @@ import java.util.function.Predicate;
  */
 @Log4j2
 public class DynamicTextureLoader {
-  /** Map of discovered textures */
-  private static final Map<ResourceLocation,Boolean> EXISTING_TEXTURES = new HashMap<>();
-  /** Set of all textures that are missing from the resource pack, to avoid logging twice */
+
+  /**
+   * Map of discovered textures
+   */
+  private static final Map<ResourceLocation, Boolean> EXISTING_TEXTURES = new HashMap<>();
+  /**
+   * Set of all textures that are missing from the resource pack, to avoid logging twice
+   */
   private static final Set<ResourceLocation> SKIPPED_TEXTURES = new HashSet<>();
 
-  /** Clears all cached texture names */
+  /**
+   * Clears all cached texture names
+   */
   public static void clearCache() {
     EXISTING_TEXTURES.clear();
     SKIPPED_TEXTURES.clear();
   }
 
-  /** Registers this manager */
+  /**
+   * Registers this manager
+   */
   public static void init(RegisterClientReloadListenersEvent event) {
     // clear cache on texture stitch, no longer need it then as its too late to lookup textures
     MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, false, TextureStitchEvent.Post.class, e -> clearCache());
   }
 
-  /** Checks if a texture exists */
+  /**
+   * Checks if a texture exists
+   */
   public static boolean textureExists(ResourceManager manager, ResourceLocation location) {
     Boolean found = EXISTING_TEXTURES.get(location);
     if (found == null) {
@@ -50,7 +61,9 @@ public class DynamicTextureLoader {
     return found;
   }
 
-  /** Logs that a dynamic texture is missing, config option to disable */
+  /**
+   * Logs that a dynamic texture is missing, config option to disable
+   */
   public static void logMissingTexture(ResourceLocation location) {
     if (!SKIPPED_TEXTURES.contains(location)) {
       SKIPPED_TEXTURES.add(location);
@@ -60,9 +73,10 @@ public class DynamicTextureLoader {
 
   /**
    * Gets a consumer to add textures to the given collection
-   * @param allTextures         Collection of textures
-   * @param logMissingTextures  If true, log textures that were not found
-   * @return  Texture consumer
+   *
+   * @param allTextures        Collection of textures
+   * @param logMissingTextures If true, log textures that were not found
+   * @return Texture consumer
    */
   public static Predicate<Material> getTextureAdder(Collection<Material> allTextures, boolean logMissingTextures) {
     ResourceManager manager = Minecraft.getInstance().getResourceManager();

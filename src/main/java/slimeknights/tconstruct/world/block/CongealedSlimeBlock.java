@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 public class CongealedSlimeBlock extends Block {
 
   private static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 15, 15);
+
   public CongealedSlimeBlock(Properties properties) {
     super(properties);
   }

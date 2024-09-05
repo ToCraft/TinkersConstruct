@@ -15,6 +15,7 @@ import slimeknights.tconstruct.smeltery.block.entity.controller.MelterBlockEntit
 import javax.annotation.Nullable;
 
 public class MelterBlock extends TinyMultiblockControllerBlock {
+
   public MelterBlock(Properties props) {
     super(props);
   }

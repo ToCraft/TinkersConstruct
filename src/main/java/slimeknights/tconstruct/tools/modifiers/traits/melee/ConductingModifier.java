@@ -24,8 +24,11 @@ import slimeknights.tconstruct.library.utils.Util;
 import javax.annotation.Nullable;
 import java.util.List;
 
-/** Deals a percentage boost in damage when on fire */
+/**
+ * Deals a percentage boost in damage when on fire
+ */
 public class ConductingModifier extends Modifier implements ConditionalStatModifierHook, TooltipModifierHook, MeleeDamageModifierHook {
+
   private static final Component BOOST = TConstruct.makeTranslation("modifier", "conducting.boost");
   private static final int MAX_BONUS_TICKS = 15 * 20; // time from lava
   private static final float PERCENT_PER_LEVEL = 0.15f; // 15% bonus when in lava essentially
@@ -40,14 +43,16 @@ public class ConductingModifier extends Modifier implements ConditionalStatModif
     return 90;
   }
 
-  /** Gets the bonus damage for the given entity and level */
+  /**
+   * Gets the bonus damage for the given entity and level
+   */
   public static float bonusScale(LivingEntity living) {
     int fire = living.getRemainingFireTicks();
     if (fire > 0) {
       float bonus = 1;
       // if less than 15 seconds of fire, smaller boost
       if (fire < MAX_BONUS_TICKS) {
-        bonus *= (float)(fire) / MAX_BONUS_TICKS;
+        bonus *= (float) (fire) / MAX_BONUS_TICKS;
       }
       // half boost if not on fire
       if (living.hasEffect(MobEffects.FIRE_RESISTANCE)) {

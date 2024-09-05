@@ -17,6 +17,7 @@ import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 public class BoonOfSssssModifier extends NoLevelsModifier implements EquipmentChangeModifierHook {
+
   public BoonOfSssssModifier() {
     MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, false, MobEffectEvent.Added.class, this::onPotionStart);
   }
@@ -38,7 +39,9 @@ public class BoonOfSssssModifier extends NoLevelsModifier implements EquipmentCh
     }
   }
 
-  /** Called when the potion effects start to apply this effect */
+  /**
+   * Called when the potion effects start to apply this effect
+   */
   private void onPotionStart(MobEffectEvent.Added event) {
     MobEffectInstance newEffect = event.getEffectInstance();
     if (newEffect.getEffect().isBeneficial() && !newEffect.getCurativeItems().isEmpty()) {

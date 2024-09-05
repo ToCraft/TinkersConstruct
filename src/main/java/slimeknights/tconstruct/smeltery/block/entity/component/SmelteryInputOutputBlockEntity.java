@@ -35,11 +35,18 @@ import static slimeknights.mantle.util.RetexturedHelper.TAG_TEXTURE;
  * Shared logic between drains and ducts
  */
 public abstract class SmelteryInputOutputBlockEntity<T> extends SmelteryComponentBlockEntity implements IRetexturedBlockEntity {
-  /** Capability this TE watches */
+
+  /**
+   * Capability this TE watches
+   */
   private final Capability<T> capability;
-  /** Empty capability for in case the valid capability becomes invalid without invalidating */
+  /**
+   * Empty capability for in case the valid capability becomes invalid without invalidating
+   */
   protected final T emptyInstance;
-  /** Listener to attach to consumed capabilities */
+  /**
+   * Listener to attach to consumed capabilities
+   */
   protected final NonNullConsumer<LazyOptional<T>> listener = new WeakConsumerWrapper<>(this, (te, cap) -> te.clearHandler());
   @Nullable
   private LazyOptional<T> capabilityHolder = null;
@@ -55,7 +62,9 @@ public abstract class SmelteryInputOutputBlockEntity<T> extends SmelteryComponen
     this.emptyInstance = emptyInstance;
   }
 
-  /** Clears all cached capabilities */
+  /**
+   * Clears all cached capabilities
+   */
   private void clearHandler() {
     if (capabilityHolder != null) {
       capabilityHolder.invalidate();
@@ -88,8 +97,9 @@ public abstract class SmelteryInputOutputBlockEntity<T> extends SmelteryComponen
 
   /**
    * Gets the capability to store in this IO block. Capability parent should have the proper listeners attached
-   * @param parent  Parent tile entity
-   * @return  Capability from parent, or empty if absent
+   *
+   * @param parent Parent tile entity
+   * @return Capability from parent, or empty if absent
    */
   protected LazyOptional<T> getCapability(BlockEntity parent) {
     LazyOptional<T> handler = parent.getCapability(capability);
@@ -180,13 +190,18 @@ public abstract class SmelteryInputOutputBlockEntity<T> extends SmelteryComponen
   }
 
 
-  /** Fluid implementation of smeltery IO */
+  /**
+   * Fluid implementation of smeltery IO
+   */
   public static abstract class SmelteryFluidIO extends SmelteryInputOutputBlockEntity<IFluidHandler> {
+
     protected SmelteryFluidIO(BlockEntityType<?> type, BlockPos pos, BlockState state) {
       super(type, pos, state, ForgeCapabilities.FLUID_HANDLER, EmptyFluidHandler.INSTANCE);
     }
 
-    /** Wraps the given capability */
+    /**
+     * Wraps the given capability
+     */
     protected LazyOptional<IFluidHandler> makeWrapper(LazyOptional<IFluidHandler> capability) {
       return LazyOptional.of(() -> capability.orElse(emptyInstance));
     }
@@ -205,8 +220,11 @@ public abstract class SmelteryInputOutputBlockEntity<T> extends SmelteryComponen
     }
   }
 
-  /** Item implementation of smeltery IO */
+  /**
+   * Item implementation of smeltery IO
+   */
   public static class ChuteBlockEntity extends SmelteryInputOutputBlockEntity<IItemHandler> {
+
     public ChuteBlockEntity(BlockPos pos, BlockState state) {
       this(TinkerSmeltery.chute.get(), pos, state);
     }

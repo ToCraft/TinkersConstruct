@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class FlexModifiableBowItem extends ModifiableBowItem implements IFlexItem {
+
   private final Map<String, FlexEventHandler> eventHandlers = new HashMap<>();
   private final Set<CreativeModeTab> tabs = new HashSet<>();
 

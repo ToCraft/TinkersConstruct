@@ -16,39 +16,53 @@ import slimeknights.tconstruct.library.modifiers.ModifierId;
 
 import java.util.function.Consumer;
 
-/** Builder for recipes to add or remove a modifier from a set in persistent data */
+/**
+ * Builder for recipes to add or remove a modifier from a set in persistent data
+ */
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ModifierSetWorktableRecipeBuilder extends AbstractSizedIngredientRecipeBuilder<ModifierSetWorktableRecipeBuilder> {
+
   private final ResourceLocation dataKey;
-  @Setter @Accessors(fluent = true)
+  @Setter
+  @Accessors(fluent = true)
   private IJsonPredicate<ModifierId> modifierPredicate = ModifierPredicate.ANY;
   private final boolean addToSet;
   private Ingredient tools = AbstractWorktableRecipe.DEFAULT_TOOLS;
   private boolean allowTraits = false;
 
-  /** Creates a new recipe for adding to a set */
+  /**
+   * Creates a new recipe for adding to a set
+   */
   public static ModifierSetWorktableRecipeBuilder setAdding(ResourceLocation dataKey) {
     return new ModifierSetWorktableRecipeBuilder(dataKey, true);
   }
 
-  /** Creates a new recipe for removing from a set */
+  /**
+   * Creates a new recipe for removing from a set
+   */
   public static ModifierSetWorktableRecipeBuilder setRemoving(ResourceLocation dataKey) {
     return new ModifierSetWorktableRecipeBuilder(dataKey, false);
   }
 
-  /** Sets the tool requirement for this recipe */
+  /**
+   * Sets the tool requirement for this recipe
+   */
   public ModifierSetWorktableRecipeBuilder setTools(Ingredient ingredient) {
     this.tools = ingredient;
     return this;
   }
 
-  /** Sets the tool requirement for this recipe */
+  /**
+   * Sets the tool requirement for this recipe
+   */
   public ModifierSetWorktableRecipeBuilder setTools(TagKey<Item> tag) {
     return this.setTools(Ingredient.of(tag));
   }
 
-  /** Sets the recipe to allow traits */
+  /**
+   * Sets the recipe to allow traits
+   */
   public ModifierSetWorktableRecipeBuilder allowTraits() {
     allowTraits = true;
     return this;

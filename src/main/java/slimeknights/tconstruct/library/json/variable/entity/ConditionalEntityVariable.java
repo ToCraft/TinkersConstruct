@@ -9,8 +9,10 @@ import slimeknights.tconstruct.library.json.variable.ConditionalVariable;
 /**
  * Gets one of two entity properties based on the condition
  */
-public record ConditionalEntityVariable(IJsonPredicate<LivingEntity> condition, EntityVariable ifTrue, EntityVariable ifFalse)
-    implements EntityVariable, ConditionalVariable<IJsonPredicate<LivingEntity>,EntityVariable> {
+public record ConditionalEntityVariable(IJsonPredicate<LivingEntity> condition, EntityVariable ifTrue,
+                                        EntityVariable ifFalse)
+  implements EntityVariable, ConditionalVariable<IJsonPredicate<LivingEntity>, EntityVariable> {
+
   public static final IGenericLoader<ConditionalEntityVariable> LOADER = ConditionalVariable.loadable(LivingEntityPredicate.LOADER, EntityVariable.LOADER, ConditionalEntityVariable::new);
 
   public ConditionalEntityVariable(IJsonPredicate<LivingEntity> condition, float ifTrue, float ifFalse) {

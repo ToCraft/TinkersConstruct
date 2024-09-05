@@ -24,6 +24,7 @@ import slimeknights.tconstruct.tables.TinkerTables;
 
 @RequiredArgsConstructor
 public class TinkerStationDamagingRecipe implements ITinkerStationRecipe {
+
   public static final RecordLoadable<TinkerStationDamagingRecipe> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(),
     IngredientLoadable.DISALLOW_EMPTY.requiredField("ingredient", r -> r.ingredient),
@@ -70,7 +71,9 @@ public class TinkerStationDamagingRecipe implements ITinkerStationRecipe {
     IncrementalModifierRecipe.updateInputs(inv, ingredient, damageTaken, damageAmount, ItemStack.EMPTY);
   }
 
-  /** @deprecated Use {@link #getValidatedResult(ITinkerStationContainer)} */
+  /**
+   * @deprecated Use {@link #getValidatedResult(ITinkerStationContainer)}
+   */
   @Deprecated
   @Override
   public ItemStack getResultItem() {

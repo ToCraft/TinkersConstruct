@@ -23,17 +23,26 @@ import java.util.function.Function;
  */
 @RequiredArgsConstructor
 public class NormalModifierModel implements IBakedModifierModel {
-  /** Constant unbaked model instance, as they are all the same */
+
+  /**
+   * Constant unbaked model instance, as they are all the same
+   */
   public static final IUnbakedModifierModel UNBAKED_INSTANCE = new Unbaked(-1, 0);
 
-  /** Textures to show */
+  /**
+   * Textures to show
+   */
   @Nullable
   private final Material small;
   @Nullable
   private final Material large;
-  /** Color to apply to the texture */
+  /**
+   * Color to apply to the texture
+   */
   private final int color;
-  /** Luminosity to apply to the texture */
+  /**
+   * Luminosity to apply to the texture
+   */
   private final int luminosity;
 
   public NormalModifierModel(@Nullable Material smallTexture, @Nullable Material largeTexture) {
@@ -41,7 +50,7 @@ public class NormalModifierModel implements IBakedModifierModel {
   }
 
   @Override
-  public void addQuads(IToolStackView tool, ModifierEntry entry, Function<Material,TextureAtlasSprite> spriteGetter, Transformation transforms, boolean isLarge, int startTintIndex, Consumer<Collection<BakedQuad>> quadConsumer, @Nullable ItemLayerPixels pixels) {
+  public void addQuads(IToolStackView tool, ModifierEntry entry, Function<Material, TextureAtlasSprite> spriteGetter, Transformation transforms, boolean isLarge, int startTintIndex, Consumer<Collection<BakedQuad>> quadConsumer, @Nullable ItemLayerPixels pixels) {
     Material spriteName = isLarge ? large : small;
     if (spriteName != null) {
       quadConsumer.accept(MantleItemLayerModel.getQuadsForSprite(color, -1, spriteGetter.apply(spriteName), transforms, luminosity, pixels));
@@ -49,9 +58,10 @@ public class NormalModifierModel implements IBakedModifierModel {
   }
 
   private record Unbaked(int color, int luminosity) implements IUnbakedModifierModel {
+
     @Nullable
     @Override
-    public IBakedModifierModel forTool(Function<String,Material> smallGetter, Function<String,Material> largeGetter) {
+    public IBakedModifierModel forTool(Function<String, Material> smallGetter, Function<String, Material> largeGetter) {
       Material smallTexture = smallGetter.apply("");
       Material largeTexture = largeGetter.apply("");
       if (smallTexture != null || largeTexture != null) {

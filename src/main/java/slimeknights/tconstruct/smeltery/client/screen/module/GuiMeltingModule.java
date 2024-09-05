@@ -15,6 +15,7 @@ import java.util.function.Predicate;
 
 @AllArgsConstructor
 public class GuiMeltingModule {
+
   // progress bars
   private static final ScalableElementScreen PROGRESS_BAR = new ScalableElementScreen(176, 150, 3, 16, 256, 256);
   private static final ScalableElementScreen NO_HEAT_BAR = new ScalableElementScreen(179, 150, 3, 16, 256, 256);
@@ -51,8 +52,7 @@ public class GuiMeltingModule {
         float progress = 1f;
         if (requiredTime == 0) {
           bar = UNMELTABLE_BAR;
-        }
-        else if (inventory.getRequiredTemp(index) > temperature) {
+        } else if (inventory.getRequiredTemp(index) > temperature) {
           bar = NO_HEAT_BAR;
         }
         // -1 error state if no space
@@ -73,8 +73,9 @@ public class GuiMeltingModule {
 
   /**
    * Draws the tooltip for the hovered hear slot
-   * @param mouseX  Mouse X position
-   * @param mouseY  Mouse Y position
+   *
+   * @param mouseX Mouse X position
+   * @param mouseY Mouse Y position
    */
   public void drawHeatTooltips(PoseStack matrices, int mouseX, int mouseY) {
     int checkX = mouseX - screen.leftPos;

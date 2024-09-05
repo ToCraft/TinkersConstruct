@@ -35,14 +35,25 @@ import java.util.function.BiConsumer;
 /**
  * Module to add an attribute to a tool
  */
-public record AttributeModule(String unique, Attribute attribute, Operation operation, ToolFormula formula, UUID[] slotUUIDs, ModifierCondition<IToolStackView> condition) implements AttributesModifierHook, ModifierModule, ConditionalModule<IToolStackView> {
-  /** Default variables */
-  private static final String[] VARIABLES = { "level" };
-  /** Loader for the variables */
+public record AttributeModule(String unique, Attribute attribute, Operation operation, ToolFormula formula,
+                              UUID[] slotUUIDs,
+                              ModifierCondition<IToolStackView> condition) implements AttributesModifierHook, ModifierModule, ConditionalModule<IToolStackView> {
+
+  /**
+   * Default variables
+   */
+  private static final String[] VARIABLES = {"level"};
+  /**
+   * Loader for the variables
+   */
   private static final RecordLoadable<ToolFormula> VARIABLE_LOADER = new VariableFormulaLoadable<>(ToolVariable.LOADER, VARIABLES, FallbackFormula.IDENTITY, (formula, variables, percent) -> new ToolFormula(formula, variables, VariableFormula.EMPTY_STRINGS));
-  /** Default hooks */
+  /**
+   * Default hooks
+   */
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<AttributeModule>defaultHooks(ModifierHooks.ATTRIBUTES);
-  /** Loader for the module */
+  /**
+   * Loader for the module
+   */
   public static final RecordLoadable<AttributeModule> LOADER = RecordLoadable.create(
     StringLoadable.DEFAULT.requiredField("unique", AttributeModule::unique),
     Loadables.ATTRIBUTE.requiredField("attribute", AttributeModule::attribute),
@@ -52,12 +63,16 @@ public record AttributeModule(String unique, Attribute attribute, Operation oper
     ModifierCondition.TOOL_FIELD,
     (unique, attribute, operation, amount, slots, condition) -> new AttributeModule(unique, attribute, operation, amount, slotsToUUIDs(unique, slots), condition));
 
-  /** Gets the UUID from a name */
+  /**
+   * Gets the UUID from a name
+   */
   public static UUID getUUID(String name, EquipmentSlot slot) {
     return UUID.nameUUIDFromBytes((name + "." + slot.getName()).getBytes());
   }
 
-  /** Converts a list of slots to an array of UUIDs at each index */
+  /**
+   * Converts a list of slots to an array of UUIDs at each index
+   */
   public static UUID[] slotsToUUIDs(String name, Collection<EquipmentSlot> slots) {
     UUID[] slotUUIDs = new UUID[6];
     for (EquipmentSlot slot : slots) {
@@ -66,7 +81,9 @@ public record AttributeModule(String unique, Attribute attribute, Operation oper
     return slotUUIDs;
   }
 
-  /** Maps the UUID array to a set for serializing */
+  /**
+   * Maps the UUID array to a set for serializing
+   */
   public static Set<EquipmentSlot> uuidsToSlots(UUID[] uuids) {
     Set<EquipmentSlot> set = EnumSet.noneOf(EquipmentSlot.class);
     for (EquipmentSlot slot : EquipmentSlot.values()) {
@@ -78,7 +95,7 @@ public record AttributeModule(String unique, Attribute attribute, Operation oper
   }
 
   @Override
-  public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute,AttributeModifier> consumer) {
+  public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
     if (condition.matches(tool, modifier)) {
       UUID uuid = slotUUIDs[slot.getFilterFlag()];
       if (uuid != null) {
@@ -98,12 +115,15 @@ public record AttributeModule(String unique, Attribute attribute, Operation oper
   }
 
 
-  /** Creates a new builder instance */
+  /**
+   * Creates a new builder instance
+   */
   public static Builder builder(Attribute attribute, Operation operation) {
     return new Builder(attribute, operation);
   }
 
-  public static class Builder extends VariableFormula.Builder<Builder,AttributeModule,ToolVariable> {
+  public static class Builder extends VariableFormula.Builder<Builder, AttributeModule, ToolVariable> {
+
     protected final Attribute attribute;
     protected final Operation operation;
     protected String unique;
@@ -115,7 +135,9 @@ public record AttributeModule(String unique, Attribute attribute, Operation oper
       this.operation = operation;
     }
 
-    /** Adds the given slots to this builder */
+    /**
+     * Adds the given slots to this builder
+     */
     public Builder slots(EquipmentSlot... slots) {
       this.slots = slots;
       return this;

@@ -20,12 +20,15 @@ import java.util.function.Consumer;
 @RequiredArgsConstructor(staticName = "toolBuildingRecipe")
 @Accessors(fluent = true)
 public class ToolBuildingRecipeBuilder extends AbstractRecipeBuilder<ToolBuildingRecipeBuilder> {
+
   private final IModifiable output;
   @Setter
   private int outputSize = 1;
   private final List<Ingredient> extraRequirements = new ArrayList<>();
 
-  /** Adds an extra ingredient requirement */
+  /**
+   * Adds an extra ingredient requirement
+   */
   public ToolBuildingRecipeBuilder addExtraRequirement(Ingredient ingredient) {
     extraRequirements.add(ingredient);
     return this;
@@ -33,7 +36,7 @@ public class ToolBuildingRecipeBuilder extends AbstractRecipeBuilder<ToolBuildin
 
   @Override
   public void save(Consumer<FinishedRecipe> consumerIn) {
-    this.save(consumerIn, Registry.ITEM.getKey(this.output.asItem()));
+    this.save(consumerIn, ForgeRegistries.ITEMS.getKey(this.output.asItem()));
   }
 
   @Override

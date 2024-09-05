@@ -21,19 +21,22 @@ import java.util.function.Consumer;
 @SuppressWarnings({"unused", "WeakerAccess"})
 @RequiredArgsConstructor(staticName = "castingRecipe")
 public class MaterialCastingRecipeBuilder extends AbstractRecipeBuilder<MaterialCastingRecipeBuilder> {
+
   private final IMaterialItem result;
   private final IModifiable resultTool;
   private final TypeAwareRecipeSerializer<? extends AbstractMaterialCastingRecipe> recipeSerializer;
   private Ingredient cast = Ingredient.EMPTY;
-  @Setter @Accessors(chain = true)
+  @Setter
+  @Accessors(chain = true)
   private int itemCost = 0;
   private boolean consumed = false;
   private boolean switchSlots = false;
 
   /**
    * Creates a new material casting recipe for an basin recipe
-   * @param result            Material item result
-   * @return  Builder instance
+   *
+   * @param result Material item result
+   * @return Builder instance
    */
   public static MaterialCastingRecipeBuilder basinRecipe(IMaterialItem result) {
     return castingRecipe(result, null, TinkerSmeltery.basinMaterialSerializer.get());
@@ -41,8 +44,9 @@ public class MaterialCastingRecipeBuilder extends AbstractRecipeBuilder<Material
 
   /**
    * Creates a new material casting recipe for an table recipe
-   * @param result            Material item result
-   * @return  Builder instance
+   *
+   * @param result Material item result
+   * @return Builder instance
    */
   public static MaterialCastingRecipeBuilder tableRecipe(IMaterialItem result) {
     return castingRecipe(result, null, TinkerSmeltery.tableMaterialSerializer.get());
@@ -50,8 +54,9 @@ public class MaterialCastingRecipeBuilder extends AbstractRecipeBuilder<Material
 
   /**
    * Creates a new material casting recipe for an basin recipe
-   * @param result            Material item result
-   * @return  Builder instance
+   *
+   * @param result Material item result
+   * @return Builder instance
    */
   public static MaterialCastingRecipeBuilder basinRecipe(IModifiable result) {
     return castingRecipe(null, result, TinkerSmeltery.basinToolSerializer.get());
@@ -59,8 +64,9 @@ public class MaterialCastingRecipeBuilder extends AbstractRecipeBuilder<Material
 
   /**
    * Creates a new material casting recipe for an table recipe
-   * @param result            Material item result
-   * @return  Builder instance
+   *
+   * @param result Material item result
+   * @return Builder instance
    */
   public static MaterialCastingRecipeBuilder tableRecipe(IModifiable result) {
     return castingRecipe(null, result, TinkerSmeltery.tableToolSerializer.get());
@@ -68,9 +74,10 @@ public class MaterialCastingRecipeBuilder extends AbstractRecipeBuilder<Material
 
   /**
    * Sets the cast to the given tag
-   * @param tag       Cast tag
-   * @param consumed  If true, cast is consumed
-   * @return  Builder instance
+   *
+   * @param tag      Cast tag
+   * @param consumed If true, cast is consumed
+   * @return Builder instance
    */
   public MaterialCastingRecipeBuilder setCast(TagKey<Item> tag, boolean consumed) {
     return this.setCast(Ingredient.of(tag), consumed);
@@ -78,9 +85,10 @@ public class MaterialCastingRecipeBuilder extends AbstractRecipeBuilder<Material
 
   /**
    * Sets the cast to the given item
-   * @param item      Cast item
-   * @param consumed  If true, cast is consumed
-   * @return  Builder instance
+   *
+   * @param item     Cast item
+   * @param consumed If true, cast is consumed
+   * @return Builder instance
    */
   public MaterialCastingRecipeBuilder setCast(ItemLike item, boolean consumed) {
     return this.setCast(Ingredient.of(item), consumed);
@@ -88,9 +96,10 @@ public class MaterialCastingRecipeBuilder extends AbstractRecipeBuilder<Material
 
   /**
    * Set the cast to the given ingredient
-   * @param cast      Ingredient
-   * @param consumed  If true, cast is consumed
-   * @return  Builder instance
+   *
+   * @param cast     Ingredient
+   * @param consumed If true, cast is consumed
+   * @return Builder instance
    */
   public MaterialCastingRecipeBuilder setCast(Ingredient cast, boolean consumed) {
     this.cast = cast;
@@ -109,7 +118,7 @@ public class MaterialCastingRecipeBuilder extends AbstractRecipeBuilder<Material
 
   @Override
   public void save(Consumer<FinishedRecipe> consumer) {
-    this.save(consumer, Registry.ITEM.getKey(this.result.asItem()));
+    this.save(consumer, ForgeRegistries.ITEMS.getKey(this.result.asItem()));
   }
 
   @Override

@@ -4,8 +4,11 @@ import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.library.modifiers.ModifierManager;
 
-/** Supplier that will return a modifier once they are fully registered, typically used with {@link ModifierDeferredRegister} */
+/**
+ * Supplier that will return a modifier once they are fully registered, typically used with {@link ModifierDeferredRegister}
+ */
 public class StaticModifier<T extends Modifier> extends LazyModifier {
+
   public StaticModifier(ModifierId id) {
     super(id);
   }
@@ -18,7 +21,9 @@ public class StaticModifier<T extends Modifier> extends LazyModifier {
     return result;
   }
 
-  /** Returns true if this static modifier has a value. A return of true here means its safe to call {@link #get()} */
+  /**
+   * Returns true if this static modifier has a value. A return of true here means its safe to call {@link #get()}
+   */
   @Override
   public boolean isBound() {
     if (!ModifierManager.INSTANCE.isModifiersRegistered()) {
@@ -29,8 +34,9 @@ public class StaticModifier<T extends Modifier> extends LazyModifier {
 
   /**
    * Fetches the modifier from the modifier manager. Should not be called until after the modifier registration event fires
-   * @return  Modifier instance
-   * @throws IllegalStateException  If the modifier manager has not registered modifiers, or if the modifier ID was never registered
+   *
+   * @return Modifier instance
+   * @throws IllegalStateException If the modifier manager has not registered modifiers, or if the modifier ID was never registered
    */
   @SuppressWarnings("unchecked")
   @Override

@@ -7,17 +7,20 @@ import slimeknights.mantle.client.book.data.content.PageContent;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.client.book.content.ContentTool;
 
-/** Injects tools into a section based on a tag */
+/**
+ * Injects tools into a section based on a tag
+ */
 public class ToolTagInjectorTransformer extends AbstractTagInjectingTransformer<Item> {
+
   public static final ToolTagInjectorTransformer INSTANCE = new ToolTagInjectorTransformer();
 
   private ToolTagInjectorTransformer() {
-    super(Registry.ITEM_REGISTRY, TConstruct.getResource("load_tools"), ContentTool.ID);
+    super(Registries.ITEM, TConstruct.getResource("load_tools"), ContentTool.ID);
   }
 
   @Override
   protected ResourceLocation getId(Item item) {
-    return Registry.ITEM.getKey(item);
+    return ForgeRegistries.ITEMS.getKey(item);
   }
 
   @Override

@@ -30,7 +30,10 @@ import java.util.stream.Stream;
  * Extension of the vanilla ingredient to display materials on items and support matching by materials
  */
 public class MaterialIngredient extends NestedIngredient {
-  /** Material ID meaning any material matches */
+
+  /**
+   * Material ID meaning any material matches
+   */
   private static final MaterialId WILDCARD = IMaterial.UNKNOWN.getIdentifier();
 
   private final MaterialVariantId material;
@@ -38,27 +41,33 @@ public class MaterialIngredient extends NestedIngredient {
   private final TagKey<IMaterial> tag;
   @Nullable
   private ItemStack[] materialStacks;
+
   protected MaterialIngredient(Ingredient nested, MaterialVariantId material, @Nullable TagKey<IMaterial> tag) {
     super(nested);
     this.material = material;
     this.tag = tag;
   }
 
-  /** Creates an ingredient matching a single material */
+  /**
+   * Creates an ingredient matching a single material
+   */
   public static MaterialIngredient of(Ingredient ingredient, MaterialVariantId material) {
     return new MaterialIngredient(ingredient, material, null);
   }
 
-  /** Creates an ingredient matching a material tag */
+  /**
+   * Creates an ingredient matching a material tag
+   */
   public static MaterialIngredient of(Ingredient ingredient, TagKey<IMaterial> tag) {
     return new MaterialIngredient(ingredient, WILDCARD, tag);
   }
 
   /**
    * Creates a new instance from an item with a fixed material
-   * @param item      Material item
-   * @param material  Material ID
-   * @return  Material ingredient instance
+   *
+   * @param item     Material item
+   * @param material Material ID
+   * @return Material ingredient instance
    */
   public static MaterialIngredient of(ItemLike item, MaterialVariantId material) {
     return of(Ingredient.of(item), material);
@@ -66,9 +75,10 @@ public class MaterialIngredient extends NestedIngredient {
 
   /**
    * Creates a new instance from an item with a tagged material
-   * @param item      Material item
-   * @param tag   Material tag
-   * @return  Material ingredient instance
+   *
+   * @param item Material item
+   * @param tag  Material tag
+   * @return Material ingredient instance
    */
   public static MaterialIngredient of(ItemLike item, TagKey<IMaterial> tag) {
     return of(Ingredient.of(item), tag);
@@ -76,8 +86,9 @@ public class MaterialIngredient extends NestedIngredient {
 
   /**
    * Creates a new ingredient matching any material from items
-   * @param item  Material item
-   * @return  Material ingredient instance
+   *
+   * @param item Material item
+   * @return Material ingredient instance
    */
   public static MaterialIngredient of(ItemLike item) {
     return of(item, WILDCARD);
@@ -85,9 +96,10 @@ public class MaterialIngredient extends NestedIngredient {
 
   /**
    * Creates a new ingredient from a tag
-   * @param tag       Tag instance
-   * @param material  Material value
-   * @return  Material with tag
+   *
+   * @param tag      Tag instance
+   * @param material Material value
+   * @return Material with tag
    */
   public static MaterialIngredient of(TagKey<Item> tag, MaterialVariantId material) {
     return of(Ingredient.of(tag), material);
@@ -95,8 +107,9 @@ public class MaterialIngredient extends NestedIngredient {
 
   /**
    * Creates a new ingredient matching any material from a tag
-   * @param tag       Tag instance
-   * @return  Material with tag
+   *
+   * @param tag Tag instance
+   * @return Material with tag
    */
   public static MaterialIngredient of(TagKey<Item> tag) {
     return of(tag, WILDCARD);
@@ -137,8 +150,8 @@ public class MaterialIngredient extends NestedIngredient {
         // if we have a tag, filter values, else get all values
         Collection<IMaterial> materials = tag != null ? MaterialRegistry.getInstance().getTagValues(tag) : MaterialRegistry.getMaterials();
         items = items.flatMap(stack -> materials.stream()
-                                                .map(mat -> IMaterialItem.withMaterial(stack, mat.getIdentifier()))
-                                                .filter(ItemStack::hasTag));
+          .map(mat -> IMaterialItem.withMaterial(stack, mat.getIdentifier()))
+          .filter(ItemStack::hasTag));
       }
       materialStacks = items.distinct().toArray(ItemStack[]::new);
     }
@@ -177,12 +190,14 @@ public class MaterialIngredient extends NestedIngredient {
     return Serializer.INSTANCE;
   }
 
-  /** Serializer instance */
+  /**
+   * Serializer instance
+   */
   public enum Serializer implements IIngredientSerializer<MaterialIngredient> {
     INSTANCE;
     public static final ResourceLocation ID = TConstruct.getResource("material");
-    private static final LoadableField<MaterialVariantId,MaterialIngredient> MATERIAL_FIELD = MaterialVariantId.LOADABLE.defaultField("material", WILDCARD, i -> i.material);
-    private static final LoadableField<TagKey<IMaterial>,MaterialIngredient> TAG_FIELD = TinkerLoadables.MATERIAL_TAGS.nullableField("material_tag", i -> i.tag);
+    private static final LoadableField<MaterialVariantId, MaterialIngredient> MATERIAL_FIELD = MaterialVariantId.LOADABLE.defaultField("material", WILDCARD, i -> i.material);
+    private static final LoadableField<TagKey<IMaterial>, MaterialIngredient> TAG_FIELD = TinkerLoadables.MATERIAL_TAGS.nullableField("material_tag", i -> i.tag);
 
     @Override
     public MaterialIngredient parse(JsonObject json) {

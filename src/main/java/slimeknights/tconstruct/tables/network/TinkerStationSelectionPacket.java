@@ -12,7 +12,9 @@ import slimeknights.tconstruct.tables.menu.TinkerStationContainerMenu;
 
 @RequiredArgsConstructor
 public class TinkerStationSelectionPacket implements IThreadsafePacket {
+
   private final ResourceLocation layoutName;
+
   public TinkerStationSelectionPacket(FriendlyByteBuf buffer) {
     this.layoutName = buffer.readResourceLocation();
   }

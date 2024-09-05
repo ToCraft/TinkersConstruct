@@ -15,8 +15,12 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemFrameModifier extends InventoryModifier {
-  /** Pattern and inventory key */
+
+  /**
+   * Pattern and inventory key
+   */
   private static final Pattern ITEM_FRAME = new Pattern(TConstruct.MOD_ID, "item_frame");
+
   public ItemFrameModifier() {
     super(ITEM_FRAME, 1);
   }
@@ -32,7 +36,9 @@ public class ItemFrameModifier extends InventoryModifier {
     return hasStack ? null : ITEM_FRAME;
   }
 
-  /** Parses all stacks in NBT into the passed list */
+  /**
+   * Parses all stacks in NBT into the passed list
+   */
   public void getAllStacks(IToolStackView tool, ModifierEntry entry, List<ItemStack> stackList) {
     IModDataView modData = tool.getPersistentData();
     if (modData.contains(ITEM_FRAME, Tag.TAG_LIST)) {

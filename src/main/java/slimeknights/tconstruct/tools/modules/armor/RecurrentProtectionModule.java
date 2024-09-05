@@ -26,8 +26,12 @@ import slimeknights.tconstruct.tools.stats.ToolType;
 import javax.annotation.Nullable;
 import java.util.List;
 
-/** Module for boosting protection after taking damage */
-public record RecurrentProtectionModule(LevelingValue amount) implements ModifierModule, ProtectionModifierHook, ModifyDamageModifierHook, TooltipModifierHook {
+/**
+ * Module for boosting protection after taking damage
+ */
+public record RecurrentProtectionModule(
+  LevelingValue amount) implements ModifierModule, ProtectionModifierHook, ModifyDamageModifierHook, TooltipModifierHook {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<RecurrentProtectionModule>defaultHooks(ModifierHooks.PROTECTION, ModifierHooks.MODIFY_DAMAGE, ModifierHooks.TOOLTIP);
   public static final RecordLoadable<RecurrentProtectionModule> LOADER = RecordLoadable.create(
     LevelingValue.LOADABLE.directField(RecurrentProtectionModule::amount),

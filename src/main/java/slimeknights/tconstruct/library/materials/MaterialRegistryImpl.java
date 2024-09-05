@@ -25,6 +25,7 @@ import java.util.Optional;
  * For the Client, materials are synced from the server on server join.
  */
 public class MaterialRegistryImpl implements IMaterialRegistry {
+
   private final MaterialManager materialManager;
   private final MaterialStatsManager materialStatsManager;
   private final MaterialTraitsManager materialTraitsManager;
@@ -74,7 +75,9 @@ public class MaterialRegistryImpl implements IMaterialRegistry {
 
   /* Stats */
 
-  /** Gets the loader for all stat types */
+  /**
+   * Gets the loader for all stat types
+   */
   @Override
   public Loadable<MaterialStatType<?>> getStatTypeLoader() {
     return materialStatsManager.getStatTypes();

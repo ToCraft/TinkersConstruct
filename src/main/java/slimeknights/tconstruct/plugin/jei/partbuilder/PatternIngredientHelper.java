@@ -13,6 +13,7 @@ import javax.annotation.Nullable;
  * Ingredient helper for Tinkers patterns
  */
 public class PatternIngredientHelper implements IIngredientHelper<Pattern> {
+
   @Override
   public IIngredientType<Pattern> getIngredientType() {
     return TConstructJEIConstants.PATTERN_TYPE;

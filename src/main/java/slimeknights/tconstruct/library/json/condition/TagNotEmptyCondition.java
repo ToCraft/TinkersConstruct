@@ -25,6 +25,7 @@ import slimeknights.tconstruct.shared.TinkerCommons;
  */
 @RequiredArgsConstructor
 public class TagNotEmptyCondition<T> implements LootItemCondition, ICondition {
+
   private static final ResourceLocation NAME = TConstruct.getResource("tag_not_empty");
   private final TagKey<T> tag;
 
@@ -50,7 +51,10 @@ public class TagNotEmptyCondition<T> implements LootItemCondition, ICondition {
   }
 
   public static class ConditionSerializer implements Serializer<TagNotEmptyCondition<?>>, IConditionSerializer<TagNotEmptyCondition<?>> {
-    /** Helper to deal with generics */
+
+    /**
+     * Helper to deal with generics
+     */
     private static <T> TagKey<T> createKey(JsonObject json) {
       ResourceKey<? extends Registry<T>> registry = ResourceKey.createRegistryKey(JsonHelper.getResourceLocation(json, "registry"));
       return TagKey.create(registry, JsonHelper.getResourceLocation(json, "tag"));

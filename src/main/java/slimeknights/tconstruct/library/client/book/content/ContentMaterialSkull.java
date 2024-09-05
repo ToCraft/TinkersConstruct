@@ -23,18 +23,31 @@ import slimeknights.tconstruct.tools.stats.SkullStats;
 import javax.annotation.Nullable;
 import java.util.List;
 
-/** Extension of the material page to display skull stats for the slimeskull */
+/**
+ * Extension of the material page to display skull stats for the slimeskull
+ */
 public class ContentMaterialSkull extends AbstractMaterialContent {
-  /** Translation key for skull recipe */
+
+  /**
+   * Translation key for skull recipe
+   */
   private static final String SKULL_FROM = TConstruct.makeTranslationKey("book", "material.skull_from");
-  /** Page ID for using this index directly */
+  /**
+   * Page ID for using this index directly
+   */
   public static final ResourceLocation ID = TConstruct.getResource("skull_material");
 
-  /** casting recipe used to create this item */
+  /**
+   * casting recipe used to create this item
+   */
   protected transient IDisplayableCastingRecipe skullRecipe = null;
-  /** If true, casting recipe was looked up */
+  /**
+   * If true, casting recipe was looked up
+   */
   private transient boolean searchedSkullRecipe = false;
-  /** List of skull items as inputs */
+  /**
+   * List of skull items as inputs
+   */
   protected transient List<ItemStack> skullStacks = null;
 
   public ContentMaterialSkull(MaterialVariantId material, boolean detailed) {
@@ -57,20 +70,22 @@ public class ContentMaterialSkull extends AbstractMaterialContent {
     return String.format(detailed ? "material.%s.%s.skull_encyclopedia" : "material.%s.%s.skull_flavor", material.getNamespace(), material.getPath());
   }
 
-  /** Gets the recipe to cast this skull */
+  /**
+   * Gets the recipe to cast this skull
+   */
   @Nullable
   private IDisplayableCastingRecipe getSkullRecipe() {
     Level world = Minecraft.getInstance().level;
     if (!searchedSkullRecipe && world != null) {
       skullRecipe = world.getRecipeManager().getAllRecipesFor(TinkerRecipeTypes.CASTING_BASIN.get()).stream()
-												 .filter(recipe -> recipe instanceof IDisplayableCastingRecipe)
-												 .map(recipe -> (IDisplayableCastingRecipe)recipe)
-												 .filter(recipe -> {
-                           ItemStack output = recipe.getOutput();
-                           return output.getItem() == TinkerTools.slimesuit.get(ArmorSlotType.HELMET) && MaterialIdNBT.from(output).getMaterial(0).getId().toString().equals(materialName);
-                         })
-												 .findFirst()
-												 .orElse(null);
+        .filter(recipe -> recipe instanceof IDisplayableCastingRecipe)
+        .map(recipe -> (IDisplayableCastingRecipe) recipe)
+        .filter(recipe -> {
+          ItemStack output = recipe.getOutput();
+          return output.getItem() == TinkerTools.slimesuit.get(ArmorSlotType.HELMET) && MaterialIdNBT.from(output).getMaterial(0).getId().toString().equals(materialName);
+        })
+        .findFirst()
+        .orElse(null);
       searchedSkullRecipe = true;
     }
     return skullRecipe;

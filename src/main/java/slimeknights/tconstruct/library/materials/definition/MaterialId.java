@@ -11,6 +11,7 @@ import javax.annotation.Nullable;
  * This is just a copy of ResourceLocation for type safety.
  */
 public final class MaterialId extends ResourceLocation implements MaterialVariantId {
+
   public static final IdParser<MaterialId> PARSER = new IdParser<>(MaterialId::new, "Material");
 
   public MaterialId(String resourceName) {
@@ -25,12 +26,16 @@ public final class MaterialId extends ResourceLocation implements MaterialVarian
     super(resourceLocation.getNamespace(), resourceLocation.getPath());
   }
 
-  /** Checks if this ID matches the given material */
+  /**
+   * Checks if this ID matches the given material
+   */
   public boolean matches(IMaterial material) {
     return this.equals(material.getIdentifier());
   }
 
-  /** Checks if this ID matches the given stack */
+  /**
+   * Checks if this ID matches the given stack
+   */
   public boolean matches(ItemStack stack) {
     return !stack.isEmpty() && this.equals(IMaterialItem.getMaterialFromStack(stack));
   }
@@ -69,8 +74,9 @@ public final class MaterialId extends ResourceLocation implements MaterialVarian
 
   /**
    * Creates a new material ID from the given string
-   * @param string  String
-   * @return  Material ID, or null if invalid
+   *
+   * @param string String
+   * @return Material ID, or null if invalid
    */
   @Nullable
   public static MaterialId tryParse(String string) {

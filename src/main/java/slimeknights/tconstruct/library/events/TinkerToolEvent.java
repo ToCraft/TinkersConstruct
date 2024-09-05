@@ -22,8 +22,10 @@ import javax.annotation.Nullable;
 @AllArgsConstructor
 @Getter
 public abstract class TinkerToolEvent extends Event {
+
   private final ItemStack stack;
   private final IToolStackView tool;
+
   public TinkerToolEvent(ItemStack stack) {
     this.stack = stack;
     this.tool = ToolStack.from(stack);
@@ -35,7 +37,10 @@ public abstract class TinkerToolEvent extends Event {
   @HasResult
   @Getter
   public static class ToolHarvestEvent extends TinkerToolEvent {
-    /** Item context, note this is the original context, so some information (such as position) may not be accurate */
+
+    /**
+     * Item context, note this is the original context, so some information (such as position) may not be accurate
+     */
     private final UseOnContext context;
     private final ServerLevel world;
     private final BlockState state;
@@ -51,7 +56,9 @@ public abstract class TinkerToolEvent extends Event {
       this.source = source;
     }
 
-    /** Gets the item for the event */
+    /**
+     * Gets the item for the event
+     */
     private static ItemStack getItem(UseOnContext context, InteractionSource source) {
       Player player = context.getPlayer();
       if (player != null) {
@@ -60,7 +67,9 @@ public abstract class TinkerToolEvent extends Event {
       return context.getItemInHand();
     }
 
-    /** Gets the item for the event */
+    /**
+     * Gets the item for the event
+     */
     private static ItemStack getItem(UseOnContext context, EquipmentSlot slotType) {
       Player player = context.getPlayer();
       if (player != null) {
@@ -74,7 +83,9 @@ public abstract class TinkerToolEvent extends Event {
       return context.getPlayer();
     }
 
-    /** Fires this event and posts the result */
+    /**
+     * Fires this event and posts the result
+     */
     public Result fire() {
       MinecraftForge.EVENT_BUS.post(this);
       return this.getResult();
@@ -87,10 +98,12 @@ public abstract class TinkerToolEvent extends Event {
   @HasResult
   @Getter
   public static class ToolShearEvent extends TinkerToolEvent {
+
     private final Level world;
     private final Player player;
     private final Entity target;
     private final int fortune;
+
     public ToolShearEvent(ItemStack stack, IToolStackView tool, Level world, Player player, Entity target, int fortune) {
       super(stack, tool);
       this.world = world;
@@ -99,7 +112,9 @@ public abstract class TinkerToolEvent extends Event {
       this.fortune = fortune;
     }
 
-    /** Fires this event and posts the result */
+    /**
+     * Fires this event and posts the result
+     */
     public Result fire() {
       MinecraftForge.EVENT_BUS.post(this);
       return this.getResult();

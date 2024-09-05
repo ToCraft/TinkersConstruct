@@ -35,15 +35,18 @@ import java.util.function.Predicate;
  * Section transformer to show a range of materials tiers in the book
  */
 public class TierRangeMaterialSectionTransformer extends BookTransformer {
+
   private static final ResourceLocation KEY = TConstruct.getResource("material_tier");
   private static final IntRange TIER = new IntRange(0, Short.MAX_VALUE);
 
-  private static final Map<ResourceLocation,MaterialType> MATERIAL_TYPES = new HashMap<>();
+  private static final Map<ResourceLocation, MaterialType> MATERIAL_TYPES = new HashMap<>();
 
   public static final TierRangeMaterialSectionTransformer INSTANCE = new TierRangeMaterialSectionTransformer();
 
-  /** Registers a new group of stat types to show on a page */
-  public static void registerMaterialType(ResourceLocation id, BiFunction<MaterialVariantId,Boolean,AbstractMaterialContent> constructor, MaterialStatsId... stats) {
+  /**
+   * Registers a new group of stat types to show on a page
+   */
+  public static void registerMaterialType(ResourceLocation id, BiFunction<MaterialVariantId, Boolean, AbstractMaterialContent> constructor, MaterialStatsId... stats) {
     if (MATERIAL_TYPES.putIfAbsent(id, new MaterialType(constructor, ImmutableSet.copyOf(stats))) != null) {
       throw new IllegalArgumentException("Duplicate material stat group " + id);
     }
@@ -57,7 +60,7 @@ public class TierRangeMaterialSectionTransformer extends BookTransformer {
         try {
           JsonObject json = GsonHelper.convertToJsonObject(element, KEY.toString());
           IntRange tier = TIER.getOrDefault(json, "tier");
-          Function<MaterialVariantId,AbstractMaterialContent> pageBuilder;
+          Function<MaterialVariantId, AbstractMaterialContent> pageBuilder;
           Set<MaterialStatsId> visibleStats;
           TagKey<IMaterial> tag = TinkerLoadables.MATERIAL_TAGS.getOrDefault(json, "tag", null);
           ResourceLocation type = JsonHelper.getResourceLocation(json, "type");
@@ -75,8 +78,12 @@ public class TierRangeMaterialSectionTransformer extends BookTransformer {
     }
   }
 
-  /** Helper to create a material predicate */
-  public record ValidMaterial(Set<MaterialStatsId> visibleStats, IntRange tier, @Nullable TagKey<IMaterial> tag) implements Predicate<IMaterial> {
+  /**
+   * Helper to create a material predicate
+   */
+  public record ValidMaterial(Set<MaterialStatsId> visibleStats, IntRange tier,
+                              @Nullable TagKey<IMaterial> tag) implements Predicate<IMaterial> {
+
     @Override
     public boolean test(IMaterial material) {
       if (!this.tier.test(material.getTier())) {
@@ -98,9 +105,13 @@ public class TierRangeMaterialSectionTransformer extends BookTransformer {
     }
   }
 
-  /** Internal record from the registry */
-  private record MaterialType(BiFunction<MaterialVariantId,Boolean,AbstractMaterialContent> pageConstructor, Set<MaterialStatsId> visibleStats) {
-    public Function<MaterialVariantId,AbstractMaterialContent> getMapping(boolean detailed) {
+  /**
+   * Internal record from the registry
+   */
+  private record MaterialType(BiFunction<MaterialVariantId, Boolean, AbstractMaterialContent> pageConstructor,
+                              Set<MaterialStatsId> visibleStats) {
+
+    public Function<MaterialVariantId, AbstractMaterialContent> getMapping(boolean detailed) {
       return id -> pageConstructor.apply(id, detailed);
     }
   }

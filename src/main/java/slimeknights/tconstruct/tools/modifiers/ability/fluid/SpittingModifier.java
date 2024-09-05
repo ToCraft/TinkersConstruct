@@ -36,8 +36,11 @@ import slimeknights.tconstruct.tools.modifiers.upgrades.ranged.ScopeModifier;
 
 import static slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper.TANK_HELPER;
 
-/** Modifier that fires fluid as a projectile */
+/**
+ * Modifier that fires fluid as a projectile
+ */
 public class SpittingModifier extends Modifier implements GeneralInteractionModifierHook {
+
   @Override
   protected void registerHooks(Builder builder) {
     builder.addHook(this, ModifierHooks.GENERAL_INTERACT);
@@ -92,7 +95,7 @@ public class SpittingModifier extends Modifier implements GeneralInteractionModi
             int level = modifier.intEffectiveLevel();
             // amount is the amount per projectile, total cost is amount times level (every other shot is free)
             // if its 0, that means we have only a couple mb left
-            int amount = Math.min(fluid.getAmount(), (int)(recipe.getAmount(fluid.getFluid()) * power) * level) / level;
+            int amount = Math.min(fluid.getAmount(), (int) (recipe.getAmount(fluid.getFluid()) * power) * level) / level;
             if (amount > 0) {
               // other stats now that we know we are shooting
               // velocity determines how far it goes, does not impact damage unlike bows

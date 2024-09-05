@@ -48,6 +48,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ContentTool extends PageContent {
+
   public static final transient ResourceLocation ID = TConstruct.getResource("tool");
   private static final transient String KEY_PROPERTIES = TConstruct.makeTranslationKey("book", "tool.properties");
 
@@ -67,24 +68,34 @@ public class ContentTool extends PageContent {
     IMG_SLOT_3x3, IMG_SLOT_3x3, IMG_SLOT_3x3
   };
   private static final transient ImageData[][] IMG_SLOTS_SHAPED = {
-    { IMG_SLOT_1x1, IMG_SLOT_2x1, IMG_SLOT_3x1, },
-    { IMG_SLOT_1x2, IMG_SLOT_2x2, IMG_SLOT_3x2, },
-    { IMG_SLOT_1x3, IMG_SLOT_2x3, IMG_SLOT_3x3, }
+    {IMG_SLOT_1x1, IMG_SLOT_2x1, IMG_SLOT_3x1,},
+    {IMG_SLOT_1x2, IMG_SLOT_2x2, IMG_SLOT_3x2,},
+    {IMG_SLOT_1x3, IMG_SLOT_2x3, IMG_SLOT_3x3,}
   };
 
 
   /* Slot positions */
-  /** Locations for slots between 0 and 9 for a width of 3 */
-  private static final transient SlotPos[] SLOTS_WIDTH_3 = {new SlotPos(3,  3), new SlotPos(21,  3), new SlotPos(39,  3),
-                                                            new SlotPos(3, 22), new SlotPos(21, 22), new SlotPos(39, 22),
-                                                            new SlotPos(3, 40), new SlotPos(21, 40), new SlotPos(39, 40)};
-  /** Locations for slots between 0 and 6 in a 2x size grid */
+  /**
+   * Locations for slots between 0 and 9 for a width of 3
+   */
+  private static final transient SlotPos[] SLOTS_WIDTH_3 = {new SlotPos(3, 3), new SlotPos(21, 3), new SlotPos(39, 3),
+    new SlotPos(3, 22), new SlotPos(21, 22), new SlotPos(39, 22),
+    new SlotPos(3, 40), new SlotPos(21, 40), new SlotPos(39, 40)};
+  /**
+   * Locations for slots between 0 and 6 in a 2x size grid
+   */
   private static final transient SlotPos[] SLOTS_WIDTH_2 = {SLOTS_WIDTH_3[0], SLOTS_WIDTH_3[1], SLOTS_WIDTH_3[3], SLOTS_WIDTH_3[4], SLOTS_WIDTH_3[6], SLOTS_WIDTH_3[7]};
-  /** Locations for slots between 0 and 3 in a 1x size grid */
+  /**
+   * Locations for slots between 0 and 3 in a 1x size grid
+   */
   private static final transient SlotPos[] SLOTS_WIDTH_1 = {SLOTS_WIDTH_3[0], SLOTS_WIDTH_3[3], SLOTS_WIDTH_3[6]};
-  /** Array of width to slot positions */
+  /**
+   * Array of width to slot positions
+   */
   private static final transient SlotPos[][] SLOTS_WIDTH = {SLOTS_WIDTH_1, SLOTS_WIDTH_2, SLOTS_WIDTH_3};
-  /** Locations for slots between 0 and 5 in a 5 slot shapeless recipe */
+  /**
+   * Locations for slots between 0 and 5 in a 5 slot shapeless recipe
+   */
   private static final transient SlotPos[] SLOTS_5 = {SLOTS_WIDTH_3[0], SLOTS_WIDTH_3[1], SLOTS_WIDTH_3[2], new SlotPos(12, 22), new SlotPos(30, 22)};
 
   /* Page computed data */
@@ -106,18 +117,18 @@ public class ContentTool extends PageContent {
 
   public ContentTool(IModifiableDisplay tool) {
     this.tool = tool;
-    this.toolName = Registry.ITEM.getKey(tool.asItem()).toString();
-    this.text = new TextData[] { new TextData(ForgeI18n.getPattern(tool.asItem().getDescriptionId() + ".description"))};
+    this.toolName = ForgeRegistries.ITEMS.getKey(tool.asItem()).toString();
+    this.text = new TextData[]{new TextData(ForgeI18n.getPattern(tool.asItem().getDescriptionId() + ".description"))};
   }
 
   public ContentTool(Item item) {
-    this.toolName = Registry.ITEM.getKey(item.asItem()).toString();
+    this.toolName = ForgeRegistries.ITEMS.getKey(item.asItem()).toString();
     if (item instanceof IModifiableDisplay tool) {
       this.tool = tool;
     } else {
       this.tool = new Fallback(item);
     }
-    this.text = new TextData[] { new TextData(ForgeI18n.getPattern(tool.asItem().getDescriptionId() + ".description"))};
+    this.text = new TextData[]{new TextData(ForgeI18n.getPattern(tool.asItem().getDescriptionId() + ".description"))};
   }
 
   public IModifiableDisplay getTool() {
@@ -153,10 +164,10 @@ public class ContentTool extends PageContent {
       if (required.isEmpty()) {
         // get the stacks for the first crafting table recipe
         Recipe<CraftingContainer> recipe = Optional.ofNullable(Minecraft.getInstance().level)
-                                                   .flatMap(world -> world.getRecipeManager().byType(RecipeType.CRAFTING).values().stream()
-                                                                          .filter(r -> r.getResultItem().getItem() == tool.asItem())
-                                                                          .findFirst())
-                                                   .orElse(null);
+          .flatMap(world -> world.getRecipeManager().byType(RecipeType.CRAFTING).values().stream()
+            .filter(r -> r.getResultItem().getItem() == tool.asItem())
+            .findFirst())
+          .orElse(null);
         if (recipe != null) {
           // parts is just the items in the recipe
           this.parts = recipe.getIngredients().stream().map(ingredient -> ItemStackList.of(ingredient.getItems())).collect(Collectors.toList());
@@ -180,10 +191,10 @@ public class ContentTool extends PageContent {
         }
         // fetch the tool building recipe for extra ingredients
         List<Ingredient> extraRequirements = Optional.ofNullable(Minecraft.getInstance().level)
-                                                     .flatMap(world -> world.getRecipeManager().byType(TinkerRecipeTypes.TINKER_STATION.get()).values().stream()
-                                                                            .filter(r -> r instanceof ToolBuildingRecipe toolRecipe && toolRecipe.getOutput() == tool)
-                                                                            .map(r -> ((ToolBuildingRecipe)r).getExtraRequirements())
-                                                                            .findFirst()).orElse(List.of());
+          .flatMap(world -> world.getRecipeManager().byType(TinkerRecipeTypes.TINKER_STATION.get()).values().stream()
+            .filter(r -> r instanceof ToolBuildingRecipe toolRecipe && toolRecipe.getOutput() == tool)
+            .map(r -> ((ToolBuildingRecipe) r).getExtraRequirements())
+            .findFirst()).orElse(List.of());
         for (Ingredient ingredient : extraRequirements) {
           partBuilder.add(ItemStackList.of(ingredient.getItems()));
         }
@@ -195,8 +206,8 @@ public class ContentTool extends PageContent {
         // determine the slot positions by number of slots
         int size = this.parts.size();
         switch (size) {
-          case 4  -> this.slotPos = SLOTS_WIDTH_2;
-          case 5  -> this.slotPos = SLOTS_5;
+          case 4 -> this.slotPos = SLOTS_WIDTH_2;
+          case 5 -> this.slotPos = SLOTS_5;
           default -> this.slotPos = SLOTS_WIDTH_3;
         }
         // slots is just the set matching the size
@@ -263,17 +274,22 @@ public class ContentTool extends PageContent {
 
     for (int i = 0; i < partsSize; i++) {
       SlotPos pos = slotPos[i];
-      TinkerItemElement partItem = new TinkerItemElement(imgX + pos.x(), imgY + pos.y(), 1f,  this.parts.get(i));
+      TinkerItemElement partItem = new TinkerItemElement(imgX + pos.x(), imgY + pos.y(), 1f, this.parts.get(i));
       //partItem.noTooltip = true;
       list.add(partItem);
     }
   }
 
-  /** Simple record to hold a XY pair */
+  /**
+   * Simple record to hold a XY pair
+   */
   private record SlotPos(int x, int y) {}
 
-  /** Fallback for when a tool is missing the proper interface */
+  /**
+   * Fallback for when a tool is missing the proper interface
+   */
   private static class Fallback implements IModifiableDisplay {
+
     private final Item item;
     @Getter
     private final ItemStack renderTool;

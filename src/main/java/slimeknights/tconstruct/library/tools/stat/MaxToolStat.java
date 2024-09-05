@@ -25,6 +25,7 @@ import java.util.function.IntFunction;
  */
 @AllArgsConstructor
 public class MaxToolStat implements IToolStat<Integer> {
+
   @Getter
   private final ToolStatId name;
   private final int defaultValue;
@@ -58,8 +59,9 @@ public class MaxToolStat implements IToolStat<Integer> {
 
   /**
    * Sets the tier to the new tier, keeping the largest
-   * @param builder  Builder
-   * @param value    Value
+   *
+   * @param builder Builder
+   * @param value   Value
    */
   @Override
   public void update(ModifierStatsBuilder builder, Integer value) {
@@ -68,14 +70,14 @@ public class MaxToolStat implements IToolStat<Integer> {
 
   @Override
   public Integer build(ModifierStatsBuilder parent, Object builder) {
-    return ((TierBuilder)builder).tier;
+    return ((TierBuilder) builder).tier;
   }
 
   @Nullable
   @Override
   public Integer read(Tag tag) {
     if (TagUtil.isNumeric(tag)) {
-      return ((NumericTag)tag).getAsInt();
+      return ((NumericTag) tag).getAsInt();
     }
     return null;
   }
@@ -116,8 +118,11 @@ public class MaxToolStat implements IToolStat<Integer> {
     return "TierToolStat{" + name + '}';
   }
 
-  /** Internal int storage, basically just a int wrapper */
+  /**
+   * Internal int storage, basically just a int wrapper
+   */
   protected static class TierBuilder {
+
     private int tier = 0;
   }
 }

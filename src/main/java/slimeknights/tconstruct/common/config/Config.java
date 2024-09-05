@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Config {
+
   /**
    * Common specific configuration
    */
@@ -40,7 +41,7 @@ public class Config {
     public final BooleanValue witherBoneConversion;
     public final BooleanValue slimeRecipeFix;
     public final BooleanValue glassRecipeFix;
-    public final Map<TinkerHeadType,BooleanValue> headDrops;
+    public final Map<TinkerHeadType, BooleanValue> headDrops;
     public final DoubleValue repairKitAmount;
 
     // loot
@@ -63,7 +64,10 @@ public class Config {
     // debug
     public final BooleanValue forceIntegrationMaterials;
     public final EnumValue<LogInvalidToolStack> logInvalidToolStack;
-    public enum LogInvalidToolStack { STACKTRACE, WARNING, IGNORED };
+
+    public enum LogInvalidToolStack {STACKTRACE, WARNING, IGNORED}
+
+    ;
 
     Common(ForgeConfigSpec.Builder builder) {
       builder.comment("Everything to do with gameplay").push("gameplay");
@@ -76,8 +80,8 @@ public class Config {
 
       ImmutableList.Builder<ConfigurableAction> actions = ImmutableList.builder();
       actions.add(new ConfigurableAction(builder, "extendFireProtectionSlots", true,
-                                         "If true, extends the applicable slots for the fire protection enchantment to work better with shields. Will not impact gameplay with the vanilla enchantment.\nIf false, fire protection on a shield will not reduce fire tick time.",
-                                         () -> Enchantments.FIRE_PROTECTION.slots = EquipmentSlot.values()));
+        "If true, extends the applicable slots for the fire protection enchantment to work better with shields. Will not impact gameplay with the vanilla enchantment.\nIf false, fire protection on a shield will not reduce fire tick time.",
+        () -> Enchantments.FIRE_PROTECTION.slots = EquipmentSlot.values()));
 
       builder.comment("Tweaks to vanilla damage sources to better work with armor").push("damageTweaks");
       actions.add(new ConfigurableAction(builder, "wither", true, "Makes withering damage count as magic", DamageSource.WITHER::setMagic));
@@ -212,7 +216,7 @@ public class Config {
         .defineInRange("barter_blazing_blood", 20, 0, 100);
       tinkerToolBonusChest = builder
         .comment("Weight of tinker tools in the vanilla spawn bonus chest, randomly replacing the vanilla axe or shovel. Tool will have a random tier 1 head and binding, plus a wooden handle. Set to 0 to disable.",
-                 "For comparison, vanilla wooden axes and pickaxes have a weight of 3, and stone axes/pickaxes have a weight of 1")
+          "For comparison, vanilla wooden axes and pickaxes have a weight of 3, and stone axes/pickaxes have a weight of 1")
         .worldRestart()
         .defineInRange("tinker_tool_bonus_chest", 2, 0, 25);
       dropDragonScales = builder
@@ -224,7 +228,7 @@ public class Config {
       builder.comment("Features to use in debugging gameplay and mechanics, generally should not be enabled in packs").push("debug");
       this.forceIntegrationMaterials = builder
         .comment("If true, forces integration materials to be enabled, even if the relevant metal is missing. Useful for testing material balance.",
-                 "Does not provide recipes for any of them, they will only be available to cheat in creative.")
+          "Does not provide recipes for any of them, they will only be available to cheat in creative.")
         .worldRestart()
         .define("forceIntegrationMaterials", false);
       this.logInvalidToolStack = builder
@@ -238,6 +242,7 @@ public class Config {
    * Client specific configuration - only loaded clientside from tconstruct-client.toml
    */
   public static class Client {
+
     //public final ForgeConfigSpec.BooleanValue temperatureInCelsius;
     public final ForgeConfigSpec.BooleanValue tankFluidModel;
     public final ForgeConfigSpec.BooleanValue extraToolTips; // TODO: do we even need this config option? who would turn it off?
@@ -267,7 +272,7 @@ public class Config {
         .comment(
           "Experimental. If true, renders fluids in tanks using a dynamic model, being more efficient when the tank is static",
           "If false, renders fluids in tanks using a TESR, which is more efficient when the tank contents are changing"
-         )
+        )
         .translation("tconstruct.configgui.tankFluidModel")
         .define("tankFluidModel", false);
 
@@ -293,12 +298,12 @@ public class Config {
 
       this.maxSmelteryItemQuads = builder
         .comment("Maximum number of quads to render for items in the smeltery. Most blocks are about 6 quads, items like ingots are around 26.",
-                 "Setting this lower will cause fewer items to be renderer (but never a partial item). Set to -1 to allow unlimited quads, and 0 to disable the item renderer.")
+          "Setting this lower will cause fewer items to be renderer (but never a partial item). Set to -1 to allow unlimited quads, and 0 to disable the item renderer.")
         .defineInRange("maxSmelteryItemQuads", 3500, -1, Short.MAX_VALUE);
 
       this.modifiersIDsInAdvancedTooltips = builder
         .comment("If true, shows modifier IDs in advanced tooltips for tools and tool parts.",
-                 "They are more intrusive than most advanced tooltip content, so this option is provided in case some mod made poor design decisions and put essential gameplay info in tooltips or for pack makers who do not need modifier info.")
+          "They are more intrusive than most advanced tooltip content, so this option is provided in case some mod made poor design decisions and put essential gameplay info in tooltips or for pack makers who do not need modifier info.")
         .define("modifiersIDsInAdvancedTooltips", true);
 
       builder.comment("Settings related to modifiers").push("modifiers");
@@ -352,7 +357,9 @@ public class Config {
     COMMON = specPair.getLeft();
   }
 
-  /** Registers any relevant listeners for config */
+  /**
+   * Registers any relevant listeners for config
+   */
   public static void init() {
     ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.commonSpec);
     ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.clientSpec);
@@ -360,8 +367,11 @@ public class Config {
     IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
   }
 
-  /** Configuration for an ore rate, such as melter or foundry */
+  /**
+   * Configuration for an ore rate, such as melter or foundry
+   */
   public static class OreRate implements IOreRate {
+
     private final ConfigValue<Integer> nuggetsPerMetal;
     private final ConfigValue<Integer> shardsPerGem;
 

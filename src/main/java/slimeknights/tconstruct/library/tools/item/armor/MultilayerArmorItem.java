@@ -13,9 +13,13 @@ import slimeknights.tconstruct.tools.item.ArmorSlotType;
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
-/** Armor model that applies multiple texture layers in order */
+/**
+ * Armor model that applies multiple texture layers in order
+ */
 public class MultilayerArmorItem extends ModifiableArmorItem {
+
   private final ResourceLocation name;
+
   public MultilayerArmorItem(ModifiableArmorMaterial material, ArmorSlotType slot, Properties properties) {
     super(material, slot, properties);
     this.name = material.getId();

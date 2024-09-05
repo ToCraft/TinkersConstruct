@@ -8,22 +8,26 @@ import javax.annotation.Nullable;
 import java.io.IOException;
 import java.util.List;
 
-import static com.mojang.blaze3d.platform.NativeImage.getA;
+import static slimeknights.tconstruct.util.ColourUtils.getA;
 
 /**
  * Supports including sprites as "part of the palette" which can produce animated textures.
  */
 public class AnimatedGreyToSpriteTransformer extends GreyToSpriteTransformer {
+
   private final ResourceLocation metaPath;
   private final int frames;
   private JsonObject meta;
+
   protected AnimatedGreyToSpriteTransformer(List<SpriteMapping> sprites, ResourceLocation metaPath, int frames) {
     super(sprites);
     this.metaPath = metaPath;
     this.frames = frames;
   }
 
-  /** Gets the color at the given location from its full color value */
+  /**
+   * Gets the color at the given location from its full color value
+   */
   private int getNewColor(int color, int x, int y, int frame) {
     // if fully transparent, just return fully transparent
     // we do not do 0 alpha RGB values to save effort

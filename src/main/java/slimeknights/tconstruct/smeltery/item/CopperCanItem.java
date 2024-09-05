@@ -2,6 +2,7 @@ package slimeknights.tconstruct.smeltery.item;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -25,6 +26,7 @@ import java.util.List;
  * Fluid container holding 1 ingot of fluid
  */
 public class CopperCanItem extends Item {
+
   private static final String TAG_FLUID = "fluid";
   private static final String TAG_FLUID_TAG = "fluid_tag";
 
@@ -68,7 +70,9 @@ public class CopperCanItem extends Item {
     }
   }
 
-  /** Sets the fluid on the given stack */
+  /**
+   * Sets the fluid on the given stack
+   */
   public static ItemStack setFluid(ItemStack stack, FluidStack fluid) {
     // if empty, try to remove the NBT, helps with recipes
     if (fluid.isEmpty()) {
@@ -82,7 +86,7 @@ public class CopperCanItem extends Item {
       }
     } else {
       CompoundTag nbt = stack.getOrCreateTag();
-      nbt.putString(TAG_FLUID, Registry.FLUID.getKey(fluid.getFluid()).toString());
+      nbt.putString(TAG_FLUID, BuiltInRegistries.FLUID.getKey(fluid.getFluid()).toString());
       CompoundTag fluidTag = fluid.getTag();
       if (fluidTag != null) {
         nbt.put(TAG_FLUID_TAG, fluidTag.copy());
@@ -93,7 +97,9 @@ public class CopperCanItem extends Item {
     return stack;
   }
 
-  /** Gets the fluid from the given stack */
+  /**
+   * Gets the fluid from the given stack
+   */
   public static Fluid getFluid(ItemStack stack) {
     CompoundTag nbt = stack.getTag();
     if (nbt != null) {
@@ -108,7 +114,9 @@ public class CopperCanItem extends Item {
     return Fluids.EMPTY;
   }
 
-  /** Gets the fluid NBT from the given stack */
+  /**
+   * Gets the fluid NBT from the given stack
+   */
   @Nullable
   public static CompoundTag getFluidTag(ItemStack stack) {
     CompoundTag nbt = stack.getTag();
@@ -120,8 +128,9 @@ public class CopperCanItem extends Item {
 
   /**
    * Gets a string variant name for the given stack
-   * @param stack  Stack instance to check
-   * @return  String variant name
+   *
+   * @param stack Stack instance to check
+   * @return String variant name
    */
   public static String getSubtype(ItemStack stack) {
     CompoundTag nbt = stack.getTag();

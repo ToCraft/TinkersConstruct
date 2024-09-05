@@ -16,6 +16,7 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import javax.annotation.Nullable;
 
 public class DyedModifier extends NoLevelsModifier implements ModifierRemovalHook {
+
   private static final String FORMAT_KEY = TConstruct.makeTranslationKey("modifier", "dyed.formatted");
 
   @Override

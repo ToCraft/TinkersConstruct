@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class ClearStainedGlassPaneBlock extends ClearGlassPaneBlock {
 
   private final GlassColor glassColor;
+
   public ClearStainedGlassPaneBlock(Properties builder, GlassColor glassColor) {
     super(builder);
     this.glassColor = glassColor;

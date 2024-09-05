@@ -17,10 +17,14 @@ import slimeknights.tconstruct.tools.item.ArmorSlotType.ArmorShieldBuilder;
 
 import java.util.List;
 
-/** Material stat class handling all four plating types */
-public record PlatingMaterialStats(MaterialStatType<?> getType, int durability, float armor, float toughness, float knockbackResistance) implements IRepairableMaterialStats {
-  private static final LoadableField<Float,PlatingMaterialStats> TOUGHNESS = FloatLoadable.FROM_ZERO.defaultField("toughness", 0f, PlatingMaterialStats::toughness);
-  private static final LoadableField<Float,PlatingMaterialStats> KNOCKBACK_RESISTANCE = FloatLoadable.FROM_ZERO.defaultField("knockback_resistance", 0f, PlatingMaterialStats::knockbackResistance);
+/**
+ * Material stat class handling all four plating types
+ */
+public record PlatingMaterialStats(MaterialStatType<?> getType, int durability, float armor, float toughness,
+                                   float knockbackResistance) implements IRepairableMaterialStats {
+
+  private static final LoadableField<Float, PlatingMaterialStats> TOUGHNESS = FloatLoadable.FROM_ZERO.defaultField("toughness", 0f, PlatingMaterialStats::toughness);
+  private static final LoadableField<Float, PlatingMaterialStats> KNOCKBACK_RESISTANCE = FloatLoadable.FROM_ZERO.defaultField("knockback_resistance", 0f, PlatingMaterialStats::knockbackResistance);
   private static final RecordLoadable<PlatingMaterialStats> LOADABLE = RecordLoadable.create(
     MaterialStatType.CONTEXT_KEY.requiredField(),
     IRepairableMaterialStats.DURABILITY_FIELD,
@@ -42,11 +46,15 @@ public record PlatingMaterialStats(MaterialStatType<?> getType, int durability, 
   public static final MaterialStatType<PlatingMaterialStats> CHESTPLATE = makeType("plating_chestplate");
   public static final MaterialStatType<PlatingMaterialStats> LEGGINGS = makeType("plating_leggings");
   public static final MaterialStatType<PlatingMaterialStats> BOOTS = makeType("plating_boots");
-  /** Shield loadable does not support armor */
+  /**
+   * Shield loadable does not support armor
+   */
   public static final MaterialStatType<PlatingMaterialStats> SHIELD = new MaterialStatType<PlatingMaterialStats>(new MaterialStatsId(TConstruct.MOD_ID, "plating_shield"), type -> new PlatingMaterialStats(type, 1, 0, 0, 0), RecordLoadable.create(
     MaterialStatType.CONTEXT_KEY.requiredField(), IRepairableMaterialStats.DURABILITY_FIELD, TOUGHNESS, KNOCKBACK_RESISTANCE,
     (type, durability, toughness, knockbackResistance) -> new PlatingMaterialStats(type, durability, 0, toughness, knockbackResistance)));
-  /** All types including shield */
+  /**
+   * All types including shield
+   */
   public static final List<MaterialStatType<PlatingMaterialStats>> TYPES = List.of(BOOTS, LEGGINGS, CHESTPLATE, HELMET, SHIELD);
 
   @Override
@@ -73,7 +81,9 @@ public record PlatingMaterialStats(MaterialStatType<?> getType, int durability, 
     ToolStats.KNOCKBACK_RESISTANCE.update(builder, knockbackResistance * scale);
   }
 
-  /** Makes a stat type for the given name */
+  /**
+   * Makes a stat type for the given name
+   */
   private static MaterialStatType<PlatingMaterialStats> makeType(String name) {
     return new MaterialStatType<PlatingMaterialStats>(new MaterialStatsId(TConstruct.MOD_ID, name), type -> new PlatingMaterialStats(type, 1, 0, 0, 0), LOADABLE);
   }
@@ -83,10 +93,13 @@ public record PlatingMaterialStats(MaterialStatType<?> getType, int durability, 
     return new Builder();
   }
 
-  /** Builder to create plating material stats for all four pieces */
+  /**
+   * Builder to create plating material stats for all four pieces
+   */
   @Setter
   @Accessors(fluent = true)
   public static class Builder implements ArmorShieldBuilder<PlatingMaterialStats> {
+
     private final int[] durability = new int[4];
     private int shieldDurability = 0;
     private final float[] armor = new float[4];
@@ -95,19 +108,23 @@ public record PlatingMaterialStats(MaterialStatType<?> getType, int durability, 
 
     private Builder() {}
 
-    /** Sets the durability for the piece based on the given factor */
+    /**
+     * Sets the durability for the piece based on the given factor
+     */
     public Builder durabilityFactor(float maxDamageFactor) {
       for (ArmorSlotType slotType : ArmorSlotType.values()) {
         int index = slotType.getIndex();
-        durability[index] = (int)(ArmorSlotType.MAX_DAMAGE_ARRAY[index] * maxDamageFactor);
+        durability[index] = (int) (ArmorSlotType.MAX_DAMAGE_ARRAY[index] * maxDamageFactor);
       }
       if (shieldDurability == 0) {
-        shieldDurability = (int)(maxDamageFactor * 18);
+        shieldDurability = (int) (maxDamageFactor * 18);
       }
       return this;
     }
 
-    /** Sets the armor value for each piece */
+    /**
+     * Sets the armor value for each piece
+     */
     public Builder armor(float boots, float leggings, float chestplate, float helmet) {
       armor[ArmorSlotType.BOOTS.getIndex()] = boots;
       armor[ArmorSlotType.LEGGINGS.getIndex()] = leggings;

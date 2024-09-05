@@ -11,7 +11,9 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 
 public class SearedPillarBlock extends SearedBlock {
+
   public static final EnumProperty<Axis> AXIS = BlockStateProperties.AXIS;
+
   public SearedPillarBlock(Properties properties, boolean requireBlockEntity) {
     super(properties, requireBlockEntity);
     this.registerDefaultState(this.defaultBlockState().setValue(AXIS, Direction.Axis.Y));
@@ -19,9 +21,10 @@ public class SearedPillarBlock extends SearedBlock {
 
   @Override
   public BlockState rotate(BlockState state, Rotation rot) {
-    switch(rot) {
-      case COUNTERCLOCKWISE_90: case CLOCKWISE_90:
-        switch(state.getValue(AXIS)) {
+    switch (rot) {
+      case COUNTERCLOCKWISE_90:
+      case CLOCKWISE_90:
+        switch (state.getValue(AXIS)) {
           case X:
             return state.setValue(AXIS, Direction.Axis.Z);
           case Z:

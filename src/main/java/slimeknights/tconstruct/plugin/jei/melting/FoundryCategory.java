@@ -18,8 +18,11 @@ import slimeknights.tconstruct.plugin.jei.AlloyRecipeCategory;
 import slimeknights.tconstruct.plugin.jei.TConstructJEIConstants;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 
-/** Extension of melting for byproducts, but ditchs solid fuels */
+/**
+ * Extension of melting for byproducts, but ditchs solid fuels
+ */
 public class FoundryCategory extends AbstractMeltingCategory {
+
   private static final Component TITLE = TConstruct.makeTranslation("jei", "foundry.title");
 
   @Getter
@@ -50,8 +53,8 @@ public class FoundryCategory extends AbstractMeltingCategory {
 
     // fuel
     builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 4, 4)
-           .addTooltipCallback(FUEL_TOOLTIP)
-           .setFluidRenderer(1, false, 12, 32)
-           .addIngredients(ForgeTypes.FLUID_STACK, MeltingFuelHandler.getUsableFuels(recipe.getTemperature()));
+      .addTooltipCallback(FUEL_TOOLTIP)
+      .setFluidRenderer(1, false, 12, 32)
+      .addIngredients(ForgeTypes.FLUID_STACK, MeltingFuelHandler.getUsableFuels(recipe.getTemperature()));
   }
 }

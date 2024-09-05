@@ -6,23 +6,33 @@ import net.minecraft.world.entity.player.Player;
 import slimeknights.mantle.data.registry.NamedComponentRegistry;
 import slimeknights.tconstruct.TConstruct;
 
-/** Logic that determines how box AOE expands */
+/**
+ * Logic that determines how box AOE expands
+ */
 public interface IBoxExpansion {
-  /** Registered box expansion types */
+
+  /**
+   * Registered box expansion types
+   */
   NamedComponentRegistry<IBoxExpansion> REGISTRY = new NamedComponentRegistry<>("Unknown Box Expansion Type");
 
   /**
    * Gets the directions to expand for the given player and side hit
-   * @param player   Player instance
-   * @param sideHit  Side of the block hit
-   * @return  Directions of expansion
+   *
+   * @param player  Player instance
+   * @param sideHit Side of the block hit
+   * @return Directions of expansion
    */
   ExpansionDirections getDirections(Player player, Direction sideHit);
 
-  /** Computed direction of expansion */
+  /**
+   * Computed direction of expansion
+   */
   record ExpansionDirections(Direction width, Direction height, Direction depth, boolean traverseDown) {}
 
-  /** Expands a box around the targeted face */
+  /**
+   * Expands a box around the targeted face
+   */
   IBoxExpansion SIDE_HIT = REGISTRY.register(TConstruct.getResource("side_hit"), (player, sideHit) -> {
     // depth is always direction into the block
     Direction depth = sideHit.getOpposite();
@@ -39,7 +49,9 @@ public interface IBoxExpansion {
     return new ExpansionDirections(width, height, depth, true);
   });
 
-  /** Box expansion based on the direction the player looks */
+  /**
+   * Box expansion based on the direction the player looks
+   */
   IBoxExpansion PITCH = REGISTRY.register(TConstruct.getResource("pitch"), (player, sideHit) -> {
     // depth is always direction into the block
     Direction playerLook = player.getDirection();
@@ -59,7 +71,9 @@ public interface IBoxExpansion {
     return new ExpansionDirections(width, height, depth, true);
   });
 
-  /** Box expansion going up and additionally to a facing side */
+  /**
+   * Box expansion going up and additionally to a facing side
+   */
   IBoxExpansion HEIGHT = REGISTRY.register(TConstruct.getResource("height"), (player, sideHit) -> {
     // if hit the top or bottom, use facing direction
     Direction depth;

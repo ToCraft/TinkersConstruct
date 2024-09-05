@@ -19,6 +19,7 @@ import slimeknights.tconstruct.smeltery.block.entity.controller.SmelteryBlockEnt
 import javax.annotation.Nullable;
 
 public class SmelteryControllerBlock extends HeatingControllerBlock {
+
   public SmelteryControllerBlock(Properties properties) {
     super(properties);
   }

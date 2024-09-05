@@ -28,8 +28,11 @@ import java.util.List;
 
 import static slimeknights.tconstruct.library.modifiers.modules.build.SwappableSlotModule.FORMAT;
 
-/** Module to add additional traits to a tool given the passed hook */
+/**
+ * Module to add additional traits to a tool given the passed hook
+ */
 public class SwappableToolTraitsModule implements ModifierModule, ModifierTraitHook, DisplayNameModifierHook, ModifierRemovalHook, ModuleWithKey {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<SwappableToolTraitsModule>defaultHooks(ModifierHooks.MODIFIER_TRAITS, ModifierHooks.DISPLAY_NAME, ModifierHooks.REMOVE);
   @SuppressWarnings("unchecked")
   public static final RecordLoadable<SwappableToolTraitsModule> LOADER = RecordLoadable.create(
@@ -44,7 +47,8 @@ public class SwappableToolTraitsModule implements ModifierModule, ModifierTraitH
     SwappableToolTraitsModule::new);
 
   @Nullable
-  @Getter @Accessors(fluent = true)
+  @Getter
+  @Accessors(fluent = true)
   private final ResourceLocation key;
   private final String match;
   private final ModuleHook<ToolTraitHook> hook;

@@ -17,8 +17,11 @@ import javax.annotation.Nullable;
 
 import static slimeknights.tconstruct.library.tools.helper.ModifierUtil.asLiving;
 
-/** Modifier to handle spilling recipes */
+/**
+ * Modifier to handle spilling recipes
+ */
 public class BurstingModifier extends UseFluidOnHitModifier implements OnAttackedModifierHook {
+
   @Override
   protected void registerHooks(Builder hookBuilder) {
     super.registerHooks(hookBuilder);

@@ -43,7 +43,10 @@ import static slimeknights.tconstruct.TConstruct.RANDOM;
 /**
  * Module that applies a mob effect on melee attack, projectile hit, and counterattack
  */
-public record MobEffectModule(IJsonPredicate<LivingEntity> target, MobEffect effect, RandomLevelingValue level, RandomLevelingValue time, ModifierCondition<IToolStackView> condition) implements OnAttackedModifierHook, MeleeHitModifierHook, ProjectileHitModifierHook, ModifierModule, ConditionalModule<IToolStackView> {
+public record MobEffectModule(IJsonPredicate<LivingEntity> target, MobEffect effect, RandomLevelingValue level,
+                              RandomLevelingValue time,
+                              ModifierCondition<IToolStackView> condition) implements OnAttackedModifierHook, MeleeHitModifierHook, ProjectileHitModifierHook, ModifierModule, ConditionalModule<IToolStackView> {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<MobEffectModule>defaultHooks(ModifierHooks.ON_ATTACKED, ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT);
   public static final RecordLoadable<MobEffectModule> LOADER = RecordLoadable.create(
     LivingEntityPredicate.LOADER.defaultField("target", MobEffectModule::target),
@@ -53,12 +56,16 @@ public record MobEffectModule(IJsonPredicate<LivingEntity> target, MobEffect eff
     ModifierCondition.TOOL_FIELD,
     MobEffectModule::new);
 
-  /** Creates a builder instance */
+  /**
+   * Creates a builder instance
+   */
   public static MobEffectModule.Builder builder(MobEffect effect) {
     return new Builder(effect);
   }
 
-  /** Applies the effect for the given level */
+  /**
+   * Applies the effect for the given level
+   */
   private void applyEffect(@Nullable LivingEntity target, float scaledLevel) {
     if (target == null || !this.target.matches(target)) {
       return;
@@ -69,7 +76,7 @@ public record MobEffectModule(IJsonPredicate<LivingEntity> target, MobEffect eff
     }
     float duration = this.time.computeValue(scaledLevel);
     if (duration > 0) {
-      target.addEffect(new MobEffectInstance(effect, (int)duration, level));
+      target.addEffect(new MobEffectInstance(effect, (int) duration, level));
     }
   }
 
@@ -107,17 +114,22 @@ public record MobEffectModule(IJsonPredicate<LivingEntity> target, MobEffect eff
     return LOADER;
   }
 
-  /** Builder for this modifier in datagen */
+  /**
+   * Builder for this modifier in datagen
+   */
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   @Accessors(fluent = true)
   @Setter
   public static class Builder extends ModuleBuilder.Stack<Builder> {
+
     private final MobEffect effect;
     private IJsonPredicate<LivingEntity> target = LivingEntityPredicate.ANY;
     private RandomLevelingValue level = RandomLevelingValue.flat(1);
     private RandomLevelingValue time = RandomLevelingValue.flat(0);
 
-    /** Builds the finished modifier */
+    /**
+     * Builds the finished modifier
+     */
     public MobEffectModule build() {
       return new MobEffectModule(target, effect, level, time, condition);
     }

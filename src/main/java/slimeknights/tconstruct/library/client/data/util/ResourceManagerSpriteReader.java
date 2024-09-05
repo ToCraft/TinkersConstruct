@@ -14,18 +14,25 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Optional;
 
-/** Sprite reader pulling from a datapack resource manager */
+/**
+ * Sprite reader pulling from a datapack resource manager
+ */
 @RequiredArgsConstructor
 public class ResourceManagerSpriteReader extends AbstractSpriteReader {
+
   private final ResourceManager manager;
   private final String folder;
 
-  /** Gets a location with the given extension */
+  /**
+   * Gets a location with the given extension
+   */
   private ResourceLocation getLocation(ResourceLocation base, String extension) {
     return new ResourceLocation(base.getNamespace(), folder + "/" + base.getPath() + extension);
   }
 
-  /** Gets a location for .png */
+  /**
+   * Gets a location for .png
+   */
   private ResourceLocation getLocation(ResourceLocation base) {
     return getLocation(base, ".png");
   }

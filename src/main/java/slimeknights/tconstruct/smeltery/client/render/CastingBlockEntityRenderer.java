@@ -19,6 +19,7 @@ import slimeknights.tconstruct.smeltery.client.util.CastingItemRenderTypeBuffer;
 import java.util.List;
 
 public class CastingBlockEntityRenderer implements BlockEntityRenderer<CastingBlockEntity> {
+
   public CastingBlockEntityRenderer(Context context) {}
 
   @Override
@@ -64,11 +65,11 @@ public class CastingBlockEntityRenderer implements BlockEntityRenderer<CastingBl
       // output may be the recipe output instead of the current item
       if (modelItems.size() >= 2) {
         ModelItem outputModel = modelItems.get(1);
-        if(!outputModel.isHidden()) {
+        if (!outputModel.isHidden()) {
           // get output stack
           ItemStack output = casting.getItem(1);
           MultiBufferSource outputBuffer = buffer;
-          if(itemOpacity > 0 && output.isEmpty()) {
+          if (itemOpacity > 0 && output.isEmpty()) {
             output = casting.getRecipeOutput();
             // apply a buffer wrapper to tint and add opacity
             outputBuffer = new CastingItemRenderTypeBuffer(buffer, itemOpacity, fluidOpacity);

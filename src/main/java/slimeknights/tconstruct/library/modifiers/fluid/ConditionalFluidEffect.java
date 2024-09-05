@@ -10,12 +10,19 @@ import slimeknights.mantle.data.predicate.block.BlockPredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
 import slimeknights.tconstruct.library.json.predicate.TinkerPredicate;
 
-/** Fluid effect that conditions on the holder and target */
+/**
+ * Fluid effect that conditions on the holder and target
+ */
 public interface ConditionalFluidEffect<C extends FluidEffectContext> extends FluidEffect<C> {
-  /** Gets the effect to apply */
+
+  /**
+   * Gets the effect to apply
+   */
   FluidEffect<? super C> effect();
 
-  /** Checks if this effect can be applied */
+  /**
+   * Checks if this effect can be applied
+   */
   boolean canApply(C context);
 
   @Override
@@ -23,8 +30,12 @@ public interface ConditionalFluidEffect<C extends FluidEffectContext> extends Fl
     return canApply(context) ? effect().apply(fluid, level, context, action) : 0;
   }
 
-  /** Conditional block effect */
-  record Block(IJsonPredicate<BlockState> block, FluidEffect<? super FluidEffectContext.Block> effect) implements ConditionalFluidEffect<FluidEffectContext.Block> {
+  /**
+   * Conditional block effect
+   */
+  record Block(IJsonPredicate<BlockState> block,
+               FluidEffect<? super FluidEffectContext.Block> effect) implements ConditionalFluidEffect<FluidEffectContext.Block> {
+
     public static final RecordLoadable<Block> LOADER = RecordLoadable.create(
       BlockPredicate.LOADER.defaultField("block", e -> e.block),
       FluidEffect.BLOCK_EFFECTS.requiredField("effect", e -> e.effect),
@@ -41,8 +52,12 @@ public interface ConditionalFluidEffect<C extends FluidEffectContext> extends Fl
     }
   }
 
-  /** Conditional block effect */
-  record Entity(IJsonPredicate<LivingEntity> target, FluidEffect<? super FluidEffectContext.Entity> effect) implements ConditionalFluidEffect<FluidEffectContext.Entity> {
+  /**
+   * Conditional block effect
+   */
+  record Entity(IJsonPredicate<LivingEntity> target,
+                FluidEffect<? super FluidEffectContext.Entity> effect) implements ConditionalFluidEffect<FluidEffectContext.Entity> {
+
     public static final RecordLoadable<Entity> LOADER = RecordLoadable.create(
       LivingEntityPredicate.LOADER.defaultField("target", e -> e.target),
       FluidEffect.ENTITY_EFFECTS.requiredField("effect", e -> e.effect),

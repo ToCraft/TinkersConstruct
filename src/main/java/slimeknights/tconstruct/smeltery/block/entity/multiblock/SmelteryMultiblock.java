@@ -5,6 +5,7 @@ import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.smeltery.block.entity.controller.SmelteryBlockEntity;
 
 public class SmelteryMultiblock extends HeatingStructureMultiblock<SmelteryBlockEntity> {
+
   public SmelteryMultiblock(SmelteryBlockEntity smeltery) {
     super(smeltery, true, false, false);
   }

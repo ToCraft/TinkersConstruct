@@ -12,27 +12,37 @@ import slimeknights.tconstruct.shared.block.SlimeType;
 import javax.annotation.Nullable;
 import java.util.Locale;
 
-/** Variants of slimy dirt */
+/**
+ * Variants of slimy dirt
+ */
 @Getter
 public enum DirtType implements StringRepresentable {
-  EARTH  (Tiers.STONE,   MaterialColor.GRASS),
-  SKY    (Tiers.GOLD,    MaterialColor.WARPED_STEM),
-  ICHOR  (Tiers.IRON,    MaterialColor.TERRACOTTA_LIGHT_BLUE),
-  ENDER  (Tiers.DIAMOND, MaterialColor.TERRACOTTA_ORANGE),
-  VANILLA(Tiers.WOOD,    MaterialColor.DIRT);
+  EARTH(Tiers.STONE, MaterialColor.GRASS),
+  SKY(Tiers.GOLD, MaterialColor.WARPED_STEM),
+  ICHOR(Tiers.IRON, MaterialColor.TERRACOTTA_LIGHT_BLUE),
+  ENDER(Tiers.DIAMOND, MaterialColor.TERRACOTTA_ORANGE),
+  VANILLA(Tiers.WOOD, MaterialColor.DIRT);
 
-  /** Dirt types added by the mod */
+  /**
+   * Dirt types added by the mod
+   */
   public static final DirtType[] TINKER = {EARTH, SKY, ICHOR, ENDER};
 
-  /** Tier needed to harvest dirt blocks of this type */
+  /**
+   * Tier needed to harvest dirt blocks of this type
+   */
   private final Tiers harvestTier;
-  /** Color for this block on maps */
+  /**
+   * Color for this block on maps
+   */
   private final MaterialColor mapColor;
   @Getter
   private final String serializedName = this.name().toLowerCase(Locale.ROOT);
 
   /* Tags */
-  /** Tag for dirt blocks of this type, including blocks with grass on top */
+  /**
+   * Tag for dirt blocks of this type, including blocks with grass on top
+   */
   private final TagKey<Block> blockTag;
 
   DirtType(Tiers harvestTier, MaterialColor mapColor) {
@@ -43,7 +53,9 @@ public enum DirtType implements StringRepresentable {
 
   private SlimeType slimeType;
 
-  /** Gets the slime type for this dirt type */
+  /**
+   * Gets the slime type for this dirt type
+   */
   @Nullable
   public SlimeType asSlime() {
     if (slimeType == null && this != VANILLA) {

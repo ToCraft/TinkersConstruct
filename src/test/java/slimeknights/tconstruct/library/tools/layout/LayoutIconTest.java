@@ -82,7 +82,7 @@ class LayoutIconTest extends BaseMcTest {
     LayoutIcon itemIcon = LayoutIcon.ofItem(original);
     JsonObject json = itemIcon.toJson();
     assertThat(json.entrySet()).hasSize(2);
-    assertThat(GsonHelper.getAsString(json, "item")).isEqualTo(Registry.ITEM.getKey(Items.DIAMOND_PICKAXE).toString());
+    assertThat(GsonHelper.getAsString(json, "item")).isEqualTo(ForgeRegistries.ITEMS.getKey(Items.DIAMOND_PICKAXE).toString());
     assert original.getTag() != null;
     assertThat(GsonHelper.getAsString(json, "nbt")).isEqualTo(original.getTag().toString());
   }
@@ -90,7 +90,7 @@ class LayoutIconTest extends BaseMcTest {
   @Test
   void item_jsonDeserialize() {
     JsonObject json = new JsonObject();
-    json.addProperty("item", Registry.ITEM.getKey(Items.DIAMOND).toString());
+    json.addProperty("item", ForgeRegistries.ITEMS.getKey(Items.DIAMOND).toString());
     json.addProperty("nbt", "{test:1}");
     LayoutIcon icon = LayoutIcon.SERIALIZER.deserialize(json, LayoutIcon.class, mock(JsonDeserializationContext.class));
     assertThat(icon).isInstanceOf(ItemStackIcon.class);

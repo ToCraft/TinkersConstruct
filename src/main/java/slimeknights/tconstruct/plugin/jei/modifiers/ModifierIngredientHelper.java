@@ -12,6 +12,7 @@ import slimeknights.tconstruct.tools.item.ModifierCrystalItem;
 import javax.annotation.Nullable;
 
 public class ModifierIngredientHelper implements IIngredientHelper<ModifierEntry> {
+
   @Override
   public IIngredientType<ModifierEntry> getIngredientType() {
     return TConstructJEIConstants.MODIFIER_TYPE;
@@ -31,6 +32,7 @@ public class ModifierIngredientHelper implements IIngredientHelper<ModifierEntry
   public ResourceLocation getResourceLocation(ModifierEntry entry) {
     return entry.getId();
   }
+
   @Override
   public ModifierEntry copyIngredient(ModifierEntry entry) {
     return entry;

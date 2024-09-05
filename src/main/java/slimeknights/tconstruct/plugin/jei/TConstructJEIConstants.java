@@ -19,10 +19,11 @@ import slimeknights.tconstruct.library.recipe.partbuilder.Pattern;
 import slimeknights.tconstruct.library.recipe.worktable.IModifierWorktableRecipe;
 
 public class TConstructJEIConstants {
+
   public static final ResourceLocation PLUGIN = TConstruct.getResource("jei_plugin");
 
   // ingredient types
-  public static final IIngredientTypeWithSubtypes<Modifier,ModifierEntry> MODIFIER_TYPE = new IIngredientTypeWithSubtypes<>() {
+  public static final IIngredientTypeWithSubtypes<Modifier, ModifierEntry> MODIFIER_TYPE = new IIngredientTypeWithSubtypes<>() {
     @Override
     public Class<? extends ModifierEntry> getIngredientClass() {
       return ModifierEntry.class;

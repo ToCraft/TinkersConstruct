@@ -16,8 +16,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-/** Condition requiring that items exist in the intersection of all required item tags. */
+/**
+ * Condition requiring that items exist in the intersection of all required item tags.
+ */
 public class TagDifferencePresentCondition<T> implements ICondition {
+
   private static final ResourceLocation NAME = TConstruct.getResource("tag_difference_present");
   public static final Serializer SERIALIZER = new Serializer();
 
@@ -32,13 +35,17 @@ public class TagDifferencePresentCondition<T> implements ICondition {
     this.subtracted = subtracted;
   }
 
-  /** Creates a condition from a set of keys */
+  /**
+   * Creates a condition from a set of keys
+   */
   @SafeVarargs
   public static <T> TagDifferencePresentCondition<T> ofKeys(TagKey<T> base, TagKey<T>... subtracted) {
     return new TagDifferencePresentCondition<>(base, Arrays.asList(subtracted));
   }
 
-  /** Creates a condition from a registry and a set of names */
+  /**
+   * Creates a condition from a registry and a set of names
+   */
   public static <T> TagDifferencePresentCondition<T> ofNames(ResourceKey<? extends Registry<T>> registry, ResourceLocation base, ResourceLocation... subtracted) {
     TagKey<T> baseKey = TagKey.create(registry, base);
     return new TagDifferencePresentCondition<>(baseKey, Arrays.stream(subtracted).map(name -> TagKey.create(registry, name)).toList());
@@ -78,6 +85,7 @@ public class TagDifferencePresentCondition<T> implements ICondition {
   }
 
   private static class Serializer implements IConditionSerializer<TagDifferencePresentCondition<?>> {
+
     @Override
     public void write(JsonObject json, TagDifferencePresentCondition<?> value) {
       json.addProperty("registry", value.base.registry().location().toString());
@@ -102,8 +110,7 @@ public class TagDifferencePresentCondition<T> implements ICondition {
     }
 
     @Override
-    public ResourceLocation getID()
-    {
+    public ResourceLocation getID() {
       return NAME;
     }
   }

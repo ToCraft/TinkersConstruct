@@ -18,9 +18,12 @@ import slimeknights.tconstruct.library.recipe.FluidValues;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/** Capability handler instance for the copper can item */
+/**
+ * Capability handler instance for the copper can item
+ */
 @AllArgsConstructor
 public class CopperCanFluidHandler implements IFluidHandlerItem, ICapabilityProvider {
+
   private final LazyOptional<IFluidHandlerItem> holder = LazyOptional.of(() -> this);
 
   @Getter
@@ -50,12 +53,16 @@ public class CopperCanFluidHandler implements IFluidHandlerItem, ICapabilityProv
     return FluidValues.INGOT;
   }
 
-  /** Gets the contained fluid */
+  /**
+   * Gets the contained fluid
+   */
   private Fluid getFluid() {
     return CopperCanItem.getFluid(container);
   }
 
-  /** Gets the contained fluid */
+  /**
+   * Gets the contained fluid
+   */
   @Nullable
   private CompoundTag getFluidTag() {
     return CopperCanItem.getFluidTag(container);

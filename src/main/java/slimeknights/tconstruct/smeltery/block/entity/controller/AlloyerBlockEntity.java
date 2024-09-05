@@ -40,34 +40,52 @@ import java.util.Collections;
  * Dedicated alloying block
  */
 public class AlloyerBlockEntity extends NameableBlockEntity implements ITankBlockEntity {
-  /** Max capacity for the tank */
+
+  /**
+   * Max capacity for the tank
+   */
   private static final int TANK_CAPACITY = TankType.INGOT_TANK.getCapacity();
-  /** Name of the container */
+  /**
+   * Name of the container
+   */
   private static final Component NAME = TConstruct.makeTranslation("gui", "alloyer");
 
   public static final BlockEntityTicker<AlloyerBlockEntity> SERVER_TICKER = (level, pos, state, self) -> self.tick(level, pos, state);
 
-  /** Tank for this mixer */
+  /**
+   * Tank for this mixer
+   */
   @Getter
   protected final FluidTankAnimated tank = new FluidTankAnimated(TANK_CAPACITY, this);
   /* Capability for return */
   private final LazyOptional<IFluidHandler> tankHolder = LazyOptional.of(() -> tank);
 
   // modules
-  /** Logic for a mixer alloying */
+  /**
+   * Logic for a mixer alloying
+   */
   @Getter
   private final MixerAlloyTank alloyTank = new MixerAlloyTank(this, tank);
-  /** Base alloy logic */
+  /**
+   * Base alloy logic
+   */
   private final SingleAlloyingModule alloyingModule = new SingleAlloyingModule(this, alloyTank);
-  /** Fuel handling logic */
+  /**
+   * Fuel handling logic
+   */
   @Getter
   private final FuelModule fuelModule = new FuelModule(this, () -> Collections.singletonList(this.worldPosition.below()));
 
-  /** Last comparator strength to reduce block updates */
-  @Getter @Setter
+  /**
+   * Last comparator strength to reduce block updates
+   */
+  @Getter
+  @Setter
   private int lastStrength = -1;
 
-  /** Internal tick counter */
+  /**
+   * Internal tick counter
+   */
   private int tick;
 
   public AlloyerBlockEntity(BlockPos pos, BlockState state) {
@@ -102,13 +120,17 @@ public class AlloyerBlockEntity extends NameableBlockEntity implements ITankBloc
    * Alloying
    */
 
-  /** Checks if the tile entity is active */
+  /**
+   * Checks if the tile entity is active
+   */
   private boolean isFormed() {
     BlockState state = this.getBlockState();
     return state.hasProperty(MelterBlock.IN_STRUCTURE) && state.getValue(MelterBlock.IN_STRUCTURE);
   }
 
-  /** Handles server tick */
+  /**
+   * Handles server tick
+   */
   private void tick(Level level, BlockPos pos, BlockState state) {
     if (!isFormed()) {
       return;
@@ -150,7 +172,8 @@ public class AlloyerBlockEntity extends NameableBlockEntity implements ITankBloc
 
   /**
    * Called when a neighbor of this block is changed to update the tank cache
-   * @param side  Side changed
+   *
+   * @param side Side changed
    */
   public void neighborChanged(Direction side) {
     alloyTank.refresh(side, true);

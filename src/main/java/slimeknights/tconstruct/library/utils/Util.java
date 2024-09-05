@@ -34,6 +34,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class Util {
+
   public static final Marker TCONSTRUCT = MarkerManager.getMarker("TCONSTRUCT");
 
   public static final DecimalFormat COMMA_FORMAT = new DecimalFormat("#,###,###.##", DecimalFormatSymbols.getInstance(Locale.US));
@@ -41,19 +42,23 @@ public class Util {
   public static final DecimalFormat BONUS_FORMAT = new DecimalFormat("#.##");
   public static final DecimalFormat MULTIPLIER_FORMAT = new DecimalFormat("#.##x");
   public static final DecimalFormat PERCENT_BOOST_FORMAT = new DecimalFormat("#%");
+
   static {
     BONUS_FORMAT.setPositivePrefix("+");
     PERCENT_BOOST_FORMAT.setPositivePrefix("+");
   }
 
-  /** Gets a logger for the given name */
+  /**
+   * Gets a logger for the given name
+   */
   public static Logger getLogger(String type) {
     return LogManager.getLogger(TConstruct.MOD_ID + "-" + type);
   }
 
   /**
    * Gets the currently active mod, assuming its not Tinkers
-   * @return  Currently active mod ID
+   *
+   * @return Currently active mod ID
    */
   public static Optional<String> getCurrentlyActiveExternalMod() {
     return Optional.ofNullable(ModLoadingContext.get().getActiveContainer().getModId())
@@ -62,8 +67,9 @@ public class Util {
 
   /**
    * Checks if the given key can be translated
-   * @param key  Key to check
-   * @return  True if it can be translated
+   *
+   * @param key Key to check
+   * @return True if it can be translated
    */
   public static boolean canTranslate(String key) {
     return !ForgeI18n.getPattern(key).equals(key);
@@ -71,20 +77,25 @@ public class Util {
 
   /**
    * Makes a translation key for the given name, redirect to the vanilla method
-   * @param base  Base name, such as "block" or "gui"
-   * @param name  Object name
-   * @return  Translation key
+   *
+   * @param base Base name, such as "block" or "gui"
+   * @param name Object name
+   * @return Translation key
    */
   public static String makeTranslationKey(String base, @Nullable ResourceLocation name) {
     return net.minecraft.Util.makeDescriptionId(base, name);
   }
 
-  /** Same as {@link net.minecraft.Util#make(Supplier)} */
+  /**
+   * Same as {@link net.minecraft.Util#make(Supplier)}
+   */
   public static <T> T make(Supplier<T> supplier) {
     return supplier.get();
   }
 
-  /** Same as {@link net.minecraft.Util#make(Object, Consumer)} */
+  /**
+   * Same as {@link net.minecraft.Util#make(Object, Consumer)}
+   */
   public static <T> T make(T object, Consumer<T> consumer) {
     consumer.accept(object);
     return object;
@@ -106,8 +117,9 @@ public class Util {
 
   /**
    * Gets the sign of a number
-   * @param value  Number
-   * @return  Sign
+   *
+   * @param value Number
+   * @return Sign
    */
   public static int sign(int value) {
     if (value == 0) {
@@ -118,9 +130,10 @@ public class Util {
 
   /**
    * Obtains a direction based on the difference between two positions
-   * @param pos       Tile position
-   * @param neighbor  Position of offset
-   * @return  Direction, or down if missing
+   *
+   * @param pos      Tile position
+   * @param neighbor Position of offset
+   * @return Direction, or down if missing
    */
   public static Direction directionFromOffset(BlockPos pos, BlockPos neighbor) {
     BlockPos offset = neighbor.subtract(pos);
@@ -133,22 +146,30 @@ public class Util {
     return Direction.DOWN;
   }
 
-  /** Converts an ARGB color to a ABGR color or vice versa */
+  /**
+   * Converts an ARGB color to a ABGR color or vice versa
+   */
   public static int translateColorBGR(int color) {
     return (color & 0xFF00FF00) | (((color & 0x00FF0000) >> 16) & 0x000000FF) | (((color & 0x000000FF) << 16) & 0x00FF0000);
   }
 
-  /** Gets the slot type from a hand */
+  /**
+   * Gets the slot type from a hand
+   */
   public static EquipmentSlot getSlotType(InteractionHand hand) {
     return hand == InteractionHand.OFF_HAND ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND;
   }
 
-  /** Gets the opposite hand of the given hand */
+  /**
+   * Gets the opposite hand of the given hand
+   */
   public static InteractionHand getOpposite(InteractionHand hand) {
     return hand == InteractionHand.OFF_HAND ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
   }
 
-  /** Converts a position and a side hit into a hit vector */
+  /**
+   * Converts a position and a side hit into a hit vector
+   */
   public static Vec3 toHitVec(BlockPos pos, Direction sideHit) {
     return new Vec3(
       pos.getX() + 0.5D + sideHit.getStepX() * 0.5D,
@@ -157,13 +178,17 @@ public class Util {
     );
   }
 
-  /** Creates a block raytrace from the given position and side, targets the block center */
+  /**
+   * Creates a block raytrace from the given position and side, targets the block center
+   */
   public static BlockHitResult createTraceResult(BlockPos pos, Direction sideHit, boolean empty) {
     return new BlockHitResult(toHitVec(pos, empty ? sideHit.getOpposite() : sideHit), sideHit, pos, false);
   }
 
-  /** Creates a new client block entity data packet with better generics than the vanilla method */
-  public static <B extends BlockEntity> ClientboundBlockEntityDataPacket createBEPacket(B be, Function<? super B,CompoundTag> tagFunction) {
+  /**
+   * Creates a new client block entity data packet with better generics than the vanilla method
+   */
+  public static <B extends BlockEntity> ClientboundBlockEntityDataPacket createBEPacket(B be, Function<? super B, CompoundTag> tagFunction) {
     return new ClientboundBlockEntityDataPacket(be.getBlockPos(), be.getType(), tagFunction.apply(be));
   }
 }

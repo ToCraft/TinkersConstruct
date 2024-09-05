@@ -24,32 +24,42 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/** Logic for injecting pages based on a tag value */
+/**
+ * Logic for injecting pages based on a tag value
+ */
 @RequiredArgsConstructor
 public abstract class AbstractTagInjectingTransformer<T> extends BookTransformer {
+
   private static final Comparator<PageData> COMPARATOR = Comparator.comparing(PageData::getTitle);
 
   private final ResourceKey<? extends Registry<T>> registry;
   private final ResourceLocation key;
   private final ResourceLocation pageType;
 
-  /** Gets values in the tag */
+  /**
+   * Gets values in the tag
+   */
   protected Iterator<T> getTagEntries(TagKey<T> tag) {
     return RegistryHelper.getTagValueStream(tag).iterator();
   }
 
-  /** Gets the name to use for a page given its value */
+  /**
+   * Gets the name to use for a page given its value
+   */
   protected abstract ResourceLocation getId(T value);
 
-  /** Creates a fallback page for when data does not exist */
+  /**
+   * Creates a fallback page for when data does not exist
+   */
   protected abstract PageContent createFallback(T value);
 
   /**
    * Inserts generated pages into the section
-   * @param section    Section to insert pages
-   * @param extraData  Data map from the section or page
-   * @param index      Index to start inserting pages
-   * @return  Number of pages added
+   *
+   * @param section   Section to insert pages
+   * @param extraData Data map from the section or page
+   * @param index     Index to start inserting pages
+   * @return Number of pages added
    */
   protected int addPages(SectionData section, Map<ResourceLocation, JsonElement> extraData, int index) {
     JsonElement element = extraData.get(key);
@@ -111,7 +121,7 @@ public abstract class AbstractTagInjectingTransformer<T> extends BookTransformer
       for (; i < section.pages.size(); i++) {
         // want to insert after the page in the loop
         // the index increase means we will continue iteration after the last new page
-        i += addPages(section, section.pages.get(i).extraData, i+1);
+        i += addPages(section, section.pages.get(i).extraData, i + 1);
       }
     }
   }

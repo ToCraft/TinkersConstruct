@@ -10,7 +10,9 @@ import slimeknights.tconstruct.tables.menu.module.SideInventoryContainer;
 import javax.annotation.Nullable;
 
 public class TinkerChestContainerMenu extends TabbedContainerMenu<AbstractChestBlockEntity> {
+
   protected SideInventoryContainer<AbstractChestBlockEntity> inventory;
+
   public TinkerChestContainerMenu(int id, Inventory inv, @Nullable AbstractChestBlockEntity tileEntity) {
     super(TinkerTables.tinkerChestContainer.get(), id, inv, tileEntity);
     // columns don't matter since they get set by gui
@@ -25,8 +27,11 @@ public class TinkerChestContainerMenu extends TabbedContainerMenu<AbstractChestB
     this(id, inv, getTileEntityFromBuf(buf, AbstractChestBlockEntity.class));
   }
 
-  /** Resizable inventory */
+  /**
+   * Resizable inventory
+   */
   public static class DynamicChestInventory extends SideInventoryContainer<AbstractChestBlockEntity> {
+
     public DynamicChestInventory(MenuType<?> containerType, int windowId, Inventory inv, AbstractChestBlockEntity tile, int x, int y, int columns) {
       super(containerType, windowId, inv, tile, x, y, columns);
     }

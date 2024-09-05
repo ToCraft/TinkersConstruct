@@ -7,17 +7,23 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import java.util.Collection;
 
-/** Attack logic for a modifiable weapon */
+/**
+ * Attack logic for a modifiable weapon
+ */
 public interface MeleeHitToolHook {
+
   /**
    * Deals damage using the tool
+   *
    * @param tool    Tool instance
-   * @param context  Attack context
-   * @param damage   Damage to deal
+   * @param context Attack context
+   * @param damage  Damage to deal
    */
   void afterMeleeHit(IToolStackView tool, ToolAttackContext context, float damage);
 
-  /** Deals damage using the given tool, applying any post damage effects */
+  /**
+   * Deals damage using the given tool, applying any post damage effects
+   */
   static boolean dealDamage(IToolStackView tool, ToolAttackContext context, float damage) {
     boolean hit = ToolAttackUtil.dealDefaultDamage(context.getAttacker(), context.getTarget(), damage);
     if (hit) {
@@ -26,8 +32,11 @@ public interface MeleeHitToolHook {
     return hit;
   }
 
-  /** Merger that runs all hooks */
+  /**
+   * Merger that runs all hooks
+   */
   record AllMerger(Collection<MeleeHitToolHook> hooks) implements MeleeHitToolHook {
+
     @Override
     public void afterMeleeHit(IToolStackView tool, ToolAttackContext context, float damage) {
       for (MeleeHitToolHook hook : hooks) {

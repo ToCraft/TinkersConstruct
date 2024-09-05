@@ -31,23 +31,26 @@ import static net.minecraft.world.level.block.state.properties.BlockStatePropert
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.WEST;
 
 public class PlatformBlock extends Block implements SimpleWaterloggedBlock {
-  private static final VoxelShape[] SHAPES = new VoxelShape[64];
-  private static final BooleanProperty[] DIRECTIONS = { DOWN, UP, NORTH, SOUTH, WEST, EAST };
 
-  /** Makes an index in the shapes map for the given set of booleans */
+  private static final VoxelShape[] SHAPES = new VoxelShape[64];
+  private static final BooleanProperty[] DIRECTIONS = {DOWN, UP, NORTH, SOUTH, WEST, EAST};
+
+  /**
+   * Makes an index in the shapes map for the given set of booleans
+   */
   private static int makeShapeIndex(boolean up, boolean down, boolean north, boolean east, boolean south, boolean west) {
-    return (down    ? 0b000001 : 0)
-           | (up    ? 0b000010 : 0)
-           | (north ? 0b000100 : 0)
-           | (south ? 0b001000 : 0)
-           | (west  ? 0b010000 : 0)
-           | (east  ? 0b100000 : 0);
+    return (down ? 0b000001 : 0)
+      | (up ? 0b000010 : 0)
+      | (north ? 0b000100 : 0)
+      | (south ? 0b001000 : 0)
+      | (west ? 0b010000 : 0)
+      | (east ? 0b100000 : 0);
   }
 
   static {
     // base boxes
-    VoxelShape neither = Shapes.or(Block.box( 0, 0,  0,  2, 16,  2), Block.box(14, 0,  0, 16, 16,  2),
-                        Block.box( 0, 0, 14,  2, 16, 16), Block.box(14, 0, 14, 16, 16, 16));
+    VoxelShape neither = Shapes.or(Block.box(0, 0, 0, 2, 16, 2), Block.box(14, 0, 0, 16, 16, 2),
+      Block.box(0, 0, 14, 2, 16, 16), Block.box(14, 0, 14, 16, 16, 16));
     VoxelShape bottom = Shapes.or(neither, Block.box(0, 0, 0, 16, 2, 16));
     VoxelShape topPlate = Block.box(0, 14, 0, 16, 16, 16);
     VoxelShape top = Shapes.or(neither, topPlate);
@@ -55,10 +58,10 @@ public class PlatformBlock extends Block implements SimpleWaterloggedBlock {
 
     // start building map for all orientations
     boolean[] bools = {false, true};
-    VoxelShape northPlate = Block.box( 0, 2,  0, 16, 14,  1);
-    VoxelShape southPlate = Block.box( 0, 2, 15, 16, 14, 16);
-    VoxelShape westPlate  = Block.box( 0, 2,  0,  1, 14, 16);
-    VoxelShape eastPlate  = Block.box(15, 2,  0, 16, 14, 16);
+    VoxelShape northPlate = Block.box(0, 2, 0, 16, 14, 1);
+    VoxelShape southPlate = Block.box(0, 2, 15, 16, 14, 16);
+    VoxelShape westPlate = Block.box(0, 2, 0, 1, 14, 16);
+    VoxelShape eastPlate = Block.box(15, 2, 0, 16, 14, 16);
     for (boolean north : bools) {
       for (boolean east : bools) {
         for (boolean south : bools) {
@@ -74,8 +77,8 @@ public class PlatformBlock extends Block implements SimpleWaterloggedBlock {
                 }
                 if (north) shape = Shapes.joinUnoptimized(shape, northPlate, BooleanOp.OR);
                 if (south) shape = Shapes.joinUnoptimized(shape, southPlate, BooleanOp.OR);
-                if (west)  shape = Shapes.joinUnoptimized(shape, westPlate, BooleanOp.OR);
-                if (east)  shape = Shapes.joinUnoptimized(shape, eastPlate, BooleanOp.OR);
+                if (west) shape = Shapes.joinUnoptimized(shape, westPlate, BooleanOp.OR);
+                if (east) shape = Shapes.joinUnoptimized(shape, eastPlate, BooleanOp.OR);
                 // add to map
                 int index = makeShapeIndex(up, down, north, east, south, west);
                 SHAPES[index] = shape.optimize();
@@ -86,6 +89,7 @@ public class PlatformBlock extends Block implements SimpleWaterloggedBlock {
       }
     }
   }
+
   public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
   public PlatformBlock(Properties props) {
@@ -94,7 +98,7 @@ public class PlatformBlock extends Block implements SimpleWaterloggedBlock {
   }
 
   @Override
-  protected void createBlockStateDefinition(Builder<Block,BlockState> builder) {
+  protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
     builder.add(DIRECTIONS);
     builder.add(WATERLOGGED);
   }
@@ -109,12 +113,16 @@ public class PlatformBlock extends Block implements SimpleWaterloggedBlock {
     return Shapes.block();
   }
 
-  /** Checks if the block has the given facing property */
+  /**
+   * Checks if the block has the given facing property
+   */
   private static boolean facingConnected(Direction facing, BlockState state, DirectionProperty property) {
     return !state.hasProperty(property) || state.getValue(property) == facing;
   }
 
-  /** Checks if the block should connect to the given side */
+  /**
+   * Checks if the block should connect to the given side
+   */
   private static boolean connected(Direction direction, BlockState state) {
     if (!state.is(TinkerTags.Blocks.PLATFORM_CONNECTIONS)) {
       return false;
@@ -130,11 +138,13 @@ public class PlatformBlock extends Block implements SimpleWaterloggedBlock {
     }
     // try relevant facing properties, if any are present must be facing this
     return facingConnected(direction, state, BlockStateProperties.HORIZONTAL_FACING)
-           && facingConnected(direction, state, BlockStateProperties.FACING)
-           && facingConnected(direction, state, BlockStateProperties.FACING_HOPPER);
+      && facingConnected(direction, state, BlockStateProperties.FACING)
+      && facingConnected(direction, state, BlockStateProperties.FACING_HOPPER);
   }
 
-  /** Returns true if this platform connects vertically to the block */
+  /**
+   * Returns true if this platform connects vertically to the block
+   */
   protected boolean verticalConnect(BlockState state) {
     return state.is(this);
   }
@@ -146,9 +156,9 @@ public class PlatformBlock extends Block implements SimpleWaterloggedBlock {
     BlockPos below = pos.below();
     BlockState belowState = level.getBlockState(below);
     BlockState state = this.defaultBlockState()
-                           .setValue(WATERLOGGED, level.getFluidState(pos).getType() == Fluids.WATER)
-                           .setValue(UP, verticalConnect(level.getBlockState(pos.above())))
-                           .setValue(DOWN, verticalConnect(belowState) || belowState.isFaceSturdy(level, below, Direction.UP));
+      .setValue(WATERLOGGED, level.getFluidState(pos).getType() == Fluids.WATER)
+      .setValue(UP, verticalConnect(level.getBlockState(pos.above())))
+      .setValue(DOWN, verticalConnect(belowState) || belowState.isFaceSturdy(level, below, Direction.UP));
     for (Direction direction : Plane.HORIZONTAL) {
       state = state.setValue(DIRECTIONS[direction.get3DDataValue()], connected(direction, level.getBlockState(pos.relative(direction))));
     }

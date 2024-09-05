@@ -9,13 +9,16 @@ import slimeknights.tconstruct.library.tools.SlotType;
  * Note unlike other NBT classes, the data inside this one is mutable as most of it is directly used by the tools.
  */
 public class ModDataNBT extends NamespacedNBT implements IModDataView {
+
   public ModDataNBT() {}
 
   protected ModDataNBT(CompoundTag nbt) {
     super(nbt);
   }
 
-  /** Constructor to clone from another instance, needed to deal with an API conflict */
+  /**
+   * Constructor to clone from another instance, needed to deal with an API conflict
+   */
   public ModDataNBT(NamespacedNBT nbt) {
     super(nbt.getData());
   }
@@ -27,8 +30,9 @@ public class ModDataNBT extends NamespacedNBT implements IModDataView {
 
   /**
    * Sets the slots for the given type
-   * @param type   Slot type
-   * @param value  New value
+   *
+   * @param type  Slot type
+   * @param value New value
    */
   public void setSlots(SlotType type, int value) {
     if (value == 0) {
@@ -40,8 +44,9 @@ public class ModDataNBT extends NamespacedNBT implements IModDataView {
 
   /**
    * Adds the given number of slots
-   * @param type   Slot type
-   * @param add    Value to add, use negative to remove
+   *
+   * @param type Slot type
+   * @param add  Value to add, use negative to remove
    */
   public void addSlots(SlotType type, int add) {
     if (add != 0) {
@@ -52,8 +57,9 @@ public class ModDataNBT extends NamespacedNBT implements IModDataView {
 
   /**
    * Parses the mod data from NBT
-   * @param data  data
-   * @return  Parsed mod data
+   *
+   * @param data data
+   * @return Parsed mod data
    */
   public static ModDataNBT readFromNBT(CompoundTag data) {
     return new ModDataNBT(data);

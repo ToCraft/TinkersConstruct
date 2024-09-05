@@ -21,6 +21,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import java.util.function.Supplier;
 
 public record EmptyBottleIntoEmpty(Supplier<Item> empty, CauldronInteraction fallback) implements CauldronInteraction {
+
   @Override
   public InteractionResult interact(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, ItemStack stack) {
     if (PotionUtils.getPotion(stack) != Potions.WATER) {

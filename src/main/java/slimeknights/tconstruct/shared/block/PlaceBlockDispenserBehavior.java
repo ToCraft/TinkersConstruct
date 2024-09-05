@@ -17,6 +17,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
  * Dispenser behavior that places a block
  */
 public class PlaceBlockDispenserBehavior extends OptionalDispenseItemBehavior {
+
   public static PlaceBlockDispenserBehavior INSTANCE = new PlaceBlockDispenserBehavior();
 
   private PlaceBlockDispenserBehavior() {}

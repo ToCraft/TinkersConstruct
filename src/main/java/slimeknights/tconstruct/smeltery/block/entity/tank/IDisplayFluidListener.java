@@ -9,22 +9,29 @@ import net.minecraftforge.fluids.FluidType;
  * Interface for blocks to be notified when the smeltery has a new bottommost fluid
  */
 public interface IDisplayFluidListener {
-  /** Property for fluid models TODO: move to {@link slimeknights.tconstruct.library.client.model.ModelProperties} */
+
+  /**
+   * Property for fluid models TODO: move to {@link slimeknights.tconstruct.library.client.model.ModelProperties}
+   */
   ModelProperty<FluidStack> PROPERTY = new ModelProperty<>();
 
   /**
    * Called when the display fluid changes0
+   *
    * @param fluid New display fluid, is safe to store (will not be modified)
    */
   void notifyDisplayFluidUpdated(FluidStack fluid);
 
   /**
    * Gets the position of the listener
-   * @return  Position of listener
+   *
+   * @return Position of listener
    */
   BlockPos getListenerPos();
 
-  /** Makes the fluid contain 1000mb, or {@link FluidStack#EMPTY} if empty */
+  /**
+   * Makes the fluid contain 1000mb, or {@link FluidStack#EMPTY} if empty
+   */
   static FluidStack normalizeFluid(FluidStack fluid) {
     if (fluid.isEmpty()) {
       return FluidStack.EMPTY;

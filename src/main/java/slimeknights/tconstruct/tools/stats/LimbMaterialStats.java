@@ -16,8 +16,12 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import java.util.List;
 
-/** Primary stats for a bow */
-public record LimbMaterialStats(int durability, float drawSpeed, float velocity, float accuracy) implements IRepairableMaterialStats {
+/**
+ * Primary stats for a bow
+ */
+public record LimbMaterialStats(int durability, float drawSpeed, float velocity,
+                                float accuracy) implements IRepairableMaterialStats {
+
   public static final MaterialStatsId ID = new MaterialStatsId(TConstruct.getResource("limb"));
   public static final MaterialStatType<LimbMaterialStats> TYPE = new MaterialStatType<>(ID, new LimbMaterialStats(1, 0f, 0f, 0f), RecordLoadable.create(
     IRepairableMaterialStats.DURABILITY_FIELD,

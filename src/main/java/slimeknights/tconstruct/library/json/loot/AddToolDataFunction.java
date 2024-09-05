@@ -27,14 +27,21 @@ import slimeknights.tconstruct.tools.TinkerTools;
 
 import java.util.List;
 
-/** Loot function to add data to a tool. */
+/**
+ * Loot function to add data to a tool.
+ */
 public class AddToolDataFunction extends LootItemConditionalFunction {
+
   public static final ResourceLocation ID = TConstruct.getResource("add_tool_data");
   public static final Serializer SERIALIZER = new Serializer();
 
-  /** Percentage of damage on the tool, if 0 the tool is undamaged */
+  /**
+   * Percentage of damage on the tool, if 0 the tool is undamaged
+   */
   private final float damage;
-  /** Fixed materials on the tool, any nulls in the list will randomize */
+  /**
+   * Fixed materials on the tool, any nulls in the list will randomize
+   */
   private final List<RandomMaterial> materials;
 
   protected AddToolDataFunction(LootItemCondition[] conditionsIn, float damage, List<RandomMaterial> materials) {
@@ -43,7 +50,9 @@ public class AddToolDataFunction extends LootItemConditionalFunction {
     this.materials = materials;
   }
 
-  /** Creates a new builder */
+  /**
+   * Creates a new builder
+   */
   public static AddToolDataFunction.Builder builder() {
     return new AddToolDataFunction.Builder();
   }
@@ -66,15 +75,18 @@ public class AddToolDataFunction extends LootItemConditionalFunction {
       }
       // set damage last to a percentage of max damage if requested
       if (damage > 0) {
-        tool.setDamage((int)(tool.getStats().get(ToolStats.DURABILITY) * damage));
+        tool.setDamage((int) (tool.getStats().get(ToolStats.DURABILITY) * damage));
       }
     }
     return stack;
   }
 
-  /** Serializer logic for the function */
+  /**
+   * Serializer logic for the function
+   */
   private static class Serializer extends LootItemConditionalFunction.Serializer<AddToolDataFunction> {
-    private static final LoadableField<List<RandomMaterial>,AddToolDataFunction> MATERIAL_LIST = RandomMaterial.LOADER.list(0).defaultField("materials", List.of(), d -> d.materials);
+
+    private static final LoadableField<List<RandomMaterial>, AddToolDataFunction> MATERIAL_LIST = RandomMaterial.LOADER.list(0).defaultField("materials", List.of(), d -> d.materials);
 
     @Override
     public void serialize(JsonObject json, AddToolDataFunction loot, JsonSerializationContext context) {
@@ -97,9 +109,12 @@ public class AddToolDataFunction extends LootItemConditionalFunction {
     }
   }
 
-  /** Builder to create a new add tool data function */
+  /**
+   * Builder to create a new add tool data function
+   */
   @Accessors(chain = true)
   public static class Builder extends LootItemConditionalFunction.Builder<AddToolDataFunction.Builder> {
+
     private final ImmutableList.Builder<RandomMaterial> materials = ImmutableList.builder();
     private float damage = 0;
 
@@ -110,7 +125,9 @@ public class AddToolDataFunction extends LootItemConditionalFunction {
       return this;
     }
 
-    /** Sets the damage for the tool */
+    /**
+     * Sets the damage for the tool
+     */
     public void setDamage(float damage) {
       if (damage < 0 || damage > 1) {
         throw new IllegalArgumentException("Damage must be between 0 and 1, given " + damage);
@@ -118,13 +135,17 @@ public class AddToolDataFunction extends LootItemConditionalFunction {
       this.damage = damage;
     }
 
-    /** Adds a material to the builder */
+    /**
+     * Adds a material to the builder
+     */
     public Builder addMaterial(RandomMaterial mat) {
       materials.add(mat);
       return this;
     }
 
-    /** Adds a material to the builder */
+    /**
+     * Adds a material to the builder
+     */
     public Builder addMaterial(MaterialId mat) {
       return addMaterial(RandomMaterial.fixed(mat));
     }

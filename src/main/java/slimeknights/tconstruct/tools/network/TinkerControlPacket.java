@@ -35,7 +35,9 @@ public enum TinkerControlPacket implements IThreadsafePacket {
     this(TooltipKey.UNKNOWN);
   }
 
-  /** Gets the packet for helmet interaction */
+  /**
+   * Gets the packet for helmet interaction
+   */
   public static TinkerControlPacket getStartHelmetInteract(TooltipKey key) {
     return switch (key) {
       case SHIFT -> START_HELMET_INTERACT_SHIFT;
@@ -45,7 +47,9 @@ public enum TinkerControlPacket implements IThreadsafePacket {
     };
   }
 
-  /** Gets the packet for leggings interaction */
+  /**
+   * Gets the packet for leggings interaction
+   */
   public static TinkerControlPacket getStartLeggingsInteract(TooltipKey key) {
     return switch (key) {
       case SHIFT -> START_LEGGINGS_INTERACT_SHIFT;
@@ -70,11 +74,13 @@ public enum TinkerControlPacket implements IThreadsafePacket {
     if (player != null) {
       switch (this) {
         case DOUBLE_JUMP -> DoubleJumpModifier.extraJump(player);
-        case START_HELMET_INTERACT, START_HELMET_INTERACT_SHIFT, START_HELMET_INTERACT_CONTROL, START_HELMET_INTERACT_ALT
-          -> InteractionHandler.startArmorInteract(player, EquipmentSlot.HEAD, this.modifier);
+        case START_HELMET_INTERACT, START_HELMET_INTERACT_SHIFT, START_HELMET_INTERACT_CONTROL,
+             START_HELMET_INTERACT_ALT ->
+          InteractionHandler.startArmorInteract(player, EquipmentSlot.HEAD, this.modifier);
         case STOP_HELMET_INTERACT -> InteractionHandler.stopArmorInteract(player, EquipmentSlot.HEAD);
-        case START_LEGGINGS_INTERACT, START_LEGGINGS_INTERACT_SHIFT, START_LEGGINGS_INTERACT_CONTROL, START_LEGGINGS_INTERACT_ALT
-          -> InteractionHandler.startArmorInteract(player, EquipmentSlot.LEGS, this.modifier);
+        case START_LEGGINGS_INTERACT, START_LEGGINGS_INTERACT_SHIFT, START_LEGGINGS_INTERACT_CONTROL,
+             START_LEGGINGS_INTERACT_ALT ->
+          InteractionHandler.startArmorInteract(player, EquipmentSlot.LEGS, this.modifier);
         case STOP_LEGGINGS_INTERACT -> InteractionHandler.stopArmorInteract(player, EquipmentSlot.LEGS);
       }
     }

@@ -12,9 +12,12 @@ import slimeknights.mantle.network.packet.IThreadsafePacket;
 import java.util.Map;
 import java.util.Map.Entry;
 
-/** Packet to sync tool definitions to the client */
+/**
+ * Packet to sync tool definitions to the client
+ */
 @RequiredArgsConstructor
 public class UpdateToolDefinitionDataPacket implements IThreadsafePacket {
+
   @Getter(AccessLevel.PROTECTED)
   private final Map<ResourceLocation, ToolDefinitionData> dataMap;
 

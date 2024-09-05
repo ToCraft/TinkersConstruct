@@ -20,8 +20,10 @@ import java.util.List;
 import java.util.Map;
 
 public class FluidEffectProjectileRenderer extends EntityRenderer<FluidEffectProjectile> {
+
   // TODO: make public in mantle
-  private static final Map<Direction,FluidFace> FACES;
+  private static final Map<Direction, FluidFace> FACES;
+
   static {
     FACES = new EnumMap<>(Direction.class);
     for (Direction direction : Direction.values()) {
@@ -30,15 +32,16 @@ public class FluidEffectProjectileRenderer extends EntityRenderer<FluidEffectPro
   }
 
   private final List<FluidCuboid> fluids;
+
   public FluidEffectProjectileRenderer(Context context) {
     super(context);
     this.fluids = List.of(
-      new FluidCuboid(new Vector3f(-4,  0,  0), new Vector3f(-2,  2,  2), FACES),
-      new FluidCuboid(new Vector3f( 0, -4,  0), new Vector3f( 2, -2,  2), FACES),
-      new FluidCuboid(new Vector3f( 0,  0, -4), new Vector3f( 2,  2, -2), FACES),
-      new FluidCuboid(new Vector3f( 2,  0,  0), new Vector3f( 4,  2,  2), FACES),
-      new FluidCuboid(new Vector3f( 0,  0,  0), new Vector3f( 2,  4,  2), FACES),
-      new FluidCuboid(new Vector3f( 0,  0,  2), new Vector3f( 2,  2,  4), FACES));
+      new FluidCuboid(new Vector3f(-4, 0, 0), new Vector3f(-2, 2, 2), FACES),
+      new FluidCuboid(new Vector3f(0, -4, 0), new Vector3f(2, -2, 2), FACES),
+      new FluidCuboid(new Vector3f(0, 0, -4), new Vector3f(2, 2, -2), FACES),
+      new FluidCuboid(new Vector3f(2, 0, 0), new Vector3f(4, 2, 2), FACES),
+      new FluidCuboid(new Vector3f(0, 0, 0), new Vector3f(2, 4, 2), FACES),
+      new FluidCuboid(new Vector3f(0, 0, 2), new Vector3f(2, 2, 4), FACES));
   }
 
   @Override

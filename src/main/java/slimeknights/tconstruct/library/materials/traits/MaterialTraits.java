@@ -23,15 +23,17 @@ import java.util.Map.Entry;
  */
 @AllArgsConstructor
 public class MaterialTraits {
+
   @Getter
   private final List<ModifierEntry> defaultTraits;
   @Getter(AccessLevel.PROTECTED)
-  private final Map<MaterialStatsId,List<ModifierEntry>> traitsPerStats;
+  private final Map<MaterialStatsId, List<ModifierEntry>> traitsPerStats;
 
   /**
    * Checks if the stats ID has unique traits
-   * @param statsId  Stats ID
-   * @return  True if the traits for this stat type are unique
+   *
+   * @param statsId Stats ID
+   * @return True if the traits for this stat type are unique
    */
   public boolean hasUniqueTraits(MaterialStatsId statsId) {
     return traitsPerStats.containsKey(statsId);
@@ -39,7 +41,8 @@ public class MaterialTraits {
 
   /**
    * Gets the traits for a stat type
-   * @param statsId  Stats ID
+   *
+   * @param statsId Stats ID
    * @return List of traits
    */
   public List<ModifierEntry> getTraits(MaterialStatsId statsId) {
@@ -48,13 +51,14 @@ public class MaterialTraits {
 
   /**
    * Writes this object to the packet buffer
-   * @param buffer  Buffer instance
+   *
+   * @param buffer Buffer instance
    */
   public void write(FriendlyByteBuf buffer) {
     writeTraitList(buffer, defaultTraits);
     // write map of traits
     buffer.writeVarInt(traitsPerStats.size());
-    for (Entry<MaterialStatsId,List<ModifierEntry>> entry : traitsPerStats.entrySet()) {
+    for (Entry<MaterialStatsId, List<ModifierEntry>> entry : traitsPerStats.entrySet()) {
       buffer.writeResourceLocation(entry.getKey());
       writeTraitList(buffer, entry.getValue());
     }
@@ -62,13 +66,14 @@ public class MaterialTraits {
 
   /**
    * Reads this object from the packet buffer
-   * @param buffer  Buffer
+   *
+   * @param buffer Buffer
    * @return Read MaterialTraits
    */
   public static MaterialTraits read(FriendlyByteBuf buffer) {
     List<ModifierEntry> defaultTraits = readTraitList(buffer);
     int statTypeCount = buffer.readVarInt();
-    Map<MaterialStatsId,List<ModifierEntry>> statsTraits = new HashMap<>(statTypeCount);
+    Map<MaterialStatsId, List<ModifierEntry>> statsTraits = new HashMap<>(statTypeCount);
     for (int i = 0; i < statTypeCount; i++) {
       MaterialStatsId statsId = new MaterialStatsId(buffer.readResourceLocation());
       List<ModifierEntry> traitsList = readTraitList(buffer);
@@ -79,8 +84,9 @@ public class MaterialTraits {
 
   /**
    * Reads a single list of traits from the buffer
-   * @param buffer  Buffer
-   * @return  List of traits
+   *
+   * @param buffer Buffer
+   * @return List of traits
    */
   private static List<ModifierEntry> readTraitList(FriendlyByteBuf buffer) {
     ImmutableList.Builder<ModifierEntry> builder = ImmutableList.builder();
@@ -93,8 +99,9 @@ public class MaterialTraits {
 
   /**
    * Writes a single list of traits to the buffer
-   * @param buffer  Buffer
-   * @param traits  List of traits
+   *
+   * @param buffer Buffer
+   * @param traits List of traits
    */
   private static void writeTraitList(FriendlyByteBuf buffer, List<ModifierEntry> traits) {
     buffer.writeVarInt(traits.size());
@@ -103,16 +110,20 @@ public class MaterialTraits {
     }
   }
 
-  /** Builder for use in deserializing and datagen */
+  /**
+   * Builder for use in deserializing and datagen
+   */
   public static class Builder {
+
     @Getter
     private List<ModifierEntry> defaultTraits = null;
     @Getter(AccessLevel.PROTECTED)
-    private final Map<MaterialStatsId,List<ModifierEntry>> traitsPerStats = new HashMap<>();
+    private final Map<MaterialStatsId, List<ModifierEntry>> traitsPerStats = new HashMap<>();
 
     /**
      * Sets the default traits
-     * @param traits   Traits list
+     *
+     * @param traits Traits list
      */
     public void setDefaultTraits(@Nullable List<ModifierEntry> traits) {
       if (traits != null) {
@@ -122,8 +133,9 @@ public class MaterialTraits {
 
     /**
      * Sets the traits for a stat type
-     * @param statsId  Stats ID
-     * @param traits   Traits list
+     *
+     * @param statsId Stats ID
+     * @param traits  Traits list
      */
     public void setTraits(MaterialStatsId statsId, @Nullable List<ModifierEntry> traits) {
       if (traits != null) {
@@ -136,12 +148,13 @@ public class MaterialTraits {
 
     /**
      * Serializes this object to a trait mapping JSON
-     * @return  Trait mapping Json
+     *
+     * @return Trait mapping Json
      */
     public MaterialTraitsJson serialize() {
       // need to adjust the map to the right generics
       // also suppress the map if no stat types were defined
-      Map<ResourceLocation,List<ModifierEntry>> newMap = null;
+      Map<ResourceLocation, List<ModifierEntry>> newMap = null;
       if (!traitsPerStats.isEmpty()) {
         newMap = new HashMap<>(traitsPerStats.size());
         newMap.putAll(traitsPerStats);
@@ -151,22 +164,23 @@ public class MaterialTraits {
 
     /**
      * Builds this into a material trait object
-     * @param  fallbacks Map of stat type fallbacks
-     * @return  Material traits
+     *
+     * @param fallbacks Map of stat type fallbacks
+     * @return Material traits
      */
-    public MaterialTraits build(Map<MaterialStatsId,MaterialStatsId> fallbacks) {
+    public MaterialTraits build(Map<MaterialStatsId, MaterialStatsId> fallbacks) {
       List<ModifierEntry> defaultTraits = this.defaultTraits;
       if (defaultTraits == null || defaultTraits.isEmpty()) {
         defaultTraits = Collections.emptyList();
       }
-      Map<MaterialStatsId,List<ModifierEntry>> traitsPerStats;
+      Map<MaterialStatsId, List<ModifierEntry>> traitsPerStats;
       if (this.traitsPerStats.isEmpty()) {
         traitsPerStats = Collections.emptyMap();
       } else {
         // add in fallbacks now so no hit to lookup times
-        ImmutableMap.Builder<MaterialStatsId,List<ModifierEntry>> builder = ImmutableMap.builder();
+        ImmutableMap.Builder<MaterialStatsId, List<ModifierEntry>> builder = ImmutableMap.builder();
         builder.putAll(this.traitsPerStats);
-        for (Entry<MaterialStatsId,MaterialStatsId> fallback : fallbacks.entrySet()) {
+        for (Entry<MaterialStatsId, MaterialStatsId> fallback : fallbacks.entrySet()) {
           MaterialStatsId statType = fallback.getKey();
           if (!this.traitsPerStats.containsKey(statType)) {
             List<ModifierEntry> fallbackTraits = this.traitsPerStats.get(fallback.getValue());

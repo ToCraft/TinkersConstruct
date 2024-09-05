@@ -25,13 +25,18 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-/** Collection of custom block types added by Tinkers */
+/**
+ * Collection of custom block types added by Tinkers
+ */
 public class FlexBlockTypes {
-  /** Creates the supplier for a fluid in a fluid block */
+
+  /**
+   * Creates the supplier for a fluid in a fluid block
+   */
   private static Supplier<FlowingFluid> fluidSupplier(ResourceLocation name) {
     return Lazy.of(() -> {
       // TODO: make Mantle loadables resource location
-      if (((ResourceLocationLoadable<Fluid>)Loadables.FLUID).fromKey(name, "fluid") instanceof FlowingFluid flowing) {
+      if (((ResourceLocationLoadable<Fluid>) Loadables.FLUID).fromKey(name, "fluid") instanceof FlowingFluid flowing) {
         return flowing;
       } else {
         throw new RuntimeException("LiquidBlock requires a flowing fluid");
@@ -39,7 +44,9 @@ public class FlexBlockTypes {
     });
   }
 
-  /** Initializes the block types */
+  /**
+   * Initializes the block types
+   */
   public static void init() {
     register("burning_liquid", data -> {
       ResourceLocation fluidField = Loadables.RESOURCE_LOCATION.getOrDefault(data, "fluid", null);
@@ -49,7 +56,7 @@ public class FlexBlockTypes {
         final List<Property<?>> _properties = builder.getProperties();
         return new FlexBurningLiquidBlock(props, builder.getPropertyDefaultValues(), fluidSupplier(Objects.requireNonNullElse(fluidField, builder.getRegistryName())), burnTime, damage) {
           @Override
-          protected void createBlockStateDefinition(Builder<Block,BlockState> stateBuilder) {
+          protected void createBlockStateDefinition(Builder<Block, BlockState> stateBuilder) {
             super.createBlockStateDefinition(stateBuilder);
             _properties.forEach(stateBuilder::add);
           }
@@ -62,10 +69,10 @@ public class FlexBlockTypes {
       int effectLevel = GsonHelper.getAsInt(data, "burn_time");
       return (props, builder) -> {
         final List<Property<?>> _properties = builder.getProperties();
-        Lazy<MobEffect> effect = Lazy.of(() -> ((ResourceLocationLoadable<MobEffect>)Loadables.MOB_EFFECT).fromKey(effectName, "effect"));
-        return new FlexMobEffectLiquidBlock(props, builder.getPropertyDefaultValues(), fluidSupplier(Objects.requireNonNullElse(fluidField, builder.getRegistryName())), () -> new MobEffectInstance(effect.get(), 5*20, effectLevel - 1)) {
+        Lazy<MobEffect> effect = Lazy.of(() -> ((ResourceLocationLoadable<MobEffect>) Loadables.MOB_EFFECT).fromKey(effectName, "effect"));
+        return new FlexMobEffectLiquidBlock(props, builder.getPropertyDefaultValues(), fluidSupplier(Objects.requireNonNullElse(fluidField, builder.getRegistryName())), () -> new MobEffectInstance(effect.get(), 5 * 20, effectLevel - 1)) {
           @Override
-          protected void createBlockStateDefinition(Builder<Block,BlockState> stateBuilder) {
+          protected void createBlockStateDefinition(Builder<Block, BlockState> stateBuilder) {
             super.createBlockStateDefinition(stateBuilder);
             _properties.forEach(stateBuilder::add);
           }
@@ -74,7 +81,9 @@ public class FlexBlockTypes {
     }, Material.WATER);
   }
 
-  /** Local helper to register our stuff */
+  /**
+   * Local helper to register our stuff
+   */
   private static <T extends Block & IFlexBlock> void register(String name, IBlockSerializer<T> factory, Material defaultMaterial) {
     FlexBlockType.register(TConstruct.resourceString(name), factory, "translucent", true, defaultMaterial);
   }

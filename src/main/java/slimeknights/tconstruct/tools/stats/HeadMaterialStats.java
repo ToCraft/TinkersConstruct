@@ -17,8 +17,12 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import java.util.List;
 
-/** Stats for melee/harvest head stats */
-public record HeadMaterialStats(int durability, float miningSpeed, Tier tier, float attack) implements IRepairableMaterialStats {
+/**
+ * Stats for melee/harvest head stats
+ */
+public record HeadMaterialStats(int durability, float miningSpeed, Tier tier,
+                                float attack) implements IRepairableMaterialStats {
+
   public static final MaterialStatsId ID = new MaterialStatsId(TConstruct.getResource("head"));
   public static final MaterialStatType<HeadMaterialStats> TYPE = new MaterialStatType<>(ID, new HeadMaterialStats(1, 1f, Tiers.WOOD, 1f), RecordLoadable.create(
     IRepairableMaterialStats.DURABILITY_FIELD,

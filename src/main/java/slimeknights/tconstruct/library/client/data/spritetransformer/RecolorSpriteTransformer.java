@@ -15,13 +15,18 @@ import slimeknights.tconstruct.TConstruct;
 
 import java.lang.reflect.Type;
 
-/** Sprite transformer that applies the given color mapping to recolor each pixel */
+/**
+ * Sprite transformer that applies the given color mapping to recolor each pixel
+ */
 @RequiredArgsConstructor
 public class RecolorSpriteTransformer implements ISpriteTransformer {
+
   public static final ResourceLocation NAME = TConstruct.getResource("recolor_sprite");
   public static final Deserializer DESERIALIZER = new Deserializer();
 
-  /** Color mapping to apply */
+  /**
+   * Color mapping to apply
+   */
   @Getter
   private final IColorMapping colorMapping;
 
@@ -47,8 +52,11 @@ public class RecolorSpriteTransformer implements ISpriteTransformer {
     return object;
   }
 
-  /** Serializer for a recolor sprite transformer */
+  /**
+   * Serializer for a recolor sprite transformer
+   */
   protected static class Deserializer implements JsonDeserializer<RecolorSpriteTransformer> {
+
     @Override
     public RecolorSpriteTransformer deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
       JsonObject object = json.getAsJsonObject();

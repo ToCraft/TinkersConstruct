@@ -21,20 +21,27 @@ import slimeknights.tconstruct.tools.item.ModifierCrystalItem;
 import javax.annotation.Nullable;
 import java.util.List;
 
-/** Recipe that removes a modifier, placing it on a crystal for reapplication */
+/**
+ * Recipe that removes a modifier, placing it on a crystal for reapplication
+ */
 public class ExtractModifierRecipe extends ModifierRemovalRecipe {
+
   private static final String BASE_KEY = TConstruct.makeTranslationKey("recipe", "extract_modifier");
   private static final Component DESCRIPTION = TConstruct.makeTranslation("recipe", "extract_modifier.description");
   private static final Component NO_MODIFIERS = TConstruct.makeTranslation("recipe", "extract_modifier.no_modifiers");
 
-  /** Recipe loadable */
+  /**
+   * Recipe loadable
+   */
   public static final RecordLoadable<ExtractModifierRecipe> LOADER = RecordLoadable.create(ContextKey.ID.requiredField(), NAME_FIELD, TOOLS_FIELD, INPUTS_FIELD, LEFTOVERS_FIELD, MODIFIER_PREDICATE_FIELD, ExtractModifierRecipe::new);
 
   public ExtractModifierRecipe(ResourceLocation id, String name, SizedIngredient toolRequirements, List<SizedIngredient> inputs, List<ItemStack> leftovers, IJsonPredicate<ModifierId> modifierPredicate) {
     super(id, name, toolRequirements, inputs, leftovers, modifierPredicate);
   }
 
-  /** Gets the base key for the title translation */
+  /**
+   * Gets the base key for the title translation
+   */
   @Override
   protected String getBaseKey() {
     return BASE_KEY;

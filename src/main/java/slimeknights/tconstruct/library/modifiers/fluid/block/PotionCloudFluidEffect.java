@@ -16,8 +16,12 @@ import slimeknights.tconstruct.library.recipe.TagPredicate;
 
 import java.util.List;
 
-/** Effect to create a lingering cloud at the hit block */
-public record PotionCloudFluidEffect(float scale, TagPredicate predicate) implements FluidEffect<FluidEffectContext.Block> {
+/**
+ * Effect to create a lingering cloud at the hit block
+ */
+public record PotionCloudFluidEffect(float scale,
+                                     TagPredicate predicate) implements FluidEffect<FluidEffectContext.Block> {
+
   public static final RecordLoadable<PotionCloudFluidEffect> LOADER = RecordLoadable.create(
     FloatLoadable.FROM_ZERO.requiredField("scale", e -> e.scale),
     TagPredicate.LOADABLE.defaultField("nbt", TagPredicate.ANY, e -> e.predicate),
@@ -45,13 +49,13 @@ public record PotionCloudFluidEffect(float scale, TagPredicate predicate) implem
           for (MobEffectInstance instance : effects) {
             if (instance.getEffect().isInstantenous()) {
               // only thing we have to scale on instant effects is the amplifier, though clouds automatically half instant effects for us
-              int amplifier = (int)((instance.getAmplifier() + 1) * effectScale * 2) - 1;
+              int amplifier = (int) ((instance.getAmplifier() + 1) * effectScale * 2) - 1;
               if (amplifier >= 0) {
                 cloud.addEffect(new MobEffectInstance(instance.getEffect(), instance.getDuration(), amplifier, instance.isAmbient(), instance.isVisible(), instance.showIcon()));
                 used = true;
               }
             } else {
-              int duration = (int)(instance.getDuration() * effectScale);
+              int duration = (int) (instance.getDuration() * effectScale);
               if (duration > 10) {
                 cloud.addEffect(new MobEffectInstance(instance.getEffect(), duration, instance.getAmplifier(), instance.isAmbient(), instance.isVisible(), instance.showIcon()));
                 used = true;

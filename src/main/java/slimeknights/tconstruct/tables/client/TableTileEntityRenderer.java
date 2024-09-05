@@ -17,9 +17,11 @@ import java.util.List;
 /**
  * Same as {@link slimeknights.mantle.client.render.InventoryTileEntityRenderer}, but uses {@link TableModel}.
  * TODO: migrate to an interface in Mantle
- * @param <T>  Tile entity type
+ *
+ * @param <T> Tile entity type
  */
 public class TableTileEntityRenderer<T extends BlockEntity & Container> implements BlockEntityRenderer<T> {
+
   public TableTileEntityRenderer(Context context) {}
 
   @Override
@@ -31,7 +33,7 @@ public class TableTileEntityRenderer<T extends BlockEntity & Container> implemen
         boolean isRotated = RenderingHelper.applyRotation(matrices, state);
         List<ModelItem> modelItems = model.getItems();
 
-        for(int i = 0; i < modelItems.size(); ++i) {
+        for (int i = 0; i < modelItems.size(); ++i) {
           RenderingHelper.renderItem(matrices, buffer, inventory.getItem(i), modelItems.get(i), light);
         }
 

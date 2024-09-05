@@ -13,11 +13,13 @@ import javax.annotation.Nullable;
 
 /**
  * Reads an entity variable from melee content
+ *
  * @param entity   Entity variable
  * @param which    Determines whether to read the attacker or the target
  * @param fallback Fallback if the entity is not found
  */
 public record EntityMeleeVariable(EntityVariable entity, WhichEntity which, float fallback) implements MeleeVariable {
+
   public static final RecordLoadable<EntityMeleeVariable> LOADER = RecordLoadable.create(
     EntityVariable.LOADER.directField("entity_type", EntityMeleeVariable::entity),
     new EnumLoadable<>(WhichEntity.class).requiredField("which", EntityMeleeVariable::which),
@@ -43,5 +45,5 @@ public record EntityMeleeVariable(EntityVariable entity, WhichEntity which, floa
     return LOADER;
   }
 
-  public enum WhichEntity { ATTACKER, TARGET }
+  public enum WhichEntity {ATTACKER, TARGET}
 }

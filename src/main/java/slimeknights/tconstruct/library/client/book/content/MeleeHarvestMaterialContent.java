@@ -13,7 +13,10 @@ import slimeknights.tconstruct.tools.stats.StatlessMaterialStats;
  * Content page for melee/harvest materials
  */
 public class MeleeHarvestMaterialContent extends AbstractMaterialContent {
-  /** Page ID for using this index directly */
+
+  /**
+   * Page ID for using this index directly
+   */
   public static final ResourceLocation ID = TConstruct.getResource("melee_harvest_material");
 
   public MeleeHarvestMaterialContent(MaterialVariantId materialVariant, boolean detailed) {

@@ -15,22 +15,33 @@ import javax.annotation.Nullable;
 import static slimeknights.tconstruct.library.tools.helper.ModifierUtil.asLiving;
 import static slimeknights.tconstruct.library.tools.helper.ModifierUtil.asPlayer;
 
-/** Context for calling fluid effects */
+/**
+ * Context for calling fluid effects
+ */
 @Getter
 @RequiredArgsConstructor
 public abstract class FluidEffectContext {
+
   protected final Level level;
-  /** Entity using the fluid */
+  /**
+   * Entity using the fluid
+   */
   @Nullable
   protected final LivingEntity entity;
-  /** Player using the fluid, may be null if a non-player is the source of the fluid */
+  /**
+   * Player using the fluid, may be null if a non-player is the source of the fluid
+   */
   @Nullable
   protected final Player player;
-  /** Projectile that caused the fluid, null if no projectile is used (e.g. melee or interact effects) */
+  /**
+   * Projectile that caused the fluid, null if no projectile is used (e.g. melee or interact effects)
+   */
   @Nullable
   protected final Projectile projectile;
 
-  /** Gets a damage source based on this context */
+  /**
+   * Gets a damage source based on this context
+   */
   public DamageSource createDamageSource() {
     if (projectile != null) {
       return DamageSource.indirectMobAttack(projectile, entity).setProjectile();
@@ -45,12 +56,16 @@ public abstract class FluidEffectContext {
     return new DamageSource("generic");
   }
 
-  /** Context for fluid effects targeting an entity */
+  /**
+   * Context for fluid effects targeting an entity
+   */
   @Getter
   public static class Entity extends FluidEffectContext {
+
     private final net.minecraft.world.entity.Entity target;
     @Nullable
     private final LivingEntity livingTarget;
+
     public Entity(Level level, @Nullable LivingEntity holder, @Nullable Player player, @Nullable Projectile projectile, net.minecraft.world.entity.Entity target, @Nullable LivingEntity livingTarget) {
       super(level, holder, player, projectile);
       this.target = target;
@@ -66,11 +81,15 @@ public abstract class FluidEffectContext {
     }
   }
 
-  /** Context for fluid effects targeting an entity */
+  /**
+   * Context for fluid effects targeting an entity
+   */
   public static class Block extends FluidEffectContext {
+
     @Getter
     private final BlockHitResult hitResult;
     private BlockState state;
+
     public Block(Level level, @Nullable LivingEntity holder, @Nullable Player player, @Nullable Projectile projectile, BlockHitResult hitResult) {
       super(level, holder, player, projectile);
       this.hitResult = hitResult;
@@ -84,7 +103,9 @@ public abstract class FluidEffectContext {
       this(level, player, player, projectile, hitResult);
     }
 
-    /** Gets the block state targeted by this context */
+    /**
+     * Gets the block state targeted by this context
+     */
     public BlockState getBlockState() {
       if (state == null) {
         state = level.getBlockState(hitResult.getBlockPos());
@@ -92,7 +113,9 @@ public abstract class FluidEffectContext {
       return state;
     }
 
-    /** Checks if the block in front of the hit block is replaceable */
+    /**
+     * Checks if the block in front of the hit block is replaceable
+     */
     public boolean isOffsetReplaceable() {
       return level.getBlockState(hitResult.getBlockPos().relative(hitResult.getDirection())).getMaterial().isReplaceable();
     }

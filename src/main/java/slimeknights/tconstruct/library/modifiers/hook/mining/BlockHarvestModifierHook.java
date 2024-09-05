@@ -17,25 +17,31 @@ import java.util.Collection;
  * </ul>
  */
 public interface BlockHarvestModifierHook {
+
   /**
    * Called when a tool is about to break blocks to allow setting markers on the tool for hooks with less context (such as {@link slimeknights.tconstruct.library.modifiers.hook.behavior.EnchantmentModifierHook}).
-   * @param tool      Tool used
-   * @param modifier  Modifier level
-   * @param context   Harvest context
+   *
+   * @param tool     Tool used
+   * @param modifier Modifier level
+   * @param context  Harvest context
    */
   default void startHarvest(IToolStackView tool, ModifierEntry modifier, ToolHarvestContext context) {}
 
   /**
    * Called after all blocks are broken on the target block. Use to perform effects or to cleanup changes from {@link #startHarvest(IToolStackView, ModifierEntry, ToolHarvestContext)}.
-   * @param tool        Tool used
-   * @param modifier    Modifier level
-   * @param context     Harvest context
-   * @param didHarvest  If true, the block was actually broken.
+   *
+   * @param tool       Tool used
+   * @param modifier   Modifier level
+   * @param context    Harvest context
+   * @param didHarvest If true, the block was actually broken.
    */
   void finishHarvest(IToolStackView tool, ModifierEntry modifier, ToolHarvestContext context, boolean didHarvest);
 
-  /** Merger that runs all submodules */
+  /**
+   * Merger that runs all submodules
+   */
   record AllMerger(Collection<BlockHarvestModifierHook> modules) implements BlockHarvestModifierHook {
+
     @Override
     public void startHarvest(IToolStackView tool, ModifierEntry modifier, ToolHarvestContext context) {
       for (BlockHarvestModifierHook module : modules) {
@@ -54,10 +60,14 @@ public interface BlockHarvestModifierHook {
   /**
    * Implementation that simply marks we are harvesting in the tools persistent data.
    * Not a problem if multiple modifiers use the default impl as it just sets the flag and clears it multiple times.
+   *
    * @see slimeknights.tconstruct.library.modifiers.modules.technical.MarkHarvestingModule
    */
   interface MarkHarvesting extends BlockHarvestModifierHook {
-    /** Flag marking we are currently harvesting. Will be shared by all usages of this hook as its not a problem if its set/removed multiple times. */
+
+    /**
+     * Flag marking we are currently harvesting. Will be shared by all usages of this hook as its not a problem if its set/removed multiple times.
+     */
     ResourceLocation HARVESTING_FLAG = TConstruct.getResource("is_harvesting");
 
     @Override
@@ -70,7 +80,9 @@ public interface BlockHarvestModifierHook {
       tool.getPersistentData().remove(HARVESTING_FLAG);
     }
 
-    /** Checks if we are presently harvesting */
+    /**
+     * Checks if we are presently harvesting
+     */
     static boolean isHarvesting(IToolStackView tool) {
       return tool.getPersistentData().getBoolean(HARVESTING_FLAG);
     }

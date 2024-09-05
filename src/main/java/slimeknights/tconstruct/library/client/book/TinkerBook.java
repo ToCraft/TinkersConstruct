@@ -40,12 +40,13 @@ import static slimeknights.tconstruct.tools.stats.PlatingMaterialStats.LEGGINGS;
 import static slimeknights.tconstruct.tools.stats.PlatingMaterialStats.SHIELD;
 
 public class TinkerBook extends BookData {
-  public static final BookData MATERIALS_AND_YOU = BookLoader.registerBook(MATERIALS_BOOK_ID,    false, false);
-  public static final BookData PUNY_SMELTING     = BookLoader.registerBook(PUNY_SMELTING_ID,     false, false);
-  public static final BookData MIGHTY_SMELTING   = BookLoader.registerBook(MIGHTY_SMELTING_ID,   false, false);
-  public static final BookData TINKERS_GADGETRY  = BookLoader.registerBook(TINKERS_GADGETRY_ID,  false, false);
+
+  public static final BookData MATERIALS_AND_YOU = BookLoader.registerBook(MATERIALS_BOOK_ID, false, false);
+  public static final BookData PUNY_SMELTING = BookLoader.registerBook(PUNY_SMELTING_ID, false, false);
+  public static final BookData MIGHTY_SMELTING = BookLoader.registerBook(MIGHTY_SMELTING_ID, false, false);
+  public static final BookData TINKERS_GADGETRY = BookLoader.registerBook(TINKERS_GADGETRY_ID, false, false);
   public static final BookData FANTASTIC_FOUNDRY = BookLoader.registerBook(FANTASTIC_FOUNDRY_ID, false, false);
-  public static final BookData ENCYCLOPEDIA      = BookLoader.registerBook(ENCYCLOPEDIA_ID,      false, false);
+  public static final BookData ENCYCLOPEDIA = BookLoader.registerBook(ENCYCLOPEDIA_ID, false, false);
   private static final BookData[] ALL_BOOKS = {MATERIALS_AND_YOU, PUNY_SMELTING, MIGHTY_SMELTING, TINKERS_GADGETRY, FANTASTIC_FOUNDRY, ENCYCLOPEDIA};
 
   /**
@@ -56,8 +57,8 @@ public class TinkerBook extends BookData {
 
     // register page types
     BookLoader.registerPageType(MeleeHarvestMaterialContent.ID, MeleeHarvestMaterialContent.class);
-    BookLoader.registerPageType(RangedMaterialContent.ID,       RangedMaterialContent.class);
-    BookLoader.registerPageType(ArmorMaterialContent.ID,        ArmorMaterialContent.class);
+    BookLoader.registerPageType(RangedMaterialContent.ID, RangedMaterialContent.class);
+    BookLoader.registerPageType(ArmorMaterialContent.ID, ArmorMaterialContent.class);
     BookLoader.registerPageType(ContentTool.ID, ContentTool.class);
     BookLoader.registerPageType(ContentModifier.ID, ContentModifier.class);
     BookLoader.registerPageType(TooltipShowcaseContent.ID, TooltipShowcaseContent.class);
@@ -66,8 +67,8 @@ public class TinkerBook extends BookData {
     TierRangeMaterialSectionTransformer.registerMaterialType(getResource("melee_harvest"), MeleeHarvestMaterialContent::new, HeadMaterialStats.ID, HandleMaterialStats.ID, StatlessMaterialStats.BINDING.getIdentifier());
     TierRangeMaterialSectionTransformer.registerMaterialType(getResource("ranged"), RangedMaterialContent::new, LimbMaterialStats.ID, GripMaterialStats.ID, StatlessMaterialStats.BOWSTRING.getIdentifier());
     TierRangeMaterialSectionTransformer.registerMaterialType(getResource("armor"), ArmorMaterialContent::new,
-                                                             HELMET.getId(), CHESTPLATE.getId(), LEGGINGS.getId(), BOOTS.getId(), SHIELD.getId(),
-                                                             StatlessMaterialStats.MAILLE.getIdentifier(), StatlessMaterialStats.SHIELD_CORE.getIdentifier());
+      HELMET.getId(), CHESTPLATE.getId(), LEGGINGS.getId(), BOOTS.getId(), SHIELD.getId(),
+      StatlessMaterialStats.MAILLE.getIdentifier(), StatlessMaterialStats.SHIELD_CORE.getIdentifier());
     TierRangeMaterialSectionTransformer.registerMaterialType(getResource("skull"), ContentMaterialSkull::new, SkullStats.ID);
 
     // add transformers that load modifiers from tags
@@ -131,11 +132,11 @@ public class TinkerBook extends BookData {
   public static BookData getBook(BookType bookType) {
     return switch (bookType) {
       case MATERIALS_AND_YOU -> MATERIALS_AND_YOU;
-      case PUNY_SMELTING     -> PUNY_SMELTING;
-      case MIGHTY_SMELTING   -> MIGHTY_SMELTING;
-      case TINKERS_GADGETRY  -> TINKERS_GADGETRY;
+      case PUNY_SMELTING -> PUNY_SMELTING;
+      case MIGHTY_SMELTING -> MIGHTY_SMELTING;
+      case TINKERS_GADGETRY -> TINKERS_GADGETRY;
       case FANTASTIC_FOUNDRY -> FANTASTIC_FOUNDRY;
-      case ENCYCLOPEDIA      -> ENCYCLOPEDIA;
+      case ENCYCLOPEDIA -> ENCYCLOPEDIA;
     };
   }
 }

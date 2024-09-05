@@ -47,6 +47,7 @@ import static slimeknights.tconstruct.common.TinkerTags.Modifiers.SPECIAL_DEFENS
 import static slimeknights.tconstruct.common.TinkerTags.Modifiers.UPGRADES;
 
 public class ModifierTagProvider extends AbstractModifierTagProvider {
+
   public ModifierTagProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
     super(generator, TConstruct.MOD_ID, existingFileHelper);
   }
@@ -65,17 +66,17 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
     // modifiers in this tag support both left click and right click interaction
     tag(DUAL_INTERACTION)
       .add(TinkerModifiers.bucketing.getId(), TinkerModifiers.splashing.getId(),
-           TinkerModifiers.glowing.getId(), TinkerModifiers.firestarter.getId(),
-           ModifierIds.stripping, ModifierIds.tilling, ModifierIds.pathing,
-           TinkerModifiers.shears.getId(), TinkerModifiers.harvest.getId())
+        TinkerModifiers.glowing.getId(), TinkerModifiers.firestarter.getId(),
+        ModifierIds.stripping, ModifierIds.tilling, ModifierIds.pathing,
+        TinkerModifiers.shears.getId(), TinkerModifiers.harvest.getId())
       .addOptional(ModifierIds.pockets);
     tag(SLIME_DEFENSE)
       .add(TinkerModifiers.meleeProtection.getId(), TinkerModifiers.projectileProtection.getId(),
-           ModifierIds.fireProtection, TinkerModifiers.magicProtection.getId(),
-           TinkerModifiers.blastProtection.getId(), TinkerModifiers.golden.getId());
+        ModifierIds.fireProtection, TinkerModifiers.magicProtection.getId(),
+        TinkerModifiers.blastProtection.getId(), TinkerModifiers.golden.getId());
     tag(OVERSLIME_FRIEND)
       .add(TinkerModifiers.overgrowth.getId(), ModifierIds.overcast, TinkerModifiers.overlord.getId(),
-           ModifierIds.overforced, ModifierIds.overslimeFriend, TinkerModifiers.overworked.getId());
+        ModifierIds.overforced, ModifierIds.overslimeFriend, TinkerModifiers.overworked.getId());
 
     // book tags
     this.tag(UPGRADES).addTag(GENERAL_UPGRADES, MELEE_UPGRADES, DAMAGE_UPGRADES, HARVEST_UPGRADES, ARMOR_UPGRADES, RANGED_UPGRADES);
@@ -87,11 +88,11 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
 
     // upgrades
     this.tag(GENERAL_UPGRADES).add(
-      ModifierIds.diamond, ModifierIds.emerald, ModifierIds.netherite,
-      ModifierIds.reinforced, ModifierIds.overforced, ModifierIds.soulbound,
-      ModifierIds.experienced, TinkerModifiers.magnetic.getId(), TinkerModifiers.zoom.getId(),
-      ModifierIds.tank, TinkerModifiers.fireprimer.getId())
-        .addOptional(ModifierIds.theOneProbe);
+        ModifierIds.diamond, ModifierIds.emerald, ModifierIds.netherite,
+        ModifierIds.reinforced, ModifierIds.overforced, ModifierIds.soulbound,
+        ModifierIds.experienced, TinkerModifiers.magnetic.getId(), TinkerModifiers.zoom.getId(),
+        ModifierIds.tank, TinkerModifiers.fireprimer.getId())
+      .addOptional(ModifierIds.theOneProbe);
 
     this.tag(MELEE_UPGRADES).add(
       TinkerModifiers.knockback.getId(), TinkerModifiers.padded.getId(),

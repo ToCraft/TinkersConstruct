@@ -19,7 +19,7 @@ public class EntityTypeTagProvider extends EntityTypeTagsProvider {
   @Override
   public void addTags() {
     this.tag(TinkerTags.EntityTypes.SLIMES)
-        .add(EntityType.SLIME, TinkerWorld.skySlimeEntity.get(), TinkerWorld.enderSlimeEntity.get(), TinkerWorld.terracubeEntity.get());
+      .add(EntityType.SLIME, TinkerWorld.skySlimeEntity.get(), TinkerWorld.enderSlimeEntity.get(), TinkerWorld.terracubeEntity.get());
     this.tag(EntityTypeTags.FROG_FOOD).add(TinkerWorld.skySlimeEntity.get(), TinkerWorld.enderSlimeEntity.get(), TinkerWorld.terracubeEntity.get());
     this.tag(TinkerTags.EntityTypes.BACON_PRODUCER).add(EntityType.PIG, EntityType.PIGLIN, EntityType.HOGLIN);
 

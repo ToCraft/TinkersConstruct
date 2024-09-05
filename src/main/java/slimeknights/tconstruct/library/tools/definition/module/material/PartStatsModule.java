@@ -19,8 +19,11 @@ import slimeknights.tconstruct.tools.item.ArmorSlotType;
 import java.util.List;
 import java.util.function.Supplier;
 
-/** Tool using tool parts for its material stats, allows part swapping and tool building */
+/**
+ * Tool using tool parts for its material stats, allows part swapping and tool building
+ */
 public class PartStatsModule extends MaterialStatsModule implements ToolPartsHook {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<PartStatsModule>defaultHooks(ToolHooks.TOOL_STATS, ToolHooks.TOOL_TRAITS, ToolHooks.TOOL_MATERIALS, ToolHooks.TOOL_PARTS, ToolHooks.MATERIAL_REPAIR);
   public static final RecordLoadable<PartStatsModule> LOADER = RecordLoadable.create(
     new OptionallyNestedLoadable<>(TinkerLoadables.TOOL_PART_ITEM, "item").list().requiredField("parts", m -> m.parts),
@@ -30,7 +33,9 @@ public class PartStatsModule extends MaterialStatsModule implements ToolPartsHoo
 
   private final List<IToolPart> parts;
 
-  /** @deprecated use {@link #PartStatsModule(List,float[], int)} or {@link Builder} */
+  /**
+   * @deprecated use {@link #PartStatsModule(List, float[], int)} or {@link Builder}
+   */
   @Deprecated
   public PartStatsModule(List<IToolPart> parts, float[] scales) {
     this(parts, scales, 0);
@@ -63,41 +68,55 @@ public class PartStatsModule extends MaterialStatsModule implements ToolPartsHoo
     return new Builder();
   }
 
-  /** Starts a builder for armor stats */
+  /**
+   * Starts a builder for armor stats
+   */
   public static ArmorBuilder armor(List<ArmorSlotType> slots) {
     return new ArmorBuilder(slots);
   }
 
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   public static class Builder {
+
     private final ImmutableList.Builder<IToolPart> parts = ImmutableList.builder();
     private final ImmutableList.Builder<Float> scales = ImmutableList.builder();
-    @Setter @Accessors(fluent = true)
+    @Setter
+    @Accessors(fluent = true)
     private int primaryPart = 0;
 
-    /** Adds a part to the builder */
+    /**
+     * Adds a part to the builder
+     */
     public Builder part(IToolPart part, float scale) {
       parts.add(part);
       scales.add(scale);
       return this;
     }
 
-    /** Adds a part to the builder */
+    /**
+     * Adds a part to the builder
+     */
     public Builder part(Supplier<? extends IToolPart> part, float scale) {
       return part(part.get(), scale);
     }
 
-    /** Adds a part to the builder */
+    /**
+     * Adds a part to the builder
+     */
     public Builder part(IToolPart part) {
       return part(part, 1);
     }
 
-    /** Adds a part to the builder */
+    /**
+     * Adds a part to the builder
+     */
     public Builder part(Supplier<? extends IToolPart> part) {
       return part(part, 1);
     }
 
-    /** Builds the module */
+    /**
+     * Builds the module
+     */
     public PartStatsModule build() {
       List<IToolPart> parts = this.parts.build();
       if (primaryPart >= parts.size() || primaryPart < -1) {
@@ -107,8 +126,11 @@ public class PartStatsModule extends MaterialStatsModule implements ToolPartsHoo
     }
   }
 
-  /** Builder for armor */
+  /**
+   * Builder for armor
+   */
   public static class ArmorBuilder implements ArmorSlotType.ArmorBuilder<PartStatsModule> {
+
     private final List<ArmorSlotType> slotTypes;
     private final Builder[] builders = new Builder[4];
 
@@ -119,7 +141,9 @@ public class PartStatsModule extends MaterialStatsModule implements ToolPartsHoo
       }
     }
 
-    /** Gets the builder for the given slot */
+    /**
+     * Gets the builder for the given slot
+     */
     protected Builder getBuilder(ArmorSlotType slotType) {
       Builder builder = builders[slotType.getIndex()];
       if (builder == null) {
@@ -128,13 +152,17 @@ public class PartStatsModule extends MaterialStatsModule implements ToolPartsHoo
       return builder;
     }
 
-    /** Adds a part to the given slot */
+    /**
+     * Adds a part to the given slot
+     */
     public ArmorBuilder part(ArmorSlotType slotType, IToolPart part, float scale) {
       getBuilder(slotType).part(part, scale);
       return this;
     }
 
-    /** Adds a part to all slots */
+    /**
+     * Adds a part to all slots
+     */
     public ArmorBuilder part(IToolPart part, float scale) {
       for (ArmorSlotType slotType : slotTypes) {
         getBuilder(slotType).part(part, scale);
@@ -142,12 +170,16 @@ public class PartStatsModule extends MaterialStatsModule implements ToolPartsHoo
       return this;
     }
 
-    /** Adds a part to all slots */
+    /**
+     * Adds a part to all slots
+     */
     public ArmorBuilder part(Supplier<? extends IToolPart> part, float scale) {
       return part(part.get(), scale);
     }
 
-    /** Adds parts to the builder from the passed object */
+    /**
+     * Adds parts to the builder from the passed object
+     */
     public ArmorBuilder part(EnumObject<ArmorSlotType, ? extends IToolPart> parts, float scale) {
       for (ArmorSlotType slotType : slotTypes) {
         getBuilder(slotType).part(parts.get(slotType), scale);
@@ -155,7 +187,9 @@ public class PartStatsModule extends MaterialStatsModule implements ToolPartsHoo
       return this;
     }
 
-    /** Sets the primary part for all slots, assuming its the same index as you defined the parts using this builder. */
+    /**
+     * Sets the primary part for all slots, assuming its the same index as you defined the parts using this builder.
+     */
     public ArmorBuilder primaryPart(int index) {
       for (ArmorSlotType slotType : slotTypes) {
         getBuilder(slotType).primaryPart(index);

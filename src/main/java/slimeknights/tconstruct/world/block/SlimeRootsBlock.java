@@ -5,6 +5,7 @@ import net.minecraft.world.level.block.MangroveRootsBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class SlimeRootsBlock extends MangroveRootsBlock {
+
   public SlimeRootsBlock(Properties props) {
     super(props);
   }

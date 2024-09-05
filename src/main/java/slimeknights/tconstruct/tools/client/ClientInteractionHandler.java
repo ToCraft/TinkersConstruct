@@ -28,10 +28,15 @@ import slimeknights.tconstruct.tools.network.InteractWithAirPacket;
  */
 @EventBusSubscriber(modid = TConstruct.MOD_ID, bus = Bus.FORGE, value = Dist.CLIENT)
 public class ClientInteractionHandler {
-  /** If true, next offhand interaction should be canceled, used since we cannot tell Forge to break the hand loop from the main hand */
+
+  /**
+   * If true, next offhand interaction should be canceled, used since we cannot tell Forge to break the hand loop from the main hand
+   */
   private static boolean cancelNextOffhand = false;
 
-  /** Implements the client side of chestplate {@link slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook#onToolUse(IToolStackView, ModifierEntry, Player, InteractionHand, InteractionSource)} */
+  /**
+   * Implements the client side of chestplate {@link slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook#onToolUse(IToolStackView, ModifierEntry, Player, InteractionHand, InteractionSource)}
+   */
   @SubscribeEvent(priority = EventPriority.LOW)
   static void chestplateToolUse(PlayerInteractEvent.RightClickEmpty event) {
     // not sure if anyone sets the result, but just in case listen to it so they can stop us running
@@ -60,7 +65,9 @@ public class ClientInteractionHandler {
     }
   }
 
-  /** Prevents an empty right click from running the offhand */
+  /**
+   * Prevents an empty right click from running the offhand
+   */
   @SubscribeEvent(priority = EventPriority.HIGH)
   static void preventDoubleInteract(InputEvent.InteractionKeyMappingTriggered event) {
     if (cancelNextOffhand) {
@@ -72,7 +79,9 @@ public class ClientInteractionHandler {
     }
   }
 
-  /** Implements the client side of left click interaction for {@link slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook#onToolUse(IToolStackView, ModifierEntry, Player, InteractionHand, InteractionSource)} */
+  /**
+   * Implements the client side of left click interaction for {@link slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook#onToolUse(IToolStackView, ModifierEntry, Player, InteractionHand, InteractionSource)}
+   */
   @SubscribeEvent
   static void leftClickAir(LeftClickEmpty event) {
     // not sure if anyone sets the result, but just in case listen to it so they can stop us running

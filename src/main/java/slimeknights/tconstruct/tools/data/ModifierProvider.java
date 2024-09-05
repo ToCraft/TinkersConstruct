@@ -124,6 +124,7 @@ import static slimeknights.tconstruct.library.modifiers.modules.behavior.RepairM
 import static slimeknights.tconstruct.library.tools.definition.ModifiableArmorMaterial.ARMOR_SLOTS;
 
 public class ModifierProvider extends AbstractModifierProvider implements IConditionBuilder {
+
   public ModifierProvider(DataGenerator generator) {
     super(generator);
   }
@@ -136,12 +137,12 @@ public class ModifierProvider extends AbstractModifierProvider implements ICondi
 
     // extra modifier slots
     ModifierSlotModule UPGRADE = new ModifierSlotModule(SlotType.UPGRADE);
-    buildModifier(ModifierIds.writable)   .tooltipDisplay(TooltipDisplay.TINKER_STATION).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL).addModule(UPGRADE);
+    buildModifier(ModifierIds.writable).tooltipDisplay(TooltipDisplay.TINKER_STATION).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL).addModule(UPGRADE);
     buildModifier(ModifierIds.recapitated).tooltipDisplay(TooltipDisplay.TINKER_STATION).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL).addModule(UPGRADE);
-    buildModifier(ModifierIds.harmonious) .tooltipDisplay(TooltipDisplay.TINKER_STATION).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL).addModule(UPGRADE);
+    buildModifier(ModifierIds.harmonious).tooltipDisplay(TooltipDisplay.TINKER_STATION).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL).addModule(UPGRADE);
     buildModifier(ModifierIds.resurrected).tooltipDisplay(TooltipDisplay.TINKER_STATION).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL).addModule(UPGRADE);
-    buildModifier(ModifierIds.gilded)     .tooltipDisplay(TooltipDisplay.TINKER_STATION).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL).addModule(new ModifierSlotModule(SlotType.UPGRADE, 2));
-    buildModifier(ModifierIds.draconic)   .tooltipDisplay(TooltipDisplay.TINKER_STATION).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL).addModule(new ModifierSlotModule(SlotType.ABILITY, 1));
+    buildModifier(ModifierIds.gilded).tooltipDisplay(TooltipDisplay.TINKER_STATION).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL).addModule(new ModifierSlotModule(SlotType.UPGRADE, 2));
+    buildModifier(ModifierIds.draconic).tooltipDisplay(TooltipDisplay.TINKER_STATION).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL).addModule(new ModifierSlotModule(SlotType.ABILITY, 1));
     buildModifier(ModifierIds.rebalanced)
       .tooltipDisplay(TooltipDisplay.TINKER_STATION).levelDisplay(ModifierLevelDisplay.NO_LEVELS)
       .addModule(new SwappableSlotModule(1))
@@ -209,9 +210,9 @@ public class ModifierProvider extends AbstractModifierProvider implements ICondi
     buildModifier(ModifierIds.reinforced)
       // level 0 to 5: 0.025 * LEVEL * (11 - LEVEL)
       .addModule(ReduceToolDamageModule.builder().toolContext(noUnbreakable).maxLevel(5).formula()
-                                       .constant(0.025f).variable(LEVEL).multiply() // 0.025 * level
-                                       .constant(11).variable(LEVEL).subtract()     // 11 - level
-                                       .multiply().build())
+        .constant(0.025f).variable(LEVEL).multiply() // 0.025 * level
+        .constant(11).variable(LEVEL).subtract()     // 11 - level
+        .multiply().build())
       // level 6+: 0.5 + level * 0.05
       .addModule(ReduceToolDamageModule.builder().toolContext(noUnbreakable).minLevel(6).amount(0.5f, 0.05f));
     // unbreakable priority is after overslime but before standard modifiers like dense
@@ -273,8 +274,8 @@ public class ModifierProvider extends AbstractModifierProvider implements ICondi
     IJsonPredicate<Item> harvest = ItemPredicate.tag(HARVEST);
     IJsonPredicate<Item> armor = ItemPredicate.tag(WORN_ARMOR);
     buildModifier(TinkerModifiers.silky).levelDisplay(ModifierLevelDisplay.NO_LEVELS)
-                                        .addModule(EnchantmentModule.builder(Enchantments.SILK_TOUCH).toolItem(harvest).constant())
-                                        .addModule(EnchantmentModule.builder(Enchantments.SILK_TOUCH).toolItem(armor).armorHarvest(ARMOR_SLOTS));
+      .addModule(EnchantmentModule.builder(Enchantments.SILK_TOUCH).toolItem(harvest).constant())
+      .addModule(EnchantmentModule.builder(Enchantments.SILK_TOUCH).toolItem(armor).armorHarvest(ARMOR_SLOTS));
     EnchantmentModule CONSTANT_FORTUNE = EnchantmentModule.builder(Enchantments.BLOCK_FORTUNE).toolItem(harvest).constant();
     EnchantmentModule ARMOR_FORTUNE = EnchantmentModule.builder(Enchantments.BLOCK_FORTUNE).toolItem(armor).armorHarvest(ARMOR_SLOTS);
     // note chestplates will have both modules, but will get ignored due to setting the looting slot
@@ -346,11 +347,11 @@ public class ModifierProvider extends AbstractModifierProvider implements ICondi
     buildModifier(ModifierIds.turtleShell)
       .addModule(AttributeModule.builder(ForgeMod.SWIM_SPEED.get(), Operation.MULTIPLY_TOTAL).uniqueFrom(ModifierIds.turtleShell).slots(armorSlots).eachLevel(0.05f))
       .addModule(ProtectionModule.builder()
-                                 .toolItem(ItemPredicate.or(ItemPredicate.tag(TinkerTags.Items.HELMETS), ItemPredicate.tag(TinkerTags.Items.CHESTPLATES)))
-                                 .entity(LivingEntityPredicate.EYES_IN_WATER).eachLevel(2.5f))
+        .toolItem(ItemPredicate.or(ItemPredicate.tag(TinkerTags.Items.HELMETS), ItemPredicate.tag(TinkerTags.Items.CHESTPLATES)))
+        .entity(LivingEntityPredicate.EYES_IN_WATER).eachLevel(2.5f))
       .addModule(ProtectionModule.builder()
-                                 .toolItem(ItemPredicate.or(ItemPredicate.tag(TinkerTags.Items.LEGGINGS), ItemPredicate.tag(TinkerTags.Items.BOOTS)))
-                                 .entity(LivingEntityPredicate.FEET_IN_WATER).eachLevel(2.5f));
+        .toolItem(ItemPredicate.or(ItemPredicate.tag(TinkerTags.Items.LEGGINGS), ItemPredicate.tag(TinkerTags.Items.BOOTS)))
+        .entity(LivingEntityPredicate.FEET_IN_WATER).eachLevel(2.5f));
     // helmet
     buildModifier(ModifierIds.respiration).addModule(EnchantmentModule.builder(Enchantments.RESPIRATION).constant());
     buildModifier(ModifierIds.aquaAffinity).addModule(EnchantmentModule.builder(Enchantments.AQUA_AFFINITY).constant()).levelDisplay(ModifierLevelDisplay.NO_LEVELS);
@@ -358,7 +359,7 @@ public class ModifierProvider extends AbstractModifierProvider implements ICondi
     buildModifier(ModifierIds.strength).addModule(AttributeModule.builder(Attributes.ATTACK_DAMAGE, Operation.MULTIPLY_TOTAL).uniqueFrom(ModifierIds.strength).slots(armorSlots).eachLevel(0.1f));
     // leggings
     addModifier(ModifierIds.pockets, new InventoryMenuModifier(18));
-    addModifier(ModifierIds.toolBelt, new ToolBeltModifier(new int[] {4, 5, 6, 7, 8, 9}));
+    addModifier(ModifierIds.toolBelt, new ToolBeltModifier(new int[]{4, 5, 6, 7, 8, 9}));
     buildModifier(ModifierIds.stepUp).addModule(AttributeModule.builder(ForgeMod.STEP_HEIGHT_ADDITION.get(), Operation.ADDITION).uniqueFrom(ModifierIds.stepUp).slots(armorSlots).eachLevel(0.5f));
     buildModifier(ModifierIds.speedy).addModule(AttributeModule.builder(Attributes.MOVEMENT_SPEED, Operation.MULTIPLY_TOTAL).uniqueFrom(ModifierIds.speedy).slots(armorMainHand).eachLevel(0.1f));
     buildModifier(ModifierIds.leaping).addModule(ArmorStatModule.builder(TinkerDataKeys.JUMP_BOOST).eachLevel(1));
@@ -421,7 +422,7 @@ public class ModifierProvider extends AbstractModifierProvider implements ICondi
       .addModule(ConditionalMeleeDamageModule.builder()
         .customVariable("poison", new EntityMeleeVariable(new EntityEffectLevelVariable(MobEffects.POISON), WhichEntity.ATTACKER, 0))
         .formula()
-         // gives 1.5 bonus per level at poison 1, 2.5 at poison 2
+        // gives 1.5 bonus per level at poison 1, 2.5 at poison 2
         .customVariable("poison").constant(0.5f).add().variable(LEVEL).multiply().variable(MULTIPLIER).multiply()
         // finally, add in base damage
         .variable(VALUE).add().build())
@@ -485,21 +486,21 @@ public class ModifierProvider extends AbstractModifierProvider implements ICondi
     buildModifier(ModifierIds.dense)
       // from 0 to 5, repair formula is FACTOR * (1 - 0.025 * LEVEL * (11 - LEVEL))
       .addModule(RepairModule.builder().maxLevel(5).formula()
-          .variable(FACTOR)
-            .constant(1)
-              .constant(0.025f).variable(LEVEL).multiply()
-              .constant(11).variable(LEVEL).subtract()
-            .multiply()
-          .subtract()
+        .variable(FACTOR)
+        .constant(1)
+        .constant(0.025f).variable(LEVEL).multiply()
+        .constant(11).variable(LEVEL).subtract()
+        .multiply()
+        .subtract()
         .multiply().build())
       // at 6+, repair formula is FACTOR * (0.5 - LEVEL * 0.05), simple formula supports below
       .addModule(RepairModule.builder().minLevel(6).amount(-0.5f, -0.05f))
       // durability formula is 1 - 1/(1.5^LEVEL)
       .addModule(ReduceToolDamageModule.builder().formula()
-          .constant(1)
-            .constant(1)
-            .constant(1.5f).variable(LEVEL).power()
-          .divide()
+        .constant(1)
+        .constant(1)
+        .constant(1.5f).variable(LEVEL).power()
+        .divide()
         .subtract().build());
     buildModifier(ModifierIds.consecrated).addModule(ProtectionModule.builder().attacker(new MobTypePredicate(MobType.UNDEAD)).eachLevel(1.25f));
 
@@ -512,8 +513,8 @@ public class ModifierProvider extends AbstractModifierProvider implements ICondi
     buildModifier(ModifierIds.crystalbound).addModule(RestrictAngleModule.INSTANCE).addModule(StatBoostModule.add(ToolStats.VELOCITY).eachLevel(0.1f));
     buildModifier(ModifierIds.crystalstrike)
       .addModule(AttributeModule.builder(Attributes.ATTACK_SPEED, Operation.MULTIPLY_TOTAL)
-                                .uniqueFrom(ModifierIds.crystalstrike)
-                                .eachLevel(0.025f))
+        .uniqueFrom(ModifierIds.crystalstrike)
+        .eachLevel(0.025f))
       .addModule(new ArmorLevelModule(TinkerDataKeys.CRYSTALSTRIKE, false, TinkerTags.Items.HELD_ARMOR));
     // traits - tier 3 nether
     buildModifier(ModifierIds.lightweight)
@@ -573,19 +574,19 @@ public class ModifierProvider extends AbstractModifierProvider implements ICondi
     buildModifier(ModifierIds.mithridatism).addModule(new EffectImmunityModule(MobEffects.POISON)).levelDisplay(ModifierLevelDisplay.NO_LEVELS);
 
     // mob disguise
-    buildModifier(ModifierIds.creeperDisguise        ).addModule(new MobDisguiseModule(EntityType.CREEPER));
-    buildModifier(ModifierIds.endermanDisguise       ).addModule(new MobDisguiseModule(EntityType.ENDERMAN));
-    buildModifier(ModifierIds.skeletonDisguise       ).addModule(new MobDisguiseModule(EntityType.SKELETON));
-    buildModifier(ModifierIds.strayDisguise          ).addModule(new MobDisguiseModule(EntityType.STRAY));
-    buildModifier(ModifierIds.witherSkeletonDisguise ).addModule(new MobDisguiseModule(EntityType.WITHER_SKELETON));
-    buildModifier(ModifierIds.spiderDisguise         ).addModule(new MobDisguiseModule(EntityType.SPIDER));
-    buildModifier(ModifierIds.caveSpiderDisguise     ).addModule(new MobDisguiseModule(EntityType.CAVE_SPIDER));
-    buildModifier(ModifierIds.zombieDisguise         ).addModule(new MobDisguiseModule(EntityType.ZOMBIE));
-    buildModifier(ModifierIds.huskDisguise           ).addModule(new MobDisguiseModule(EntityType.HUSK));
-    buildModifier(ModifierIds.drownedDisguise        ).addModule(new MobDisguiseModule(EntityType.DROWNED));
-    buildModifier(ModifierIds.blazeDisguise          ).addModule(new MobDisguiseModule(EntityType.BLAZE));
-    buildModifier(ModifierIds.piglinDisguise         ).addModule(new MobDisguiseModule(EntityType.PIGLIN));
-    buildModifier(ModifierIds.piglinBruteDisguise    ).addModule(new MobDisguiseModule(EntityType.PIGLIN_BRUTE));
+    buildModifier(ModifierIds.creeperDisguise).addModule(new MobDisguiseModule(EntityType.CREEPER));
+    buildModifier(ModifierIds.endermanDisguise).addModule(new MobDisguiseModule(EntityType.ENDERMAN));
+    buildModifier(ModifierIds.skeletonDisguise).addModule(new MobDisguiseModule(EntityType.SKELETON));
+    buildModifier(ModifierIds.strayDisguise).addModule(new MobDisguiseModule(EntityType.STRAY));
+    buildModifier(ModifierIds.witherSkeletonDisguise).addModule(new MobDisguiseModule(EntityType.WITHER_SKELETON));
+    buildModifier(ModifierIds.spiderDisguise).addModule(new MobDisguiseModule(EntityType.SPIDER));
+    buildModifier(ModifierIds.caveSpiderDisguise).addModule(new MobDisguiseModule(EntityType.CAVE_SPIDER));
+    buildModifier(ModifierIds.zombieDisguise).addModule(new MobDisguiseModule(EntityType.ZOMBIE));
+    buildModifier(ModifierIds.huskDisguise).addModule(new MobDisguiseModule(EntityType.HUSK));
+    buildModifier(ModifierIds.drownedDisguise).addModule(new MobDisguiseModule(EntityType.DROWNED));
+    buildModifier(ModifierIds.blazeDisguise).addModule(new MobDisguiseModule(EntityType.BLAZE));
+    buildModifier(ModifierIds.piglinDisguise).addModule(new MobDisguiseModule(EntityType.PIGLIN));
+    buildModifier(ModifierIds.piglinBruteDisguise).addModule(new MobDisguiseModule(EntityType.PIGLIN_BRUTE));
     buildModifier(ModifierIds.zombifiedPiglinDisguise).addModule(new MobDisguiseModule(EntityType.ZOMBIFIED_PIGLIN));
   }
 
@@ -594,7 +595,9 @@ public class ModifierProvider extends AbstractModifierProvider implements ICondi
     return "Tinkers' Construct Modifiers";
   }
 
-  /** Short helper to get a modifier ID */
+  /**
+   * Short helper to get a modifier ID
+   */
   private static ModifierId id(String name) {
     return new ModifierId(TConstruct.MOD_ID, name);
   }

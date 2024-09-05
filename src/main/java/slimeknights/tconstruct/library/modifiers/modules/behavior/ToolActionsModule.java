@@ -20,7 +20,9 @@ import java.util.Set;
 /**
  * Module that allows a modifier to perform tool actions
  */
-public record ToolActionsModule(Set<ToolAction> actions, ModifierCondition<IToolStackView> condition) implements ToolActionModifierHook, ModifierModule, ConditionalModule<IToolStackView> {
+public record ToolActionsModule(Set<ToolAction> actions,
+                                ModifierCondition<IToolStackView> condition) implements ToolActionModifierHook, ModifierModule, ConditionalModule<IToolStackView> {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<ToolActionsModule>defaultHooks(ModifierHooks.TOOL_ACTION);
   public static final RecordLoadable<ToolActionsModule> LOADER = RecordLoadable.create(
     Loadables.TOOL_ACTION.set().requiredField("tool_actions", ToolActionsModule::actions),

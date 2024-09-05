@@ -32,12 +32,19 @@ import java.util.List;
 import static slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper.TANK_HELPER;
 
 public class MeltingModifier extends NoLevelsModifier implements MeleeHitModifierHook, ProcessLootModifierHook {
-  /** Max temperature allowed for melting items */
+
+  /**
+   * Max temperature allowed for melting items
+   */
   private static final int MAX_TEMPERATURE = 1000;
 
-  /** Last melting recipe used */
+  /**
+   * Last melting recipe used
+   */
   private static IMeltingRecipe lastRecipe = null;
-  /** Inventory used for finding recipes */
+  /**
+   * Inventory used for finding recipes
+   */
   private static final MeltingContainer inventory = new MeltingContainer();
 
   @Override
@@ -50,9 +57,10 @@ public class MeltingModifier extends NoLevelsModifier implements MeleeHitModifie
 
   /**
    * Gets the fluid for the given item
-   * @param stack  Item
-   * @param world  World instance
-   * @return  Fluid
+   *
+   * @param stack Item
+   * @param world World instance
+   * @return Fluid
    */
   private static FluidStack meltItem(ItemStack stack, Level world) {
     inventory.setStack(stack);
@@ -140,7 +148,7 @@ public class MeltingModifier extends NoLevelsModifier implements MeleeHitModifie
         // recipe amount determines how much we get per hit, up to twice the recipe damage
         int fluidAmount;
         if (damageDealt < damagePerOutput * 2) {
-          fluidAmount = (int)(output.getAmount() * damageDealt / damagePerOutput);
+          fluidAmount = (int) (output.getAmount() * damageDealt / damagePerOutput);
         } else {
           fluidAmount = output.getAmount() * 2;
         }
@@ -158,9 +166,13 @@ public class MeltingModifier extends NoLevelsModifier implements MeleeHitModifie
     }
   }
 
-  /** Helper for finding recipes in melting */
+  /**
+   * Helper for finding recipes in melting
+   */
   private static class MeltingContainer implements IMeltingContainer {
-    @Getter @Setter
+
+    @Getter
+    @Setter
     private ItemStack stack;
 
     @Override

@@ -20,6 +20,7 @@ import java.util.List;
  * TODO: consider modifier level/tool conditions
  */
 public record RarityModule(Rarity rarity) implements VolatileDataModifierHook, ModifierModule {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<RarityModule>defaultHooks(ModifierHooks.VOLATILE_DATA);
   public static final RecordLoadable<RarityModule> LOADER = RecordLoadable.create(new EnumLoadable<>(Rarity.class).requiredField("rarity", RarityModule::rarity), RarityModule::new);
 

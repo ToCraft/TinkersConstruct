@@ -37,6 +37,7 @@ import java.util.stream.IntStream;
  */
 @AllArgsConstructor
 public class TinkerStationPartSwapping implements ITinkerStationRecipe {
+
   private static final RecipeResult<ItemStack> TOO_MANY_PARTS = RecipeResult.failure(TConstruct.makeTranslationKey("recipe", "part_swapping.too_many_parts"));
 
   @Getter
@@ -45,7 +46,7 @@ public class TinkerStationPartSwapping implements ITinkerStationRecipe {
   @Override
   public boolean matches(ITinkerStationContainer inv, Level world) {
     ItemStack tinkerable = inv.getTinkerableStack();
-    if (tinkerable.isEmpty() || !tinkerable.is(TinkerTags.Items.MULTIPART_TOOL)|| !(tinkerable.getItem() instanceof IModifiable modifiable)) {
+    if (tinkerable.isEmpty() || !tinkerable.is(TinkerTags.Items.MULTIPART_TOOL) || !(tinkerable.getItem() instanceof IModifiable modifiable)) {
       return false;
     }
     // get the list of parts, empty means its not multipart
@@ -75,7 +76,9 @@ public class TinkerStationPartSwapping implements ITinkerStationRecipe {
     return foundItem;
   }
 
-  /** @deprecated Use {@link #assemble(ITinkerStationContainer)}  */
+  /**
+   * @deprecated Use {@link #assemble(ITinkerStationContainer)}
+   */
   @Deprecated
   @Override
   public ItemStack getResultItem() {
@@ -114,8 +117,8 @@ public class TinkerStationPartSwapping implements ITinkerStationRecipe {
         int index = i;
         if (i >= parts.size() || parts.get(i).asItem() != item) {
           index = IntStream.range(0, parts.size())
-                           .filter(pi -> parts.get(pi).asItem() == item)
-                           .findFirst().orElse(-1);
+            .filter(pi -> parts.get(pi).asItem() == item)
+            .findFirst().orElse(-1);
           if (index == -1) {
             return RecipeResult.pass();
           }
@@ -155,7 +158,7 @@ public class TinkerStationPartSwapping implements ITinkerStationRecipe {
               }
             }
             if (repairDurability > 0) {
-              ToolDamageUtil.repair(tool, (int)repairDurability);
+              ToolDamageUtil.repair(tool, (int) repairDurability);
             }
           }
         }

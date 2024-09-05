@@ -16,10 +16,12 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 public class FlexModifiableCrossbowItem extends ModifiableCrossbowItem implements IFlexItem {
+
   private final Map<String, FlexEventHandler> eventHandlers = new HashMap<>();
   private final Set<CreativeModeTab> tabs = new HashSet<>();
 
   private final boolean allowFireworks;
+
   public FlexModifiableCrossbowItem(Properties properties, ToolDefinition toolDefinition, boolean allowFireworks) {
     super(properties, toolDefinition);
     this.allowFireworks = allowFireworks;

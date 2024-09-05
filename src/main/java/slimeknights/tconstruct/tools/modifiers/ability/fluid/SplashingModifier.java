@@ -43,8 +43,11 @@ import slimeknights.tconstruct.tools.TinkerModifiers;
 import static slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper.TANK_HELPER;
 import static slimeknights.tconstruct.library.tools.helper.ModifierUtil.asLiving;
 
-/** Modifier to handle spilling recipes on interaction */
+/**
+ * Modifier to handle spilling recipes on interaction
+ */
 public class SplashingModifier extends Modifier implements EntityInteractionModifierHook, BlockInteractionModifierHook {
+
   @Override
   protected void registerHooks(Builder hookBuilder) {
     super.registerHooks(hookBuilder);
@@ -89,7 +92,7 @@ public class SplashingModifier extends Modifier implements EntityInteractionModi
             }
 
             // consume the fluid last, if any target used fluid
-            if (!player.isCreative() ) {
+            if (!player.isCreative()) {
               if (consumed > 0) {
                 fluid.shrink(consumed);
                 TANK_HELPER.setFluid(tool, fluid);
@@ -101,7 +104,7 @@ public class SplashingModifier extends Modifier implements EntityInteractionModi
           }
 
           // cooldown based on attack speed/draw speed. both are on the same scale and default to 1, we don't care which one the tool uses
-          player.getCooldowns().addCooldown(tool.getItem(), (int)(20 / ConditionalStatModifierHook.getModifiedStat(tool, player, ToolStats.DRAW_SPEED)));
+          player.getCooldowns().addCooldown(tool.getItem(), (int) (20 / ConditionalStatModifierHook.getModifiedStat(tool, player, ToolStats.DRAW_SPEED)));
           return InteractionResult.SUCCESS;
         }
       }
@@ -109,11 +112,13 @@ public class SplashingModifier extends Modifier implements EntityInteractionModi
     return InteractionResult.PASS;
   }
 
-  /** Spawns particles at the given entity */
+  /**
+   * Spawns particles at the given entity
+   */
   private static void spawnParticles(Level level, BlockHitResult hit, FluidStack fluid) {
     if (level instanceof ServerLevel) {
       Vec3 location = hit.getLocation();
-      ((ServerLevel)level).sendParticles(new FluidParticleData(TinkerCommons.fluidParticle.get(), fluid), location.x(), location.y(), location.z(), 10, 0.1, 0.2, 0.1, 0.2);
+      ((ServerLevel) level).sendParticles(new FluidParticleData(TinkerCommons.fluidParticle.get(), fluid), location.x(), location.y(), location.z(), 10, 0.1, 0.2, 0.1, 0.2);
     }
   }
 
@@ -155,7 +160,7 @@ public class SplashingModifier extends Modifier implements EntityInteractionModi
             }
 
             // consume the fluid last, if any target used fluid
-            if (player == null || !player.isCreative() ) {
+            if (player == null || !player.isCreative()) {
               if (consumed > 0) {
                 fluid.shrink(consumed);
                 TANK_HELPER.setFluid(tool, fluid);
@@ -171,7 +176,7 @@ public class SplashingModifier extends Modifier implements EntityInteractionModi
 
           // cooldown based on attack speed/draw speed. both are on the same scale and default to 1, we don't care which one the tool uses
           if (player != null) {
-            player.getCooldowns().addCooldown(tool.getItem(), (int)(20 / ConditionalStatModifierHook.getModifiedStat(tool, player, ToolStats.DRAW_SPEED)));
+            player.getCooldowns().addCooldown(tool.getItem(), (int) (20 / ConditionalStatModifierHook.getModifiedStat(tool, player, ToolStats.DRAW_SPEED)));
           }
           return InteractionResult.SUCCESS;
         }

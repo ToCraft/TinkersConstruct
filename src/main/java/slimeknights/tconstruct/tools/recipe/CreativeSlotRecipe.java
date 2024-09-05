@@ -28,14 +28,16 @@ import javax.annotation.Nullable;
  */
 @RequiredArgsConstructor
 public class CreativeSlotRecipe implements ITinkerStationRecipe, IModifierRecipe {
+
   @Getter
   private final ResourceLocation id;
 
   /**
    * Finds the slot type from the inventory
-   * @param inv             Inventory
-   * @param stopAfterFirst  If true, stops after the first item is found
-   * @return  Slot type found, or null if invalid
+   *
+   * @param inv            Inventory
+   * @param stopAfterFirst If true, stops after the first item is found
+   * @return Slot type found, or null if invalid
    */
   @Nullable
   private SlotType findSlotType(ITinkerStationContainer inv, boolean stopAfterFirst) {
@@ -111,7 +113,9 @@ public class CreativeSlotRecipe implements ITinkerStationRecipe, IModifierRecipe
     return TinkerModifiers.creativeSlot.get();
   }
 
-  /** @deprecated Use {@link #assemble(ITinkerStationContainer)} */
+  /**
+   * @deprecated Use {@link #assemble(ITinkerStationContainer)}
+   */
   @Deprecated
   @Override
   public ItemStack getResultItem() {

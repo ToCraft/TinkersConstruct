@@ -8,6 +8,7 @@ import net.minecraft.world.level.Level;
  * Blocks implementing this interface are part of the tinker table tab GUI system
  */
 public interface ITabbedBlock {
+
   /**
    * Open the gui of this block for the given player. Same as {@link slimeknights.mantle.block.InventoryBlock#openGui(Player, Level, BlockPos)} coincidentally
    */

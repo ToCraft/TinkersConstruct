@@ -10,6 +10,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class TinkersAnvilBlock extends TinkerStationBlock {
+
   private static final VoxelShape PART_BASE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 4.0D, 14.0D);
   private static final VoxelShape X_AXIS_AABB = Shapes.or(
     PART_BASE,
@@ -25,6 +26,7 @@ public class TinkersAnvilBlock extends TinkerStationBlock {
   public TinkersAnvilBlock(Properties builder, int slotCount) {
     super(builder, slotCount);
   }
+
   @Override
   @Deprecated
   public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {

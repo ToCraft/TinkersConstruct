@@ -23,6 +23,7 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 public class ContainerFoodItem extends Item {
+
   public ContainerFoodItem(Properties props) {
     super(props);
   }
@@ -75,7 +76,9 @@ public class ContainerFoodItem extends Item {
   }
 
   public static class FluidContainerFoodItem extends ContainerFoodItem {
+
     private final Supplier<FluidStack> fluid;
+
     public FluidContainerFoodItem(Properties props, Supplier<FluidStack> fluid) {
       super(props);
       this.fluid = fluid;

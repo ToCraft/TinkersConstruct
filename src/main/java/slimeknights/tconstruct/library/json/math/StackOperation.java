@@ -5,15 +5,24 @@ import com.google.gson.JsonSyntaxException;
 import it.unimi.dsi.fastutil.floats.FloatStack;
 import net.minecraft.network.FriendlyByteBuf;
 
-/** Interface representing a simple operation performed on the stack */
+/**
+ * Interface representing a simple operation performed on the stack
+ */
 public interface StackOperation {
-  /** Performs this operand */
+
+  /**
+   * Performs this operand
+   */
   void perform(FloatStack stack, float[] variables);
 
-  /** Serializes this operation to JSON */
+  /**
+   * Serializes this operation to JSON
+   */
   JsonPrimitive serialize(String[] variableNames);
 
-  /** Reads an operation from JSON */
+  /**
+   * Reads an operation from JSON
+   */
   static StackOperation deserialize(JsonPrimitive element, String[] variableNames) {
     // strings are either binary operators or are variables
     if (element.isString()) {
@@ -40,10 +49,14 @@ public interface StackOperation {
     throw new JsonSyntaxException("Expected stack operation to be a string or number, got boolean");
   }
 
-  /** Serializes this operation to the network */
+  /**
+   * Serializes this operation to the network
+   */
   void toNetwork(FriendlyByteBuf buffer);
 
-  /** Reads an operation from the network */
+  /**
+   * Reads an operation from the network
+   */
   static StackOperation fromNetwork(FriendlyByteBuf buffer) {
     int type = buffer.readVarInt();
     if (type == PostFixOperator.VALUE_INDEX) {

@@ -9,8 +9,11 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 /**
  * Shared logic to iterate fluid capabilities for {@link ToolFluidCapability}
  */
-abstract class InventoryModifierHookIterator<I> extends CompoundIndexHookIterator<InventoryModifierHook,I> {
-  /** Entry from {@link #findHook(IToolStackView, int)}, will be set during or before iteration */
+abstract class InventoryModifierHookIterator<I> extends CompoundIndexHookIterator<InventoryModifierHook, I> {
+
+  /**
+   * Entry from {@link #findHook(IToolStackView, int)}, will be set during or before iteration
+   */
   protected ModifierEntry indexEntry = null;
 
   @Override

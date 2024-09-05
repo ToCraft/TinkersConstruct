@@ -19,11 +19,16 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-/** Base data generator for use in addons */
+/**
+ * Base data generator for use in addons
+ */
 @SuppressWarnings("unused")  // API
 public abstract class AbstractMaterialRenderInfoProvider extends GenericDataProvider {
-  /** Map of material ID to builder, there is at most one builder for each ID */
-  private final Map<MaterialVariantId,RenderInfoBuilder> allRenderInfo = new HashMap<>();
+
+  /**
+   * Map of material ID to builder, there is at most one builder for each ID
+   */
+  private final Map<MaterialVariantId, RenderInfoBuilder> allRenderInfo = new HashMap<>();
   @Nullable
   private final AbstractMaterialSpriteProvider materialSprites;
   @Nullable
@@ -39,7 +44,9 @@ public abstract class AbstractMaterialRenderInfoProvider extends GenericDataProv
     this(gen, null, null);
   }
 
-  /** Adds all relevant material stats */
+  /**
+   * Adds all relevant material stats
+   */
   protected abstract void addMaterialRenderInfo();
 
   @Override
@@ -58,7 +65,9 @@ public abstract class AbstractMaterialRenderInfoProvider extends GenericDataProv
 
   /* Helpers */
 
-  /** Initializes a builder for the given material */
+  /**
+   * Initializes a builder for the given material
+   */
   private RenderInfoBuilder getBuilder(ResourceLocation texture) {
     RenderInfoBuilder builder = new RenderInfoBuilder();
     if (materialSprites != null) {
@@ -79,7 +88,9 @@ public abstract class AbstractMaterialRenderInfoProvider extends GenericDataProv
     return builder;
   }
 
-  /** Starts a builder for a general render info */
+  /**
+   * Starts a builder for a general render info
+   */
   protected RenderInfoBuilder buildRenderInfo(MaterialVariantId materialId) {
     return allRenderInfo.computeIfAbsent(materialId, id -> getBuilder(materialId.getLocation('_')));
   }
@@ -94,6 +105,7 @@ public abstract class AbstractMaterialRenderInfoProvider extends GenericDataProv
 
   @Accessors(fluent = true, chain = true)
   protected static class RenderInfoBuilder {
+
     @Setter
     private ResourceLocation texture = null;
     private String[] fallbacks;
@@ -105,7 +117,9 @@ public abstract class AbstractMaterialRenderInfoProvider extends GenericDataProv
     @Setter
     private MaterialGeneratorJson generator = null;
 
-    /** Sets the color */
+    /**
+     * Sets the color
+     */
     public RenderInfoBuilder color(int color) {
       if ((color & 0xFF000000) == 0) {
         color |= 0xFF000000;
@@ -114,18 +128,24 @@ public abstract class AbstractMaterialRenderInfoProvider extends GenericDataProv
       return this;
     }
 
-    /** Sets the fallback names */
+    /**
+     * Sets the fallback names
+     */
     public RenderInfoBuilder fallbacks(@Nullable String... fallbacks) {
       this.fallbacks = fallbacks;
       return this;
     }
 
-    /** Sets the texture from another material variant */
+    /**
+     * Sets the texture from another material variant
+     */
     public RenderInfoBuilder materialTexture(MaterialVariantId variantId) {
       return texture(variantId.getLocation('_'));
     }
 
-    /** Builds the material */
+    /**
+     * Builds the material
+     */
     public MaterialRenderInfoJson build() {
       return new MaterialRenderInfoJson(texture, fallbacks, ColorLoadable.ALPHA.getString(color), skipUniqueTexture ? Boolean.TRUE : null, luminosity, generator);
     }

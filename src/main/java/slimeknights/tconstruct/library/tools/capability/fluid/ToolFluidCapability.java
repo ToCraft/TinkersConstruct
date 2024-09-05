@@ -29,10 +29,15 @@ import java.util.function.Supplier;
  */
 @RequiredArgsConstructor
 public class ToolFluidCapability extends FluidModifierHookIterator<ModifierEntry> implements IFluidHandlerItem {
-  /** Boolean key to set in volatile mod data to enable the fluid capability */
+
+  /**
+   * Boolean key to set in volatile mod data to enable the fluid capability
+   */
   public static final ResourceLocation TOTAL_TANKS = TConstruct.getResource("total_tanks");
 
-  /** Modifier hook instance to make an inventory modifier */
+  /**
+   * Modifier hook instance to make an inventory modifier
+   */
   public static final ModuleHook<FluidModifierHook> HOOK = ModifierHooks.register(TConstruct.getResource("fluid"), FluidModifierHook.class, FluidModifierHookMerger::new, new FluidModifierHook() {
     @Override
     public int getTanks(INamespacedNBTView volatileData, ModifierEntry modifier) {
@@ -130,19 +135,25 @@ public class ToolFluidCapability extends FluidModifierHookIterator<ModifierEntry
     return drain(tool.get(), maxDrain, action);
   }
 
-  /** Adds the tanks from the fluid modifier to the tool */
+  /**
+   * Adds the tanks from the fluid modifier to the tool
+   */
   public static void addTanks(ModifierEntry modifier, NamespacedNBT volatileData, FluidModifierHook hook) {
     volatileData.putInt(TOTAL_TANKS, hook.getTanks(volatileData, modifier) + volatileData.getInt(TOTAL_TANKS));
   }
 
-  /** Interface for modifiers with fluid capabilities to return */
+  /**
+   * Interface for modifiers with fluid capabilities to return
+   */
   @SuppressWarnings("unused")
   public interface FluidModifierHook {
+
     /**
      * Determines how many fluid tanks are used by this modifier
-     * @param volatileData  Tool data to check
-     * @param modifier      Modifier to consider
-     * @return  Number of tanks used
+     *
+     * @param volatileData Tool data to check
+     * @param modifier     Modifier to consider
+     * @return Number of tanks used
      */
     default int getTanks(INamespacedNBTView volatileData, ModifierEntry modifier) {
       return 1;
@@ -150,10 +161,11 @@ public class ToolFluidCapability extends FluidModifierHookIterator<ModifierEntry
 
     /**
      * Gets the fluid in the given tank
-     * @param tool      Tool instance
-     * @param modifier  Entry instance
-     * @param tank      Tank index
-     * @return  Fluid in the given tank
+     *
+     * @param tool     Tool instance
+     * @param modifier Entry instance
+     * @param tank     Tank index
+     * @return Fluid in the given tank
      */
     default FluidStack getFluidInTank(IToolStackView tool, ModifierEntry modifier, int tank) {
       return FluidStack.EMPTY;
@@ -161,10 +173,11 @@ public class ToolFluidCapability extends FluidModifierHookIterator<ModifierEntry
 
     /**
      * Gets the max capacity for the given tank
-     * @param tool      Tool instance
-     * @param modifier  Entry instance
-     * @param tank      Tank index
-     * @return  Fluid in the given tank
+     *
+     * @param tool     Tool instance
+     * @param modifier Entry instance
+     * @param tank     Tank index
+     * @return Fluid in the given tank
      */
     default int getTankCapacity(IToolStackView tool, ModifierEntry modifier, int tank) {
       return 0;
@@ -172,11 +185,12 @@ public class ToolFluidCapability extends FluidModifierHookIterator<ModifierEntry
 
     /**
      * Checks if the fluid is valid for the given tank
-     * @param tool      Tool instance
-     * @param modifier  Entry instance
-     * @param tank      Tank index
-     * @param fluid  Fluid to insert
-     * @return  True if the fluid is valid
+     *
+     * @param tool     Tool instance
+     * @param modifier Entry instance
+     * @param tank     Tank index
+     * @param fluid    Fluid to insert
+     * @return True if the fluid is valid
      */
     default boolean isFluidValid(IToolStackView tool, ModifierEntry modifier, int tank, FluidStack fluid) {
       return true;
@@ -184,9 +198,10 @@ public class ToolFluidCapability extends FluidModifierHookIterator<ModifierEntry
 
     /**
      * Fills fluid into tanks
-     * @param tool      Tool instance
-     * @param modifier  Entry instance
-     * @param resource  FluidStack representing the Fluid and maximum amount of fluid to be filled. If you want to store this stack, make a copy
+     *
+     * @param tool     Tool instance
+     * @param modifier Entry instance
+     * @param resource FluidStack representing the Fluid and maximum amount of fluid to be filled. If you want to store this stack, make a copy
      * @param action   If SIMULATE, fill will only be simulated.
      * @return Amount of resource that was (or would have been, if simulated) filled.
      */
@@ -194,10 +209,11 @@ public class ToolFluidCapability extends FluidModifierHookIterator<ModifierEntry
 
     /**
      * Drains fluid out of tanks, distribution is left entirely to the IFluidHandler.
-     * @param tool      Tool instance
-     * @param modifier  Entry instance
-     * @param resource  FluidStack representing the Fluid and maximum amount of fluid to be drained.
-     * @param action    If SIMULATE, drain will only be simulated.
+     *
+     * @param tool     Tool instance
+     * @param modifier Entry instance
+     * @param resource FluidStack representing the Fluid and maximum amount of fluid to be drained.
+     * @param action   If SIMULATE, drain will only be simulated.
      * @return FluidStack representing the Fluid and amount that was (or would have been, if
      * simulated) drained.
      */
@@ -205,19 +221,23 @@ public class ToolFluidCapability extends FluidModifierHookIterator<ModifierEntry
 
     /**
      * Drains fluid out of internal tanks, distribution is left entirely to the IFluidHandler.
-     * @param tool      Tool instance
-     * @param modifier  Entry instance
-     * @param maxDrain  Maximum amount of fluid to drain.
-     * @param action    If SIMULATE, drain will only be simulated.
+     *
+     * @param tool     Tool instance
+     * @param modifier Entry instance
+     * @param maxDrain Maximum amount of fluid to drain.
+     * @param action   If SIMULATE, drain will only be simulated.
      * @return FluidStack representing the Fluid and amount that was (or would have been, if
      * simulated) drained.
      */
     FluidStack drain(IToolStackView tool, ModifierEntry modifier, int maxDrain, FluidAction action);
   }
 
-  /** Logic to merge multiple fluid hooks */
+  /**
+   * Logic to merge multiple fluid hooks
+   */
   @RequiredArgsConstructor
   private static class FluidModifierHookMerger extends FluidModifierHookIterator<FluidModifierHook> implements FluidModifierHook {
+
     private final Collection<FluidModifierHook> modules;
 
     @Override
@@ -230,7 +250,9 @@ public class ToolFluidCapability extends FluidModifierHookIterator<ModifierEntry
       return entry;
     }
 
-    /** Gets the given hook */
+    /**
+     * Gets the given hook
+     */
     @Nullable
     private FluidModifierHook findHook(IToolStackView tool, ModifierEntry modifier, int tank) {
       indexEntry = modifier;
@@ -292,9 +314,13 @@ public class ToolFluidCapability extends FluidModifierHookIterator<ModifierEntry
     }
   }
 
-  /** Provider instance for a fluid cap */
+  /**
+   * Provider instance for a fluid cap
+   */
   public static class Provider implements IToolCapabilityProvider {
+
     private final LazyOptional<IFluidHandlerItem> fluidCap;
+
     public Provider(ItemStack stack, Supplier<? extends IToolStackView> toolStack) {
       this.fluidCap = LazyOptional.of(() -> new ToolFluidCapability(stack, toolStack));
     }

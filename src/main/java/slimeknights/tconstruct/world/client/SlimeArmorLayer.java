@@ -39,12 +39,16 @@ import net.minecraftforge.client.ForgeHooksClient;
 
 import java.util.Map;
 
-/** Generics do not match to use the vanilla armor layer, so this is a reimplementation of some of {@link HumanoidArmorLayer} */
-public class SlimeArmorLayer<T extends Slime, M extends HierarchicalModel<T>, A extends HumanoidModel<T>> extends RenderLayer<T,M> {
+/**
+ * Generics do not match to use the vanilla armor layer, so this is a reimplementation of some of {@link HumanoidArmorLayer}
+ */
+public class SlimeArmorLayer<T extends Slime, M extends HierarchicalModel<T>, A extends HumanoidModel<T>> extends RenderLayer<T, M> {
+
   private final A armorModel;
-  public final Map<Type,SkullModelBase> skullModels;
+  public final Map<Type, SkullModelBase> skullModels;
   private final boolean lavaSlime;
-  public SlimeArmorLayer(RenderLayerParent<T,M> pRenderer, A armorModel, EntityModelSet modelSet, boolean lavaSlime) {
+
+  public SlimeArmorLayer(RenderLayerParent<T, M> pRenderer, A armorModel, EntityModelSet modelSet, boolean lavaSlime) {
     super(pRenderer);
     this.armorModel = armorModel;
     this.skullModels = SkullBlockRenderer.createSkullRenderers(modelSet);
@@ -122,9 +126,9 @@ public class SlimeArmorLayer<T extends Slime, M extends HierarchicalModel<T>, A 
    * More generic ForgeHook version of the above function, it allows for Items to have more control over what texture they provide.
    *
    * @param entity Entity wearing the armor
-   * @param stack ItemStack for the armor
-   * @param armor Armor item instance
-   * @param type Subtype, can be null or "overlay"
+   * @param stack  ItemStack for the armor
+   * @param armor  Armor item instance
+   * @param type   Subtype, can be null or "overlay"
    * @return ResourceLocation pointing at the armor's texture
    */
   public static ResourceLocation getArmorResource(Entity entity, ItemStack stack, ArmorItem armor, String type) {

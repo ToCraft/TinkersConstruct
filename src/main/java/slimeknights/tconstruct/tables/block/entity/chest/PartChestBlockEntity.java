@@ -13,13 +13,18 @@ import slimeknights.tconstruct.tables.block.entity.inventory.ScalingChestItemHan
  * Chest that holds parts, up to 8 of a given material and type
  */
 public class PartChestBlockEntity extends AbstractChestBlockEntity {
+
   private static final Component NAME = TConstruct.makeTranslation("gui", "part_chest");
+
   public PartChestBlockEntity(BlockPos pos, BlockState state) {
     super(TinkerTables.partChestTile.get(), pos, state, NAME, new PartChestItemHandler());
   }
 
-  /** Item handler for part chests */
+  /**
+   * Item handler for part chests
+   */
   public static class PartChestItemHandler extends ScalingChestItemHandler {
+
     @Override
     public int getSlotLimit(int slot) {
       return 8;

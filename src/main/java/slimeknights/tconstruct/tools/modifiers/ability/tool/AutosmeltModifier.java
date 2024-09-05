@@ -25,12 +25,17 @@ import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 public class AutosmeltModifier extends NoLevelsModifier implements ProcessLootModifierHook {
-  /** Cache of relevant smelting recipes */
-  private final Cache<Item,Optional<SmeltingRecipe>> recipeCache = CacheBuilder
+
+  /**
+   * Cache of relevant smelting recipes
+   */
+  private final Cache<Item, Optional<SmeltingRecipe>> recipeCache = CacheBuilder
     .newBuilder()
     .maximumSize(64)
     .build();
-  /** Inventory instance to use for recipe search */
+  /**
+   * Inventory instance to use for recipe search
+   */
   private final SingleItemContainer inventory = new SingleItemContainer();
 
   public AutosmeltModifier() {
@@ -48,9 +53,10 @@ public class AutosmeltModifier extends NoLevelsModifier implements ProcessLootMo
 
   /**
    * Gets a furnace recipe without using the cache
-   * @param stack  Stack to try
-   * @param world  World instance
-   * @return  Furnace recipe
+   *
+   * @param stack Stack to try
+   * @param world World instance
+   * @return Furnace recipe
    */
   private Optional<SmeltingRecipe> findRecipe(ItemStack stack, Level world) {
     inventory.setStack(stack);
@@ -59,8 +65,9 @@ public class AutosmeltModifier extends NoLevelsModifier implements ProcessLootMo
 
   /**
    * Gets a cached furnace recipe
-   * @param stack  Stack for recipe
-   * @param world  World instance
+   *
+   * @param stack Stack for recipe
+   * @param world World instance
    * @return Cached recipe
    */
   @Nullable
@@ -78,9 +85,10 @@ public class AutosmeltModifier extends NoLevelsModifier implements ProcessLootMo
 
   /**
    * Smelts an item using the relevant furnace recipe
-   * @param stack  Stack to smelt
-   * @param world  World instance
-   * @return  Smelted item, or original if no recipe
+   *
+   * @param stack Stack to smelt
+   * @param world World instance
+   * @return Smelted item, or original if no recipe
    */
   private ItemStack smeltItem(ItemStack stack, Level world) {
     // skip blacklisted entries

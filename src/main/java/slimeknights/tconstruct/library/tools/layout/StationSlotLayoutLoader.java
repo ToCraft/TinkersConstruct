@@ -40,6 +40,7 @@ import java.util.stream.Collectors;
  */
 @Log4j2
 public class StationSlotLayoutLoader extends SimpleJsonResourceReloadListener {
+
   public static final String FOLDER = "tinkering/station_layouts";
   public static final Gson GSON = (new GsonBuilder())
     .registerTypeHierarchyAdapter(Ingredient.class, new IngredientSerializer())
@@ -50,12 +51,18 @@ public class StationSlotLayoutLoader extends SimpleJsonResourceReloadListener {
     .create();
   private static final StationSlotLayoutLoader INSTANCE = new StationSlotLayoutLoader();
 
-  /** Map of name to slot layout */
+  /**
+   * Map of name to slot layout
+   */
   private Map<ResourceLocation, StationSlotLayout> layoutMap = Collections.emptyMap();
-  /** List of layouts that must be loaded for the game to work properly */
+  /**
+   * List of layouts that must be loaded for the game to work properly
+   */
   private final List<ResourceLocation> requiredLayouts = new ArrayList<>();
 
-  /** List of all slots in order */
+  /**
+   * List of all slots in order
+   */
   @Getter
   private List<StationSlotLayout> sortedSlots = Collections.emptyList();
 
@@ -63,25 +70,29 @@ public class StationSlotLayoutLoader extends SimpleJsonResourceReloadListener {
     super(GSON, FOLDER);
   }
 
-  /** Sets the slots to the given collection from the packet */
+  /**
+   * Sets the slots to the given collection from the packet
+   */
   public void setSlots(Collection<StationSlotLayout> slots) {
     setSlots(slots.stream().collect(Collectors.toMap(StationSlotLayout::getName, Function.identity())));
   }
 
-  /** Updates the slot layouts */
+  /**
+   * Updates the slot layouts
+   */
   private void setSlots(Map<ResourceLocation, StationSlotLayout> map) {
     this.layoutMap = map;
     this.sortedSlots = map.values().stream()
-                          .filter(layout -> !layout.isMain())
-                          .sorted(Comparator.comparingInt(StationSlotLayout::getSortIndex))
-                          .collect(Collectors.toList());
+      .filter(layout -> !layout.isMain())
+      .sorted(Comparator.comparingInt(StationSlotLayout::getSortIndex))
+      .collect(Collectors.toList());
   }
 
   @Override
-  protected void apply(Map<ResourceLocation,JsonElement> splashList, ResourceManager resourceManager, ProfilerFiller profiler) {
+  protected void apply(Map<ResourceLocation, JsonElement> splashList, ResourceManager resourceManager, ProfilerFiller profiler) {
     long time = System.nanoTime();
     ImmutableMap.Builder<ResourceLocation, StationSlotLayout> builder = ImmutableMap.builder();
-    for (Entry<ResourceLocation,JsonElement> entry : splashList.entrySet()) {
+    for (Entry<ResourceLocation, JsonElement> entry : splashList.entrySet()) {
       ResourceLocation key = entry.getKey();
       JsonElement value = entry.getValue();
       try {
@@ -109,26 +120,34 @@ public class StationSlotLayoutLoader extends SimpleJsonResourceReloadListener {
     }
   }
 
-  /** Gets a layout by name */
+  /**
+   * Gets a layout by name
+   */
   public StationSlotLayout get(ResourceLocation name) {
     return layoutMap.getOrDefault(name, StationSlotLayout.EMPTY);
   }
 
 
-  /** Registers the name of a layout that should be loaded, if its missing that causes an error */
+  /**
+   * Registers the name of a layout that should be loaded, if its missing that causes an error
+   */
   public void registerRequiredLayout(ResourceLocation name) {
     requiredLayouts.add(name);
   }
 
   /* Events */
 
-  /** Called on datapack sync to send the tool data to all players */
+  /**
+   * Called on datapack sync to send the tool data to all players
+   */
   private void onDatapackSync(OnDatapackSyncEvent event) {
     UpdateTinkerSlotLayoutsPacket packet = new UpdateTinkerSlotLayoutsPacket(layoutMap.values());
     TinkerNetwork.getInstance().sendToPlayerList(event.getPlayer(), event.getPlayerList(), packet);
   }
 
-  /** Adds the managers as datapack listeners */
+  /**
+   * Adds the managers as datapack listeners
+   */
   private void addDataPackListeners(final AddReloadListenerEvent event) {
     event.addListener(this);
   }
@@ -136,19 +155,26 @@ public class StationSlotLayoutLoader extends SimpleJsonResourceReloadListener {
 
   /* Static */
 
-  /** Gets the singleton instance of the loader */
+  /**
+   * Gets the singleton instance of the loader
+   */
   public static StationSlotLayoutLoader getInstance() {
     return INSTANCE;
   }
 
-  /** Initializes the tool definition loader */
+  /**
+   * Initializes the tool definition loader
+   */
   public static void init() {
     MinecraftForge.EVENT_BUS.addListener(INSTANCE::addDataPackListeners);
     MinecraftForge.EVENT_BUS.addListener(INSTANCE::onDatapackSync);
   }
 
-  /** GSON serializer for ingredients */
+  /**
+   * GSON serializer for ingredients
+   */
   private static class IngredientSerializer implements JsonSerializer<Ingredient>, JsonDeserializer<Ingredient> {
+
     @Override
     public Ingredient deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
       return Ingredient.fromJson(json);

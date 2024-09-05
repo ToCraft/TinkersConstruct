@@ -17,7 +17,7 @@ import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.client.RenderUtils;
 import slimeknights.tconstruct.tables.client.inventory.widget.BorderWidget;
 
-public class SideInventoryScreen<P extends MultiModuleScreen<?>, C extends AbstractContainerMenu> extends ModuleScreen<P,C> {
+public class SideInventoryScreen<P extends MultiModuleScreen<?>, C extends AbstractContainerMenu> extends ModuleScreen<P, C> {
 
   protected ScalableElementScreen overlap = GenericScreen.overlap;
   protected ElementScreen overlapTopLeft = GenericScreen.overlapTopLeft;
@@ -75,8 +75,7 @@ public class SideInventoryScreen<P extends MultiModuleScreen<?>, C extends Abstr
         this.border.cornerTopLeft = this.overlapTopLeft;
         this.border.borderLeft = this.overlap;
         this.border.cornerBottomLeft = this.overlapBottomLeft;
-      }
-      else {
+      } else {
         this.border.cornerTopRight = this.overlapTopRight;
         this.border.borderRight = this.overlap;
         this.border.cornerBottomRight = this.overlapBottomRight;
@@ -131,8 +130,7 @@ public class SideInventoryScreen<P extends MultiModuleScreen<?>, C extends Abstr
     if (this.getDisplayedRows() < this.getTotalRows()) {
       this.slider.enable();
       this.imageWidth = this.columns * this.slot.w + this.slider.width + 2 * this.border.w;
-    }
-    else {
+    } else {
       this.slider.disable();
       this.imageWidth = this.columns * this.slot.w + this.border.w * 2;
     }
@@ -145,16 +143,14 @@ public class SideInventoryScreen<P extends MultiModuleScreen<?>, C extends Abstr
       if (this.yOffset == 0) {
         if (this.right) {
           this.border.cornerTopLeft = this.overlapTop;
-        }
-        else {
+        } else {
           this.border.cornerTopRight = this.overlapTop;
         }
       }
 
       this.xOffset = (this.border.w - 1) * (this.right ? -1 : 1);
       this.leftPos += this.xOffset;
-    }
-    else {
+    } else {
       this.xOffset = 0;
     }
 
@@ -234,12 +230,10 @@ public class SideInventoryScreen<P extends MultiModuleScreen<?>, C extends Abstr
 
         if (this.right) {
           slot.x += this.parent.realWidth;
-        }
-        else {
+        } else {
           slot.x -= this.imageWidth;
         }
-      }
-      else {
+      } else {
         slot.x = 0;
         slot.y = 0;
       }

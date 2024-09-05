@@ -19,7 +19,9 @@ import java.util.List;
 /**
  * Module that adds extra modifier slots to a tool.
  */
-public record ModifierSlotModule(SlotType type, int count, ModifierCondition<IToolContext> condition) implements VolatileDataModifierHook, ModifierModule, ConditionalModule<IToolContext> {
+public record ModifierSlotModule(SlotType type, int count,
+                                 ModifierCondition<IToolContext> condition) implements VolatileDataModifierHook, ModifierModule, ConditionalModule<IToolContext> {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<ModifierSlotModule>defaultHooks(ModifierHooks.VOLATILE_DATA);
   public static final RecordLoadable<ModifierSlotModule> LOADER = RecordLoadable.create(
     SlotType.LOADABLE.requiredField("name", ModifierSlotModule::type),

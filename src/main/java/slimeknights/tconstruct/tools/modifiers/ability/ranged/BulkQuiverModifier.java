@@ -23,9 +23,11 @@ import javax.annotation.Nullable;
 import java.util.function.Predicate;
 
 public class BulkQuiverModifier extends InventoryMenuModifier implements BowAmmoModifierHook {
+
   private static final ResourceLocation INVENTORY_KEY = TConstruct.getResource("bulk_quiver");
   private static final ResourceLocation LAST_SLOT = TConstruct.getResource("quiver_last_selected");
   private static final Pattern ARROW = new Pattern(TConstruct.getResource("arrow"));
+
   public BulkQuiverModifier() {
     super(INVENTORY_KEY, 2);
   }

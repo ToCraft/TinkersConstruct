@@ -40,7 +40,10 @@ import java.util.Iterator;
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TConstruct.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ToolRenderEvents {
-  /** Maximum number of blocks from the iterator to render */
+
+  /**
+   * Maximum number of blocks from the iterator to render
+   */
   private static final int MAX_BLOCKS = 60;
 
   /**
@@ -103,12 +106,14 @@ public class ToolRenderEvents {
         rendered++;
         worldRender.renderHitOutline(matrices, vertexBuilder, viewEntity, x, y, z, pos, world.getBlockState(pos));
       }
-    } while(rendered < MAX_BLOCKS && extraBlocks.hasNext());
+    } while (rendered < MAX_BLOCKS && extraBlocks.hasNext());
     matrices.popPose();
     buffers.endBatch();
   }
 
-  /** Renders the block damage process on the extra blocks */
+  /**
+   * Renders the block damage process on the extra blocks
+   */
   @SubscribeEvent
   static void renderBlockDamageProgress(RenderLevelLastEvent event) {
     // validate required variables are set
@@ -137,7 +142,7 @@ public class ToolRenderEvents {
       return;
     }
     // find breaking progress
-    BlockHitResult blockTrace = (BlockHitResult)result;
+    BlockHitResult blockTrace = (BlockHitResult) result;
     BlockPos target = blockTrace.getBlockPos();
     BlockDestructionProgress progress = null;
     for (Int2ObjectMap.Entry<BlockDestructionProgress> entry : Minecraft.getInstance().levelRenderer.destroyingBlocks.int2ObjectEntrySet()) {

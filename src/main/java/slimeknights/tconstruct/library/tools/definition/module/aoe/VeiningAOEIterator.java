@@ -20,9 +20,11 @@ import java.util.Set;
 
 /**
  * Harvest logic that breaks a block plus neighbors of the same type
- * @param maxDistance  Maximum distance from the starting block to vein, min of 0
+ *
+ * @param maxDistance Maximum distance from the starting block to vein, min of 0
  */
 public record VeiningAOEIterator(int maxDistance) implements AreaOfEffectIterator.Loadable {
+
   public static final RecordLoadable<VeiningAOEIterator> LOADER = RecordLoadable.create(IntLoadable.FROM_ZERO.defaultField("max_distance", 0, true, VeiningAOEIterator::maxDistance), VeiningAOEIterator::new);
 
   @Override
@@ -39,24 +41,28 @@ public record VeiningAOEIterator(int maxDistance) implements AreaOfEffectIterato
   /**
    * Calculates the blocks for veining
    *
-   * @param state        State being mined
-   * @param world        World instance
-   * @param origin       Position origin
-   * @param maxDistance  Max distance to vein
-   * @return  Iterator for veining
+   * @param state       State being mined
+   * @param world       World instance
+   * @param origin      Position origin
+   * @param maxDistance Max distance to vein
+   * @return Iterator for veining
    */
   public static Iterable<BlockPos> calculate(BlockState state, Level world, BlockPos origin, int maxDistance) {
     return () -> new VeiningIterator(world, origin, state.getBlock(), maxDistance);
   }
 
-  /** Iterator that navigates block and other similar blocks */
+  /**
+   * Iterator that navigates block and other similar blocks
+   */
   private static class VeiningIterator extends AbstractIterator<BlockPos> {
+
     private final Set<BlockPos> visited = new HashSet<>();
     private final Queue<DistancePos> queue = new ArrayDeque<>();
 
     private final Level world;
     private final Block target;
     private final int maxDistance;
+
     private VeiningIterator(Level world, BlockPos origin, Block target, int maxDistance) {
       this.world = world;
       this.target = target;
@@ -71,8 +77,9 @@ public record VeiningAOEIterator(int maxDistance) implements AreaOfEffectIterato
 
     /**
      * Enqueues all neighbors of this position
-     * @param pos       Position
-     * @param distance  Distance for neighbors
+     *
+     * @param pos      Position
+     * @param distance Distance for neighbors
      */
     private void enqueueNeighbors(BlockPos pos, int distance) {
       for (Direction direction : Direction.values()) {
@@ -106,6 +113,8 @@ public record VeiningAOEIterator(int maxDistance) implements AreaOfEffectIterato
     }
   }
 
-  /** Helper data class */
+  /**
+   * Helper data class
+   */
   private record DistancePos(BlockPos pos, int distance) {}
 }

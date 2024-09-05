@@ -10,7 +10,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class CrystalBlock extends Block {
+
   private final SoundEvent chimeSound;
+
   public CrystalBlock(SoundEvent chimeSound, Properties props) {
     super(props);
     this.chimeSound = chimeSound;

@@ -16,6 +16,7 @@ import javax.annotation.Nullable;
  */
 @RequiredArgsConstructor
 public class CastingContainerWrapper implements ICastingContainer {
+
   private final CastingBlockEntity tile;
   @Setter
   private FluidStack fluid;
@@ -41,12 +42,16 @@ public class CastingContainerWrapper implements ICastingContainer {
     return fluid.getTag();
   }
 
-  /** Uses the input for input (default) */
+  /**
+   * Uses the input for input (default)
+   */
   public void useInput() {
     switchSlots = false;
   }
 
-  /** Uses the output for input (for multistep casting) */
+  /**
+   * Uses the output for input (for multistep casting)
+   */
   public void useOutput() {
     switchSlots = true;
   }

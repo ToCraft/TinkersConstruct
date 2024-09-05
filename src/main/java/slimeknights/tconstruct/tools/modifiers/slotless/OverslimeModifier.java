@@ -22,7 +22,10 @@ import slimeknights.tconstruct.tools.TinkerModifiers;
 import javax.annotation.Nullable;
 
 public class OverslimeModifier extends DurabilityShieldModifier implements ToolStatsModifierHook {
-  /** Stat for the overslime cap, copies the durability global multiplier on build */
+
+  /**
+   * Stat for the overslime cap, copies the durability global multiplier on build
+   */
   public static final FloatToolStat OVERSLIME_STAT = ToolStats.register(new FloatToolStat(new ToolStatId(TConstruct.MOD_ID, "overslime"), 0xFF71DC85, 0, 0, Short.MAX_VALUE, TinkerTags.Items.DURABILITY) {
     @Override
     public Float build(ModifierStatsBuilder parent, Object builderObj) {
@@ -51,7 +54,9 @@ public class OverslimeModifier extends DurabilityShieldModifier implements ToolS
 
   /* Tool building */
 
-  /** Checks if the given tool has an overslime friend */
+  /**
+   * Checks if the given tool has an overslime friend
+   */
   private static boolean hasFriend(IToolContext context) {
     for (ModifierEntry entry : context.getModifierList()) {
       if (ModifierManager.isInTag(entry.getId(), TinkerTags.Modifiers.OVERSLIME_FRIEND)) {
@@ -114,9 +119,10 @@ public class OverslimeModifier extends DurabilityShieldModifier implements ToolS
 
   /**
    * Adds to the overslime on a tool
-   * @param tool    Tool instance
-   * @param entry   Overslime entry on the tool
-   * @param amount  Amount to add
+   *
+   * @param tool   Tool instance
+   * @param entry  Overslime entry on the tool
+   * @param amount Amount to add
    */
   public void addOverslime(IToolStackView tool, ModifierEntry entry, int amount) {
     // yeah, I am hardcoding overworked. If you need something similar, put in an issue request on github

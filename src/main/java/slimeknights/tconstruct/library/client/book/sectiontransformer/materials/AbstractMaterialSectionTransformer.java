@@ -25,6 +25,7 @@ import java.util.function.Predicate;
 public abstract class AbstractMaterialSectionTransformer extends SectionTransformer {
 
   protected final boolean detailed;
+
   public AbstractMaterialSectionTransformer(String sectionName, boolean detailed) {
     super(sectionName);
     this.detailed = detailed;
@@ -32,15 +33,17 @@ public abstract class AbstractMaterialSectionTransformer extends SectionTransfor
 
   /**
    * Determines if a material should show in this book
-   * @param material  Material to check
-   * @return  True if it should show
+   *
+   * @param material Material to check
+   * @return True if it should show
    */
   protected abstract boolean isValidMaterial(IMaterial material);
 
   /**
    * Gets the page for the given material, can override if you use a different page type
-   * @param material       Material to display
-   * @return  Material page
+   *
+   * @param material Material to display
+   * @return Material page
    */
   protected AbstractMaterialContent getPageContent(MaterialVariantId material) {
     return new MeleeHarvestMaterialContent(material, detailed);
@@ -51,7 +54,9 @@ public abstract class AbstractMaterialSectionTransformer extends SectionTransfor
     createPages(book, sectionData, this::isValidMaterial, this::getPageContent);
   }
 
-  /** Helper to add a page to the section */
+  /**
+   * Helper to add a page to the section
+   */
   private static PageData addPageStatic(SectionData data, String name, ResourceLocation type, PageContent content) {
     PageData page = new PageData(true);
     page.source = data.source;
@@ -68,12 +73,13 @@ public abstract class AbstractMaterialSectionTransformer extends SectionTransfor
 
   /**
    * Creates all the pages for the materials
-   * @param book            Book data
-   * @param sectionData     Section data
-   * @param validMaterial   Predicate to validate materials
-   * @param pageCreator     Logic to create a page
+   *
+   * @param book          Book data
+   * @param sectionData   Section data
+   * @param validMaterial Predicate to validate materials
+   * @param pageCreator   Logic to create a page
    */
-  public static void createPages(BookData book, SectionData sectionData, Predicate<IMaterial> validMaterial, Function<MaterialVariantId,AbstractMaterialContent> pageCreator) {
+  public static void createPages(BookData book, SectionData sectionData, Predicate<IMaterial> validMaterial, Function<MaterialVariantId, AbstractMaterialContent> pageCreator) {
     sectionData.source = BookRepository.DUMMY;
     sectionData.parent = book;
 

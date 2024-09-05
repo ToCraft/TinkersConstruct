@@ -19,6 +19,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class CreativeSlotItem extends Item {
+
   private static final String NBT_KEY = "slot";
   private static final String TOOLTIP = TConstruct.makeTranslationKey("item", "creative_slot.tooltip");
   private static final Component TOOLTIP_MISSING = TConstruct.makeTranslation("item", "creative_slot.missing").withStyle(ChatFormatting.RED);
@@ -27,7 +28,9 @@ public class CreativeSlotItem extends Item {
     super(properties);
   }
 
-  /** Gets the value of the slot tag from the given stack */
+  /**
+   * Gets the value of the slot tag from the given stack
+   */
   @Nullable
   public static SlotType getSlot(ItemStack stack) {
     CompoundTag nbt = stack.getTag();
@@ -37,7 +40,9 @@ public class CreativeSlotItem extends Item {
     return null;
   }
 
-  /** Makes an item stack with the given slot type */
+  /**
+   * Makes an item stack with the given slot type
+   */
   public static ItemStack withSlot(ItemStack stack, SlotType type) {
     stack.getOrCreateTag().putString(NBT_KEY, type.getName());
     return stack;

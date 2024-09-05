@@ -37,34 +37,51 @@ import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.function.Function;
 
-/** Model to render a slimeskull helmet with both the helmet and skull */
+/**
+ * Model to render a slimeskull helmet with both the helmet and skull
+ */
 public class SlimeskullArmorModel extends MultilayerArmorModel {
-  /** Singleton model instance, all data is passed in via setters */
+
+  /**
+   * Singleton model instance, all data is passed in via setters
+   */
   public static final SlimeskullArmorModel INSTANCE = new SlimeskullArmorModel();
-  /** Cache of colors for materials */
-  private static final SimpleCache<String,Integer> MATERIAL_COLOR_CACHE = new SimpleCache<>(mat ->
+  /**
+   * Cache of colors for materials
+   */
+  private static final SimpleCache<String, Integer> MATERIAL_COLOR_CACHE = new SimpleCache<>(mat ->
     Optional.ofNullable(MaterialVariantId.tryParse(mat))
-            .flatMap(MaterialRenderInfoLoader.INSTANCE::getRenderInfo)
-            .map(MaterialRenderInfo::getVertexColor)
-            .orElse(-1));
-  /** Listener to clear caches */
+      .flatMap(MaterialRenderInfoLoader.INSTANCE::getRenderInfo)
+      .map(MaterialRenderInfo::getVertexColor)
+      .orElse(-1));
+  /**
+   * Listener to clear caches
+   */
   public static final ISafeManagerReloadListener RELOAD_LISTENER = manager -> {
     HEAD_MODELS = null;
     MATERIAL_COLOR_CACHE.clear();
   };
 
-  /** Head to render under the helmet */
+  /**
+   * Head to render under the helmet
+   */
   @Nullable
   private ResourceLocation headTexture;
-  /** Tint color for the head */
+  /**
+   * Tint color for the head
+   */
   private int headColor = -1;
-  /** Texture for the head */
+  /**
+   * Texture for the head
+   */
   @Nullable
   private SkullModelBase headModel;
 
   private SlimeskullArmorModel() {}
 
-  /** Prepares the model */
+  /**
+   * Prepares the model
+   */
   public Model setup(LivingEntity living, ItemStack stack, HumanoidModel<?> base, ArmorModel model) {
     super.setup(living, stack, EquipmentSlot.HEAD, base, model);
     MaterialId materialId = MaterialIdNBT.from(stack).getMaterial(0).getId();
@@ -116,7 +133,7 @@ public class SlimeskullArmorModel extends MultilayerArmorModel {
         } else {
           matrixStackIn.scale(1.115f, 1.115f, 1.115f);
         }
-        headModel.setupAnim(0, base.head.yRot * 180f / (float)(Math.PI), base.head.xRot * 180f / (float)(Math.PI));
+        headModel.setupAnim(0, base.head.yRot * 180f / (float) (Math.PI), base.head.xRot * 180f / (float) (Math.PI));
         renderColored(headModel, matrixStackIn, headBuilder, packedLightIn, packedOverlayIn, headColor, red, green, blue, alpha);
         matrixStackIn.popPose();
       }
@@ -126,18 +143,26 @@ public class SlimeskullArmorModel extends MultilayerArmorModel {
 
   /* Head models */
 
-  /** Map of all skull factories */
-  private static final Map<MaterialId,Function<EntityModelSet,? extends SkullModelBase>> HEAD_MODEL_FACTORIES = new HashMap<>();
-  /** Map of texture for the skull textures */
-  private static final Map<MaterialId,ResourceLocation> HEAD_TEXTURES = new HashMap<>();
+  /**
+   * Map of all skull factories
+   */
+  private static final Map<MaterialId, Function<EntityModelSet, ? extends SkullModelBase>> HEAD_MODEL_FACTORIES = new HashMap<>();
+  /**
+   * Map of texture for the skull textures
+   */
+  private static final Map<MaterialId, ResourceLocation> HEAD_TEXTURES = new HashMap<>();
 
-  /** Registers a head model and texture, using the default skull model */
+  /**
+   * Registers a head model and texture, using the default skull model
+   */
   public static void registerHeadModel(MaterialId materialId, ModelLayerLocation headModel, ResourceLocation texture) {
     registerHeadModel(materialId, modelSet -> new SkullModel(modelSet.bakeLayer(headModel)), texture);
   }
 
-  /** Registers a head model and texture, using a custom skull model */
-  public static void registerHeadModel(MaterialId materialId, Function<EntityModelSet,? extends SkullModelBase> headFunction, ResourceLocation texture) {
+  /**
+   * Registers a head model and texture, using a custom skull model
+   */
+  public static void registerHeadModel(MaterialId materialId, Function<EntityModelSet, ? extends SkullModelBase> headFunction, ResourceLocation texture) {
     if (HEAD_MODEL_FACTORIES.containsKey(materialId)) {
       throw new IllegalArgumentException("Duplicate head model " + materialId);
     }
@@ -145,17 +170,21 @@ public class SlimeskullArmorModel extends MultilayerArmorModel {
     HEAD_TEXTURES.put(materialId, texture);
   }
 
-  /** Map of baked head models, if null it is not currently computed */
+  /**
+   * Map of baked head models, if null it is not currently computed
+   */
   private static Map<MaterialId, SkullModelBase> HEAD_MODELS;
 
-  /** Gets the head model for the given material */
+  /**
+   * Gets the head model for the given material
+   */
   @Nullable
   private static SkullModelBase getHeadModel(MaterialId materialId) {
     if (HEAD_MODELS == null) {
       // vanilla rebakes these a lot, so figure we should at least do it every resource reload
       EntityModelSet modelSet = Minecraft.getInstance().getEntityModels();
-      ImmutableMap.Builder<MaterialId,SkullModelBase> models = ImmutableMap.builder();
-      for (Entry<MaterialId,Function<EntityModelSet,? extends SkullModelBase>> entry : HEAD_MODEL_FACTORIES.entrySet()) {
+      ImmutableMap.Builder<MaterialId, SkullModelBase> models = ImmutableMap.builder();
+      for (Entry<MaterialId, Function<EntityModelSet, ? extends SkullModelBase>> entry : HEAD_MODEL_FACTORIES.entrySet()) {
         models.put(entry.getKey(), entry.getValue().apply(modelSet));
       }
       HEAD_MODELS = models.build();

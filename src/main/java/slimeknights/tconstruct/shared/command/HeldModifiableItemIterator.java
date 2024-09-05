@@ -16,19 +16,26 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/** Helper to iterate target entities in a command context */
+/**
+ * Helper to iterate target entities in a command context
+ */
 public class HeldModifiableItemIterator {
+
   private static final SimpleCommandExceptionType FAILED_EXCEPTION = new SimpleCommandExceptionType(TConstruct.makeTranslation("command", "held_modifiable.failed"));
   private static final DynamicCommandExceptionType NONLIVING_ENTITY_EXCEPTION = new DynamicCommandExceptionType(error -> TConstruct.makeTranslation("command", "held_modifiable.failed.nonliving", error));
   private static final DynamicCommandExceptionType ITEMLESS_EXCEPTION = new DynamicCommandExceptionType(error -> TConstruct.makeTranslation("command", "held_modifiable.failed.no_item", error));
   private static final DynamicCommandExceptionType INVALID_ITEM = new DynamicCommandExceptionType(error -> TConstruct.makeTranslation("command", "held_modifiable.failed.invalid_item", error));
 
-  /** Applies for the given context */
+  /**
+   * Applies for the given context
+   */
   public static List<LivingEntity> apply(CommandContext<CommandSourceStack> context, HeldModifiableBehavior behavior) throws CommandSyntaxException {
     return apply(EntityArgument.getEntities(context, "targets"), behavior);
   }
 
-  /** Applies the iterator to the given entities */
+  /**
+   * Applies the iterator to the given entities
+   */
   public static List<LivingEntity> apply(Collection<? extends Entity> targets, HeldModifiableBehavior behavior) throws CommandSyntaxException {
     // apply to all entities
     List<LivingEntity> successes = new ArrayList<>();
@@ -58,10 +65,14 @@ public class HeldModifiableItemIterator {
     return successes;
   }
 
-  /** BiConsumer that throws command syntax exceptions */
+  /**
+   * BiConsumer that throws command syntax exceptions
+   */
   public interface HeldModifiableBehavior {
+
     /**
      * Runs the command for the given entity and stack
+     *
      * @return true if successful
      */
     boolean accept(LivingEntity living, ItemStack stack) throws CommandSyntaxException;

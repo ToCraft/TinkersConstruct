@@ -16,6 +16,7 @@ import javax.annotation.Nullable;
  */
 @RequiredArgsConstructor
 public class StructureErrorPositionPacket implements IThreadsafePacket {
+
   private final BlockPos controllerPos;
   @Nullable
   private final BlockPos errorPos;
@@ -46,9 +47,10 @@ public class StructureErrorPositionPacket implements IThreadsafePacket {
   }
 
   private static class HandleClient {
+
     private static void handle(StructureErrorPositionPacket packet) {
       BlockEntityHelper.get(HeatingStructureBlockEntity.class, Minecraft.getInstance().level, packet.controllerPos)
-                       .ifPresent(te -> te.setErrorPos(packet.errorPos));
+        .ifPresent(te -> te.setErrorPos(packet.errorPos));
     }
   }
 }

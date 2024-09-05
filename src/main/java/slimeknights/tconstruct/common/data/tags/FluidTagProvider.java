@@ -94,9 +94,9 @@ public class FluidTagProvider extends FluidTagsProvider {
 
     /* Normal tags */
     this.tag(TinkerTags.Fluids.SLIME)
-        .addTag(TinkerFluids.earthSlime.getForgeTag())
-        .addTag(TinkerFluids.skySlime.getLocalTag())
-        .addTag(TinkerFluids.enderSlime.getLocalTag());
+      .addTag(TinkerFluids.earthSlime.getForgeTag())
+      .addTag(TinkerFluids.skySlime.getLocalTag())
+      .addTag(TinkerFluids.enderSlime.getLocalTag());
 
     this.tagForge(TinkerFluids.potion);
     this.tagForge(TinkerFluids.powderedSnow);
@@ -106,23 +106,23 @@ public class FluidTagProvider extends FluidTagsProvider {
     this.tag(TinkerTags.Fluids.SLIME_TOOLTIPS).addTags(TinkerFluids.magma.getForgeTag(), TinkerFluids.moltenEnder.getForgeTag(), TinkerTags.Fluids.SLIME);
     this.tag(TinkerTags.Fluids.CLAY_TOOLTIPS).addTags(TinkerFluids.moltenClay.getLocalTag(), TinkerFluids.moltenPorcelain.getLocalTag(), TinkerFluids.searedStone.getLocalTag(), TinkerFluids.scorchedStone.getLocalTag());
     this.tag(TinkerTags.Fluids.METAL_TOOLTIPS).addTags(
-        // vanilla ores
-        TinkerFluids.moltenIron.getForgeTag(), TinkerFluids.moltenGold.getForgeTag(), TinkerFluids.moltenCopper.getForgeTag(), TinkerFluids.moltenCobalt.getForgeTag(), TinkerFluids.moltenDebris.getLocalTag(),
-        // base alloys
-        TinkerFluids.moltenSlimesteel.getLocalTag(), TinkerFluids.moltenAmethystBronze.getLocalTag(), TinkerFluids.moltenRoseGold.getForgeTag(), TinkerFluids.moltenPigIron.getLocalTag(),
-        TinkerFluids.moltenManyullyn.getForgeTag(), TinkerFluids.moltenHepatizon.getForgeTag(), TinkerFluids.moltenQueensSlime.getLocalTag(), TinkerFluids.moltenNetherite.getForgeTag(),
-        TinkerFluids.moltenSoulsteel.getLocalTag(), TinkerFluids.moltenKnightslime.getLocalTag(),
-        // compat ores
-        TinkerFluids.moltenTin.getForgeTag(), TinkerFluids.moltenAluminum.getForgeTag(), TinkerFluids.moltenLead.getForgeTag(), TinkerFluids.moltenSilver.getForgeTag(),
-        TinkerFluids.moltenNickel.getForgeTag(), TinkerFluids.moltenZinc.getForgeTag(), TinkerFluids.moltenPlatinum.getForgeTag(),
-        TinkerFluids.moltenTungsten.getForgeTag(), TinkerFluids.moltenOsmium.getForgeTag(), TinkerFluids.moltenUranium.getForgeTag(),
-        // compat alloys
-        TinkerFluids.moltenBronze.getForgeTag(), TinkerFluids.moltenBrass.getForgeTag(), TinkerFluids.moltenElectrum.getForgeTag(),
-        TinkerFluids.moltenInvar.getForgeTag(), TinkerFluids.moltenConstantan.getForgeTag(), TinkerFluids.moltenPewter.getForgeTag(), TinkerFluids.moltenSteel.getForgeTag(),
-        // thermal alloys
-        TinkerFluids.moltenEnderium.getForgeTag(), TinkerFluids.moltenLumium.getForgeTag(), TinkerFluids.moltenSignalum.getForgeTag(),
-        // mekanism alloys
-        TinkerFluids.moltenRefinedGlowstone.getForgeTag(), TinkerFluids.moltenRefinedObsidian.getForgeTag());
+      // vanilla ores
+      TinkerFluids.moltenIron.getForgeTag(), TinkerFluids.moltenGold.getForgeTag(), TinkerFluids.moltenCopper.getForgeTag(), TinkerFluids.moltenCobalt.getForgeTag(), TinkerFluids.moltenDebris.getLocalTag(),
+      // base alloys
+      TinkerFluids.moltenSlimesteel.getLocalTag(), TinkerFluids.moltenAmethystBronze.getLocalTag(), TinkerFluids.moltenRoseGold.getForgeTag(), TinkerFluids.moltenPigIron.getLocalTag(),
+      TinkerFluids.moltenManyullyn.getForgeTag(), TinkerFluids.moltenHepatizon.getForgeTag(), TinkerFluids.moltenQueensSlime.getLocalTag(), TinkerFluids.moltenNetherite.getForgeTag(),
+      TinkerFluids.moltenSoulsteel.getLocalTag(), TinkerFluids.moltenKnightslime.getLocalTag(),
+      // compat ores
+      TinkerFluids.moltenTin.getForgeTag(), TinkerFluids.moltenAluminum.getForgeTag(), TinkerFluids.moltenLead.getForgeTag(), TinkerFluids.moltenSilver.getForgeTag(),
+      TinkerFluids.moltenNickel.getForgeTag(), TinkerFluids.moltenZinc.getForgeTag(), TinkerFluids.moltenPlatinum.getForgeTag(),
+      TinkerFluids.moltenTungsten.getForgeTag(), TinkerFluids.moltenOsmium.getForgeTag(), TinkerFluids.moltenUranium.getForgeTag(),
+      // compat alloys
+      TinkerFluids.moltenBronze.getForgeTag(), TinkerFluids.moltenBrass.getForgeTag(), TinkerFluids.moltenElectrum.getForgeTag(),
+      TinkerFluids.moltenInvar.getForgeTag(), TinkerFluids.moltenConstantan.getForgeTag(), TinkerFluids.moltenPewter.getForgeTag(), TinkerFluids.moltenSteel.getForgeTag(),
+      // thermal alloys
+      TinkerFluids.moltenEnderium.getForgeTag(), TinkerFluids.moltenLumium.getForgeTag(), TinkerFluids.moltenSignalum.getForgeTag(),
+      // mekanism alloys
+      TinkerFluids.moltenRefinedGlowstone.getForgeTag(), TinkerFluids.moltenRefinedObsidian.getForgeTag());
 
     this.tag(TinkerTags.Fluids.LARGE_GEM_TOOLTIPS).addTags(TinkerFluids.moltenEmerald.getLocalTag(), TinkerFluids.moltenDiamond.getLocalTag());
     this.tag(TinkerTags.Fluids.SMALL_GEM_TOOLTIPS).addTags(TinkerFluids.moltenQuartz.getLocalTag(), TinkerFluids.moltenAmethyst.getLocalTag());
@@ -130,29 +130,29 @@ public class FluidTagProvider extends FluidTagsProvider {
 
     // spilling tags - reduces the number of recipes generated //
     this.tag(TinkerTags.Fluids.CLAY_SPILLING)
-        .addTag(TinkerFluids.moltenClay.getLocalTag())
-        .addTag(TinkerFluids.moltenPorcelain.getLocalTag())
-        .addTag(TinkerFluids.searedStone.getLocalTag())
-        .addTag(TinkerFluids.scorchedStone.getLocalTag());
+      .addTag(TinkerFluids.moltenClay.getLocalTag())
+      .addTag(TinkerFluids.moltenPorcelain.getLocalTag())
+      .addTag(TinkerFluids.searedStone.getLocalTag())
+      .addTag(TinkerFluids.scorchedStone.getLocalTag());
     this.tag(TinkerTags.Fluids.GLASS_SPILLING)
-        .addTag(TinkerFluids.moltenGlass.getLocalTag())
-        .addTag(TinkerFluids.moltenObsidian.getLocalTag());
+      .addTag(TinkerFluids.moltenGlass.getLocalTag())
+      .addTag(TinkerFluids.moltenObsidian.getLocalTag());
     this.tag(TinkerTags.Fluids.CHEAP_METAL_SPILLING)
-        .addTag(TinkerFluids.moltenPlatinum.getForgeTag())
-        .addTag(TinkerFluids.moltenTungsten.getForgeTag())
-        .addTag(TinkerFluids.moltenOsmium.getForgeTag())
-        .addTag(TinkerFluids.moltenAmethyst.getLocalTag());
+      .addTag(TinkerFluids.moltenPlatinum.getForgeTag())
+      .addTag(TinkerFluids.moltenTungsten.getForgeTag())
+      .addTag(TinkerFluids.moltenOsmium.getForgeTag())
+      .addTag(TinkerFluids.moltenAmethyst.getLocalTag());
     this.tag(TinkerTags.Fluids.AVERAGE_METAL_SPILLING)
-        .addTag(TinkerFluids.moltenQuartz.getLocalTag())
-        .addTag(TinkerFluids.moltenEmerald.getLocalTag())
-        .addTag(TinkerFluids.moltenRefinedGlowstone.getForgeTag());
+      .addTag(TinkerFluids.moltenQuartz.getLocalTag())
+      .addTag(TinkerFluids.moltenEmerald.getLocalTag())
+      .addTag(TinkerFluids.moltenRefinedGlowstone.getForgeTag());
     this.tag(TinkerTags.Fluids.EXPENSIVE_METAL_SPILLING)
-        .addTag(TinkerFluids.moltenDiamond.getLocalTag())
-        .addTag(TinkerFluids.moltenDebris.getLocalTag())
-        .addTag(TinkerFluids.moltenEnderium.getForgeTag())
-        .addTag(TinkerFluids.moltenLumium.getForgeTag())
-        .addTag(TinkerFluids.moltenSignalum.getForgeTag())
-        .addTag(TinkerFluids.moltenRefinedObsidian.getForgeTag());
+      .addTag(TinkerFluids.moltenDiamond.getLocalTag())
+      .addTag(TinkerFluids.moltenDebris.getLocalTag())
+      .addTag(TinkerFluids.moltenEnderium.getForgeTag())
+      .addTag(TinkerFluids.moltenLumium.getForgeTag())
+      .addTag(TinkerFluids.moltenSignalum.getForgeTag())
+      .addTag(TinkerFluids.moltenRefinedObsidian.getForgeTag());
   }
 
   @Override
@@ -160,18 +160,24 @@ public class FluidTagProvider extends FluidTagsProvider {
     return "Tinkers Construct Fluid TinkerTags";
   }
 
-  /** Tags this fluid using local tags */
+  /**
+   * Tags this fluid using local tags
+   */
   private void tagLocal(FlowingFluidObject<?> fluid) {
     tag(fluid.getLocalTag()).add(fluid.getStill(), fluid.getFlowing());
   }
 
-  /** Tags this fluid with local and forge tags */
+  /**
+   * Tags this fluid with local and forge tags
+   */
   private void tagAll(FlowingFluidObject<?> fluid) {
     tagLocal(fluid);
     tag(fluid.getForgeTag()).addTag(fluid.getLocalTag());
   }
 
-  /** Tags this fluid with local and forge tags */
+  /**
+   * Tags this fluid with local and forge tags
+   */
   private void tagForge(FluidObject<?> fluid) {
     tag(fluid.getForgeTag()).add(fluid.get());
   }

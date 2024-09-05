@@ -10,7 +10,9 @@ import slimeknights.tconstruct.common.multiblock.IMasterLogic;
 import slimeknights.tconstruct.common.multiblock.ServantTileEntity;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 
-/** Mostly extended to make type validaton easier, and the servant base class is not registered */
+/**
+ * Mostly extended to make type validaton easier, and the servant base class is not registered
+ */
 public class SmelteryComponentBlockEntity extends ServantTileEntity {
 
   public SmelteryComponentBlockEntity(BlockPos pos, BlockState state) {
@@ -23,8 +25,9 @@ public class SmelteryComponentBlockEntity extends ServantTileEntity {
 
   /**
    * Block method to update neighbors of a smeltery component when a new one is placed
-   * @param world  World instance
-   * @param pos    Location of new smeltery component
+   *
+   * @param world World instance
+   * @param pos   Location of new smeltery component
    */
   public static void updateNeighbors(Level world, BlockPos pos, BlockState state) {
     for (Direction direction : Direction.values()) {

@@ -19,37 +19,41 @@ import java.util.OptionalInt;
 import java.util.stream.Collectors;
 
 public class MeltingFuelHandler {
+
   /**
    * List of pairs of temperature and list of fluids with that or greater temperature
    * Sorted from highest to lowest temperature
    */
-  private static List<Pair<Integer,List<FluidStack>>> fuelLookup = Collections.emptyList();
+  private static List<Pair<Integer, List<FluidStack>>> fuelLookup = Collections.emptyList();
 
   /**
    * Lookup from fluid to fluids melting temperature
    */
-  private static Map<Fluid,Integer> temperatureLookup = Collections.emptyMap();
+  private static Map<Fluid, Integer> temperatureLookup = Collections.emptyMap();
 
-  /** List of solid fuels for solid melting */
+  /**
+   * List of solid fuels for solid melting
+   */
   public static final Lazy<List<ItemStack>> SOLID_FUELS = Lazy.of(() -> Arrays.asList(
     new ItemStack(Items.COAL), new ItemStack(Items.CHARCOAL), new ItemStack(Blocks.OAK_LOG), new ItemStack(Blocks.OAK_PLANKS), new ItemStack(Items.BLAZE_ROD)));
 
   /**
    * Updates the melting cache, called on JEI load
-   * @param fuels  List of fuel recipes
+   *
+   * @param fuels List of fuel recipes
    */
   public static void setMeltngFuels(List<MeltingFuel> fuels) {
     // sort the fuels highest first
     fuels.sort(Comparator.comparingInt(MeltingFuel::getTemperature));
     // get a list of temperature to fuel
     fuelLookup = fuels.stream()
-                      .mapToInt(MeltingFuel::getTemperature)
-                      .distinct()
-                      .mapToObj((temperature) -> Pair.of(temperature, fuels.stream()
-                          .filter(fuel -> fuel.getTemperature() >= temperature)
-                          .flatMap(fuel -> fuel.getInputs().stream())
-                          .collect(Collectors.toList())))
-                      .collect(Collectors.toList());
+      .mapToInt(MeltingFuel::getTemperature)
+      .distinct()
+      .mapToObj((temperature) -> Pair.of(temperature, fuels.stream()
+        .filter(fuel -> fuel.getTemperature() >= temperature)
+        .flatMap(fuel -> fuel.getInputs().stream())
+        .collect(Collectors.toList())))
+      .collect(Collectors.toList());
     // get a map of fluid to temperature
     temperatureLookup = fuels.stream().collect(HashMap::new, (map, fuel) -> {
       int temperature = fuel.getTemperature();
@@ -59,8 +63,9 @@ public class MeltingFuelHandler {
 
   /**
    * Gets a fluid stack list for the given temperature
-   * @param temperature  Recipe temperature
-   * @return  List of fuels for the given temperature
+   *
+   * @param temperature Recipe temperature
+   * @return List of fuels for the given temperature
    */
   public static List<FluidStack> getUsableFuels(int temperature) {
     // first fuel list with a temperature bigger is the one to use
@@ -74,8 +79,9 @@ public class MeltingFuelHandler {
 
   /**
    * Gets the temperature for the given fluid
-   * @param fluid  Fluid to lookup
-   * @return  Temperature, or empty if the fluid is not valid
+   *
+   * @param fluid Fluid to lookup
+   * @return Temperature, or empty if the fluid is not valid
    */
   public static OptionalInt getTemperature(Fluid fluid) {
     Integer temperature = temperatureLookup.get(fluid);

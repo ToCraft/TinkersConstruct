@@ -6,9 +6,12 @@ import net.minecraftforge.network.NetworkEvent.Context;
 import slimeknights.mantle.network.packet.IThreadsafePacket;
 import slimeknights.tconstruct.shared.client.ClientGeneratePartTexturesCommand;
 
-/** Packet to tell the client to generate tool textures */
+/**
+ * Packet to tell the client to generate tool textures
+ */
 @RequiredArgsConstructor
 public class GeneratePartTexturesPacket implements IThreadsafePacket {
+
   private final Operation operation;
   private final String modId;
   private final String materialPath;
@@ -31,5 +34,5 @@ public class GeneratePartTexturesPacket implements IThreadsafePacket {
     context.enqueueWork(() -> ClientGeneratePartTexturesCommand.generateTextures(operation, modId, materialPath));
   }
 
-  public enum Operation { ALL, MISSING }
+  public enum Operation {ALL, MISSING}
 }

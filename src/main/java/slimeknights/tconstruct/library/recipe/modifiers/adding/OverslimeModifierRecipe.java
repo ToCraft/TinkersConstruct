@@ -2,6 +2,7 @@ package slimeknights.tconstruct.library.recipe.modifiers.adding;
 
 import lombok.Getter;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -35,6 +36,7 @@ import static slimeknights.tconstruct.library.recipe.modifiers.adding.IDisplayMo
  * Recipe to add overslime to a tool
  */
 public class OverslimeModifierRecipe implements ITinkerStationRecipe, IDisplayModifierRecipe {
+
   private static final RecipeResult<ItemStack> AT_CAPACITY = RecipeResult.failure(TConstruct.makeTranslationKey("recipe", "overslime.at_capacity"));
   public static final RecordLoadable<OverslimeModifierRecipe> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(),
@@ -95,8 +97,9 @@ public class OverslimeModifierRecipe implements ITinkerStationRecipe, IDisplayMo
 
   /**
    * Updates the input stacks upon crafting this recipe
-   * @param result  Result from {@link #assemble(ITinkerStationContainer)}. Generally should not be modified
-   * @param inv     Inventory instance to modify inputs
+   *
+   * @param result Result from {@link #assemble(ITinkerStationContainer)}. Generally should not be modified
+   * @param inv    Inventory instance to modify inputs
    */
   @Override
   public void updateInputs(ItemStack result, IMutableTinkerStationContainer inv, boolean isServer) {
@@ -113,22 +116,19 @@ public class OverslimeModifierRecipe implements ITinkerStationRecipe, IDisplayMo
     IncrementalModifierRecipe.updateInputs(inv, ingredient, maxNeeded, restoreAmount, ItemStack.EMPTY);
   }
 
-  /** @deprecated use {@link #assemble(ITinkerStationContainer)} */
-  @Deprecated
-  @Override
-  public ItemStack getResultItem() {
-    return ItemStack.EMPTY;
-  }
-
   @Override
   public RecipeSerializer<?> getSerializer() {
     return TinkerModifiers.overslimeSerializer.get();
   }
 
   /* JEI display */
-  /** Cache of modifier result, same for all overslime */
+  /**
+   * Cache of modifier result, same for all overslime
+   */
   private static final ModifierEntry RESULT = new ModifierEntry(TinkerModifiers.overslime, 1);
-  /** Cache of input and output tools for display */
+  /**
+   * Cache of input and output tools for display
+   */
   private List<ItemStack> toolWithoutModifier, toolWithModifier = null;
 
   @Override
@@ -143,10 +143,11 @@ public class OverslimeModifierRecipe implements ITinkerStationRecipe, IDisplayMo
     }
     return Collections.emptyList();
   }
+
   @Override
   public List<ItemStack> getToolWithoutModifier() {
     if (toolWithoutModifier == null) {
-      toolWithoutModifier = RegistryHelper.getTagValueStream(Registry.ITEM, TinkerTags.Items.DURABILITY).map(MAP_TOOL_FOR_RENDERING).toList();
+      toolWithoutModifier = RegistryHelper.getTagValueStream(BuiltInRegistries.ITEM, TinkerTags.Items.DURABILITY).map(MAP_TOOL_FOR_RENDERING).toList();
     }
     return toolWithoutModifier;
   }
@@ -156,10 +157,10 @@ public class OverslimeModifierRecipe implements ITinkerStationRecipe, IDisplayMo
     if (toolWithModifier == null) {
       OverslimeModifier overslime = TinkerModifiers.overslime.get();
       List<ModifierEntry> result = List.of(RESULT);
-      toolWithModifier = RegistryHelper.getTagValueStream(Registry.ITEM, TinkerTags.Items.DURABILITY)
-                                       .map(MAP_TOOL_FOR_RENDERING)
-                                       .map(stack -> withModifiers(stack, result, data -> overslime.setShield(data, restoreAmount)))
-                                       .toList();
+      toolWithModifier = RegistryHelper.getTagValueStream(BuiltInRegistries.ITEM, TinkerTags.Items.DURABILITY)
+        .map(MAP_TOOL_FOR_RENDERING)
+        .map(stack -> withModifiers(stack, result, data -> overslime.setShield(data, restoreAmount)))
+        .toList();
     }
     return toolWithModifier;
   }

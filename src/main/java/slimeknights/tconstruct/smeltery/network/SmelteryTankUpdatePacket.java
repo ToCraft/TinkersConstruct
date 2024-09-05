@@ -18,6 +18,7 @@ import java.util.List;
  */
 @AllArgsConstructor
 public class SmelteryTankUpdatePacket implements IThreadsafePacket {
+
   private final BlockPos pos;
   private final List<FluidStack> fluids;
 
@@ -45,6 +46,7 @@ public class SmelteryTankUpdatePacket implements IThreadsafePacket {
   }
 
   private static class HandleClient {
+
     private static void handle(SmelteryTankUpdatePacket packet) {
       BlockEntityHelper.get(ISmelteryTankHandler.class, Minecraft.getInstance().level, packet.pos).ifPresent(te -> te.updateFluidsFromPacket(packet.fluids));
     }

@@ -29,7 +29,10 @@ import java.util.List;
 import java.util.UUID;
 
 public class LightspeedArmorModifier extends Modifier implements ArmorWalkModifierHook, EquipmentChangeModifierHook, TooltipModifierHook {
-  /** UUID for speed boost */
+
+  /**
+   * UUID for speed boost
+   */
   private static final UUID ATTRIBUTE_BONUS = UUID.fromString("8790747b-6654-4bd8-83c7-dbe9ae04c0ca");
 
   @Override

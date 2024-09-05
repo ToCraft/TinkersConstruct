@@ -24,7 +24,9 @@ import net.minecraft.world.phys.HitResult;
  * Item that can fill a bottle on right click
  */
 public class BottleItem extends Item {
+
   private final ItemLike potion;
+
   public BottleItem(ItemLike potion, Properties props) {
     super(props);
     this.potion = potion;

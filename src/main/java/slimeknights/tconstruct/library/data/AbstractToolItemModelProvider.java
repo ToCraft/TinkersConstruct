@@ -24,18 +24,24 @@ import java.util.Objects;
 
 import static slimeknights.mantle.util.IdExtender.INSTANCE;
 
-/** Helper for generating tool item models */
+/**
+ * Helper for generating tool item models
+ */
 public abstract class AbstractToolItemModelProvider extends GenericDataProvider {
-  protected final Map<String,JsonObject> models = new HashMap<>();
+
+  protected final Map<String, JsonObject> models = new HashMap<>();
   protected final ExistingFileHelper existingFileHelper;
   protected final String modId;
+
   public AbstractToolItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper, String modId) {
     super(generator, PackType.CLIENT_RESOURCES, "models/item");
     this.existingFileHelper = existingFileHelper;
     this.modId = modId;
   }
 
-  /** Add all relevant models */
+  /**
+   * Add all relevant models
+   */
   protected abstract void addModels() throws IOException;
 
   @Override
@@ -49,7 +55,9 @@ public abstract class AbstractToolItemModelProvider extends GenericDataProvider 
 
   /* Model types */
 
-  /** Creates models for blocking and broken for the given tool */
+  /**
+   * Creates models for blocking and broken for the given tool
+   */
   protected void tool(IdAwareObject tool, JsonObject properties, String... brokenParts) throws IOException {
     ResourceLocation id = tool.getId();
     String name = id.getPath();
@@ -57,7 +65,9 @@ public abstract class AbstractToolItemModelProvider extends GenericDataProvider 
     transformTool("tool/" + name + "/broken", readJson(id), "", false, "broken", brokenParts);
   }
 
-  /** Creates a model in the blocking folder with the given copied display */
+  /**
+   * Creates a model in the blocking folder with the given copied display
+   */
   protected void bow(IdAwareObject bow, JsonObject properties, boolean crossbow, String... pullingParts) throws IOException {
     ResourceLocation id = bow.getId();
     String name = id.getPath();
@@ -85,7 +95,9 @@ public abstract class AbstractToolItemModelProvider extends GenericDataProvider 
     }
   }
 
-  /** Creates a model in the blocking folder with the given copied display */
+  /**
+   * Creates a model in the blocking folder with the given copied display
+   */
   protected void staff(IdAwareObject staff, JsonObject properties) throws IOException {
     ResourceLocation id = staff.getId();
     String path = id.getPath();
@@ -100,36 +112,46 @@ public abstract class AbstractToolItemModelProvider extends GenericDataProvider 
     }
   }
 
-  /** Adds broken and blocking models for the shield */
+  /**
+   * Adds broken and blocking models for the shield
+   */
   protected void shield(String setName, IdAwareObject shield, JsonObject properties, String... parts) throws IOException {
     ResourceLocation id = shield.getId();
     withDisplay("armor/" + setName + "/shield_blocking", id, Objects.requireNonNull(properties));
     transformTool("armor/" + setName + "/shield_broken", readJson(id), "", false, "broken", parts);
   }
 
-  /** Adds broken and blocking models for the armor set */
+  /**
+   * Adds broken and blocking models for the armor set
+   */
   @SuppressWarnings("deprecation")  // no its not
-  protected void armor(String name, EnumObject<ArmorSlotType,? extends Item> armor, String... textures) throws IOException {
+  protected void armor(String name, EnumObject<ArmorSlotType, ? extends Item> armor, String... textures) throws IOException {
     for (ArmorSlotType slot : ArmorSlotType.values()) {
-      transformTool("armor/" + name + '/' + slot.getSerializedName() + "_broken", readJson(Registry.ITEM.getKey(armor.get(slot))), "", false, "broken", textures);
+      transformTool("armor/" + name + '/' + slot.getSerializedName() + "_broken", readJson(ForgeRegistries.ITEMS.getKey(armor.get(slot))), "", false, "broken", textures);
     }
   }
 
   /* Helpers */
 
-  /** Reads a JSON file */
+  /**
+   * Reads a JSON file
+   */
   protected JsonObject readJson(ResourceLocation path) throws IOException {
     try (BufferedReader reader = existingFileHelper.getResource(path, PackType.CLIENT_RESOURCES, ".json", "models/item").openAsReader()) {
       return GsonHelper.parse(reader);
     }
   }
 
-  /** Creates a resource location under this mod */
+  /**
+   * Creates a resource location under this mod
+   */
   protected ResourceLocation resource(String name) {
     return new ResourceLocation(modId, name);
   }
 
-  /** Creates a model with display from the given target */
+  /**
+   * Creates a model with display from the given target
+   */
   protected void withDisplay(String destination, ResourceLocation parent, JsonObject properties) {
     JsonObject model = new JsonObject();
     model.addProperty("parent", INSTANCE.prefix(parent, "item/").toString());
@@ -137,7 +159,9 @@ public abstract class AbstractToolItemModelProvider extends GenericDataProvider 
     models.put(destination, model);
   }
 
-  /** Adds a new root to the array with the given suffix */
+  /**
+   * Adds a new root to the array with the given suffix
+   */
   protected static JsonArray copyAndSuffixRoot(JsonArray array, String suffix, boolean allRoots) {
     JsonArray newArray = new JsonArray();
     boolean first = true;
@@ -151,7 +175,9 @@ public abstract class AbstractToolItemModelProvider extends GenericDataProvider 
     return newArray;
   }
 
-  /** Adds a part to the given tool */
+  /**
+   * Adds a part to the given tool
+   */
   protected JsonObject addPart(JsonObject tool, String part, String toolName, String texture) {
     JsonObject textures = tool.getAsJsonObject("textures");
     // add the texture
@@ -166,7 +192,9 @@ public abstract class AbstractToolItemModelProvider extends GenericDataProvider 
     return tool;
   }
 
-  /** Suffixes the passed textures with the given suffix */
+  /**
+   * Suffixes the passed textures with the given suffix
+   */
   protected static JsonObject suffixTextures(JsonObject tool, String suffix, String... updateTextures) {
     // update parts that we were told to update
     boolean large = GsonHelper.getAsBoolean(tool, "large", false);
@@ -180,7 +208,9 @@ public abstract class AbstractToolItemModelProvider extends GenericDataProvider 
     return tool;
   }
 
-  /** Transforms the given tool by adding suffixes to listed textures and the modifier roots */
+  /**
+   * Transforms the given tool by adding suffixes to listed textures and the modifier roots
+   */
   protected void transformTool(String destination, JsonObject tool, String parent, boolean allRoots, String suffix, String... updateTextures) {
     JsonObject transformed = tool.deepCopy();
     // set parent if given

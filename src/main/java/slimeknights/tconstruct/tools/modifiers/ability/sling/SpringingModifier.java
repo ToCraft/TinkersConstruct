@@ -15,7 +15,9 @@ import slimeknights.tconstruct.library.tools.helper.ToolDamageUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.utils.SlimeBounceHandler;
 
-/** Add velocity in the direction you face */
+/**
+ * Add velocity in the direction you face
+ */
 public class SpringingModifier extends SlingModifier {
 
   @Override

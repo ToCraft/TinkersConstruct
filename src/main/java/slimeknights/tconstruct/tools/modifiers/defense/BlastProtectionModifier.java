@@ -20,8 +20,12 @@ import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
 import slimeknights.tconstruct.tools.modifiers.defense.BlastProtectionModifier.BlastData;
 
 public class BlastProtectionModifier extends AbstractProtectionModifier<BlastData> {
-  /** Entity data key for the data associated with this modifier */
+
+  /**
+   * Entity data key for the data associated with this modifier
+   */
   private static final ComputableDataKey<BlastData> BLAST_DATA = TConstruct.createKey("blast_protection", BlastData::new);
+
   public BlastProtectionModifier() {
     super(BLAST_DATA);
     MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, false, ExplosionEvent.Detonate.class, BlastProtectionModifier::onExplosionDetonate);
@@ -39,7 +43,9 @@ public class BlastProtectionModifier extends AbstractProtectionModifier<BlastDat
     data.wasKnockback = false;
   }
 
-  /** On explosion, checks if any blast protected entity is involved, if so marks them for knockback update next tick */
+  /**
+   * On explosion, checks if any blast protected entity is involved, if so marks them for knockback update next tick
+   */
   private static void onExplosionDetonate(ExplosionEvent.Detonate event) {
     Explosion explosion = event.getExplosion();
     Vec3 center = explosion.getPosition();
@@ -57,7 +63,7 @@ public class BlastProtectionModifier extends AbstractProtectionModifier<BlastDat
             if (x != 0 || z != 0 || (entity.getEyeY() - center.y) != 0) {
               // we need two numbers to calculate the knockback: distance to explosion and block density
               double y = entity.getY() - center.y;
-              double distance = Mth.sqrt((float)(x * x + y * y + z * z)) / diameter;
+              double distance = Mth.sqrt((float) (x * x + y * y + z * z)) / diameter;
               if (distance <= 1) {
                 blastData.wasKnockback = true;
               }
@@ -68,7 +74,9 @@ public class BlastProtectionModifier extends AbstractProtectionModifier<BlastDat
     }
   }
 
-  /** If the entity is marked for knockback update, adjust velocity */
+  /**
+   * If the entity is marked for knockback update, adjust velocity
+   */
   private static void livingTick(LivingTickEvent event) {
     LivingEntity living = event.getEntity();
     if (!living.level.isClientSide && !living.isSpectator()) {
@@ -93,9 +101,14 @@ public class BlastProtectionModifier extends AbstractProtectionModifier<BlastDat
     }
   }
 
-  /** Data object for the modifier */
+  /**
+   * Data object for the modifier
+   */
   protected static class BlastData extends ModifierMaxLevel {
-    /** If true, the entity was knocked back and needs their velocity adjusted */
+
+    /**
+     * If true, the entity was knocked back and needs their velocity adjusted
+     */
     boolean wasKnockback = false;
   }
 }

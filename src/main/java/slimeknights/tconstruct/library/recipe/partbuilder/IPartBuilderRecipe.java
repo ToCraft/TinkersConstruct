@@ -17,43 +17,55 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public interface IPartBuilderRecipe extends ICommonRecipe<IPartBuilderContainer> {
-  /** Default patterns in a part builder recipe, Forge has cache invalidation for vanilla, so this is fine as long as that persists */
+
+  /**
+   * Default patterns in a part builder recipe, Forge has cache invalidation for vanilla, so this is fine as long as that persists
+   */
   Ingredient DEFAULT_PATTERNS = Ingredient.of(TinkerTags.Items.DEFAULT_PATTERNS);
 
-  /** Gets the pattern needed for this recipe,
-   * if there are multiple recipes with the same pattern, they are effectively merged */
+  /**
+   * Gets the pattern needed for this recipe,
+   * if there are multiple recipes with the same pattern, they are effectively merged
+   */
   Pattern getPattern();
 
-  /** Gets a stream of all patterns matching this recipe, allows one recipe to match on multiple patterns */
+  /**
+   * Gets a stream of all patterns matching this recipe, allows one recipe to match on multiple patterns
+   */
   default Stream<Pattern> getPatterns(IPartBuilderContainer inv) {
     return Stream.of(getPattern());
   }
 
   /**
    * Gets the number of material needed for this recipe
-   * @return  Material amount
+   *
+   * @return Material amount
    */
   int getCost();
 
   /**
    * Checks if the recipe can possibly match. Should treat empty input as a match, and does not need to check sizes
-   * @param inv  Inventory instance
-   * @return  True if the recipe matches the given pattern
+   *
+   * @param inv Inventory instance
+   * @return True if the recipe matches the given pattern
    */
   boolean partialMatch(IPartBuilderContainer inv);
 
   /**
    * Gets the number of material items consumed by this recipe
-   * @param inv  Crafting inventory
-   * @return  Number of items consumed
+   *
+   * @param inv Crafting inventory
+   * @return Number of items consumed
    */
   default int getItemsUsed(IPartBuilderContainer inv) {
     return Optional.ofNullable(inv.getMaterial())
-                   .map(mat -> mat.getItemsUsed(getCost()))
-                   .orElse(1);
+      .map(mat -> mat.getItemsUsed(getCost()))
+      .orElse(1);
   }
 
-  /** Assembles the result with the given pattern */
+  /**
+   * Assembles the result with the given pattern
+   */
   default ItemStack assemble(IPartBuilderContainer inv, Pattern pattern) {
     return assemble(inv);
   }
@@ -70,7 +82,9 @@ public interface IPartBuilderRecipe extends ICommonRecipe<IPartBuilderContainer>
     return new ItemStack(TinkerTables.partBuilder);
   }
 
-  /** Gets the leftover from performing this recipe */
+  /**
+   * Gets the leftover from performing this recipe
+   */
   default ItemStack getLeftover(IPartBuilderContainer inventoryWrapper, Pattern pattern) {
     IMaterialValue recipe = inventoryWrapper.getMaterial();
     if (recipe != null) {
@@ -90,13 +104,17 @@ public interface IPartBuilderRecipe extends ICommonRecipe<IPartBuilderContainer>
     return ItemStack.EMPTY;
   }
 
-  /** Gets the title to display on the part builder panel. If null, displays default info */
+  /**
+   * Gets the title to display on the part builder panel. If null, displays default info
+   */
   @Nullable
   default Component getTitle() {
     return null;
   }
 
-  /** Gets the text to display on the part builder screen */
+  /**
+   * Gets the text to display on the part builder screen
+   */
   default List<Component> getText(IPartBuilderContainer inv) {
     return Collections.emptyList();
   }

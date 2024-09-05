@@ -12,7 +12,10 @@ import slimeknights.mantle.recipe.ingredient.EntityIngredient;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 
 public class AgeableSeveringRecipe extends SeveringRecipe {
-  /** Loader instance */
+
+  /**
+   * Loader instance
+   */
   public static final RecordLoadable<AgeableSeveringRecipe> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(), ENTITY_FIELD,
     ItemOutput.Loadable.REQUIRED_STACK.requiredField("adult_result", r -> r.output),
@@ -20,6 +23,7 @@ public class AgeableSeveringRecipe extends SeveringRecipe {
     AgeableSeveringRecipe::new);
 
   private final ItemOutput childOutput;
+
   public AgeableSeveringRecipe(ResourceLocation id, EntityIngredient ingredient, ItemOutput adultOutput, ItemOutput childOutput) {
     super(id, ingredient, adultOutput);
     this.childOutput = childOutput;

@@ -7,6 +7,7 @@ import it.unimi.dsi.fastutil.ints.IntComparators;
 import it.unimi.dsi.fastutil.ints.IntList;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -28,9 +29,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/** Item ingredient matching items with a block form in the given tag */
+/**
+ * Item ingredient matching items with a block form in the given tag
+ */
 @RequiredArgsConstructor
 public class BlockTagIngredient extends AbstractIngredient {
+
   private final TagKey<Block> tag;
   @Nullable
   private Set<Item> matchingItems;
@@ -56,14 +60,16 @@ public class BlockTagIngredient extends AbstractIngredient {
     this.stackingIds = null;
   }
 
-  /** Gets the ordered matching items set */
+  /**
+   * Gets the ordered matching items set
+   */
   private Set<Item> getMatchingItems() {
     if (matchingItems == null || checkInvalidation()) {
       markValid();
-      matchingItems = RegistryHelper.getTagValueStream(Registry.BLOCK, tag)
-                                    .map(Block::asItem)
-                                    .filter(item -> item != Items.AIR)
-                                    .collect(Collectors.toCollection(LinkedHashSet::new));
+      matchingItems = RegistryHelper.getTagValueStream(BuiltInRegistries.BLOCK, tag)
+        .map(Block::asItem)
+        .filter(item -> item != Items.AIR)
+        .collect(Collectors.toCollection(LinkedHashSet::new));
     }
     return matchingItems;
   }
@@ -84,7 +90,7 @@ public class BlockTagIngredient extends AbstractIngredient {
       Set<Item> items = getMatchingItems();
       stackingIds = new IntArrayList(items.size());
       for (Item item : items) {
-        stackingIds.add(Registry.ITEM.getId(item));
+        stackingIds.add(BuiltInRegistries.ITEM.getId(item));
       }
       stackingIds.sort(IntComparators.NATURAL_COMPARATOR);
     }
@@ -104,7 +110,9 @@ public class BlockTagIngredient extends AbstractIngredient {
     return json;
   }
 
-  /** Serializer instance */
+  /**
+   * Serializer instance
+   */
   public enum Serializer implements IIngredientSerializer<Ingredient> {
     INSTANCE;
 

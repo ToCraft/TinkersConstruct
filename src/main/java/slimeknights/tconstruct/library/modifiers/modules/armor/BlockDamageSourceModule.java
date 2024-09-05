@@ -22,9 +22,12 @@ import java.util.List;
 
 /**
  * Module to block damage of the passed sources
- * @param source  Predicate of sources to block
+ *
+ * @param source Predicate of sources to block
  */
-public record BlockDamageSourceModule(IJsonPredicate<DamageSource> source, ModifierCondition<IToolStackView> condition) implements DamageBlockModifierHook, ModifierModule, ConditionalModule<IToolStackView> {
+public record BlockDamageSourceModule(IJsonPredicate<DamageSource> source,
+                                      ModifierCondition<IToolStackView> condition) implements DamageBlockModifierHook, ModifierModule, ConditionalModule<IToolStackView> {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = List.of(ModifierHooks.DAMAGE_BLOCK);
   public static final RecordLoadable<BlockDamageSourceModule> LOADER = RecordLoadable.create(
     DamageSourcePredicate.LOADER.defaultField("damage_source", BlockDamageSourceModule::source),
@@ -45,7 +48,7 @@ public record BlockDamageSourceModule(IJsonPredicate<DamageSource> source, Modif
   public RecordLoadable<BlockDamageSourceModule> getLoader() {
     return LOADER;
   }
-  
+
 
   /* Builder */
 
@@ -55,6 +58,7 @@ public record BlockDamageSourceModule(IJsonPredicate<DamageSource> source, Modif
 
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   public static class Builder extends ModuleBuilder.Stack<Builder> {
+
     private final IJsonPredicate<DamageSource> source;
 
     public BlockDamageSourceModule build() {

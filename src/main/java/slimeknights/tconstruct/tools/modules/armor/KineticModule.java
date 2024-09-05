@@ -29,7 +29,9 @@ import slimeknights.tconstruct.tools.stats.ToolType;
 import javax.annotation.Nullable;
 import java.util.List;
 
-/** Module applying the insatiable armor effect as you take damage */
+/**
+ * Module applying the insatiable armor effect as you take damage
+ */
 public enum KineticModule implements ModifierModule, OnAttackedModifierHook, TooltipModifierHook {
   INSTANCE;
 

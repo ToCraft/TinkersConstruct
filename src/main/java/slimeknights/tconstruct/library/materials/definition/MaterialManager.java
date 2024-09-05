@@ -50,14 +50,23 @@ import static java.util.Objects.requireNonNullElse;
  */
 @Log4j2
 public class MaterialManager extends SimpleJsonResourceReloadListener {
-  /** Location of materials */
+
+  /**
+   * Location of materials
+   */
   public static final String FOLDER = "tinkering/materials/definition";
-  /** Location of material tags */
+  /**
+   * Location of material tags
+   */
   public static final String TAG_FOLDER = "tinkering/tags/materials";
-  /** Registry key to make tag keys, will not work on actual registry lookup */
+  /**
+   * Registry key to make tag keys, will not work on actual registry lookup
+   */
   public static final ResourceKey<? extends Registry<IMaterial>> REGISTRY_KEY = ResourceKey.createRegistryKey(TConstruct.getResource("materials"));
 
-  /** GSON for loading materials */
+  /**
+   * GSON for loading materials
+   */
   public static final Gson GSON = (new GsonBuilder())
     .registerTypeAdapter(ResourceLocation.class, new ResourceLocation.Serializer())
     .registerTypeAdapter(ICondition.class, ConditionSerializer.INSTANCE)
@@ -65,20 +74,34 @@ public class MaterialManager extends SimpleJsonResourceReloadListener {
     .disableHtmlEscaping()
     .create();
 
-  /** Runnable to run after loading material stats */
+  /**
+   * Runnable to run after loading material stats
+   */
   private final Runnable onLoaded;
-  /** Map of all materials */
-  private Map<MaterialId,IMaterial> materials = Collections.emptyMap();
-  /** Map of material ID redirects */
-  private Map<MaterialId,MaterialId> redirects = Collections.emptyMap();
-  /** Sorted list of visible materials */
+  /**
+   * Map of all materials
+   */
+  private Map<MaterialId, IMaterial> materials = Collections.emptyMap();
+  /**
+   * Map of material ID redirects
+   */
+  private Map<MaterialId, MaterialId> redirects = Collections.emptyMap();
+  /**
+   * Sorted list of visible materials
+   */
   private List<IMaterial> sortedMaterials = Collections.emptyList();
 
-  /** Modifier tags loaded from JSON */
-  private Map<TagKey<IMaterial>,List<IMaterial>> tags = Collections.emptyMap();
-  /** Map from modifier to tags on the modifier */
-  private Map<MaterialId,Set<TagKey<IMaterial>>> reverseTags = Collections.emptyMap();
-  /** Context for conditions */
+  /**
+   * Modifier tags loaded from JSON
+   */
+  private Map<TagKey<IMaterial>, List<IMaterial>> tags = Collections.emptyMap();
+  /**
+   * Map from modifier to tags on the modifier
+   */
+  private Map<MaterialId, Set<TagKey<IMaterial>>> reverseTags = Collections.emptyMap();
+  /**
+   * Context for conditions
+   */
   @Setter
   private IContext conditionContext = IContext.EMPTY;
 
@@ -94,7 +117,8 @@ public class MaterialManager extends SimpleJsonResourceReloadListener {
 
   /**
    * Gets a collection of all loaded materials, sorted by tier and sort orders
-   * @return  All loaded materials
+   *
+   * @return All loaded materials
    */
   public Collection<IMaterial> getVisibleMaterials() {
     return sortedMaterials;
@@ -102,7 +126,8 @@ public class MaterialManager extends SimpleJsonResourceReloadListener {
 
   /**
    * Gets a collection of all loaded materials, unsorted and including hidden materials
-   * @return  All loaded materials
+   *
+   * @return All loaded materials
    */
   public Collection<IMaterial> getAllMaterials() {
     return materials.values();
@@ -110,8 +135,9 @@ public class MaterialManager extends SimpleJsonResourceReloadListener {
 
   /**
    * Gets a material based on its ID
-   * @param materialId  Material ID
-   * @return  Optional of material, empty if missing
+   *
+   * @param materialId Material ID
+   * @return Optional of material, empty if missing
    */
   public Optional<IMaterial> getMaterial(MaterialId materialId) {
     return Optional.ofNullable(materials.get(materialId));
@@ -119,8 +145,9 @@ public class MaterialManager extends SimpleJsonResourceReloadListener {
 
   /**
    * Resolves any redirect for the given material ID
-   * @param materialId  Original material ID
-   * @return  Redirected ID, or original if no redirect is set up for this ID
+   *
+   * @param materialId Original material ID
+   * @return Redirected ID, or original if no redirect is set up for this ID
    */
   public MaterialId resolveRedirect(MaterialId materialId) {
     return redirects.getOrDefault(materialId, materialId);
@@ -129,14 +156,17 @@ public class MaterialManager extends SimpleJsonResourceReloadListener {
 
   /* Tags */
 
-  /** Creates a tag key for a material */
+  /**
+   * Creates a tag key for a material
+   */
   public static TagKey<IMaterial> getTag(ResourceLocation id) {
     return TagKey.create(REGISTRY_KEY, id);
   }
 
   /**
    * Checks if the given modifier is in the given tag
-   * @return  True if the modifier is in the tag
+   *
+   * @return True if the modifier is in the tag
    */
   public boolean isIn(MaterialId id, TagKey<IMaterial> tag) {
     return reverseTags.getOrDefault(id, Collections.emptySet()).contains(tag);
@@ -144,8 +174,9 @@ public class MaterialManager extends SimpleJsonResourceReloadListener {
 
   /**
    * Gets all values contained in the given tag
-   * @param tag  Tag instance
-   * @return  Contained values
+   *
+   * @param tag Tag instance
+   * @return Contained values
    */
   public List<IMaterial> getValues(TagKey<IMaterial> tag) {
     return tags.getOrDefault(tag, List.of());
@@ -157,15 +188,15 @@ public class MaterialManager extends SimpleJsonResourceReloadListener {
    */
   private void onMaterialUpdate() {
     this.sortedMaterials = this.materials.values().stream()
-                                         .filter(mat -> !mat.isHidden())
-                                         .sorted().collect(Collectors.toList());
+      .filter(mat -> !mat.isHidden())
+      .sorted().collect(Collectors.toList());
     onLoaded.run();
   }
 
   /**
    * Updates the material list from the server.list. Should only be called client side
    */
-  public void updateMaterialsFromServer(Map<MaterialId,IMaterial> materials, Map<MaterialId,MaterialId> redirects, Map<TagKey<IMaterial>,List<IMaterial>> tags) {
+  public void updateMaterialsFromServer(Map<MaterialId, IMaterial> materials, Map<MaterialId, MaterialId> redirects, Map<TagKey<IMaterial>, List<IMaterial>> tags) {
     this.materials = materials;
     this.redirects = redirects;
     this.tags = tags;
@@ -186,9 +217,9 @@ public class MaterialManager extends SimpleJsonResourceReloadListener {
         material -> material)
       );
     // validate redirects
-    Iterator<Entry<MaterialId,MaterialId>> redirectIterator = redirects.entrySet().iterator();
+    Iterator<Entry<MaterialId, MaterialId>> redirectIterator = redirects.entrySet().iterator();
     while (redirectIterator.hasNext()) {
-      Entry<MaterialId,MaterialId> entry = redirectIterator.next();
+      Entry<MaterialId, MaterialId> entry = redirectIterator.next();
       if (!this.materials.containsKey(entry.getValue())) {
         log.error("Invalid material redirect {} as material {} does not exist", entry.getKey(), entry.getValue());
         redirectIterator.remove();
@@ -196,7 +227,7 @@ public class MaterialManager extends SimpleJsonResourceReloadListener {
     }
     this.redirects = redirects;
     onMaterialUpdate();
-    
+
     log.debug("Loaded materials: {}", Util.toIndentedStringList(materials.keySet()));
     log.debug("Loaded redirects: {}", Util.toIndentedStringList(redirects.keySet()));
     long timeStep = System.nanoTime();
@@ -212,7 +243,8 @@ public class MaterialManager extends SimpleJsonResourceReloadListener {
 
   /**
    * Gets the packet to send on player login
-   * @return  Packet object
+   *
+   * @return Packet object
    */
   public UpdateMaterialsPacket getUpdatePacket() {
     return new UpdateMaterialsPacket(materials, redirects, tags);

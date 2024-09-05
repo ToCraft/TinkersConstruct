@@ -18,11 +18,17 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import java.util.List;
 import java.util.function.Function;
 
-/** Module to show the offhand for a tool that can interact using the offhand */
+/**
+ * Module to show the offhand for a tool that can interact using the offhand
+ */
 public enum ShowOffhandModule implements ModifierModule, EquipmentChangeModifierHook {
-  /** Mode which will always show the offhand */
+  /**
+   * Mode which will always show the offhand
+   */
   ALLOW_BROKEN,
-  /** Mode which will only show the offhand when the tool is not broken */
+  /**
+   * Mode which will only show the offhand when the tool is not broken
+   */
   DISALLOW_BROKEN;
 
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<ShowOffhandModule>defaultHooks(ModifierHooks.EQUIPMENT_CHANGE);

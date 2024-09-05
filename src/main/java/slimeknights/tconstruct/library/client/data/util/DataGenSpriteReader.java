@@ -20,6 +20,7 @@ import java.util.NoSuchElementException;
 @Log4j2
 @RequiredArgsConstructor
 public class DataGenSpriteReader extends AbstractSpriteReader {
+
   private final ExistingFileHelper existingFileHelper;
   private final String folder;
 
@@ -40,7 +41,7 @@ public class DataGenSpriteReader extends AbstractSpriteReader {
       NativeImage image = NativeImage.read(resource.open());
       openedImages.add(image);
       return image;
-    } catch (IOException|NoSuchElementException e) {
+    } catch (IOException | NoSuchElementException e) {
       log.error("Failed to read image at {}", path);
       throw e;
     }

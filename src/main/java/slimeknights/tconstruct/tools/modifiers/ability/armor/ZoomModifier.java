@@ -24,6 +24,7 @@ import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 public class ZoomModifier extends NoLevelsModifier implements KeybindInteractModifierHook, GeneralInteractionModifierHook, EquipmentChangeModifierHook {
+
   private static final ResourceLocation ZOOM = TConstruct.getResource("zoom");
 
   @Override

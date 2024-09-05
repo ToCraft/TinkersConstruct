@@ -5,6 +5,7 @@ import slimeknights.mantle.client.screen.ElementScreen;
 import slimeknights.tconstruct.TConstruct;
 
 public interface Icons {
+
   ResourceLocation ICONS = TConstruct.getResource("textures/gui/icons.png");
 
   //ElementScreen ANVIL = new ElementScreen(18 * 3, 0, 18, 18, 256, 256);

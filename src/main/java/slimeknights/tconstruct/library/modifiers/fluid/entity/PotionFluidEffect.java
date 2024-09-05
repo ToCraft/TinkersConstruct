@@ -16,8 +16,11 @@ import slimeknights.tconstruct.library.recipe.TagPredicate;
 
 import java.util.List;
 
-/** Spilling effect that pulls the potion from a NBT potion fluid and applies it */
+/**
+ * Spilling effect that pulls the potion from a NBT potion fluid and applies it
+ */
 public record PotionFluidEffect(float scale, TagPredicate predicate) implements FluidEffect<FluidEffectContext.Entity> {
+
   public static final RecordLoadable<PotionFluidEffect> LOADER = RecordLoadable.create(
     FloatLoadable.FROM_ZERO.requiredField("scale", e -> e.scale),
     TagPredicate.LOADABLE.defaultField("nbt", TagPredicate.ANY, e -> e.predicate),

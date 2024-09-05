@@ -9,12 +9,19 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import java.util.Collection;
 
-/** Hook for changing the mining speed beyond effectiveness and tier. */
+/**
+ * Hook for changing the mining speed beyond effectiveness and tier.
+ */
 public interface MiningSpeedToolHook {
-  /** Updates the mining speed for the tool against the given state */
+
+  /**
+   * Updates the mining speed for the tool against the given state
+   */
   float modifyDestroySpeed(IToolStackView tool, BlockState state, float speed);
 
-  /** Gets the mining speed for the tool against the given state */
+  /**
+   * Gets the mining speed for the tool against the given state
+   */
   static float getDestroySpeed(ItemStack tool, BlockState state) {
     if (!tool.hasTag()) {
       return 1;
@@ -22,7 +29,9 @@ public interface MiningSpeedToolHook {
     return getDestroySpeed(ToolStack.from(tool), state);
   }
 
-  /** Gets the mining speed for the tool against the given state */
+  /**
+   * Gets the mining speed for the tool against the given state
+   */
   static float getDestroySpeed(IToolStackView tool, BlockState state) {
     if (tool.isBroken()) {
       return 0.3f;
@@ -31,8 +40,11 @@ public interface MiningSpeedToolHook {
     return Math.max(1, tool.getHook(ToolHooks.MINING_SPEED).modifyDestroySpeed(tool, state, speed));
   }
 
-  /** Merger that runs each hook after the previous */
+  /**
+   * Merger that runs each hook after the previous
+   */
   record ComposeMerger(Collection<MiningSpeedToolHook> hooks) implements MiningSpeedToolHook {
+
     @Override
     public float modifyDestroySpeed(IToolStackView tool, BlockState state, float speed) {
       for (MiningSpeedToolHook hook : hooks) {

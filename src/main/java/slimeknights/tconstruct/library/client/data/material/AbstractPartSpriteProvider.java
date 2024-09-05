@@ -25,23 +25,35 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-/** Base class for listing sprites to generate */
+/**
+ * Base class for listing sprites to generate
+ */
 @SuppressWarnings("SameParameterValue")
 @RequiredArgsConstructor
 public abstract class AbstractPartSpriteProvider {
 
-  /** List of created sprites */
+  /**
+   * List of created sprites
+   */
   private final List<PartSpriteInfo> sprites = new ArrayList<>();
   private final List<ToolSpriteBuilder> toolSprites = new ArrayList<>();
-  /** If true, sprites have been added */
+  /**
+   * If true, sprites have been added
+   */
   private boolean added = false;
-  /** Default mod ID for helper functions */
+  /**
+   * Default mod ID for helper functions
+   */
   private final String modID;
 
-  /** Gets the name of these part sprites */
+  /**
+   * Gets the name of these part sprites
+   */
   public abstract String getName();
 
-  /** Function to add both sprites and materials */
+  /**
+   * Function to add both sprites and materials
+   */
   protected abstract void addAllSpites();
 
 
@@ -49,8 +61,9 @@ public abstract class AbstractPartSpriteProvider {
 
   /**
    * Adds a given texture to the list to generate
-   * @param sprite  Sprite name
-   * @param requiredStats  At least one of these stat types must be present for this sprite to be generated
+   *
+   * @param sprite        Sprite name
+   * @param requiredStats At least one of these stat types must be present for this sprite to be generated
    */
   protected void addTexture(ResourceLocation sprite, MaterialStatsId requiredStats, boolean allowAnimated) {
     sprites.add(new PartSpriteInfo(sprite, requiredStats, allowAnimated));
@@ -58,8 +71,9 @@ public abstract class AbstractPartSpriteProvider {
 
   /**
    * Adds a given texture to the list to generate
-   * @param sprite  Sprite name
-   * @param requiredStats  At least one of these stat types must be present for this sprite to be generated
+   *
+   * @param sprite        Sprite name
+   * @param requiredStats At least one of these stat types must be present for this sprite to be generated
    */
   protected void addTexture(ResourceLocation sprite, MaterialStatsId requiredStats) {
     addTexture(sprite, requiredStats, true);
@@ -67,8 +81,9 @@ public abstract class AbstractPartSpriteProvider {
 
   /**
    * Adds a given sprite to the list to generate, local to textures instead of tool
-   * @param name           Name relative to the mod
-   * @param requiredStats  At least one of these stat types must be present for this sprite to be generated
+   *
+   * @param name          Name relative to the mod
+   * @param requiredStats At least one of these stat types must be present for this sprite to be generated
    */
   protected void addTexture(String name, MaterialStatsId requiredStats, boolean allowAnimated) {
     addTexture(new ResourceLocation(modID, name), requiredStats, allowAnimated);
@@ -76,8 +91,9 @@ public abstract class AbstractPartSpriteProvider {
 
   /**
    * Adds a given sprite to the list to generate, local to textures instead of tool
-   * @param name           Name relative to the mod
-   * @param requiredStats  At least one of these stat types must be present for this sprite to be generated
+   *
+   * @param name          Name relative to the mod
+   * @param requiredStats At least one of these stat types must be present for this sprite to be generated
    */
   protected void addTexture(String name, MaterialStatsId requiredStats) {
     addTexture(new ResourceLocation(modID, name), requiredStats);
@@ -85,8 +101,9 @@ public abstract class AbstractPartSpriteProvider {
 
   /**
    * Adds a given sprite to the list to generated
-   * @param name           Name relative to the mod
-   * @param requiredStats  At least one of these stat types must be present for this sprite to be generated
+   *
+   * @param name          Name relative to the mod
+   * @param requiredStats At least one of these stat types must be present for this sprite to be generated
    */
   protected void addSprite(String name, MaterialStatsId requiredStats) {
     addTexture(new ResourceLocation(modID, "item/tool/" + name), requiredStats);
@@ -94,46 +111,61 @@ public abstract class AbstractPartSpriteProvider {
 
   /**
    * Adds a sprite for a generic tool part from the parts folder
-   * @param name  Part name relative to item/tool/parts
-   * @param requiredStats  At least one of these stat types must be present for this part to be generated
+   *
+   * @param name          Part name relative to item/tool/parts
+   * @param requiredStats At least one of these stat types must be present for this part to be generated
    */
   protected void addPart(String name, MaterialStatsId requiredStats) {
     addSprite("parts/" + name, requiredStats);
   }
 
-  /** Adds a sprite requiring head stats */
+  /**
+   * Adds a sprite requiring head stats
+   */
   protected void addHead(String name) {
     addPart(name, HeadMaterialStats.ID);
   }
 
-  /** Adds a sprite requiring handle stats */
+  /**
+   * Adds a sprite requiring handle stats
+   */
   protected void addHandle(String name) {
     addPart(name, HandleMaterialStats.ID);
   }
 
-  /** Adds a sprite requiring extra stats */
+  /**
+   * Adds a sprite requiring extra stats
+   */
   protected void addBinding(String name) {
     addPart(name, StatlessMaterialStats.BINDING.getIdentifier());
   }
 
-  /** Adds a sprite requiring head stats */
+  /**
+   * Adds a sprite requiring head stats
+   */
   protected void addLimb(String name) {
     addPart(name, LimbMaterialStats.ID);
   }
 
-  /** Adds a sprite requiring head stats */
+  /**
+   * Adds a sprite requiring head stats
+   */
   protected void addBowstring(String name) {
     addPart(name, StatlessMaterialStats.BOWSTRING.getIdentifier());
   }
 
-  /** Create a builder for tool sprites */
+  /**
+   * Create a builder for tool sprites
+   */
   protected ToolSpriteBuilder buildTool(ResourceLocation name) {
     ToolSpriteBuilder builder = new ToolSpriteBuilder(name);
     toolSprites.add(builder);
     return builder;
   }
 
-  /** Create a builder for tool sprites relative to the default mod ID */
+  /**
+   * Create a builder for tool sprites relative to the default mod ID
+   */
   protected ToolSpriteBuilder buildTool(String name) {
     return buildTool(new ResourceLocation(modID, name));
   }
@@ -141,7 +173,9 @@ public abstract class AbstractPartSpriteProvider {
 
   /* For use in the data generator */
 
-  /** Runs {@link #addAllSpites()} if not yet run */
+  /**
+   * Runs {@link #addAllSpites()} if not yet run
+   */
   private void ensureSpritesAdded() {
     if (!added) {
       addAllSpites();
@@ -151,42 +185,61 @@ public abstract class AbstractPartSpriteProvider {
     }
   }
 
-  /** Gets all sprites produced by this provider */
+  /**
+   * Gets all sprites produced by this provider
+   */
   public List<PartSpriteInfo> getSprites() {
     ensureSpritesAdded();
     return sprites;
   }
 
-  /** Closes all open images and resets all caches */
+  /**
+   * Closes all open images and resets all caches
+   */
   public void cleanCache() {
     sprites.clear();
     added = false;
   }
 
-  /** Data class containing a sprite path, and different bases */
+  /**
+   * Data class containing a sprite path, and different bases
+   */
   @RequiredArgsConstructor
   public static class PartSpriteInfo {
-    /** Loadable instance */
+
+    /**
+     * Loadable instance
+     */
     public static final RecordLoadable<PartSpriteInfo> LOADABLE = RecordLoadable.create(
       Loadables.RESOURCE_LOCATION.requiredField("path", i -> i.path),
       MaterialStatsId.PARSER.requiredField("stat_type", i -> i.statType),
       BooleanLoadable.INSTANCE.defaultField("allow_animated", true, false, i -> i.allowAnimated),
       PartSpriteInfo::new);
-    /** Loadable for a list, since its the main usage of this */
+    /**
+     * Loadable for a list, since its the main usage of this
+     */
     public static final Loadable<List<PartSpriteInfo>> LIST_LOADABLE = LOADABLE.list(1);
 
-    /** Path to the base sprite */
+    /**
+     * Path to the base sprite
+     */
     @Getter
     private final ResourceLocation path;
-    /** Stat type of this part */
+    /**
+     * Stat type of this part
+     */
     @Getter
     private final MaterialStatsId statType;
     @Getter
     private final boolean allowAnimated;
-    /** Cache of fetched images for each sprite name */
-    private transient final Map<String,NativeImage> sprites = new HashMap<>();
+    /**
+     * Cache of fetched images for each sprite name
+     */
+    private transient final Map<String, NativeImage> sprites = new HashMap<>();
 
-    /** Gets the texture for the given fallback name, use empty string for the default */
+    /**
+     * Gets the texture for the given fallback name, use empty string for the default
+     */
     @Nullable
     public NativeImage getTexture(AbstractSpriteReader spriteReader, String name) {
       if (sprites.containsKey(name)) {
@@ -207,11 +260,14 @@ public abstract class AbstractPartSpriteProvider {
   @SuppressWarnings("UnusedReturnValue")
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   protected class ToolSpriteBuilder {
+
     private final ResourceLocation name;
     private final Map<String, MaterialStatsId> parts = new LinkedHashMap<>();
     private boolean hasLarge = false;
 
-    /** Adds a part to the tool */
+    /**
+     * Adds a part to the tool
+     */
     public ToolSpriteBuilder addPart(String name, MaterialStatsId statTypes) {
       parts.put(name, statTypes);
       return this;
@@ -228,60 +284,82 @@ public abstract class AbstractPartSpriteProvider {
       return this;
     }
 
-    /** Adds a sprite requiring head stats */
+    /**
+     * Adds a sprite requiring head stats
+     */
     public ToolSpriteBuilder addHead(String name) {
       return addPart(name, HeadMaterialStats.ID);
     }
 
-    /** Adds a breakable part requiring head stats */
+    /**
+     * Adds a breakable part requiring head stats
+     */
     public ToolSpriteBuilder addBreakableHead(String name) {
       return addBreakablePart(name, HeadMaterialStats.ID);
     }
 
-    /** Adds a sprite requiring handle stats */
+    /**
+     * Adds a sprite requiring handle stats
+     */
     public ToolSpriteBuilder addHandle(String name) {
       return addPart(name, HandleMaterialStats.ID);
     }
 
-    /** Adds a sprite requiring extra stats */
+    /**
+     * Adds a sprite requiring extra stats
+     */
     public ToolSpriteBuilder addBinding(String name) {
       return addPart(name, StatlessMaterialStats.BINDING.getIdentifier());
     }
 
-    /** Adds a sprite requiring limb stats */
+    /**
+     * Adds a sprite requiring limb stats
+     */
     public ToolSpriteBuilder addLimb(String name) {
       return addPart(name, LimbMaterialStats.ID);
     }
 
-    /** Adds a sprite requiring grip stats */
+    /**
+     * Adds a sprite requiring grip stats
+     */
     public ToolSpriteBuilder addGrip(String name) {
       return addPart(name, GripMaterialStats.ID);
     }
 
-    /** Adds a sprite requiring bowstring stats */
+    /**
+     * Adds a sprite requiring bowstring stats
+     */
     public ToolSpriteBuilder addBowstring(String name) {
       return addPart(name, StatlessMaterialStats.BOWSTRING.getIdentifier());
     }
 
-    /** Adds a breakable sprite requiring bowstring stats */
+    /**
+     * Adds a breakable sprite requiring bowstring stats
+     */
     public ToolSpriteBuilder addBreakableBowstring(String name) {
       return addBreakablePart(name, StatlessMaterialStats.BOWSTRING.getIdentifier());
     }
 
-    /** Adds sprites for large parts as well */
+    /**
+     * Adds sprites for large parts as well
+     */
     public ToolSpriteBuilder withLarge() {
       this.hasLarge = true;
       return this;
     }
 
-    /** Helper to add all parts for a size */
+    /**
+     * Helper to add all parts for a size
+     */
     private void addParts(String path) {
-      for (Entry<String,MaterialStatsId> entry : parts.entrySet()) {
+      for (Entry<String, MaterialStatsId> entry : parts.entrySet()) {
         addTexture(new ResourceLocation(name.getNamespace(), "item/tool/" + path + "/" + entry.getKey()), entry.getValue());
       }
     }
 
-    /** Adds all sprites into the list of sprites */
+    /**
+     * Adds all sprites into the list of sprites
+     */
     private void build() {
       addParts(name.getPath());
       if (hasLarge) {

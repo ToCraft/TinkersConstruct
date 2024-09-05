@@ -7,6 +7,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
@@ -37,8 +38,11 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
-/** Base logic for containers with tabs on the menu */
+/**
+ * Base logic for containers with tabs on the menu
+ */
 public class TabbedContainerMenu<TILE extends BlockEntity> extends TriggeringMultiModuleContainerMenu<TILE> {
+
   private static final TinkerBlockComp COMPARATOR = new TinkerBlockComp();
   public final List<Pair<BlockPos, BlockState>> stationBlocks;
 
@@ -102,7 +106,9 @@ public class TabbedContainerMenu<TILE extends BlockEntity> extends TriggeringMul
     this.stationBlocks.sort(COMPARATOR);
   }
 
-  /** Adds a side inventory to this container */
+  /**
+   * Adds a side inventory to this container
+   */
   protected void addChestSideInventory() {
     if (tile == null || inv == null) {
       return;
@@ -118,7 +124,7 @@ public class TabbedContainerMenu<TILE extends BlockEntity> extends TriggeringMul
       for (Direction dir : Direction.Plane.HORIZONTAL) {
         // skip any tables in this multiblock
         BlockPos neighbor = pos.relative(dir);
-        for (Pair<BlockPos,BlockState> tinkerPos : this.stationBlocks) {
+        for (Pair<BlockPos, BlockState> tinkerPos : this.stationBlocks) {
           if (tinkerPos.getLeft().equals(neighbor)) {
             continue horizontals;
           }
@@ -155,20 +161,22 @@ public class TabbedContainerMenu<TILE extends BlockEntity> extends TriggeringMul
 
   /**
    * Checks if the given tile entity is blacklisted
-   * @param tileEntity  Tile to check
-   * @return  True if blacklisted
+   *
+   * @param tileEntity Tile to check
+   * @return True if blacklisted
    */
   private static boolean isUsable(BlockEntity tileEntity, Player player) {
     // must not be blacklisted and be usable
-    return !RegistryHelper.contains(Registry.BLOCK_ENTITY_TYPE, TinkerTags.TileEntityTypes.CRAFTING_STATION_BLACKLIST, tileEntity.getType())
-           && (!(tileEntity instanceof Container) || ((Container)tileEntity).stillValid(player));
+    return !RegistryHelper.contains(BuiltInRegistries.BLOCK_ENTITY_TYPE, TinkerTags.TileEntityTypes.CRAFTING_STATION_BLACKLIST, tileEntity.getType())
+      && (!(tileEntity instanceof Container) || ((Container) tileEntity).stillValid(player));
   }
 
   /**
    * Checks to see if the given Tile Entity has an item handler that's compatible with the side inventory
    * The Tile Entity's item handler must be an instance of IItemHandlerModifiable
+   *
    * @param tileEntity Tile to check
-   * @param direction the given direction
+   * @param direction  the given direction
    * @return True if compatible.
    */
   private static boolean hasItemHandler(BlockEntity tileEntity, @Nullable Direction direction) {
@@ -215,8 +223,11 @@ public class TabbedContainerMenu<TILE extends BlockEntity> extends TriggeringMul
     }
   }
 
-  /** Logic for comparing two blocks based on position and state */
+  /**
+   * Logic for comparing two blocks based on position and state
+   */
   private static class TinkerBlockComp implements Comparator<Pair<BlockPos, BlockState>> {
+
     @Override
     public int compare(Pair<BlockPos, BlockState> o1, Pair<BlockPos, BlockState> o2) {
       // base location: lowest overall position
@@ -238,29 +249,38 @@ public class TabbedContainerMenu<TILE extends BlockEntity> extends TriggeringMul
     }
   }
 
-  /** Methods that only work on the client side */
+  /**
+   * Methods that only work on the client side
+   */
   private static class ClientOnly {
-    /** Updates the client's screen */
+
+    /**
+     * Updates the client's screen
+     */
     private static void clientScreenUpdate() {
       Screen screen = Minecraft.getInstance().screen;
       if (screen instanceof BaseTabbedScreen) {
-        ((BaseTabbedScreen<?,?>) screen).updateDisplay();
+        ((BaseTabbedScreen<?, ?>) screen).updateDisplay();
       }
     }
 
-    /** Sends the error message from the container to the client's screen */
+    /**
+     * Sends the error message from the container to the client's screen
+     */
     private static void clientError(MutableComponent errorMessage) {
       Screen screen = Minecraft.getInstance().screen;
       if (screen instanceof BaseTabbedScreen) {
-        ((BaseTabbedScreen<?,?>) screen).error(errorMessage);
+        ((BaseTabbedScreen<?, ?>) screen).error(errorMessage);
       }
     }
 
-    /** Sends the warning message from the container to the client's screen */
+    /**
+     * Sends the warning message from the container to the client's screen
+     */
     private static void clientWarning(MutableComponent warningMessage) {
       Screen screen = Minecraft.getInstance().screen;
       if (screen instanceof BaseTabbedScreen) {
-        ((BaseTabbedScreen<?,?>) screen).warning(warningMessage);
+        ((BaseTabbedScreen<?, ?>) screen).warning(warningMessage);
       }
     }
   }

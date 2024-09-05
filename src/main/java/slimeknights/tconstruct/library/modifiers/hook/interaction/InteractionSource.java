@@ -20,7 +20,9 @@ public enum InteractionSource {
    */
   ARMOR;
 
-  /** Translates the context to a slot for the sake of breaking animations */
+  /**
+   * Translates the context to a slot for the sake of breaking animations
+   */
   public EquipmentSlot getSlot(InteractionHand hand) {
     return switch (this) {
       case RIGHT_CLICK -> switch (hand) {
@@ -34,8 +36,9 @@ public enum InteractionSource {
 
   /**
    * Translates the equipment slot to an interaction source. Will never return {@link #LEFT_CLICK}.
-   * @param slot  Original slot
-   * @return  Proper interaction source
+   *
+   * @param slot Original slot
+   * @return Proper interaction source
    */
   public static InteractionSource fromEquipmentSlot(EquipmentSlot slot) {
     return switch (slot.getType()) {

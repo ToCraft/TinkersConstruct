@@ -28,6 +28,7 @@ import java.util.function.Consumer;
 
 @EventBusSubscriber(modid = TConstruct.MOD_ID, value = Dist.CLIENT, bus = Bus.MOD)
 public class CommonsClientEvents extends ClientEventBase {
+
   @SubscribeEvent
   static void addResourceListeners(RegisterClientReloadListenersEvent event) {
     DomainDisplayName.addResourceListener(event);
@@ -90,7 +91,9 @@ public class CommonsClientEvents extends ClientEventBase {
 
   private static Font unicodeRenderer;
 
-  /** Gets the unicode font renderer */
+  /**
+   * Gets the unicode font renderer
+   */
   public static Font unicodeFontRender() {
     if (unicodeRenderer == null)
       unicodeRenderer = new Font(rl -> {

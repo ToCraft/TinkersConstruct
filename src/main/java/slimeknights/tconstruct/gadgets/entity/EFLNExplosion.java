@@ -22,8 +22,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/** Custom explosion logic for EFLNs, more spherical and less random, plus works underwater */
+/**
+ * Custom explosion logic for EFLNs, more spherical and less random, plus works underwater
+ */
 public class EFLNExplosion extends Explosion {
+
   public EFLNExplosion(Level world, @Nullable Entity entity, @Nullable DamageSource damage, @Nullable ExplosionDamageCalculator context, double x, double y, double z, float size, boolean causesFire, BlockInteraction mode) {
     super(world, entity, damage, context, x, y, z, size, causesFire, mode);
   }
@@ -75,11 +78,11 @@ public class EFLNExplosion extends Explosion {
     List<Entity> list = this.level.getEntities(
       this.source,
       new AABB(Math.floor(this.x - diameter - 1),
-               Math.floor(this.y - diameter - 1),
-               Math.floor(this.z - diameter - 1),
-               Math.floor(this.x + diameter + 1),
-               Math.floor(this.y + diameter + 1),
-               Math.floor(this.z + diameter + 1)),
+        Math.floor(this.y - diameter - 1),
+        Math.floor(this.z - diameter - 1),
+        Math.floor(this.x + diameter + 1),
+        Math.floor(this.y + diameter + 1),
+        Math.floor(this.z + diameter + 1)),
       entity -> entity != null && !entity.ignoreExplosion() && !entity.isSpectator() && entity.isAlive());
     ForgeEventFactory.onExplosionDetonate(this.level, this, list, diameter);
 
@@ -97,7 +100,7 @@ public class EFLNExplosion extends Explosion {
         }
         if (length > 1.0E-4D) {
           double strength = (1.0D - distance) * getSeenPercent(center, entity);
-          entity.hurt(this.getDamageSource(), (int)((strength * strength + strength) / 2 * diameter + 1));
+          entity.hurt(this.getDamageSource(), (int) ((strength * strength + strength) / 2 * diameter + 1));
 
           // apply enchantment
           // TODO 1.19.4, this was broke, reportably fixed in 1.19.4+

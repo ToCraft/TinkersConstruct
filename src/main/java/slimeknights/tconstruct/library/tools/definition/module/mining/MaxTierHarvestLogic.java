@@ -17,6 +17,7 @@ import java.util.List;
  * TODO 1.20: rename to MaxTierModule
  */
 public record MaxTierHarvestLogic(Tier tier) implements MiningTierToolHook, ToolModule {
+
   public static final RecordLoadable<MaxTierHarvestLogic> LOADER = RecordLoadable.create(TinkerLoadables.TIER.requiredField("tier", MaxTierHarvestLogic::tier), MaxTierHarvestLogic::new);
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<MaxTierHarvestLogic>defaultHooks(ToolHooks.MINING_TIER);
 

@@ -8,6 +8,7 @@ import slimeknights.tconstruct.library.data.tinkering.AbstractMaterialTagProvide
 import slimeknights.tconstruct.tools.data.material.MaterialIds;
 
 public class MaterialTagProvider extends AbstractMaterialTagProvider {
+
   public MaterialTagProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
     super(generator, TConstruct.MOD_ID, existingFileHelper);
   }

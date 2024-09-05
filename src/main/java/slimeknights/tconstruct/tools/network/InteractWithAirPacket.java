@@ -12,24 +12,36 @@ import slimeknights.mantle.network.packet.IThreadsafePacket;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.tools.logic.InteractionHandler;
 
-/** Packet sent client to server when an empty hand interaction */
+/**
+ * Packet sent client to server when an empty hand interaction
+ */
 @RequiredArgsConstructor
 public enum InteractWithAirPacket implements IThreadsafePacket {
-  /** Right click with an empty main hand and a chestplate */
+  /**
+   * Right click with an empty main hand and a chestplate
+   */
   MAINHAND(InteractionHand.MAIN_HAND),
-  /** Right click with an empty off hand and a chestplate */
+  /**
+   * Right click with an empty off hand and a chestplate
+   */
   OFFHAND(InteractionHand.OFF_HAND),
-  /** Left click with a supported tool */
+  /**
+   * Left click with a supported tool
+   */
   LEFT_CLICK(InteractionHand.MAIN_HAND);
 
   private final InteractionHand hand;
 
-  /** Gets the packet for the given hand */
+  /**
+   * Gets the packet for the given hand
+   */
   public static InteractWithAirPacket fromChestplate(InteractionHand hand) {
     return hand == InteractionHand.OFF_HAND ? OFFHAND : MAINHAND;
   }
 
-  /** Gets the packet from the packet buffer */
+  /**
+   * Gets the packet from the packet buffer
+   */
   public static InteractWithAirPacket read(FriendlyByteBuf buffer) {
     return buffer.readEnum(InteractWithAirPacket.class);
   }

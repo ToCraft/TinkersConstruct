@@ -5,8 +5,13 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import slimeknights.mantle.block.entity.MantleBlockEntity;
 
-/** Interface for tinker chest TEs */
+/**
+ * Interface for tinker chest TEs
+ */
 public interface IChestItemHandler extends IItemHandlerModifiable, INBTSerializable<CompoundTag>, IScalingContainer {
-  /** Sets the parent of this block */
+
+  /**
+   * Sets the parent of this block
+   */
   void setParent(MantleBlockEntity parent);
 }

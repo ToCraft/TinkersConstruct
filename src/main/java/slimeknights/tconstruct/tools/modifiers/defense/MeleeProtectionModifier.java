@@ -11,6 +11,7 @@ import slimeknights.tconstruct.library.tools.capability.TinkerDataKeys;
 import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
 
 public class MeleeProtectionModifier extends AbstractProtectionModifier<ModifierMaxLevel> {
+
   private static final ComputableDataKey<ModifierMaxLevel> KEY = TConstruct.createKey("melee_protection", ModifierMaxLevel::new);
 
   public MeleeProtectionModifier() {

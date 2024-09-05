@@ -10,7 +10,9 @@ import slimeknights.mantle.recipe.data.AbstractRecipeBuilder;
 
 import java.util.function.Consumer;
 
-/** Builder for tinker station damaging recipes */
+/**
+ * Builder for tinker station damaging recipes
+ */
 @RequiredArgsConstructor(staticName = "damage")
 public class TinkerStationDamagingRecipeBuilder extends AbstractRecipeBuilder<TinkerStationDamagingRecipeBuilder> {
 
@@ -23,7 +25,7 @@ public class TinkerStationDamagingRecipeBuilder extends AbstractRecipeBuilder<Ti
     if (stacks.length == 0) {
       throw new IllegalStateException("Empty ingredient not allowed");
     }
-    save(consumer, Registry.ITEM.getKey(stacks[0].getItem()));
+    save(consumer, ForgeRegistries.ITEMS.getKey(stacks[0].getItem()));
   }
 
   @Override

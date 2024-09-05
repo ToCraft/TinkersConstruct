@@ -10,8 +10,11 @@ import slimeknights.tconstruct.library.modifiers.ModifierManager;
 
 import java.util.Iterator;
 
-/** Injects modifiers into a section based on a tag */
+/**
+ * Injects modifiers into a section based on a tag
+ */
 public class ModifierTagInjectorTransformer extends AbstractTagInjectingTransformer<Modifier> {
+
   public static final ModifierTagInjectorTransformer INSTANCE = new ModifierTagInjectorTransformer();
 
   private ModifierTagInjectorTransformer() {

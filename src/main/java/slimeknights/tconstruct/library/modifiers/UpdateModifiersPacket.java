@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableMap;
 import io.netty.handler.codec.DecoderException;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -19,28 +20,45 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-/** Packet to sync modifiers */
+/**
+ * Packet to sync modifiers
+ */
 @RequiredArgsConstructor
 public class UpdateModifiersPacket implements IThreadsafePacket {
-  /** Collection of all modifiers */
-  private final Map<ModifierId,Modifier> allModifiers;
-  /** Map of all modifier tags */
-  private final Map<TagKey<Modifier>,List<Modifier>> tags;
-  /** Collection of non-redirect modifiers */
+
+  /**
+   * Collection of all modifiers
+   */
+  private final Map<ModifierId, Modifier> allModifiers;
+  /**
+   * Map of all modifier tags
+   */
+  private final Map<TagKey<Modifier>, List<Modifier>> tags;
+  /**
+   * Collection of non-redirect modifiers
+   */
   private Collection<Modifier> modifiers;
-  /** Map of modifier redirect ID pairs */
-  private Map<ModifierId,ModifierId> redirects;
-  /** Map of enchantment to modifier pair */
-  private final Map<Enchantment,Modifier> enchantmentMap;
-  /** Collection of all enchantment tag mappings */
+  /**
+   * Map of modifier redirect ID pairs
+   */
+  private Map<ModifierId, ModifierId> redirects;
+  /**
+   * Map of enchantment to modifier pair
+   */
+  private final Map<Enchantment, Modifier> enchantmentMap;
+  /**
+   * Collection of all enchantment tag mappings
+   */
   private final Map<TagKey<Enchantment>, Modifier> enchantmentTagMappings;
 
-  /** Ensures both the modifiers and redirects lists are calculated, allows one packet to be used multiple times without redundant work */
+  /**
+   * Ensures both the modifiers and redirects lists are calculated, allows one packet to be used multiple times without redundant work
+   */
   private void ensureCalculated() {
     if (this.modifiers == null || this.redirects == null) {
       ImmutableList.Builder<Modifier> modifiers = ImmutableList.builder();
-      ImmutableMap.Builder<ModifierId,ModifierId> redirects = ImmutableMap.builder();
-      for (Entry<ModifierId,Modifier> entry : allModifiers.entrySet()) {
+      ImmutableMap.Builder<ModifierId, ModifierId> redirects = ImmutableMap.builder();
+      for (Entry<ModifierId, Modifier> entry : allModifiers.entrySet()) {
         ModifierId id = entry.getKey();
         Modifier mod = entry.getValue();
         if (id.equals(mod.getId())) {
@@ -54,8 +72,10 @@ public class UpdateModifiersPacket implements IThreadsafePacket {
     }
   }
 
-  /** Gets a modifier by the given ID, falling back to the map if needed */
-  private static Modifier getModifier(Map<ModifierId,Modifier> modifiers, ModifierId id) {
+  /**
+   * Gets a modifier by the given ID, falling back to the map if needed
+   */
+  private static Modifier getModifier(Map<ModifierId, Modifier> modifiers, ModifierId id) {
     Modifier modifier = ModifierManager.INSTANCE.getStatic(id);
     if (modifier == ModifierManager.INSTANCE.getDefaultValue()) {
       modifier = modifiers.get(id);
@@ -69,7 +89,7 @@ public class UpdateModifiersPacket implements IThreadsafePacket {
   public UpdateModifiersPacket(FriendlyByteBuf buffer) {
     // read in modifiers
     int size = buffer.readVarInt();
-    Map<ModifierId,Modifier> modifiers = new HashMap<>();
+    Map<ModifierId, Modifier> modifiers = new HashMap<>();
     for (int i = 0; i < size; i++) {
       ModifierId id = new ModifierId(buffer.readUtf(Short.MAX_VALUE));
       Modifier modifier = ModifierManager.MODIFIER_LOADERS.decode(buffer);
@@ -86,7 +106,7 @@ public class UpdateModifiersPacket implements IThreadsafePacket {
     this.tags = GenericTagUtil.decodeTags(buffer, ModifierManager.REGISTRY_KEY, id -> getModifier(modifiers, new ModifierId(id)));
 
     // read in enchantment to modifier mapping
-    ImmutableMap.Builder<Enchantment,Modifier> enchantmentBuilder = ImmutableMap.builder();
+    ImmutableMap.Builder<Enchantment, Modifier> enchantmentBuilder = ImmutableMap.builder();
     size = buffer.readVarInt();
     for (int i = 0; i < size; i++) {
       enchantmentBuilder.put(
@@ -98,7 +118,7 @@ public class UpdateModifiersPacket implements IThreadsafePacket {
     size = buffer.readVarInt();
     for (int i = 0; i < size; i++) {
       enchantmentTagBuilder.put(
-        TagKey.create(Registry.ENCHANTMENT_REGISTRY, buffer.readResourceLocation()),
+        TagKey.create(Registries.ENCHANTMENT, buffer.readResourceLocation()),
         getModifier(modifiers, new ModifierId(buffer.readResourceLocation())));
     }
     enchantmentTagMappings = enchantmentTagBuilder.build();
@@ -115,7 +135,7 @@ public class UpdateModifiersPacket implements IThreadsafePacket {
     }
     // write redirects
     buffer.writeVarInt(redirects.size());
-    for (Entry<ModifierId,ModifierId> entry : redirects.entrySet()) {
+    for (Entry<ModifierId, ModifierId> entry : redirects.entrySet()) {
       buffer.writeResourceLocation(entry.getKey());
       buffer.writeResourceLocation(entry.getValue());
     }
@@ -123,7 +143,7 @@ public class UpdateModifiersPacket implements IThreadsafePacket {
 
     // enchantment mapping
     buffer.writeVarInt(enchantmentMap.size());
-    for (Entry<Enchantment,Modifier> entry : enchantmentMap.entrySet()) {
+    for (Entry<Enchantment, Modifier> entry : enchantmentMap.entrySet()) {
       buffer.writeRegistryIdUnsafe(ForgeRegistries.ENCHANTMENTS, entry.getKey());
       buffer.writeResourceLocation(entry.getValue().getId());
     }

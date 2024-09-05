@@ -16,10 +16,11 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class NearsightedModifier extends Modifier implements EquipmentChangeModifierHook {
+
   private final ResourceLocation[] SLOT_KEYS = Arrays.stream(EquipmentSlot.values())
-                                                     .sorted(Comparator.comparing(EquipmentSlot::getFilterFlag))
-                                                     .map(slot -> TConstruct.getResource("nearsighted_" + slot.getName()))
-                                                     .toArray(ResourceLocation[]::new);
+    .sorted(Comparator.comparing(EquipmentSlot::getFilterFlag))
+    .map(slot -> TConstruct.getResource("nearsighted_" + slot.getName()))
+    .toArray(ResourceLocation[]::new);
 
   @Override
   protected void registerHooks(Builder hookBuilder) {

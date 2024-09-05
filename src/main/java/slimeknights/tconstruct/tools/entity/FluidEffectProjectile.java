@@ -29,6 +29,7 @@ import static slimeknights.tconstruct.library.tools.helper.ModifierUtil.asLiving
  * Projectile that applies a fluid effect on hit, styled after llama spit.
  */
 public class FluidEffectProjectile extends LlamaSpit {
+
   private static final EntityDataAccessor<FluidStack> FLUID = SynchedEntityData.defineId(FluidEffectProjectile.class, TinkerFluids.FLUID_DATA_SERIALIZER);
 
   @Setter

@@ -9,9 +9,12 @@ import net.minecraftforge.common.crafting.AbstractIngredient;
 
 import javax.annotation.Nullable;
 
-/** Ingredient that contains another ingredient nested inside */
+/**
+ * Ingredient that contains another ingredient nested inside
+ */
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class NestedIngredient extends AbstractIngredient {
+
   protected final Ingredient nested;
 
 

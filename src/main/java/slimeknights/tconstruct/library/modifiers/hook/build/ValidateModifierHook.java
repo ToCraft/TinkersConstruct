@@ -13,6 +13,7 @@ import java.util.Collection;
  * Hook used to validate modifier data after tool build. Can return an error message if the new state is not valid.
  */
 public interface ValidateModifierHook {
+
   /**
    * Called when modifiers or tool materials change to validate the tool. You are free to modify persistent data in this hook if needed.
    * This hook will not be called when a modifier is removed, to validate if a removal can be done, use {@link ModifierRemovalHook}.
@@ -23,15 +24,19 @@ public interface ValidateModifierHook {
    *   <li>{@link ModifierRemovalHook}: Called when the last level of a modifier is removed.</li>
    *   <li>{@link RawDataModifierHook#removeRawData(IToolStackView, Modifier, RestrictedCompoundTag)}: Called before the modifier is actually removed</li>
    * </ul>
-   * @param tool      Current tool instance
-   * @param modifier  Modifier being validated
-   * @return  null if no validation errors, text component with error message if there was an error
+   *
+   * @param tool     Current tool instance
+   * @param modifier Modifier being validated
+   * @return null if no validation errors, text component with error message if there was an error
    */
   @Nullable
   Component validate(IToolStackView tool, ModifierEntry modifier);
 
-  /** Merger that returns the first erroring submodule */
+  /**
+   * Merger that returns the first erroring submodule
+   */
   record AllMerger(Collection<ValidateModifierHook> modules) implements ValidateModifierHook {
+
     @Nullable
     @Override
     public Component validate(IToolStackView tool, ModifierEntry modifier) {

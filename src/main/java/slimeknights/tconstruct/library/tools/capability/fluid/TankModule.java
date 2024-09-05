@@ -33,11 +33,14 @@ import java.util.List;
 @SuppressWarnings("ClassCanBeRecord")  // Want to leave extendable
 @RequiredArgsConstructor
 public class TankModule implements HookProvider, FluidModifierHook, TooltipModifierHook, VolatileDataModifierHook, ValidateModifierHook, ModifierRemovalHook {
+
   private static final String FLUID_KEY = ToolTankHelper.CAPACITY_STAT.getTranslationKey() + ".fluid";
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<TankModule>defaultHooks(ToolFluidCapability.HOOK, ModifierHooks.TOOLTIP, ModifierHooks.VOLATILE_DATA, ModifierHooks.VALIDATE, ModifierHooks.REMOVE);
 
 
-  /** Helper handling updating fluids */
+  /**
+   * Helper handling updating fluids
+   */
   private final ToolTankHelper helper;
 
 
@@ -58,10 +61,10 @@ public class TankModule implements HookProvider, FluidModifierHook, TooltipModif
     FluidStack current = helper.getFluid(tool);
     if (!current.isEmpty()) {
       tooltip.add(Component.translatable(FLUID_KEY)
-                           .append(Component.translatable(TankCapacityStat.MB_FORMAT, Util.COMMA_FORMAT.format(current.getAmount()))
-                                            .append(" ")
-                                            .append(current.getDisplayName())
-                                            .withStyle(style -> style.withColor(ToolTankHelper.CAPACITY_STAT.getColor()))));
+        .append(Component.translatable(TankCapacityStat.MB_FORMAT, Util.COMMA_FORMAT.format(current.getAmount()))
+          .append(" ")
+          .append(current.getDisplayName())
+          .withStyle(style -> style.withColor(ToolTankHelper.CAPACITY_STAT.getColor()))));
     }
     tooltip.add(helper.getCapacityStat().formatValue(helper.getCapacity(tool)));
   }

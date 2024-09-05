@@ -13,6 +13,7 @@ import slimeknights.mantle.fluid.texture.ClientTextureFluidType;
 import java.util.function.Consumer;
 
 public class PotionFluidType extends FluidType {
+
   public PotionFluidType(Properties properties) {
     super(properties);
   }
@@ -35,7 +36,7 @@ public class PotionFluidType extends FluidType {
       /**
        * Gets the color, based on {@link PotionUtils#getColor(ItemStack)}
        * @param stack  Fluid stack instance
-       * @return  Color for the fluid
+       * @return Color for the fluid
        */
       @Override
       public int getTintColor(FluidStack stack) {

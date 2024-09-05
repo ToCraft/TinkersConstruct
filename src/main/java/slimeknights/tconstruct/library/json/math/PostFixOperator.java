@@ -7,7 +7,9 @@ import lombok.RequiredArgsConstructor;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.Mth;
 
-/** Represents 2 argument stack operations */
+/**
+ * Represents 2 argument stack operations
+ */
 @RequiredArgsConstructor
 public enum PostFixOperator implements StackOperation {
   ADD("+", Float::sum),
@@ -32,11 +34,13 @@ public enum PostFixOperator implements StackOperation {
     }
     return right / left;
   }),
-  POWER("^", (left, right) -> (float)Math.pow(left, right)),
-  POWER_FLIPPED("!^", (left, right) -> (float)Math.pow(right, left)),
+  POWER("^", (left, right) -> (float) Math.pow(left, right)),
+  POWER_FLIPPED("!^", (left, right) -> (float) Math.pow(right, left)),
   MIN("min", Math::min),
   MAX("max", Math::max),
-  /** Makes the top value on the stack 0 if its negative */
+  /**
+   * Makes the top value on the stack 0 if its negative
+   */
   NON_NEGATIVE("non-negative") {
     @Override
     public void perform(FloatStack stack, float[] variables) {
@@ -47,7 +51,9 @@ public enum PostFixOperator implements StackOperation {
       }
     }
   },
-  /** Clamps the value between 0 and 1 */
+  /**
+   * Clamps the value between 0 and 1
+   */
   PERCENT_CLAMP("percent_clamp") {
     @Override
     public void perform(FloatStack stack, float[] variables) {
@@ -84,7 +90,9 @@ public enum PostFixOperator implements StackOperation {
       stack.push(Mth.ceil(stack.popFloat()));
     }
   },
-  /** Swaps the top two elements */
+  /**
+   * Swaps the top two elements
+   */
   SWAP("swap") {
     @Override
     public void perform(FloatStack stack, float[] variables) {
@@ -94,7 +102,9 @@ public enum PostFixOperator implements StackOperation {
       stack.push(second);
     }
   },
-  /** Copies the top element on the stack */
+  /**
+   * Copies the top element on the stack
+   */
   DUPLICATE("duplicate") {
     @Override
     public void perform(FloatStack stack, float[] variables) {
@@ -102,14 +112,22 @@ public enum PostFixOperator implements StackOperation {
     }
   };
 
-  /** Index used for serializing value to the network */
+  /**
+   * Index used for serializing value to the network
+   */
   public static final int VALUE_INDEX = values().length;
-  /** Index used for serializing a variable to the network */
+  /**
+   * Index used for serializing a variable to the network
+   */
   public static final int VARIABLE_INDEX = VALUE_INDEX + 1;
 
-  /** Name of this operator when serialized into JSON */
+  /**
+   * Name of this operator when serialized into JSON
+   */
   private final String serialized;
-  /** Binary function to run, used for most operators */
+  /**
+   * Binary function to run, used for most operators
+   */
   private final BinaryOperator binary;
 
   PostFixOperator(String serialized) {
@@ -128,7 +146,9 @@ public enum PostFixOperator implements StackOperation {
 
   /* JSON and network */
 
-  /** Deserializes the operator from a character */
+  /**
+   * Deserializes the operator from a character
+   */
   public static PostFixOperator deserialize(String name) {
     for (PostFixOperator operator : PostFixOperator.values()) {
       if (operator.serialized.equals(name)) {
@@ -150,11 +170,16 @@ public enum PostFixOperator implements StackOperation {
     buffer.writeEnum(this);
   }
 
-  /** Interface for common operators */
+  /**
+   * Interface for common operators
+   */
   private interface BinaryOperator {
+
     BinaryOperator ZERO = (left, right) -> 0;
 
-    /** Applies this operator to the given values */
+    /**
+     * Applies this operator to the given values
+     */
     float apply(float left, float right);
   }
 }

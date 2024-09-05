@@ -22,13 +22,20 @@ import java.util.ListIterator;
  * Fluid handler implementation for the smeltery
  */
 public class SmelteryTank<T extends MantleBlockEntity & ISmelteryTankHandler> implements IFluidHandler {
+
   private final T parent;
-  /** Fluids actually contained in the tank */
+  /**
+   * Fluids actually contained in the tank
+   */
   @Getter
   private final List<FluidStack> fluids;
-  /** Maximum capacity of the smeltery */
+  /**
+   * Maximum capacity of the smeltery
+   */
   private int capacity;
-  /** Current amount of fluid in the tank */
+  /**
+   * Current amount of fluid in the tank
+   */
   @Getter
   private int contained;
 
@@ -55,7 +62,8 @@ public class SmelteryTank<T extends MantleBlockEntity & ISmelteryTankHandler> im
 
   /**
    * Updates the maximum tank capacity
-   * @param maxCapacity  New max capacity
+   *
+   * @param maxCapacity New max capacity
    */
   public void setCapacity(int maxCapacity) {
     this.capacity = maxCapacity;
@@ -63,7 +71,8 @@ public class SmelteryTank<T extends MantleBlockEntity & ISmelteryTankHandler> im
 
   /**
    * Gets the maximum amount of space in the smeltery tank
-   * @return  Tank capacity
+   *
+   * @return Tank capacity
    */
   public int getCapacity() {
     return capacity;
@@ -71,7 +80,8 @@ public class SmelteryTank<T extends MantleBlockEntity & ISmelteryTankHandler> im
 
   /**
    * Gets the amount of empty space in the tank
-   * @return  Remaining space in the tank
+   *
+   * @return Remaining space in the tank
    */
   public int getRemainingSpace() {
     if (contained >= capacity) {
@@ -121,7 +131,8 @@ public class SmelteryTank<T extends MantleBlockEntity & ISmelteryTankHandler> im
 
   /**
    * Moves the fluid with the passed index to the beginning/bottom of the fluid tank stack
-   * @param index  Index to move
+   *
+   * @param index Index to move
    */
   public void moveFluidToBottom(int index) {
     if (index < fluids.size()) {
@@ -250,7 +261,8 @@ public class SmelteryTank<T extends MantleBlockEntity & ISmelteryTankHandler> im
 
   /**
    * Updates fluids in the tank, typically from a packet
-   * @param fluids  List of fluids
+   *
+   * @param fluids List of fluids
    */
   public void setFluids(List<FluidStack> fluids) {
     FluidStack oldFirst = getFluidInTank(0);
@@ -263,7 +275,9 @@ public class SmelteryTank<T extends MantleBlockEntity & ISmelteryTankHandler> im
     }
   }
 
-  /** Writes the tank to NBT */
+  /**
+   * Writes the tank to NBT
+   */
   public CompoundTag write(CompoundTag nbt) {
     ListTag list = new ListTag();
     for (FluidStack liquid : fluids) {
@@ -276,7 +290,9 @@ public class SmelteryTank<T extends MantleBlockEntity & ISmelteryTankHandler> im
     return nbt;
   }
 
-  /** Reads the tank from NBT */
+  /**
+   * Reads the tank from NBT
+   */
   public void read(CompoundTag tag) {
     ListTag list = tag.getList(TAG_FLUIDS, Tag.TAG_COMPOUND);
     fluids.clear();

@@ -26,16 +26,21 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ModifierNBT {
 
-  /** Instance containing no modifiers */
+  /**
+   * Instance containing no modifiers
+   */
   public static final ModifierNBT EMPTY = new ModifierNBT(Collections.emptyList());
 
-  /** Sorted list of modifiers */
+  /**
+   * Sorted list of modifiers
+   */
   @Getter
   private final List<ModifierEntry> modifiers;
 
   /**
    * Checks if the NBT has no modifiers
-   * @return  True if there are no modifiers
+   *
+   * @return True if there are no modifiers
    */
   public boolean isEmpty() {
     return modifiers.isEmpty();
@@ -43,8 +48,9 @@ public class ModifierNBT {
 
   /**
    * Gets the modifier entry for a modifier
-   * @param modifier  Modifier to check
-   * @return  Modifier entry, or {@link ModifierEntry#EMPTY} if absent
+   *
+   * @param modifier Modifier to check
+   * @return Modifier entry, or {@link ModifierEntry#EMPTY} if absent
    */
   public ModifierEntry getEntry(ModifierId modifier) {
     for (ModifierEntry entry : modifiers) {
@@ -57,8 +63,9 @@ public class ModifierNBT {
 
   /**
    * Gets the level of a modifier
-   * @param modifier  Modifier to check
-   * @return  Modifier level, or 0 if modifier is missing
+   *
+   * @param modifier Modifier to check
+   * @return Modifier level, or 0 if modifier is missing
    */
   public int getLevel(ModifierId modifier) {
     return getEntry(modifier).getLevel();
@@ -70,9 +77,10 @@ public class ModifierNBT {
   /**
    * Creates a copy of this NBT with the given modifier added. Result will be unsorted
    * Do not use if you need to make multiple additions, use {@link ModifierNBT.Builder}
-   * @param modifier  Modifier
-   * @param level     Levels of the modifier to add
-   * @return  Instance with the given modifier
+   *
+   * @param modifier Modifier
+   * @param level    Levels of the modifier to add
+   * @return Instance with the given modifier
    */
   public ModifierNBT withModifier(ModifierId modifier, int level) {
     if (level <= 0) {
@@ -103,10 +111,11 @@ public class ModifierNBT {
   /**
    * Creates a copy of this NBT with the given incremental modifier amount added.
    * Do not use if you need to make multiple additions, use {@link ModifierNBT.Builder}
-   * @param modifier  Modifier
-   * @param amount    Increments to add
-   * @param needed    Increment scale to reach a full level
-   * @return  Instance with the given modifier
+   *
+   * @param modifier Modifier
+   * @param amount   Increments to add
+   * @param needed   Increment scale to reach a full level
+   * @return Instance with the given modifier
    */
   public ModifierNBT addAmount(ModifierId modifier, int amount, int needed) {
     // no need to do anything if amount or need is not at least 1
@@ -137,9 +146,10 @@ public class ModifierNBT {
 
   /**
    * Creates a copy of this NBT without the given modifier
-   * @param modifier  Modifier to remove
-   * @param level     Level to remove
-   * @return  ModifierNBT without the given modifier
+   *
+   * @param modifier Modifier to remove
+   * @param level    Level to remove
+   * @return ModifierNBT without the given modifier
    */
   public ModifierNBT withoutModifier(ModifierId modifier, int level) {
     if (level <= 0) {
@@ -167,13 +177,15 @@ public class ModifierNBT {
 
   /* NBT */
 
-  /** Re-adds the modifier list from NBT */
+  /**
+   * Re-adds the modifier list from NBT
+   */
   public static ModifierNBT readFromNBT(@Nullable Tag inbt) {
     if (inbt == null || inbt.getId() != Tag.TAG_LIST) {
       return EMPTY;
     }
 
-    ListTag listNBT = (ListTag)inbt;
+    ListTag listNBT = (ListTag) inbt;
     if (listNBT.getElementType() != Tag.TAG_COMPOUND) {
       return EMPTY;
     }
@@ -188,7 +200,9 @@ public class ModifierNBT {
     return new ModifierNBT(builder.build());
   }
 
-  /** Writes these modifiers to NBT */
+  /**
+   * Writes these modifiers to NBT
+   */
   public ListTag serializeToNBT() {
     ListTag list = new ListTag();
     for (ModifierEntry entry : modifiers) {
@@ -202,7 +216,8 @@ public class ModifierNBT {
 
   /**
    * Creates a new builder for modifier NBT
-   * @return  Builder instance
+   *
+   * @return Builder instance
    */
   public static Builder builder() {
     return new Builder();
@@ -212,7 +227,10 @@ public class ModifierNBT {
    * Builder class for creating a modifier list with multiple additions. Builder results will be sorted
    */
   public static class Builder implements ModifierBuilder {
-    /** Intentionally using modifiers to ensure they are resolved */
+
+    /**
+     * Intentionally using modifiers to ensure they are resolved
+     */
     private final Map<ModifierId, ModifierEntry> modifiers = new LinkedHashMap<>();
 
     private Builder() {}
@@ -235,9 +253,9 @@ public class ModifierNBT {
       // converts the map into a list of entries, priority sorted
       // note priority is negated so higher numbers go first
       List<ModifierEntry> list = modifiers.values().stream()
-                                          // sort on priority, falls back to the order they were added
-                                          .sorted(Comparator.comparingInt(entry -> -entry.getModifier().getPriority()))
-                                          .collect(Collectors.toList());
+        // sort on priority, falls back to the order they were added
+        .sorted(Comparator.comparingInt(entry -> -entry.getModifier().getPriority()))
+        .collect(Collectors.toList());
       // it's rare to see no modifiers, but no sense creating a new instance for that
       if (list.isEmpty()) {
         return EMPTY;

@@ -24,8 +24,11 @@ import slimeknights.tconstruct.library.modifiers.fluid.EffectLevel;
 import slimeknights.tconstruct.library.modifiers.fluid.FluidEffect;
 import slimeknights.tconstruct.library.modifiers.fluid.FluidEffectContext;
 
-/** Effect to place a block in using logic similar to block item placement. */
+/**
+ * Effect to place a block in using logic similar to block item placement.
+ */
 public record PlaceBlockFluidEffect(Block block) implements FluidEffect<FluidEffectContext.Block> {
+
   public static final RecordLoadable<PlaceBlockFluidEffect> LOADER = RecordLoadable.create(Loadables.BLOCK.requiredField("block", e -> e.block), PlaceBlockFluidEffect::new);
 
   @Override

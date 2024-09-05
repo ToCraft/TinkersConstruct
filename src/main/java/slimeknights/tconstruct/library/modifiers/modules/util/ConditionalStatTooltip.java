@@ -17,16 +17,29 @@ import slimeknights.tconstruct.library.tools.stat.INumericToolStat;
 import javax.annotation.Nullable;
 import java.util.List;
 
-/** Common tooltip logic for conditional stat modules */
+/**
+ * Common tooltip logic for conditional stat modules
+ */
 public interface ConditionalStatTooltip extends TooltipModifierHook, ConditionalModule<IToolStackView> {
-  /** Gets the holder condition for this module */
+
+  /**
+   * Gets the holder condition for this module
+   */
   IJsonPredicate<LivingEntity> holder();
-  /** Gets the stat for this tooltip */
+
+  /**
+   * Gets the stat for this tooltip
+   */
   INumericToolStat<?> stat();
-  /** If true, display as percent. If false, display as boost */
+
+  /**
+   * If true, display as percent. If false, display as boost
+   */
   boolean percent();
 
-  /** Computes the value to display in the tooltip */
+  /**
+   * Computes the value to display in the tooltip
+   */
   float computeTooltipValue(IToolStackView tool, ModifierEntry entry, @Nullable Player player);
 
   @Override

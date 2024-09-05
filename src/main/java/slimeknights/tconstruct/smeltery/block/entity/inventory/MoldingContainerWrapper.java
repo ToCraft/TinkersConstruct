@@ -7,13 +7,17 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import slimeknights.tconstruct.library.recipe.molding.IMoldingContainer;
 
-/** Wrapper around an item handler for the sake of use as a molding inventory */
+/**
+ * Wrapper around an item handler for the sake of use as a molding inventory
+ */
 @RequiredArgsConstructor
 public class MoldingContainerWrapper implements IMoldingContainer {
+
   private final IItemHandler handler;
   private final int slot;
 
-  @Getter @Setter
+  @Getter
+  @Setter
   private ItemStack pattern = ItemStack.EMPTY;
 
   @Override

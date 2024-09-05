@@ -5,8 +5,11 @@ import com.google.gson.JsonObject;
 import net.minecraft.network.FriendlyByteBuf;
 import slimeknights.mantle.data.loadable.Loadable;
 
-/** Wrapper around a loadable making it optionally load from an object key. If used with a record loadable, will condition on the object key being present */
+/**
+ * Wrapper around a loadable making it optionally load from an object key. If used with a record loadable, will condition on the object key being present
+ */
 public record OptionallyNestedLoadable<T>(Loadable<T> loadable, String objectKey) implements Loadable<T> {
+
   @Override
   public T convert(JsonElement element, String key) {
     if (element.isJsonObject()) {

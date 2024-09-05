@@ -20,6 +20,7 @@ import java.util.List;
  * Interface to implement for tools that also display in the tinker station
  */
 public interface ITinkerStationDisplay extends ItemLike {
+
   /**
    * The "title" displayed in the GUI
    */
@@ -29,9 +30,10 @@ public interface ITinkerStationDisplay extends ItemLike {
 
   /**
    * Returns the tool stat information for this tool
-   * @param tool         Tool to display
-   * @param tooltips     List of tooltips for display
-   * @param tooltipFlag  Determines the type of tooltip to display
+   *
+   * @param tool        Tool to display
+   * @param tooltips    List of tooltips for display
+   * @param tooltipFlag Determines the type of tooltip to display
    */
   default List<Component> getStatInformation(IToolStackView tool, @Nullable Player player, List<Component> tooltips, TooltipKey key, TooltipFlag tooltipFlag) {
     tooltips = TooltipUtil.getDefaultStats(tool, player, tooltips, key, tooltipFlag);
@@ -41,11 +43,12 @@ public interface ITinkerStationDisplay extends ItemLike {
 
   /**
    * Allows making attribute tooltips more efficient by not parsing the tool twice
-   * @param tool   Tool to check for attributes
-   * @param slot   Slot with attributes
-   * @return  Attribute map
+   *
+   * @param tool Tool to check for attributes
+   * @param slot Slot with attributes
+   * @return Attribute map
    */
-  default Multimap<Attribute,AttributeModifier> getAttributeModifiers(IToolStackView tool, EquipmentSlot slot) {
+  default Multimap<Attribute, AttributeModifier> getAttributeModifiers(IToolStackView tool, EquipmentSlot slot) {
     return ImmutableMultimap.of();
   }
 }

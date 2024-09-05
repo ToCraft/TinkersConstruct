@@ -13,7 +13,9 @@ import net.minecraft.world.inventory.InventoryMenu;
 import slimeknights.tconstruct.gadgets.entity.shuriken.ShurikenEntityBase;
 
 public class RenderShuriken extends EntityRenderer<ShurikenEntityBase> {
+
   private final ItemRenderer itemRenderer;
+
   public RenderShuriken(EntityRendererProvider.Context context) {
     super(context);
     this.itemRenderer = context.getItemRenderer();

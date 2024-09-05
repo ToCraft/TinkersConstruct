@@ -13,8 +13,11 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import java.util.List;
 import java.util.Set;
 
-/** Module that allows a tool to perform tool actions */
+/**
+ * Module that allows a tool to perform tool actions
+ */
 public record ToolActionsModule(Set<ToolAction> actions) implements ToolActionToolHook, ToolModule {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<ToolActionsModule>defaultHooks(ToolHooks.TOOL_ACTION);
   public static final RecordLoadable<ToolActionsModule> LOADER = RecordLoadable.create(Loadables.TOOL_ACTION.set().requiredField("tool_actions", ToolActionsModule::actions), ToolActionsModule::new);
 

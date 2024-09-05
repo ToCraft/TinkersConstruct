@@ -4,12 +4,12 @@ import com.mojang.datafixers.util.Function6;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
 import slimeknights.mantle.recipe.ingredient.SizedIngredient;
 import slimeknights.tconstruct.library.json.predicate.modifier.ModifierPredicate;
@@ -21,10 +21,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/** Builder for {@link ModifierRemovalRecipe} and {@link ExtractModifierRecipe} */
+/**
+ * Builder for {@link ModifierRemovalRecipe} and {@link ExtractModifierRecipe}
+ */
 @RequiredArgsConstructor(staticName = "removal")
 public class ModifierRemovalRecipeBuilder extends AbstractSizedIngredientRecipeBuilder<ModifierRemovalRecipeBuilder> {
-  private final Function6<ResourceLocation,String,SizedIngredient,List<SizedIngredient>,List<ItemStack>,IJsonPredicate<ModifierId>,ModifierRemovalRecipe> constructor;
+
+  private final Function6<ResourceLocation, String, SizedIngredient, List<SizedIngredient>, List<ItemStack>, IJsonPredicate<ModifierId>, ModifierRemovalRecipe> constructor;
   private final List<ItemStack> leftovers = new ArrayList<>();
   @Accessors(chain = true)
   @Setter
@@ -42,7 +45,9 @@ public class ModifierRemovalRecipeBuilder extends AbstractSizedIngredientRecipeB
     return removal(ExtractModifierRecipe::new);
   }
 
-  /** Sets the name from the given slot */
+  /**
+   * Sets the name from the given slot
+   */
   public ModifierRemovalRecipeBuilder slotName(SlotType slot) {
     return setName(slot.getName());
   }
@@ -79,7 +84,7 @@ public class ModifierRemovalRecipeBuilder extends AbstractSizedIngredientRecipeB
 
   @Override
   public void save(Consumer<FinishedRecipe> consumer) {
-    save(consumer, Registry.ITEM.getKey(leftovers.get(0).getItem()));
+    save(consumer, ForgeRegistries.ITEMS.getKey(leftovers.get(0).getItem()));
   }
 
   @Override

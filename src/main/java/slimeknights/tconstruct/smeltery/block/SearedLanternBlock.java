@@ -24,8 +24,10 @@ import slimeknights.tconstruct.smeltery.block.entity.component.TankBlockEntity.I
 import javax.annotation.Nullable;
 
 public class SearedLanternBlock extends LanternBlock implements ITankBlock, EntityBlock {
+
   @Getter
   private final int capacity;
+
   public SearedLanternBlock(Properties properties, int capacity) {
     super(properties);
     this.capacity = capacity;

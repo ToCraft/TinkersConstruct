@@ -13,6 +13,7 @@ import java.util.List;
  * Basic interface for all material stats.
  */
 public interface IMaterialStats {
+
   /**
    * Returns the stat type, which is used for parsing the stat and getting default stats.
    */
@@ -47,14 +48,16 @@ public interface IMaterialStats {
    * The indices of the lines must line up with the lines from getLocalizedInfo()!</br>
    * *
    * This is used to display properties of materials to the user.
+   *
    * @return a list of Text Components
    */
   List<Component> getLocalizedDescriptions();
 
   /**
    * Applies this stat to the builder
-   * @param builder  Builder instance
-   * @param scale    Scaling factor for applying these stats, used to allow multiple stats of the same type to exist on one tool
+   *
+   * @param builder Builder instance
+   * @param scale   Scaling factor for applying these stats, used to allow multiple stats of the same type to exist on one tool
    */
   void apply(ModifierStatsBuilder builder, float scale);
 
@@ -63,8 +66,9 @@ public interface IMaterialStats {
 
   /**
    * Helper to make a translation key for the given name
-   * @param name  name
-   * @return  Text component
+   *
+   * @param name name
+   * @return Text component
    */
   static String makeTooltipKey(ResourceLocation name) {
     return Util.makeTranslationKey("tool_stat", name);
@@ -72,8 +76,9 @@ public interface IMaterialStats {
 
   /**
    * Helper to make a text component for the given name
-   * @param name  name
-   * @return  Text component
+   *
+   * @param name name
+   * @return Text component
    */
   static Component makeTooltip(ResourceLocation name) {
     return Component.translatable(makeTooltipKey(name));

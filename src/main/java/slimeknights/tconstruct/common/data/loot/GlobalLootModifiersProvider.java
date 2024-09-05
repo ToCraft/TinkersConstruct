@@ -3,7 +3,6 @@ package slimeknights.tconstruct.common.data.loot;
 import net.minecraft.advancements.critereon.EntityEquipmentPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -40,6 +39,7 @@ import slimeknights.tconstruct.tools.modifiers.loot.HasModifierLootCondition;
 import slimeknights.tconstruct.tools.modifiers.loot.ModifierBonusLootFunction;
 
 public class GlobalLootModifiersProvider extends GlobalLootModifierProvider {
+
   public GlobalLootModifiersProvider(DataGenerator gen) {
     super(gen, TConstruct.MOD_ID);
   }
@@ -57,8 +57,8 @@ public class GlobalLootModifiersProvider extends GlobalLootModifierProvider {
     add("modifier_hook", ModifierLootModifier.builder()
       .addCondition(BlockOrEntityCondition.INSTANCE)
       .addCondition(MatchTool.toolMatches(lootCapableTool)
-                             .or(LootItemEntityPropertyCondition.hasProperties(EntityTarget.KILLER, EntityPredicate.Builder.entity().equipment(mainHand(lootCapableTool.build()))))
-                             .build())
+        .or(LootItemEntityPropertyCondition.hasProperties(EntityTarget.KILLER, EntityPredicate.Builder.entity().equipment(mainHand(lootCapableTool.build()))))
+        .build())
       .build());
 
     // chrysophilite modifier hook
@@ -84,13 +84,15 @@ public class GlobalLootModifiersProvider extends GlobalLootModifierProvider {
     }
   }
 
-  /** Adds lustrous for an ore */
+  /**
+   * Adds lustrous for an ore
+   */
   private void addLustrous(String name, boolean optional) {
-    TagKey<Item> nuggets = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation("forge", "nuggets/" + name));
+    TagKey<Item> nuggets = TagKey.create(Registries.ITEM, new ResourceLocation("forge", "nuggets/" + name));
     ResourceLocation ores = new ResourceLocation("forge", "ores/" + name);
     AddEntryLootModifier.Builder builder = AddEntryLootModifier.builder(TagPreferenceLootEntry.tagPreference(nuggets));
-    builder.addCondition(new BlockTagLootCondition(TagKey.create(Registry.BLOCK_REGISTRY, ores)))
-           .addCondition(new ContainsItemModifierLootCondition(Ingredient.of(TagKey.create(Registry.ITEM_REGISTRY, ores))).inverted());
+    builder.addCondition(new BlockTagLootCondition(TagKey.create(Registries.BLOCK, ores)))
+      .addCondition(new ContainsItemModifierLootCondition(Ingredient.of(TagKey.create(Registries.ITEM, ores))).inverted());
     if (optional) {
       builder.addCondition(new TagNotEmptyCondition<>(nuggets));
     }
@@ -101,7 +103,9 @@ public class GlobalLootModifiersProvider extends GlobalLootModifierProvider {
       .build());
   }
 
-  /** Creates an equipment predicate for mainhand */
+  /**
+   * Creates an equipment predicate for mainhand
+   */
   private static EntityEquipmentPredicate mainHand(ItemPredicate mainHand) {
     EntityEquipmentPredicate.Builder builder = EntityEquipmentPredicate.Builder.equipment();
     builder.mainhand = mainHand;

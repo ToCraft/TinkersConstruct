@@ -31,37 +31,61 @@ import java.util.List;
 import java.util.Optional;
 
 public class ModifierWorktableBlockEntity extends RetexturedTableBlockEntity implements ILazyCrafter {
-  /** Index containing the tool */
+
+  /**
+   * Index containing the tool
+   */
   public static final int TINKER_SLOT = 0;
-  /** First input slot index */
+  /**
+   * First input slot index
+   */
   public static final int INPUT_START = 1;
-  /** Number of input slots */
+  /**
+   * Number of input slots
+   */
   public static final int INPUT_COUNT = 2;
-  /** Title for the GUI */
+  /**
+   * Title for the GUI
+   */
   private static final Component NAME = TConstruct.makeTranslation("gui", "modifier_worktable");
 
-  /** Result inventory, lazy loads results */
+  /**
+   * Result inventory, lazy loads results
+   */
   @Getter
   private final LazyResultContainer craftingResult;
-  /** Crafting inventory for the recipe calls */
+  /**
+   * Crafting inventory for the recipe calls
+   */
   @Getter
   private final ModifierWorktableContainerWrapper inventoryWrapper;
 
-  /** If true, the last recipe is the current recipe. If false, no recipe was found. If null, have not tried recipe lookup */
+  /**
+   * If true, the last recipe is the current recipe. If false, no recipe was found. If null, have not tried recipe lookup
+   */
   private Boolean recipeValid;
-  /** Cache of the last recipe, may not be the current one */
+  /**
+   * Cache of the last recipe, may not be the current one
+   */
   @Nullable
   private IModifierWorktableRecipe lastRecipe;
   /* Current buttons to display */
   @Nonnull
   private List<ModifierEntry> buttons = Collections.emptyList();
-  /** Index of the currently selected modifier */
+  /**
+   * Index of the currently selected modifier
+   */
   private int selectedModifierIndex = -1;
 
-  /** Current result, may be modified again later */
-  @Nullable @Getter
+  /**
+   * Current result, may be modified again later
+   */
+  @Nullable
+  @Getter
   private LazyToolStack result = null;
-  /** Current message displayed on the screen */
+  /**
+   * Current message displayed on the screen
+   */
   @Getter
   private Component currentMessage = Component.empty();
 
@@ -75,7 +99,8 @@ public class ModifierWorktableBlockEntity extends RetexturedTableBlockEntity imp
 
   /**
    * Selects a modifier by index. Will fetch the buttons list if the index is non-negative
-   * @param index  New index
+   *
+   * @param index New index
    */
   public void selectModifier(int index) {
     result = null;
@@ -103,16 +128,20 @@ public class ModifierWorktableBlockEntity extends RetexturedTableBlockEntity imp
     // index is either not valid or the list is empty, so just clear
     selectedModifierIndex = -1;
     currentMessage = recipeValid == Boolean.TRUE && lastRecipe != null
-                     ? lastRecipe.getDescription(inventoryWrapper)
-                     : Component.empty();
+      ? lastRecipe.getDescription(inventoryWrapper)
+      : Component.empty();
   }
 
-  /** Gets the index of the selected pattern */
+  /**
+   * Gets the index of the selected pattern
+   */
   public int getSelectedIndex() {
     return selectedModifierIndex;
   }
 
-  /** Updates the current recipe */
+  /**
+   * Updates the current recipe
+   */
   public IModifierWorktableRecipe updateRecipe(IModifierWorktableRecipe recipe) {
     lastRecipe = recipe;
     recipeValid = true;
@@ -127,7 +156,9 @@ public class ModifierWorktableBlockEntity extends RetexturedTableBlockEntity imp
     return recipe;
   }
 
-  /** Gets the currently active recipe */
+  /**
+   * Gets the currently active recipe
+   */
   @Nullable
   public IModifierWorktableRecipe getCurrentRecipe() {
     if (recipeValid == Boolean.TRUE) {
@@ -154,7 +185,8 @@ public class ModifierWorktableBlockEntity extends RetexturedTableBlockEntity imp
 
   /**
    * Gets a map of all recipes for the current inputs
-   * @return  List of recipes for the current inputs
+   *
+   * @return List of recipes for the current inputs
    */
   public List<ModifierEntry> getCurrentButtons() {
     if (level == null) {
@@ -165,7 +197,9 @@ public class ModifierWorktableBlockEntity extends RetexturedTableBlockEntity imp
     return buttons;
   }
 
-  /** Called when a slot changes to clear the current result */
+  /**
+   * Called when a slot changes to clear the current result
+   */
   public void onSlotChanged(int slot) {
     this.inventoryWrapper.refreshInput(slot);
     this.recipeValid = null;

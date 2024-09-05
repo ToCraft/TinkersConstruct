@@ -10,11 +10,16 @@ import slimeknights.tconstruct.library.json.variable.VariableLoaderRegistry;
 
 import static slimeknights.mantle.data.registry.GenericLoaderRegistry.SingletonLoader.singleton;
 
-/** Variable that fetches a property from a block state */
+/**
+ * Variable that fetches a property from a block state
+ */
 public interface BlockVariable extends IHaveLoader {
+
   GenericLoaderRegistry<BlockVariable> LOADER = new VariableLoaderRegistry<>("Block Variable", Constant::new);
 
-  /** Gets a value from the given block state */
+  /**
+   * Gets a value from the given block state
+   */
   float getValue(BlockState state);
 
   @Override
@@ -22,7 +27,9 @@ public interface BlockVariable extends IHaveLoader {
 
   /* Singletons */
 
-  /** Creates a new singleton variable getter */
+  /**
+   * Creates a new singleton variable getter
+   */
   static BlockVariable simple(ToFloatFunction<BlockState> getter) {
     return singleton(loader -> new BlockVariable() {
       @Override
@@ -37,14 +44,21 @@ public interface BlockVariable extends IHaveLoader {
     });
   }
 
-  /** Gets the block's blast resistance */
+  /**
+   * Gets the block's blast resistance
+   */
   BlockVariable BLAST_RESISTANCE = simple(state -> state.getBlock().getExplosionResistance());
-  /** Gets the block's hardness */
+  /**
+   * Gets the block's hardness
+   */
   BlockVariable HARDNESS = simple(state -> state.getBlock().defaultDestroyTime());
 
 
-  /** Constant value instance for this object */
+  /**
+   * Constant value instance for this object
+   */
   record Constant(float value) implements VariableLoaderRegistry.ConstantFloat, BlockVariable {
+
     public static final RecordLoadable<Constant> LOADER = VariableLoaderRegistry.constantLoader(Constant::new);
 
     @Override

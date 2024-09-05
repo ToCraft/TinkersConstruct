@@ -24,9 +24,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-/** Generates the file that tells the part generator command which parts are needed for your tools */
+/**
+ * Generates the file that tells the part generator command which parts are needed for your tools
+ */
 public class GeneratorPartTextureJsonGenerator extends GenericDataProvider {
-  /** GSON adapter for material info deserializing */
+
+  /**
+   * GSON adapter for material info deserializing
+   */
   public static final Gson GSON = (new GsonBuilder())
     .registerTypeAdapter(ResourceLocation.class, new ResourceLocation.Serializer())
     .registerTypeAdapter(MaterialStatsId.class, new ResourceLocationSerializer<>(MaterialStatsId::new, TConstruct.MOD_ID))
@@ -37,7 +42,7 @@ public class GeneratorPartTextureJsonGenerator extends GenericDataProvider {
   private final String modId;
   private final AbstractPartSpriteProvider spriteProvider;
   private final StatOverride overrides;
-  
+
   public GeneratorPartTextureJsonGenerator(DataGenerator generator, String modId, AbstractPartSpriteProvider spriteProvider) {
     this(generator, modId, spriteProvider, StatOverride.EMPTY);
   }
@@ -65,16 +70,23 @@ public class GeneratorPartTextureJsonGenerator extends GenericDataProvider {
     return modId + " Command Part Texture JSON Generator";
   }
 
-  /** Class representing an override allowing a stat type to include a material withot modifying its render info */
-  public record StatOverride(Map<MaterialStatsId,Set<ResourceLocation>> overrides) {
+  /**
+   * Class representing an override allowing a stat type to include a material withot modifying its render info
+   */
+  public record StatOverride(Map<MaterialStatsId, Set<ResourceLocation>> overrides) {
+
     public static final StatOverride EMPTY = new StatOverride(Collections.emptyMap());
 
-    /** Checks if the material has the given override */
+    /**
+     * Checks if the material has the given override
+     */
     public boolean hasOverride(MaterialStatsId statsId, ResourceLocation location) {
       return overrides.getOrDefault(statsId, Collections.emptySet()).contains(location);
     }
 
-    /** Serializes this to JSON */
+    /**
+     * Serializes this to JSON
+     */
     public JsonObject serialize() {
       JsonObject json = new JsonObject();
       for (Entry<MaterialStatsId, Set<ResourceLocation>> entry : overrides.entrySet()) {
@@ -88,27 +100,34 @@ public class GeneratorPartTextureJsonGenerator extends GenericDataProvider {
     }
 
     public static class Builder {
-      private final Map<MaterialStatsId,ImmutableSet.Builder<ResourceLocation>> builder = new LinkedHashMap<>();
 
-      /** Adds a texture to the builder */
+      private final Map<MaterialStatsId, ImmutableSet.Builder<ResourceLocation>> builder = new LinkedHashMap<>();
+
+      /**
+       * Adds a texture to the builder
+       */
       public Builder add(MaterialStatsId statsId, ResourceLocation texture) {
         builder.computeIfAbsent(statsId, id -> ImmutableSet.builder()).add(texture);
         return this;
       }
 
-      /** Adds a texture to the builder */
+      /**
+       * Adds a texture to the builder
+       */
       public Builder addVariant(MaterialStatsId statsId, MaterialVariantId texture) {
         return add(statsId, texture.getLocation('_'));
       }
 
-      /** Builds the final instance */
+      /**
+       * Builds the final instance
+       */
       public StatOverride build() {
         if (builder.isEmpty()) {
           return EMPTY;
         }
 
-        ImmutableMap.Builder<MaterialStatsId,Set<ResourceLocation>> builder = ImmutableMap.builder();
-        for (Entry<MaterialStatsId,ImmutableSet.Builder<ResourceLocation>> entry : this.builder.entrySet()) {
+        ImmutableMap.Builder<MaterialStatsId, Set<ResourceLocation>> builder = ImmutableMap.builder();
+        for (Entry<MaterialStatsId, ImmutableSet.Builder<ResourceLocation>> entry : this.builder.entrySet()) {
           builder.put(entry.getKey(), entry.getValue().build());
         }
         return new StatOverride(builder.build());

@@ -22,9 +22,14 @@ import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 
 public class StrongBonesModifier extends NoLevelsModifier {
-  /** Key for modifiers that are boosted by drinking milk */
+
+  /**
+   * Key for modifiers that are boosted by drinking milk
+   */
   public static final TinkerDataKey<Integer> CALCIFIABLE = TConstruct.createKey("calcifable");
-  /** Module to add to any calcifiable modifiers */
+  /**
+   * Module to add to any calcifiable modifiers
+   */
   public static final ArmorLevelModule CALCIFIABLE_MODULE = new ArmorLevelModule(CALCIFIABLE, false, TinkerTags.Items.HELD_ARMOR);
 
   public StrongBonesModifier() {
@@ -55,7 +60,9 @@ public class StrongBonesModifier extends NoLevelsModifier {
     return didSomething;
   }
 
-  /** Called when you finish drinking milk */
+  /**
+   * Called when you finish drinking milk
+   */
   private static void onItemFinishUse(LivingEntityUseItemEvent.Finish event) {
     LivingEntity living = event.getEntity();
     if (event.getItem().getItem() == Items.MILK_BUCKET) {
@@ -66,11 +73,13 @@ public class StrongBonesModifier extends NoLevelsModifier {
 
   /* Spilling effect */
 
-  /** Singleton instance spilling effect */
+  /**
+   * Singleton instance spilling effect
+   */
   public static final FluidEffect<FluidEffectContext.Entity> FLUID_EFFECT = FluidEffect.simple((fluid, scale, context, action) -> {
     LivingEntity target = context.getLivingTarget();
     // while we could scale, doing it flat ensures we don't charge extra
-    if (target != null && drinkMilk(target, (int)(400 * scale.value()))) {
+    if (target != null && drinkMilk(target, (int) (400 * scale.value()))) {
       return scale.value();
     }
     return 0;

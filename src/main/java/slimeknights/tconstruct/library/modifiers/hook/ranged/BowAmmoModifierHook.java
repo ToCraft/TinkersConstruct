@@ -14,30 +14,37 @@ import slimeknights.tconstruct.tools.TinkerModifiers;
 
 import java.util.function.Predicate;
 
-/** Hook to find ammo on a bow.*/
+/**
+ * Hook to find ammo on a bow.
+ */
 public interface BowAmmoModifierHook {
-  /** Default instance */
+
+  /**
+   * Default instance
+   */
   BowAmmoModifierHook EMPTY = (tool, modifier, shooter, standardAmmo, ammoPredicate) -> ItemStack.EMPTY;
 
   /**
    * Finds the ammo. Does *not* modify the tool, this method may be called without loosing an arrow
-   * @param tool           Tool instance
-   * @param modifier       Modifier being called
-   * @param shooter        Entity using the bow
-   * @param standardAmmo   Arrows found in the player inventory. Will be empty if not found
-   * @param ammoPredicate  Predicate from the bow of types of ammo it accepts
-   * @return  Item stack of ammo found. If empty, will continue searching for ammo elsewhere until falling back to standard ammo
+   *
+   * @param tool          Tool instance
+   * @param modifier      Modifier being called
+   * @param shooter       Entity using the bow
+   * @param standardAmmo  Arrows found in the player inventory. Will be empty if not found
+   * @param ammoPredicate Predicate from the bow of types of ammo it accepts
+   * @return Item stack of ammo found. If empty, will continue searching for ammo elsewhere until falling back to standard ammo
    */
   ItemStack findAmmo(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, ItemStack standardAmmo, Predicate<ItemStack> ammoPredicate);
 
   /**
    * Callback to shrink the ammo returned by {@link #findAmmo(IToolStackView, ModifierEntry, LivingEntity, ItemStack, Predicate)}.
    * Will only be called on the modifier that returned non-empty in the previous method
-   * @param tool      Tool instance
-   * @param modifier  Modifier instance
-   * @param shooter   Entity shooting the ammo
-   * @param ammo      Ammo that was found by {@link #findAmmo(IToolStackView, ModifierEntry, LivingEntity, ItemStack, Predicate)}
-   * @param needed    Desired size, should always be less than the size of {@code ammo}
+   *
+   * @param tool     Tool instance
+   * @param modifier Modifier instance
+   * @param shooter  Entity shooting the ammo
+   * @param ammo     Ammo that was found by {@link #findAmmo(IToolStackView, ModifierEntry, LivingEntity, ItemStack, Predicate)}
+   * @param needed   Desired size, should always be less than the size of {@code ammo}
    */
   default void shrinkAmmo(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, ItemStack ammo, int needed) {
     ammo.shrink(needed);
@@ -45,11 +52,12 @@ public interface BowAmmoModifierHook {
 
   /**
    * Checks if the player has ammo for the given tool
-   * @param tool       Tool instance, for running modifier hooks
-   * @param bowStack   Bow stack instance, for standard ammo lookup
-   * @param player     Player instance, for standard ammo lookup
-   * @param predicate  Predicate for finding ammo in modifiers
-   * @return  True if there is ammo either on the player or on the modifiers
+   *
+   * @param tool      Tool instance, for running modifier hooks
+   * @param bowStack  Bow stack instance, for standard ammo lookup
+   * @param player    Player instance, for standard ammo lookup
+   * @param predicate Predicate for finding ammo in modifiers
+   * @return True if there is ammo either on the player or on the modifiers
    */
   static boolean hasAmmo(IToolStackView tool, ItemStack bowStack, Player player, Predicate<ItemStack> predicate) {
     // no need to ask the modifiers for ammo if we have it in the inventory, as there is no way for a modifier to say not to use ammo if its present
@@ -67,10 +75,11 @@ public interface BowAmmoModifierHook {
 
   /**
    * Looks for a matching item stack in the player inventory
-   * @param bow        Bow stack
-   * @param living     Entity to search
-   * @param predicate  Predicate for finding ammo in modifiers
-   * @return  Matching stack in the player inventory
+   *
+   * @param bow       Bow stack
+   * @param living    Entity to search
+   * @param predicate Predicate for finding ammo in modifiers
+   * @return Matching stack in the player inventory
    */
   private static ItemStack findMatchingAmmo(ItemStack bow, LivingEntity living, Predicate<ItemStack> predicate) {
     // start with hands, find one that matches but is not the bow
@@ -96,11 +105,12 @@ public interface BowAmmoModifierHook {
 
   /**
    * Finds ammo in the inventory, and consume it if not creative
-   * @param tool       Tool instance
-   * @param bow        Bow stack instance
-   * @param predicate  Predicate for valid ammo
-   * @param player     Player to search
-   * @return  Found ammo
+   *
+   * @param tool      Tool instance
+   * @param bow       Bow stack instance
+   * @param predicate Predicate for valid ammo
+   * @param player    Player to search
+   * @return Found ammo
    */
   static ItemStack findAmmo(IToolStackView tool, ItemStack bow, Player player, Predicate<ItemStack> predicate) {
     int projectilesDesired = 1 + (2 * tool.getModifierLevel(TinkerModifiers.multishot.getId()));

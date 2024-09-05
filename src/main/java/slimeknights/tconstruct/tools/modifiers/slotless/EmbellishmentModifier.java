@@ -21,6 +21,7 @@ import slimeknights.tconstruct.library.utils.RestrictedCompoundTag;
 import javax.annotation.Nullable;
 
 public class EmbellishmentModifier extends NoLevelsModifier implements ModifierRemovalHook, RawDataModifierHook {
+
   private static final String FORMAT_KEY = TConstruct.makeTranslationKey("modifier", "embellishment.formatted");
 
   @Override

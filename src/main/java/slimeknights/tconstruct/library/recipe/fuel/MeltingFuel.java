@@ -24,6 +24,7 @@ import java.util.List;
  * Recipe for a fuel for the melter or smeltery
  */
 public class MeltingFuel implements ICustomOutputRecipe<IFluidContainer> {
+
   public static final RecordLoadable<MeltingFuel> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(),
     LoadableRecipeSerializer.RECIPE_GROUP,
@@ -63,8 +64,9 @@ public class MeltingFuel implements ICustomOutputRecipe<IFluidContainer> {
 
   /**
    * Checks if this fuel matches the given fluid
-   * @param fluid  Fluid
-   * @return  True if matches
+   *
+   * @param fluid Fluid
+   * @return True if matches
    */
   public boolean matches(Fluid fluid) {
     return input.test(fluid);
@@ -72,8 +74,9 @@ public class MeltingFuel implements ICustomOutputRecipe<IFluidContainer> {
 
   /**
    * Gets the amount of fluid consumed for the given fluid
-   * @param inv  Inventory instance
-   * @return  Amount of fluid consumed
+   *
+   * @param inv Inventory instance
+   * @return Amount of fluid consumed
    */
   public int getAmount(IFluidContainer inv) {
     return getAmount(inv.getFluid());
@@ -81,8 +84,9 @@ public class MeltingFuel implements ICustomOutputRecipe<IFluidContainer> {
 
   /**
    * Gets the amount of fluid consumed for the given fluid
-   * @param fluid  Fluid
-   * @return  Amount of fluid consumed
+   *
+   * @param fluid Fluid
+   * @return Amount of fluid consumed
    */
   public int getAmount(Fluid fluid) {
     return input.getAmount(fluid);
@@ -90,7 +94,8 @@ public class MeltingFuel implements ICustomOutputRecipe<IFluidContainer> {
 
   /**
    * Gets a list of all valid input fluids for this recipe
-   * @return  Input fluids
+   *
+   * @return Input fluids
    */
   public List<FluidStack> getInputs() {
     return input.getFluids();

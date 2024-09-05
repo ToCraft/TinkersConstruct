@@ -21,22 +21,33 @@ import java.util.function.Consumer;
 @Accessors(chain = true)
 @RequiredArgsConstructor(staticName = "material")
 public class MaterialFluidRecipeBuilder extends AbstractRecipeBuilder<MaterialFluidRecipeBuilder> {
-  /** Output material ID */
+
+  /**
+   * Output material ID
+   */
   private final MaterialVariantId outputId;
-  /** Fluid used for casting */
+  /**
+   * Fluid used for casting
+   */
   @Setter
   private FluidIngredient fluid = FluidIngredient.EMPTY;
-  /** Temperature for cooling time calculations */
+  /**
+   * Temperature for cooling time calculations
+   */
   @Setter
   private int temperature = -1;
-  /** Material base for composite */
-  @Setter @Nullable
+  /**
+   * Material base for composite
+   */
+  @Setter
+  @Nullable
   private MaterialVariantId inputId;
 
   /**
    * Sets the fluid for this recipe, and cooling time if unset.
-   * @param fluidStack  Fluid input
-   * @return  Builder instance
+   *
+   * @param fluidStack Fluid input
+   * @return Builder instance
    */
   public MaterialFluidRecipeBuilder setFluidAndTemp(FluidStack fluidStack) {
     this.fluid = FluidIngredient.of(fluidStack);
@@ -48,8 +59,9 @@ public class MaterialFluidRecipeBuilder extends AbstractRecipeBuilder<MaterialFl
 
   /**
    * Sets the fluid for this recipe, and cooling time
-   * @param tagIn   Tag<Fluid> instance
-   * @param amount  Fluid amount
+   *
+   * @param tagIn  Tag<Fluid> instance
+   * @param amount Fluid amount
    */
   public MaterialFluidRecipeBuilder setFluid(TagKey<Fluid> tagIn, int amount) {
     setFluid(FluidIngredient.of(tagIn, amount));

@@ -9,10 +9,13 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
 import slimeknights.mantle.registration.object.IdAwareObject;
 
-/** Armor material that returns 0 except for name, since we bypass all the usages */
+/**
+ * Armor material that returns 0 except for name, since we bypass all the usages
+ */
 @RequiredArgsConstructor
 @Getter
 public class DummyArmorMaterial implements ArmorMaterial, IdAwareObject {
+
   private final ResourceLocation id;
   private final SoundEvent equipSound;
 

@@ -2,6 +2,7 @@ package slimeknights.tconstruct.library.recipe.alloying;
 
 import lombok.RequiredArgsConstructor;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -14,18 +15,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/** Builder for alloy recipes */
+/**
+ * Builder for alloy recipes
+ */
 @SuppressWarnings("unused")
 @RequiredArgsConstructor(staticName = "alloy")
 public class AlloyRecipeBuilder extends AbstractRecipeBuilder<AlloyRecipeBuilder> {
+
   private final FluidStack output;
   private final int temperature;
   private final List<FluidIngredient> inputs = new ArrayList<>();
 
   /**
    * Creates a new recipe producing the given fluid
-   * @param fluid   Fluid output
-   * @return  Builder instance
+   *
+   * @param fluid Fluid output
+   * @return Builder instance
    */
   public static AlloyRecipeBuilder alloy(FluidStack fluid) {
     return alloy(fluid, fluid.getFluid().getFluidType().getTemperature(fluid) - 300);
@@ -33,9 +38,10 @@ public class AlloyRecipeBuilder extends AbstractRecipeBuilder<AlloyRecipeBuilder
 
   /**
    * Creates a new recipe producing the given fluid
-   * @param fluid   Fluid output
-   * @param amount  Output amount
-   * @return  Builder instance
+   *
+   * @param fluid  Fluid output
+   * @param amount Output amount
+   * @return Builder instance
    */
   public static AlloyRecipeBuilder alloy(Fluid fluid, int amount) {
     return alloy(new FluidStack(fluid, amount));
@@ -46,8 +52,9 @@ public class AlloyRecipeBuilder extends AbstractRecipeBuilder<AlloyRecipeBuilder
 
   /**
    * Adds an input
-   * @param input  Input ingredient
-   * @return  Builder instance
+   *
+   * @param input Input ingredient
+   * @return Builder instance
    */
   public AlloyRecipeBuilder addInput(FluidIngredient input) {
     inputs.add(input);
@@ -56,8 +63,9 @@ public class AlloyRecipeBuilder extends AbstractRecipeBuilder<AlloyRecipeBuilder
 
   /**
    * Adds an input
-   * @param input  Input fluid
-   * @return  Builder instance
+   *
+   * @param input Input fluid
+   * @return Builder instance
    */
   public AlloyRecipeBuilder addInput(FluidStack input) {
     return addInput(FluidIngredient.of(input));
@@ -65,9 +73,10 @@ public class AlloyRecipeBuilder extends AbstractRecipeBuilder<AlloyRecipeBuilder
 
   /**
    * Adds an input
-   * @param fluid   Input fluid
-   * @param amount  Input amount
-   * @return  Builder instance
+   *
+   * @param fluid  Input fluid
+   * @param amount Input amount
+   * @return Builder instance
    */
   public AlloyRecipeBuilder addInput(Fluid fluid, int amount) {
     return addInput(FluidIngredient.of(new FluidStack(fluid, amount)));
@@ -75,9 +84,10 @@ public class AlloyRecipeBuilder extends AbstractRecipeBuilder<AlloyRecipeBuilder
 
   /**
    * Adds an input
-   * @param tag     Input tag
-   * @param amount  Input amount
-   * @return  Builder instance
+   *
+   * @param tag    Input tag
+   * @param amount Input amount
+   * @return Builder instance
    */
   public AlloyRecipeBuilder addInput(TagKey<Fluid> tag, int amount) {
     return addInput(FluidIngredient.of(tag, amount));
@@ -88,7 +98,7 @@ public class AlloyRecipeBuilder extends AbstractRecipeBuilder<AlloyRecipeBuilder
 
   @Override
   public void save(Consumer<FinishedRecipe> consumer) {
-    save(consumer, Registry.FLUID.getKey(output.getFluid()));
+    save(consumer, BuiltInRegistries.FLUID.getKey(output.getFluid()));
   }
 
   @Override

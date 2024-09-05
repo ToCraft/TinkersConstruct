@@ -8,6 +8,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class SoulGlassPaneBlock extends ClearGlassPaneBlock {
+
   public SoulGlassPaneBlock(Properties properties) {
     super(properties);
   }

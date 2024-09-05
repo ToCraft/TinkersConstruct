@@ -21,6 +21,7 @@ import java.util.function.Consumer;
 @RequiredArgsConstructor(staticName = "materialRecipe")
 @Accessors(chain = true)
 public class MaterialRecipeBuilder extends AbstractRecipeBuilder<MaterialRecipeBuilder> {
+
   private final MaterialVariantId material;
   private Ingredient ingredient = Ingredient.EMPTY;
   @Setter
@@ -32,8 +33,9 @@ public class MaterialRecipeBuilder extends AbstractRecipeBuilder<MaterialRecipeB
 
   /**
    * Sets the input ingredient for this material recipe
-   * @param tag  Tag input
-   * @return  Builder instance
+   *
+   * @param tag Tag input
+   * @return Builder instance
    */
   public MaterialRecipeBuilder setIngredient(TagKey<Item> tag) {
     return this.setIngredient(Ingredient.of(tag));
@@ -41,8 +43,9 @@ public class MaterialRecipeBuilder extends AbstractRecipeBuilder<MaterialRecipeB
 
   /**
    * Sets the input ingredient for this material recipe
-   * @param item  Item input
-   * @return  Builder instance
+   *
+   * @param item Item input
+   * @return Builder instance
    */
   public MaterialRecipeBuilder setIngredient(ItemLike item) {
     return this.setIngredient(Ingredient.of(item));
@@ -50,8 +53,9 @@ public class MaterialRecipeBuilder extends AbstractRecipeBuilder<MaterialRecipeB
 
   /**
    * Sets the input ingredient for this material recipe
-   * @param ingredient  Ingredient input
-   * @return  Builder instance
+   *
+   * @param ingredient Ingredient input
+   * @return Builder instance
    */
   public MaterialRecipeBuilder setIngredient(Ingredient ingredient) {
     this.ingredient = ingredient;

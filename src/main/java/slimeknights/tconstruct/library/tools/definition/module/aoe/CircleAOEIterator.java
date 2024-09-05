@@ -19,10 +19,12 @@ import java.util.function.Predicate;
 
 /**
  * AOE harvest logic that mines blocks in a circle
- * @param diameter  Diameter of the circle, starting from 1
- * @param is3D      If true, calculates AOE blocks in 3D instead of 2D
+ *
+ * @param diameter Diameter of the circle, starting from 1
+ * @param is3D     If true, calculates AOE blocks in 3D instead of 2D
  */
 public record CircleAOEIterator(int diameter, boolean is3D) implements AreaOfEffectIterator.Loadable {
+
   public static final RecordLoadable<CircleAOEIterator> LOADER = RecordLoadable.create(
     IntLoadable.FROM_ONE.defaultField("diameter", 1, true, CircleAOEIterator::diameter),
     BooleanLoadable.INSTANCE.defaultField("3D", false, CircleAOEIterator::is3D),
@@ -41,16 +43,15 @@ public record CircleAOEIterator(int diameter, boolean is3D) implements AreaOfEff
   }
 
   /**
-   *
-   * @param tool       Tool used for harvest
-   * @param stack      Item stack used for harvest (for vanilla hooks)
-   * @param world      World containing the block
-   * @param player     Player harvesting
-   * @param origin     Center of harvest
-   * @param sideHit    Block side hit
-   * @param diameter   Circle diameter
-   * @param matchType  Type of harvest being performed
-   * @return  List of block positions
+   * @param tool      Tool used for harvest
+   * @param stack     Item stack used for harvest (for vanilla hooks)
+   * @param world     World containing the block
+   * @param player    Player harvesting
+   * @param origin    Center of harvest
+   * @param sideHit   Block side hit
+   * @param diameter  Circle diameter
+   * @param matchType Type of harvest being performed
+   * @return List of block positions
    */
   public static Iterable<BlockPos> calculate(IToolStackView tool, ItemStack stack, Level world, Player player, BlockPos origin, Direction sideHit, int diameter, boolean is3D, AOEMatchType matchType) {
     // skip if no work
@@ -66,22 +67,28 @@ public record CircleAOEIterator(int diameter, boolean is3D) implements AreaOfEff
     return () -> new CircleIterator(origin, directions.width(), directions.height(), directions.traverseDown(), directions.depth(), radiusSq, diameter / 2, is3D, posPredicate);
   }
 
-  /** Iterator used for getting the blocks, secret is a circle is a rectangle */
+  /**
+   * Iterator used for getting the blocks, secret is a circle is a rectangle
+   */
   private static class CircleIterator extends RectangleIterator {
+
     /* Diameter of the area to mine, circular */
     private final int radiusSq;
+
     private CircleIterator(BlockPos origin, Direction widthDir, Direction heightDir, boolean traverseDown, Direction depthDir, int radiusSq, int extra, boolean is3D, Predicate<BlockPos> posPredicate) {
       super(origin, widthDir, extra, heightDir, extra, traverseDown, depthDir, is3D ? extra : 0, posPredicate);
       this.radiusSq = radiusSq;
     }
 
-    /** Gets the squared distance between the origin and the mutable position */
+    /**
+     * Gets the squared distance between the origin and the mutable position
+     */
     private int distanceSq() {
       // built in method returns a double, thats overkill
       int dx = origin.getX() - mutablePos.getX();
       int dy = origin.getY() - mutablePos.getY();
       int dz = origin.getZ() - mutablePos.getZ();
-      return dx*dx + dy*dy + dz*dz;
+      return dx * dx + dy * dy + dz * dz;
     }
 
     @Override

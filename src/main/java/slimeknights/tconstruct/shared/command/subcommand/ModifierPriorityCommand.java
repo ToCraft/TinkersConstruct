@@ -19,28 +19,33 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/** Command to list priorities for all modifiers */
+/**
+ * Command to list priorities for all modifiers
+ */
 public class ModifierPriorityCommand {
+
   private static final Component SUCCESS = Component.translatable("command.tconstruct.modifier_priority");
 
   /**
    * Registers this sub command with the root command
-   * @param subCommand  Command builder
+   *
+   * @param subCommand Command builder
    */
   public static void register(LiteralArgumentBuilder<CommandSourceStack> subCommand) {
     subCommand.requires(sender -> sender.hasPermission(MantleCommand.PERMISSION_EDIT_SPAWN))
-              // no argument: list all priorities
-              .executes(context -> run(context, false))
-              // argument: list only priorities of modifiers using that hook
-              .then(Commands.argument("modifier_hook", ModifierHookArgument.modifierHook())
-                            .executes(context -> run(context, true)));
+      // no argument: list all priorities
+      .executes(context -> run(context, false))
+      // argument: list only priorities of modifiers using that hook
+      .then(Commands.argument("modifier_hook", ModifierHookArgument.modifierHook())
+        .executes(context -> run(context, true)));
   }
 
   /**
    * Runs the command
-   * @param context   Command context
-   * @param filtered  If true, filter the modifiers based on the hook argument
-   * @return  Number of modifiers that are in the output table
+   *
+   * @param context  Command context
+   * @param filtered If true, filter the modifiers based on the hook argument
+   * @return Number of modifiers that are in the output table
    */
   private static int run(CommandContext<CommandSourceStack> context, boolean filtered) {
     // common table properties

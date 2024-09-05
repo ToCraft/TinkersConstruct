@@ -31,79 +31,98 @@ import java.util.function.Function;
  * Used since there is no easy way to handle multipart in the fluid cuboid system.
  */
 public class ChannelModel implements IUnbakedGeometry<ChannelModel> {
-	/** Model loader instance */
-	public static final IGeometryLoader<ChannelModel> LOADER = ChannelModel::deserialize;
 
-	/** Base block model */
-	private final SimpleBlockModel model;
-	/** Map of all fluid parts of the model */
-	private final Map<ChannelModelPart,FluidCuboid> fluids;
+  /**
+   * Model loader instance
+   */
+  public static final IGeometryLoader<ChannelModel> LOADER = ChannelModel::deserialize;
 
-	public ChannelModel(SimpleBlockModel model, Map<ChannelModelPart,FluidCuboid> fluids) {
-		this.model = model;
-		this.fluids = fluids;
-	}
+  /**
+   * Base block model
+   */
+  private final SimpleBlockModel model;
+  /**
+   * Map of all fluid parts of the model
+   */
+  private final Map<ChannelModelPart, FluidCuboid> fluids;
 
-	@Override
-	public Collection<Material> getMaterials(IGeometryBakingContext owner, Function<ResourceLocation,UnbakedModel> modelGetter, Set<Pair<String,String>> missingTextureErrors) {
-		return model.getMaterials(owner, modelGetter, missingTextureErrors);
-	}
+  public ChannelModel(SimpleBlockModel model, Map<ChannelModelPart, FluidCuboid> fluids) {
+    this.model = model;
+    this.fluids = fluids;
+  }
 
-	@Override
-	public BakedModel bake(IGeometryBakingContext owner, ModelBakery bakery, Function<Material,TextureAtlasSprite> spriteGetter, ModelState transform, ItemOverrides overrides, ResourceLocation location) {
-		BakedModel baked = this.model.bake(owner, bakery, spriteGetter, transform, overrides, location);
-		return new Baked(baked, this.fluids);
-	}
+  @Override
+  public Collection<Material> getMaterials(IGeometryBakingContext owner, Function<ResourceLocation, UnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors) {
+    return model.getMaterials(owner, modelGetter, missingTextureErrors);
+  }
 
-	/**
-	 * Baked model wrapper for cistern models
-	 */
-	public static class Baked extends BakedModelWrapper<BakedModel> {
-		private final Map<ChannelModelPart,FluidCuboid> fluids;
-		private Baked(BakedModel originalModel, Map<ChannelModelPart,FluidCuboid> fluids) {
-			super(originalModel);
-			this.fluids = fluids;
-		}
+  @Override
+  public BakedModel bake(IGeometryBakingContext owner, ModelBakery bakery, Function<Material, TextureAtlasSprite> spriteGetter, ModelState transform, ItemOverrides overrides, ResourceLocation location) {
+    BakedModel baked = this.model.bake(owner, bakery, spriteGetter, transform, overrides, location);
+    return new Baked(baked, this.fluids);
+  }
 
-		/** Gets the cuboid for flowing down */
-		public FluidCuboid getDownFluid() {
-			return this.fluids.get(ChannelModelPart.DOWN);
-		}
+  /**
+   * Baked model wrapper for cistern models
+   */
+  public static class Baked extends BakedModelWrapper<BakedModel> {
 
-		/**
-		 * Gets the cuboid for the center
-		 * @param flowing  If true, the center is flowing
-		 */
-		public FluidCuboid getCenterFluid(boolean flowing) {
-			return this.fluids.get(flowing ? ChannelModelPart.CENTER_FLOWING : ChannelModelPart.CENTER_STILL);
-		}
+    private final Map<ChannelModelPart, FluidCuboid> fluids;
 
-		/**
-		 * Gets the flowing fluid for the side
-		 * @return  Cuboid for center
-		 */
-		public FluidCuboid getSideFlow(boolean out) {
-			return this.fluids.get(out ? ChannelModelPart.SIDE_OUT : ChannelModelPart.SIDE_IN);
-		}
+    private Baked(BakedModel originalModel, Map<ChannelModelPart, FluidCuboid> fluids) {
+      super(originalModel);
+      this.fluids = fluids;
+    }
 
-		/** Gets the cuboid for still side */
-		public FluidCuboid getSideStill() {
-			return this.fluids.get(ChannelModelPart.SIDE_STILL);
-		}
+    /**
+     * Gets the cuboid for flowing down
+     */
+    public FluidCuboid getDownFluid() {
+      return this.fluids.get(ChannelModelPart.DOWN);
+    }
 
-		/** Gets the cuboid for side edge */
-		public FluidCuboid getSideEdge() {
-			return this.fluids.get(ChannelModelPart.SIDE_EDGE);
-		}
-	}
+    /**
+     * Gets the cuboid for the center
+     *
+     * @param flowing If true, the center is flowing
+     */
+    public FluidCuboid getCenterFluid(boolean flowing) {
+      return this.fluids.get(flowing ? ChannelModelPart.CENTER_FLOWING : ChannelModelPart.CENTER_STILL);
+    }
 
-	/** Deserializes a model from JSON */
+    /**
+     * Gets the flowing fluid for the side
+     *
+     * @return Cuboid for center
+     */
+    public FluidCuboid getSideFlow(boolean out) {
+      return this.fluids.get(out ? ChannelModelPart.SIDE_OUT : ChannelModelPart.SIDE_IN);
+    }
+
+    /**
+     * Gets the cuboid for still side
+     */
+    public FluidCuboid getSideStill() {
+      return this.fluids.get(ChannelModelPart.SIDE_STILL);
+    }
+
+    /**
+     * Gets the cuboid for side edge
+     */
+    public FluidCuboid getSideEdge() {
+      return this.fluids.get(ChannelModelPart.SIDE_EDGE);
+    }
+  }
+
+  /**
+   * Deserializes a model from JSON
+   */
   public static ChannelModel deserialize(JsonObject json, JsonDeserializationContext context) {
     SimpleBlockModel model = ColoredBlockModel.deserialize(json, context);
 
     // parse fluid cuboid for each side
     JsonObject fluidJson = GsonHelper.getAsJsonObject(json, "fluids");
-    Map<ChannelModelPart,FluidCuboid> fluids = new EnumMap<>(ChannelModelPart.class);
+    Map<ChannelModelPart, FluidCuboid> fluids = new EnumMap<>(ChannelModelPart.class);
     fluids.put(ChannelModelPart.DOWN, FluidCuboid.fromJson(GsonHelper.getAsJsonObject(fluidJson, "down")));
     // center
     JsonObject centerJson = GsonHelper.getAsJsonObject(fluidJson, "center");
@@ -119,14 +138,16 @@ public class ChannelModel implements IUnbakedGeometry<ChannelModel> {
     return new ChannelModel(model, fluids);
   }
 
-	/** Enum to hold each of the 7 relevant cuboids */
-	private enum ChannelModelPart {
-		CENTER_STILL,
-		CENTER_FLOWING,
-		SIDE_STILL,
-		SIDE_IN,
-		SIDE_OUT,
-		SIDE_EDGE,
-		DOWN;
-	}
+  /**
+   * Enum to hold each of the 7 relevant cuboids
+   */
+  private enum ChannelModelPart {
+    CENTER_STILL,
+    CENTER_FLOWING,
+    SIDE_STILL,
+    SIDE_IN,
+    SIDE_OUT,
+    SIDE_EDGE,
+    DOWN;
+  }
 }

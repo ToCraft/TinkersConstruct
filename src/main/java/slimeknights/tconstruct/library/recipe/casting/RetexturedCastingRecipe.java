@@ -12,9 +12,14 @@ import slimeknights.mantle.recipe.helper.LoadableRecipeSerializer;
 import slimeknights.mantle.recipe.helper.TypeAwareRecipeSerializer;
 import slimeknights.mantle.recipe.ingredient.FluidIngredient;
 
-/** Extension of item recipe that sets the result block to the input block */
+/**
+ * Extension of item recipe that sets the result block to the input block
+ */
 public class RetexturedCastingRecipe extends ItemCastingRecipe {
-  /** Loader instance */
+
+  /**
+   * Loader instance
+   */
   public static final RecordLoadable<RetexturedCastingRecipe> LOADER = RecordLoadable.create(
     LoadableRecipeSerializer.TYPED_SERIALIZER.requiredField(), ContextKey.ID.requiredField(),
     LoadableRecipeSerializer.RECIPE_GROUP, CAST_FIELD, FLUID_FIELD, RESULT_FIELD, COOLING_TIME_FIELD, CAST_CONSUMED_FIELD, SWITCH_SLOTS_FIELD,
@@ -27,7 +32,7 @@ public class RetexturedCastingRecipe extends ItemCastingRecipe {
   @Override
   public ItemStack assemble(ICastingContainer inv) {
     ItemStack result = getResultItem().copy();
-    if (inv.getStack().getItem() instanceof BlockItem blockItem ) {
+    if (inv.getStack().getItem() instanceof BlockItem blockItem) {
       return RetexturedBlockItem.setTexture(result, blockItem.getBlock());
     }
     return result;

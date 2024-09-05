@@ -29,27 +29,40 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 public class ArmorModelManager extends SimpleJsonResourceReloadListener {
-  /** Folder containing the logic */
+
+  /**
+   * Folder containing the logic
+   */
   public static final String FOLDER = "tinkering/armor_models";
 
-  /** Object representing parsed models */
+  /**
+   * Object representing parsed models
+   */
   public record ArmorModel(List<ArmorTextureSupplier> layers) {
-    /** Empty instace for fallback */
+
+    /**
+     * Empty instace for fallback
+     */
     public static final ArmorModel EMPTY = new ArmorModel(List.of());
-    /** Loadable for JSON parsing */
+    /**
+     * Loadable for JSON parsing
+     */
     public static final RecordLoadable<ArmorModel> LOADABLE = RecordLoadable.create(ArmorTextureSupplier.LOADER.list(1).requiredField("layers", ArmorModel::layers), ArmorModel::new);
   }
 
   /* Instance data */
   public static final ArmorModelManager INSTANCE = new ArmorModelManager();
-  /** Map of location to texture suppliers */
-  private Map<ResourceLocation,ArmorModel> models = Collections.emptyMap();
+  /**
+   * Map of location to texture suppliers
+   */
+  private Map<ResourceLocation, ArmorModel> models = Collections.emptyMap();
 
   private static final List<ArmorModelDispatcher> DISPATCHERS = new ArrayList<>();
 
   /**
    * Initializes this manager, registering it with the resource manager
-   * @param manager  Manager
+   *
+   * @param manager Manager
    */
   public static void init(RegisterClientReloadListenersEvent manager) {
     manager.registerReloadListener(INSTANCE);
@@ -60,15 +73,15 @@ public class ArmorModelManager extends SimpleJsonResourceReloadListener {
   }
 
   @Override
-  protected void apply(Map<ResourceLocation,JsonElement> splashList, ResourceManager manager, ProfilerFiller pProfiler) {
+  protected void apply(Map<ResourceLocation, JsonElement> splashList, ResourceManager manager, ProfilerFiller pProfiler) {
     long time = System.nanoTime();
 
     // first, load in all fluid textures, means we are allowed to reference them in fluid texture supplier constructors
     ArmorTextureSupplier.TEXTURE_VALIDATOR.onReloadSafe(manager);
 
     // load all models
-    ImmutableMap.Builder<ResourceLocation,ArmorModel> builder = ImmutableMap.builder();
-    for (Entry<ResourceLocation,JsonElement> entry : splashList.entrySet()) {
+    ImmutableMap.Builder<ResourceLocation, ArmorModel> builder = ImmutableMap.builder();
+    for (Entry<ResourceLocation, JsonElement> entry : splashList.entrySet()) {
       ResourceLocation key = entry.getKey();
       JsonElement element = entry.getValue();
       try {
@@ -94,13 +107,18 @@ public class ArmorModelManager extends SimpleJsonResourceReloadListener {
     TConstruct.LOG.info("Loaded {} armor models in {} ms", models.size(), (System.nanoTime() - time) / 1000000f);
   }
 
-  /** Gets the armor model for the given location. Location typically corresponds to armor material name */
+  /**
+   * Gets the armor model for the given location. Location typically corresponds to armor material name
+   */
   public ArmorModel getModel(ResourceLocation name) {
     return models.getOrDefault(name, ArmorModel.EMPTY);
   }
 
-  /** Helper to cache armor models in the item */
+  /**
+   * Helper to cache armor models in the item
+   */
   public abstract static class ArmorModelDispatcher implements IClientItemExtensions {
+
     private ArmorModel model;
 
     public ArmorModelDispatcher() {
@@ -113,7 +131,9 @@ public class ArmorModelManager extends SimpleJsonResourceReloadListener {
      */
     protected abstract ResourceLocation getName();
 
-    /** Fetches the model from the cache */
+    /**
+     * Fetches the model from the cache
+     */
     protected ArmorModel getModel(ItemStack stack) {
       if (model == null) {
         model = ArmorModelManager.INSTANCE.getModel(getName());

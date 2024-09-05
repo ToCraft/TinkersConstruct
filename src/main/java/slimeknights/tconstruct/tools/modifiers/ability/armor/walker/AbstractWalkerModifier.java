@@ -13,17 +13,21 @@ import slimeknights.tconstruct.library.module.ModuleHookMap.Builder;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 public abstract class AbstractWalkerModifier extends NoLevelsModifier implements ArmorWalkModifierHook {
-  /** Gets the radius for this modifier */
+
+  /**
+   * Gets the radius for this modifier
+   */
   protected abstract float getRadius(IToolStackView tool, int level);
 
   /**
    * Called to modify a position
-   * @param tool     Tool instance
-   * @param level    Modifier level
-   * @param living   Entity walking
-   * @param world    World being walked in
-   * @param target   Position target for effect
-   * @param mutable  Mutable position you can freely modify
+   *
+   * @param tool    Tool instance
+   * @param level   Modifier level
+   * @param living  Entity walking
+   * @param world   World being walked in
+   * @param target  Position target for effect
+   * @param mutable Mutable position you can freely modify
    */
   protected abstract void walkOn(IToolStackView tool, int level, LivingEntity living, Level world, BlockPos target, MutableBlockPos mutable);
 
@@ -45,7 +49,7 @@ public abstract class AbstractWalkerModifier extends NoLevelsModifier implements
       }
     }
   }
-  
+
   @Override
   protected void registerHooks(Builder hookBuilder) {
     super.registerHooks(hookBuilder);

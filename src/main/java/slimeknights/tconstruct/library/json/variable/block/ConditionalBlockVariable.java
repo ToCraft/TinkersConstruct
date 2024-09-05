@@ -9,7 +9,9 @@ import slimeknights.tconstruct.library.json.variable.ConditionalVariable;
 /**
  * Gets one of two block properties based on the condition
  */
-public record ConditionalBlockVariable(IJsonPredicate<BlockState> condition, BlockVariable ifTrue, BlockVariable ifFalse) implements BlockVariable, ConditionalVariable<IJsonPredicate<BlockState>,BlockVariable> {
+public record ConditionalBlockVariable(IJsonPredicate<BlockState> condition, BlockVariable ifTrue,
+                                       BlockVariable ifFalse) implements BlockVariable, ConditionalVariable<IJsonPredicate<BlockState>, BlockVariable> {
+
   public static final IGenericLoader<ConditionalBlockVariable> LOADER = ConditionalVariable.loadable(BlockPredicate.LOADER, BlockVariable.LOADER, ConditionalBlockVariable::new);
 
   @Override

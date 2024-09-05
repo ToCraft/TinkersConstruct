@@ -5,10 +5,14 @@ import lombok.RequiredArgsConstructor;
 import net.minecraft.world.item.Item;
 import slimeknights.tconstruct.library.tools.definition.ToolDefinition;
 
-/** Tool stack instance in a context that does not have a proper tool, used for projectils */
+/**
+ * Tool stack instance in a context that does not have a proper tool, used for projectils
+ */
 @SuppressWarnings("ClassCanBeRecord")
-@RequiredArgsConstructor @Getter
+@RequiredArgsConstructor
+@Getter
 public class DummyToolStack implements IToolStackView {
+
   private final Item item;
   private final ModifierNBT modifiers;
   private final ModDataNBT persistentData;

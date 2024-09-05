@@ -11,7 +11,8 @@ import slimeknights.tconstruct.smeltery.client.screen.HeatingStructureScreen;
 import slimeknights.tconstruct.tables.client.inventory.module.SideInventoryScreen;
 import slimeknights.tconstruct.tables.menu.module.SideInventoryContainer;
 
-public class HeatingStructureSideInventoryScreen extends SideInventoryScreen<HeatingStructureScreen,SideInventoryContainer<? extends HeatingStructureBlockEntity>> {
+public class HeatingStructureSideInventoryScreen extends SideInventoryScreen<HeatingStructureScreen, SideInventoryContainer<? extends HeatingStructureBlockEntity>> {
+
   public static final ResourceLocation SLOT_LOCATION = HeatingStructureScreen.BACKGROUND;
 
   // TODO: read from a proper place

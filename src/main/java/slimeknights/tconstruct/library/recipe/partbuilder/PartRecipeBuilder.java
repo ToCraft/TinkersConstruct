@@ -18,6 +18,7 @@ import java.util.function.Consumer;
 @Accessors(chain = true)
 @RequiredArgsConstructor(staticName = "partRecipe")
 public class PartRecipeBuilder extends AbstractRecipeBuilder<PartRecipeBuilder> {
+
   private final IMaterialItem output;
   private final int outputAmount;
   @Setter
@@ -29,8 +30,9 @@ public class PartRecipeBuilder extends AbstractRecipeBuilder<PartRecipeBuilder> 
 
   /**
    * Creates a new part recipe that outputs a single item
-   * @param output  Output item
-   * @return  Builder instance
+   *
+   * @param output Output item
+   * @return Builder instance
    */
   public static PartRecipeBuilder partRecipe(IMaterialItem output) {
     return partRecipe(output, 1);
@@ -38,7 +40,7 @@ public class PartRecipeBuilder extends AbstractRecipeBuilder<PartRecipeBuilder> 
 
   @Override
   public void save(Consumer<FinishedRecipe> consumerIn) {
-    this.save(consumerIn, Registry.ITEM.getKey(this.output.asItem()));
+    this.save(consumerIn, ForgeRegistries.ITEMS.getKey(this.output.asItem()));
   }
 
   @Override

@@ -8,11 +8,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class RayTracer {
+
   /**
    * Creates a BlockRayTraceEvent with a block mode of COLLIDER and whatever fluid mode you pass to it.
    * Uses the corrected player's starting vector and the corrected ending vector. (Takes into account the players eye level)
    *
-   * @param player the player
+   * @param player    the player
    * @param fluidMode the raytracing fluid mode
    * @return a BlockRayTraceResult
    */
@@ -24,7 +25,7 @@ public class RayTracer {
    * Creates a BlockRayTraceEvent with whatever block and fluid mode you pass to it.
    * Uses the corrected player's starting vector and the corrected ending vector. (Takes into account the players eye level)
    *
-   * @param player the player
+   * @param player    the player
    * @param blockMode the raytracing block mode to use
    * @param fluidMode the raytracing fluid mode to use
    * @return a BlockRayTraceResult
@@ -86,8 +87,10 @@ public class RayTracer {
   }
 
   private static class ClientOnly {
+
     /**
      * Gets the block reach distance from the client
+     *
      * @return the block reach distance from the client
      */
     private static double getBlockReachDistanceClient() {

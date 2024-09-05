@@ -21,6 +21,7 @@ import java.util.Map;
 @Getter
 @AllArgsConstructor
 public class UpdateMaterialStatsPacket implements IThreadsafePacket {
+
   private static final Logger log = Util.getLogger("NetworkSync");
 
   protected final Map<MaterialId, Collection<IMaterialStats>> materialToStats;
@@ -60,8 +61,9 @@ public class UpdateMaterialStatsPacket implements IThreadsafePacket {
 
   /**
    * Encodes a single material stat
-   * @param buffer  Buffer instance
-   * @param stat    Stat to encode
+   *
+   * @param buffer Buffer instance
+   * @param stat   Stat to encode
    */
   @SuppressWarnings("unchecked")
   private <T extends IMaterialStats> void encodeStat(FriendlyByteBuf buffer, IMaterialStats stat, MaterialStatType<T> type) {

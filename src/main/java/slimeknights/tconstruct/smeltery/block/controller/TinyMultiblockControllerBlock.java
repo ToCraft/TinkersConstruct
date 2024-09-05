@@ -17,6 +17,7 @@ import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.smeltery.block.entity.ITankBlockEntity;
 
 public abstract class TinyMultiblockControllerBlock extends ControllerBlock {
+
   private static final Component NO_FUEL_TANK = TConstruct.makeTranslation("multiblock", "tiny.no_fuel_tank");
 
   protected TinyMultiblockControllerBlock(Properties builder) {
@@ -30,8 +31,9 @@ public abstract class TinyMultiblockControllerBlock extends ControllerBlock {
 
   /**
    * Checks if the given state is a valid melter fuel source
-   * @param state  State instance
-   * @return  True if its a valid fuel source
+   *
+   * @param state State instance
+   * @return True if its a valid fuel source
    */
   protected boolean isValidFuelSource(BlockState state) {
     return state.is(TinkerTags.Blocks.FUEL_TANKS);

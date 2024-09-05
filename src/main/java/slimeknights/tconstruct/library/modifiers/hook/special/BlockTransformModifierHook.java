@@ -10,10 +10,14 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import java.util.Collection;
 
-/** Interface that allows another modifier to hook into the block transform modifier. */
+/**
+ * Interface that allows another modifier to hook into the block transform modifier.
+ */
 public interface BlockTransformModifierHook {
+
   /**
    * Called after a block is successfully transformed
+   *
    * @param tool     Tool used in transforming
    * @param modifier Entry calling this hook
    * @param context  Item use context, corresponds to the original targeted position
@@ -25,6 +29,7 @@ public interface BlockTransformModifierHook {
 
   /**
    * Runs the hook after transforming a block
+   *
    * @param tool    Tool instance, for running modifier hooks
    * @param context Item use context, corresponds to the original targeted position
    * @param state   State before it was transformed
@@ -37,8 +42,11 @@ public interface BlockTransformModifierHook {
     }
   }
 
-  /** Merger that runs all hooks */
+  /**
+   * Merger that runs all hooks
+   */
   record AllMerger(Collection<BlockTransformModifierHook> modules) implements BlockTransformModifierHook {
+
     @Override
     public void afterTransformBlock(IToolStackView tool, ModifierEntry modifier, UseOnContext context, BlockState state, BlockPos pos, ToolAction action) {
       for (BlockTransformModifierHook module : modules) {

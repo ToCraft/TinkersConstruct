@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TooltipShowcaseContent extends ContentShowcase {
+
   public static final transient ResourceLocation ID = TConstruct.getResource("showcase");
 
   public List<Component> tooltip = null;

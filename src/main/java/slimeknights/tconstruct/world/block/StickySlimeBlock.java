@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class StickySlimeBlock extends SlimeBlock {
 
   private final BiPredicate<BlockState, BlockState> stickyPredicate;
+
   public StickySlimeBlock(Properties properties, BiPredicate<BlockState, BlockState> stickyPredicate) {
     super(properties);
     this.stickyPredicate = stickyPredicate;

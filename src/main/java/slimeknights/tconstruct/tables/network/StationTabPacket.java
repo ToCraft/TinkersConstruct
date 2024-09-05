@@ -17,6 +17,7 @@ import slimeknights.tconstruct.tables.block.ITabbedBlock;
 
 @RequiredArgsConstructor
 public class StationTabPacket implements IThreadsafePacket {
+
   private final BlockPos pos;
 
   public StationTabPacket(FriendlyByteBuf buffer) {

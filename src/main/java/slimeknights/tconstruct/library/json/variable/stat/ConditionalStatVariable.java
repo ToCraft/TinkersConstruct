@@ -20,13 +20,15 @@ import javax.annotation.Nullable;
  * All conditional stat variables automatically work as mining speed variables due to the superset parameter space.
  */
 public interface ConditionalStatVariable extends IHaveLoader, MiningSpeedVariable {
+
   GenericLoaderRegistry<ConditionalStatVariable> LOADER = new VariableLoaderRegistry<>("Conditional Stat Variable", ConditionalStatVariable.Constant::new);
 
   /**
    * Gets the value for the given content
-   * @param tool    Tool context
-   * @param entity  Entity context, will be null in tooltips
-   * @return  Value for the given context
+   *
+   * @param tool   Tool context
+   * @param entity Entity context, will be null in tooltips
+   * @return Value for the given context
    */
   float getValue(IToolStackView tool, @Nullable LivingEntity entity);
 
@@ -36,15 +38,20 @@ public interface ConditionalStatVariable extends IHaveLoader, MiningSpeedVariabl
   }
 
 
-  /** Registers a variable with conditional stat and mining speed */
+  /**
+   * Registers a variable with conditional stat and mining speed
+   */
   static void register(ResourceLocation name, IGenericLoader<? extends ConditionalStatVariable> loader) {
     LOADER.register(name, loader);
     MiningSpeedVariable.LOADER.register(name, loader);
   }
 
 
-  /** Constant value instance for this object */
+  /**
+   * Constant value instance for this object
+   */
   record Constant(float value) implements VariableLoaderRegistry.ConstantFloat, ConditionalStatVariable {
+
     public static final RecordLoadable<ConditionalStatVariable.Constant> LOADER = VariableLoaderRegistry.constantLoader(ConditionalStatVariable.Constant::new);
 
     @Override

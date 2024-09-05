@@ -19,6 +19,7 @@ import slimeknights.tconstruct.smeltery.menu.MelterContainerMenu;
 import javax.annotation.Nullable;
 
 public class MelterScreen extends AbstractContainerScreen<MelterContainerMenu> implements IScreenWithFluidTank {
+
   private static final ResourceLocation BACKGROUND = TConstruct.getResource("textures/gui/melter.png");
   private static final ElementScreen SCALA = new ElementScreen(176, 0, 52, 52, 256, 256);
   private static final ElementScreen FUEL_SLOT = new ElementScreen(176, 52, 18, 36, 256, 256);
@@ -27,6 +28,7 @@ public class MelterScreen extends AbstractContainerScreen<MelterContainerMenu> i
   private final GuiMeltingModule melting;
   private final GuiFuelModule fuel;
   private final GuiTankModule tank;
+
   public MelterScreen(MelterContainerMenu container, Inventory inv, Component name) {
     super(container, inv, name);
     MelterBlockEntity te = container.getTile();

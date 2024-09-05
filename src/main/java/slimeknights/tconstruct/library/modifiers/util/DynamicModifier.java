@@ -9,28 +9,40 @@ import slimeknights.tconstruct.library.modifiers.ModifierManager.ModifiersLoaded
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-/** Supplier that will return a modifier from a datapack, automatically updating to the new instance when datapacks reload */
+/**
+ * Supplier that will return a modifier from a datapack, automatically updating to the new instance when datapacks reload
+ */
 public class DynamicModifier<T> extends LazyModifier {
-  /** List of all dynamic modifiers, to clear cache when modifiers reload */
+
+  /**
+   * List of all dynamic modifiers, to clear cache when modifiers reload
+   */
   private static final AtomicInteger INVALIDATION_COUNTER = new AtomicInteger(0);
 
-  /** Filter for the modifier, must be of this type to return */
+  /**
+   * Filter for the modifier, must be of this type to return
+   */
   private final Class<T> classFilter;
-  /** Last count of the invalation counter, if this is smaller than the global, time to invalidate */
+  /**
+   * Last count of the invalation counter, if this is smaller than the global, time to invalidate
+   */
   private int invalidationCount = -1;
 
   /**
    * Creates a new instance.
    * Creating an instance of a dynamic modifier is considered "expensive", as it will never be garbage collected
-   * @param id           Modifier ID to fetch
-   * @param classFilter  expected type for the modifier
+   *
+   * @param id          Modifier ID to fetch
+   * @param classFilter expected type for the modifier
    */
   public DynamicModifier(ModifierId id, Class<T> classFilter) {
     super(id);
     this.classFilter = classFilter;
   }
 
-  /** Returns true if this static modifier has a value. A return of true here means {@link #get()} will not throw */
+  /**
+   * Returns true if this static modifier has a value. A return of true here means {@link #get()} will not throw
+   */
   @Override
   public boolean isBound() {
     return super.isBound() && classFilter.isInstance(getUnchecked());
@@ -50,8 +62,9 @@ public class DynamicModifier<T> extends LazyModifier {
 
   /**
    * Fetches the modifier from the modifier manager. Should not be called until after the modifier registration event fires
-   * @return  Modifier instance
-   * @throws IllegalStateException  If the modifier manager has not registered modifiers, if the modifier ID was never registered or if the modifier is the wrong class type
+   *
+   * @return Modifier instance
+   * @throws IllegalStateException If the modifier manager has not registered modifiers, if the modifier ID was never registered or if the modifier is the wrong class type
    */
   @Override
   public Modifier get() {
@@ -68,7 +81,9 @@ public class DynamicModifier<T> extends LazyModifier {
     return result;
   }
 
-  /** Same as {@link #get()}, but fetches the modifier as the expected type. Separate to allow the expected type to be an interface */
+  /**
+   * Same as {@link #get()}, but fetches the modifier as the expected type. Separate to allow the expected type to be an interface
+   */
   public T asType() {
     return classFilter.cast(get());
   }
@@ -78,7 +93,9 @@ public class DynamicModifier<T> extends LazyModifier {
     return "DynamicModifier{" + id + ",filter=" + classFilter.getSimpleName() + '}';
   }
 
-  /** Registers event listeners with the forge event bus */
+  /**
+   * Registers event listeners with the forge event bus
+   */
   public static void init() {
     MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, false, ModifiersLoadedEvent.class, e -> INVALIDATION_COUNTER.incrementAndGet());
   }

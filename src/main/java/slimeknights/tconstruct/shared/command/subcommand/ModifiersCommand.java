@@ -24,37 +24,43 @@ import slimeknights.tconstruct.shared.command.argument.ModifierArgument;
 
 import java.util.List;
 
-/** Command to apply a modifier to a tool without using slots */
+/**
+ * Command to apply a modifier to a tool without using slots
+ */
 public class ModifiersCommand {
+
   private static final String ADD_SUCCESS = TConstruct.makeTranslationKey("command", "modifiers.success.add.single");
   private static final String ADD_SUCCESS_MULTIPLE = TConstruct.makeTranslationKey("command", "modifiers.success.add.multiple");
   private static final String REMOVE_SUCCESS = TConstruct.makeTranslationKey("command", "modifiers.success.remove.single");
   private static final String REMOVE_SUCCESS_MULTIPLE = TConstruct.makeTranslationKey("command", "modifiers.success.remove.multiple");
-  private static final DynamicCommandExceptionType MODIFIER_ERROR = new DynamicCommandExceptionType(error -> (Component)error);
+  private static final DynamicCommandExceptionType MODIFIER_ERROR = new DynamicCommandExceptionType(error -> (Component) error);
   private static final Dynamic2CommandExceptionType CANNOT_REMOVE = new Dynamic2CommandExceptionType((name, entity) -> TConstruct.makeTranslation("command", "modifiers.failure.too_few_levels", name, entity));
 
   /**
    * Registers this sub command with the root command
-   * @param subCommand  Command builder
+   *
+   * @param subCommand Command builder
    */
   public static void register(LiteralArgumentBuilder<CommandSourceStack> subCommand) {
     subCommand.requires(sender -> sender.hasPermission(MantleCommand.PERMISSION_GAME_COMMANDS))
-              .then(Commands.argument("targets", EntityArgument.entities())
-                            // modifiers <target> add <modifier> [<level>]
-                            .then(Commands.literal("add")
-                                          .then(Commands.argument("modifier", ModifierArgument.modifier())
-                                                        .executes(context -> add(context, 1))
-                                                        .then(Commands.argument("level", IntegerArgumentType.integer(1))
-                                                                      .executes(context -> add(context, IntegerArgumentType.getInteger(context, "level"))))))
-                            // modifiers <target> remove <modifier> [<level>]
-                            .then(Commands.literal("remove")
-                                          .then(Commands.argument("modifier", ModifierArgument.modifier())
-                                                        .executes(context -> remove(context, -1))
-                                                        .then(Commands.argument("level", IntegerArgumentType.integer(1))
-                                                                      .executes(context -> remove(context, IntegerArgumentType.getInteger(context, "level")))))));
+      .then(Commands.argument("targets", EntityArgument.entities())
+        // modifiers <target> add <modifier> [<level>]
+        .then(Commands.literal("add")
+          .then(Commands.argument("modifier", ModifierArgument.modifier())
+            .executes(context -> add(context, 1))
+            .then(Commands.argument("level", IntegerArgumentType.integer(1))
+              .executes(context -> add(context, IntegerArgumentType.getInteger(context, "level"))))))
+        // modifiers <target> remove <modifier> [<level>]
+        .then(Commands.literal("remove")
+          .then(Commands.argument("modifier", ModifierArgument.modifier())
+            .executes(context -> remove(context, -1))
+            .then(Commands.argument("level", IntegerArgumentType.integer(1))
+              .executes(context -> remove(context, IntegerArgumentType.getInteger(context, "level")))))));
   }
 
-  /** Runs the command */
+  /**
+   * Runs the command
+   */
   private static int add(CommandContext<CommandSourceStack> context, int level) throws CommandSyntaxException {
     Modifier modifier = ModifierArgument.getModifier(context, "modifier");
     List<LivingEntity> successes = HeldModifiableItemIterator.apply(context, (living, stack) -> {
@@ -84,7 +90,9 @@ public class ModifiersCommand {
     return size;
   }
 
-  /** Runs the command */
+  /**
+   * Runs the command
+   */
   private static int remove(CommandContext<CommandSourceStack> context, int level) throws CommandSyntaxException {
     Modifier modifier = ModifierArgument.getModifier(context, "modifier");
     MutableInt maxRemove = new MutableInt(1);

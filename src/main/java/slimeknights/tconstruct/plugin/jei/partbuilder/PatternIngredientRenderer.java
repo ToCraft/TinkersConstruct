@@ -20,6 +20,7 @@ import java.util.List;
 
 @NoArgsConstructor
 public class PatternIngredientRenderer implements IIngredientRenderer<Pattern> {
+
   public static final PatternIngredientRenderer INSTANCE = new PatternIngredientRenderer();
 
   @Override

@@ -20,13 +20,18 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
 
-/** Argument for a material type */
+/**
+ * Argument for a material type
+ */
 @RequiredArgsConstructor(staticName = "material")
 public class MaterialArgument implements ArgumentType<IMaterial> {
+
   private static final Collection<String> EXAMPLES = Arrays.asList("tconstruct:wood", "tconstruct:iron");
   private static final DynamicCommandExceptionType NOT_FOUND = new DynamicCommandExceptionType(name -> TConstruct.makeTranslation("command", "material.not_found", name));
 
-  /** Gets the tool stat from the context */
+  /**
+   * Gets the tool stat from the context
+   */
   public static IMaterial getMaterial(CommandContext<CommandSourceStack> context, String name) {
     return context.getArgument(name, IMaterial.class);
   }

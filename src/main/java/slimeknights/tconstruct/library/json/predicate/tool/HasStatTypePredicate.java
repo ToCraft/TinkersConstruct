@@ -11,10 +11,13 @@ import java.util.List;
 
 /**
  * Checks if the tool has the given stat type.
- * @param statType    Stat type to locate.
- * @param material    If non-null, requires the given material in that stat type. If null, materials are ignored.
+ *
+ * @param statType Stat type to locate.
+ * @param material If non-null, requires the given material in that stat type. If null, materials are ignored.
  */
-public record HasStatTypePredicate(MaterialStatsId statType, @Nullable MaterialVariantId material) implements ToolContextPredicate {
+public record HasStatTypePredicate(MaterialStatsId statType,
+                                   @Nullable MaterialVariantId material) implements ToolContextPredicate {
+
   public static final RecordLoadable<HasStatTypePredicate> LOADER = RecordLoadable.create(
     MaterialStatsId.PARSER.requiredField("stat_type", HasStatTypePredicate::statType),
     MaterialVariantId.LOADABLE.nullableField("material", HasStatTypePredicate::material),

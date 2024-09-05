@@ -23,16 +23,24 @@ import slimeknights.tconstruct.tools.TinkerModifiers;
  * Recipe to repair a specialized tool in the tinker station
  */
 public class ModifierMaterialRepairRecipe extends TinkerStationRepairRecipe implements IModifierMaterialRepairRecipe {
+
   public static final RecordLoadable<ModifierMaterialRepairRecipe> LOADER = RecordLoadable.create(ContextKey.ID.requiredField(), MODIFIER_FIELD, REPAIR_MATERIAL_FIELD, STAT_TYPE_FIELD, ModifierMaterialRepairRecipe::new);
 
-  /** Tool that can be repaired with this recipe */
+  /**
+   * Tool that can be repaired with this recipe
+   */
   @Getter
   private final ModifierId modifier;
-  /** ID of material used in repairing */
+  /**
+   * ID of material used in repairing
+   */
   private final LazyMaterial repairMaterial;
-  /** Stat type used for repairing, null means it will be fetched as the first available stat type */
+  /**
+   * Stat type used for repairing, null means it will be fetched as the first available stat type
+   */
   @Getter
   private MaterialStatsId statType;
+
   public ModifierMaterialRepairRecipe(ResourceLocation id, ModifierId modifier, MaterialId repairMaterialID, MaterialStatsId statType) {
     super(id);
     this.modifier = modifier;
@@ -69,7 +77,9 @@ public class ModifierMaterialRepairRecipe extends TinkerStationRepairRecipe impl
   }
 
 
-  /** Find the repair item in the inventory */
+  /**
+   * Find the repair item in the inventory
+   */
   private static boolean findMaterialItem(ITinkerStationContainer inv, MaterialId repairMaterial) {
     // validate that we have at least one material
     boolean found = false;

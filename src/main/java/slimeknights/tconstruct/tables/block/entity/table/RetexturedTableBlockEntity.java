@@ -18,13 +18,17 @@ import slimeknights.tconstruct.shared.block.entity.TableBlockEntity;
 import javax.annotation.Nonnull;
 
 public abstract class RetexturedTableBlockEntity extends TableBlockEntity implements IRetexturedBlockEntity {
+
   private static final String TAG_TEXTURE = "texture";
 
-  @Nonnull @Getter
+  @Nonnull
+  @Getter
   private Block texture = Blocks.AIR;
+
   public RetexturedTableBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, Component name, int size) {
     super(type, pos, state, name, size);
   }
+
   @Override
   public AABB getRenderBoundingBox() {
     return new AABB(worldPosition, worldPosition.offset(1, 2, 1));

@@ -35,20 +35,25 @@ import java.util.List;
  * Alloy recipe category for JEI display
  */
 public class AlloyRecipeCategory implements IRecipeCategory<AlloyRecipe> {
+
   private static final ResourceLocation BACKGROUND_LOC = TConstruct.getResource("textures/gui/jei/alloy.png");
   private static final Component TITLE = TConstruct.makeTranslation("jei", "alloy.title");
   private static final String KEY_TEMPERATURE = TConstruct.makeTranslationKey("jei", "temperature");
 
-  /** Tooltip for fluid inputs */
+  /**
+   * Tooltip for fluid inputs
+   */
   private static final IRecipeTooltipReplacement FLUID_TOOLTIP = (slot, list) ->
     slot.getDisplayedIngredient(ForgeTypes.FLUID_STACK).ifPresent(stack -> FluidTooltipHandler.appendMaterial(stack, list));
 
-  /** Tooltip for fuel display */
+  /**
+   * Tooltip for fuel display
+   */
   public static final IRecipeTooltipReplacement FUEL_TOOLTIP = (slot, tooltip) -> {
     //noinspection SimplifyOptionalCallChains  Not for int streams
     slot.getDisplayedIngredient(ForgeTypes.FLUID_STACK)
-        .ifPresent(stack -> MeltingFuelHandler.getTemperature(stack.getFluid())
-                                              .ifPresent(temperature -> tooltip.add(Component.translatable(KEY_TEMPERATURE, temperature).withStyle(ChatFormatting.GRAY))));
+      .ifPresent(stack -> MeltingFuelHandler.getTemperature(stack.getFluid())
+        .ifPresent(temperature -> tooltip.add(Component.translatable(KEY_TEMPERATURE, temperature).withStyle(ChatFormatting.GRAY))));
   };
 
   @Getter
@@ -87,15 +92,16 @@ public class AlloyRecipeCategory implements IRecipeCategory<AlloyRecipe> {
 
   /**
    * Draws a variable number of fluids
-   * @param builder      Builder
-   * @param role         Role of the set of fluids in the recipe
-   * @param x            X start
-   * @param y            Y start
-   * @param totalWidth   Total width
-   * @param height       Tank height
-   * @param fluids       List of fluids to draw
-   * @param minAmount    Minimum tank size
-   * @param tooltip      Tooltip callback
+   *
+   * @param builder    Builder
+   * @param role       Role of the set of fluids in the recipe
+   * @param x          X start
+   * @param y          Y start
+   * @param totalWidth Total width
+   * @param height     Tank height
+   * @param fluids     List of fluids to draw
+   * @param minAmount  Minimum tank size
+   * @param tooltip    Tooltip callback
    * @return Max amount based on fluids
    */
   public static int drawVariableFluids(IRecipeLayoutBuilder builder, RecipeIngredientRole role, int x, int y, int totalWidth, int height, List<List<FluidStack>> fluids, int minAmount, IRecipeSlotTooltipCallback tooltip) {
@@ -103,8 +109,8 @@ public class AlloyRecipeCategory implements IRecipeCategory<AlloyRecipe> {
     int maxAmount = minAmount;
     if (count > 0) {
       // first, find maximum used amount in the recipe so relations are correct
-      for(List<FluidStack> list : fluids) {
-        for(FluidStack input : list) {
+      for (List<FluidStack> list : fluids) {
+        for (FluidStack input : list) {
           if (input.getAmount() > maxAmount) {
             maxAmount = input.getAmount();
           }
@@ -116,16 +122,16 @@ public class AlloyRecipeCategory implements IRecipeCategory<AlloyRecipe> {
       for (int i = 0; i < max; i++) {
         int fluidX = x + i * w;
         builder.addSlot(role, fluidX, y)
-               .addTooltipCallback(tooltip)
-               .setFluidRenderer(maxAmount, false, w, height)
-               .addIngredients(ForgeTypes.FLUID_STACK, fluids.get(i));
+          .addTooltipCallback(tooltip)
+          .setFluidRenderer(maxAmount, false, w, height)
+          .addIngredients(ForgeTypes.FLUID_STACK, fluids.get(i));
       }
       // for the last, the width is the full remaining width
       int fluidX = x + max * w;
       builder.addSlot(role, fluidX, y)
-             .addTooltipCallback(tooltip)
-             .setFluidRenderer(maxAmount, false, totalWidth - (w * max), height)
-             .addIngredients(ForgeTypes.FLUID_STACK, fluids.get(max));
+        .addTooltipCallback(tooltip)
+        .setFluidRenderer(maxAmount, false, totalWidth - (w * max), height)
+        .addIngredients(ForgeTypes.FLUID_STACK, fluids.get(max));
     }
     return maxAmount;
   }
@@ -137,15 +143,15 @@ public class AlloyRecipeCategory implements IRecipeCategory<AlloyRecipe> {
 
     // output
     builder.addSlot(RecipeIngredientRole.OUTPUT, 137, 11)
-           .addTooltipCallback(FLUID_TOOLTIP)
-           .setFluidRenderer(maxAmount, false, 16, 32)
-           .addIngredient(ForgeTypes.FLUID_STACK, recipe.getOutput());
+      .addTooltipCallback(FLUID_TOOLTIP)
+      .setFluidRenderer(maxAmount, false, 16, 32)
+      .addIngredient(ForgeTypes.FLUID_STACK, recipe.getOutput());
 
     // fuel
     builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 94, 43)
-           .addTooltipCallback(FUEL_TOOLTIP)
-           .setFluidRenderer(1, false, 16, 16)
-           .setOverlay(tank, 0, 0)
-           .addIngredients(ForgeTypes.FLUID_STACK, MeltingFuelHandler.getUsableFuels(recipe.getTemperature()));
+      .addTooltipCallback(FUEL_TOOLTIP)
+      .setFluidRenderer(1, false, 16, 16)
+      .setOverlay(tank, 0, 0)
+      .addIngredients(ForgeTypes.FLUID_STACK, MeltingFuelHandler.getUsableFuels(recipe.getTemperature()));
   }
 }

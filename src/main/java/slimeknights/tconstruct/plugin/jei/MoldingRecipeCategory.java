@@ -25,8 +25,11 @@ import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import java.util.Collections;
 import java.util.List;
 
-/** Recipe category for molding casts */
+/**
+ * Recipe category for molding casts
+ */
 public class MoldingRecipeCategory implements IRecipeCategory<MoldingRecipe> {
+
   private static final ResourceLocation BACKGROUND_LOC = TConstruct.getResource("textures/gui/jei/casting.png");
   private static final Component TITLE = TConstruct.makeTranslation("jei", "molding.title");
   private static final Component TOOLTIP_PATTERN_CONSUMED = Component.translatable(TConstruct.makeTranslationKey("jei", "molding.pattern_consumed"));
@@ -36,6 +39,7 @@ public class MoldingRecipeCategory implements IRecipeCategory<MoldingRecipe> {
   @Getter
   private final IDrawable icon;
   private final IDrawable table, basin, downArrow, upArrow;
+
   public MoldingRecipeCategory(IGuiHelper helper) {
     this.background = helper.createDrawable(BACKGROUND_LOC, 0, 55, 70, 57);
     this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(TinkerSmeltery.blankSandCast.get()));
@@ -72,7 +76,7 @@ public class MoldingRecipeCategory implements IRecipeCategory<MoldingRecipe> {
 
   @Override
   public List<Component> getTooltipStrings(MoldingRecipe recipe, IRecipeSlotsView slots, double mouseX, double mouseY) {
-    if (recipe.isPatternConsumed() && !recipe.getPattern().isEmpty() && GuiUtil.isHovered((int)mouseX, (int)mouseY, 50, 7, 18, 18)) {
+    if (recipe.isPatternConsumed() && !recipe.getPattern().isEmpty() && GuiUtil.isHovered((int) mouseX, (int) mouseY, 50, 7, 18, 18)) {
       return Collections.singletonList(TOOLTIP_PATTERN_CONSUMED);
     }
     return Collections.emptyList();

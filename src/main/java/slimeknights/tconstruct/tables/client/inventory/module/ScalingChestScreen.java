@@ -15,13 +15,15 @@ import slimeknights.tconstruct.tables.block.entity.inventory.IScalingContainer;
 import java.util.Optional;
 
 public class ScalingChestScreen<T extends BlockEntity> extends DynamicContainerScreen {
+
   private final IScalingContainer scaling;
+
   public ScalingChestScreen(MultiModuleScreen<?> parent, BaseContainerMenu<T> container, Inventory playerInventory, Component title) {
     super(parent, container, playerInventory, title);
     BlockEntity tile = container.getTile();
     IItemHandler handler = Optional.ofNullable(tile)
-                                   .flatMap(t -> t.getCapability(ForgeCapabilities.ITEM_HANDLER).resolve())
-                                   .orElse(EmptyItemHandler.INSTANCE);
+      .flatMap(t -> t.getCapability(ForgeCapabilities.ITEM_HANDLER).resolve())
+      .orElse(EmptyItemHandler.INSTANCE);
     this.scaling = handler instanceof IScalingContainer ? (IScalingContainer) handler : handler::getSlots;
     this.slotCount = scaling.getVisualSize();
     this.sliderActive = true;

@@ -25,6 +25,7 @@ import java.util.List;
  */
 @AllArgsConstructor
 public final class MaterialTraitsModule implements ToolTraitHook, ToolModule {
+
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<MaterialTraitsModule>defaultHooks(ToolHooks.TOOL_TRAITS);
   private static final MaterialStatsId MISSING = new MaterialStatsId(TConstruct.MOD_ID, "missingno");
   public static final RecordLoadable<MaterialTraitsModule> LOADER = RecordLoadable.create(
@@ -50,7 +51,9 @@ public final class MaterialTraitsModule implements ToolTraitHook, ToolModule {
     return DEFAULT_HOOKS;
   }
 
-  /** Gets the stat type given the definition */
+  /**
+   * Gets the stat type given the definition
+   */
   private MaterialStatsId getStatType(ToolDefinition definition) {
     if (statType == null) {
       // we can cache it given this module lives in the definition, so its not going to be given a different definition later

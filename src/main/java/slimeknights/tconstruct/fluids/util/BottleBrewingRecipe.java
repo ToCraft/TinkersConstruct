@@ -6,10 +6,14 @@ import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.brewing.BrewingRecipe;
 
-/** Recipe for transforming a bottle, depending on a vanilla brewing recipe to get the ingredient */
+/**
+ * Recipe for transforming a bottle, depending on a vanilla brewing recipe to get the ingredient
+ */
 public class BottleBrewingRecipe extends BrewingRecipe {
+
   private final Item from;
   private final Item to;
+
   public BottleBrewingRecipe(Ingredient input, Item from, Item to, ItemStack output) {
     super(input, Ingredient.EMPTY, output);
     this.from = from;

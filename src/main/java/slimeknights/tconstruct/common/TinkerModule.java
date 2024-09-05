@@ -1,8 +1,8 @@
 package slimeknights.tconstruct.common;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
@@ -50,6 +50,7 @@ import java.util.function.Supplier;
  * Contains base helpers for all Tinker modules. Should not be extended by other mods, this is only for internal usage.
  */
 public abstract class TinkerModule {
+
   protected TinkerModule() {
     TConstruct.sealTinkersClass(this, "TinkerModule", "This is a bug with the mod containing that class, they should create their own deferred registers.");
   }
@@ -59,7 +60,7 @@ public abstract class TinkerModule {
   protected static final BlockDeferredRegisterExtension BLOCKS = new BlockDeferredRegisterExtension(TConstruct.MOD_ID);
   protected static final ItemDeferredRegisterExtension ITEMS = new ItemDeferredRegisterExtension(TConstruct.MOD_ID);
   protected static final FluidDeferredRegister FLUIDS = new FluidDeferredRegister(TConstruct.MOD_ID);
-  protected static final EnumDeferredRegister<MobEffect> MOB_EFFECTS = new EnumDeferredRegister<>(Registry.MOB_EFFECT_REGISTRY, TConstruct.MOD_ID);
+  protected static final EnumDeferredRegister<MobEffect> MOB_EFFECTS = new EnumDeferredRegister<>(Registries.MOB_EFFECT, TConstruct.MOD_ID);
   protected static final SynchronizedDeferredRegister<ParticleType<?>> PARTICLE_TYPES = SynchronizedDeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, TConstruct.MOD_ID);
   protected static final SynchronizedDeferredRegister<EntityDataSerializer<?>> DATA_SERIALIZERS = SynchronizedDeferredRegister.create(Keys.ENTITY_DATA_SERIALIZERS, TConstruct.MOD_ID);
   // gameplay instances
@@ -69,27 +70,31 @@ public abstract class TinkerModule {
   // datapacks
   protected static final SynchronizedDeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = SynchronizedDeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, TConstruct.MOD_ID);
   protected static final SynchronizedDeferredRegister<Codec<? extends IGlobalLootModifier>> GLOBAL_LOOT_MODIFIERS = SynchronizedDeferredRegister.create(Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, TConstruct.MOD_ID);
-  protected static final SynchronizedDeferredRegister<LootItemConditionType> LOOT_CONDITIONS = SynchronizedDeferredRegister.create(Registry.LOOT_ITEM_REGISTRY, TConstruct.MOD_ID);
-  protected static final SynchronizedDeferredRegister<LootItemFunctionType> LOOT_FUNCTIONS = SynchronizedDeferredRegister.create(Registry.LOOT_FUNCTION_REGISTRY, TConstruct.MOD_ID);
-  protected static final SynchronizedDeferredRegister<LootPoolEntryType> LOOT_ENTRIES = SynchronizedDeferredRegister.create(Registry.LOOT_ENTRY_REGISTRY, TConstruct.MOD_ID);
+  protected static final SynchronizedDeferredRegister<LootItemConditionType> LOOT_CONDITIONS = SynchronizedDeferredRegister.create(Registries.LOOT_CONDITION_TYPE, TConstruct.MOD_ID);
+  protected static final SynchronizedDeferredRegister<LootItemFunctionType> LOOT_FUNCTIONS = SynchronizedDeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, TConstruct.MOD_ID);
+  protected static final SynchronizedDeferredRegister<LootPoolEntryType> LOOT_ENTRIES = SynchronizedDeferredRegister.create(Registries.LOOT_POOL_ENTRY_TYPE, TConstruct.MOD_ID);
   // worldgen
   protected static final PlacedFeatureDeferredRegister PLACED_FEATURES = new PlacedFeatureDeferredRegister(TConstruct.MOD_ID);
   protected static final ConfiguredFeatureDeferredRegister CONFIGURED_FEATURES = new ConfiguredFeatureDeferredRegister(TConstruct.MOD_ID);
   //
 
-  /** Creative tab for items that do not fit in another tab */
+  /**
+   * Creative tab for items that do not fit in another tab
+   */
   @SuppressWarnings("WeakerAccess")
   public static final CreativeModeTab TAB_GENERAL = new SupplierCreativeTab(TConstruct.MOD_ID, "general", () -> new ItemStack(TinkerCommons.slimeball.get(SlimeType.SKY)));
 
   // base item properties
   protected static final Item.Properties HIDDEN_PROPS = new Item.Properties();
   protected static final Item.Properties GENERAL_PROPS = new Item.Properties().tab(TAB_GENERAL);
-  protected static final Function<Block,? extends BlockItem> HIDDEN_BLOCK_ITEM = (b) -> new BlockItem(b, HIDDEN_PROPS);
-  protected static final Function<Block,? extends BlockItem> GENERAL_BLOCK_ITEM = (b) -> new BlockItem(b, GENERAL_PROPS);
-  protected static final Function<Block,? extends BlockItem> GENERAL_TOOLTIP_BLOCK_ITEM = (b) -> new BlockTooltipItem(b, GENERAL_PROPS);
+  protected static final Function<Block, ? extends BlockItem> HIDDEN_BLOCK_ITEM = (b) -> new BlockItem(b, HIDDEN_PROPS);
+  protected static final Function<Block, ? extends BlockItem> GENERAL_BLOCK_ITEM = (b) -> new BlockItem(b, GENERAL_PROPS);
+  protected static final Function<Block, ? extends BlockItem> GENERAL_TOOLTIP_BLOCK_ITEM = (b) -> new BlockTooltipItem(b, GENERAL_PROPS);
   protected static final Supplier<Item> TOOLTIP_ITEM = () -> new TooltipItem(GENERAL_PROPS);
 
-  /** Called during construction to initialize the registers for this mod */
+  /**
+   * Called during construction to initialize the registers for this mod
+   */
   public static void initRegisters() {
     IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
     // gameplay singleton
@@ -125,32 +130,41 @@ public abstract class TinkerModule {
     return Block.Properties.of(material).sound(soundType);
   }
 
-  /** Same as above, but with a color */
+  /**
+   * Same as above, but with a color
+   */
   protected static BlockBehaviour.Properties builder(Material material, MaterialColor color, SoundType soundType) {
     return Block.Properties.of(material, color).sound(soundType);
   }
 
-  /** Builder that pre-supplies metal properties */
+  /**
+   * Builder that pre-supplies metal properties
+   */
   protected static BlockBehaviour.Properties metalBuilder(MaterialColor color) {
     return builder(Material.METAL, color, SoundType.METAL).requiresCorrectToolForDrops().strength(5.0f);
   }
 
-  /** Builder that pre-supplies glass properties */
+  /**
+   * Builder that pre-supplies glass properties
+   */
   protected static BlockBehaviour.Properties glassBuilder(MaterialColor color) {
     return builder(Material.GLASS, color, SoundType.GLASS)
       .strength(0.3F).noOcclusion().isValidSpawn(Blocks::never)
       .isRedstoneConductor(Blocks::never).isSuffocating(Blocks::never).isViewBlocking(Blocks::never);
   }
 
-  /** Builder that pre-supplies glass properties */
+  /**
+   * Builder that pre-supplies glass properties
+   */
   protected static BlockBehaviour.Properties woodBuilder(MaterialColor color) {
     return builder(Material.WOOD, color, SoundType.WOOD).requiresCorrectToolForDrops().strength(2.0F, 7.0F);
   }
 
   /**
    * Creates a Tinkers Construct resource location
-   * @param path  Resource path
-   * @return  Tinkers Construct resource location
+   *
+   * @param path Resource path
+   * @return Tinkers Construct resource location
    */
   protected static ResourceLocation resource(String path) {
     return TConstruct.getResource(path);

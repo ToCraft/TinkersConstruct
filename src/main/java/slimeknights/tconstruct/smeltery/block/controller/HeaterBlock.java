@@ -17,6 +17,7 @@ import javax.annotation.Nullable;
  * Class for solid fuel heater for the melter
  */
 public class HeaterBlock extends ControllerBlock {
+
   public HeaterBlock(Properties builder) {
     super(builder);
   }

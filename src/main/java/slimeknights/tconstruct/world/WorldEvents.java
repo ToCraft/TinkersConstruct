@@ -42,9 +42,10 @@ public class WorldEvents {
 
   /**
    * Injects an entry into a loot pool
-   * @param event      Loot table event
-   * @param poolName   Pool name
-   * @param entries    Entry to inject
+   *
+   * @param event    Loot table event
+   * @param poolName Pool name
+   * @param entries  Entry to inject
    */
   private static void injectInto(LootTableLoadEvent event, String poolName, LootPoolEntryContainer... entries) {
     LootPool pool = event.getTable().getPool(poolName);
@@ -56,13 +57,17 @@ public class WorldEvents {
     }
   }
 
-  /** Makes a seed injection loot entry */
+  /**
+   * Makes a seed injection loot entry
+   */
   private static LootPoolEntryContainer makeSeed(FoliageType type, int weight) {
     return LootItem.lootTableItem(TinkerWorld.slimeGrassSeeds.get(type)).setWeight(weight)
-                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 4))).build();
+      .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 4))).build();
   }
 
-  /** Makes a sapling injection loot entry */
+  /**
+   * Makes a sapling injection loot entry
+   */
   private static LootPoolEntryContainer makeSapling(FoliageType type, int weight) {
     return LootItem.lootTableItem(TinkerWorld.slimeSapling.get(type)).setWeight(weight).build();
   }
@@ -102,33 +107,33 @@ public class WorldEvents {
           int weight = Config.COMMON.barterBlazingBlood.get();
           if (weight > 0) {
             injectInto(event, "main", LootItem.lootTableItem(TinkerSmeltery.scorchedLantern).setWeight(weight)
-                                              .apply(SetFluidLootFunction.builder(new FluidStack(TinkerFluids.blazingBlood.get(), FluidValues.LANTERN_CAPACITY)))
-                                              .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 4)))
-                                              .build());
+              .apply(SetFluidLootFunction.builder(new FluidStack(TinkerFluids.blazingBlood.get(), FluidValues.LANTERN_CAPACITY)))
+              .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 4)))
+              .build());
           }
           break;
         }
 
-          // randomly swap vanilla tool for a tinkers tool
+        // randomly swap vanilla tool for a tinkers tool
         case "chests/spawn_bonus_chest": {
           int weight = Config.COMMON.tinkerToolBonusChest.get();
           if (weight > 0) {
             RandomMaterial randomTier1 = RandomMaterial.random().tier(1).build();
             RandomMaterial firstWithStat = RandomMaterial.firstWithStat(); // should be wood
             injectInto(event, "main", LootItem.lootTableItem(TinkerTools.handAxe.get())
-                                              .setWeight(weight)
-                                              .apply(AddToolDataFunction.builder()
-                                                               .addMaterial(randomTier1)
-                                                               .addMaterial(firstWithStat)
-                                                               .addMaterial(randomTier1))
-                                              .build());
+              .setWeight(weight)
+              .apply(AddToolDataFunction.builder()
+                .addMaterial(randomTier1)
+                .addMaterial(firstWithStat)
+                .addMaterial(randomTier1))
+              .build());
             injectInto(event, "pool1", LootItem.lootTableItem(TinkerTools.pickaxe.get())
-                                               .setWeight(weight)
-                                               .apply(AddToolDataFunction.builder()
-                                                               .addMaterial(randomTier1)
-                                                               .addMaterial(firstWithStat)
-                                                               .addMaterial(randomTier1))
-                                               .build());
+              .setWeight(weight)
+              .apply(AddToolDataFunction.builder()
+                .addMaterial(randomTier1)
+                .addMaterial(firstWithStat)
+                .addMaterial(randomTier1))
+              .build());
           }
           break;
         }
@@ -149,7 +154,7 @@ public class WorldEvents {
     ItemStack helmet = entity.getItemBySlot(EquipmentSlot.HEAD);
     Item item = helmet.getItem();
     if (item != Items.AIR && TinkerWorld.headItems.contains(item)) {
-      if (lookingEntity.getType() == ((TinkerHeadType)((SkullBlock)((BlockItem)item).getBlock()).getType()).getType()) {
+      if (lookingEntity.getType() == ((TinkerHeadType) ((SkullBlock) ((BlockItem) item).getBlock()).getType()).getType()) {
         event.modifyVisibility(0.5f);
       }
     }

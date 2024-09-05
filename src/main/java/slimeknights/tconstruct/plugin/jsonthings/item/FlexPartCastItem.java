@@ -15,9 +15,13 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Supplier;
 
-/** Tool part cast item, which adds the part cost to the tooltip */
+/**
+ * Tool part cast item, which adds the part cost to the tooltip
+ */
 public class FlexPartCastItem extends FlexItem {
+
   private final Supplier<Item> part;
+
   public FlexPartCastItem(Properties properties, ItemBuilder builder, Supplier<Item> part) {
     super(properties, builder);
     this.part = part;

@@ -21,19 +21,29 @@ import slimeknights.tconstruct.library.tools.part.IMaterialItem;
 import slimeknights.tconstruct.tables.recipe.CraftingTableRepairKitRecipe;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 
-/** Recipe for using a repair kit in a crafting station for a specialized tool */
+/**
+ * Recipe for using a repair kit in a crafting station for a specialized tool
+ */
 public class ModifierMaterialRepairKitRecipe extends CraftingTableRepairKitRecipe implements IModifierMaterialRepairRecipe {
+
   public static final RecordLoadable<ModifierMaterialRepairKitRecipe> LOADER = RecordLoadable.create(ContextKey.ID.requiredField(), MODIFIER_FIELD, REPAIR_MATERIAL_FIELD, STAT_TYPE_FIELD, ModifierMaterialRepairKitRecipe::new);
 
-  /** Tool that can be repaired with this recipe */
+  /**
+   * Tool that can be repaired with this recipe
+   */
   @Getter
   private final ModifierId modifier;
-  /** ID of material used in repairing */
+  /**
+   * ID of material used in repairing
+   */
   @Getter
   private final MaterialId repairMaterial;
-  /** Stat type used for repairing, null means it will be fetched as the first available stat type */
+  /**
+   * Stat type used for repairing, null means it will be fetched as the first available stat type
+   */
   @Getter
   private final MaterialStatsId statType;
+
   public ModifierMaterialRepairKitRecipe(ResourceLocation id, ModifierId modifier, MaterialId repairMaterial, MaterialStatsId statType) {
     super(id);
     this.modifier = modifier;

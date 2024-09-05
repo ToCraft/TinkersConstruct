@@ -15,8 +15,11 @@ import slimeknights.tconstruct.tools.TinkerTools;
 
 import javax.annotation.Nullable;
 
-/** Item entity that will never die */
+/**
+ * Item entity that will never die
+ */
 public class IndestructibleItemEntity extends ItemEntity {
+
   public IndestructibleItemEntity(EntityType<? extends IndestructibleItemEntity> entityType, Level world) {
     super(entityType, world);
     // using setUnlimitedLifetime() makes the item no longer spin, dumb design
@@ -37,7 +40,9 @@ public class IndestructibleItemEntity extends ItemEntity {
     return NetworkHooks.getEntitySpawningPacket(this);
   }
 
-  /** Copies the pickup delay from another entity */
+  /**
+   * Copies the pickup delay from another entity
+   */
   public void setPickupDelayFrom(Entity reference) {
     if (reference instanceof ItemEntity) {
       short pickupDelay = this.getPickupDelay((ItemEntity) reference);
@@ -66,17 +71,20 @@ public class IndestructibleItemEntity extends ItemEntity {
     return source.getMsgId().equals(DamageSource.OUT_OF_WORLD.msgId);
   }
 
-  /** Checks if the given stack has a custom entity */
+  /**
+   * Checks if the given stack has a custom entity
+   */
   public static boolean hasCustomEntity(ItemStack stack) {
     return ModifierUtil.checkVolatileFlag(stack, IModifiable.INDESTRUCTIBLE_ENTITY);
   }
 
   /**
    * Creates an indestructible item entity from the given item stack (if needed). Intended to be called in {@link net.minecraftforge.common.extensions.IForgeItem#createEntity(Level, Entity, ItemStack)}
-   * @param world     World instance
-   * @param original  Original entity
-   * @param stack     Stack to drop
-   * @return  indestructible entity, or null if the stack is not marked indestructible
+   *
+   * @param world    World instance
+   * @param original Original entity
+   * @param stack    Stack to drop
+   * @return indestructible entity, or null if the stack is not marked indestructible
    */
   @Nullable
   public static Entity createFrom(Level world, Entity original, ItemStack stack) {

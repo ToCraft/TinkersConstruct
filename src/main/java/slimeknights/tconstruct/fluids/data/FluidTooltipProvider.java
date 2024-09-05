@@ -20,6 +20,7 @@ import static slimeknights.tconstruct.common.TinkerTags.Fluids.SMALL_GEM_TOOLTIP
 import static slimeknights.tconstruct.common.TinkerTags.Fluids.SOUP_TOOLTIPS;
 
 public class FluidTooltipProvider extends AbstractFluidTooltipProvider {
+
   public FluidTooltipProvider(DataGenerator generator) {
     super(generator, TConstruct.MOD_ID);
   }
@@ -59,11 +60,11 @@ public class FluidTooltipProvider extends AbstractFluidTooltipProvider {
 
     add("water", MantleTags.Fluids.WATER)
       .addUnit("kilobucket", "mantle", FluidType.BUCKET_VOLUME * 1000)
-      .addUnit("bucket",     "mantle", FluidType.BUCKET_VOLUME)
+      .addUnit("bucket", "mantle", FluidType.BUCKET_VOLUME)
       .addUnit("bottle", FluidValues.BOTTLE);
     add("venom", TinkerFluids.venom.getLocalTag())
       .addUnit("kilobucket", "mantle", FluidType.BUCKET_VOLUME * 1000)
-      .addUnit("bucket",     "mantle", FluidType.BUCKET_VOLUME)
+      .addUnit("bucket", "mantle", FluidType.BUCKET_VOLUME)
       .addUnit("bottle", FluidValues.BOTTLE);
     add("honey", TinkerFluids.honey.getForgeTag())
       .addUnit("block", FluidValues.BOTTLE * 4)

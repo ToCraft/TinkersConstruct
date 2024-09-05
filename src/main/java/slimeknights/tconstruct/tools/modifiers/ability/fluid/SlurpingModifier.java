@@ -38,9 +38,12 @@ import slimeknights.tconstruct.shared.particle.FluidParticleData;
 
 import static slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper.TANK_HELPER;
 
-/** Modifier to handle spilling recipes on helmets */
+/**
+ * Modifier to handle spilling recipes on helmets
+ */
 public class SlurpingModifier extends Modifier implements KeybindInteractModifierHook, GeneralInteractionModifierHook {
-  private static final float DEGREE_TO_RADIANS = (float)Math.PI / 180F;
+
+  private static final float DEGREE_TO_RADIANS = (float) Math.PI / 180F;
   private static final TinkerDataKey<SlurpingInfo> SLURP_FINISH_TIME = TConstruct.createKey("slurping_finish");
 
   public SlurpingModifier() {
@@ -55,7 +58,9 @@ public class SlurpingModifier extends Modifier implements KeybindInteractModifie
     hookBuilder.addHook(this, ModifierHooks.ARMOR_INTERACT, ModifierHooks.GENERAL_INTERACT);
   }
 
-  /** Checks if we can slurp the given fluid */
+  /**
+   * Checks if we can slurp the given fluid
+   */
   private int slurp(FluidStack fluid, float level, Player player, FluidAction action) {
     if (!fluid.isEmpty()) {
       FluidEffects recipe = FluidEffectManager.INSTANCE.find(fluid.getFluid());
@@ -76,9 +81,11 @@ public class SlurpingModifier extends Modifier implements KeybindInteractModifie
     return false;
   }
 
-  /** Adds the given number of fluid particles */
+  /**
+   * Adds the given number of fluid particles
+   */
   private static void addFluidParticles(Player player, FluidStack fluid, int count) {
-    for(int i = 0; i < count; ++i) {
+    for (int i = 0; i < count; ++i) {
       Vec3 motion = new Vec3((RANDOM.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, 0.0D);
       motion = motion.xRot(-player.getXRot() * DEGREE_TO_RADIANS);
       motion = motion.yRot(-player.getYRot() * DEGREE_TO_RADIANS);
@@ -88,14 +95,16 @@ public class SlurpingModifier extends Modifier implements KeybindInteractModifie
       position = position.add(player.getX(), player.getEyeY(), player.getZ());
       FluidParticleData data = new FluidParticleData(TinkerCommons.fluidParticle.get(), fluid);
       if (player.level instanceof ServerLevel) {
-        ((ServerLevel)player.level).sendParticles(data, position.x, position.y, position.z, 1, motion.x, motion.y + 0.05D, motion.z, 0.0D);
+        ((ServerLevel) player.level).sendParticles(data, position.x, position.y, position.z, 1, motion.x, motion.y + 0.05D, motion.z, 0.0D);
       } else {
         player.level.addParticle(data, position.x, position.y, position.z, motion.x, motion.y + 0.05D, motion.z);
       }
     }
   }
 
-  /** Drinks some of the fluid in the tank, reducing its value */
+  /**
+   * Drinks some of the fluid in the tank, reducing its value
+   */
   private void finishDrinking(IToolStackView tool, Player player) {
     // only server needs to drink
     if (!player.level.isClientSide) {
@@ -108,7 +117,9 @@ public class SlurpingModifier extends Modifier implements KeybindInteractModifie
     }
   }
 
-  /** Called on player tick to update drinking */
+  /**
+   * Called on player tick to update drinking
+   */
   private void playerTick(PlayerTickEvent event) {
     Player player = event.player;
     if (player.isSpectator()) {
