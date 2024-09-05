@@ -3,6 +3,7 @@ package slimeknights.tconstruct.common;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
@@ -11,12 +12,12 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
@@ -32,7 +33,6 @@ import slimeknights.mantle.registration.deferred.EntityTypeDeferredRegister;
 import slimeknights.mantle.registration.deferred.FluidDeferredRegister;
 import slimeknights.mantle.registration.deferred.MenuTypeDeferredRegister;
 import slimeknights.mantle.registration.deferred.SynchronizedDeferredRegister;
-import slimeknights.mantle.util.SupplierCreativeTab;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.registration.BlockDeferredRegisterExtension;
 import slimeknights.tconstruct.common.registration.ConfiguredFeatureDeferredRegister;
@@ -43,6 +43,8 @@ import slimeknights.tconstruct.library.recipe.TinkerRecipeTypes;
 import slimeknights.tconstruct.shared.TinkerCommons;
 import slimeknights.tconstruct.shared.block.SlimeType;
 
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -78,18 +80,30 @@ public abstract class TinkerModule {
   protected static final ConfiguredFeatureDeferredRegister CONFIGURED_FEATURES = new ConfiguredFeatureDeferredRegister(TConstruct.MOD_ID);
   //
 
+  // Concurrent in case Forge loads something asynchronous
+  protected static final List<ItemLike> TAB_GENERAL_ITEMS = new CopyOnWriteArrayList<>();
+
   /**
    * Creative tab for items that do not fit in another tab
    */
   @SuppressWarnings("WeakerAccess")
-  public static final CreativeModeTab TAB_GENERAL = new SupplierCreativeTab(TConstruct.MOD_ID, "general", () -> new ItemStack(TinkerCommons.slimeball.get(SlimeType.SKY)));
+  public static final CreativeModeTab TAB_GENERAL = CreativeModeTab.builder().title(Component.translatable("itemGroup.tconstruct.general")).icon(() -> new ItemStack(TinkerCommons.slimeball.get(SlimeType.SKY))).displayItems((itemDisplayParameters, output) -> {
+    for (ItemLike item : TAB_GENERAL_ITEMS) {
+      output.accept(item);
+    }
+  }).build();
+
+  public static <I extends ItemLike> I addToTabGeneral(I item) {
+    TAB_GENERAL_ITEMS.add(item);
+    return item;
+  }
 
   // base item properties
   protected static final Item.Properties HIDDEN_PROPS = new Item.Properties();
-  protected static final Item.Properties GENERAL_PROPS = new Item.Properties().tab(TAB_GENERAL);
+  protected static final Item.Properties GENERAL_PROPS = new Item.Properties();
   protected static final Function<Block, ? extends BlockItem> HIDDEN_BLOCK_ITEM = (b) -> new BlockItem(b, HIDDEN_PROPS);
-  protected static final Function<Block, ? extends BlockItem> GENERAL_BLOCK_ITEM = (b) -> new BlockItem(b, GENERAL_PROPS);
-  protected static final Function<Block, ? extends BlockItem> GENERAL_TOOLTIP_BLOCK_ITEM = (b) -> new BlockTooltipItem(b, GENERAL_PROPS);
+  protected static final Function<Block, ? extends BlockItem> GENERAL_BLOCK_ITEM = (b) -> addToTabGeneral(new BlockItem(b, GENERAL_PROPS));
+  protected static final Function<Block, ? extends BlockItem> GENERAL_TOOLTIP_BLOCK_ITEM = (b) -> addToTabGeneral(new BlockTooltipItem(b, GENERAL_PROPS));
   protected static final Supplier<Item> TOOLTIP_ITEM = () -> new TooltipItem(GENERAL_PROPS);
 
   /**
@@ -126,38 +140,40 @@ public abstract class TinkerModule {
    * It may be a bit less clear at first, since the actual builder methods tell you what each value means,
    * but as long as we don't statically import the enums it should be just as readable.
    */
-  protected static BlockBehaviour.Properties builder(Material material, SoundType soundType) {
-    return Block.Properties.of(material).sound(soundType);
+  protected static BlockBehaviour.Properties builder(BlockBehaviour material, SoundType soundType) {
+    return Block.Properties.copy(material).sound(soundType);
   }
 
   /**
    * Same as above, but with a color
    */
-  protected static BlockBehaviour.Properties builder(Material material, MaterialColor color, SoundType soundType) {
-    return Block.Properties.of(material, color).sound(soundType);
+  protected static BlockBehaviour.Properties builder(BlockBehaviour material, MapColor color, SoundType soundType) {
+    return Block.Properties.copy(material).mapColor(color).sound(soundType);
   }
 
   /**
    * Builder that pre-supplies metal properties
    */
-  protected static BlockBehaviour.Properties metalBuilder(MaterialColor color) {
-    return builder(Material.METAL, color, SoundType.METAL).requiresCorrectToolForDrops().strength(5.0f);
+  protected static BlockBehaviour.Properties metalBuilder(MapColor color) {
+    return builder(Blocks.IRON_BLOCK, color, SoundType.METAL).requiresCorrectToolForDrops().strength(5.0f);
   }
 
   /**
    * Builder that pre-supplies glass properties
    */
-  protected static BlockBehaviour.Properties glassBuilder(MaterialColor color) {
-    return builder(Material.GLASS, color, SoundType.GLASS)
+  protected static BlockBehaviour.Properties glassBuilder(MapColor color) {
+    // TODO: check material block
+    return builder(Blocks.GLASS, color, SoundType.GLASS)
       .strength(0.3F).noOcclusion().isValidSpawn(Blocks::never)
       .isRedstoneConductor(Blocks::never).isSuffocating(Blocks::never).isViewBlocking(Blocks::never);
   }
 
   /**
-   * Builder that pre-supplies glass properties
+   * Builder that pre-supplies wood properties
    */
-  protected static BlockBehaviour.Properties woodBuilder(MaterialColor color) {
-    return builder(Material.WOOD, color, SoundType.WOOD).requiresCorrectToolForDrops().strength(2.0F, 7.0F);
+  protected static BlockBehaviour.Properties woodBuilder(MapColor color) {
+    // TODO: check material block
+    return builder(Blocks.OAK_LOG, color, SoundType.WOOD).requiresCorrectToolForDrops().strength(2.0F, 7.0F);
   }
 
   /**

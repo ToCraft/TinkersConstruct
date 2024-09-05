@@ -5,7 +5,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.shared.block.SlimeType;
 
@@ -17,11 +17,11 @@ import java.util.Locale;
  */
 @Getter
 public enum FoliageType implements StringRepresentable {
-  EARTH(0x8CD782, Tiers.STONE, MaterialColor.GRASS, false),
-  SKY(0x00F4DA, Tiers.GOLD, MaterialColor.DIAMOND, false),
-  ICHOR(0xd09800, Tiers.IRON, MaterialColor.COLOR_ORANGE, true),
-  ENDER(0xa92dff, Tiers.DIAMOND, MaterialColor.COLOR_PURPLE, false),
-  BLOOD(0xb80000, Tiers.WOOD, MaterialColor.COLOR_RED, true);
+  EARTH(0x8CD782, Tiers.STONE, MapColor.GRASS, false),
+  SKY(0x00F4DA, Tiers.GOLD, MapColor.DIAMOND, false),
+  ICHOR(0xd09800, Tiers.IRON, MapColor.COLOR_ORANGE, true),
+  ENDER(0xa92dff, Tiers.DIAMOND, MapColor.COLOR_PURPLE, false),
+  BLOOD(0xb80000, Tiers.WOOD, MapColor.COLOR_RED, true);
 
   /**
    * Foliage types using overworld style (grass, wood)
@@ -41,7 +41,7 @@ public enum FoliageType implements StringRepresentable {
   /**
    * Color for this block on maps
    */
-  private final MaterialColor mapColor;
+  private final MapColor mapColor;
   /**
    * If true, this block type has fungus foliage instead of grass
    */
@@ -55,7 +55,7 @@ public enum FoliageType implements StringRepresentable {
    */
   private final TagKey<Block> grassBlockTag;
 
-  FoliageType(int color, Tiers harvestTier, MaterialColor mapColor, boolean nether) {
+  FoliageType(int color, Tiers harvestTier, MapColor mapColor, boolean nether) {
     this.color = color;
     this.harvestTier = harvestTier;
     this.mapColor = mapColor;

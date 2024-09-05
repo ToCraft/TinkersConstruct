@@ -5,7 +5,9 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 
@@ -37,14 +39,14 @@ public class MobEffectLiquidBlock extends LiquidBlock {
   /**
    * Creates a new block supplier
    */
-  public static Function<Supplier<? extends FlowingFluid>, LiquidBlock> createEffect(Material material, int lightLevel, Supplier<MobEffectInstance> effect) {
-    return fluid -> new MobEffectLiquidBlock(fluid, Properties.of(material).lightLevel(state -> lightLevel).noCollission().strength(100f).noLootTable(), effect);
+  public static Function<Supplier<? extends FlowingFluid>, LiquidBlock> createEffect(BlockBehaviour material, int lightLevel, Supplier<MobEffectInstance> effect) {
+    return fluid -> new MobEffectLiquidBlock(fluid, Properties.copy(material).lightLevel(state -> lightLevel).noCollission().strength(100f).noLootTable(), effect);
   }
 
   /**
    * Creates a new block supplier
    */
   public static Function<Supplier<? extends FlowingFluid>, LiquidBlock> createEffect(int lightLevel, Supplier<MobEffectInstance> effect) {
-    return createEffect(Material.WATER, lightLevel, effect);
+    return createEffect(Blocks.WATER, lightLevel, effect);
   }
 }

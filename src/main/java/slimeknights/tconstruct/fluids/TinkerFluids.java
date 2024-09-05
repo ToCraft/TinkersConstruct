@@ -18,7 +18,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.SoundActions;
@@ -32,7 +32,6 @@ import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.RegistryObject;
 import slimeknights.mantle.fluid.UnplaceableFluid;
-import slimeknights.mantle.registration.ItemProperties;
 import slimeknights.mantle.registration.object.EnumObject;
 import slimeknights.mantle.registration.object.FlowingFluidObject;
 import slimeknights.mantle.registration.object.FluidObject;
@@ -75,7 +74,7 @@ public final class TinkerFluids extends TinkerModule {
 
   // basic
   public static final FlowingFluidObject<ForgeFlowingFluid> venom = FLUIDS.register("venom").type(slime("venom").temperature(310)).bucket().block(createEffect(0, () -> new MobEffectInstance(MobEffects.POISON, 5 * 20))).flowing();
-  public static final ItemObject<Item> venomBottle = ITEMS.register("venom_bottle", () -> new FluidContainerFoodItem(new Item.Properties().food(TinkerFood.VENOM_BOTTLE).tab(TAB_GENERAL).stacksTo(1).craftRemainder(Items.GLASS_BOTTLE), () -> new FluidStack(venom.get(), FluidValues.BOTTLE)));
+  public static final ItemObject<Item> venomBottle = ITEMS.register("venom_bottle", () -> addToTabGeneral(new FluidContainerFoodItem(new Item.Properties().food(TinkerFood.VENOM_BOTTLE).stacksTo(1).craftRemainder(Items.GLASS_BOTTLE), () -> new FluidStack(venom.get(), FluidValues.BOTTLE))));
   public static final FluidObject<UnplaceableFluid> powderedSnow = FLUIDS.register("powdered_snow").bucket(() -> Items.POWDER_SNOW_BUCKET).type(powder("powdered_snow").temperature(270)).unplacable();
 
   // slime -  note second name parameter is forge tag name
@@ -86,24 +85,24 @@ public final class TinkerFluids extends TinkerModule {
   public static final EnumObject<SlimeType, SlimeFluid> slime = new EnumObject.Builder<SlimeType, SlimeFluid>(SlimeType.class).put(SlimeType.EARTH, earthSlime).put(SlimeType.SKY, skySlime).put(SlimeType.ENDER, enderSlime).build();
   // bottles of slime
   public static final EnumObject<SlimeType, Item> slimeBottle = new EnumObject.Builder<SlimeType, Item>(SlimeType.class)
-    .putAll(ITEMS.registerEnum(SlimeType.LIQUID, "slime_bottle", type -> new FluidContainerFoodItem(
-      new Item.Properties().food(TinkerFood.getBottle(type)).tab(TAB_GENERAL).stacksTo(1).craftRemainder(Items.GLASS_BOTTLE), () -> new FluidStack(slime.get(type), FluidValues.BOTTLE))))
-    .put(SlimeType.ICHOR, ITEMS.register("ichor_slime_bottle", () -> new ContainerFoodItem(new Item.Properties().food(TinkerFood.ICHOR_BOTTLE).tab(TAB_GENERAL).stacksTo(1).craftRemainder(Items.GLASS_BOTTLE))))
+    .putAll(ITEMS.registerEnum(SlimeType.LIQUID, "slime_bottle", type -> addToTabGeneral(new FluidContainerFoodItem(
+      new Item.Properties().food(TinkerFood.getBottle(type)).stacksTo(1).craftRemainder(Items.GLASS_BOTTLE), () -> new FluidStack(slime.get(type), FluidValues.BOTTLE)))))
+    .put(SlimeType.ICHOR, ITEMS.register("ichor_slime_bottle", () -> addToTabGeneral(new ContainerFoodItem(new Item.Properties().food(TinkerFood.ICHOR_BOTTLE).stacksTo(1).craftRemainder(Items.GLASS_BOTTLE)))))
     .build();
-  public static final ItemObject<Item> magmaBottle = ITEMS.register("magma_bottle", () -> new FluidContainerFoodItem(
-    new Item.Properties().food(TinkerFood.MAGMA_BOTTLE).tab(TAB_GENERAL).stacksTo(1).craftRemainder(Items.GLASS_BOTTLE),
-    () -> new FluidStack(magma.get(), FluidValues.BOTTLE)));
+  public static final ItemObject<Item> magmaBottle = ITEMS.register("magma_bottle", () -> addToTabGeneral(new FluidContainerFoodItem(
+    new Item.Properties().food(TinkerFood.MAGMA_BOTTLE).stacksTo(1).craftRemainder(Items.GLASS_BOTTLE),
+    () -> new FluidStack(magma.get(), FluidValues.BOTTLE))));
 
   // foods
   public static FlowingFluidObject<ForgeFlowingFluid> honey = FLUIDS.register("honey").type(slime("honey").temperature(301)).bucket().block(createEffect(0, () -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5 * 20))).flowing();
-  public static FlowingFluidObject<ForgeFlowingFluid> beetrootSoup = FLUIDS.register("beetroot_soup").type(cool("beetroot_soup").temperature(400)).bucket().block(Material.WATER).flowing();
-  public static FlowingFluidObject<ForgeFlowingFluid> mushroomStew = FLUIDS.register("mushroom_stew").type(cool("mushroom_stew").temperature(400)).bucket().block(Material.WATER).flowing();
-  public static FlowingFluidObject<ForgeFlowingFluid> rabbitStew = FLUIDS.register("rabbit_stew").type(cool("rabbit_stew").temperature(400)).bucket().block(Material.WATER).flowing();
-  public static FlowingFluidObject<ForgeFlowingFluid> meatSoup = FLUIDS.register("meat_soup").type(cool("meat_soup").temperature(400)).bucket().block(Material.WATER).flowing();
-  public static final ItemObject<Item> meatSoupBowl = ITEMS.register("meat_soup", () -> new ContainerFoodItem(new Item.Properties().food(TinkerFood.MEAT_SOUP).tab(TAB_GENERAL).stacksTo(1).craftRemainder(Items.BOWL)));
+  public static FlowingFluidObject<ForgeFlowingFluid> beetrootSoup = FLUIDS.register("beetroot_soup").type(cool("beetroot_soup").temperature(400)).bucket().block(() -> (LiquidBlock) Blocks.WATER).flowing();
+  public static FlowingFluidObject<ForgeFlowingFluid> mushroomStew = FLUIDS.register("mushroom_stew").type(cool("mushroom_stew").temperature(400)).bucket().block(() -> (LiquidBlock) Blocks.WATER).flowing();
+  public static FlowingFluidObject<ForgeFlowingFluid> rabbitStew = FLUIDS.register("rabbit_stew").type(cool("rabbit_stew").temperature(400)).bucket().block(() -> (LiquidBlock) Blocks.WATER).flowing();
+  public static FlowingFluidObject<ForgeFlowingFluid> meatSoup = FLUIDS.register("meat_soup").type(cool("meat_soup").temperature(400)).bucket().block(() -> (LiquidBlock) Blocks.WATER).flowing();
+  public static final ItemObject<Item> meatSoupBowl = ITEMS.register("meat_soup", () -> addToTabGeneral(new ContainerFoodItem(new Item.Properties().food(TinkerFood.MEAT_SOUP).stacksTo(1).craftRemainder(Items.BOWL))));
 
   // potion
-  public static final FluidObject<UnplaceableFluid> potion = FLUIDS.register("potion").type(() -> new PotionFluidType(cool().descriptionId("item.minecraft.potion.effect.empty").density(1100).viscosity(1100).temperature(315))).bucket(fluid -> new PotionBucketItem(fluid, ItemProperties.BUCKET_PROPS)).unplacable();
+  public static final FluidObject<UnplaceableFluid> potion = FLUIDS.register("potion").type(() -> new PotionFluidType(cool().descriptionId("item.minecraft.potion.effect.empty").density(1100).viscosity(1100).temperature(315))).bucket(fluid -> new PotionBucketItem(fluid, (new Item.Properties()).stacksTo(16))).unplacable();
   public static final ItemObject<Item> splashBottle = ITEMS.register("splash_bottle", () -> new BottleItem(Items.SPLASH_POTION, GENERAL_PROPS));
   public static final ItemObject<Item> lingeringBottle = ITEMS.register("lingering_bottle", () -> new BottleItem(Items.LINGERING_POTION, GENERAL_PROPS));
 
@@ -112,12 +111,12 @@ public final class TinkerFluids extends TinkerModule {
   public static final FlowingFluidObject<ForgeFlowingFluid> scorchedStone = FLUIDS.register("scorched_stone").type(hot("scorched_stone").temperature(800).lightLevel(4)).block(createBurning(4, 7, 2f)).bucket().flowing();
   public static final FlowingFluidObject<ForgeFlowingFluid> moltenClay = FLUIDS.register("molten_clay").type(hot("molten_clay").temperature(750).lightLevel(3)).block(createBurning(3, 5, 2f)).bucket().flowing();
   public static final FlowingFluidObject<ForgeFlowingFluid> moltenGlass = FLUIDS.register("molten_glass").type(hot("molten_glass").temperature(1050).lightLevel(1)).block(createBurning(1, 5, 2f)).bucket().flowing();
-  public static final FlowingFluidObject<ForgeFlowingFluid> liquidSoul = FLUIDS.register("liquid_soul").type(hot("liquid_soul").temperature(700).lightLevel(2)).block(createEffect(Material.LAVA, 2, () -> new MobEffectInstance(MobEffects.BLINDNESS, 5 * 20))).bucket().flowing();
+  public static final FlowingFluidObject<ForgeFlowingFluid> liquidSoul = FLUIDS.register("liquid_soul").type(hot("liquid_soul").temperature(700).lightLevel(2)).block(createEffect(Blocks.LAVA, 2, () -> new MobEffectInstance(MobEffects.BLINDNESS, 5 * 20))).bucket().flowing();
   // ceramics compat
   public static final FlowingFluidObject<ForgeFlowingFluid> moltenPorcelain = FLUIDS.register("molten_porcelain").type(hot("molten_porcelain").temperature(1000).lightLevel(2)).block(createBurning(2, 5, 2f)).bucket().flowing();
   // fancy molten fluids
   public static final FlowingFluidObject<ForgeFlowingFluid> moltenObsidian = FLUIDS.register("molten_obsidian").type(hot("molten_obsidian").temperature(1300).lightLevel(3)).block(createBurning(3, 12, 4f)).bucket().flowing();
-  public static final FlowingFluidObject<ForgeFlowingFluid> moltenEnder = FLUIDS.register("molten_ender").type(hot("molten_ender").temperature(777).lightLevel(5)).block(createEffect(Material.LAVA, 5, () -> new MobEffectInstance(TinkerModifiers.enderferenceEffect.get(), 5 * 20))).bucket().tagName("ender").flowing();
+  public static final FlowingFluidObject<ForgeFlowingFluid> moltenEnder = FLUIDS.register("molten_ender").type(hot("molten_ender").temperature(777).lightLevel(5)).block(createEffect(Blocks.LAVA, 5, () -> new MobEffectInstance(TinkerModifiers.enderferenceEffect.get(), 5 * 20))).bucket().tagName("ender").flowing();
   public static final FlowingFluidObject<ForgeFlowingFluid> blazingBlood = FLUIDS.register("blazing_blood").type(hot("blazing_blood").temperature(1800).lightLevel(15).density(3500)).block(createBurning(15, 15, 5f)).bucket().flowing();
 
   // ores

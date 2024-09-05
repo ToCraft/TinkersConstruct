@@ -3,11 +3,10 @@ package slimeknights.tconstruct.shared.inventory;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import net.minecraft.advancements.critereon.AbstractCriterionTriggerInstance;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.DeserializationContext;
-import net.minecraft.advancements.critereon.EntityPredicate.Composite;
 import net.minecraft.advancements.critereon.SerializationContext;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -34,7 +33,7 @@ public class BlockContainerOpenedTrigger extends SimpleCriterionTrigger<BlockCon
   }
 
   @Override
-  protected Instance createInstance(JsonObject json, Composite entityPredicate, DeserializationContext conditionsParser) {
+  protected Instance createInstance(JsonObject json, ContextAwarePredicate entityPredicate, DeserializationContext conditionsParser) {
     ResourceLocation id = new ResourceLocation(GsonHelper.getAsString(json, "type"));
     BlockEntityType<?> type = ForgeRegistries.BLOCK_ENTITY_TYPES.getValue(id);
     if (type == null) {
@@ -56,13 +55,13 @@ public class BlockContainerOpenedTrigger extends SimpleCriterionTrigger<BlockCon
 
     private final BlockEntityType<?> type;
 
-    public Instance(Composite playerCondition, BlockEntityType<?> type) {
+    public Instance(ContextAwarePredicate playerCondition, BlockEntityType<?> type) {
       super(ID, playerCondition);
       this.type = type;
     }
 
     public static Instance container(BlockEntityType<?> type) {
-      return new Instance(Composite.ANY, type);
+      return new Instance(ContextAwarePredicate.ANY, type);
     }
 
     /**

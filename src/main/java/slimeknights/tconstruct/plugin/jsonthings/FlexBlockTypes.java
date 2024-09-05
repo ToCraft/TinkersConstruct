@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.util.Lazy;
 import slimeknights.mantle.data.loadable.Loadables;
 import slimeknights.mantle.data.loadable.primitive.ResourceLocationLoadable;
 import slimeknights.tconstruct.TConstruct;
+import slimeknights.tconstruct.library.materials.definition.Material;
 import slimeknights.tconstruct.plugin.jsonthings.block.FlexBurningLiquidBlock;
 import slimeknights.tconstruct.plugin.jsonthings.block.FlexMobEffectLiquidBlock;
 

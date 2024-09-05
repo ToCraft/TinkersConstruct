@@ -1,6 +1,6 @@
 package slimeknights.tconstruct.common.data.tags;
 
-import net.minecraft.core.Registry;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -94,7 +94,7 @@ public class ItemTagProvider extends ItemTagsProvider {
   }
 
   @Override
-  protected void addTags() {
+  protected void addTags(HolderLookup.Provider provider) {
     this.addCommon();
     this.addWorld();
     this.addSmeltery();
