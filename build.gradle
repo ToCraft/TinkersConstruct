@@ -8,10 +8,11 @@
 
 plugins {
     id 'eclipse'
+    id 'idea'
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
-    id 'io.freefair.lombok' version '8.6'
+    id 'io.freefair.lombok' version '8.10'
 }
 //apply plugin: 'maven'
 
@@ -45,6 +46,7 @@ repositories {
      flatDir {
          dir '../Mantle/build/libs'
      }
+    mavenLocal()
 }
 
 group = 'slimeknights.tconstruct'
@@ -299,7 +301,7 @@ jar.finalizedBy('reobfJar')
 
 task sourcesJar(type: Jar) {
     from sourceSets.main.allJava
-    classifier = 'sources'
+    archiveClassifier = 'sources'
 }
 
 artifacts {
@@ -380,9 +382,11 @@ publishing {
         if (project.hasProperty('DEPLOY_DIR')) {
             maven { url DEPLOY_DIR }
         }
+        mavenLocal()
     }
 }
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+    options.compilerArgs << "-Xmaxerrs" << "1000" // Show way more compiler errors
 }
