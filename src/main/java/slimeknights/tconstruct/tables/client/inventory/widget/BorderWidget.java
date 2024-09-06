@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.tables.client.inventory.widget;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import slimeknights.mantle.client.screen.ElementScreen;
 import slimeknights.mantle.client.screen.ModuleScreen;
 import slimeknights.mantle.client.screen.ScalableElementScreen;
@@ -56,7 +57,7 @@ public class BorderWidget extends Widget {
   }
 
   @Override
-  public void draw(PoseStack matrices) {
+  public void draw(GuiGraphics matrices) {
     int x = this.xPos;
     int y = this.yPos;
     int midW = this.width - this.borderLeft.w - this.borderRight.w;

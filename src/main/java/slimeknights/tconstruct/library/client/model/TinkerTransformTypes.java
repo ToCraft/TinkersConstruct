@@ -1,6 +1,5 @@
 package slimeknights.tconstruct.library.client.model;
 
-import net.minecraft.client.renderer.block.model.ItemTransforms.TransformType;
 import net.minecraft.world.item.ItemDisplayContext;
 import slimeknights.tconstruct.TConstruct;
 

@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.tools.modifiers.ability.fluid;
 
-import com.mojang.math.Quaternion;
+import net.minecraft.world.phys.Vec3;
+import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -79,7 +80,7 @@ public class SpittingModifier extends Modifier implements GeneralInteractionModi
   @Override
   public void onStoppedUsing(IToolStackView tool, ModifierEntry modifier, LivingEntity entity, int timeLeft) {
     ScopeModifier.stopScoping(entity);
-    if (!entity.level.isClientSide) {
+    if (!entity.level().isClientSide) {
       int chargeTime = getUseDuration(tool, modifier) - timeLeft;
       if (chargeTime > 0) {
         // find the fluid to spit
@@ -107,12 +108,12 @@ public class SpittingModifier extends Modifier implements GeneralInteractionModi
               float startAngle = ModifiableLauncherItem.getAngleStart(shots);
               int primaryIndex = shots / 2;
               for (int shotIndex = 0; shotIndex < shots; shotIndex++) {
-                FluidEffectProjectile spit = new FluidEffectProjectile(entity.level, entity, new FluidStack(fluid, amount), power);
+                FluidEffectProjectile spit = new FluidEffectProjectile(entity.level(), entity, new FluidStack(fluid, amount), power);
 
                 // setup projectile target
-                Vector3f targetVector = new Vector3f(entity.getViewVector(1.0f));
+                Vector3f targetVector = entity.getViewVector(1.0f).toVector3f();
                 float angle = startAngle + (10 * shotIndex);
-                targetVector.transform(new Quaternion(new Vector3f(entity.getUpVector(1.0f)), angle, true));
+                targetVector.rotate(new Quaternionf(targetVector.x, targetVector.y, targetVector.z, angle));
                 spit.shoot(targetVector.x(), targetVector.y(), targetVector.z(), velocity, inaccuracy);
 
                 // store all modifiers on the spit
@@ -126,8 +127,8 @@ public class SpittingModifier extends Modifier implements GeneralInteractionModi
                 }
 
                 // finally, fire the projectile
-                entity.level.addFreshEntity(spit);
-                entity.level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.LLAMA_SPIT, SoundSource.PLAYERS, 1.0F, 1.0F / (entity.level.getRandom().nextFloat() * 0.4F + 1.2F) + charge * 0.5F + (angle / 10f));
+                entity.level().addFreshEntity(spit);
+                entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.LLAMA_SPIT, SoundSource.PLAYERS, 1.0F, 1.0F / (entity.level().getRandom().nextFloat() * 0.4F + 1.2F) + charge * 0.5F + (angle / 10f));
 
               }
 

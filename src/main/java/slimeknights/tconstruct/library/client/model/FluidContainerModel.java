@@ -25,8 +25,8 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
-import com.mojang.math.Quaternion;
 import com.mojang.math.Transformation;
+import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -85,7 +85,7 @@ public record FluidContainerModel(FluidStack fluid, boolean flipGas) implements 
   /**
    * Clone of same named field from {@link net.minecraftforge.client.model.DynamicFluidContainerModel}
    */
-  public static final Transformation FLUID_TRANSFORM = new Transformation(Vector3f.ZERO, Quaternion.ONE, new Vector3f(1, 1, 1.002f), Quaternion.ONE);
+  public static final Transformation FLUID_TRANSFORM = new Transformation(new Vector3f(0, 0, 0), new Quaternionf(), new Vector3f(1, 1, 1.002f), new Quaternionf());
 
   /**
    * Deserializes this model from JSON
@@ -176,7 +176,7 @@ public record FluidContainerModel(FluidStack fluid, boolean flipGas) implements 
     // add in fluid
     if (fluidSprite != null) {
       List<BakedQuad> quads = UnbakedGeometryHelper.bakeElements(
-        UnbakedGeometryHelper.createUnbakedItemMaskElements(1, spriteGetter.apply(context.getMaterial("fluid"))),
+        UnbakedGeometryHelper.createUnbakedItemMaskElements(1, spriteGetter.apply(context.getMaterial("fluid")).contents()),
         $ -> fluidSprite,
         new SimpleModelState(modelState.getRotation().compose(FLUID_TRANSFORM), modelState.isUvLocked()),
         modelLocation

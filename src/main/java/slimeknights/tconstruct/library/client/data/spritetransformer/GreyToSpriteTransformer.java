@@ -25,6 +25,7 @@ import slimeknights.tconstruct.library.client.data.util.AbstractSpriteReader;
 import slimeknights.tconstruct.library.client.data.util.DataGenSpriteReader;
 import slimeknights.tconstruct.library.client.data.util.ResourceManagerSpriteReader;
 import slimeknights.tconstruct.library.utils.Util;
+import slimeknights.tconstruct.util.ColourUtils;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
@@ -346,14 +347,14 @@ public class GreyToSpriteTransformer implements ISpriteTransformer {
           for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
               int color = image.getPixelRGBA(x, y);
-              red += NativeImage.getR(color);
-              green += NativeImage.getG(color);
-              blue += NativeImage.getB(color);
-              alpha += NativeImage.getA(color);
+              red += ColourUtils.getR(color);
+              green += ColourUtils.getG(color);
+              blue += ColourUtils.getB(color);
+              alpha += ColourUtils.getA(color);
             }
           }
           int pixels = image.getWidth() * image.getHeight();
-          int spriteColor = NativeImage.combine(alpha / pixels, blue / pixels, green / pixels, red / pixels);
+          int spriteColor = ColourUtils.combine(alpha / pixels, blue / pixels, green / pixels, red / pixels);
           // if we have a color set, treat it as a tint
           if (color != -1) {
             spriteColor = GreyToColorMapping.scaleColor(spriteColor, color, 255);

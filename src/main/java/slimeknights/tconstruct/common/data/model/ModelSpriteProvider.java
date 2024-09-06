@@ -10,6 +10,7 @@ import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.client.data.GenericTextureGenerator;
 import slimeknights.tconstruct.library.client.data.util.DataGenSpriteReader;
 import slimeknights.tconstruct.shared.block.SlimeType;
+import slimeknights.tconstruct.util.ColourUtils;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -96,7 +97,7 @@ public class ModelSpriteProvider extends GenericTextureGenerator {
         for (NativeImage sprite : sprites) {
           // tile the sprite if its smaller than the output, lets you merge multiple animations
           int spriteColor = sprite.getPixelRGBA(x % sprite.getHeight(), y % sprite.getHeight());
-          if (NativeImage.getA(spriteColor) != 0) {
+          if (ColourUtils.getA(spriteColor) != 0) {
             // TODO: this does not merge alpha, though will we ever need that?
             color = spriteColor;
             break;

@@ -2,6 +2,7 @@ package slimeknights.tconstruct.tables.client.inventory;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -82,7 +83,7 @@ public class ModifierWorktableScreen extends BaseTabbedScreen<ModifierWorktableB
   }
 
   @Override
-  protected void renderBg(PoseStack matrices, float partialTicks, int mouseX, int mouseY) {
+  protected void renderBg(GuiGraphics matrices, float partialTicks, int mouseX, int mouseY) {
     this.drawBackground(matrices, BACKGROUND);
 
     // draw scrollbar
@@ -169,7 +170,7 @@ public class ModifierWorktableScreen extends BaseTabbedScreen<ModifierWorktableB
   /**
    * Draw slot icons for all patterns
    */
-  private void drawModifierIcons(PoseStack matrices, int left, int top) {
+  private void drawModifierIcons(GuiGraphics matrices, int left, int top) {
     // use block texture list
     if (tile != null) {
       assert this.minecraft != null;

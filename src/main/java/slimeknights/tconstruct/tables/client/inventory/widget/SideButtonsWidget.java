@@ -2,6 +2,7 @@ package slimeknights.tconstruct.tables.client.inventory.widget;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import lombok.Getter;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Widget;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -11,7 +12,7 @@ import slimeknights.mantle.client.screen.MultiModuleScreen;
 
 import java.util.List;
 
-public class SideButtonsWidget<T extends Button> implements Widget, GuiEventListener {
+public class SideButtonsWidget<T extends Button> implements gradl, GuiEventListener {
 
   private static final int SPACING = 4;
 
@@ -90,7 +91,7 @@ public class SideButtonsWidget<T extends Button> implements Widget, GuiEventList
   }
 
   @Override
-  public void render(PoseStack matrices, int mouseX, int mouseY, float partialTicks) {
+  public void render(GuiGraphics matrices, int mouseX, int mouseY, float partialTicks) {
     for (T button : this.buttons) {
       button.render(matrices, mouseX, mouseY, partialTicks);
     }

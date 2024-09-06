@@ -2,6 +2,7 @@ package slimeknights.tconstruct.tables.client.inventory;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -52,12 +53,12 @@ public class BaseTabbedScreen<TILE extends BlockEntity, CONTAINER extends Tabbed
     return this.tile;
   }
 
-  protected void drawIcon(PoseStack matrices, Slot slot, ElementScreen element) {
+  protected void drawIcon(GuiGraphics matrices, Slot slot, ElementScreen element) {
     RenderSystem.setShaderTexture(0, Icons.ICONS);
     element.draw(matrices, slot.x + this.cornerX - 1, slot.y + this.cornerY - 1);
   }
 
-  protected void drawIconEmpty(PoseStack matrices, Slot slot, ElementScreen element) {
+  protected void drawIconEmpty(GuiGraphics matrices, Slot slot, ElementScreen element) {
     if (slot.hasItem()) {
       return;
     }
@@ -65,7 +66,7 @@ public class BaseTabbedScreen<TILE extends BlockEntity, CONTAINER extends Tabbed
     this.drawIcon(matrices, slot, element);
   }
 
-  protected void drawIconEmpty(PoseStack matrices, Slot slot, Pattern pattern) {
+  protected void drawIconEmpty(GuiGraphics matrices, Slot slot, Pattern pattern) {
     if (!slot.hasItem()) {
       GuiUtil.renderPattern(matrices, pattern, slot.x + this.cornerX, slot.y + this.cornerY);
     }
