@@ -2,7 +2,7 @@ package slimeknights.tconstruct.common.data.tags;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.PackOutput;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -92,8 +92,8 @@ import static slimeknights.tconstruct.common.TinkerTags.Items.WORN_ARMOR;
 @SuppressWarnings("unchecked")
 public class ItemTagProvider extends ItemTagsProvider {
 
-  public ItemTagProvider(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pLookupProvider, CompletableFuture<TagLookup<Block>> pBlockTags, @Nullable ExistingFileHelper existingFileHelper) {
-    super(pOutput, pLookupProvider, pBlockTags, TConstruct.MOD_ID, existingFileHelper);
+  public ItemTagProvider(DataGenerator dataGenerator, CompletableFuture<HolderLookup.Provider> pLookupProvider, CompletableFuture<TagLookup<Block>> pBlockTags, @Nullable ExistingFileHelper existingFileHelper) {
+    super(dataGenerator.getPackOutput(), pLookupProvider, pBlockTags, TConstruct.MOD_ID, existingFileHelper);
   }
 
   @Override
@@ -185,7 +185,7 @@ public class ItemTagProvider extends ItemTagsProvider {
 
   private void addWorld() {
     TagAppender<Item> heads = this.tag(Tags.Items.HEADS);
-    TinkerWorld.heads.forEach(head -> heads.add(head.asItem()));
+    TinkerWorld.heads.forEach(head -> heads.add(head.asItem().builtInRegistryHolder().key()));
 
     this.copy(TinkerTags.Blocks.SLIME_BLOCK, TinkerTags.Items.SLIME_BLOCK);
     this.copy(TinkerTags.Blocks.CONGEALED_SLIME, TinkerTags.Items.CONGEALED_SLIME);
@@ -267,7 +267,7 @@ public class ItemTagProvider extends ItemTagsProvider {
     // want these in top down order as it looks better in the book then
     TagAppender<Item> multipart = tag(MULTIPART_TOOL);
     for (ArmorSlotType slotType : ArmorSlotType.TOP_DOWN) {
-      multipart.add(TinkerTools.plateArmor.get(slotType));
+      multipart.add(TinkerTools.plateArmor.get(slotType).builtInRegistryHolder().key());
     }
     addArmorTags(TinkerTools.slimesuit, DURABILITY, BONUS_SLOTS, GOLDEN_ARMOR, EMBELLISHMENT_SLIME);
     addToolTags(TinkerTools.slimesuit.get(ArmorSlotType.HELMET), MULTIPART_TOOL);
@@ -280,18 +280,18 @@ public class ItemTagProvider extends ItemTagsProvider {
     tag(BASIC_ARMOR);
     TagAppender<Item> bookArmor = tag(PUNY_ARMOR);
     for (ArmorSlotType slotType : ArmorSlotType.TOP_DOWN) {
-      bookArmor.add(TinkerTools.travelersGear.get(slotType));
+      bookArmor.add(TinkerTools.travelersGear.get(slotType).builtInRegistryHolder().key());
     }
-    bookArmor.add(TinkerTools.travelersShield.get());
+    bookArmor.add(TinkerTools.travelersShield.get().builtInRegistryHolder().key());
     for (ArmorSlotType slotType : ArmorSlotType.TOP_DOWN) {
-      bookArmor.add(TinkerTools.plateArmor.get(slotType));
+      bookArmor.add(TinkerTools.plateArmor.get(slotType).builtInRegistryHolder().key());
     }
-    bookArmor.add(TinkerTools.plateShield.get());
+    bookArmor.add(TinkerTools.plateShield.get().builtInRegistryHolder().key());
     tag(MIGHTY_ARMOR);
     tag(FANTASTIC_ARMOR);
     bookArmor = tag(GADGETRY_ARMOR);
     for (ArmorSlotType slotType : ArmorSlotType.TOP_DOWN) {
-      bookArmor.add(TinkerTools.slimesuit.get(slotType));
+      bookArmor.add(TinkerTools.slimesuit.get(slotType).builtInRegistryHolder().key());
     }
     tag(BOOK_ARMOR).addTags(BASIC_ARMOR, PUNY_ARMOR, MIGHTY_ARMOR, FANTASTIC_ARMOR, GADGETRY_ARMOR);
 
@@ -353,7 +353,7 @@ public class ItemTagProvider extends ItemTagsProvider {
       .add(TinkerToolParts.plating.values().toArray(new Item[0]));
 
     TagAppender<Item> slimySeeds = this.tag(TinkerTags.Items.SLIMY_SEEDS);
-    TinkerWorld.slimeGrassSeeds.values().forEach(slimySeeds::add);
+    TinkerWorld.slimeGrassSeeds.values().forEach(item -> slimySeeds.add(item.builtInRegistryHolder().key()));
 
     // contains any ground stones
     this.tag(TinkerTags.Items.STONESHIELDS)
@@ -427,9 +427,9 @@ public class ItemTagProvider extends ItemTagsProvider {
     TagAppender<Item> multiUseCasts = this.tag(TinkerTags.Items.MULTI_USE_CASTS);
     Consumer<CastItemObject> addCast = cast -> {
       // tag based on material
-      goldCasts.add(cast.get());
-      sandCasts.add(cast.getSand());
-      redSandCasts.add(cast.getRedSand());
+      goldCasts.add(cast.get().builtInRegistryHolder().key());
+      sandCasts.add(cast.getSand().builtInRegistryHolder().key());
+      redSandCasts.add(cast.getRedSand().builtInRegistryHolder().key());
       // tag based on usage
       singleUseCasts.addTag(cast.getSingleUseTag());
       this.tag(cast.getSingleUseTag()).add(cast.getSand(), cast.getRedSand());
@@ -437,8 +437,8 @@ public class ItemTagProvider extends ItemTagsProvider {
       this.tag(cast.getMultiUseTag()).add(cast.get());
     };
     // blank sand casts, no blank gold or this would use the helper
-    sandCasts.add(TinkerSmeltery.blankSandCast.get());
-    redSandCasts.add(TinkerSmeltery.blankRedSandCast.get());
+    sandCasts.add(TinkerSmeltery.blankSandCast.get().builtInRegistryHolder().key());
+    redSandCasts.add(TinkerSmeltery.blankRedSandCast.get().builtInRegistryHolder().key());
     singleUseCasts.addTag(TinkerTags.Items.BLANK_SINGLE_USE_CASTS);
     this.tag(TinkerTags.Items.BLANK_SINGLE_USE_CASTS).add(TinkerSmeltery.blankSandCast.get(), TinkerSmeltery.blankRedSandCast.get());
     // basic

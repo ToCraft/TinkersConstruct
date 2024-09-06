@@ -145,13 +145,13 @@ public class TConstruct {
     DataGenerator datagenerator = event.getGenerator();
     ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
     boolean server = event.includeServer();
-    TagsProvider<Block> blockTags = new BlockTagProvider(datagenerator, existingFileHelper);
+    TagsProvider<Block> blockTags = new BlockTagProvider(datagenerator, event.getLookupProvider(), existingFileHelper);
     datagenerator.addProvider(server, blockTags);
-    datagenerator.addProvider(server, new ItemTagProvider(datagenerator.getPackOutput(), event.getLookupProvider(), blockTags.contentsGetter(), existingFileHelper));
+    datagenerator.addProvider(server, new ItemTagProvider(datagenerator, event.getLookupProvider(), blockTags.contentsGetter(), existingFileHelper));
     datagenerator.addProvider(server, new FluidTagProvider(datagenerator, existingFileHelper));
     datagenerator.addProvider(server, new EntityTypeTagProvider(datagenerator, existingFileHelper));
-    datagenerator.addProvider(server, new BlockEntityTypeTagProvider(datagenerator, existingFileHelper));
-    datagenerator.addProvider(server, new BiomeTagProvider(datagenerator, existingFileHelper));
+    datagenerator.addProvider(server, new BlockEntityTypeTagProvider(datagenerator, event.getLookupProvider(), existingFileHelper));
+    datagenerator.addProvider(server, new BiomeTagProvider(datagenerator, event.getLookupProvider(), existingFileHelper));
     datagenerator.addProvider(server, new EnchantmentTagProvider(datagenerator, existingFileHelper));
     datagenerator.addProvider(server, new TConstructLootTableProvider(datagenerator));
     datagenerator.addProvider(server, new AdvancementsProvider(datagenerator));

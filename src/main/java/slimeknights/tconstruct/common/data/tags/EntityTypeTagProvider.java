@@ -1,5 +1,6 @@
 package slimeknights.tconstruct.common.data.tags;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.tags.EntityTypeTags;
@@ -9,15 +10,17 @@ import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.world.TinkerWorld;
 
+import java.util.concurrent.CompletableFuture;
+
 @SuppressWarnings("unchecked")
 public class EntityTypeTagProvider extends EntityTypeTagsProvider {
 
-  public EntityTypeTagProvider(DataGenerator generatorIn, ExistingFileHelper existingFileHelper) {
-    super(generatorIn, TConstruct.MOD_ID, existingFileHelper);
+  public EntityTypeTagProvider(DataGenerator generatorIn, CompletableFuture<HolderLookup.Provider> lookup, ExistingFileHelper existingFileHelper) {
+    super(generatorIn.getPackOutput(), lookup, TConstruct.MOD_ID, existingFileHelper);
   }
 
   @Override
-  public void addTags() {
+  public void addTags(HolderLookup.Provider lookup) {
     this.tag(TinkerTags.EntityTypes.SLIMES)
       .add(EntityType.SLIME, TinkerWorld.skySlimeEntity.get(), TinkerWorld.enderSlimeEntity.get(), TinkerWorld.terracubeEntity.get());
     this.tag(EntityTypeTags.FROG_FOOD).add(TinkerWorld.skySlimeEntity.get(), TinkerWorld.enderSlimeEntity.get(), TinkerWorld.terracubeEntity.get());

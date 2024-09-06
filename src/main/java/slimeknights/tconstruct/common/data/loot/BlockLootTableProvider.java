@@ -4,8 +4,9 @@ import net.minecraft.advancements.critereon.EnchantmentPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
-import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -52,10 +53,16 @@ import slimeknights.tconstruct.world.block.DirtType;
 import slimeknights.tconstruct.world.block.FoliageType;
 
 import javax.annotation.Nonnull;
+import java.util.HashSet;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class BlockLootTableProvider extends BlockLoot {
+public class BlockLootTableProvider extends BlockLootSubProvider {
+
+  protected BlockLootTableProvider() {
+    // TODO: Replace HashSet with some list of explosive resistant items
+    super(new HashSet<>(), FeatureFlags.REGISTRY.allFlags());
+  }
 
   @Nonnull
   @Override
@@ -66,7 +73,7 @@ public class BlockLootTableProvider extends BlockLoot {
   }
 
   @Override
-  protected void addTables() {
+  protected void generate() {
     this.addCommon();
     this.addDecorative();
     this.addGadgets();
@@ -314,11 +321,11 @@ public class BlockLootTableProvider extends BlockLoot {
     return createSelfDropDispatchTable(block, SILK_TOUCH_OR_SHEARS, alternativeLootEntry);
   }
 
-  private static LootTable.Builder dropSapling(Block blockIn, Block saplingIn, float... fortuneIn) {
+  private LootTable.Builder dropSapling(Block blockIn, Block saplingIn, float... fortuneIn) {
     return droppingSilkOrShears(blockIn, applyExplosionCondition(blockIn, LootItem.lootTableItem(saplingIn)).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, fortuneIn)));
   }
 
-  private static LootTable.Builder randomDropSlimeBallOrSapling(FoliageType foliageType, Block blockIn, Block sapling, float... fortuneIn) {
+  private LootTable.Builder randomDropSlimeBallOrSapling(FoliageType foliageType, Block blockIn, Block sapling, float... fortuneIn) {
     LootTable.Builder builder = dropSapling(blockIn, sapling, fortuneIn);
     SlimeType slime = foliageType.asSlime();
     if (slime != null) {
@@ -331,7 +338,7 @@ public class BlockLootTableProvider extends BlockLoot {
     return builder;
   }
 
-  private static LootTable.Builder droppingWithFunctions(Block block, Function<LootItem.Builder<?>, LootItem.Builder<?>> mapping) {
+  private LootTable.Builder droppingWithFunctions(Block block, Function<LootItem.Builder<?>, LootItem.Builder<?>> mapping) {
     return LootTable.lootTable().withPool(applyExplosionCondition(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(mapping.apply(LootItem.lootTableItem(block)))));
   }
 
@@ -342,7 +349,7 @@ public class BlockLootTableProvider extends BlockLoot {
    */
   private void registerBuildingLootTables(BuildingBlockObject object) {
     this.dropSelf(object.get());
-    this.add(object.getSlab(), BlockLoot::createSlabItemTable);
+    this.add(object.getSlab(), this::createSlabItemTable);
     this.dropSelf(object.getStairs());
   }
 
@@ -378,7 +385,7 @@ public class BlockLootTableProvider extends BlockLoot {
     this.dropSelf(object.getStrippedWood());
     // door
     this.dropSelf(object.getFenceGate());
-    this.add(object.getDoor(), BlockLoot::createDoorTable);
+    this.add(object.getDoor(), this::createDoorTable);
     this.dropSelf(object.getTrapdoor());
     // redstone
     this.dropSelf(object.getPressurePlate());
@@ -387,7 +394,7 @@ public class BlockLootTableProvider extends BlockLoot {
     this.dropSelf(object.getSign());
   }
 
-  private static Function<Block, LootTable.Builder> ADD_TABLE = block -> droppingWithFunctions(block, (builder) ->
+  private final Function<Block, LootTable.Builder> ADD_TABLE = block -> droppingWithFunctions(block, (builder) ->
     builder.apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY)).apply(RetexturedLootFunction::new));
 
   /**

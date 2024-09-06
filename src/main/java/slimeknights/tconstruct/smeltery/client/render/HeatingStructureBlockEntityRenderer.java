@@ -3,6 +3,7 @@ package slimeknights.tconstruct.smeltery.client.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Quaternion;
+import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
@@ -28,6 +29,7 @@ import slimeknights.tconstruct.smeltery.block.controller.ControllerBlock;
 import slimeknights.tconstruct.smeltery.block.entity.controller.HeatingStructureBlockEntity;
 import slimeknights.tconstruct.smeltery.block.entity.module.MeltingModuleInventory;
 import slimeknights.tconstruct.smeltery.block.entity.multiblock.HeatingStructureMultiblock.StructureData;
+import slimeknights.tconstruct.util.Maths;
 
 public class HeatingStructureBlockEntityRenderer implements BlockEntityRenderer<HeatingStructureBlockEntity> {
 
@@ -83,7 +85,7 @@ public class HeatingStructureBlockEntityRenderer implements BlockEntityRenderer<
     int zd = 1 + maxPos.getZ() - minPos.getZ();
     int layer = xd * zd;
     Direction facing = state.getValue(ControllerBlock.FACING);
-    Quaternion itemRotation = Vector3f.YP.rotationDegrees(-90.0F * (float) facing.get2DDataValue());
+    Quaternionf itemRotation = Maths.getDegreesQuaternion(Maths.POSITIVE_Y(), -90.0F * (float) facing.get2DDataValue());
     MeltingModuleInventory inventory = smeltery.getMeltingInventory();
     Minecraft mc = Minecraft.getInstance();
     ItemRenderer itemRenderer = mc.getItemRenderer();

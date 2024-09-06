@@ -8,6 +8,7 @@ import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.registration.object.ItemObject;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.registration.CastItemObject;
@@ -22,7 +23,7 @@ import static slimeknights.tconstruct.TConstruct.getResource;
 public class TinkerItemModelProvider extends ItemModelProvider {
 
   public TinkerItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-    super(generator, TConstruct.MOD_ID, existingFileHelper);
+    super(generator.getPackOutput(), TConstruct.MOD_ID, existingFileHelper);
   }
 
   @Override

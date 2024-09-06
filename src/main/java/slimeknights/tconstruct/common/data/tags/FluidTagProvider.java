@@ -1,5 +1,6 @@
 package slimeknights.tconstruct.common.data.tags;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.FluidTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -9,15 +10,17 @@ import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.fluids.TinkerFluids;
 
+import java.util.concurrent.CompletableFuture;
+
 @SuppressWarnings("unchecked")
 public class FluidTagProvider extends FluidTagsProvider {
 
-  public FluidTagProvider(DataGenerator generatorIn, ExistingFileHelper helper) {
-    super(generatorIn, TConstruct.MOD_ID, helper);
+  public FluidTagProvider(DataGenerator generatorIn, CompletableFuture<HolderLookup.Provider> lookup, ExistingFileHelper helper) {
+    super(generatorIn.getPackOutput(), lookup, TConstruct.MOD_ID, helper);
   }
 
   @Override
-  public void addTags() {
+  public void addTags(HolderLookup.Provider provider) {
     // first, register common tags
     // slime
     tagAll(TinkerFluids.earthSlime);

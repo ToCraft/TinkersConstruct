@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.library.client.model;
 
 import net.minecraft.client.renderer.block.model.ItemTransforms.TransformType;
+import net.minecraft.world.item.ItemDisplayContext;
 import slimeknights.tconstruct.TConstruct;
 
 import java.util.Locale;
@@ -20,28 +21,28 @@ public class TinkerTransformTypes {
   /**
    * Used by the melter and smeltery for display of items its melting
    */
-  public static TransformType MELTER = registerSmallTool(create("melter", TransformType.NONE));
+  public static ItemDisplayContext MELTER = registerSmallTool(create("melter", ItemDisplayContext.NONE));
   /**
    * Used by the part builder, crafting station, tinkers station, and tinker anvil
    */
-  public static TransformType TABLE = create("table", TransformType.NONE);
+  public static ItemDisplayContext TABLE = create("table", ItemDisplayContext.NONE);
   /**
    * Used by the casting table for item rendering
    */
-  public static TransformType CASTING_TABLE = registerSmallTool(create("casting_table", TransformType.FIXED));
+  public static ItemDisplayContext CASTING_TABLE = registerSmallTool(create("casting_table", ItemDisplayContext.FIXED));
   /**
    * Used by the casting basin for item rendering
    */
-  public static TransformType CASTING_BASIN = registerSmallTool(create("casting_basin", TransformType.NONE));
+  public static ItemDisplayContext CASTING_BASIN = registerSmallTool(create("casting_basin", ItemDisplayContext.NONE));
 
   /**
    * Creates a transform type
    */
-  private static TransformType create(String name, TransformType fallback) {
+  private static ItemDisplayContext create(String name, ItemDisplayContext fallback) {
     String key = "TCONSTRUCT_" + name.toUpperCase(Locale.ROOT);
-    if (fallback == TransformType.NONE) {
-      return TransformType.create(key, TConstruct.getResource(name));
+    if (fallback == ItemDisplayContext.NONE) {
+      return ItemDisplayContext.create(key, TConstruct.getResource(name), null);
     }
-    return TransformType.create(key, TConstruct.getResource(name), fallback);
+    return ItemDisplayContext.create(key, TConstruct.getResource(name), fallback);
   }
 }

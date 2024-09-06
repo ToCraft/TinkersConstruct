@@ -1,8 +1,8 @@
 package slimeknights.tconstruct.library.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.block.model.ItemTransforms.TransformType;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraftforge.client.model.BakedModelWrapper;
 
 /**
@@ -18,8 +18,8 @@ public class BakedUniqueGuiModel extends BakedModelWrapper<BakedModel> {
   }
 
   @Override
-  public BakedModel applyTransform(TransformType cameraTransformType, PoseStack mat, boolean applyLeftHandTransform) {
-    if (cameraTransformType == TransformType.GUI) {
+  public BakedModel applyTransform(ItemDisplayContext cameraTransformType, PoseStack mat, boolean applyLeftHandTransform) {
+    if (cameraTransformType == ItemDisplayContext.GUI) {
       return gui.applyTransform(cameraTransformType, mat, applyLeftHandTransform);
     }
     return originalModel.applyTransform(cameraTransformType, mat, applyLeftHandTransform);

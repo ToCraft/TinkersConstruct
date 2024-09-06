@@ -30,6 +30,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec2;
 import net.minecraftforge.client.model.BakedModelWrapper;
@@ -93,7 +94,7 @@ public class ToolModel implements IUnbakedGeometry<ToolModel> {
   /**
    * Registers a new small tool transform type
    */
-  public static synchronized TransformType registerSmallTool(TransformType type) {
+  public static synchronized ItemDisplayContext registerSmallTool(ItemDisplayContext type) {
     SMALL_TOOL_TYPES.set(type.ordinal());
     return type;
   }
@@ -458,9 +459,9 @@ public class ToolModel implements IUnbakedGeometry<ToolModel> {
     }
 
     @Override
-    public BakedModel applyTransform(TransformType cameraTransformType, PoseStack mat, boolean applyLeftHandTransform) {
+    public BakedModel applyTransform(ItemDisplayContext cameraTransformType, PoseStack mat, boolean applyLeftHandTransform) {
       BakedModel model = originalModel;
-      if (cameraTransformType == TransformType.GUI) {
+      if (cameraTransformType == ItemDisplayContext.GUI) {
         model = gui;
       } else if (SMALL_TOOL_TYPES.get(cameraTransformType.ordinal())) {
         model = small;
