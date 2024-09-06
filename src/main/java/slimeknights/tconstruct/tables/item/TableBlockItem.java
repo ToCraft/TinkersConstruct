@@ -7,13 +7,14 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import slimeknights.mantle.item.RetexturedBlockItem;
+import slimeknights.tconstruct.tables.block.RetexturedTableBlock;
 
 import java.util.function.BooleanSupplier;
 
 /**
  * Retextured block that conditionally enables show all variants
  */
-public class TableBlockItem extends RetexturedBlockItem {
+public class TableBlockItem extends RetexturedTableBlock {
 
   private final BooleanSupplier showAllCondition;
 

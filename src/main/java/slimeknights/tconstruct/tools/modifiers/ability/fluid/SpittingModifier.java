@@ -1,7 +1,7 @@
 package slimeknights.tconstruct.tools.modifiers.ability.fluid;
 
 import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
+import org.joml.Vector3f;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;

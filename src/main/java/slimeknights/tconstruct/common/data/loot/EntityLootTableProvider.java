@@ -5,6 +5,7 @@ import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.advancements.critereon.SlimePredicate;
 import net.minecraft.data.loot.EntityLoot;
+import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -29,7 +30,7 @@ import slimeknights.tconstruct.world.TinkerWorld;
 
 import java.util.Map.Entry;
 
-public class EntityLootTableProvider extends EntityLoot {
+public class EntityLootTableProvider extends EntityLootSubProvider {
 
   @Override
   protected Iterable<EntityType<?>> getKnownEntities() {

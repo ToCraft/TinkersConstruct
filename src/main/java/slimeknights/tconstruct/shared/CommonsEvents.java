@@ -37,7 +37,7 @@ public class CommonsEvents {
     }
 
     // check if we jumped from a slime block
-    BlockPos pos = new BlockPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
+    BlockPos pos = new BlockPos(event.getEntity().blockPosition());
     if (event.getEntity().getCommandSenderWorld().isEmptyBlock(pos)) {
       pos = pos.below();
     }

@@ -167,7 +167,7 @@ public class ModifierUsageCommand {
     // finally, output the table
     table.build(logOutput);
     TConstruct.LOG.info(logOutput.toString());
-    context.getSource().sendSuccess(SUCCESS, true);
+    context.getSource().sendSuccess(() -> SUCCESS, true);
     return finalList.size();
   }
 
