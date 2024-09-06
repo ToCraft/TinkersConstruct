@@ -2,6 +2,7 @@ package slimeknights.tconstruct.common.data.tags;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -12,8 +13,10 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.registration.object.EnumObject;
 import slimeknights.mantle.registration.object.MetalItemObject;
 import slimeknights.tconstruct.TConstruct;
@@ -34,6 +37,7 @@ import slimeknights.tconstruct.tools.item.ArmorSlotType;
 import slimeknights.tconstruct.world.TinkerHeadType;
 import slimeknights.tconstruct.world.TinkerWorld;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 import static net.minecraft.tags.ItemTags.CLUSTER_MAX_HARVESTABLES;
@@ -89,8 +93,8 @@ import static slimeknights.tconstruct.common.TinkerTags.Items.WORN_ARMOR;
 @SuppressWarnings("unchecked")
 public class ItemTagProvider extends ItemTagsProvider {
 
-  public ItemTagProvider(DataGenerator generatorIn, BlockTagsProvider blockTagProvider, ExistingFileHelper existingFileHelper) {
-    super(generatorIn, blockTagProvider, TConstruct.MOD_ID, existingFileHelper);
+  public ItemTagProvider(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pLookupProvider, CompletableFuture<TagLookup<Block>> pBlockTags, @Nullable ExistingFileHelper existingFileHelper) {
+    super(pOutput, pLookupProvider, pBlockTags, TConstruct.MOD_ID, existingFileHelper);
   }
 
   @Override

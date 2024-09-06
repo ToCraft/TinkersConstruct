@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.smeltery.client.screen;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -84,7 +85,7 @@ public class HeatingStructureScreen extends MultiModuleScreen<HeatingStructureCo
   }
 
   @Override
-  protected void renderLabels(PoseStack matrices, int mouseX, int mouseY) {
+  protected void renderLabels(GuiGraphics matrices, int mouseX, int mouseY) {
     super.renderLabels(matrices, mouseX, mouseY);
 
     assert minecraft != null;

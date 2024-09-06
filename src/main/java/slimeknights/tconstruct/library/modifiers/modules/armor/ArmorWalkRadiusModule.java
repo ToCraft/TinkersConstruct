@@ -57,11 +57,11 @@ public interface ArmorWalkRadiusModule<T> extends ArmorWalkModifierHook, Modifie
 
   @Override
   default void onWalk(IToolStackView tool, ModifierEntry modifier, LivingEntity living, BlockPos prevPos, BlockPos newPos) {
-    if (living.isOnGround() && !tool.isBroken() && !living.level.isClientSide) {
+    if (living.onGround() && !tool.isBroken() && !living.level().isClientSide) {
       T context = getContext(tool, modifier, living, prevPos, newPos);
       float radius = Math.min(16, getRadius(tool, modifier));
       MutableBlockPos mutable = new MutableBlockPos();
-      Level world = living.level;
+      Level world = living.level();
       Vec3 posVec = living.position();
       BlockPos center = new BlockPos(posVec.x, posVec.y + 0.5, posVec.z);
       for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, 0, -radius), center.offset(radius, 0, radius))) {

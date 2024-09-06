@@ -1,7 +1,5 @@
 package slimeknights.tconstruct.library.tools.item.ranged;
 
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.nbt.CompoundTag;
@@ -29,6 +27,8 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ToolActions;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -177,7 +177,7 @@ public class ModifiableCrossbowItem extends ModifiableLauncherItem {
    */
   public static void fireCrossbow(IToolStackView tool, Player player, InteractionHand hand, CompoundTag heldAmmo) {
     // ammo already loaded? time to fire
-    Level level = player.level;
+    Level level = player.level();
     if (!level.isClientSide) {
       // shoot the projectile
       int damage = 0;
@@ -227,7 +227,7 @@ public class ModifiableCrossbowItem extends ModifiableLauncherItem {
         // setup projectile
         Vector3f targetVector = new Vector3f(player.getViewVector(1.0f));
         float angle = startAngle + (10 * arrowIndex);
-        targetVector.transform(new Quaternion(new Vector3f(player.getUpVector(1.0f)), angle, true));
+        targetVector.transform(new Quaternionf(new Vector3f(player.getUpVector(1.0f)), angle, true));
         projectile.shoot(targetVector.x(), targetVector.y(), targetVector.z(), velocity * speed, inaccuracy);
 
         // add modifiers to the projectile, will let us use them on impact

@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Blocks;
@@ -52,7 +53,7 @@ public final class AchievementEvents {
   @SubscribeEvent
   public static void onDamageEntity(LivingHurtEvent event) {
     DamageSource source = event.getSource();
-    if (source.isProjectile() && !(source.getEntity() instanceof FakePlayer) && source.getEntity() instanceof ServerPlayer) {// && source.getImmediateSource() instanceof EntityArrow) {
+    if (source.is(DamageTypes.MOB_PROJECTILE) && !(source.getEntity() instanceof FakePlayer) && source.getEntity() instanceof ServerPlayer) {// && source.getImmediateSource() instanceof EntityArrow) {
       grantAdvancement((ServerPlayer) source.getEntity(), ADVANCEMENT_SHOOT_ARROW);
     }
   }

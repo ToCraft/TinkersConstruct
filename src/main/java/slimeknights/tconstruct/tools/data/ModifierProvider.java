@@ -205,7 +205,7 @@ public class ModifierProvider extends AbstractModifierProvider implements ICondi
     // general abilities
     buildModifier(ModifierIds.reach)
       .addModule(AttributeModule.builder(ForgeMod.REACH_DISTANCE.get(), Operation.ADDITION).uniqueFrom(ModifierIds.reach).eachLevel(1))
-      .addModule(AttributeModule.builder(ForgeMod.ATTACK_RANGE.get(), Operation.ADDITION).uniqueFrom(ModifierIds.reach).eachLevel(1));
+      .addModule(AttributeModule.builder(Attributes.ATTACK_DAMAGE, Operation.ADDITION).uniqueFrom(ModifierIds.reach).eachLevel(1));
     IJsonPredicate<IToolContext> noUnbreakable = HasModifierPredicate.hasModifier(TinkerModifiers.unbreakable.getId(), 1).inverted();
     buildModifier(ModifierIds.reinforced)
       // level 0 to 5: 0.025 * LEVEL * (11 - LEVEL)

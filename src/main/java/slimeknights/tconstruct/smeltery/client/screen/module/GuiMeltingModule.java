@@ -2,6 +2,7 @@ package slimeknights.tconstruct.smeltery.client.screen.module;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import lombok.AllArgsConstructor;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.Slot;
@@ -36,7 +37,7 @@ public class GuiMeltingModule {
   /**
    * Draws the heat bars on each slot
    */
-  public void drawHeatBars(PoseStack matrices) {
+  public void drawHeatBars(GuiGraphics matrices) {
     int temperature = this.temperature.getAsInt();
     for (int i = 0; i < inventory.getSlots(); i++) {
       Slot slot = screen.getMenu().slots.get(i);

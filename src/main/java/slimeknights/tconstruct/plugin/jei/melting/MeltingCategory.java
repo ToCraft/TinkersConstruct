@@ -15,6 +15,7 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
@@ -79,7 +80,7 @@ public class MeltingCategory extends AbstractMeltingCategory {
   }
 
   @Override
-  public void draw(MeltingRecipe recipe, IRecipeSlotsView slots, PoseStack matrices, double mouseX, double mouseY) {
+  public void draw(MeltingRecipe recipe, IRecipeSlotsView slots, GuiGraphics matrices, double mouseX, double mouseY) {
     super.draw(recipe, slots, matrices, mouseX, mouseY);
 
     // solid fuel slot

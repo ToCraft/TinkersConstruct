@@ -1,7 +1,6 @@
 package slimeknights.tconstruct.gadgets.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.Sheets;
@@ -20,6 +19,8 @@ import net.minecraftforge.client.event.RenderItemInFrameEvent;
 import net.minecraftforge.client.event.RenderNameTagEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Event.Result;
+import org.joml.Vector2f;
+import org.joml.Vector3f;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.gadgets.entity.FancyItemFrameEntity;
 import slimeknights.tconstruct.gadgets.entity.FrameType;
@@ -94,7 +95,7 @@ public class FancyItemFrameRenderer<T extends FancyItemFrameEntity> extends Item
       // determine rotation for the item inside
       MapItemSavedData mapdata = null;
       if (isMap) {
-        mapdata = MapItem.getSavedData(stack, frame.level);
+        mapdata = MapItem.getSavedData(stack, frame.level());
       }
       int frameRotation = frame.getRotation();
       // for diamond, render the timer as a partial rotation

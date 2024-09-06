@@ -1,7 +1,7 @@
 package slimeknights.tconstruct.common.data.tags;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -49,14 +49,14 @@ import static net.minecraftforge.common.Tags.Blocks.NEEDS_GOLD_TOOL;
 import static net.minecraftforge.common.Tags.Blocks.NEEDS_NETHERITE_TOOL;
 
 @SuppressWarnings({"unchecked", "SameParameterValue"})
-public class BlockTagProvider extends BlockTagsProvider {
+public class BlockTagProvider extends TagsProvider<Block> {
 
   public BlockTagProvider(DataGenerator generatorIn, ExistingFileHelper existingFileHelper) {
     super(generatorIn, TConstruct.MOD_ID, existingFileHelper);
   }
 
   @Override
-  protected void addTags() {
+  protected void addTags(HolderLookup.Provider provider) {
     this.addCommon();
     this.addTools();
     this.addWorld();

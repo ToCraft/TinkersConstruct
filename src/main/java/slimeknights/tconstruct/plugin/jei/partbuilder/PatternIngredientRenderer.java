@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import mezz.jei.api.ingredients.IIngredientRenderer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
@@ -24,11 +25,11 @@ public class PatternIngredientRenderer implements IIngredientRenderer<Pattern> {
   public static final PatternIngredientRenderer INSTANCE = new PatternIngredientRenderer();
 
   @Override
-  public void render(PoseStack matrices, @Nullable Pattern pattern) {
+  public void render(GuiGraphics matrices, @Nullable Pattern pattern) {
     if (pattern != null) {
       TextureAtlasSprite sprite = Minecraft.getInstance().getModelManager().getAtlas(InventoryMenu.BLOCK_ATLAS).getSprite(pattern.getTexture());
       RenderUtils.setup(InventoryMenu.BLOCK_ATLAS);
-      Screen.blit(matrices, 0, 0, 100, 16, 16, sprite);
+      matrices.blit(0, 0, 100, 16, 16, sprite);
     }
   }
 

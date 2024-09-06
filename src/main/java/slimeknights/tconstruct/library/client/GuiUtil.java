@@ -32,9 +32,8 @@ public final class GuiUtil {
    * @param screen     Parent screen
    * @param background Background location
    */
-  public static void drawBackground(PoseStack matrices, AbstractContainerScreen<?> screen, ResourceLocation background) {
-    RenderUtils.setup(background);
-    screen.blit(matrices, screen.leftPos, screen.topPos, 0, 0, screen.imageWidth, screen.imageHeight);
+  public static void drawBackground(GuiGraphics matrices, AbstractContainerScreen<?> screen, ResourceLocation background) {
+    matrices.blit(background, screen.leftPos, screen.topPos, 0, 0, screen.imageWidth, screen.imageHeight);
   }
 
   /**
@@ -155,8 +154,8 @@ public final class GuiUtil {
     // tile vertically
     float u1 = sprite.getU0();
     float v1 = sprite.getV0();
-    int spriteHeight = sprite.getHeight();
-    int spriteWidth = sprite.getWidth();
+    int spriteHeight = sprite.contents().height();
+    int spriteWidth = sprite.contents().width();
     int startX = x + screen.leftPos;
     int startY = y + screen.topPos;
     do {
@@ -233,7 +232,7 @@ public final class GuiUtil {
     }
     // amount to offset element by for the height
     int deltaY = element.h - height;
-    Screen.blit(matrices, x, y + deltaY, element.x, element.y + deltaY, element.w, height, element.texW, element.texH);
+    matrices.blit(x, y + deltaY, element.x, element.y + deltaY, element.w, height, element.texW, element.texH);
   }
 
   /**

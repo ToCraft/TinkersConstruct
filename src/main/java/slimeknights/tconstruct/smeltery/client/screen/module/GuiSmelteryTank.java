@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.smeltery.client.screen.module;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -126,7 +127,7 @@ public class GuiSmelteryTank {
    * @param mouseX   Mouse X
    * @param mouseY   Mouse Y
    */
-  public void renderHighlight(PoseStack matrices, int mouseX, int mouseY) {
+  public void renderHighlight(GuiGraphics matrices, int mouseX, int mouseY) {
     int checkX = mouseX - parent.leftPos;
     int checkY = mouseY - parent.topPos;
     if (withinTank(checkX, checkY)) {
@@ -159,7 +160,7 @@ public class GuiSmelteryTank {
    * @param mouseX   Mouse X
    * @param mouseY   Mouse Y
    */
-  public void drawTooltip(PoseStack matrices, int mouseX, int mouseY) {
+  public void drawTooltip(GuiGraphics matrices, int mouseX, int mouseY) {
     // Liquids
     int checkX = mouseX - parent.leftPos;
     int checkY = mouseY - parent.topPos;

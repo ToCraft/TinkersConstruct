@@ -231,7 +231,7 @@ public class BucketingModifier extends Modifier implements BlockInteractionModif
       return InteractionResult.PASS;
     }
     // have to trace again to find the fluid, ensure we can edit the position
-    Level world = player.level;
+    Level world = player.level();
     BlockHitResult trace = ModifiableItem.blockRayTrace(world, player, ClipContext.Fluid.SOURCE_ONLY);
     if (trace.getType() != Type.BLOCK) {
       return InteractionResult.PASS;

@@ -3,6 +3,7 @@ package slimeknights.tconstruct.tools.client;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.network.chat.contents.TranslatableContents;
@@ -201,15 +202,14 @@ public class ModifierClientEvents {
 
         int scaledWidth = mc.getWindow().getGuiScaledWidth();
         int scaledHeight = mc.getWindow().getGuiScaledHeight();
-        PoseStack matrixStack = event.getPoseStack();
+        GuiGraphics matrixStack = event.getGuiGraphics();
         float partialTicks = event.getPartialTick();
 
         // want just above the normal hotbar item
         if (renderShield) {
-          RenderSystem.setShaderTexture(0, Icons.ICONS);
           int x = scaledWidth / 2 + (player.getMainArm().getOpposite() == HumanoidArm.LEFT ? -117 : 101);
           int y = scaledHeight - 38;
-          Screen.blit(matrixStack, x - 3, y - 3, player.getOffhandItem().isEmpty() ? 211 : 189, 0, SLOT_BACKGROUND_SIZE, SLOT_BACKGROUND_SIZE, 256, 256);
+          matrixStack.blit(Icons.ICONS, x - 3, y - 3, player.getOffhandItem().isEmpty() ? 211 : 189, 0, SLOT_BACKGROUND_SIZE, SLOT_BACKGROUND_SIZE, 256, 256);
           mc.gui.renderSlot(x, y, partialTicks, player, nextOffhand, 11);
         }
 
@@ -235,17 +235,16 @@ public class ModifierClientEvents {
           int yStart = yOrientation.align(scaledHeight - SLOT_BACKGROUND_SIZE * rows) + Config.CLIENT.itemFrameYOffset.get();
 
           // draw backgrounds
-          RenderSystem.setShaderTexture(0, Icons.ICONS);
           int lastRow = rows - 1;
           for (int r = 0; r < lastRow; r++) {
             for (int c = 0; c < columns; c++) {
-              Screen.blit(matrixStack, xStart + c * SLOT_BACKGROUND_SIZE, yStart + r * SLOT_BACKGROUND_SIZE, 167, 0, SLOT_BACKGROUND_SIZE, SLOT_BACKGROUND_SIZE, 256, 256);
+              matrixStack.blit(Icons.ICONS, xStart + c * SLOT_BACKGROUND_SIZE, yStart + r * SLOT_BACKGROUND_SIZE, 167, 0, SLOT_BACKGROUND_SIZE, SLOT_BACKGROUND_SIZE, 256, 256);
             }
           }
           // last row will be aligned in the direction of x orientation (center, left, or right)
           int lastRowOffset = xOrientation.align((columns - inLastRow) * 2) * SLOT_BACKGROUND_SIZE / 2;
           for (int c = 0; c < inLastRow; c++) {
-            Screen.blit(matrixStack, xStart + c * SLOT_BACKGROUND_SIZE + lastRowOffset, yStart + lastRow * SLOT_BACKGROUND_SIZE, 167, 0, SLOT_BACKGROUND_SIZE, SLOT_BACKGROUND_SIZE, 256, 256);
+            matrixStack.blit(Icons.ICONS, xStart + c * SLOT_BACKGROUND_SIZE + lastRowOffset, yStart + lastRow * SLOT_BACKGROUND_SIZE, 167, 0, SLOT_BACKGROUND_SIZE, SLOT_BACKGROUND_SIZE, 256, 256);
           }
 
           // draw items

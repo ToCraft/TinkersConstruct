@@ -2,6 +2,7 @@ package slimeknights.tconstruct;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -66,6 +67,7 @@ import slimeknights.tconstruct.world.TinkerWorld;
 import javax.annotation.Nullable;
 import java.util.Locale;
 import java.util.Random;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 /**
@@ -143,9 +145,9 @@ public class TConstruct {
     DataGenerator datagenerator = event.getGenerator();
     ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
     boolean server = event.includeServer();
-    BlockTagProvider blockTags = new BlockTagProvider(datagenerator, existingFileHelper);
+    TagsProvider<Block> blockTags = new BlockTagProvider(datagenerator, existingFileHelper);
     datagenerator.addProvider(server, blockTags);
-    datagenerator.addProvider(server, new ItemTagProvider(datagenerator, blockTags, existingFileHelper));
+    datagenerator.addProvider(server, new ItemTagProvider(datagenerator.getPackOutput(), event.getLookupProvider(), blockTags.contentsGetter(), existingFileHelper));
     datagenerator.addProvider(server, new FluidTagProvider(datagenerator, existingFileHelper));
     datagenerator.addProvider(server, new EntityTypeTagProvider(datagenerator, existingFileHelper));
     datagenerator.addProvider(server, new BlockEntityTypeTagProvider(datagenerator, existingFileHelper));
