@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.registries.RegistryObject;
 import slimeknights.mantle.registration.deferred.BlockDeferredRegister;
 import slimeknights.mantle.registration.object.EnumObject;
@@ -25,7 +26,7 @@ import java.util.function.Supplier;
 @SuppressWarnings("UnusedReturnValue")
 public class BlockDeferredRegisterExtension extends BlockDeferredRegister {
 
-  private static final BlockBehaviour.Properties POTTED_PROPS = BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion();
+  private static final BlockBehaviour.Properties POTTED_PROPS = BlockBehaviour.Properties.of().pushReaction(PushReaction.DESTROY).isRedstoneConductor((state, getter, pos) -> false).forceSolidOff().forceSolidOn().instabreak().noOcclusion();
 
   public BlockDeferredRegisterExtension(String modID) {
     super(modID);

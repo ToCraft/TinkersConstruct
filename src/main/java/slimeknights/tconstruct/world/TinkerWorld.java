@@ -53,7 +53,6 @@ import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.RarityFilter;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.common.PlantType;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -135,13 +134,13 @@ public final class TinkerWorld extends TinkerModule {
    * Blocks
    */
   // ores
-  public static final ItemObject<Block> cobaltOre = BLOCKS.register("cobalt_ore", () -> new Block(builder(Material.STONE, MapColor.NETHER, SoundType.NETHER_ORE).requiresCorrectToolForDrops().strength(10.0F)), DEFAULT_BLOCK_ITEM);
-  public static final ItemObject<Block> rawCobaltBlock = BLOCKS.register("raw_cobalt_block", () -> new Block(builder(Material.STONE, MapColor.COLOR_BLUE, SoundType.NETHER_ORE).requiresCorrectToolForDrops().strength(6.0f, 7.0f)), DEFAULT_BLOCK_ITEM);
+  public static final ItemObject<Block> cobaltOre = BLOCKS.register("cobalt_ore", () -> new Block(builder(Blocks.STONE, MapColor.NETHER, SoundType.NETHER_ORE).requiresCorrectToolForDrops().strength(10.0F)), DEFAULT_BLOCK_ITEM);
+  public static final ItemObject<Block> rawCobaltBlock = BLOCKS.register("raw_cobalt_block", () -> new Block(builder(Blocks.STONE, MapColor.COLOR_BLUE, SoundType.NETHER_ORE).requiresCorrectToolForDrops().strength(6.0f, 7.0f)), DEFAULT_BLOCK_ITEM);
   public static final ItemObject<Item> rawCobalt = ITEMS.register("raw_cobalt", WORLD_PROPS);
 
   // slime
   public static final EnumObject<SlimeType, SlimeBlock> slime = Util.make(() -> {
-    Function<SlimeType, BlockBehaviour.Properties> slimeProps = type -> builder(Material.CLAY, type.getMapColor(), SoundType.SLIME_BLOCK).friction(0.8F).sound(SoundType.SLIME_BLOCK).noOcclusion();
+    Function<SlimeType, BlockBehaviour.Properties> slimeProps = type -> builder(Blocks.CLAY, type.getMapColor(), SoundType.SLIME_BLOCK).friction(0.8F).sound(SoundType.SLIME_BLOCK).noOcclusion();
     return new EnumObject.Builder<SlimeType, SlimeBlock>(SlimeType.class)
       .put(SlimeType.EARTH, () -> (SlimeBlock) Blocks.SLIME_BLOCK)
       // sky slime: sticks to anything, but will not pull back
@@ -170,7 +169,7 @@ public final class TinkerWorld extends TinkerModule {
   public static final Map<DirtType, EnumObject<FoliageType, Block>> slimeGrass = new EnumMap<>(DirtType.class);
 
   static {
-    Function<FoliageType, BlockBehaviour.Properties> slimeGrassProps = type -> builder(Material.GRASS, type.getMapColor(), SoundType.SLIME_BLOCK).strength(2.0f).requiresCorrectToolForDrops().randomTicks();
+    Function<FoliageType, BlockBehaviour.Properties> slimeGrassProps = type -> builder(Blocks.GRASS, type.getMapColor(), SoundType.SLIME_BLOCK).strength(2.0f).requiresCorrectToolForDrops().randomTicks();
     Function<FoliageType, Block> slimeGrassRegister = type -> type.isNether() ? new SlimeNyliumBlock(slimeGrassProps.apply(type), type) : new SlimeGrassBlock(slimeGrassProps.apply(type), type);
     // blood is not an exact match for vanilla, but close enough
     FoliageType[] values = FoliageType.values();
@@ -194,10 +193,10 @@ public final class TinkerWorld extends TinkerModule {
   private static Function<WoodVariant, BlockBehaviour.Properties> createSlimewood(MapColor planks, MapColor bark) {
     return type -> switch (type) {
       case WOOD ->
-        BlockBehaviour.Properties.of(Material.NETHER_WOOD, bark).sound(SoundType.WOOD).requiresCorrectToolForDrops();
+        BlockBehaviour.Properties.of().mapColor(bark).sound(SoundType.WOOD).requiresCorrectToolForDrops();
       case LOG ->
-        BlockBehaviour.Properties.of(Material.NETHER_WOOD, state -> state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? planks : bark).sound(SoundType.WOOD).requiresCorrectToolForDrops();
-      default -> BlockBehaviour.Properties.of(Material.NETHER_WOOD, planks).sound(SoundType.SLIME_BLOCK);
+        BlockBehaviour.Properties.of(Blocks.NETHER_WOOD, state -> state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? planks : bark).sound(SoundType.WOOD).requiresCorrectToolForDrops();
+      default -> BlockBehaviour.Properties.of().mapColor(planks).sound(SoundType.SLIME_BLOCK);
     };
   }
 
@@ -216,7 +215,7 @@ public final class TinkerWorld extends TinkerModule {
     Function<FoliageType, BlockBehaviour.Properties> props = type -> {
       BlockBehaviour.Properties properties;
       if (type.isNether()) {
-        properties = builder(Material.REPLACEABLE_FIREPROOF_PLANT, type.getMapColor(), SoundType.ROOTS);
+        properties = builder(Blocks.REPLACEABLE_FIREPROOF_PLANT, type.getMapColor(), SoundType.ROOTS);
       } else {
         properties = builder(Material.REPLACEABLE_PLANT, type.getMapColor(), SoundType.GRASS);
       }

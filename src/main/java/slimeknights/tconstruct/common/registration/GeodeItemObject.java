@@ -49,10 +49,10 @@ public class GeodeItemObject extends ItemObject<Item> {
     String name = shard.getId().getPath();
     Function<Block, ? extends BlockItem> blockItem = block -> new BlockItem(block, props);
     ToIntFunction<BlockState> crystalLight = light.apply(0);
-    block = register.register(name + "_block", () -> new CrystalBlock(chimeSound, BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER).mapColor(color).lightLevel(crystalLight).strength(1.5F).sound(blockSound).requiresCorrectToolForDrops()), blockItem);
-    budding = register.register("budding_" + name, () -> new BuddingCrystalBlock(this, chimeSound, BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER).mapColor(color).randomTicks().lightLevel(crystalLight).strength(1.5F).sound(blockSound).requiresCorrectToolForDrops()), blockItem);
+    block = register.register(name + "_block", () -> new CrystalBlock(chimeSound, BlockBehaviour.Properties.of().mapColor(color).lightLevel(crystalLight).strength(1.5F).sound(blockSound).requiresCorrectToolForDrops()), blockItem);
+    budding = register.register("budding_" + name, () -> new BuddingCrystalBlock(this, chimeSound, BlockBehaviour.Properties.of().mapColor(color).randomTicks().lightLevel(crystalLight).strength(1.5F).sound(blockSound).requiresCorrectToolForDrops()), blockItem);
     // buds
-    Supplier<BlockBehaviour.Properties> budProps = () -> BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER).mapColor(color).noOcclusion().strength(1.5F);
+    Supplier<BlockBehaviour.Properties> budProps = () -> BlockBehaviour.Properties.of().mapColor(color).noOcclusion().strength(1.5F);
     cluster = register.register(name + "_cluster", () -> new CrystalClusterBlock(chimeSound, 7, 3, budProps.get().lightLevel(light.apply(5)).sound(clusterSounds.get(BudSize.CLUSTER))), blockItem);
     smallBud = register.register("small_" + name + "_bud", () -> new CrystalClusterBlock(chimeSound, 3, 3, budProps.get().lightLevel(light.apply(1)).sound(clusterSounds.get(BudSize.SMALL))), blockItem);
     mediumBud = register.register("medium_" + name + "_bud", () -> new CrystalClusterBlock(chimeSound, 4, 3, budProps.get().lightLevel(light.apply(2)).sound(clusterSounds.get(BudSize.MEDIUM))), blockItem);

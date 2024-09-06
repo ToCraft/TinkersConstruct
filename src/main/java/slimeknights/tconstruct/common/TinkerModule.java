@@ -148,7 +148,11 @@ public abstract class TinkerModule {
    * Same as above, but with a color
    */
   protected static BlockBehaviour.Properties builder(BlockBehaviour material, MapColor color, SoundType soundType) {
-    return Block.Properties.copy(material).mapColor(color).sound(soundType);
+    return builder(Block.Properties.copy(material), color, soundType);
+  }
+
+  protected static BlockBehaviour.Properties builder(Block.Properties properties, MapColor color, SoundType soundType) {
+    return properties.mapColor(color).sound(soundType);
   }
 
   /**
