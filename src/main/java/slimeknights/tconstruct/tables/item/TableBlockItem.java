@@ -17,7 +17,7 @@ public class TableBlockItem extends RetexturedBlockItem {
 
   private final BooleanSupplier showAllCondition;
 
-  public TableBlockItem(Block block, TagKey<Item> textureTag, Properties builder, BooleanSupplier showAllCondition) {
+  public TableBlockItem(Block block, TagKey<Item> textureTag, Item.Properties builder, BooleanSupplier showAllCondition) {
     super(block, textureTag, builder);
     this.showAllCondition = showAllCondition;
   }

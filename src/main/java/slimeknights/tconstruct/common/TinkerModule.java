@@ -81,7 +81,7 @@ public abstract class TinkerModule {
   //
 
   // Concurrent in case Forge loads something asynchronous
-  protected static final List<ItemLike> TAB_GENERAL_ITEMS = new CopyOnWriteArrayList<>();
+  public static final List<ItemLike> TAB_GENERAL_ITEMS = new CopyOnWriteArrayList<>();
 
   /**
    * Creative tab for items that do not fit in another tab
@@ -93,8 +93,8 @@ public abstract class TinkerModule {
     }
   }).build();
 
-  public static <I extends ItemLike> I addToTabGeneral(I item) {
-    TAB_GENERAL_ITEMS.add(item);
+  public static <I extends ItemLike> I addToTabItemList(I item, List<ItemLike> list) {
+    list.add(item);
     return item;
   }
 
@@ -102,8 +102,8 @@ public abstract class TinkerModule {
   protected static final Item.Properties HIDDEN_PROPS = new Item.Properties();
   protected static final Item.Properties GENERAL_PROPS = new Item.Properties();
   protected static final Function<Block, ? extends BlockItem> HIDDEN_BLOCK_ITEM = (b) -> new BlockItem(b, HIDDEN_PROPS);
-  protected static final Function<Block, ? extends BlockItem> GENERAL_BLOCK_ITEM = (b) -> addToTabGeneral(new BlockItem(b, GENERAL_PROPS));
-  protected static final Function<Block, ? extends BlockItem> GENERAL_TOOLTIP_BLOCK_ITEM = (b) -> addToTabGeneral(new BlockTooltipItem(b, GENERAL_PROPS));
+  protected static final Function<Block, ? extends BlockItem> GENERAL_BLOCK_ITEM = (b) -> addToTabItemList(new BlockItem(b, GENERAL_PROPS), TAB_GENERAL_ITEMS);
+  protected static final Function<Block, ? extends BlockItem> GENERAL_TOOLTIP_BLOCK_ITEM = (b) -> addToTabItemList(new BlockTooltipItem(b, GENERAL_PROPS), TAB_GENERAL_ITEMS);
   protected static final Supplier<Item> TOOLTIP_ITEM = () -> new TooltipItem(GENERAL_PROPS);
 
   /**
@@ -141,7 +141,11 @@ public abstract class TinkerModule {
    * but as long as we don't statically import the enums it should be just as readable.
    */
   protected static BlockBehaviour.Properties builder(BlockBehaviour material, SoundType soundType) {
-    return Block.Properties.copy(material).sound(soundType);
+    return builder(Block.Properties.copy(material), soundType);
+  }
+
+  protected static BlockBehaviour.Properties builder(BlockBehaviour.Properties properties, SoundType soundType) {
+    return properties.sound(soundType);
   }
 
   /**

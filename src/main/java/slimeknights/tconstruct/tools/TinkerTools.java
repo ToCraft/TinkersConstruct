@@ -4,12 +4,14 @@ import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -20,7 +22,6 @@ import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
 import slimeknights.mantle.registration.object.EnumObject;
 import slimeknights.mantle.registration.object.ItemObject;
-import slimeknights.mantle.util.SupplierCreativeTab;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.TinkerModule;
 import slimeknights.tconstruct.common.config.Config;
@@ -101,6 +102,9 @@ import slimeknights.tconstruct.tools.item.SlimeskullItem;
 import slimeknights.tconstruct.tools.logic.EquipmentChangeWatcher;
 import slimeknights.tconstruct.tools.menu.ToolContainerMenu;
 
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 import static slimeknights.tconstruct.TConstruct.getResource;
 
 /**
@@ -115,10 +119,16 @@ public final class TinkerTools extends TinkerModule {
     RandomMaterial.init();
   }
 
+  // Concurrent in case Forge loads something asynchronous
+  public static final List<ItemLike> TAB_TOOLS_ITEMS = new CopyOnWriteArrayList<>();
   /**
    * Creative tab for all tool items
    */
-  public static final CreativeModeTab TAB_TOOLS = new SupplierCreativeTab(TConstruct.MOD_ID, "tools", () -> TinkerTools.pickaxe.get().getRenderTool());
+  public static final CreativeModeTab TAB_TOOLS = CreativeModeTab.builder().title(Component.translatable("itemGroup.tconstruct.tools")).icon(() -> TinkerTools.pickaxe.get().getRenderTool()).displayItems((itemDisplayParameters, output) -> {
+    for (ItemLike item : TAB_TOOLS_ITEMS) {
+      output.accept(item);
+    }
+  }).build();
 
   /**
    * Loot function type for tool add data

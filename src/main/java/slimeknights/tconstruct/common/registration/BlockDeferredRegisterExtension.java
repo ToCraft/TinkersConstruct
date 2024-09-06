@@ -26,7 +26,7 @@ import java.util.function.Supplier;
 @SuppressWarnings("UnusedReturnValue")
 public class BlockDeferredRegisterExtension extends BlockDeferredRegister {
 
-  private static final BlockBehaviour.Properties POTTED_PROPS = BlockBehaviour.Properties.of().pushReaction(PushReaction.DESTROY).isRedstoneConductor((state, getter, pos) -> false).forceSolidOff().forceSolidOn().instabreak().noOcclusion();
+  private static final BlockBehaviour.Properties POTTED_PROPS = BlockBehaviour.Properties.of().pushReaction(PushReaction.DESTROY).isRedstoneConductor(Blocks::never).forceSolidOff().instabreak().noOcclusion();
 
   public BlockDeferredRegisterExtension(String modID) {
     super(modID);

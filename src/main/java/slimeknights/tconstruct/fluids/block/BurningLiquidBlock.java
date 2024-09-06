@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
@@ -45,6 +46,6 @@ public class BurningLiquidBlock extends LiquidBlock {
    * Creates a new block supplier
    */
   public static Function<Supplier<? extends FlowingFluid>, LiquidBlock> createBurning(int lightLevel, int burnTime, float damage) {
-    return fluid -> new BurningLiquidBlock(fluid, Properties.of().isRedstoneConductor((state, getter, pos) -> false).forceSolidOff().forceSolidOn().lightLevel(state -> lightLevel).noCollission().strength(100f).noLootTable(), burnTime, damage);
+    return fluid -> new BurningLiquidBlock(fluid, Properties.of().isRedstoneConductor(Blocks::never).forceSolidOff().lightLevel(state -> lightLevel).noCollission().strength(100f).noLootTable(), burnTime, damage);
   }
 }
