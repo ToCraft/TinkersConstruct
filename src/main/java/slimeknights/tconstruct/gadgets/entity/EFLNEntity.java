@@ -2,6 +2,7 @@ package slimeknights.tconstruct.gadgets.entity;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundExplodePacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -42,11 +43,11 @@ public class EFLNEntity extends ThrowableItemProjectile implements IEntityAdditi
   protected void onHit(HitResult result) {
     if (!this.level().isClientSide) {
       // based on ServerLevel#explode
-      EFLNExplosion explosion = new EFLNExplosion(this.level, this, null, null, this.getX(), this.getY(), this.getZ(), 4f, false, BlockInteraction.BREAK);
-      if (!ForgeEventFactory.onExplosionStart(this.level, explosion)) {
+      EFLNExplosion explosion = new EFLNExplosion(this.level(), this, null, null, this.getX(), this.getY(), this.getZ(), 4f, false, BlockInteraction.DESTROY);
+      if (!ForgeEventFactory.onExplosionStart(this.level(), explosion)) {
         explosion.explode();
         explosion.finalizeExplosion(false);
-        if (level instanceof ServerLevel server) {
+        if (level() instanceof ServerLevel server) {
           for (ServerPlayer player : server.players()) {
             if (player.distanceToSqr(this) < 4096.0D) {
               player.connection.send(new ClientboundExplodePacket(getX(), getY(), getZ(), 6, explosion.getToBlow(), explosion.getHitPlayers().get(player)));
@@ -70,7 +71,7 @@ public class EFLNEntity extends ThrowableItemProjectile implements IEntityAdditi
 
   @Nonnull
   @Override
-  public Packet<?> getAddEntityPacket() {
+  public Packet<ClientGamePacketListener> getAddEntityPacket() {
     return NetworkHooks.getEntitySpawningPacket(this);
   }
 }

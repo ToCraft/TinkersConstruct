@@ -15,6 +15,7 @@ import slimeknights.tconstruct.util.ColourUtils;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import static slimeknights.tconstruct.TConstruct.getResource;
 
@@ -31,7 +32,7 @@ public class ModelSpriteProvider extends GenericTextureGenerator {
   }
 
   @Override
-  public void run(CachedOutput cache) throws IOException {
+  public CompletableFuture<?> run(CachedOutput cache) {
     ResourceLocation rootsSide = getResource("block/wood/enderbark/roots");
     ResourceLocation rootsTop = getResource("block/wood/enderbark/roots_top");
 
@@ -44,6 +45,7 @@ public class ModelSpriteProvider extends GenericTextureGenerator {
     }
 
     spriteReader.closeAll();
+    return new CompletableFuture<>();
   }
 
   /**

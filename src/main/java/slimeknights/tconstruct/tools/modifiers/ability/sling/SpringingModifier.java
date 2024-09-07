@@ -46,7 +46,7 @@ public class SpringingModifier extends SlingModifier {
 
         SlimeBounceHandler.addBounceHandler(player);
         if (!entity.level().isClientSide) {
-          player.level.playSound(null, player.getX(), player.getY(), player.getZ(), Sounds.SLIME_SLING.getSound(), player.getSoundSource(), 1, 1);
+          player.level().playSound(null, player.getX(), player.getY(), player.getZ(), Sounds.SLIME_SLING.getSound(), player.getSoundSource(), 1, 1);
           player.causeFoodExhaustion(0.2F);
           player.getCooldowns().addCooldown(tool.getItem(), 3);
           ToolDamageUtil.damageAnimated(tool, 1, entity);
@@ -54,6 +54,6 @@ public class SpringingModifier extends SlingModifier {
         return;
       }
     }
-    entity.level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), Sounds.SLIME_SLING.getSound(), entity.getSoundSource(), 1, 0.5f);
+    entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), Sounds.SLIME_SLING.getSound(), entity.getSoundSource(), 1, 0.5f);
   }
 }

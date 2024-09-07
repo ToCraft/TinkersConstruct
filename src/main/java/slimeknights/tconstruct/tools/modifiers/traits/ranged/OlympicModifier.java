@@ -86,7 +86,7 @@ public class OlympicModifier extends Modifier implements ProjectileLaunchModifie
           // spawn and play sound
           targetEntity.spawnAtLocation(nugget);
           if (attacker != null) {
-            projectile.level.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 1.0f, 1.0f);
+            projectile.level().playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 1.0f, 1.0f);
           }
         }
       }

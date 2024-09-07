@@ -38,12 +38,12 @@ public class WarpingModifier extends SlingModifier {
           BlockPos posAttempt = new BlockPos(player.getX() + offX, player.getY() + offY, player.getZ() + offZ);
           // if we do not have a position yet, see if this one is valid
           if (furthestPos == null) {
-            if (player.level.getWorldBorder().isWithinBounds(posAttempt) && !player.level.getBlockState(posAttempt).isSuffocating(player.level, posAttempt)) {
+            if (player.level().getWorldBorder().isWithinBounds(posAttempt) && !player.level().getBlockState(posAttempt).isSuffocating(player.level(), posAttempt)) {
               furthestPos = posAttempt;
             }
           } else {
             // if we already have a position, clear if the new one is unbreakable
-            if (player.level.getBlockState(posAttempt).getDestroySpeed(player.level, posAttempt) == -1) {
+            if (player.level().getBlockState(posAttempt).getDestroySpeed(player.level(), posAttempt) == -1) {
               furthestPos = null;
             }
           }
@@ -63,9 +63,9 @@ public class WarpingModifier extends SlingModifier {
 
             // particle effect from EnderPearlEntity
             for (int i = 0; i < 32; ++i) {
-              entity.level.addParticle(ParticleTypes.PORTAL, player.getX(), player.getY() + entity.level.random.nextDouble() * 2.0D, player.getZ(), entity.level.random.nextGaussian(), 0.0D, entity.level.random.nextGaussian());
+              entity.level().addParticle(ParticleTypes.PORTAL, player.getX(), player.getY() + entity.level().random.nextDouble() * 2.0D, player.getZ(), entity.level().random.nextGaussian(), 0.0D, entity.level().random.nextGaussian());
             }
-            entity.level.playSound(null, player.getX(), player.getY(), player.getZ(), Sounds.SLIME_SLING_TELEPORT.getSound(), player.getSoundSource(), 1f, 1f);
+            entity.level().playSound(null, player.getX(), player.getY(), player.getZ(), Sounds.SLIME_SLING_TELEPORT.getSound(), player.getSoundSource(), 1f, 1f);
             player.causeFoodExhaustion(0.2F);
             player.getCooldowns().addCooldown(tool.getItem(), 3);
             ToolDamageUtil.damageAnimated(tool, 1, entity);
@@ -73,7 +73,7 @@ public class WarpingModifier extends SlingModifier {
           }
         }
       }
-      entity.level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), Sounds.SLIME_SLING_TELEPORT.getSound(), entity.getSoundSource(), 1, 0.5f);
+      entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), Sounds.SLIME_SLING_TELEPORT.getSound(), entity.getSoundSource(), 1, 0.5f);
     }
   }
 }

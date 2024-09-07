@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
@@ -55,12 +56,12 @@ public class GlowballEntity extends ThrowableItemProjectile implements IEntityAd
       }
 
       if (position != null) {
-        TinkerCommons.glow.get().addGlow(this.level, position, direction);
+        TinkerCommons.glow.get().addGlow(this.level(), position, direction);
       }
     }
 
     if (!this.level().isClientSide) {
-      this.level.broadcastEntityEvent(this, (byte) 3);
+      this.level().broadcastEntityEvent(this, (byte) 3);
       this.discard();
     }
   }
@@ -77,7 +78,7 @@ public class GlowballEntity extends ThrowableItemProjectile implements IEntityAd
 
   @Nonnull
   @Override
-  public Packet<?> getAddEntityPacket() {
+  public Packet<ClientGamePacketListener> getAddEntityPacket() {
     return NetworkHooks.getEntitySpawningPacket(this);
   }
 }

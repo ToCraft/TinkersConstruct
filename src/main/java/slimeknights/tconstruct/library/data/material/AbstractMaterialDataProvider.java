@@ -2,7 +2,7 @@ package slimeknights.tconstruct.library.data.material;
 
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.server.packs.PackType;
+import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.NotCondition;
 import net.minecraftforge.common.crafting.conditions.OrCondition;
@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 /**
@@ -81,7 +82,7 @@ public abstract class AbstractMaterialDataProvider extends GenericDataProvider {
   private boolean addMaterialsRun = false;
 
   public AbstractMaterialDataProvider(DataGenerator gen) {
-    super(gen, PackType.SERVER_DATA, MaterialManager.FOLDER, MaterialManager.GSON);
+    super(gen.getPackOutput(), PackOutput.Target.DATA_PACK, MaterialManager.FOLDER, MaterialManager.GSON);
   }
 
   /**
@@ -98,9 +99,10 @@ public abstract class AbstractMaterialDataProvider extends GenericDataProvider {
   }
 
   @Override
-  public void run(CachedOutput cache) {
+  public CompletableFuture<?> run(CachedOutput cache) {
     ensureAddMaterialsRun();
     allMaterials.forEach((id, data) -> saveJson(cache, id, convert(data)));
+    return new CompletableFuture<>();
   }
 
   /**

@@ -1,8 +1,9 @@
 package slimeknights.tconstruct.library.client.book.sectiontransformer;
 
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.client.book.data.content.PageContent;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.client.book.content.ContentTool;

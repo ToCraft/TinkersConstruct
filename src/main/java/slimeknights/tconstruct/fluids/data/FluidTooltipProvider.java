@@ -22,7 +22,7 @@ import static slimeknights.tconstruct.common.TinkerTags.Fluids.SOUP_TOOLTIPS;
 public class FluidTooltipProvider extends AbstractFluidTooltipProvider {
 
   public FluidTooltipProvider(DataGenerator generator) {
-    super(generator, TConstruct.MOD_ID);
+    super(generator.getPackOutput(), TConstruct.MOD_ID);
   }
 
   @Override

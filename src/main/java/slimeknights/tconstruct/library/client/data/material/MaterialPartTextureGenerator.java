@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 
@@ -79,7 +80,7 @@ public class MaterialPartTextureGenerator extends GenericTextureGenerator {
 
 
   @Override
-  public void run(CachedOutput cache) throws IOException {
+  public CompletableFuture<?> run(CachedOutput cache) {
     runCallbacks(existingFileHelper, null);
 
     // ensure we have parts
@@ -109,6 +110,7 @@ public class MaterialPartTextureGenerator extends GenericTextureGenerator {
     spriteReader.closeAll();
     partProvider.cleanCache();
     runCallbacks(null, null);
+    return new CompletableFuture<>();
   }
 
   /**

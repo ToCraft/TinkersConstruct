@@ -1,11 +1,11 @@
 package slimeknights.tconstruct.library.data.tinkering;
 
-import net.minecraft.core.Registry;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.data.GenericDataProvider;
 import slimeknights.tconstruct.library.tools.item.IModifiableDisplay;
 import slimeknights.tconstruct.library.tools.layout.StationSlotLayout;
@@ -14,6 +14,7 @@ import slimeknights.tconstruct.library.tools.layout.StationSlotLayoutLoader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 /**
@@ -45,7 +46,7 @@ public abstract class AbstractStationSlotLayoutProvider extends GenericDataProvi
   private final Map<ResourceLocation, StationSlotLayout.Builder> allLayouts = new HashMap<>();
 
   public AbstractStationSlotLayoutProvider(DataGenerator generator) {
-    super(generator, PackType.SERVER_DATA, StationSlotLayoutLoader.FOLDER, StationSlotLayoutLoader.GSON);
+    super(generator.getPackOutput(), PackOutput.Target.DATA_PACK, StationSlotLayoutLoader.FOLDER, StationSlotLayoutLoader.GSON);
   }
 
   /**
@@ -84,8 +85,9 @@ public abstract class AbstractStationSlotLayoutProvider extends GenericDataProvi
   }
 
   @Override
-  public void run(CachedOutput cache) throws IOException {
+  public CompletableFuture<?> run(CachedOutput cache) {
     addLayouts();
     allLayouts.forEach((id, builder) -> saveJson(cache, id, builder.build()));
+    return new CompletableFuture<>();
   }
 }

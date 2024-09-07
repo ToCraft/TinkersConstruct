@@ -2,6 +2,7 @@ package slimeknights.tconstruct.library.client.book.elements;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -50,7 +51,7 @@ public class TinkerItemElement extends ItemElement {
   }
 
   @Override
-  public void drawOverlay(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks, Font fontRenderer) {
+  public void drawOverlay(GuiGraphics matrixStack, int mouseX, int mouseY, float partialTicks, Font fontRenderer) {
     if (this.noTooltip) {
       return;
     }

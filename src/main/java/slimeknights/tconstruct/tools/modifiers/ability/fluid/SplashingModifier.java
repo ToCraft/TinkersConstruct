@@ -68,7 +68,7 @@ public class SplashingModifier extends Modifier implements EntityInteractionModi
             // for the main target, consume fluids
             float level = modifier.getEffectiveLevel();
             int numTargets = 0;
-            int consumed = recipe.applyToEntity(fluid, level, new FluidEffectContext.Entity(player.level, player, player, null, target, asLiving(target)), FluidAction.EXECUTE);
+            int consumed = recipe.applyToEntity(fluid, level, new FluidEffectContext.Entity(player.level(), player, player, null, target, asLiving(target)), FluidAction.EXECUTE);
             if (consumed > 0) {
               numTargets++;
               UseFluidOnHitModifier.spawnParticles(target, fluid);
@@ -77,9 +77,9 @@ public class SplashingModifier extends Modifier implements EntityInteractionModi
             // expanded logic, they do not consume fluid, you get some splash for free
             float range = 1 + tool.getModifierLevel(TinkerModifiers.expanded.get());
             float rangeSq = range * range;
-            for (Entity aoeTarget : player.level.getEntitiesOfClass(Entity.class, target.getBoundingBox().inflate(range, 0.25, range))) {
+            for (Entity aoeTarget : player.level().getEntitiesOfClass(Entity.class, target.getBoundingBox().inflate(range, 0.25, range))) {
               if (aoeTarget != player && aoeTarget != target && !(aoeTarget instanceof ArmorStand stand && stand.isMarker()) && target.distanceToSqr(aoeTarget) < rangeSq) {
-                int aoeConsumed = recipe.applyToEntity(fluid, level, new FluidEffectContext.Entity(player.level, player, player, null, aoeTarget, asLiving(aoeTarget)), FluidAction.EXECUTE);
+                int aoeConsumed = recipe.applyToEntity(fluid, level, new FluidEffectContext.Entity(player.level(), player, player, null, aoeTarget, asLiving(aoeTarget)), FluidAction.EXECUTE);
                 if (aoeConsumed > 0) {
                   numTargets++;
                   UseFluidOnHitModifier.spawnParticles(aoeTarget, fluid);

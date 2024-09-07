@@ -3,7 +3,7 @@ package slimeknights.tconstruct.library.data.material;
 import com.google.gson.JsonElement;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.server.packs.PackType;
+import net.minecraft.data.PackOutput;
 import slimeknights.mantle.data.GenericDataProvider;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
 import slimeknights.tconstruct.library.materials.json.MaterialStatJson;
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 /**
@@ -33,7 +34,7 @@ public abstract class AbstractMaterialStatsDataProvider extends GenericDataProvi
   private final AbstractMaterialDataProvider materials;
 
   public AbstractMaterialStatsDataProvider(DataGenerator gen, AbstractMaterialDataProvider materials) {
-    super(gen, PackType.SERVER_DATA, MaterialStatsManager.FOLDER);
+    super(gen.getPackOutput(), PackOutput.Target.DATA_PACK, MaterialStatsManager.FOLDER);
     this.materials = materials;
   }
 
@@ -43,7 +44,7 @@ public abstract class AbstractMaterialStatsDataProvider extends GenericDataProvi
   protected abstract void addMaterialStats();
 
   @Override
-  public void run(CachedOutput cache) {
+  public CompletableFuture<?> run(CachedOutput cache) {
     addMaterialStats();
 
     // ensure we have stats for all materials
@@ -56,6 +57,7 @@ public abstract class AbstractMaterialStatsDataProvider extends GenericDataProvi
     // does not ensure we have materials for all stats, we may be adding stats for another mod
     // generate finally
     allMaterialStats.forEach((materialId, materialStats) -> saveJson(cache, materialId, convert(materialStats)));
+    return new CompletableFuture<>();
   }
 
 

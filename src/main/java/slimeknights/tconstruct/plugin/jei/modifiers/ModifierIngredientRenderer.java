@@ -5,6 +5,7 @@ import mezz.jei.api.ingredients.IIngredientRenderer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.TooltipFlag;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -26,7 +27,7 @@ public record ModifierIngredientRenderer(int width, int height) implements IIngr
   }
 
   @Override
-  public void render(PoseStack matrices, @Nullable ModifierEntry entry) {
+  public void render(GuiGraphics matrices, @Nullable ModifierEntry entry) {
     if (entry != null) {
       Component name = entry.getDisplayName();
       Font fontRenderer = getFontRenderer(Minecraft.getInstance(), entry);

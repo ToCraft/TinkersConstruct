@@ -17,6 +17,7 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -81,7 +82,7 @@ public class AlloyRecipeCategory implements IRecipeCategory<AlloyRecipe> {
   }
 
   @Override
-  public void draw(AlloyRecipe recipe, IRecipeSlotsView slots, PoseStack matrices, double mouseX, double mouseY) {
+  public void draw(AlloyRecipe recipe, IRecipeSlotsView slots, GuiGraphics matrices, double mouseX, double mouseY) {
     arrow.draw(matrices, 90, 21);
     // temperature info
     Font fontRenderer = Minecraft.getInstance().font;

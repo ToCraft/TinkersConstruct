@@ -12,6 +12,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -56,7 +57,7 @@ public class ModifierWorktableCategory implements IRecipeCategory<IModifierWorkt
   }
 
   @Override
-  public void draw(IModifierWorktableRecipe recipe, IRecipeSlotsView slots, PoseStack matrixStack, double mouseX, double mouseY) {
+  public void draw(IModifierWorktableRecipe recipe, IRecipeSlotsView slots, GuiGraphics matrixStack, double mouseX, double mouseY) {
     if (recipe.getInputTools().isEmpty()) {
       toolIcon.draw(matrixStack, 23, 16);
     }

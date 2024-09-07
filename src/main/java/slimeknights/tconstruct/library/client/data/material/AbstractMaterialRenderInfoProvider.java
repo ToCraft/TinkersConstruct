@@ -4,8 +4,8 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.PackType;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import slimeknights.mantle.data.GenericDataProvider;
 import slimeknights.mantle.data.loadable.common.ColorLoadable;
@@ -18,6 +18,7 @@ import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Base data generator for use in addons
@@ -35,7 +36,7 @@ public abstract class AbstractMaterialRenderInfoProvider extends GenericDataProv
   private final ExistingFileHelper existingFileHelper;
 
   public AbstractMaterialRenderInfoProvider(DataGenerator gen, @Nullable AbstractMaterialSpriteProvider materialSprites, @Nullable ExistingFileHelper existingFileHelper) {
-    super(gen, PackType.CLIENT_RESOURCES, MaterialRenderInfoLoader.FOLDER, MaterialRenderInfoLoader.GSON);
+    super(gen.getPackOutput(), PackOutput.Target.RESOURCE_PACK, MaterialRenderInfoLoader.FOLDER, MaterialRenderInfoLoader.GSON);
     this.materialSprites = materialSprites;
     this.existingFileHelper = existingFileHelper;
   }
@@ -50,7 +51,7 @@ public abstract class AbstractMaterialRenderInfoProvider extends GenericDataProv
   protected abstract void addMaterialRenderInfo();
 
   @Override
-  public void run(CachedOutput cache) {
+  public CompletableFuture<?> run(CachedOutput cache) {
     if (existingFileHelper != null) {
       MaterialPartTextureGenerator.runCallbacks(existingFileHelper, null);
     }
@@ -60,6 +61,7 @@ public abstract class AbstractMaterialRenderInfoProvider extends GenericDataProv
     if (existingFileHelper != null) {
       MaterialPartTextureGenerator.runCallbacks(null, null);
     }
+    return new CompletableFuture<>();
   }
 
 

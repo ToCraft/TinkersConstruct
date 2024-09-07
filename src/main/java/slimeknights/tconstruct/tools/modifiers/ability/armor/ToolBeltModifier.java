@@ -230,7 +230,7 @@ public class ToolBeltModifier extends InventoryMenuModifier implements VolatileD
       // sound effect
       if (didChange) {
         persistentData.put(key, list);
-        player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.PLAYERS, 1.0f, 1.0f);
+        player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.PLAYERS, 1.0f, 1.0f);
       }
       return true;
     }

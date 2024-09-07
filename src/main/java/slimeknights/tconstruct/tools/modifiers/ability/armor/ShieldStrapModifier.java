@@ -83,7 +83,7 @@ public class ShieldStrapModifier extends InventoryMenuModifier {
 
         // sound effect
         if (!newOffhand.isEmpty() || !list.isEmpty()) {
-          player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.PLAYERS, 1.0f, 1.0f);
+          player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.PLAYERS, 1.0f, 1.0f);
         }
         return true;
       }

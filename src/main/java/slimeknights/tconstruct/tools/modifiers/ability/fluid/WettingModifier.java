@@ -28,7 +28,7 @@ public class WettingModifier extends UseFluidOnHitModifier implements ModifyDama
 
   @Override
   public FluidEffectContext.Entity createContext(LivingEntity self, @Nullable Player player, @Nullable Entity attacker) {
-    return new FluidEffectContext.Entity(self.level, self, player, null, self, self);
+    return new FluidEffectContext.Entity(self.level(), self, player, null, self, self);
   }
 
   @Override

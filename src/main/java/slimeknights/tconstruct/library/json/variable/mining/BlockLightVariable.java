@@ -29,7 +29,7 @@ public record BlockLightVariable(LightLayer lightLayer, float fallback) implemen
   public float getValue(IToolStackView tool, @Nullable BreakSpeed event, @Nullable Player player, @Nullable Direction sideHit) {
     if (player != null) {
       // use block position if possible player position otherwise
-      return player.level.getBrightness(lightLayer, event != null && sideHit != null ? event.getPos().relative(sideHit) : player.blockPosition());
+      return player.level().getBrightness(lightLayer, event != null && sideHit != null ? event.getPosition().map(p -> p.relative(sideHit)).orElse(player.blockPosition()) : player.blockPosition());
     }
     return fallback;
   }

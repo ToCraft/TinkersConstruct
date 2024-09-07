@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.server.packs.PackType;
+import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import slimeknights.mantle.data.GenericDataProvider;
@@ -19,6 +19,7 @@ import javax.annotation.Nullable;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Datagen for dynamic modifiers
@@ -30,7 +31,7 @@ public abstract class AbstractModifierProvider extends GenericDataProvider {
   private final Map<ModifierId, Composable> composableModifiers = new HashMap<>();
 
   public AbstractModifierProvider(DataGenerator generator) {
-    super(generator, PackType.SERVER_DATA, ModifierManager.FOLDER, ModifierManager.GSON);
+    super(generator.getPackOutput(), PackOutput.Target.DATA_PACK, ModifierManager.FOLDER, ModifierManager.GSON);
   }
 
   /**
@@ -137,10 +138,11 @@ public abstract class AbstractModifierProvider extends GenericDataProvider {
   }
 
   @Override
-  public void run(CachedOutput cache) throws IOException {
+  public CompletableFuture<?> run(CachedOutput cache) {
     addModifiers();
     allModifiers.forEach((id, data) -> saveJson(cache, id, data.serialize()));
     composableModifiers.forEach((id, data) -> saveJson(cache, id, data.serialize()));
+    return new CompletableFuture<>();
   }
 
   /**

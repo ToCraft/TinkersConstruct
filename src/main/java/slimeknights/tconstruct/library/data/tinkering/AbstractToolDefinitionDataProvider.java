@@ -1,12 +1,12 @@
 package slimeknights.tconstruct.library.data.tinkering;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.core.Registry;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.data.GenericDataProvider;
 import slimeknights.tconstruct.library.module.ModuleHook;
 import slimeknights.tconstruct.library.tools.definition.ModifiableArmorMaterial;
@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -38,7 +39,7 @@ public abstract class AbstractToolDefinitionDataProvider extends GenericDataProv
   private final String modId;
 
   public AbstractToolDefinitionDataProvider(DataGenerator generator, String modId) {
-    super(generator, PackType.SERVER_DATA, ToolDefinitionLoader.FOLDER);
+    super(generator.getPackOutput(), PackOutput.Target.DATA_PACK, ToolDefinitionLoader.FOLDER);
     this.modId = modId;
   }
 
@@ -76,7 +77,7 @@ public abstract class AbstractToolDefinitionDataProvider extends GenericDataProv
   }
 
   @Override
-  public void run(CachedOutput cache) throws IOException {
+  public CompletableFuture<?> run(CachedOutput cache) {
     addToolDefinitions();
     Map<ResourceLocation, ToolDefinition> relevantDefinitions = ToolDefinitionLoader.getInstance().getRegisteredToolDefinitions().stream()
       .filter(def -> def.getId().getNamespace().equals(modId))
@@ -97,6 +98,7 @@ public abstract class AbstractToolDefinitionDataProvider extends GenericDataProv
       }
       saveJson(cache, id, ToolDefinitionData.LOADABLE.serialize(entry.getValue().build()));
     }
+    return new CompletableFuture<>();
   }
 
   /**

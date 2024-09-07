@@ -79,13 +79,13 @@ public enum Sounds {
 
   Sounds(String name) {
     ResourceLocation registryName = TConstruct.getResource(name);
-    sound = new SoundEvent(registryName);
+    sound = SoundEvent.createVariableRangeEvent(registryName);
   }
 
   Sounds() {
     String name = name().toLowerCase(Locale.US);
     ResourceLocation registryName = TConstruct.getResource(name);
-    sound = new SoundEvent(registryName);
+    sound = SoundEvent.createVariableRangeEvent(registryName);
   }
 
   @SubscribeEvent

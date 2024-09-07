@@ -47,8 +47,8 @@ public class BleedingEffect extends NoMilkEffect {
     target.invulnerableTime = hurtResistantTime;
 
     // damage particles
-    if (target.level instanceof ServerLevel) {
-      ((ServerLevel) target.level).sendParticles(ParticleTypes.DAMAGE_INDICATOR, target.getX(), target.getY(0.5), target.getZ(), 1, 0.1, 0, 0.1, 0.2);
+    if (target.level() instanceof ServerLevel) {
+      ((ServerLevel) target.level()).sendParticles(ParticleTypes.DAMAGE_INDICATOR, target.getX(), target.getY(0.5), target.getZ(), 1, 0.1, 0, 0.1, 0.2);
     }
   }
 

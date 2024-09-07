@@ -158,7 +158,7 @@ public class SmelteryTankRenderer {
             FluidRenderer.putTexturedQuad(builder, matrix, still, from, to, Direction.UP, color, brightness, rotation, false);
           if (y == 0) {
             // increase Y position slightly to prevent z fighting on neighboring fluids
-            from.setY(from.y() + 0.001f);
+            from.y = from.y() + 0.001f;
             FluidRenderer.putTexturedQuad(builder, matrix, still, from, to, Direction.DOWN, color, brightness, rotation, false);
           }
         }

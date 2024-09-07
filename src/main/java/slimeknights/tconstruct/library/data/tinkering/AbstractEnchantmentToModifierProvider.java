@@ -5,8 +5,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.enchantment.Enchantment;
 import slimeknights.mantle.data.GenericDataProvider;
@@ -15,6 +15,7 @@ import slimeknights.tconstruct.library.modifiers.ModifierId;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Data generator for mappings from enchantments to modifiers
@@ -27,7 +28,7 @@ public abstract class AbstractEnchantmentToModifierProvider extends GenericDataP
   private final JsonObject enchantmentMap = new JsonObject();
 
   public AbstractEnchantmentToModifierProvider(DataGenerator generator) {
-    super(generator, PackType.SERVER_DATA, "tinkering");
+    super(generator.getPackOutput(), PackOutput.Target.DATA_PACK, "tinkering");
   }
 
   /**
@@ -36,10 +37,11 @@ public abstract class AbstractEnchantmentToModifierProvider extends GenericDataP
   protected abstract void addEnchantmentMappings();
 
   @Override
-  public void run(CachedOutput pCache) throws IOException {
+  public CompletableFuture<?> run(CachedOutput pCache) {
     enchantmentMap.entrySet().clear();
     addEnchantmentMappings();
     saveJson(pCache, TConstruct.getResource("enchantments_to_modifiers"), enchantmentMap);
+    return new CompletableFuture<>();
   }
 
   /* Helpers */

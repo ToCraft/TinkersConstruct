@@ -3,14 +3,15 @@ package slimeknights.tconstruct.library.data;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import net.minecraft.core.Registry;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.data.GenericDataProvider;
 import slimeknights.mantle.registration.object.EnumObject;
 import slimeknights.mantle.registration.object.IdAwareObject;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 
 import static slimeknights.mantle.util.IdExtender.INSTANCE;
 
@@ -34,7 +36,7 @@ public abstract class AbstractToolItemModelProvider extends GenericDataProvider 
   protected final String modId;
 
   public AbstractToolItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper, String modId) {
-    super(generator, PackType.CLIENT_RESOURCES, "models/item");
+    super(generator.getPackOutput(), PackOutput.Target.RESOURCE_PACK, "models/item");
     this.existingFileHelper = existingFileHelper;
     this.modId = modId;
   }
@@ -45,10 +47,15 @@ public abstract class AbstractToolItemModelProvider extends GenericDataProvider 
   protected abstract void addModels() throws IOException;
 
   @Override
-  public void run(CachedOutput cache) throws IOException {
-    addModels();
+  public CompletableFuture<?> run(CachedOutput cache) {
+    try {
+      addModels();
+    } catch (IOException e) {
+      return CompletableFuture.failedFuture(e);
+    }
     // no key comparator - I want them sorted in the same order as the input models for easier readability
     models.forEach((location, object) -> saveJson(cache, new ResourceLocation(modId, location), object, null));
+    return new CompletableFuture<>();
   }
 
 

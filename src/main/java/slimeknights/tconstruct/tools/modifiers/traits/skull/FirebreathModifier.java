@@ -48,9 +48,9 @@ public class FirebreathModifier extends NoLevelsModifier implements KeybindInter
         player.playNotifySound(SoundEvents.BLAZE_SHOOT, SoundSource.PLAYERS, 2.0F, (RANDOM.nextFloat() - RANDOM.nextFloat()) * 0.2F + 1.0F);
         if (!player.level().isClientSide) {
           Vec3 lookVec = player.getLookAngle().multiply(2.0f, 2.0f, 2.0f);
-          SmallFireball fireball = new SmallFireball(player.level, player, lookVec.x + player.getRandom().nextGaussian() / 16, lookVec.y, lookVec.z + player.getRandom().nextGaussian() / 16);
+          SmallFireball fireball = new SmallFireball(player.level(), player, lookVec.x + player.getRandom().nextGaussian() / 16, lookVec.y, lookVec.z + player.getRandom().nextGaussian() / 16);
           fireball.setPos(fireball.getX(), player.getY(0.5D) + 0.5D, fireball.getZ());
-          player.level.addFreshEntity(fireball);
+          player.level().addFreshEntity(fireball);
           TinkerModifiers.fireballCooldownEffect.get().apply(player, 100, 0, true);
         }
         return true;

@@ -3,6 +3,7 @@ package slimeknights.tconstruct.library.client.book.elements;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.network.chat.Component;
@@ -35,7 +36,7 @@ public class CycleRecipeElement extends ArrowElement {
   }
 
   @Override
-  public void drawOverlay(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks, Font fontRenderer) {
+  public void drawOverlay(GuiGraphics matrixStack, int mouseX, int mouseY, float partialTicks, Font fontRenderer) {
     if (this.isHovered(mouseX, mouseY)) {
       this.drawTooltip(matrixStack, Collections.singletonList(Component.translatable("gui.tconstruct.manual.cycle.recipes")), mouseX, mouseY, fontRenderer);
     }

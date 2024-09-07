@@ -50,7 +50,7 @@ public record SweepWeaponAttack(float range) implements MeleeHitToolHook, ToolMo
       // if the modifier is missing, sweeping damage will be 0, so easiest to let it fully control this
       float sweepDamage = TinkerModifiers.sweeping.get().getSweepingDamage(tool, damage);
       Entity target = context.getTarget();
-      for (LivingEntity aoeTarget : attacker.level.getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(range, 0.25D, range))) {
+      for (LivingEntity aoeTarget : attacker.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(range, 0.25D, range))) {
         if (aoeTarget != attacker && aoeTarget != target && !attacker.isAlliedTo(aoeTarget)
           && !(aoeTarget instanceof ArmorStand armorStand && armorStand.isMarker()) && attacker.distanceToSqr(aoeTarget) < rangeSq) {
           float angle = attacker.getYRot() * ((float) Math.PI / 180F);
@@ -59,7 +59,7 @@ public record SweepWeaponAttack(float range) implements MeleeHitToolHook, ToolMo
         }
       }
 
-      attacker.level.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, attacker.getSoundSource(), 1.0F, 1.0F);
+      attacker.level().playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, attacker.getSoundSource(), 1.0F, 1.0F);
       if (attacker instanceof Player player) {
         player.sweepAttack();
       }

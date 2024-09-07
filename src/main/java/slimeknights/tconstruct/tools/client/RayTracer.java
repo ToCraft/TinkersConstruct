@@ -31,7 +31,7 @@ public class RayTracer {
    * @return a BlockRayTraceResult
    */
   public static BlockHitResult retrace(Player player, ClipContext.Block blockMode, ClipContext.Fluid fluidMode) {
-    return player.level.clip(new ClipContext(getStartVector(player), getEndVector(player), blockMode, fluidMode, player));
+    return player.level().clip(new ClipContext(getStartVector(player), getEndVector(player), blockMode, fluidMode, player));
   }
 
   /**

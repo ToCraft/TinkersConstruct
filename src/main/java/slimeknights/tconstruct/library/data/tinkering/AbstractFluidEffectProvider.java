@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 import net.minecraft.core.Registry;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Blocks;
@@ -16,6 +16,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.data.GenericDataProvider;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
@@ -39,6 +40,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Data provider for spilling fluids
@@ -49,7 +51,7 @@ public abstract class AbstractFluidEffectProvider extends GenericDataProvider {
   private final Map<ResourceLocation, Builder> entries = new HashMap<>();
 
   public AbstractFluidEffectProvider(DataGenerator generator, String modId) {
-    super(generator, PackType.SERVER_DATA, FluidEffectManager.FOLDER);
+    super(generator.getPackOutput(), PackOutput.Target.DATA_PACK, FluidEffectManager.FOLDER);
     this.modId = modId;
   }
 
@@ -59,9 +61,10 @@ public abstract class AbstractFluidEffectProvider extends GenericDataProvider {
   protected abstract void addFluids();
 
   @Override
-  public void run(CachedOutput cache) throws IOException {
+  public CompletableFuture<?> run(CachedOutput cache) {
     addFluids();
     entries.forEach((id, data) -> saveJson(cache, id, data.build()));
+    return new CompletableFuture<>();
   }
 
   /* Helpers */
@@ -89,14 +92,14 @@ public abstract class AbstractFluidEffectProvider extends GenericDataProvider {
    * Creates a builder for a fluid stack
    */
   protected Builder addFluid(FluidStack fluid) {
-    return addFluid(Registry.FLUID.getKey(fluid.getFluid()).getPath(), FluidIngredient.of(fluid));
+    return addFluid(ForgeRegistries.FLUIDS.getKey(fluid.getFluid()).getPath(), FluidIngredient.of(fluid));
   }
 
   /**
    * Creates a builder for a fluid and amount
    */
   protected Builder addFluid(Fluid fluid, int amount) {
-    return addFluid(Registry.FLUID.getKey(fluid).getPath(), FluidIngredient.of(fluid, amount));
+    return addFluid(ForgeRegistries.FLUIDS.getKey(fluid).getPath(), FluidIngredient.of(fluid, amount));
   }
 
   /**

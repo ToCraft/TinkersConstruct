@@ -39,13 +39,13 @@ public final class ModifierUtil {
    */
   public static void dropItem(Entity target, ItemStack stack) {
     if (!stack.isEmpty() && !target.level().isClientSide) {
-      ItemEntity ent = new ItemEntity(target.level, target.getX(), target.getY() + 1, target.getZ(), stack);
+      ItemEntity ent = new ItemEntity(target.level(), target.getX(), target.getY() + 1, target.getZ(), stack);
       ent.setDefaultPickUpDelay();
-      RandomSource rand = target.level.random;
+      RandomSource rand = target.level().random;
       ent.setDeltaMovement(ent.getDeltaMovement().add((rand.nextFloat() - rand.nextFloat()) * 0.1F,
         rand.nextFloat() * 0.05F,
         (rand.nextFloat() - rand.nextFloat()) * 0.1F));
-      target.level.addFreshEntity(ent);
+      target.level().addFreshEntity(ent);
     }
   }
 

@@ -60,7 +60,7 @@ public class LightspeedArmorModifier extends Modifier implements ArmorWalkModifi
     // not above air
     Vec3 vecPos = living.position();
     BlockPos pos = new BlockPos(vecPos.x, vecPos.y + 0.5f, vecPos.z);
-    int light = living.level.getBrightness(LightLayer.BLOCK, pos);
+    int light = living.level().getBrightness(LightLayer.BLOCK, pos);
     if (light > 5) {
       int scaledLight = light - 5;
       attribute.addTransientModifier(new AttributeModifier(ATTRIBUTE_BONUS, "tconstruct.modifier.lightspeed", scaledLight * 0.0015f * modifier.getEffectiveLevel(), Operation.ADDITION));
@@ -95,7 +95,7 @@ public class LightspeedArmorModifier extends Modifier implements ArmorWalkModifi
     float boost;
     float level = modifier.getEffectiveLevel();
     if (player != null && key == TooltipKey.SHIFT) {
-      int light = player.level.getBrightness(LightLayer.BLOCK, player.blockPosition());
+      int light = player.level().getBrightness(LightLayer.BLOCK, player.blockPosition());
       boost = 0.015f * (light - 5) * level;
     } else {
       boost = 0.15f * level;

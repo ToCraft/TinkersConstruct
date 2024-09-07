@@ -38,7 +38,7 @@ public class TinkerBlockStateProvider extends BlockStateProvider {
   private final UncheckedModelFile GENERATED = new UncheckedModelFile("item/generated");
 
   public TinkerBlockStateProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-    super(generator, TConstruct.MOD_ID, existingFileHelper);
+    super(generator.getPackOutput(), TConstruct.MOD_ID, existingFileHelper);
   }
 
   @Override
