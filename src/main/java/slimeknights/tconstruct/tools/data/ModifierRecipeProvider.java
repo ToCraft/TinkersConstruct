@@ -99,7 +99,7 @@ public class ModifierRecipeProvider extends BaseRecipeProvider {
   }
 
   @Override
-  protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
+  protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
     addItemRecipes(consumer);
     addModifierRecipes(consumer);
     addTextureRecipes(consumer);

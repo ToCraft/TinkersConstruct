@@ -13,7 +13,6 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SimpleRecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
@@ -267,6 +266,7 @@ import slimeknights.tconstruct.tools.recipe.severing.PlayerBeheadingRecipe;
 import slimeknights.tconstruct.tools.recipe.severing.SheepShearingRecipe;
 import slimeknights.tconstruct.tools.recipe.severing.SnowGolemBeheadingRecipe;
 import slimeknights.tconstruct.tools.stats.ToolType;
+import slimeknights.tconstruct.util.SimpleRecipeSerializer;
 
 import static slimeknights.tconstruct.TConstruct.getResource;
 import static slimeknights.tconstruct.tools.TinkerTools.TAB_TOOLS;

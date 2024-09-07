@@ -22,7 +22,7 @@ public class WarpingModifier extends SlingModifier {
   @Override
   public void onStoppedUsing(IToolStackView tool, ModifierEntry modifier, LivingEntity entity, int timeLeft) {
     super.onStoppedUsing(tool, modifier, entity, timeLeft);
-    if (!entity.level.isClientSide && entity instanceof ServerPlayer player) {
+    if (!entity.level().isClientSide && entity instanceof ServerPlayer player) {
       float f = getForce(tool, modifier, entity, timeLeft, false) * 6;
       if (f > 0) {
         Vec3 look = player.getLookAngle();

@@ -44,7 +44,7 @@ public class LightspeedArmorModifier extends Modifier implements ArmorWalkModifi
   @Override
   public void onWalk(IToolStackView tool, ModifierEntry modifier, LivingEntity living, BlockPos prevPos, BlockPos newPos) {
     // no point trying if not on the ground
-    if (tool.isBroken() || !living.isOnGround() || living.level.isClientSide) {
+    if (tool.isBroken() || !living.onGround() || living.level().isClientSide) {
       return;
     }
     // must have speed

@@ -7,12 +7,12 @@ import lombok.experimental.Accessors;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.ToolAction;
 import slimeknights.mantle.data.loadable.Loadables;
 import slimeknights.mantle.data.loadable.primitive.BooleanLoadable;
@@ -64,8 +64,7 @@ public record ToolActionTransformModule(ToolAction action, SoundEvent sound, boo
 
     // hoes and shovels: air or plants above
     if (requireGround) {
-      Material material = level.getBlockState(above).getMaterial();
-      if (!material.isReplaceable() && material != Material.PLANT) {
+      if (!level.getBlockState(above).is(BlockTags.REPLACEABLE)) {
         return false;
       }
     }

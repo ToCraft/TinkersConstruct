@@ -33,7 +33,7 @@ public class WorldRecipeProvider extends BaseRecipeProvider implements ICommonRe
   }
 
   @Override
-  protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
+  protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
     // Add recipe for all slimeball <-> congealed and slimeblock <-> slimeball
     // only earth slime recipe we need here slime
     ShapedRecipeBuilder.shaped(TinkerWorld.congealedSlime.get(SlimeType.EARTH))

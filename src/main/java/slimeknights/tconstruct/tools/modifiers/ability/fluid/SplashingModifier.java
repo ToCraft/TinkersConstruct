@@ -64,7 +64,7 @@ public class SplashingModifier extends Modifier implements EntityInteractionModi
       if (!fluid.isEmpty()) {
         FluidEffects recipe = FluidEffectManager.INSTANCE.find(fluid.getFluid());
         if (recipe.hasEntityEffects()) {
-          if (!player.level.isClientSide) {
+          if (!player.level().isClientSide) {
             // for the main target, consume fluids
             float level = modifier.getEffectiveLevel();
             int numTargets = 0;

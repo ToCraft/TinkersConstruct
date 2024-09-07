@@ -38,7 +38,7 @@ public class MaterialRecipeProvider extends BaseRecipeProvider implements IMater
   }
 
   @Override
-  protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
+  protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
     addMaterialItems(consumer);
     addMaterialSmeltery(consumer);
   }

@@ -74,7 +74,7 @@ public class SelfDestructiveModifier extends NoLevelsModifier implements Keybind
     @Override
     public void applyEffectTick(LivingEntity living, int amplifier) {
       // effect level is the explosion radius
-      if (!living.level.isClientSide) {
+      if (!living.level().isClientSide) {
         living.level.explode(living, living.getX(), living.getY(), living.getZ(), amplifier + 1, Explosion.BlockInteraction.DESTROY);
         living.hurt(SELF_DESTRUCT, 99999);
       }

@@ -177,7 +177,7 @@ public class ToolBeltModifier extends InventoryMenuModifier implements VolatileD
       return super.startInteract(tool, modifier, player, equipmentSlot, keyModifier);
     }
     if (keyModifier == TooltipKey.NORMAL || keyModifier == TooltipKey.CONTROL) {
-      if (player.level.isClientSide) {
+      if (player.level().isClientSide) {
         return true;
       }
 

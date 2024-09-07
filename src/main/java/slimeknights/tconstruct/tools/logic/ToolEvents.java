@@ -178,7 +178,7 @@ public class ToolEvents {
   static void livingAttack(LivingAttackEvent event) {
     LivingEntity entity = event.getEntity();
     // client side always returns false, so this should be fine?
-    if (entity.level.isClientSide() || entity.isDeadOrDying()) {
+    if (entity.level().isClientSide() || entity.isDeadOrDying()) {
       return;
     }
     // I cannot think of a reason to run when invulnerable
@@ -373,7 +373,7 @@ public class ToolEvents {
     LivingEntity living = event.getEntity();
     // this event runs before vanilla updates prevBlockPos
     BlockPos pos = living.blockPosition();
-    if (!living.isSpectator() && !living.level.isClientSide() && living.isAlive() && !Objects.equals(living.lastPos, pos)) {
+    if (!living.isSpectator() && !living.level().isClientSide() && living.isAlive() && !Objects.equals(living.lastPos, pos)) {
       ItemStack boots = living.getItemBySlot(EquipmentSlot.FEET);
       if (!boots.isEmpty() && boots.is(TinkerTags.Items.BOOTS)) {
         ToolStack tool = ToolStack.from(boots);

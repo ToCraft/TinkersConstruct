@@ -48,7 +48,7 @@ public class ShieldStrapModifier extends InventoryMenuModifier {
       return super.startInteract(tool, modifier, player, equipmentSlot, keyModifier);
     }
     if (keyModifier == TooltipKey.NORMAL) {
-      if (player.level.isClientSide) {
+      if (player.level().isClientSide) {
         return true;
       }
       // offhand must be able to go in the pants

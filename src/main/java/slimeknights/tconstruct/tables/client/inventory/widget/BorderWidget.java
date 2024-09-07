@@ -1,6 +1,5 @@
 package slimeknights.tconstruct.tables.client.inventory.widget;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiGraphics;
 import slimeknights.mantle.client.screen.ElementScreen;
 import slimeknights.mantle.client.screen.ModuleScreen;

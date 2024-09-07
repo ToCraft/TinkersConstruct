@@ -201,7 +201,7 @@ public class ToolHarvestLogic {
     //return this.breakBlock(stack, pos, player);
 
     // client can run normal block breaking
-    if (player.level.isClientSide || !(player instanceof ServerPlayer serverPlayer)) {
+    if (player.level().isClientSide || !(player instanceof ServerPlayer serverPlayer)) {
       return false;
     }
 

@@ -84,7 +84,7 @@ public class ToolAttackUtil {
    * @return Attack damage
    */
   public static float getAttributeAttackDamage(IToolStackView tool, LivingEntity holder, EquipmentSlot slotType) {
-    if (slotType == EquipmentSlot.MAINHAND || holder.level.isClientSide) {
+    if (slotType == EquipmentSlot.MAINHAND || holder.level().isClientSide) {
       return (float) holder.getAttributeValue(Attributes.ATTACK_DAMAGE);
     }
 
@@ -178,7 +178,7 @@ public class ToolAttackUtil {
     }
     // nothing to do? cancel
     // TODO: is it a problem that we return true instead of false when isExtraAttack and the final damage is 0 or we fail to hit? I don't think anywhere clientside uses that
-    if (attackerLiving.level.isClientSide || !targetEntity.isAttackable() || targetEntity.skipAttackInteraction(attackerLiving)) {
+    if (attackerLiving.level().isClientSide || !targetEntity.isAttackable() || targetEntity.skipAttackInteraction(attackerLiving)) {
       return true;
     }
 
@@ -201,7 +201,7 @@ public class ToolAttackUtil {
 
     // calculate if it's a critical hit
     // that is, in the air, not blind, targeting living, and not sprinting
-    boolean isCritical = !isExtraAttack && fullyCharged && attackerLiving.fallDistance > 0.0F && !attackerLiving.isOnGround() && !attackerLiving.onClimbable()
+    boolean isCritical = !isExtraAttack && fullyCharged && attackerLiving.fallDistance > 0.0F && !attackerLiving.onGround() && !attackerLiving.onClimbable()
       && !attackerLiving.isInWater() && !attackerLiving.hasEffect(MobEffects.BLINDNESS)
       && !attackerLiving.isPassenger() && targetLiving != null && !attackerLiving.isSprinting();
 
@@ -395,7 +395,7 @@ public class ToolAttackUtil {
     // final attack hooks
     if (attackerPlayer != null) {
       if (targetLiving != null) {
-        if (!attackerLiving.level.isClientSide && !isExtraAttack) {
+        if (!attackerLiving.level().isClientSide && !isExtraAttack) {
           ItemStack held = attackerLiving.getItemBySlot(sourceSlot);
           if (!held.isEmpty()) {
             held.hurtEnemy(targetLiving, attackerPlayer);

@@ -107,7 +107,7 @@ public abstract class ArmoredSlimeEntity extends Slime {
   public void remove(Entity.RemovalReason reason) {
     // on death, split into multiple slimes, and let them inherit armor if it did not drop
     int size = this.getSize();
-    if (!this.level.isClientSide && size > 1 && this.isDeadOrDying()) {
+    if (!this.level().isClientSide && size > 1 && this.isDeadOrDying()) {
       Component name = this.getCustomName();
       boolean noAi = this.isNoAi();
       boolean invulnerable = this.isInvulnerable();

@@ -42,7 +42,7 @@ public class GadgetRecipeProvider extends BaseRecipeProvider {
   }
 
   @Override
-  protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
+  protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
     // throw balls
     String folder = "gadgets/throwball/";
     ShapedRecipeBuilder.shaped(TinkerGadgets.efln.get())

@@ -107,7 +107,7 @@ public class SlurpingModifier extends Modifier implements KeybindInteractModifie
    */
   private void finishDrinking(IToolStackView tool, Player player) {
     // only server needs to drink
-    if (!player.level.isClientSide) {
+    if (!player.level().isClientSide) {
       FluidStack fluid = TANK_HELPER.getFluid(tool);
       int consumed = slurp(fluid, tool.getModifier(this).getEffectiveLevel(), player, FluidAction.EXECUTE);
       if (!player.isCreative() && consumed > 0) {

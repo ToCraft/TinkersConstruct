@@ -74,7 +74,7 @@ public class RayTracer {
    * @return the block reach distance
    */
   public static double getBlockReachDistance(Player player) {
-    return player.level.isClientSide ? ClientOnly.getBlockReachDistanceClient() : player instanceof ServerPlayer ? getBlockReachDistanceServer((ServerPlayer) player) : 5D;
+    return player.level().isClientSide ? ClientOnly.getBlockReachDistanceClient() : player instanceof ServerPlayer ? getBlockReachDistanceServer((ServerPlayer) player) : 5D;
   }
 
   /**

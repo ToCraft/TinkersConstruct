@@ -43,7 +43,7 @@ public class TableRecipeProvider extends BaseRecipeProvider {
   }
 
   @Override
-  protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
+  protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
     String folder = "tables/";
     // pattern
     ShapedRecipeBuilder.shaped(TinkerTables.pattern, 3)

@@ -93,11 +93,11 @@ public class FirestarterModifier extends NoLevelsModifier implements EntityInter
   public InteractionResult afterEntityUse(IToolStackView tool, ModifierEntry modifier, Player player, LivingEntity target, InteractionHand hand, InteractionSource source) {
     if (tool.getHook(ToolHooks.INTERACTION).canInteract(tool, modifier.getId(), source) && target instanceof Creeper creeper) {
       player.level.playSound(player, creeper.getX(), creeper.getY(), creeper.getZ(), SoundEvents.FLINTANDSTEEL_USE, creeper.getSoundSource(), 1.0F, RANDOM.nextFloat() * 0.4F + 0.8F);
-      if (!player.level.isClientSide) {
+      if (!player.level().isClientSide) {
         creeper.ignite();
         ToolDamageUtil.damageAnimated(tool, 1, player, source.getSlot(hand));
       }
-      return InteractionResult.sidedSuccess(player.level.isClientSide);
+      return InteractionResult.sidedSuccess(player.level().isClientSide);
     }
     return InteractionResult.PASS;
   }

@@ -40,7 +40,7 @@ public class EFLNEntity extends ThrowableItemProjectile implements IEntityAdditi
 
   @Override
   protected void onHit(HitResult result) {
-    if (!this.level.isClientSide) {
+    if (!this.level().isClientSide) {
       // based on ServerLevel#explode
       EFLNExplosion explosion = new EFLNExplosion(this.level, this, null, null, this.getX(), this.getY(), this.getZ(), 4f, false, BlockInteraction.BREAK);
       if (!ForgeEventFactory.onExplosionStart(this.level, explosion)) {

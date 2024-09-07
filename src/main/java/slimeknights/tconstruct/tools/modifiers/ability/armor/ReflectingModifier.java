@@ -40,7 +40,7 @@ public class ReflectingModifier extends Modifier {
   private void projectileImpact(ProjectileImpactEvent event) {
     Entity entity = event.getEntity();
     // first, need a projectile that is hitting a living entity
-    if (!entity.level.isClientSide) {
+    if (!entity.level().isClientSide) {
       Projectile projectile = event.getProjectile();
 
       // handle blacklist for projectiles

@@ -97,7 +97,7 @@ public class TrickQuiverModifier extends InventoryMenuModifier implements BowAmm
   @Override
   public InteractionResult onToolUse(IToolStackView tool, ModifierEntry modifier, Player player, InteractionHand hand, InteractionSource source) {
     if (!player.isCrouching()) {
-      if (!player.level.isClientSide) {
+      if (!player.level().isClientSide) {
         // first, increment the number
         ModDataNBT data = tool.getPersistentData();
         int totalSlots = getSlots(tool, modifier);

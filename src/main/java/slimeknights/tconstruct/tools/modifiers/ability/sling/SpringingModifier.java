@@ -45,7 +45,7 @@ public class SpringingModifier extends SlingModifier {
           (look.z + random.nextGaussian() * inaccuracy) * f);
 
         SlimeBounceHandler.addBounceHandler(player);
-        if (!entity.level.isClientSide) {
+        if (!entity.level().isClientSide) {
           player.level.playSound(null, player.getX(), player.getY(), player.getZ(), Sounds.SLIME_SLING.getSound(), player.getSoundSource(), 1, 1);
           player.causeFoodExhaustion(0.2F);
           player.getCooldowns().addCooldown(tool.getItem(), 3);

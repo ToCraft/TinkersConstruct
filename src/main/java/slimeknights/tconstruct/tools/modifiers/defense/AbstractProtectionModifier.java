@@ -47,7 +47,7 @@ public abstract class AbstractProtectionModifier<T extends ModifierMaxLevel> ext
   @Override
   public void onUnequip(IToolStackView tool, ModifierEntry modifier, EquipmentChangeContext context) {
     EquipmentSlot slot = context.getChangedSlot();
-    if ((allowClient || !context.getEntity().level.isClientSide) && ModifierUtil.validArmorSlot(tool, slot)) {
+    if ((allowClient || !context.getEntity().level().isClientSide) && ModifierUtil.validArmorSlot(tool, slot)) {
       context.getTinkerData().ifPresent(data -> {
         T modData = data.get(key);
         if (modData != null) {
@@ -63,7 +63,7 @@ public abstract class AbstractProtectionModifier<T extends ModifierMaxLevel> ext
   @Override
   public void onEquip(IToolStackView tool, ModifierEntry modifier, EquipmentChangeContext context) {
     EquipmentSlot slot = context.getChangedSlot();
-    if ((allowClient || !context.getEntity().level.isClientSide) && ModifierUtil.validArmorSlot(tool, slot) && !tool.isBroken()) {
+    if ((allowClient || !context.getEntity().level().isClientSide) && ModifierUtil.validArmorSlot(tool, slot) && !tool.isBroken()) {
       float scaledLevel = modifier.getEffectiveLevel();
       context.getTinkerData().ifPresent(data -> {
         // add ourself to the data

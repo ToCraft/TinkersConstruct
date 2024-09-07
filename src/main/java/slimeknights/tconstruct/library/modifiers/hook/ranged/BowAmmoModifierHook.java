@@ -115,7 +115,7 @@ public interface BowAmmoModifierHook {
   static ItemStack findAmmo(IToolStackView tool, ItemStack bow, Player player, Predicate<ItemStack> predicate) {
     int projectilesDesired = 1 + (2 * tool.getModifierLevel(TinkerModifiers.multishot.getId()));
     // treat client side as creative, no need to shrink the stacks clientside
-    boolean creative = player.getAbilities().instabuild || player.level.isClientSide;
+    boolean creative = player.getAbilities().instabuild || player.level().isClientSide;
 
     // first search, find what ammo type we want
     ItemStack standardAmmo = player.getProjectile(bow);
@@ -156,7 +156,7 @@ public interface BowAmmoModifierHook {
     // if we made it this far, we found ammo and are not in creative
     // we may be done already, saves making a predicate
     // can also return if on client side, they don't need the full stack
-    if (resultStack.getCount() >= projectilesDesired || player.level.isClientSide) {
+    if (resultStack.getCount() >= projectilesDesired || player.level().isClientSide) {
       return resultStack;
     }
 

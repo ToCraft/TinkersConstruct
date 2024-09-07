@@ -38,7 +38,7 @@ public final class ModifierUtil {
    * Drops an item at the entity position
    */
   public static void dropItem(Entity target, ItemStack stack) {
-    if (!stack.isEmpty() && !target.level.isClientSide) {
+    if (!stack.isEmpty() && !target.level().isClientSide) {
       ItemEntity ent = new ItemEntity(target.level, target.getX(), target.getY() + 1, target.getZ(), stack);
       ent.setDefaultPickUpDelay();
       RandomSource rand = target.level.random;

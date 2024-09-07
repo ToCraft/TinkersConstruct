@@ -513,7 +513,7 @@ public class ToolInventoryCapability extends InventoryModifierHookIterator<Modif
           TooltipUtil.getDisplayName(stack, tool, definition)
         ), buf -> buf.writeEnum(slotType));
       }
-      return InteractionResult.sidedSuccess(player.level.isClientSide);
+      return InteractionResult.sidedSuccess(player.level().isClientSide);
     }
     return InteractionResult.PASS;
   }
