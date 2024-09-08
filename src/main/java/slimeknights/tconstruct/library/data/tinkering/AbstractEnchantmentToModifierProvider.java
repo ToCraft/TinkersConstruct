@@ -40,8 +40,7 @@ public abstract class AbstractEnchantmentToModifierProvider extends GenericDataP
   public CompletableFuture<?> run(CachedOutput pCache) {
     enchantmentMap.entrySet().clear();
     addEnchantmentMappings();
-    saveJson(pCache, TConstruct.getResource("enchantments_to_modifiers"), enchantmentMap);
-    return new CompletableFuture<>();
+    return saveJson(pCache, TConstruct.getResource("enchantments_to_modifiers"), enchantmentMap);
   }
 
   /* Helpers */

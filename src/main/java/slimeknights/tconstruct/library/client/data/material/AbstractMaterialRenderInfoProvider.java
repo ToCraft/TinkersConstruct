@@ -57,11 +57,10 @@ public abstract class AbstractMaterialRenderInfoProvider extends GenericDataProv
     }
     addMaterialRenderInfo();
     // generate
-    allRenderInfo.forEach((materialId, info) -> saveJson(cache, materialId.getLocation('/'), info.build()));
     if (existingFileHelper != null) {
       MaterialPartTextureGenerator.runCallbacks(null, null);
     }
-    return new CompletableFuture<>();
+    return allOf(allRenderInfo.entrySet().stream().map(entry -> saveJson(cache, entry.getKey().getLocation('/'), entry.getValue().build())));
   }
 
 

@@ -19,6 +19,7 @@ import slimeknights.tconstruct.tools.item.ArmorSlotType;
 import slimeknights.tconstruct.tools.item.ArmorSlotType.ArmorBuilder;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,6 +90,8 @@ public abstract class AbstractToolDefinitionDataProvider extends GenericDataProv
         throw new IllegalStateException(String.format("Missing tool definition for '%s'", name));
       }
     }
+
+    List<CompletableFuture<?>> futures = new ArrayList<>();
     // ensure all included ones are required, and the built ones are valid
     for (Entry<ResourceLocation, ToolDefinitionDataBuilder> entry : allTools.entrySet()) {
       ResourceLocation id = entry.getKey();
@@ -96,9 +99,10 @@ public abstract class AbstractToolDefinitionDataProvider extends GenericDataProv
       if (definition == null) {
         throw new IllegalStateException("Unknown tool definition with ID " + id);
       }
-      saveJson(cache, id, ToolDefinitionData.LOADABLE.serialize(entry.getValue().build()));
+      futures.add(saveJson(cache, id, ToolDefinitionData.LOADABLE.serialize(entry.getValue().build())));
     }
-    return new CompletableFuture<>();
+
+    return allOf(futures.stream());
   }
 
   /**

@@ -13,6 +13,7 @@ import slimeknights.tconstruct.shared.block.SlimeType;
 import slimeknights.tconstruct.util.ColourUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -33,6 +34,7 @@ public class ModelSpriteProvider extends GenericTextureGenerator {
 
   @Override
   public CompletableFuture<?> run(CachedOutput cache) {
+    List<CompletableFuture<?>> futures = new ArrayList<>();
     ResourceLocation rootsSide = getResource("block/wood/enderbark/roots");
     ResourceLocation rootsTop = getResource("block/wood/enderbark/roots_top");
 
@@ -40,12 +42,12 @@ public class ModelSpriteProvider extends GenericTextureGenerator {
     for (SlimeType slime : SlimeType.values()) {
       String name = slime.getSerializedName();
       ResourceLocation congealed = getResource("block/slime/storage/congealed_" + name);
-      stackSprites(cache, getResource("block/wood/enderbark/roots/" + name), rootsSide, congealed);
-      stackSprites(cache, getResource("block/wood/enderbark/roots/" + name + "_top"), rootsTop, congealed);
+      futures.add(stackSprites(cache, getResource("block/wood/enderbark/roots/" + name), rootsSide, congealed));
+      futures.add(stackSprites(cache, getResource("block/wood/enderbark/roots/" + name + "_top"), rootsTop, congealed));
     }
 
     spriteReader.closeAll();
-    return new CompletableFuture<>();
+    return CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new));
   }
 
   /**
@@ -61,8 +63,10 @@ public class ModelSpriteProvider extends GenericTextureGenerator {
    * @param cache  Output cache
    * @param output Output path
    * @param inputs List of inputs, will iterate from 0 to the end and grab the first non-transparent pixel
+   * @return
    */
-  protected void stackSprites(CachedOutput cache, ResourceLocation output, ResourceLocation... inputs) {
+  protected CompletableFuture<?> stackSprites(CachedOutput cache, ResourceLocation output, ResourceLocation... inputs) {
+    List<CompletableFuture<?>> futures = new ArrayList<>();
     List<NativeImage> sprites = Arrays.stream(inputs).map(path -> {
       try {
         return spriteReader.read(path);
@@ -108,14 +112,15 @@ public class ModelSpriteProvider extends GenericTextureGenerator {
         generated.setPixelRGBA(x, y, color);
       }
     }
-    saveImage(cache, output, generated);
+    futures.add(saveImage(cache, output, generated));
     if (metaLocation != null) {
       try {
-        saveMetadata(cache, output, spriteReader.readMetadata(output));
+        futures.add(saveMetadata(cache, output, spriteReader.readMetadata(output)));
       } catch (IOException e) {
         TConstruct.LOG.error("Failed to save sprite metadata", e);
       }
     }
+    return CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new));
   }
 
   @Override

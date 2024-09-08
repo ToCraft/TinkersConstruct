@@ -55,7 +55,6 @@ public abstract class AbstractMaterialTraitDataProvider extends GenericDataProvi
   @Override
   public CompletableFuture<?> run(CachedOutput cache) {
     addMaterialTraits();
-
     // ensure we have traits for all materials
     // if you want no traits for your material, use an empty list
     Set<MaterialId> materialsGenerated = materials.getAllMaterials();
@@ -66,8 +65,7 @@ public abstract class AbstractMaterialTraitDataProvider extends GenericDataProvi
     }
 
     // generate
-    allMaterialTraits.forEach((materialId, traits) -> saveJson(cache, materialId, traits.serialize()));
-    return new CompletableFuture<>();
+    return allOf(allMaterialTraits.entrySet().stream().map(entry -> saveJson(cache, entry.getKey(), entry.getValue().serialize())));
   }
 
 

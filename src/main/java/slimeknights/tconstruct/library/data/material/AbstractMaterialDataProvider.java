@@ -101,8 +101,7 @@ public abstract class AbstractMaterialDataProvider extends GenericDataProvider {
   @Override
   public CompletableFuture<?> run(CachedOutput cache) {
     ensureAddMaterialsRun();
-    allMaterials.forEach((id, data) -> saveJson(cache, id, convert(data)));
-    return new CompletableFuture<>();
+    return allOf(allMaterials.entrySet().stream().map(entry -> saveJson(cache, entry.getKey(), convert(entry.getValue()))));
   }
 
   /**

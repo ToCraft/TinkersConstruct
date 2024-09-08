@@ -43,7 +43,7 @@ public abstract class GenericNBTProvider implements DataProvider {
       ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
       NbtIo.writeCompressed(data, outputStream);
       byte[] bytes = outputStream.toByteArray();
-      Path outputPath = generator.getOutputFolder().resolve(Paths.get(packType.getDirectory(), location.getNamespace(), folder, location.getPath() + ".nbt"));
+      Path outputPath = generator.getPackOutput().getOutputFolder().resolve(Paths.get(packType.getDirectory(), location.getNamespace(), folder, location.getPath() + ".nbt"));
       cache.writeIfNeeded(outputPath, bytes, Hashing.sha1().hashBytes(bytes));
     } catch (IOException e) {
       TConstruct.LOG.error("Couldn't write NBT for {}", location, e);

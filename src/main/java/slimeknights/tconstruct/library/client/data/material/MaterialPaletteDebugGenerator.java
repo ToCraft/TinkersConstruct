@@ -10,6 +10,8 @@ import slimeknights.tconstruct.library.client.data.spritetransformer.IColorMappi
 import slimeknights.tconstruct.library.client.data.spritetransformer.RecolorSpriteTransformer;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.CompletableFuture;
 
@@ -29,6 +31,7 @@ public class MaterialPaletteDebugGenerator extends GenericTextureGenerator {
 
   @Override
   public CompletableFuture<?> run(CachedOutput cache) {
+    List<CompletableFuture<?>> futures = new ArrayList<>();
     for (AbstractMaterialSpriteProvider materialProvider : materialProviders) {
       for (Entry<ResourceLocation, MaterialSpriteInfo> entry : materialProvider.getMaterials().entrySet()) {
         if (entry.getValue().getTransformer() instanceof RecolorSpriteTransformer recolor) {
@@ -41,12 +44,11 @@ public class MaterialPaletteDebugGenerator extends GenericTextureGenerator {
               palette.setPixelRGBA(grey, height, color);
             }
           }
-          saveImage(cache, entry.getKey(), palette);
-          palette.close();
+          futures.add(saveImage(cache, entry.getKey(), palette));
         }
       }
     }
-    return new CompletableFuture<>();
+    return CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new));
   }
 
   @Override

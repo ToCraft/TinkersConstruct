@@ -8,6 +8,7 @@ import com.google.gson.JsonSyntaxException;
 import com.mojang.blaze3d.platform.NativeImage;
 import lombok.extern.log4j.Log4j2;
 import net.minecraft.client.Minecraft;
+import net.minecraft.data.DataProvider;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.ClickEvent.Action;
 import net.minecraft.network.chat.Component;
@@ -45,7 +46,9 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
 /**
@@ -108,8 +111,8 @@ public class ClientGeneratePartTexturesCommand {
 
     // prepare the output directory
     Path path = Minecraft.getInstance().getResourcePackDirectory().resolve(PACK_NAME);
-    BiConsumer<ResourceLocation, NativeImage> saver = (outputPath, image) -> saveImage(path, outputPath, image);
-    BiConsumer<ResourceLocation, JsonObject> metaSaver = (outputPath, image) -> saveMetadata(path, outputPath, image);
+    BiFunction<ResourceLocation, NativeImage, CompletableFuture<?>> saver = (outputPath, image) -> saveImage(path, outputPath, image);
+    BiFunction<ResourceLocation, JsonObject, CompletableFuture<?>> metaSaver = (outputPath, image) -> saveMetadata(path, outputPath, image);
 
     // create a pack.mcmeta so its a valid resource pack
     savePackMcmeta(path);
@@ -179,32 +182,36 @@ public class ClientGeneratePartTexturesCommand {
   /**
    * Saves an image to the output folder
    */
-  private static void saveImage(Path folder, ResourceLocation location, NativeImage image) {
-    Path path = folder.resolve(Paths.get(PackType.CLIENT_RESOURCES.getDirectory(),
-      location.getNamespace(), MaterialPartTextureGenerator.FOLDER, location.getPath() + ".png"));
-    try {
-      Files.createDirectories(path.getParent());
-      image.writeToFile(path);
-    } catch (IOException e) {
-      log.error("Couldn't create image for {}", location, e);
-    }
+  private static CompletableFuture<?> saveImage(Path folder, ResourceLocation location, NativeImage image) {
+    return CompletableFuture.runAsync(() -> {
+      Path path = folder.resolve(Paths.get(PackType.CLIENT_RESOURCES.getDirectory(),
+        location.getNamespace(), MaterialPartTextureGenerator.FOLDER, location.getPath() + ".png"));
+      try {
+        Files.createDirectories(path.getParent());
+        image.writeToFile(path);
+      } catch (IOException e) {
+        log.error("Couldn't create image for {}", location, e);
+      }
+    });
   }
 
   /**
    * Saves metadata to the output folder
    */
-  private static void saveMetadata(Path folder, ResourceLocation location, JsonObject meta) {
-    Path path = folder.resolve(Paths.get(PackType.CLIENT_RESOURCES.getDirectory(),
-      location.getNamespace(), MaterialPartTextureGenerator.FOLDER, location.getPath() + ".png.mcmeta"));
-    try {
-      Files.createDirectories(path.getParent());
-      String json = MaterialRenderInfoLoader.GSON.toJson(meta);
-      try (BufferedWriter bufferedwriter = Files.newBufferedWriter(path)) {
-        bufferedwriter.write(json);
+  private static CompletableFuture<?> saveMetadata(Path folder, ResourceLocation location, JsonObject meta) {
+    return CompletableFuture.runAsync(() -> {
+      Path path = folder.resolve(Paths.get(PackType.CLIENT_RESOURCES.getDirectory(),
+        location.getNamespace(), MaterialPartTextureGenerator.FOLDER, location.getPath() + ".png.mcmeta"));
+      try {
+        Files.createDirectories(path.getParent());
+        String json = MaterialRenderInfoLoader.GSON.toJson(meta);
+        try (BufferedWriter bufferedwriter = Files.newBufferedWriter(path)) {
+          bufferedwriter.write(json);
+        }
+      } catch (IOException e) {
+        log.error("Couldn't create metadata for {}", location, e);
       }
-    } catch (IOException e) {
-      log.error("Couldn't create metadata for {}", location, e);
-    }
+    });
   }
 
   /**

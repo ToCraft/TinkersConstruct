@@ -79,7 +79,9 @@ import slimeknights.tconstruct.world.TinkerWorld;
 import slimeknights.tconstruct.world.block.FoliageType;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -450,23 +452,23 @@ public class AdvancementsProvider extends GenericDataProvider {
   @Override
   public CompletableFuture<?> run(CachedOutput cache) {
     Set<ResourceLocation> set = Sets.newHashSet();
+    List<CompletableFuture<?>> futures = new ArrayList<>();
     this.advancementConsumer = advancement -> {
       if (!set.add(advancement.getId())) {
         throw new IllegalStateException("Duplicate advancement " + advancement.getId());
       } else {
-        saveJson(cache, advancement.getId(), advancement.deconstruct().serializeToJson());
+        futures.add(saveJson(cache, advancement.getId(), advancement.deconstruct().serializeToJson()));
       }
     };
     this.conditionalConsumer = (id, advancement) -> {
       if (!set.add(id)) {
         throw new IllegalStateException("Duplicate advancement " + id);
       } else {
-        saveJson(cache, id, advancement.write());
+        futures.add(saveJson(cache, id, advancement.write()));
       }
     };
     generate();
-    // TODO: Move something into the CompletableFuture
-    return new CompletableFuture<>();
+    return allOf(futures.stream());
   }
 
 

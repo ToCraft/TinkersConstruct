@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 
 /**
  * Datagen for dynamic modifiers
@@ -140,9 +141,9 @@ public abstract class AbstractModifierProvider extends GenericDataProvider {
   @Override
   public CompletableFuture<?> run(CachedOutput cache) {
     addModifiers();
-    allModifiers.forEach((id, data) -> saveJson(cache, id, data.serialize()));
-    composableModifiers.forEach((id, data) -> saveJson(cache, id, data.serialize()));
-    return new CompletableFuture<>();
+    CompletableFuture<?> f = allOf(allModifiers.entrySet().stream().map(entry -> saveJson(cache, entry.getKey(), entry.getValue().serialize())));
+    CompletableFuture<?> f2 = allOf(composableModifiers.entrySet().stream().map(entry -> saveJson(cache, entry.getKey(), entry.getValue().serialize())));
+    return CompletableFuture.allOf(f, f2);
   }
 
   /**

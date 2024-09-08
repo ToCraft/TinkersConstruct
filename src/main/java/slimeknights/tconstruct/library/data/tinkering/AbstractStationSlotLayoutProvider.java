@@ -87,7 +87,6 @@ public abstract class AbstractStationSlotLayoutProvider extends GenericDataProvi
   @Override
   public CompletableFuture<?> run(CachedOutput cache) {
     addLayouts();
-    allLayouts.forEach((id, builder) -> saveJson(cache, id, builder.build()));
-    return new CompletableFuture<>();
+    return allOf(allLayouts.entrySet().stream().map(entry -> saveJson(cache, entry.getKey(), entry.getValue().build())));
   }
 }

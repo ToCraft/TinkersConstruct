@@ -10,7 +10,6 @@ import slimeknights.tconstruct.library.client.armor.ArmorModelManager;
 import slimeknights.tconstruct.library.client.armor.ArmorModelManager.ArmorModel;
 import slimeknights.tconstruct.library.client.armor.texture.ArmorTextureSupplier;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,8 +35,7 @@ public abstract class AbstractArmorModelProvider extends GenericDataProvider {
   @Override
   public CompletableFuture<?> run(CachedOutput output) {
     addModels();
-    models.forEach((id, model) -> saveJson(output, id, ArmorModel.LOADABLE.serialize(model)));
-    return new CompletableFuture<>();
+    return allOf(models.entrySet().stream().map(entry -> saveJson(output, entry.getKey(), ArmorModel.LOADABLE.serialize(entry.getValue()))));
   }
 
   /**

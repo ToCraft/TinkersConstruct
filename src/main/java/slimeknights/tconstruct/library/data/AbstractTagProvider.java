@@ -75,7 +75,9 @@ public abstract class AbstractTagProvider<T> extends GenericDataProvider {
   public CompletableFuture<?> run(CachedOutput cache) {
     this.builders.clear();
     this.addTags();
-    this.builders.forEach((id, builder) -> {
+    return allOf(this.builders.entrySet().stream().map(entry -> {
+      ResourceLocation id = entry.getKey();
+      TagBuilder builder = entry.getValue();
       List<TagEntry> tagEntries = builder.build();
       List<TagEntry> invalidEntries = tagEntries.stream()
         .filter((value) -> !value.verifyIfPresent(staticValuePredicate, this.builders::containsKey))
@@ -85,10 +87,9 @@ public abstract class AbstractTagProvider<T> extends GenericDataProvider {
         throw new IllegalArgumentException(String.format("Couldn't define tag %s as it is missing following references: %s", id, invalidEntries.stream().map(Objects::toString).collect(Collectors.joining(","))));
       } else {
         // TODO: replace does not work, but that is a forge bug. Fix whenever forge adds the getter
-        saveJson(cache, id, TagFile.CODEC.encodeStart(JsonOps.INSTANCE, new TagFile(tagEntries, false)).getOrThrow(false, TConstruct.LOG::error));
+        return saveJson(cache, id, TagFile.CODEC.encodeStart(JsonOps.INSTANCE, new TagFile(tagEntries, false)).getOrThrow(false, TConstruct.LOG::error));
       }
-    });
-    return new CompletableFuture<>();
+    }));
   }
 
   /**

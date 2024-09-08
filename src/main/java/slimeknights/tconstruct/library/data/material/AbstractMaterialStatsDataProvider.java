@@ -56,8 +56,7 @@ public abstract class AbstractMaterialStatsDataProvider extends GenericDataProvi
     }
     // does not ensure we have materials for all stats, we may be adding stats for another mod
     // generate finally
-    allMaterialStats.forEach((materialId, materialStats) -> saveJson(cache, materialId, convert(materialStats)));
-    return new CompletableFuture<>();
+    return allOf(allMaterialStats.entrySet().stream().map(entry -> saveJson(cache, entry.getKey(), convert(entry.getValue()))));
   }
 
 

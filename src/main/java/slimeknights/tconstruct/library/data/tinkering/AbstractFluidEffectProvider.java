@@ -63,8 +63,7 @@ public abstract class AbstractFluidEffectProvider extends GenericDataProvider {
   @Override
   public CompletableFuture<?> run(CachedOutput cache) {
     addFluids();
-    entries.forEach((id, data) -> saveJson(cache, id, data.build()));
-    return new CompletableFuture<>();
+   return allOf(entries.entrySet().stream().map(entry -> saveJson(cache, entry.getKey(), entry.getValue().build())));
   }
 
   /* Helpers */

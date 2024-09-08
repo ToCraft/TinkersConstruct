@@ -15,6 +15,7 @@ import javax.annotation.Nullable;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Data generator to create png image files
@@ -53,29 +54,28 @@ public abstract class GenericTextureGenerator implements DataProvider {
   /**
    * Saves the given image to the given location
    */
-  @SuppressWarnings("UnstableApiUsage")
-  protected void saveImage(CachedOutput cache, ResourceLocation location, NativeImage image) {
-    try {
-      Path path = this.generator.getOutputFolder().resolve(Paths.get(PackType.CLIENT_RESOURCES.getDirectory(), location.getNamespace(), folder, location.getPath() + ".png"));
-      if (existingFileHelper != null && resourceType != null) {
-        existingFileHelper.trackGenerated(location, resourceType);
+  protected CompletableFuture<?> saveImage(CachedOutput cache, ResourceLocation location, NativeImage image) {
+    return CompletableFuture.runAsync(() -> {
+      try (image) {
+        try {
+          Path path = this.generator.getPackOutput().getOutputFolder().resolve(Paths.get(PackType.CLIENT_RESOURCES.getDirectory(), location.getNamespace(), folder, location.getPath() + ".png"));
+          if (existingFileHelper != null && resourceType != null) {
+            existingFileHelper.trackGenerated(location, resourceType);
+          }
+          byte[] bytes = image.asByteArray();
+          cache.writeIfNeeded(path, bytes, Hashing.sha1().hashBytes(bytes));
+        } catch (IOException e) {
+          log.error("Couldn't write image for {}", location, e);
+        }
       }
-      byte[] bytes = image.asByteArray();
-      cache.writeIfNeeded(path, bytes, Hashing.sha1().hashBytes(bytes));
-    } catch (IOException e) {
-      log.error("Couldn't write image for {}", location, e);
-    }
+    });
   }
 
   /**
    * Saves metadata for the given image
    */
-  protected void saveMetadata(CachedOutput cache, ResourceLocation location, JsonObject metadata) {
-    try {
-      Path path = this.generator.getOutputFolder().resolve(Paths.get(PackType.CLIENT_RESOURCES.getDirectory(), location.getNamespace(), folder, location.getPath() + ".png.mcmeta"));
-      DataProvider.saveStable(cache, metadata, path);
-    } catch (IOException e) {
-      log.error("Couldn't write image metadata for {}", location, e);
-    }
+  protected CompletableFuture<?> saveMetadata(CachedOutput cache, ResourceLocation location, JsonObject metadata) {
+      Path path = this.generator.getPackOutput().getOutputFolder().resolve(Paths.get(PackType.CLIENT_RESOURCES.getDirectory(), location.getNamespace(), folder, location.getPath() + ".png.mcmeta"));
+      return DataProvider.saveStable(cache, metadata, path);
   }
 }

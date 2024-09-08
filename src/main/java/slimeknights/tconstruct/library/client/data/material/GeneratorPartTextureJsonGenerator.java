@@ -63,8 +63,7 @@ public class GeneratorPartTextureJsonGenerator extends GenericDataProvider {
     if (!overrides.overrides.isEmpty()) {
       json.add("overrides", overrides.serialize());
     }
-    saveJson(cache, new ResourceLocation(modId, "generator_part_textures"), json);
-    return new CompletableFuture<>();
+    return saveJson(cache, new ResourceLocation(modId, "generator_part_textures"), json);
   }
 
   @Override

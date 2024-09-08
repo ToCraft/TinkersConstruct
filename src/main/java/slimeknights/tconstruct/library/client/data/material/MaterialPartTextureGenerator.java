@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
 /**
@@ -81,6 +82,7 @@ public class MaterialPartTextureGenerator extends GenericTextureGenerator {
 
   @Override
   public CompletableFuture<?> run(CachedOutput cache) {
+    List<CompletableFuture<?>> futures = new ArrayList<>();
     runCallbacks(existingFileHelper, null);
 
     // ensure we have parts
@@ -90,8 +92,8 @@ public class MaterialPartTextureGenerator extends GenericTextureGenerator {
     }
 
     // for each material list, generate sprites
-    BiConsumer<ResourceLocation, NativeImage> saver = (path, image) -> saveImage(cache, path, image);
-    BiConsumer<ResourceLocation, JsonObject> metaSaver = (path, meta) -> saveMetadata(cache, path, meta);
+    BiFunction<ResourceLocation, NativeImage, CompletableFuture<?>> saver = (path, image) -> saveImage(cache, path, image);
+    BiFunction<ResourceLocation, JsonObject, CompletableFuture<?>> metaSaver = (path, meta) -> saveMetadata(cache, path, meta);
     for (AbstractMaterialSpriteProvider materialProvider : materialProviders) {
       Collection<MaterialSpriteInfo> materials = materialProvider.getMaterials().values();
       if (materials.isEmpty()) {
@@ -102,7 +104,7 @@ public class MaterialPartTextureGenerator extends GenericTextureGenerator {
       for (MaterialSpriteInfo material : materials) {
         for (PartSpriteInfo part : parts) {
           if (material.supportStatType(part.getStatType()) || overrides.hasOverride(part.getStatType(), material.getTexture())) {
-            generateSprite(spriteReader, material, part, shouldGenerate, saver, metaSaver);
+            futures.add(generateSprite(spriteReader, material, part, shouldGenerate, saver, metaSaver));
           }
         }
       }
@@ -110,7 +112,7 @@ public class MaterialPartTextureGenerator extends GenericTextureGenerator {
     spriteReader.closeAll();
     partProvider.cleanCache();
     runCallbacks(null, null);
-    return new CompletableFuture<>();
+    return CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new));
   }
 
   /**
@@ -123,7 +125,8 @@ public class MaterialPartTextureGenerator extends GenericTextureGenerator {
    * @param saver          Function to save the images
    * @param metaSaver      Function to save the animation metadata
    */
-  public static void generateSprite(AbstractSpriteReader spriteReader, MaterialSpriteInfo material, PartSpriteInfo part, Predicate<ResourceLocation> shouldGenerate, BiConsumer<ResourceLocation, NativeImage> saver, BiConsumer<ResourceLocation, JsonObject> metaSaver) {
+  public static CompletableFuture<?> generateSprite(AbstractSpriteReader spriteReader, MaterialSpriteInfo material, PartSpriteInfo part, Predicate<ResourceLocation> shouldGenerate, BiFunction<ResourceLocation, NativeImage, CompletableFuture<?>> saver, BiFunction<ResourceLocation, JsonObject, CompletableFuture<?>> metaSaver) {
+    List<CompletableFuture<?>> futures = new ArrayList<>();
     // first step: see if this sprite has already been generated, if so nothing to do
     // path format: pNamespace:pPath_mNamespace_mPath
     ResourceLocation partPath = part.getPath();
@@ -151,14 +154,16 @@ public class MaterialPartTextureGenerator extends GenericTextureGenerator {
       ISpriteTransformer transformer = material.getTransformer();
       NativeImage transformed = transformer.transformCopy(base, part.isAllowAnimated());
       spriteReader.track(transformed);
-      saver.accept(spritePath, transformed);
+      futures.add(saver.apply(spritePath, transformed));
       if (part.isAllowAnimated()) {
         JsonObject meta = transformer.animationMeta(base);
         if (meta != null) {
-          metaSaver.accept(spritePath, meta);
+          futures.add(metaSaver.apply(spritePath, meta));
         }
       }
     }
+
+    return CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new));
   }
 
 
