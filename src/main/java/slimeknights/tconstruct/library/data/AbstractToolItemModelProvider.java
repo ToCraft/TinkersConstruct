@@ -3,6 +3,7 @@ package slimeknights.tconstruct.library.data;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -11,7 +12,6 @@ import net.minecraft.server.packs.PackType;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.data.GenericDataProvider;
 import slimeknights.mantle.registration.object.EnumObject;
 import slimeknights.mantle.registration.object.IdAwareObject;
@@ -134,7 +134,7 @@ public abstract class AbstractToolItemModelProvider extends GenericDataProvider 
   @SuppressWarnings("deprecation")  // no its not
   protected void armor(String name, EnumObject<ArmorSlotType, ? extends Item> armor, String... textures) throws IOException {
     for (ArmorSlotType slot : ArmorSlotType.values()) {
-      transformTool("armor/" + name + '/' + slot.getSerializedName() + "_broken", readJson(ForgeRegistries.ITEMS.getKey(armor.get(slot))), "", false, "broken", textures);
+      transformTool("armor/" + name + '/' + slot.getSerializedName() + "_broken", readJson(BuiltInRegistries.ITEM.getKey(armor.get(slot))), "", false, "broken", textures);
     }
   }
 

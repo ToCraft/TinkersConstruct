@@ -1,9 +1,9 @@
 package slimeknights.tconstruct.library.client.book.sectiontransformer;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.client.book.data.content.PageContent;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.client.book.content.ContentTool;
@@ -21,7 +21,7 @@ public class ToolTagInjectorTransformer extends AbstractTagInjectingTransformer<
 
   @Override
   protected ResourceLocation getId(Item item) {
-    return ForgeRegistries.ITEMS.getKey(item);
+    return BuiltInRegistries.ITEM.getKey(item);
   }
 
   @Override

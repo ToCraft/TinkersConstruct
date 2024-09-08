@@ -166,7 +166,7 @@ public class WorldgenDatapackRegistryProvider implements DataProvider {
    */
   private <T> Holder<T> reference(ResourceKey<T> key) {
     ResourceKey<Registry<T>> registry = ResourceKey.createRegistryKey(key.registry());
-    return registryAccess.registryOrThrow(registry).getOrCreateHolderOrThrow(Objects.requireNonNull(key));
+    return registryAccess.registryOrThrow(registry).getHolderOrThrow(Objects.requireNonNull(key));
   }
 
   /**
@@ -210,7 +210,7 @@ public class WorldgenDatapackRegistryProvider implements DataProvider {
   }
 
   private <T> NotHolderSet<T> not(ResourceKey<Registry<T>> key, HolderSet<T> set) {
-    return new NotHolderSet<>(registryAccess.registryOrThrow(key), set);
+    return new NotHolderSet<>(registryAccess.registryOrThrow(key).asLookup(), set);
   }
 
 

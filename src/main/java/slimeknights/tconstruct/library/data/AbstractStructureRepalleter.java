@@ -6,6 +6,7 @@ import com.google.common.collect.Multimap;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.nbt.CompoundTag;
@@ -17,7 +18,6 @@ import net.minecraft.server.packs.PackType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.tconstruct.TConstruct;
 
 import java.io.IOException;
@@ -147,7 +147,7 @@ public abstract class AbstractStructureRepalleter extends GenericNBTProvider {
      * Adds a mapping replacing from with to
      */
     public Replacement addMapping(Block from, Block to) {
-      return addMapping(ForgeRegistries.BLOCKS.getKey(from), ForgeRegistries.BLOCKS.getKey(to));
+      return addMapping(BuiltInRegistries.BLOCK.getKey(from), BuiltInRegistries.BLOCK.getKey(to));
     }
 
     /**

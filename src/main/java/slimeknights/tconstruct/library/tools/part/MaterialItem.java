@@ -2,6 +2,7 @@ package slimeknights.tconstruct.library.tools.part;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -136,7 +137,7 @@ public class MaterialItem extends Item implements IMaterialItem {
     if (!IMaterial.UNKNOWN_ID.equals(material)) {
       return material.getId().getNamespace();
     }
-    return ForgeRegistries.ITEMS.getKey(this).getNamespace();
+    return BuiltInRegistries.ITEM.getKey(this).getNamespace();
   }
 
 

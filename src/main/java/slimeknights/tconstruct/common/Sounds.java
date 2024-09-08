@@ -1,6 +1,8 @@
 package slimeknights.tconstruct.common;
 
 import lombok.Getter;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -8,7 +10,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.registration.GeodeItemObject.BudSize;
@@ -92,7 +93,7 @@ public enum Sounds {
   public static void registerSounds(RegisterEvent event) {
     if (event.getRegistryKey() == Registries.SOUND_EVENT) {
       for (Sounds sound : values()) {
-        ForgeRegistries.SOUND_EVENTS.register(sound.sound.getLocation(), sound.getSound());
+        Registry.register(BuiltInRegistries.SOUND_EVENT, sound.sound.getLocation(), sound.getSound());
       }
     }
   }

@@ -37,7 +37,6 @@ import net.minecraftforge.fml.ModLoader;
 import net.minecraftforge.fml.event.IModBusEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.data.registry.GenericLoaderRegistry;
 import slimeknights.mantle.util.JsonHelper;
 import slimeknights.mantle.util.RegistryHelper;
@@ -265,10 +264,10 @@ public class ModifierManager extends SimpleJsonResourceReloadListener {
             } else {
               // assume its an ID
               ResourceLocation enchantId = ResourceLocation.tryParse(key);
-              if (enchantId == null || !ForgeRegistries.ENCHANTMENTS.containsKey(enchantId)) {
+              if (enchantId == null || !BuiltInRegistries.ENCHANTMENT.containsKey(enchantId)) {
                 throw new JsonSyntaxException("Invalid enchantment ID " + key);
               }
-              enchantmentMap.put(ForgeRegistries.ENCHANTMENTS.getValue(enchantId), modifier);
+              enchantmentMap.put(BuiltInRegistries.ENCHANTMENT.get(enchantId), modifier);
             }
           } catch (JsonSyntaxException e) {
             log.info("Invalid enchantment to modifier mapping", e);

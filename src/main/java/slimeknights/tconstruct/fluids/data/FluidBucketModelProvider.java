@@ -9,7 +9,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.data.GenericDataProvider;
 
 import java.io.IOException;
@@ -37,7 +36,7 @@ public class FluidBucketModelProvider extends GenericDataProvider {
     // using our own model as the forge one expects us to use item colors to handle tints, when we could just bake it in
     json.addProperty("loader", "tconstruct:fluid_container");
     json.addProperty("flip_gas", bucket.getFluid().getFluidType().isLighterThanAir());
-    json.addProperty("fluid", ForgeRegistries.FLUIDS.getKey(bucket.getFluid()).toString());
+    json.addProperty("fluid", BuiltInRegistries.FLUID.getKey(bucket.getFluid()).toString());
     return json;
   }
 

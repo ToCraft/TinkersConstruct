@@ -7,6 +7,7 @@ import lombok.Getter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.CraftingContainer;
@@ -19,7 +20,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.ForgeI18n;
 import net.minecraftforge.common.crafting.IShapedRecipe;
-import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.client.book.data.BookData;
 import slimeknights.mantle.client.book.data.content.PageContent;
 import slimeknights.mantle.client.book.data.element.ImageData;
@@ -117,12 +117,12 @@ public class ContentTool extends PageContent {
 
   public ContentTool(IModifiableDisplay tool) {
     this.tool = tool;
-    this.toolName = ForgeRegistries.ITEMS.getKey(tool.asItem()).toString();
+    this.toolName = BuiltInRegistries.ITEM.getKey(tool.asItem()).toString();
     this.text = new TextData[]{new TextData(ForgeI18n.getPattern(tool.asItem().getDescriptionId() + ".description"))};
   }
 
   public ContentTool(Item item) {
-    this.toolName = ForgeRegistries.ITEMS.getKey(item.asItem()).toString();
+    this.toolName = BuiltInRegistries.ITEM.getKey(item.asItem()).toString();
     if (item instanceof IModifiableDisplay tool) {
       this.tool = tool;
     } else {
@@ -136,7 +136,7 @@ public class ContentTool extends PageContent {
       if (this.toolName == null) {
         this.toolName = this.parent.name;
       }
-      Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(this.toolName));
+      Item item = BuiltInRegistries.ITEM.getOptional(new ResourceLocation(this.toolName)).orElse(null);
       if (item instanceof IModifiableDisplay tool) {
         this.tool = tool;
       } else {

@@ -4,12 +4,12 @@ import com.mojang.datafixers.util.Function6;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
 import slimeknights.mantle.recipe.ingredient.SizedIngredient;
 import slimeknights.tconstruct.library.json.predicate.modifier.ModifierPredicate;
@@ -84,7 +84,7 @@ public class ModifierRemovalRecipeBuilder extends AbstractSizedIngredientRecipeB
 
   @Override
   public void save(Consumer<FinishedRecipe> consumer) {
-    save(consumer, ForgeRegistries.ITEMS.getKey(leftovers.get(0).getItem()));
+    save(consumer, BuiltInRegistries.ITEM.getKey(leftovers.get(0).getItem()));
   }
 
   @Override

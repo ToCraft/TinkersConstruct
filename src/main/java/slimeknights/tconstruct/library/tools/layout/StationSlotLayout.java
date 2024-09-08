@@ -7,13 +7,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.recipe.partbuilder.Pattern;
 
@@ -299,7 +299,7 @@ public class StationSlotLayout {
      * Adds an input as the given item
      */
     public Builder addInputItem(ItemLike item, int x, int y) {
-      return addInputItem(new Pattern(ForgeRegistries.ITEMS.getKey(item.asItem())), item, x, y);
+      return addInputItem(new Pattern(BuiltInRegistries.ITEM.getKey(item.asItem())), item, x, y);
     }
 
     /**

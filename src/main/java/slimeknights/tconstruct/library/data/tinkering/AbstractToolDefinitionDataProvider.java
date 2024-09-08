@@ -1,12 +1,12 @@
 package slimeknights.tconstruct.library.data.tinkering;
 
 import com.google.common.collect.ImmutableList;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.data.GenericDataProvider;
 import slimeknights.tconstruct.library.module.ModuleHook;
 import slimeknights.tconstruct.library.tools.definition.ModifiableArmorMaterial;
@@ -59,7 +59,7 @@ public abstract class AbstractToolDefinitionDataProvider extends GenericDataProv
    * Defines the given ID as a tool definition
    */
   protected ToolDefinitionDataBuilder define(ItemLike item) {
-    return define(ForgeRegistries.ITEMS.getKey(item.asItem()));
+    return define(BuiltInRegistries.ITEM.getKey(item.asItem()));
   }
 
   /**

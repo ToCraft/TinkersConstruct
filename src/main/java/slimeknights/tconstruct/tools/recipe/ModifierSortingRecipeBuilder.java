@@ -1,9 +1,9 @@
 package slimeknights.tconstruct.tools.recipe;
 
 import lombok.RequiredArgsConstructor;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.tconstruct.library.recipe.worktable.AbstractSizedIngredientRecipeBuilder;
 
 import java.util.function.Consumer;
@@ -16,7 +16,7 @@ public class ModifierSortingRecipeBuilder extends AbstractSizedIngredientRecipeB
 
   @Override
   public void save(Consumer<FinishedRecipe> consumer) {
-    save(consumer, ForgeRegistries.ITEMS.getKey((inputs.get(0).getMatchingStacks().get(0).getItem())));
+    save(consumer, BuiltInRegistries.ITEM.getKey((inputs.get(0).getMatchingStacks().get(0).getItem())));
   }
 
   @Override

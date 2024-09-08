@@ -22,8 +22,11 @@ import mezz.jei.api.runtime.IIngredientManager;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.Container;
@@ -253,7 +256,7 @@ public class JEIPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(TinkerSmeltery.foundryController), TConstructJEIConstants.FOUNDRY);
 
     // modifiers
-    for (Item item : Objects.requireNonNull(ForgeRegistries.ITEMS.tags()).getTag(TinkerTags.Items.MELEE)) {
+    for (Item item : BuiltInRegistries.ITEM.getTag(TinkerTags.Items.MELEE).orElseThrow().stream().map(Holder::get).toArray(Item[]::new)) {
       // add any tools with a severing trait
       if (item instanceof IModifiable modifiable && ToolTraitHook.getTraits(modifiable.getToolDefinition(), MaterialNBT.EMPTY).getLevel(TinkerModifiers.severing.getId()) > 0) {
         registry.addRecipeCatalyst(IModifiableDisplay.getDisplayStack(item), TConstructJEIConstants.SEVERING);

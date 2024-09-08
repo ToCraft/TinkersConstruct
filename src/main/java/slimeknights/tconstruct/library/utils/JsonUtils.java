@@ -5,12 +5,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSyntaxException;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.OnDatapackSyncEvent;
-import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.data.loadable.common.ColorLoadable;
 import slimeknights.mantle.network.packet.ISimplePacket;
 import slimeknights.mantle.util.JsonHelper;
@@ -119,7 +119,7 @@ public class JsonUtils {
    */
   public static JsonElement serializeItemStack(ItemStack result) {
     // if the item has NBT, write both, else write just the name
-    String itemName = ForgeRegistries.ITEMS.getKey(result.getItem()).toString();
+    String itemName = BuiltInRegistries.ITEM.getKey(result.getItem()).toString();
     if (result.hasTag()) {
       JsonObject jsonResult = new JsonObject();
       jsonResult.addProperty("item", itemName);

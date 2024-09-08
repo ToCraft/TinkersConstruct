@@ -1,10 +1,10 @@
 package slimeknights.tconstruct.fixture;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.tconstruct.library.tools.part.ToolPartItem;
 import slimeknights.tconstruct.tools.stats.HandleMaterialStats;
 import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
@@ -23,16 +23,16 @@ public class MaterialItemFixture {
       return;
     }
     init = true;
-    ForgeRegistries.ITEMS.unfreeze(); // yes, I know this is bad, but this is testing so we do bad things sometimes
+    BuiltInRegistries.ITEM.unfreeze(); // yes, I know this is bad, but this is testing so we do bad things sometimes
     MATERIAL_ITEM = new ToolPartItem(new Item.Properties(), MaterialStatsFixture.STATS_TYPE);
     MATERIAL_ITEM_2 = new ToolPartItem(new Item.Properties(), MaterialStatsFixture.STATS_TYPE_2);
     MATERIAL_ITEM_HEAD = new ToolPartItem(new Item.Properties(), HeadMaterialStats.ID);
     MATERIAL_ITEM_HANDLE = new ToolPartItem(new Item.Properties(), HandleMaterialStats.ID);
     MATERIAL_ITEM_EXTRA = new ToolPartItem(new Item.Properties(), StatlessMaterialStats.BINDING.getIdentifier());
-    ForgeRegistries.ITEMS.register(new ResourceLocation("test", "test_material"), MATERIAL_ITEM);
-    ForgeRegistries.ITEMS.register(new ResourceLocation("test", "test_material_2"), MATERIAL_ITEM_2);
-    ForgeRegistries.ITEMS.register(new ResourceLocation("test", "test_head"), MATERIAL_ITEM_HEAD);
-    ForgeRegistries.ITEMS.register(new ResourceLocation("test", "test_handle"), MATERIAL_ITEM_HANDLE);
-    ForgeRegistries.ITEMS.register(new ResourceLocation("test", "test_extra"), MATERIAL_ITEM_EXTRA);
+    Registry.register(BuiltInRegistries.ITEM, new ResourceLocation("test", "test_material"), MATERIAL_ITEM);
+    Registry.register(BuiltInRegistries.ITEM, new ResourceLocation("test", "test_material_2"), MATERIAL_ITEM_2);
+    Registry.register(BuiltInRegistries.ITEM, new ResourceLocation("test", "test_head"), MATERIAL_ITEM_HEAD);
+    Registry.register(BuiltInRegistries.ITEM, new ResourceLocation("test", "test_handle"), MATERIAL_ITEM_HANDLE);
+    Registry.register(BuiltInRegistries.ITEM, new ResourceLocation("test", "test_extra"), MATERIAL_ITEM_EXTRA);
   }
 }

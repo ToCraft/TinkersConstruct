@@ -1,13 +1,13 @@
 package slimeknights.tconstruct.common.data.tags;
 
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
@@ -46,7 +46,7 @@ public class BlockEntityTypeTagProvider extends TagsProvider<BlockEntityType<?>>
   private static ResourceKey<BlockEntityType<?>>[] getBlockETypeResourceKeys(BlockEntityType<?>... blockEntityTypes) {
     //noinspection unchecked
     return Arrays.stream(blockEntityTypes)
-      .map(blockEntityType -> ForgeRegistries.BLOCK_ENTITY_TYPES.getResourceKey(blockEntityType).orElseThrow(() -> new IllegalStateException("Block not found in forge registry: " + blockEntityType)))
+      .map(blockEntityType -> BuiltInRegistries.BLOCK_ENTITY_TYPE.getResourceKey(blockEntityType).orElseThrow(() -> new IllegalStateException("Block not found in forge registry: " + blockEntityType)))
       .toArray(ResourceKey[]::new);
   }
 }

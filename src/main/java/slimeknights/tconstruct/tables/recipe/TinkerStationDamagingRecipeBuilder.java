@@ -6,7 +6,6 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.recipe.data.AbstractRecipeBuilder;
 
 import java.util.function.Consumer;
@@ -26,7 +25,7 @@ public class TinkerStationDamagingRecipeBuilder extends AbstractRecipeBuilder<Ti
     if (stacks.length == 0) {
       throw new IllegalStateException("Empty ingredient not allowed");
     }
-    save(consumer, ForgeRegistries.ITEMS.getKey(stacks[0].getItem()));
+    save(consumer, BuiltInRegistries.FLUID.ITEMS.getKey(stacks[0].getItem()));
   }
 
   @Override

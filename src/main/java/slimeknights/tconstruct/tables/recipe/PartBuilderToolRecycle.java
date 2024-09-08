@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -87,7 +89,7 @@ public class PartBuilderToolRecycle implements IPartBuilderRecipe {
   public Stream<Pattern> getPatterns(IPartBuilderContainer inv) {
     if (inv.getStack().getItem() instanceof IModifiable modifiable) {
       return ToolPartsHook.parts(modifiable.getToolDefinition()).stream()
-        .map(part -> ForgeRegistries.ITEMS.getKey(part.asItem()))
+        .map(part -> BuiltInRegistries.ITEM.getKey(part.asItem()))
         .distinct()
         .map(Pattern::new);
     }
@@ -123,7 +125,7 @@ public class PartBuilderToolRecycle implements IPartBuilderRecipe {
     List<IToolPart> requirements = ToolPartsHook.parts(tool.getDefinition());
     for (int i = 0; i < requirements.size(); i++) {
       IToolPart part = requirements.get(i);
-      if (pattern.equals(ForgeRegistries.ITEMS.getKey(part.asItem()))) {
+      if (pattern.equals(BuiltInRegistries.ITEM.getKey(part.asItem()))) {
         matchIndex = i;
         match = part;
         break;
@@ -156,7 +158,7 @@ public class PartBuilderToolRecycle implements IPartBuilderRecipe {
     List<IToolPart> requirements = ToolPartsHook.parts(tool.getDefinition());
     for (int i = 0; i < requirements.size(); i++) {
       IToolPart part = requirements.get(i);
-      if (found || !pattern.equals(ForgeRegistries.ITEMS.getKey(part.asItem()))) {
+      if (found || !pattern.equals(BuiltInRegistries.ITEM.getKey(part.asItem()))) {
         parts.add(part);
         indices.add(i);
       } else {
@@ -175,7 +177,7 @@ public class PartBuilderToolRecycle implements IPartBuilderRecipe {
    */
   @Deprecated
   @Override
-  public ItemStack getResultItem() {
+  public ItemStack getResultItem(RegistryAccess registryAccess) {
     return ItemStack.EMPTY;
   }
 

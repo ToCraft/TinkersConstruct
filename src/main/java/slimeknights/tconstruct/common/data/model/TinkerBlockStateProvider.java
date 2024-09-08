@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.common.data.model;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
@@ -20,7 +21,6 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.ModelFile.UncheckedModelFile;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.registration.object.BuildingBlockObject;
 import slimeknights.mantle.registration.object.FenceBuildingBlockObject;
 import slimeknights.mantle.registration.object.WoodBlockObject;
@@ -131,7 +131,7 @@ public class TinkerBlockStateProvider extends BlockStateProvider {
    */
   @SuppressWarnings("deprecation")
   private ResourceLocation key(Block block) {
-    return ForgeRegistries.BLOCKS.getKey(block);
+    return BuiltInRegistries.BLOCK.getKey(block);
   }
 
   /**
@@ -146,7 +146,7 @@ public class TinkerBlockStateProvider extends BlockStateProvider {
    */
   @SuppressWarnings("deprecation")
   private ResourceLocation itemKey(ItemLike item) {
-    return ForgeRegistries.ITEMS.getKey(item.asItem());
+    return BuiltInRegistries.ITEM.getKey(item.asItem());
   }
 
   /**

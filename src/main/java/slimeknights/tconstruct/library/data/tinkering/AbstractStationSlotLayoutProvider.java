@@ -1,11 +1,11 @@
 package slimeknights.tconstruct.library.data.tinkering;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.data.GenericDataProvider;
 import slimeknights.tconstruct.library.tools.item.IModifiableDisplay;
 import slimeknights.tconstruct.library.tools.layout.StationSlotLayout;
@@ -65,14 +65,14 @@ public abstract class AbstractStationSlotLayoutProvider extends GenericDataProvi
    * Defines the given ID as a item layout
    */
   protected StationSlotLayout.Builder define(ItemLike item) {
-    return define(ForgeRegistries.ITEMS.getKey(item.asItem()));
+    return define(BuiltInRegistries.ITEM.getKey(item.asItem()));
   }
 
   /**
    * Defines the given ID as a tool layout, sets icon and name
    */
   protected StationSlotLayout.Builder defineModifiable(IModifiableDisplay item) {
-    return define(ForgeRegistries.ITEMS.getKey(item.asItem()))
+    return define(BuiltInRegistries.ITEM.getKey(item.asItem()))
       .translationKey(item.asItem().getDescriptionId())
       .icon(item.getRenderTool());
   }

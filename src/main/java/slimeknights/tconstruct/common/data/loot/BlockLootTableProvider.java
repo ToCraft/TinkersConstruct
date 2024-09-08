@@ -4,6 +4,7 @@ import net.minecraft.advancements.critereon.EnchantmentPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.flag.FeatureFlags;
@@ -29,7 +30,6 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.common.loot.CanToolPerformAction;
-import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.loot.function.RetexturedLootFunction;
 import slimeknights.mantle.registration.object.BuildingBlockObject;
 import slimeknights.mantle.registration.object.FenceBuildingBlockObject;
@@ -67,8 +67,8 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
   @Nonnull
   @Override
   protected Iterable<Block> getKnownBlocks() {
-    return ForgeRegistries.BLOCKS.getValues().stream()
-      .filter((block) -> TConstruct.MOD_ID.equals(ForgeRegistries.BLOCKS.getKey(block).getNamespace()))
+    return BuiltInRegistries.BLOCK.stream()
+      .filter((block) -> TConstruct.MOD_ID.equals(BuiltInRegistries.BLOCK.getKey(block).getNamespace()))
       .collect(Collectors.toList());
   }
 

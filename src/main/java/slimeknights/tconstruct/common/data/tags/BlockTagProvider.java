@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.common.data.tags;
 
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.TagsProvider;
@@ -13,7 +14,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.registration.object.BuildingBlockObject;
 import slimeknights.mantle.registration.object.EnumObject;
 import slimeknights.mantle.registration.object.MetalItemObject;
@@ -650,7 +650,7 @@ public class BlockTagProvider extends TagsProvider<Block> {
 
   private static ResourceKey<Block>[] getBlockResourceKeys(Block... blocks) {
     return Arrays.stream(blocks)
-      .map(block -> ForgeRegistries.BLOCKS.getResourceKey(block).orElseThrow(() -> new IllegalStateException("Block not found in forge registry: " + block)))
+      .map(block -> BuiltInRegistries.BLOCK.getResourceKey(block).orElseThrow(() -> new IllegalStateException("Block not found in forge registry: " + block)))
       .toArray(ResourceKey[]::new);
   }
 }
