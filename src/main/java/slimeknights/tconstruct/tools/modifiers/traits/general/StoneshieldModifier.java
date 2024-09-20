@@ -19,6 +19,7 @@ public class StoneshieldModifier extends DurabilityShieldModifier implements Pro
 
   @Override
   protected void registerHooks(Builder hookBuilder) {
+    super.registerHooks(hookBuilder);
     hookBuilder.addHook(this, ModifierHooks.PROCESS_LOOT);
   }
 

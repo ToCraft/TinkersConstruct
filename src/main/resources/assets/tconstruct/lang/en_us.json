@@ -950,6 +950,8 @@
 
   "_comment": "Tinkers Tool Parts",
 
+  "item.tconstruct.dummy_tool_part.tooltip": "Used to create casts, cannot be used to create tools.",
+
   "item.tconstruct.repair_kit": "Repair Kit",
 
   "item.tconstruct.pick_head": "Pick Head",
@@ -975,6 +977,10 @@
   "item.tconstruct.chestplate_plating": "Chest Plating",
   "item.tconstruct.leggings_plating": "Leg Plating",
   "item.tconstruct.boots_plating": "Boot Plating",
+  "item.tconstruct.helmet_plating_dummy": "Stone Helmet Plating",
+  "item.tconstruct.chestplate_plating_dummy": "Stone Chest Plating",
+  "item.tconstruct.leggings_plating_dummy": "Stone Leg Plating",
+  "item.tconstruct.boots_plating_dummy": "Stone Boot Plating",
   "item.tconstruct.maille": "Maille",
   "item.tconstruct.shield_core": "Shield Core",
 
@@ -1530,7 +1536,7 @@
   "material.tconstruct.iron.flavor": "Ironic. He could save others from death, but not himself.",
   "material.tconstruct.iron.encyclopedia": "Causes mining blocks and hitting mobs to attract nearby items.",
   "material.tconstruct.iron.ranged": "Causes firing arrows to attract nearby items to the holder.",
-  "material.tconstruct.iron.armor": "Reduces damage from projectiles by 10% per level, and grants 5% projectile protection based on the max level.",
+  "material.tconstruct.iron.armor": "Reduces damage from projectiles by 10% per level, and grants 5% knockback resistance times the max level.",
   "material.tconstruct.iron.skull_flavor": "Violation of quarantine",
   "material.tconstruct.iron.skull_encyclopedia": "Melee attacks copy all negative status effects from the wearer to the target",
 
@@ -1622,7 +1628,7 @@
   "material.tconstruct.manyullyn.flavor": "The metal that most Tinkers will never pronounce right. Also known as a star cutting material.",
   "material.tconstruct.manyullyn.encyclopedia": "Grants +2 damage per level after 8 consecutive hits",
   "material.tconstruct.manyullyn.ranged": "Arrows gain +1 damage per level (before velocity) after 8 consecutive arrow hits",
-  "material.tconstruct.manyullyn.armor": "Temporarily boosts melee damge by 1 after taking damage, capping at the total level across all armor",
+  "material.tconstruct.manyullyn.armor": "Temporarily boosts melee damage by 1 after taking damage, capping at the total level across all armor",
 
   "material.tconstruct.hepatizon": "Hepatizon",
   "material.tconstruct.hepatizon.flavor": "He-pa-ti-zon - boil it, mash it, put it in a stew.",
@@ -1728,7 +1734,7 @@
   "material.tconstruct.silver.flavor": "You know, this tool isn't going to look so shiny in a few days.",
   "material.tconstruct.silver.encyclopedia": "Gives +2.5 damage against undead per level",
   "material.tconstruct.silver.ranged": "Gives +0.5 projectile power against undead per level",
-  "material.tconstruct.silver.armor": "Reduces dmage from undead by 5% per level",
+  "material.tconstruct.silver.armor": "Reduces damage from undead by 5% per level",
 
   "material.tconstruct.whitestone": "Whitestone",
   "material.tconstruct.whitestone.end": "End Stone",
@@ -1764,7 +1770,7 @@
   "material.tconstruct.invar.flavor": "Resists both temperature and arrest.",
   "material.tconstruct.invar.encyclopedia": "Grants +2.5 damage in biomes with neutral temperatures",
   "material.tconstruct.invar.ranged": "Grants +0.15 accuracy in biomes with neutral temperatures",
-  "material.tconstruct.invar.armor": "Redudes damage by 5% per level in biomes with neutral temperatures",
+  "material.tconstruct.invar.armor": "Reduces damage by 5% per level in biomes with neutral temperatures",
 
   "material.tconstruct.electrum": "Electrum",
   "material.tconstruct.electrum.flavor": "Good for electronic components.",
@@ -2431,7 +2437,7 @@
   "modifier.tconstruct.crystalbound.description": "Bows gain bonus velocity, but arrow angle is restricted",
   "modifier.tconstruct.crystalstrike": "Crystalstrike",
   "modifier.tconstruct.crystalstrike.flavor": "Speed of the crystal comes at a cost",
-  "modifier.tconstruct.crystalstrike.description": "Armor instead gains attack speed by restricting knockback angle",
+  "modifier.tconstruct.crystalstrike.description": "Increases attack speed but also restricts knockback angles",
   "modifier.tconstruct.lightweight": "Lightweight",
   "modifier.tconstruct.lightweight.flavor": "Like a Shardblade!",
   "modifier.tconstruct.lightweight.description": "Tool is incredibly light for its size, allowing you to attack, mine, and launch projectiles faster",
@@ -2875,9 +2881,9 @@
   "recipe.tconstruct.modifier.not_enough_slots": "Need at least %s %s slots to add this modifier",
   "recipe.tconstruct.modifier.validate_slots": "This change leaves the tool with too few %s slots",
   "recipe.tconstruct.modifier.min_level": "This recipe requires the tool to have at least %s to apply (ignoring traits)",
-  "recipe.tconstruct.modifier.max_level": "%s level cannot be above %s (ignoring traits)",
+  "recipe.tconstruct.modifier.max_level": "This recipe cannot increase %s above level %s (ignoring traits)",
   "recipe.tconstruct.modifier.min_level.traits": "This recipe requires the tool to have at least %s to apply (including traits)",
-  "recipe.tconstruct.modifier.max_level.traits": "%s level cannot be above %s (including traits)",
+  "recipe.tconstruct.modifier.max_level.traits": "This recipe cannot increase %s above level %s (including traits)",
 
   "recipe.tconstruct.tool_recycling": "Tool Recycling",
   "recipe.tconstruct.tool_recycling.info": "Select which part to salvage from this tool. There is a chance based on the tool's remaining durability to salvage a second part.",
@@ -3032,6 +3038,9 @@
 
   "jei.tconstruct.severing.title": "Severing",
 
+  "jei.tconstruct.tinkering.tool_building": "Tool Building",
+  "jei.tconstruct.tinkering.tool_building.anvil": "Broad tools require the Tinker's Anvil to be created or swap parts",
+
   "jei.tconstruct.part_builder.title": "Part Builder",
   "jei.tconstruct.part_builder.cost": "Cost: %s",
 
@@ -3074,9 +3083,9 @@
   "advancements.tconstruct.smeltery.melter.title": "Basic Meltery",
   "advancements.tconstruct.smeltery.melter.description": "Make a basic melting setup with a melter, a heater or tank, a casting basin, a casting table, and a faucet",
   "advancements.tconstruct.smeltery.sand_casting.title": "Sand Casting",
-  "advancements.tconstruct.smeltery.sand_casting.description": "Make a basic disposable casts out of sand",
+  "advancements.tconstruct.smeltery.sand_casting.description": "Make a basic disposable cast out of sand",
   "advancements.tconstruct.smeltery.gold_casting.title": "Shiny Casts",
-  "advancements.tconstruct.smeltery.gold_casting.description": "Make a reusable casts out of gold",
+  "advancements.tconstruct.smeltery.gold_casting.description": "Make a reusable cast out of gold",
   "advancements.tconstruct.smeltery.cast_collector.title": "Cast Collector",
   "advancements.tconstruct.smeltery.cast_collector.description": "Collect one of each gold cast",
   "advancements.tconstruct.smeltery.mighty_smelting.title": "Smelting 201",

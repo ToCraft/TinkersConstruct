@@ -100,6 +100,10 @@ public class TinkerItemModelProvider extends ItemModelProvider {
     cast(TinkerSmeltery.leggingsPlatingCast);
     cast(TinkerSmeltery.bootsPlatingCast);
     cast(TinkerSmeltery.mailleCast);
+    // dummy parts
+    TinkerSmeltery.dummyPlating.forEach((type, item) -> {
+      basicItem(item, "tool/parts/plating_" + type.getSerializedName());
+    });
   }
 
   /**

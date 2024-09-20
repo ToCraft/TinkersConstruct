@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.common.data.model;
 
 import com.google.common.math.IntMath;
+import com.google.gson.JsonObject;
 import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
@@ -8,6 +9,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.client.data.GenericTextureGenerator;
+import slimeknights.tconstruct.library.client.data.spritetransformer.GreyToColorMapping;
+import slimeknights.tconstruct.library.client.data.spritetransformer.ISpriteTransformer;
+import slimeknights.tconstruct.library.client.data.spritetransformer.OffsettingSpriteTransformer;
+import slimeknights.tconstruct.library.client.data.spritetransformer.RecolorSpriteTransformer;
 import slimeknights.tconstruct.library.client.data.util.DataGenSpriteReader;
 import slimeknights.tconstruct.shared.block.SlimeType;
 import slimeknights.tconstruct.util.ColourUtils;
@@ -46,6 +51,13 @@ public class ModelSpriteProvider extends GenericTextureGenerator {
       futures.add(stackSprites(cache, getResource("block/wood/enderbark/roots/" + name + "_top"), rootsTop, congealed));
     }
 
+    // dummy parts
+    ISpriteTransformer stoneColor = new RecolorSpriteTransformer(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF181818).addARGB(102, 0xFF494949).addARGB(140, 0xFF5A5A5A).addARGB(178, 0xFF787777).addARGB(216, 0xFF95918D).addARGB(255, 0xFFB3B1AF).build());
+    transformSprite(cache, getResource("item/tool/parts/plating_helmet"),     getResource("item/tool/armor/plate/helmet/plating"), new OffsettingSpriteTransformer(stoneColor, 0, 2));
+    transformSprite(cache, getResource("item/tool/parts/plating_chestplate"), getResource("item/tool/armor/plate/chestplate/plating"), stoneColor);
+    transformSprite(cache, getResource("item/tool/parts/plating_leggings"),   getResource("item/tool/armor/plate/leggings/plating"), new OffsettingSpriteTransformer(stoneColor, 0, 1));
+    transformSprite(cache, getResource("item/tool/parts/plating_boots"),      getResource("item/tool/armor/plate/boots/plating"), stoneColor);
+
     spriteReader.closeAll();
     return CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new));
   }
@@ -55,6 +67,24 @@ public class ModelSpriteProvider extends GenericTextureGenerator {
    */
   private static int lcm(int a, int b) {
     return a * (b / IntMath.gcd(a, b));
+  }
+
+  /**
+   * Applies the given transformer to the passed sprite
+   * @param cache         Output cache
+   * @param output        Output location
+   * @param input         Input location
+   * @param transformer   Transformer instance
+   * @throws IOException  If an exception happens
+   */
+  protected void transformSprite(CachedOutput cache, ResourceLocation output, ResourceLocation input, ISpriteTransformer transformer) throws IOException {
+    NativeImage original = spriteReader.read(input);
+    NativeImage generated = transformer.transformCopy(original, true);
+    saveImage(cache, output, generated);
+    JsonObject meta = transformer.animationMeta(original);
+    if (meta != null) {
+      saveMetadata(cache, output, meta);
+    }
   }
 
   /**
@@ -115,7 +145,7 @@ public class ModelSpriteProvider extends GenericTextureGenerator {
     futures.add(saveImage(cache, output, generated));
     if (metaLocation != null) {
       try {
-        futures.add(saveMetadata(cache, output, spriteReader.readMetadata(output)));
+        futures.add(saveMetadata(cache, output, spriteReader.readMetadata(metaLocation)));
       } catch (IOException e) {
         TConstruct.LOG.error("Failed to save sprite metadata", e);
       }
