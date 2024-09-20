@@ -1,9 +1,13 @@
 package slimeknights.tconstruct.tools.modifiers.effect;
 
+import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.EntityDamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,7 +21,7 @@ import slimeknights.tconstruct.tools.modifiers.traits.melee.LaceratingModifier;
  */
 public class BleedingEffect extends NoMilkEffect {
 
-  private static final String SOURCE_KEY = TConstruct.prefix("bleed");
+  ResourceKey<DamageType> BLEED = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(TConstruct.prefix("bleed")));
 
   public BleedingEffect() {
     super(MobEffectCategory.HARMFUL, 0xa80000, true);
@@ -35,9 +39,9 @@ public class BleedingEffect extends NoMilkEffect {
     LivingEntity lastAttacker = target.getLastHurtMob();
     DamageSource source;
     if (lastAttacker != null) {
-      source = new BleedingDamageSource(SOURCE_KEY, lastAttacker);
+      source = new BleedingDamageSource(BLEED, lastAttacker);
     } else {
-      source = new DamageSource(SOURCE_KEY);
+      source = new DamageSource(BLEED);
     }
     source.bypassMagic();
 
@@ -56,10 +60,10 @@ public class BleedingEffect extends NoMilkEffect {
    * Guardians use the direct entity to determine if they should thorns, while the direct marks for player kills
    * treat this as indirect damage by making the direct entity null, so guardians treat it like arrows
    */
-  private static class BleedingDamageSource extends EntityDamageSource {
+  private static class BleedingDamageSource extends DamageSource {
 
-    public BleedingDamageSource(String name, Entity entity) {
-      super(name, entity);
+    public BleedingDamageSource(Holder<DamageType> type, Entity entity) {
+      super(type, entity);
     }
 
     @Nullable
