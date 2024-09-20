@@ -231,7 +231,7 @@ public class PartBuilderBlockEntity extends RetexturedTableBlockEntity implement
     super.setItem(slot, stack);
     if (slot == MATERIAL_SLOT) {
       // if item or NBT changed, update
-      if (original.getItem() != stack.getItem() || !ItemStack.tagMatches(original, stack)) {
+      if (!ItemStack.isSameItemSameTags(original, stack)) {
         this.inventoryWrapper.refreshMaterial();
         refresh(true);
         // if size changed, we are still the same material but might no longer have enough

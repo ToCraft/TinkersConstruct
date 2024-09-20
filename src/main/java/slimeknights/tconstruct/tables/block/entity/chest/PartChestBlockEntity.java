@@ -35,7 +35,7 @@ public class PartChestBlockEntity extends AbstractChestBlockEntity {
       // check if there is no other slot containing that item
       for (int i = 0; i < this.getSlots(); i++) {
         // don't compare count
-        if (ItemStack.isSame(stack, this.getStackInSlot(i)) && ItemStack.tagMatches(stack, this.getStackInSlot(i))) {
+        if (ItemStack.isSameItemSameTags(stack, this.getStackInSlot(i))) {
           return i == slot; // only allowed in the same slot
         }
       }
