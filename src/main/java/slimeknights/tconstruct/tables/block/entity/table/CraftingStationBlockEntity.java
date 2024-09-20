@@ -79,7 +79,7 @@ public class CraftingStationBlockEntity extends RetexturedTableBlockEntity imple
     }
     // assume empty unless we learn otherwise
     ItemStack result = ItemStack.EMPTY;
-    if (!this.level().isClientSide && this.level.getServer() != null) {
+    if (!this.level.isClientSide && this.level.getServer() != null) {
       RecipeManager manager = this.level.getServer().getRecipeManager();
 
       // first, try the cached recipe
@@ -234,7 +234,7 @@ public class CraftingStationBlockEntity extends RetexturedTableBlockEntity imple
    */
   public void syncRecipe(Player player) {
     // must have a last recipe and a server world
-    if (this.lastRecipe != null && this.level != null && !this.level().isClientSide && player instanceof ServerPlayer) {
+    if (this.lastRecipe != null && this.level != null && !this.level.isClientSide && player instanceof ServerPlayer) {
       TinkerNetwork.getInstance().sendTo(new UpdateCraftingRecipePacket(this.worldPosition, this.lastRecipe), (ServerPlayer) player);
     }
   }

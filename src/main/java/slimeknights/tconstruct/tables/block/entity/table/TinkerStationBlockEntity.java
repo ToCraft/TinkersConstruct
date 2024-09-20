@@ -126,7 +126,7 @@ public class TinkerStationBlockEntity extends RetexturedTableBlockEntity impleme
     ItemStack result = ItemStack.EMPTY;
     this.currentError = null;
 
-    if (!this.level().isClientSide && this.level.getServer() != null) {
+    if (!this.level.isClientSide && this.level.getServer() != null) {
       RecipeManager manager = this.level.getServer().getRecipeManager();
 
       // first, try the cached recipe
@@ -257,7 +257,7 @@ public class TinkerStationBlockEntity extends RetexturedTableBlockEntity impleme
    */
   public void syncRecipe(Player player) {
     // must have a last recipe and a server level
-    if (this.lastRecipe != null && this.level != null && !this.level().isClientSide && player instanceof ServerPlayer server) {
+    if (this.lastRecipe != null && this.level != null && !this.level.isClientSide && player instanceof ServerPlayer server) {
       TinkerNetwork.getInstance().sendTo(new UpdateTinkerStationRecipePacket(this.worldPosition, this.lastRecipe), server);
     }
   }
