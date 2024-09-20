@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.gson.annotations.SerializedName;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.language.I18n;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
