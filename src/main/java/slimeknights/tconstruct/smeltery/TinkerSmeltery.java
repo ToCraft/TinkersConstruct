@@ -147,8 +147,8 @@ public final class TinkerSmeltery extends TinkerModule {
   /*
    * Blocks
    */
-  public static final ItemObject<Block> grout = BLOCKS.register("grout", builder(Material.SAND, MapColor.COLOR_LIGHT_GRAY, SoundType.SAND).strength(3.0f).friction(0.8F), TOOLTIP_BLOCK_ITEM);
-  public static final ItemObject<Block> netherGrout = BLOCKS.register("nether_grout", builder(Material.SAND, SoundType.SOUL_SOIL).strength(3.0f).friction(0.8F), TOOLTIP_BLOCK_ITEM);
+  public static final ItemObject<Block> grout = BLOCKS.register("grout", builder(Blocks.SAND, MapColor.COLOR_LIGHT_GRAY, SoundType.SAND).strength(3.0f).friction(0.8F), TOOLTIP_BLOCK_ITEM);
+  public static final ItemObject<Block> netherGrout = BLOCKS.register("nether_grout", builder(Blocks.SAND, SoundType.SOUL_SOIL).strength(3.0f).friction(0.8F), TOOLTIP_BLOCK_ITEM);
 
   // seared blocks
   private static final Properties SEARED, TOUGH_SEARED, SEARED_GLASS, SEARED_SOUL_GLASS, SEARED_NON_SOLID, SEARED_LANTERN;
@@ -156,12 +156,12 @@ public final class TinkerSmeltery extends TinkerModule {
   static {
     // solid
     IntFunction<Properties> solidProps = factor ->
-      builder(Material.STONE, MapColor.COLOR_GRAY, SoundType.METAL).requiresCorrectToolForDrops().strength(3.0F * factor, 9.0F * factor)
+      builder(Blocks.STONE, MapColor.COLOR_GRAY, SoundType.METAL).requiresCorrectToolForDrops().strength(3.0F * factor, 9.0F * factor)
         .isValidSpawn((s, r, p, e) -> !s.hasProperty(SearedBlock.IN_STRUCTURE) || !s.getValue(SearedBlock.IN_STRUCTURE));
     SEARED = solidProps.apply(1);
     TOUGH_SEARED = solidProps.apply(2);
     // non-solid
-    Function<SoundType, Properties> nonSolidProps = sound -> builder(Material.STONE, MapColor.COLOR_GRAY, sound)
+    Function<SoundType, Properties> nonSolidProps = sound -> builder(Blocks.STONE, MapColor.COLOR_GRAY, sound)
       .requiresCorrectToolForDrops().strength(3.0F, 9.0F).noOcclusion()
       .isValidSpawn(Blocks::never).isRedstoneConductor(Blocks::never).isSuffocating(Blocks::never).isViewBlocking(Blocks::never);
     SEARED_GLASS = nonSolidProps.apply(SoundType.GLASS);
