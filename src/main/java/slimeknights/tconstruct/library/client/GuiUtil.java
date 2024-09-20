@@ -232,7 +232,7 @@ public final class GuiUtil {
     }
     // amount to offset element by for the height
     int deltaY = element.h - height;
-    matrices.blit(x, y + deltaY, element.x, element.y + deltaY, element.w, height, element.texW, element.texH);
+    matrices.blit(element.texture, x, y + deltaY, element.x, element.y + deltaY, element.w, height, element.texW, element.texH);
   }
 
   /**
