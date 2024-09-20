@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.library.recipe.tinkerstation;
 
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -32,7 +33,7 @@ public interface ITinkerStationRecipe extends ICommonRecipe<ITinkerStationContai
   boolean matches(ITinkerStationContainer inv, Level world);
 
   /**
-   * Gets the recipe result. Return {@link ItemStack#EMPTY) to represent {@link RecipeResult#PASS}, or a non-empty stack to represent success.
+   * Gets the recipe result. Return {@link ItemStack#EMPTY} to represent {@link RecipeResult#PASS}, or a non-empty stack to represent success.
    * For more complex recipes, override {@link #getValidatedResult(ITinkerStationContainer)} instead.
    * <p>
    * Do not call this method directly, but it is okay to override it.
@@ -40,8 +41,8 @@ public interface ITinkerStationRecipe extends ICommonRecipe<ITinkerStationContai
    * @return Recipe result, may be empty.
    */
   @Override
-  default ItemStack assemble(ITinkerStationContainer inv) {
-    return getResultItem().copy();
+  default ItemStack assemble(ITinkerStationContainer inv, RegistryAccess registryAccess) {
+    return getResultItem(registryAccess).copy();
   }
 
   /**
@@ -51,7 +52,7 @@ public interface ITinkerStationRecipe extends ICommonRecipe<ITinkerStationContai
    * @return Validated result
    */
   default RecipeResult<ItemStack> getValidatedResult(ITinkerStationContainer inv) {
-    ItemStack result = assemble(inv);
+    ItemStack result = assemble(inv, null);
     if (result.isEmpty()) {
       return RecipeResult.pass();
     }

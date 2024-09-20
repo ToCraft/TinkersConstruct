@@ -1,5 +1,6 @@
 package slimeknights.tconstruct.library.recipe.partbuilder;
 
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -67,7 +68,7 @@ public interface IPartBuilderRecipe extends ICommonRecipe<IPartBuilderContainer>
    * Assembles the result with the given pattern
    */
   default ItemStack assemble(IPartBuilderContainer inv, Pattern pattern) {
-    return assemble(inv);
+    return assemble(inv, RegistryAccess.EMPTY);
   }
 
   /* Recipe data */

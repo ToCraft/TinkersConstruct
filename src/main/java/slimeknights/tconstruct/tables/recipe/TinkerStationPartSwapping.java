@@ -2,6 +2,7 @@ package slimeknights.tconstruct.tables.recipe;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -77,11 +78,11 @@ public class TinkerStationPartSwapping implements ITinkerStationRecipe {
   }
 
   /**
-   * @deprecated Use {@link #assemble(ITinkerStationContainer)}
+   * @deprecated Use {@link #assemble(ITinkerStationContainer, RegistryAccess)}
    */
   @Deprecated
   @Override
-  public ItemStack getResultItem() {
+  public ItemStack getResultItem(RegistryAccess registryAccess) {
     return ItemStack.EMPTY;
   }
 

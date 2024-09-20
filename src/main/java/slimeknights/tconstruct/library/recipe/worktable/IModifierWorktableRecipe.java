@@ -1,5 +1,6 @@
 package slimeknights.tconstruct.library.recipe.worktable;
 
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -111,13 +112,13 @@ public interface IModifierWorktableRecipe extends ICommonRecipe<ITinkerableConta
 
   @Override
   @Deprecated
-  default ItemStack getResultItem() {
+  default ItemStack getResultItem(RegistryAccess registryAccess) {
     return ItemStack.EMPTY;
   }
 
   @Deprecated
   @Override
-  default ItemStack assemble(ITinkerableContainer inv) {
+  default ItemStack assemble(ITinkerableContainer inv, RegistryAccess registryAccess) {
     return ItemStack.EMPTY;
   }
 }

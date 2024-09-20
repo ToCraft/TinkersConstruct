@@ -2,6 +2,7 @@ package slimeknights.tconstruct.library.recipe.partbuilder;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -120,7 +121,7 @@ public class PartRecipe implements IPartBuilderRecipe, IMultiRecipe<ItemPartReci
    */
   @Deprecated
   @Override
-  public ItemStack getResultItem() {
+  public ItemStack getResultItem(RegistryAccess registryAccess) {
     return new ItemStack(output);
   }
 
@@ -138,7 +139,7 @@ public class PartRecipe implements IPartBuilderRecipe, IMultiRecipe<ItemPartReci
   }
 
   @Override
-  public ItemStack assemble(IPartBuilderContainer inv) {
+  public ItemStack assemble(IPartBuilderContainer inv, RegistryAccess registryAccess) {
     MaterialVariant material = MaterialVariant.UNKNOWN;
     IMaterialValue materialRecipe = inv.getMaterial();
     if (materialRecipe != null) {

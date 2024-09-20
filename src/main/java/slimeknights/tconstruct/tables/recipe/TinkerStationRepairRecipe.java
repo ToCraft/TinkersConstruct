@@ -2,6 +2,7 @@ package slimeknights.tconstruct.tables.recipe;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -233,11 +234,11 @@ public class TinkerStationRepairRecipe implements ITinkerStationRecipe {
   }
 
   /**
-   * @deprecated Use {@link #assemble(ITinkerStationContainer)}
+   * @deprecated Use {@link #assemble(ITinkerStationContainer, RegistryAccess)}
    */
   @Deprecated
   @Override
-  public ItemStack getResultItem() {
+  public ItemStack getResultItem(RegistryAccess registryAccess) {
     return ItemStack.EMPTY;
   }
 }

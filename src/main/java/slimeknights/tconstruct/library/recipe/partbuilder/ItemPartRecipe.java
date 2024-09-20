@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.library.recipe.partbuilder;
 
 import lombok.Getter;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -97,7 +98,7 @@ public class ItemPartRecipe implements IDisplayPartBuilderRecipe {
   }
 
   @Override
-  public ItemStack getResultItem() {
+  public ItemStack getResultItem(RegistryAccess registryAccess) {
     return result.get();
   }
 

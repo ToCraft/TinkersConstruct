@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.tables.recipe;
 
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
@@ -106,7 +107,7 @@ public class CraftingTableRepairKitRecipe extends CustomRecipe {
   }
 
   @Override
-  public ItemStack assemble(CraftingContainer inv) {
+  public ItemStack assemble(CraftingContainer inv, RegistryAccess registryAccess) {
     Pair<ToolStack, ItemStack> inputs = getRelevantInputs(inv);
     if (inputs == null) {
       TConstruct.LOG.error("Recipe repair on {} failed to find items after matching", getId());
