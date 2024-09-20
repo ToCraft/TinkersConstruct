@@ -47,8 +47,8 @@ import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.tags.ITag;
-import slimeknights.mantle.item.RetexturedBlockItem;
 import slimeknights.mantle.recipe.helper.RecipeHelper;
+import slimeknights.mantle.util.RetexturedHelper;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.common.registration.CastItemObject;
@@ -271,7 +271,7 @@ public class JEIPlugin implements IModPlugin {
     // retexturable blocks
     IIngredientSubtypeInterpreter<ItemStack> tables = (stack, context) -> {
       if (context == UidContext.Ingredient) {
-        return RetexturedBlockItem.getTextureName(stack);
+        return RetexturedHelper.getTextureName(stack);
       }
       return IIngredientSubtypeInterpreter.NONE;
     };
