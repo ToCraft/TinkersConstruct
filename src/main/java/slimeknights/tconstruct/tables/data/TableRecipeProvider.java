@@ -37,10 +37,11 @@ public class TableRecipeProvider extends BaseRecipeProvider {
     super(generator);
   }
 
-  @Override
-  public String getName() {
-    return "Tinkers' Construct Table Recipes";
-  }
+  // XXX Can't override a final method
+//  @Override
+//  public String getName() {
+//    return "Tinkers' Construct Table Recipes";
+//  }
 
   @Override
   protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
