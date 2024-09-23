@@ -20,8 +20,6 @@ public class BorderWidget extends Widget {
   public ScalableElementScreen borderLeft = GenericScreen.borderLeft;
   public ScalableElementScreen borderRight = GenericScreen.borderRight;
 
-  protected static final ScalableElementScreen textBackground = new ScalableElementScreen(7 + 18, 7, 18, 10);
-
   public int w = borderLeft.w;
   public int h = borderTop.h;
 

@@ -80,7 +80,6 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
   // texture
   private static final ResourceLocation TINKER_STATION_TEXTURE = TConstruct.getResource("textures/gui/tinker_station.png");
   // texture elements
-  private static final ElementScreen ACTIVE_TEXT_FIELD = new ElementScreen(TINKER_STATION_TEXTURE, 0, 210, 91, 12, 256, 256);
   private static final ElementScreen ITEM_COVER = new ElementScreen(TINKER_STATION_TEXTURE, 176, 18, 70, 64, 256, 256);
   // slots
   private static final ElementScreen SLOT_BACKGROUND = new ElementScreen(TINKER_STATION_TEXTURE, 176, 0, 18, 18, 256, 256);
