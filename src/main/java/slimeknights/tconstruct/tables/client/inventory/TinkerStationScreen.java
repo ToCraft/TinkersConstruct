@@ -80,21 +80,21 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
   // texture
   private static final ResourceLocation TINKER_STATION_TEXTURE = TConstruct.getResource("textures/gui/tinker_station.png");
   // texture elements
-  private static final ElementScreen ACTIVE_TEXT_FIELD = new ElementScreen(0, 210, 91, 12, 256, 256);
-  private static final ElementScreen ITEM_COVER = new ElementScreen(176, 18, 70, 64);
+  private static final ElementScreen ACTIVE_TEXT_FIELD = new ElementScreen(TINKER_STATION_TEXTURE, 0, 210, 91, 12, 256, 256);
+  private static final ElementScreen ITEM_COVER = new ElementScreen(TINKER_STATION_TEXTURE, 176, 18, 70, 64, 256, 256);
   // slots
-  private static final ElementScreen SLOT_BACKGROUND = new ElementScreen(176, 0, 18, 18);
-  private static final ElementScreen SLOT_BORDER = new ElementScreen(194, 0, 18, 18);
-  private static final ElementScreen SLOT_SPACE_TOP = new ElementScreen(0, 174 + 2, 18, 2);
-  private static final ElementScreen SLOT_SPACE_BOTTOM = new ElementScreen(0, 174, 18, 2);
+  private static final ElementScreen SLOT_BACKGROUND = new ElementScreen(TINKER_STATION_TEXTURE, 176, 0, 18, 18, 256, 256);
+  private static final ElementScreen SLOT_BORDER = new ElementScreen(TINKER_STATION_TEXTURE, 194, 0, 18, 18, 256, 256);
+  private static final ElementScreen SLOT_SPACE_TOP = new ElementScreen(TINKER_STATION_TEXTURE, 0, 174 + 2, 18, 2, 256, 256);
+  private static final ElementScreen SLOT_SPACE_BOTTOM = new ElementScreen(TINKER_STATION_TEXTURE, 0, 174, 18, 2, 256, 256);
   // panel
-  private static final ElementScreen PANEL_SPACE_LEFT = new ElementScreen(0, 174, 5, 4);
-  private static final ElementScreen PANEL_SPACE_RIGHT = new ElementScreen(9, 174, 9, 4);
-  private static final ElementScreen LEFT_BEAM = new ElementScreen(0, 180, 2, 7);
-  private static final ElementScreen RIGHT_BEAM = new ElementScreen(131, 180, 2, 7);
-  private static final ScalableElementScreen CENTER_BEAM = new ScalableElementScreen(2, 180, 129, 7);
+  private static final ElementScreen PANEL_SPACE_LEFT = new ElementScreen(TINKER_STATION_TEXTURE, 0, 174, 5, 4, 256, 256);
+  private static final ElementScreen PANEL_SPACE_RIGHT = new ElementScreen(TINKER_STATION_TEXTURE, 9, 174, 9, 4, 256, 256);
+  private static final ElementScreen LEFT_BEAM = new ElementScreen(TINKER_STATION_TEXTURE, 0, 180, 2, 7, 256, 256);
+  private static final ElementScreen RIGHT_BEAM = new ElementScreen(TINKER_STATION_TEXTURE, 131, 180, 2, 7, 256, 256);
+  private static final ScalableElementScreen CENTER_BEAM = new ScalableElementScreen(TINKER_STATION_TEXTURE, 2, 180, 129, 7, 256, 256);
   // text boxes
-  private static final ElementScreen TEXT_BOX = new ElementScreen(0, 222, 90, 12);
+  private static final ElementScreen TEXT_BOX = new ElementScreen(TINKER_STATION_TEXTURE, 0, 222, 90, 12, 256, 256);
 
   /**
    * Number of button columns in the UI
@@ -107,9 +107,9 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
   protected ElementScreen panelDecorationL = PANEL_SPACE_LEFT;
   protected ElementScreen panelDecorationR = PANEL_SPACE_RIGHT;
 
-  protected ElementScreen leftBeam = new ElementScreen(0, 0, 0, 0);
-  protected ElementScreen rightBeam = new ElementScreen(0, 0, 0, 0);
-  protected ScalableElementScreen centerBeam = new ScalableElementScreen(0, 0, 0, 0);
+  protected ElementScreen leftBeam = new ElementScreen(TINKER_STATION_TEXTURE, 0, 0, 0, 0, 256, 256);
+  protected ElementScreen rightBeam = new ElementScreen(TINKER_STATION_TEXTURE, 0, 0, 0, 0, 256, 256);
+  protected ScalableElementScreen centerBeam = new ScalableElementScreen(TINKER_STATION_TEXTURE, 0, 0, 0, 0, 256, 256);
 
   /**
    * Gets the default layout to apply, the "repair" button

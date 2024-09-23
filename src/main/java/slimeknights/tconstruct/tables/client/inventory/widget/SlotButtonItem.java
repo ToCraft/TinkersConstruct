@@ -14,9 +14,9 @@ public class SlotButtonItem extends Button {
 
   public static int WIDTH = 18, HEIGHT = 18;
 
-  protected static final ElementScreen BUTTON_PRESSED_GUI = new ElementScreen(144, 216, WIDTH, HEIGHT, 256, 256);
-  protected static final ElementScreen BUTTON_NORMAL_GUI = new ElementScreen(144 + WIDTH * 2, 216, WIDTH, HEIGHT, 256, 256);
-  protected static final ElementScreen BUTTON_HOVER_GUI = new ElementScreen(144 + WIDTH * 4, 216, WIDTH, HEIGHT, 256, 256);
+  protected static final ElementScreen BUTTON_PRESSED_GUI = new ElementScreen(WIDGETS_LOCATION, 144, 216, WIDTH, HEIGHT, 256, 256);
+  protected static final ElementScreen BUTTON_NORMAL_GUI = new ElementScreen(WIDGETS_LOCATION, 144 + WIDTH * 2, 216, WIDTH, HEIGHT, 256, 256);
+  protected static final ElementScreen BUTTON_HOVER_GUI = new ElementScreen(WIDGETS_LOCATION, 144 + WIDTH * 4, 216, WIDTH, HEIGHT, 256, 256);
 
   @Getter
   private final StationSlotLayout layout;

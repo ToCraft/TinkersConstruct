@@ -37,24 +37,24 @@ public class InfoPanelScreen extends ModuleScreen {
 
   protected static ResourceLocation BACKGROUND_IMAGE = TConstruct.getResource("textures/gui/panel.png");
 
-  protected static final ElementScreen TOP_LEFT = new ElementScreen(0, 0, 4, 4, 256, 256);
-  protected static final ElementScreen TOP_RIGHT = new ElementScreen(resW + 4, 0, 4, 4);
-  protected static final ElementScreen BOTTOM_LEFT = new ElementScreen(0, resH + 4, 4, 4);
-  protected static final ElementScreen BOTTOM_RIGHT = new ElementScreen(resW + 4, resH + 4, 4, 4);
+  protected static final ElementScreen TOP_LEFT = new ElementScreen(BACKGROUND_IMAGE, 0, 0, 4, 4, 256, 256);
+  protected static final ElementScreen TOP_RIGHT = new ElementScreen(BACKGROUND_IMAGE, resW + 4, 0, 4, 4, 256, 256);
+  protected static final ElementScreen BOTTOM_LEFT = new ElementScreen(BACKGROUND_IMAGE, 0, resH + 4, 4, 4, 256, 256);
+  protected static final ElementScreen BOTTOM_RIGHT = new ElementScreen(BACKGROUND_IMAGE, resW + 4, resH + 4, 4, 4, 256, 256);
 
-  protected static final ScalableElementScreen TOP = new ScalableElementScreen(4, 0, resW, 4);
-  protected static final ScalableElementScreen BOTTOM = new ScalableElementScreen(4, 4 + resH, resW, 4);
-  protected static final ScalableElementScreen LEFT = new ScalableElementScreen(0, 4, 4, resH);
-  protected static final ScalableElementScreen RIGHT = new ScalableElementScreen(4 + resW, 4, 4, resH);
+  protected static final ScalableElementScreen TOP = new ScalableElementScreen(BACKGROUND_IMAGE, 4, 0, resW, 4, 256, 256);
+  protected static final ScalableElementScreen BOTTOM = new ScalableElementScreen(BACKGROUND_IMAGE, 4, 4 + resH, resW, 4, 256, 256);
+  protected static final ScalableElementScreen LEFT = new ScalableElementScreen(BACKGROUND_IMAGE, 0, 4, 4, resH, 256, 256);
+  protected static final ScalableElementScreen RIGHT = new ScalableElementScreen(BACKGROUND_IMAGE, 4 + resW, 4, 4, resH, 256, 256);
 
-  protected static final ScalableElementScreen BACKGROUND = new ScalableElementScreen(4, 4, resW, resH);
+  protected static final ScalableElementScreen BACKGROUND = new ScalableElementScreen(BACKGROUND_IMAGE, 4, 4, resW, resH, 256, 256);
 
-  protected static final ElementScreen SLIDER_NORMAL = new ElementScreen(0, 83, 3, 5);
+  protected static final ElementScreen SLIDER_NORMAL = new ElementScreen(BACKGROUND_IMAGE, 0, 83, 3, 5, 256, 256);
   protected static final ElementScreen SLIDER_HOVER = SLIDER_NORMAL.shift(SLIDER_NORMAL.w, 0);
 
-  protected static final ScalableElementScreen SLIDER_BAR = new ScalableElementScreen(0, 88, 3, 8);
-  protected static final ElementScreen SLIDER_TOP = new ElementScreen(3, 88, 3, 4);
-  protected static final ElementScreen SLIDER_BOTTOM = new ElementScreen(3, 92, 3, 4);
+  protected static final ScalableElementScreen SLIDER_BAR = new ScalableElementScreen(BACKGROUND_IMAGE, 0, 88, 3, 8, 256, 256);
+  protected static final ElementScreen SLIDER_TOP = new ElementScreen(BACKGROUND_IMAGE, 3, 88, 3, 4, 256, 256);
+  protected static final ElementScreen SLIDER_BOTTOM = new ElementScreen(BACKGROUND_IMAGE, 3, 92, 3, 4, 256, 256);
 
   protected BorderWidget border = new BorderWidget();
 
