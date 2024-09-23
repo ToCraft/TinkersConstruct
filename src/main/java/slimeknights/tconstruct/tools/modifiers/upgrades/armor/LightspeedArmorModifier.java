@@ -59,7 +59,7 @@ public class LightspeedArmorModifier extends Modifier implements ArmorWalkModifi
 
     // not above air
     Vec3 vecPos = living.position();
-    BlockPos pos = new BlockPos(vecPos.x, vecPos.y + 0.5f, vecPos.z);
+    BlockPos pos = new BlockPos((int) vecPos.x, (int) (vecPos.y + 0.5f), (int) vecPos.z);
     int light = living.level().getBrightness(LightLayer.BLOCK, pos);
     if (light > 5) {
       int scaledLight = light - 5;

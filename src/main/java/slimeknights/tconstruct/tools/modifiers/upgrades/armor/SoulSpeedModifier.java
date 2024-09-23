@@ -43,7 +43,7 @@ public class SoulSpeedModifier extends Modifier implements TooltipModifierHook {
     if (living.level().isEmptyBlock(pos)) {
       BlockPos below = pos.below();
       BlockState blockstate = living.level().getBlockState(below);
-      if (blockstate.collisionExtendsVertically(living.level, below, living)) {
+      if (blockstate.collisionExtendsVertically(living.level(), below, living)) {
         return below;
       }
     }

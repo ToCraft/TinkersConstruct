@@ -265,7 +265,7 @@ public class ModifierEvents {
     Player original = event.getOriginal();
     Player clone = event.getEntity();
     // inventory already copied
-    if (clone.level.getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY) || original.isSpectator()) {
+    if (clone.level().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY) || original.isSpectator()) {
       return;
     }
     // find items with the soulbound tag set and move them over

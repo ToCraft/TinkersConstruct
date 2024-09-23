@@ -225,9 +225,9 @@ public class ModifiableCrossbowItem extends ModifiableLauncherItem {
         // TODO: can we get piglins/illagers to use our crossbow?
 
         // setup projectile
-        Vector3f targetVector = new Vector3f(player.getViewVector(1.0f));
+        Vector3f targetVector = player.getViewVector(1.0f).toVector3f();
         float angle = startAngle + (10 * arrowIndex);
-        targetVector.transform(new Quaternionf(new Vector3f(player.getUpVector(1.0f)), angle, true));
+        targetVector.transform(new Quaternionf(player.getUpVector(1.0f).toVector3f(), angle, true));
         projectile.shoot(targetVector.x(), targetVector.y(), targetVector.z(), velocity * speed, inaccuracy);
 
         // add modifiers to the projectile, will let us use them on impact

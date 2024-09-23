@@ -9,6 +9,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -75,7 +76,7 @@ public class SelfDestructiveModifier extends NoLevelsModifier implements Keybind
     public void applyEffectTick(LivingEntity living, int amplifier) {
       // effect level is the explosion radius
       if (!living.level().isClientSide) {
-        living.level().explode(living, living.getX(), living.getY(), living.getZ(), amplifier + 1, Explosion.BlockInteraction.DESTROY);
+        living.level().explode(living, living.getX(), living.getY(), living.getZ(), amplifier + 1, Level.ExplosionInteraction.TNT);
         living.hurt(SELF_DESTRUCT, 99999);
       }
     }

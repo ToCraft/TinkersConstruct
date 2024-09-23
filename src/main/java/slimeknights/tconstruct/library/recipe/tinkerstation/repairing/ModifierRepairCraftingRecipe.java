@@ -6,6 +6,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -35,7 +36,7 @@ public class ModifierRepairCraftingRecipe extends CustomRecipe implements IModif
   private final int repairAmount;
 
   public ModifierRepairCraftingRecipe(ResourceLocation idIn, ModifierId modifier, Ingredient ingredient, int repairAmount) {
-    super(idIn);
+    super(idIn, CraftingBookCategory.EQUIPMENT);
     this.modifier = modifier;
     this.ingredient = ingredient;
     this.repairAmount = repairAmount;

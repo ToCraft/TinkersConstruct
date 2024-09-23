@@ -75,10 +75,10 @@ public class FluidEffectProjectile extends LlamaSpit {
       }
     }
     FluidStack fluid = getFluid();
-    if (!level.isClientSide && !fluid.isEmpty()) {
+    if (!level().isClientSide && !fluid.isEmpty()) {
       FluidEffects recipe = FluidEffectManager.INSTANCE.find(fluid.getFluid());
       if (recipe.hasEntityEffects()) {
-        int consumed = recipe.applyToEntity(fluid, power, new FluidEffectContext.Entity(level, asLiving(getOwner()), this, target), FluidAction.EXECUTE);
+        int consumed = recipe.applyToEntity(fluid, power, new FluidEffectContext.Entity(level(), asLiving(getOwner()), this, target), FluidAction.EXECUTE);
         // shrink our internal fluid, means we get a crossbow piercing like effect if its not all used
         // discarding when empty ensures the fluid won't continue with the block effect
         // unlike blocks, failing is fine, means we just continue through to the block below the entity
@@ -96,16 +96,16 @@ public class FluidEffectProjectile extends LlamaSpit {
   protected void onHitBlock(BlockHitResult hitResult) {
     // hit the block
     BlockPos hit = hitResult.getBlockPos();
-    BlockState state = this.level.getBlockState(hit);
-    state.onProjectileHit(this.level, state, hitResult, this);
+    BlockState state = this.level().getBlockState(hit);
+    state.onProjectileHit(this.level(), state, hitResult, this);
     // handle the fluid
     FluidStack fluid = getFluid();
-    if (!level.isClientSide) {
+    if (!level().isClientSide) {
       if (!fluid.isEmpty()) {
         FluidEffects recipe = FluidEffectManager.INSTANCE.find(fluid.getFluid());
         if (recipe.hasEntityEffects()) {
           // run the effect until we run out of fluid or it fails
-          FluidEffectContext.Block context = new FluidEffectContext.Block(level, asLiving(getOwner()), this, hitResult);
+          FluidEffectContext.Block context = new FluidEffectContext.Block(level(), asLiving(getOwner()), this, hitResult);
           int consumed;
           do {
             consumed = recipe.applyToBlock(fluid, power, context, FluidAction.EXECUTE);
@@ -113,7 +113,7 @@ public class FluidEffectProjectile extends LlamaSpit {
           } while (consumed > 0 && !fluid.isEmpty());
           // we can continue to live if we have fluid left and we broke our block, allows some neat shenanigans
           // TODO: maybe use a more general check than air?
-          if (!fluid.isEmpty() && level.getBlockState(hit).isAir()) {
+          if (!fluid.isEmpty() && level().getBlockState(hit).isAir()) {
             return;
           }
         }
