@@ -61,7 +61,8 @@ public class BorderWidget extends Widget {
     int midH = this.height - this.borderTop.h - this.borderBottom.h;
 
     // top row
-    x += this.cornerTopLeft.draw(matrices, x, y);
+    this.cornerTopLeft.draw(matrices, x, y);
+    x += this.cornerTopLeft.w;
     x += this.borderTop.drawScaledX(matrices, x, y, midW);
     this.cornerTopRight.draw(matrices, x, y);
 
@@ -75,7 +76,8 @@ public class BorderWidget extends Widget {
     // bottom row
     x = this.xPos;
     y += midH;
-    x += this.cornerBottomLeft.draw(matrices, x, y);
+    this.cornerBottomLeft.draw(matrices, x, y);
+    x += this.cornerBottomLeft.w;
     x += this.borderBottom.drawScaledX(matrices, x, y, midW);
     this.cornerBottomRight.draw(matrices, x, y);
   }
