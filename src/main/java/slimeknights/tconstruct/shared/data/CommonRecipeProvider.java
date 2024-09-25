@@ -40,11 +40,6 @@ public class CommonRecipeProvider extends BaseRecipeProvider implements ICommonR
   }
 
   @Override
-  public String getName() {
-    return "Tinkers' Construct Common Recipes";
-  }
-
-  @Override
   protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
     this.addCommonRecipes(consumer);
     this.addMaterialRecipes(consumer);
