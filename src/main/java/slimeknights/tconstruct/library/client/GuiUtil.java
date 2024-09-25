@@ -28,12 +28,12 @@ public final class GuiUtil {
   /**
    * Draws the background of a container
    *
-   * @param matrices   Matrix context
+   * @param graphics   Matrix context
    * @param screen     Parent screen
    * @param background Background location
    */
-  public static void drawBackground(GuiGraphics matrices, AbstractContainerScreen<?> screen, ResourceLocation background) {
-    matrices.blit(background, screen.leftPos, screen.topPos, 0, 0, screen.imageWidth, screen.imageHeight);
+  public static void drawBackground(GuiGraphics graphics, AbstractContainerScreen<?> screen, ResourceLocation background) {
+    graphics.blit(background, screen.leftPos, screen.topPos, 0, 0, screen.imageWidth, screen.imageHeight);
   }
 
   /**
@@ -86,8 +86,8 @@ public final class GuiUtil {
    * @param height   Tank height
    * @param depth    Tank depth
    */
-  public static void renderFluidTank(GuiGraphics matrices, AbstractContainerScreen<?> screen, FluidStack stack, int capacity, int x, int y, int width, int height, int depth) {
-    renderFluidTank(matrices, screen, stack, stack.getAmount(), capacity, x, y, width, height, depth);
+  public static void renderFluidTank(GuiGraphics graphics, AbstractContainerScreen<?> screen, FluidStack stack, int capacity, int x, int y, int width, int height, int depth) {
+    renderFluidTank(graphics, screen, stack, stack.getAmount(), capacity, x, y, width, height, depth);
   }
 
   /**
@@ -102,18 +102,18 @@ public final class GuiUtil {
    * @param height   Tank height
    * @param depth    Tank depth
    */
-  public static void renderFluidTank(GuiGraphics matrices, AbstractContainerScreen<?> screen, FluidStack stack, int amount, int capacity, int x, int y, int width, int height, int depth) {
+  public static void renderFluidTank(GuiGraphics graphics, AbstractContainerScreen<?> screen, FluidStack stack, int amount, int capacity, int x, int y, int width, int height, int depth) {
     if (!stack.isEmpty() && capacity > 0) {
       int maxY = y + height;
       int fluidHeight = Math.min(height * amount / capacity, height);
-      renderTiledFluid(matrices, screen, stack, x, maxY - fluidHeight, width, fluidHeight, depth);
+      renderTiledFluid(graphics, screen, stack, x, maxY - fluidHeight, width, fluidHeight, depth);
     }
   }
 
   /**
    * Colors and renders a fluid sprite
    *
-   * @param matrices Matrix instance
+   * @param graphics Matrix instance
    * @param screen   Parent screen
    * @param stack    Fluid stack
    * @param x        Fluid X
@@ -122,12 +122,12 @@ public final class GuiUtil {
    * @param height   Fluid height
    * @param depth    Fluid depth
    */
-  public static void renderTiledFluid(GuiGraphics matrices, AbstractContainerScreen<?> screen, FluidStack stack, int x, int y, int width, int height, int depth) {
+  public static void renderTiledFluid(GuiGraphics graphics, AbstractContainerScreen<?> screen, FluidStack stack, int x, int y, int width, int height, int depth) {
     if (!stack.isEmpty()) {
       IClientFluidTypeExtensions clientFluid = IClientFluidTypeExtensions.of(stack.getFluid());
       TextureAtlasSprite fluidSprite = screen.getMinecraft().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(clientFluid.getStillTexture(stack));
       RenderUtils.setColorRGBA(clientFluid.getTintColor(stack));
-      renderTiledTextureAtlas(matrices, screen, fluidSprite, x, y, width, height, depth, stack.getFluid().getFluidType().isLighterThanAir());
+      renderTiledTextureAtlas(graphics, screen, fluidSprite, x, y, width, height, depth, stack.getFluid().getFluidType().isLighterThanAir());
       RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
     }
   }
@@ -135,7 +135,7 @@ public final class GuiUtil {
   /**
    * Renders a texture atlas sprite tiled over the given area
    *
-   * @param matrices   Matrix instance
+   * @param graphics   Matrix instance
    * @param screen     Parent screen
    * @param sprite     Sprite to render
    * @param x          X position to render
@@ -145,7 +145,7 @@ public final class GuiUtil {
    * @param depth      Render depth
    * @param upsideDown If true, flips the sprite
    */
-  public static void renderTiledTextureAtlas(GuiGraphics matrices, AbstractContainerScreen<?> screen, TextureAtlasSprite sprite, int x, int y, int width, int height, int depth, boolean upsideDown) {
+  public static void renderTiledTextureAtlas(GuiGraphics graphics, AbstractContainerScreen<?> screen, TextureAtlasSprite sprite, int x, int y, int width, int height, int depth, boolean upsideDown) {
     // start drawing sprites
     RenderUtils.bindTexture(sprite.atlasLocation());
     BufferBuilder builder = Tesselator.getInstance().getBuilder();
@@ -166,7 +166,7 @@ public final class GuiUtil {
       // we need to draw the quads per width too
       int x2 = startX;
       int widthLeft = width;
-      Matrix4f matrix = matrices.pose().last().pose();
+      Matrix4f matrix = graphics.pose().last().pose();
       // tile horizontally
       do {
         int renderWidth = Math.min(spriteWidth, widthLeft);
@@ -220,7 +220,7 @@ public final class GuiUtil {
    * @param y        Y position to start
    * @param progress Progress between 0 and 1
    */
-  public static void drawProgressUp(GuiGraphics matrices, ElementScreen element, int x, int y, float progress) {
+  public static void drawProgressUp(GuiGraphics graphics, ElementScreen element, int x, int y, float progress) {
     int height;
     if (progress > 1) {
       height = element.h;
@@ -232,22 +232,22 @@ public final class GuiUtil {
     }
     // amount to offset element by for the height
     int deltaY = element.h - height;
-    matrices.blit(element.texture, x, y + deltaY, element.x, element.y + deltaY, element.w, height, element.texW, element.texH);
+    graphics.blit(element.texture, x, y + deltaY, element.x, element.y + deltaY, element.w, height, element.texW, element.texH);
   }
 
   /**
    * Renders a highlight overlay for the given area
    *
-   * @param matrices Matrix instance
+   * @param graphics Matrix instance
    * @param x        Element X position
    * @param y        Element Y position
    * @param width    Element width
    * @param height   Element height
    */
-  public static void renderHighlight(GuiGraphics matrices, int x, int y, int width, int height) {
+  public static void renderHighlight(GuiGraphics graphics, int x, int y, int width, int height) {
     RenderSystem.disableDepthTest();
     RenderSystem.colorMask(true, true, true, false);
-    matrices.fill(x, y, x + width, y + height, 0x80FFFFFF);
+    graphics.fill(x, y, x + width, y + height, 0x80FFFFFF);
     RenderSystem.colorMask(true, true, true, true);
     RenderSystem.enableDepthTest();
   }
@@ -255,8 +255,8 @@ public final class GuiUtil {
   /**
    * Renders a pattern at the given location
    */
-  public static void renderPattern(GuiGraphics matrices, Pattern pattern, int x, int y) {
+  public static void renderPattern(GuiGraphics graphics, Pattern pattern, int x, int y) {
     TextureAtlasSprite sprite = Minecraft.getInstance().getModelManager().getAtlas(InventoryMenu.BLOCK_ATLAS).getSprite(pattern.getTexture());
-    matrices.blit(x, y, 100, 16, 16, sprite);
+    graphics.blit(x, y, 100, 16, 16, sprite);
   }
 }

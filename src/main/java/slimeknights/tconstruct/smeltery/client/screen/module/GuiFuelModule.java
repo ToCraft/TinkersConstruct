@@ -64,14 +64,14 @@ public class GuiFuelModule {
   /**
    * Draws the fuel at the correct location
    *
-   * @param matrices Matrix stack instance
+   * @param graphics GuiGraphics instance
    */
-  public void draw(GuiGraphics matrices) {
+  public void draw(GuiGraphics graphics) {
     // draw fire
     int fuel = fuelModule.getFuel();
     int fuelQuality = fuelModule.getFuelQuality();
     if (fuel > 0 && fuelQuality > 0) {
-      FIRE.drawScaledYUp(matrices, fireX + screen.leftPos, fireY + screen.topPos, 14 * fuel / fuelQuality);
+      FIRE.drawScaledYUp(graphics, fireX + screen.leftPos, fireY + screen.topPos, 14 * fuel / fuelQuality);
     }
 
     // draw tank second, it changes the image
@@ -79,7 +79,7 @@ public class GuiFuelModule {
     if (!hasFuelSlot) {
       fuelInfo = fuelModule.getFuelInfo();
       if (!fuelInfo.isEmpty()) {
-        GuiUtil.renderFluidTank(matrices, screen, fuelInfo.getFluid(), fuelInfo.getTotalAmount(), fuelInfo.getCapacity(), x, y, width, height, 100);
+        GuiUtil.renderFluidTank(graphics, screen, fuelInfo.getFluid(), fuelInfo.getTotalAmount(), fuelInfo.getCapacity(), x, y, width, height, 100);
       }
     }
   }
@@ -87,20 +87,20 @@ public class GuiFuelModule {
   /**
    * Highlights the hovered fuel
    *
-   * @param matrices Matrix stack instance
+   * @param graphics GuiGraphics instance
    * @param checkX   Top corner relative mouse X
    * @param checkY   Top corner relative mouse Y
    */
-  public void renderHighlight(GuiGraphics matrices, int checkX, int checkY) {
+  public void renderHighlight(GuiGraphics graphics, int checkX, int checkY) {
     if (isHovered(checkX, checkY)) {
       // if there is a fuel slot, render highlight lower
       if (hasFuelSlot) {
         if (checkY > y + 18) {
-          GuiUtil.renderHighlight(matrices, x, y + 18, width, height - 18);
+          GuiUtil.renderHighlight(graphics, x, y + 18, width, height - 18);
         }
       } else {
         // full fluid highlight
-        GuiUtil.renderHighlight(matrices, x, y, width, height);
+        GuiUtil.renderHighlight(graphics, x, y, width, height);
       }
     }
   }
@@ -108,11 +108,11 @@ public class GuiFuelModule {
   /**
    * Adds the tooltip for the fuel
    *
-   * @param matrices Matrix stack instance
+   * @param graphics GuiGraphics instance
    * @param mouseX   Mouse X position
    * @param mouseY   Mouse Y position
    */
-  public void addTooltip(GuiGraphics matrices, int mouseX, int mouseY, boolean hasTank) {
+  public void addTooltip(GuiGraphics graphics, int mouseX, int mouseY, boolean hasTank) {
     int checkX = mouseX - screen.leftPos;
     int checkY = mouseY - screen.topPos;
 
@@ -149,7 +149,7 @@ public class GuiFuelModule {
         tooltip = hasTank ? TOOLTIP_NO_FUEL : TOOLTIP_NO_TANK;
       }
 
-      screen.renderComponentTooltip(matrices, tooltip, mouseX, mouseY);
+      screen.renderComponentTooltip(graphics, tooltip, mouseX, mouseY);
     }
   }
 

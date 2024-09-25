@@ -20,6 +20,7 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import slimeknights.mantle.fluid.tooltip.FluidTooltipHandler;
@@ -81,14 +82,14 @@ public class EntityMeltingRecipeCategory implements IRecipeCategory<EntityMeltin
   }
 
   @Override
-  public void draw(EntityMeltingRecipe recipe, IRecipeSlotsView slot, PoseStack matrices, double mouseX, double mouseY) {
-    arrow.draw(matrices, 71, 21);
+  public void draw(EntityMeltingRecipe recipe, IRecipeSlotsView slot, GuiGraphics graphics, double mouseX, double mouseY) {
+    arrow.draw(graphics, 71, 21);
 
     // draw damage string next to the heart icon
     String damage = Float.toString(recipe.getDamage() / 2f);
     Font fontRenderer = Minecraft.getInstance().font;
     int x = 84 - fontRenderer.width(damage);
-    fontRenderer.draw(matrices, damage, x, 8, Color.RED.getRGB());
+    fontRenderer.draw(graphics, damage, x, 8, Color.RED.getRGB());
   }
 
   @Override

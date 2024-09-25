@@ -100,9 +100,9 @@ public class SideButtonsWidget<T extends Button> implements Renderable, GuiEvent
   }
 
   @Override
-  public void render(GuiGraphics matrices, int mouseX, int mouseY, float partialTicks) {
+  public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
     for (T button : this.buttons) {
-      button.render(matrices, mouseX, mouseY, partialTicks);
+      button.render(graphics, mouseX, mouseY, partialTicks);
     }
   }
 

@@ -37,7 +37,7 @@ public class GuiMeltingModule {
   /**
    * Draws the heat bars on each slot
    */
-  public void drawHeatBars(GuiGraphics matrices) {
+  public void drawHeatBars(GuiGraphics graphics) {
     int temperature = this.temperature.getAsInt();
     for (int i = 0; i < inventory.getSlots(); i++) {
       Slot slot = screen.getMenu().slots.get(i);
@@ -67,7 +67,7 @@ public class GuiMeltingModule {
         }
 
         // draw the bar
-        GuiUtil.drawProgressUp(matrices, bar, slot.x - 4, slot.y, progress);
+        GuiUtil.drawProgressUp(graphics, bar, slot.x - 4, slot.y, progress);
       }
     }
   }
@@ -78,7 +78,7 @@ public class GuiMeltingModule {
    * @param mouseX Mouse X position
    * @param mouseY Mouse Y position
    */
-  public void drawHeatTooltips(GuiGraphics matrices, int mouseX, int mouseY) {
+  public void drawHeatTooltips(GuiGraphics graphics, int mouseX, int mouseY) {
     int checkX = mouseX - screen.leftPos;
     int checkY = mouseY - screen.topPos;
     int temperature = this.temperature.getAsInt();
@@ -106,7 +106,7 @@ public class GuiMeltingModule {
 
           // draw tooltip if relevant
           if (tooltip != null) {
-            screen.renderTooltip(matrices, tooltip, mouseX, mouseY);
+            screen.renderTooltip(graphics, tooltip, mouseX, mouseY);
           }
 
           // cannot hover two slots, so done

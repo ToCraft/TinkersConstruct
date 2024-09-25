@@ -54,31 +54,31 @@ public class BorderWidget extends Widget {
   }
 
   @Override
-  public void draw(GuiGraphics matrices) {
+  public void draw(GuiGraphics graphics) {
     int x = this.xPos;
     int y = this.yPos;
     int midW = this.width - this.borderLeft.w - this.borderRight.w;
     int midH = this.height - this.borderTop.h - this.borderBottom.h;
 
     // top row
-    this.cornerTopLeft.draw(matrices, x, y);
+    this.cornerTopLeft.draw(graphics, x, y);
     x += this.cornerTopLeft.w;
-    x += this.borderTop.drawScaledX(matrices, x, y, midW);
-    this.cornerTopRight.draw(matrices, x, y);
+    x += this.borderTop.drawScaledX(graphics, x, y, midW);
+    this.cornerTopRight.draw(graphics, x, y);
 
     // center row
     x = this.xPos;
     y += this.borderTop.h;
-    x += this.borderLeft.drawScaledY(matrices, x, y, midH);
+    x += this.borderLeft.drawScaledY(graphics, x, y, midH);
     x += midW;
-    this.borderRight.drawScaledY(matrices, x, y, midH);
+    this.borderRight.drawScaledY(graphics, x, y, midH);
 
     // bottom row
     x = this.xPos;
     y += midH;
-    this.cornerBottomLeft.draw(matrices, x, y);
+    this.cornerBottomLeft.draw(graphics, x, y);
     x += this.cornerBottomLeft.w;
-    x += this.borderBottom.drawScaledX(matrices, x, y, midW);
-    this.cornerBottomRight.draw(matrices, x, y);
+    x += this.borderBottom.drawScaledX(graphics, x, y, midW);
+    this.cornerBottomRight.draw(graphics, x, y);
   }
 }

@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.tables.client.inventory.module;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -176,10 +177,10 @@ public class DynamicContainerScreen extends ModuleScreen {
   }
 
   @Override
-  protected void renderBg(PoseStack matrices, float partialTicks, int mouseX, int mouseY) {
+  protected void renderBg(GuiGraphics graphics, float partialTicks, int mouseX, int mouseY) {
     RenderUtils.setup(GenericScreen.LOCATION);
     if (!this.slider.isHidden()) {
-      this.slider.draw(matrices);
+      this.slider.draw(graphics);
 
       this.updateSlots();
     }
@@ -190,15 +191,15 @@ public class DynamicContainerScreen extends ModuleScreen {
     int y;
 
     for (y = 0; y < fullRows * slot.h && y < this.imageHeight; y += slot.h) {
-      slot.drawScaledX(matrices, this.leftPos, this.topPos + y, w);
+      slot.drawScaledX(graphics, this.leftPos, this.topPos + y, w);
     }
 
     // draw partial row and unused slots
     int slotsLeft = (this.lastSlotId - this.firstSlotId) % this.columns;
     if (slotsLeft > 0) {
-      slot.drawScaledX(matrices, this.leftPos, this.topPos + y, slotsLeft * slot.w);
+      slot.drawScaledX(graphics, this.leftPos, this.topPos + y, slotsLeft * slot.w);
       // empty slots that don't exist
-      slotEmpty.drawScaledX(matrices, this.leftPos + slotsLeft * slot.w, this.topPos + y, w - slotsLeft * slot.w);
+      slotEmpty.drawScaledX(graphics, this.leftPos + slotsLeft * slot.w, this.topPos + y, w - slotsLeft * slot.w);
     }
   }
 }

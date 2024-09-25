@@ -80,13 +80,13 @@ public class MeltingCategory extends AbstractMeltingCategory {
   }
 
   @Override
-  public void draw(MeltingRecipe recipe, IRecipeSlotsView slots, GuiGraphics matrices, double mouseX, double mouseY) {
-    super.draw(recipe, slots, matrices, mouseX, mouseY);
+  public void draw(MeltingRecipe recipe, IRecipeSlotsView slots, GuiGraphics graphics, double mouseX, double mouseY) {
+    super.draw(recipe, slots, graphics, mouseX, mouseY);
 
     // solid fuel slot
     int temperature = recipe.getTemperature();
     if (temperature <= FuelModule.SOLID_TEMPERATURE) {
-      solidFuel.draw(matrices, 1, 19);
+      solidFuel.draw(graphics, 1, 19);
     }
   }
 

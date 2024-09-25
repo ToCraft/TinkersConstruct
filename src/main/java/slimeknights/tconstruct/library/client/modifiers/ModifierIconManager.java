@@ -146,26 +146,26 @@ public class ModifierIconManager implements IEarlySafeManagerReloadListener {
   /**
    * Renders a modifier icon at the given location
    *
-   * @param matrices Matrix stack instance
+   * @param graphics GuiGraphics instance
    * @param modifier Modifier to draw
    * @param x        X offset
    * @param y        Y offset
    * @param z        Render depth offset, typically 100 is good
    * @param size     Size to render, 16 is default
    */
-  public static void renderIcon(GuiGraphics matrices, Modifier modifier, int x, int y, int z, int size) {
+  public static void renderIcon(GuiGraphics graphics, Modifier modifier, int x, int y, int z, int size) {
     RenderUtils.setup(InventoryMenu.BLOCK_ATLAS);
     TextureAtlas atlas = Minecraft.getInstance().getModelManager().getAtlas(InventoryMenu.BLOCK_ATLAS);
 
     List<ResourceLocation> icons = modifierIcons.getOrDefault(modifier.getId(), Collections.emptyList());
     if (!icons.isEmpty()) {
       for (ResourceLocation icon : icons) {
-        matrices.blit(x, y, z, size, size, atlas.getSprite(icon));
+        graphics.blit(x, y, z, size, size, atlas.getSprite(icon));
       }
     } else {
-      matrices.blit(x, y, z, size, size, atlas.getSprite(DEFAULT_PAGES));
+      graphics.blit(x, y, z, size, size, atlas.getSprite(DEFAULT_PAGES));
       RenderUtils.setColorRGBA(0xFF000000 | modifier.getColor());
-      matrices.blit(x, y, z, size, size, atlas.getSprite(DEFAULT_COVER));
+      graphics.blit(x, y, z, size, size, atlas.getSprite(DEFAULT_COVER));
       RenderUtils.setColorRGBA(-1);
     }
   }

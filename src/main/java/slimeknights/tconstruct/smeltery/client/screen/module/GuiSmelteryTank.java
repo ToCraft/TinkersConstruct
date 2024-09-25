@@ -75,9 +75,9 @@ public class GuiSmelteryTank {
   /**
    * Renders the smeltery tank
    *
-   * @param matrices Matrix stack instance
+   * @param graphics GuiGraphics instance
    */
-  public void renderFluids(GuiGraphics matrices) {
+  public void renderFluids(GuiGraphics graphics) {
     // draw liquids
     if (tank.getContained() > 0) {
       int[] heights = calcLiquidHeights(true);
@@ -86,7 +86,7 @@ public class GuiSmelteryTank {
       for (int i = 0; i < heights.length; i++) {
         int fluidH = heights[i];
         FluidStack liquid = tank.getFluids().get(i);
-        GuiUtil.renderTiledFluid(matrices, parent, liquid, x, bottom - fluidH, width, fluidH, 100);
+        GuiUtil.renderTiledFluid(graphics, parent, liquid, x, bottom - fluidH, width, fluidH, 100);
         bottom -= fluidH;
       }
     }
@@ -124,16 +124,16 @@ public class GuiSmelteryTank {
   /**
    * Renders a highlight on the hovered fluid
    *
-   * @param matrices Matrix stack instance
+   * @param graphics GuiGraphics instance
    * @param mouseX   Mouse X
    * @param mouseY   Mouse Y
    */
-  public void renderHighlight(GuiGraphics matrices, int mouseX, int mouseY) {
+  public void renderHighlight(GuiGraphics graphics, int mouseX, int mouseY) {
     int checkX = mouseX - parent.leftPos;
     int checkY = mouseY - parent.topPos;
     if (withinTank(checkX, checkY)) {
       if (tank.getContained() == 0) {
-        GuiUtil.renderHighlight(matrices, x, y, width, height);
+        GuiUtil.renderHighlight(graphics, x, y, width, height);
       } else {
         int[] heights = calcLiquidHeights(false);
         int hovered = getFluidFromMouse(heights, checkY);
@@ -146,9 +146,9 @@ public class GuiSmelteryTank {
         }
         // render the area
         if (hovered == -1) {
-          GuiUtil.renderHighlight(matrices, x, y, width, height - heightSum);
+          GuiUtil.renderHighlight(graphics, x, y, width, height - heightSum);
         } else {
-          GuiUtil.renderHighlight(matrices, x, (y + height) - heightSum, width, heights[hovered]);
+          GuiUtil.renderHighlight(graphics, x, (y + height) - heightSum, width, heights[hovered]);
         }
       }
     }
@@ -157,11 +157,11 @@ public class GuiSmelteryTank {
   /**
    * Gets the tooltip for the tank based on the given mouse position
    *
-   * @param matrices Matrix stack instance
+   * @param graphics GuiGraphics instance
    * @param mouseX   Mouse X
    * @param mouseY   Mouse Y
    */
-  public void drawTooltip(GuiGraphics matrices, int mouseX, int mouseY) {
+  public void drawTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
     // Liquids
     int checkX = mouseX - parent.leftPos;
     int checkY = mouseY - parent.topPos;
@@ -189,7 +189,7 @@ public class GuiSmelteryTank {
       } else {
         tooltip = FluidTooltipHandler.getFluidTooltip(tank.getFluidInTank(hovered));
       }
-      parent.renderComponentTooltip(matrices, tooltip, mouseX, mouseY);
+      parent.renderComponentTooltip(graphics, tooltip, mouseX, mouseY);
     }
   }
 

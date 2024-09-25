@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.tables.client.inventory;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import slimeknights.tconstruct.tables.block.entity.chest.AbstractChestBlockEntity;
@@ -22,14 +23,14 @@ public class TinkerChestScreen extends BaseTabbedScreen<AbstractChestBlockEntity
   }
 
   @Override
-  protected void renderBg(PoseStack matrices, float partialTicks, int mouseX, int mouseY) {
-    this.drawBackground(matrices, BLANK_BACK);
+  protected void renderBg(GuiGraphics graphics, float partialTicks, int mouseX, int mouseY) {
+    this.drawBackground(graphics, BLANK_BACK);
 
     if (this.scalingChestScreen != null) {
       this.scalingChestScreen.update(mouseX, mouseY);
     }
 
-    super.renderBg(matrices, partialTicks, mouseX, mouseY);
+    super.renderBg(graphics, partialTicks, mouseX, mouseY);
   }
 
   @Override

@@ -15,6 +15,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
@@ -104,18 +105,18 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
   /**
    * Draws a single slot icon
    */
-  private void drawSlot(PoseStack matrices, IDisplayModifierRecipe recipe, int slot, int x, int y) {
+  private void drawSlot(GuiGraphics graphics, IDisplayModifierRecipe recipe, int slot, int x, int y) {
     List<ItemStack> stacks = recipe.getDisplayItems(slot);
     if (stacks.isEmpty()) {
       // -1 as the item list includes the output slot, we skip that
-      slotIcons[slot].draw(matrices, x + 1, y + 1);
+      slotIcons[slot].draw(graphics, x + 1, y + 1);
     }
   }
 
   /**
    * Draws the icon for the given slot type
    */
-  private void drawSlotType(PoseStack matrices, @Nullable SlotType slotType, int x, int y) {
+  private void drawSlotType(GuiGraphics graphics, @Nullable SlotType slotType, int x, int y) {
     Minecraft minecraft = Minecraft.getInstance();
     TextureAtlasSprite sprite;
     if (slotTypeSprites.containsKey(slotType)) {
@@ -136,24 +137,24 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
     RenderSystem.setShader(GameRenderer::getPositionTexShader);
     RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
 
-    Screen.blit(matrices, x, y, 0, 16, 16, sprite);
+    Screen.blit(graphics, x, y, 0, 16, 16, sprite);
   }
 
   @Override
-  public void draw(IDisplayModifierRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack matrices, double mouseX, double mouseY) {
-    drawSlot(matrices, recipe, 0, 2, 32);
-    drawSlot(matrices, recipe, 1, 24, 14);
-    drawSlot(matrices, recipe, 2, 46, 32);
-    drawSlot(matrices, recipe, 3, 42, 57);
-    drawSlot(matrices, recipe, 4, 6, 57);
+  public void draw(IDisplayModifierRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
+    drawSlot(graphics, recipe, 0, 2, 32);
+    drawSlot(graphics, recipe, 1, 24, 14);
+    drawSlot(graphics, recipe, 2, 46, 32);
+    drawSlot(graphics, recipe, 3, 42, 57);
+    drawSlot(graphics, recipe, 4, 6, 57);
 
     // draw info icons
     ModifierEntry result = recipe.getDisplayResult();
     if (result.getHook(ModifierHooks.REQUIREMENTS).requirementsError(result) != null) {
-      requirements.draw(matrices, 66, 58);
+      requirements.draw(graphics, 66, 58);
     }
     if (recipe.isIncremental()) {
-      incremental.draw(matrices, 83, 59);
+      incremental.draw(graphics, 83, 59);
     }
 
     // draw level requirements
@@ -181,17 +182,17 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
     }
     if (levelText != null) {
       // center string
-      fontRenderer.draw(matrices, levelText, 86 - fontRenderer.width(levelText) / 2f, 16, Color.GRAY.getRGB());
+      fontRenderer.draw(graphics, levelText, 86 - fontRenderer.width(levelText) / 2f, 16, Color.GRAY.getRGB());
     }
 
     // draw slot cost
     SlotCount slots = recipe.getSlots();
     if (slots == null) {
-      drawSlotType(matrices, null, 110, 58);
+      drawSlotType(graphics, null, 110, 58);
     } else {
-      drawSlotType(matrices, slots.type(), 110, 58);
+      drawSlotType(graphics, slots.type(), 110, 58);
       String text = Integer.toString(slots.count());
-      fontRenderer.draw(matrices, text, 111 - fontRenderer.width(text), 63, Color.GRAY.getRGB());
+      fontRenderer.draw(graphics, text, 111 - fontRenderer.width(text), 63, Color.GRAY.getRGB());
     }
   }
 

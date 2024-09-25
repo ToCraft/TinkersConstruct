@@ -2,6 +2,7 @@ package slimeknights.tconstruct.tables.client.inventory.widget;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import lombok.Getter;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.resources.ResourceLocation;
 import slimeknights.mantle.client.screen.ElementScreen;
@@ -44,22 +45,22 @@ public class SlotButtonItem extends Button {
   }
 
   @Override
-  public void renderButton(PoseStack matrices, int mouseX, int mouseY, float partialTicks) {
+  public void renderButton(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
     RenderUtils.setup(this.backgroundLocation);
 
     if (this.visible) {
       this.isHovered = mouseX >= this.getX() && mouseY >= this.getY() && mouseX < this.getX() + this.width && mouseY < this.getY() + this.height;
 
       if (this.pressed) {
-        this.pressedGui.draw(matrices, this.getX(), this.getY());
+        this.pressedGui.draw(graphics, this.getX(), this.getY());
       } else if (this.isHovered) {
-        this.hoverGui.draw(matrices, this.getX(), this.getY());
+        this.hoverGui.draw(graphics, this.getX(), this.getY());
       } else {
-        this.normalGui.draw(matrices, this.getX(), this.getY());
+        this.normalGui.draw(graphics, this.getX(), this.getY());
       }
 
-      //this.drawIcon(matrices, Minecraft.getInstance());
-      TinkerStationScreen.renderIcon(matrices, layout.getIcon(), this.getX() + 1, this.getY() + 1);
+      //this.drawIcon(graphics, Minecraft.getInstance());
+      TinkerStationScreen.renderIcon(graphics, layout.getIcon(), this.getX() + 1, this.getY() + 1);
     }
   }
 

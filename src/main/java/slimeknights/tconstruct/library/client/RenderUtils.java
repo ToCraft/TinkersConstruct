@@ -55,7 +55,7 @@ public final class RenderUtils {
   /**
    * Adds a fluid cuboid with transparency
    *
-   * @param matrices Matrix stack instance
+   * @param matrices GuiGraphics instance
    * @param buffer   Render type buffer instance
    * @param fluid    Fluid to render
    * @param opacity  Fluid opacity to blend in

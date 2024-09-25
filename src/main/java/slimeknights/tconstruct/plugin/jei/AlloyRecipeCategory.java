@@ -82,13 +82,13 @@ public class AlloyRecipeCategory implements IRecipeCategory<AlloyRecipe> {
   }
 
   @Override
-  public void draw(AlloyRecipe recipe, IRecipeSlotsView slots, GuiGraphics matrices, double mouseX, double mouseY) {
-    arrow.draw(matrices, 90, 21);
+  public void draw(AlloyRecipe recipe, IRecipeSlotsView slots, GuiGraphics graphics, double mouseX, double mouseY) {
+    arrow.draw(graphics, 90, 21);
     // temperature info
     Font fontRenderer = Minecraft.getInstance().font;
     String tempString = I18n.get(KEY_TEMPERATURE, recipe.getTemperature());
     int x = 102 - (fontRenderer.width(tempString) / 2);
-    fontRenderer.draw(matrices, tempString, x, 5, Color.GRAY.getRGB());
+    fontRenderer.draw(graphics, tempString, x, 5, Color.GRAY.getRGB());
   }
 
   /**

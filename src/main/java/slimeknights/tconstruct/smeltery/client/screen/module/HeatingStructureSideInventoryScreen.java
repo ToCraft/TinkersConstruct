@@ -38,23 +38,23 @@ public class HeatingStructureSideInventoryScreen extends SideInventoryScreen<Hea
   }
 
   @Override
-  protected int drawSlots(GuiGraphics matrices, int xPos, int yPos) {
+  protected int drawSlots(GuiGraphics graphics, int xPos, int yPos) {
     RenderSystem.setShaderTexture(0, SLOT_LOCATION);
-    int ret = super.drawSlots(matrices, xPos, yPos);
+    int ret = super.drawSlots(graphics, xPos, yPos);
     RenderSystem.setShaderTexture(0, GENERIC_INVENTORY);
     return ret;
   }
 
   @Override
-  public void renderLabels(GuiGraphics matrices, int mouseX, int mouseY) {
-    super.renderLabels(matrices, mouseX, mouseY);
+  public void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
+    super.renderLabels(graphics, mouseX, mouseY);
   }
 
   @Override
-  protected void renderTooltip(GuiGraphics matrices, int mouseX, int mouseY) {
-    super.renderTooltip(matrices, mouseX, mouseY);
+  protected void renderTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
+    super.renderTooltip(graphics, mouseX, mouseY);
     if (parent.melting != null) {
-      parent.melting.drawHeatTooltips(matrices, mouseX, mouseY);
+      parent.melting.drawHeatTooltips(graphics, mouseX, mouseY);
     }
   }
 }

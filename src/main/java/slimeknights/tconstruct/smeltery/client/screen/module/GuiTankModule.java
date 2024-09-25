@@ -73,20 +73,20 @@ public class GuiTankModule {
   /**
    * Draws the tank
    *
-   * @param matrices Matrix stack instance
+   * @param graphics GuiGraphics instance
    */
-  public void draw(GuiGraphics matrices) {
-    GuiUtil.renderFluidTank(matrices, screen, tank.getFluidInTank(TANK_INDEX), tank.getTankCapacity(TANK_INDEX), x, y, width, height, 100);
+  public void draw(GuiGraphics graphics) {
+    GuiUtil.renderFluidTank(graphics, screen, tank.getFluidInTank(TANK_INDEX), tank.getTankCapacity(TANK_INDEX), x, y, width, height, 100);
   }
 
   /**
    * Highlights the hovered fluid
    *
-   * @param matrices Matrix stack instance
+   * @param graphics GuiGraphics instance
    * @param checkX   Mouse X position, screen relative
    * @param checkY   Mouse Y position, screen relative
    */
-  public void highlightHoveredFluid(GuiGraphics matrices, int checkX, int checkY) {
+  public void highlightHoveredFluid(GuiGraphics graphics, int checkX, int checkY) {
     // highlight hovered fluid
     if (isHovered(checkX, checkY)) {
       int fluidHeight = getFluidHeight();
@@ -94,10 +94,10 @@ public class GuiTankModule {
 
       // highlight just fluid
       if (checkY > middle) {
-        GuiUtil.renderHighlight(matrices, x, middle, width, fluidHeight);
+        GuiUtil.renderHighlight(graphics, x, middle, width, fluidHeight);
       } else {
         // or highlight empty
-        GuiUtil.renderHighlight(matrices, x, y, width, height - fluidHeight);
+        GuiUtil.renderHighlight(graphics, x, y, width, height - fluidHeight);
       }
     }
   }
@@ -105,11 +105,11 @@ public class GuiTankModule {
   /**
    * Renders the tooltip for hovering over the tank
    *
-   * @param matrices Matrix stack instance
+   * @param graphics GuiGraphics instance
    * @param mouseX   Global mouse X position
    * @param mouseY   Global mouse Y position
    */
-  public void renderTooltip(GuiGraphics matrices, int mouseX, int mouseY) {
+  public void renderTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
     int checkX = mouseX - screen.leftPos;
     int checkY = mouseY - screen.topPos;
 
@@ -145,7 +145,7 @@ public class GuiTankModule {
       }
 
       // TODO: renderComponentTooltip->renderTooltip
-      screen.renderComponentTooltip(matrices, tooltip, mouseX, mouseY);
+      screen.renderComponentTooltip(graphics, tooltip, mouseX, mouseY);
     }
   }
 

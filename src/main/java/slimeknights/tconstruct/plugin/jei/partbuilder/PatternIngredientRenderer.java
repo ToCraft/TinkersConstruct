@@ -25,11 +25,11 @@ public class PatternIngredientRenderer implements IIngredientRenderer<Pattern> {
   public static final PatternIngredientRenderer INSTANCE = new PatternIngredientRenderer();
 
   @Override
-  public void render(GuiGraphics matrices, @Nullable Pattern pattern) {
+  public void render(GuiGraphics graphics, @Nullable Pattern pattern) {
     if (pattern != null) {
       TextureAtlasSprite sprite = Minecraft.getInstance().getModelManager().getAtlas(InventoryMenu.BLOCK_ATLAS).getSprite(pattern.getTexture());
       RenderUtils.setup(InventoryMenu.BLOCK_ATLAS);
-      matrices.blit(0, 0, 100, 16, 16, sprite);
+      graphics.blit(0, 0, 100, 16, 16, sprite);
     }
   }
 
