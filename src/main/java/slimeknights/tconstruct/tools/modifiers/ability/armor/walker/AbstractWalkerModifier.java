@@ -36,7 +36,7 @@ public abstract class AbstractWalkerModifier extends NoLevelsModifier implements
     if (living.onGround() && !tool.isBroken() && !living.level().isClientSide) {
       float radius = Math.min(16, getRadius(tool, modifier.getLevel()));
       MutableBlockPos mutable = new MutableBlockPos();
-      Level world = living.level;
+      Level world = living.level();
       Vec3 posVec = living.position();
       BlockPos center = new BlockPos(posVec.x, posVec.y + 0.5, posVec.z);
       for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, 0, -radius), center.offset(radius, 0, radius))) {
