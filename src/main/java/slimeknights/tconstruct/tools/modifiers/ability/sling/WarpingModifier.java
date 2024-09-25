@@ -35,7 +35,7 @@ public class WarpingModifier extends SlingModifier {
         // find teleport target
         BlockPos furthestPos = null;
         while (Math.abs(offX) > .5 || Math.abs(offY) > .5 || Math.abs(offZ) > .5) { // while not too close to player
-          BlockPos posAttempt = new BlockPos(player.getX() + offX, player.getY() + offY, player.getZ() + offZ);
+          BlockPos posAttempt = new BlockPos((int) (player.getX() + offX), (int) (player.getY() + offY), (int) (player.getZ() + offZ));
           // if we do not have a position yet, see if this one is valid
           if (furthestPos == null) {
             if (player.level().getWorldBorder().isWithinBounds(posAttempt) && !player.level().getBlockState(posAttempt).isSuffocating(player.level(), posAttempt)) {

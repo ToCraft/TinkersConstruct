@@ -38,8 +38,8 @@ public abstract class AbstractWalkerModifier extends NoLevelsModifier implements
       MutableBlockPos mutable = new MutableBlockPos();
       Level world = living.level();
       Vec3 posVec = living.position();
-      BlockPos center = new BlockPos(posVec.x, posVec.y + 0.5, posVec.z);
-      for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, 0, -radius), center.offset(radius, 0, radius))) {
+      BlockPos center = new BlockPos((int) posVec.x, (int) (posVec.y + 0.5), (int) posVec.z);
+      for (BlockPos pos : BlockPos.betweenClosed(center.offset((int) -radius, 0, (int) -radius), center.offset((int) radius, 0, (int) radius))) {
         if (pos.closerToCenterThan(living.position(), radius)) {
           walkOn(tool, modifier.getLevel(), living, world, pos, mutable);
           if (tool.isBroken()) {
