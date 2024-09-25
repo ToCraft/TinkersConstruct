@@ -319,7 +319,7 @@ public class ToolAttackUtil {
     // if we failed to hit, fire failure hooks
     if (!didHit) {
       if (!isExtraAttack) {
-        attackerLiving.level.playSound(null, attackerLiving.getX(), attackerLiving.getY(), attackerLiving.getZ(), SoundEvents.PLAYER_ATTACK_NODAMAGE, attackerLiving.getSoundSource(), 1.0F, 1.0F);
+        attackerLiving.level().playSound(null, attackerLiving.getX(), attackerLiving.getY(), attackerLiving.getZ(), SoundEvents.PLAYER_ATTACK_NODAMAGE, attackerLiving.getSoundSource(), 1.0F, 1.0F);
       }
       // alert modifiers nothing was hit, mainly used for fiery
       for (ModifierEntry entry : modifiers) {
@@ -366,9 +366,9 @@ public class ToolAttackUtil {
         attackerPlayer.magicCrit(targetEntity);
       }
       // sounds
-      attackerLiving.level.playSound(null, attackerLiving.getX(), attackerLiving.getY(), attackerLiving.getZ(), sound, attackerLiving.getSoundSource(), 1.0F, 1.0F);
+      attackerLiving.level().playSound(null, attackerLiving.getX(), attackerLiving.getY(), attackerLiving.getZ(), sound, attackerLiving.getSoundSource(), 1.0F, 1.0F);
     }
-    if (damageDealt > 2.0F && attackerLiving.level instanceof ServerLevel server) {
+    if (damageDealt > 2.0F && attackerLiving.level() instanceof ServerLevel server) {
       int particleCount = (int) (damageDealt * 0.5f);
       server.sendParticles(ParticleTypes.DAMAGE_INDICATOR, targetEntity.getX(), targetEntity.getY(0.5), targetEntity.getZ(), particleCount, 0.1, 0, 0.1, 0.2);
     }
@@ -444,7 +444,7 @@ public class ToolAttackUtil {
    * @param height       the height offset for the particle position
    */
   public static void spawnAttackParticle(ParticleOptions particleData, Entity entity, double height) {
-    if (entity.level instanceof ServerLevel server) {
+    if (entity.level() instanceof ServerLevel server) {
       double xd = -Mth.sin(entity.getYRot() / 180.0F * (float) Math.PI) * Mth.cos(entity.getXRot() / 180.0F * (float) Math.PI);
       double zd = Mth.cos(entity.getYRot() / 180.0F * (float) Math.PI) * Mth.cos(entity.getXRot() / 180.0F * (float) Math.PI);
       double yd = -Mth.sin(entity.getXRot() / 180.0F * (float) Math.PI);
