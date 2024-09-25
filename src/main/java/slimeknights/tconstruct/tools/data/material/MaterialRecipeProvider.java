@@ -33,11 +33,6 @@ public class MaterialRecipeProvider extends BaseRecipeProvider implements IMater
   }
 
   @Override
-  public String getName() {
-    return "Tinkers' Construct Material Recipe";
-  }
-
-  @Override
   protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
     addMaterialItems(consumer);
     addMaterialSmeltery(consumer);

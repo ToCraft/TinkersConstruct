@@ -94,11 +94,6 @@ public class ModifierRecipeProvider extends BaseRecipeProvider {
   }
 
   @Override
-  public String getName() {
-    return "Tinkers' Construct Modifier Recipes";
-  }
-
-  @Override
   protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
     addItemRecipes(consumer);
     addModifierRecipes(consumer);
