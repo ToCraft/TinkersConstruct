@@ -39,8 +39,6 @@ import java.util.List;
 
 public class EnderferenceModifier extends Modifier implements ProjectileHitModifierHook, MeleeHitModifierHook, OnAttackedModifierHook {
 
-  private static final DamageSource FALLBACK = new DamageSource("arrow");
-
   public EnderferenceModifier() {
     MinecraftForge.EVENT_BUS.addListener(EnderferenceModifier::onTeleport);
   }
@@ -139,7 +137,7 @@ public class EnderferenceModifier extends Modifier implements ProjectileHitModif
         } else if (attacker != null) {
           damageSource = attacker.damageSources().mobAttack(attacker);
         } else {
-          damageSource = FALLBACK;
+          damageSource = arrow.damageSources().arrow(arrow, null);
         }
         if (attacker != null) {
           attacker.setLastHurtMob(target);
