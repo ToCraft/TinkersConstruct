@@ -53,7 +53,7 @@ public record DamageFluidEffect(List<Consumer<DamageSource>> modifiers,
     if (action.simulate()) {
       return value;
     }
-    DamageSource source = context.createDamageSource();
+    DamageSource source = context.getDamageSource();
     for (Consumer<DamageSource> modifier : modifiers) {
       modifier.accept(source);
     }

@@ -22,7 +22,7 @@ public class SlimesteelBlock extends Block {
     if (entityIn.isSuppressingBounce()) {
       super.fallOn(worldIn, state, pos, entityIn, fallDistance);
     } else {
-      entityIn.causeFallDamage(fallDistance, 0.0F, DamageSource.FALL);
+      entityIn.causeFallDamage(fallDistance, 0.0F, entityIn.damageSources().fall());
     }
   }
 

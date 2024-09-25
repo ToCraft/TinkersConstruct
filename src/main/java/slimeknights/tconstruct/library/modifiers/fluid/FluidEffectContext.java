@@ -3,6 +3,7 @@ package slimeknights.tconstruct.library.modifiers.fluid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -42,18 +43,19 @@ public abstract class FluidEffectContext {
   /**
    * Gets a damage source based on this context
    */
-  public DamageSource createDamageSource() {
+  public DamageSource getDamageSource() {
+    DamageSources sources = level.damageSources();
     if (projectile != null) {
-      return DamageSource.indirectMobAttack(projectile, entity).setProjectile();
+      return sources.mobProjectile(projectile, entity);
     }
     if (player != null) {
-      return DamageSource.playerAttack(player);
+      return sources.playerAttack(player);
     }
     if (entity != null) {
-      return DamageSource.mobAttack(entity);
+      return sources.mobAttack(entity);
     }
     // we should never reach here, but just in case
-    return new DamageSource("generic");
+    return sources.generic();
   }
 
   /**
