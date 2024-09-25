@@ -210,7 +210,7 @@ public class ModifierClientEvents {
           int x = scaledWidth / 2 + (player.getMainArm().getOpposite() == HumanoidArm.LEFT ? -117 : 101);
           int y = scaledHeight - 38;
           matrixStack.blit(Icons.ICONS, x - 3, y - 3, player.getOffhandItem().isEmpty() ? 211 : 189, 0, SLOT_BACKGROUND_SIZE, SLOT_BACKGROUND_SIZE, 256, 256);
-          mc.gui.renderSlot(x, y, partialTicks, player, nextOffhand, 11);
+          mc.gui.renderSlot(matrixStack, x, y, partialTicks, player, nextOffhand, 11);
         }
 
         if (renderItemFrame) {
@@ -253,13 +253,13 @@ public class ModifierClientEvents {
           yStart += 3; // offset from item start instead of frame start
           for (int r = 0; r < lastRow; r++) {
             for (int c = 0; c < columns; c++) {
-              mc.gui.renderSlot(xStart + c * SLOT_BACKGROUND_SIZE, yStart + r * SLOT_BACKGROUND_SIZE, partialTicks, player, itemFrames.get(i), i);
+              mc.gui.renderSlot(matrixStack, xStart + c * SLOT_BACKGROUND_SIZE, yStart + r * SLOT_BACKGROUND_SIZE, partialTicks, player, itemFrames.get(i), i);
               i++;
             }
           }
           // align last row
           for (int c = 0; c < inLastRow; c++) {
-            mc.gui.renderSlot(xStart + c * SLOT_BACKGROUND_SIZE + lastRowOffset, yStart + lastRow * SLOT_BACKGROUND_SIZE, partialTicks, player, itemFrames.get(i), i);
+            mc.gui.renderSlot(matrixStack, xStart + c * SLOT_BACKGROUND_SIZE + lastRowOffset, yStart + lastRow * SLOT_BACKGROUND_SIZE, partialTicks, player, itemFrames.get(i), i);
             i++;
           }
         }
