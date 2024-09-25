@@ -4,6 +4,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -69,7 +70,7 @@ public class IndestructibleItemEntity extends ItemEntity {
   @Override
   public boolean hurt(DamageSource source, float amount) {
     // prevent any damage besides out of world
-    return source.getMsgId().equals(DamageSource.OUT_OF_WORLD.msgId);
+    return source.getMsgId().equals(damageSources().fellOutOfWorld().getMsgId());
   }
 
   /**

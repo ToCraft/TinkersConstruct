@@ -78,7 +78,7 @@ public class GuiMeltingModule {
    * @param mouseX Mouse X position
    * @param mouseY Mouse Y position
    */
-  public void drawHeatTooltips(PoseStack matrices, int mouseX, int mouseY) {
+  public void drawHeatTooltips(GuiGraphics matrices, int mouseX, int mouseY) {
     int checkX = mouseX - screen.leftPos;
     int checkY = mouseY - screen.topPos;
     int temperature = this.temperature.getAsInt();

@@ -2,6 +2,7 @@ package slimeknights.tconstruct.tables.client.inventory.module;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import lombok.Getter;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -240,14 +241,14 @@ public class SideInventoryScreen<P extends MultiModuleScreen<?>, C extends Abstr
   }
 
   @Override
-  public void renderLabels(PoseStack matrices, int mouseX, int mouseY) {
+  public void renderLabels(GuiGraphics matrices, int mouseX, int mouseY) {
     if (this.shouldDrawName()) {
-      this.font.draw(matrices, this.getTitle().getString(), this.border.w, this.border.h - 1, 0x404040);
+      matrices.drawString(font, this.getTitle().getString(), this.border.w, this.border.h - 1, 0x404040);
     }
   }
 
   @Override
-  protected void renderBg(PoseStack matrices, float partialTicks, int mouseX, int mouseY) {
+  protected void renderBg(GuiGraphics matrices, float partialTicks, int mouseX, int mouseY) {
     this.leftPos += this.border.w;
     this.topPos += this.border.h;
 
@@ -278,7 +279,7 @@ public class SideInventoryScreen<P extends MultiModuleScreen<?>, C extends Abstr
     this.topPos -= this.border.h;
   }
 
-  protected int drawSlots(PoseStack matrices, int xPos, int yPos) {
+  protected int drawSlots(GuiGraphics matrices, int xPos, int yPos) {
     int width = this.columns * this.slot.w;
     int height = this.imageHeight - this.border.h * 2;
     int fullRows = (this.lastSlotId - this.firstSlotId) / this.columns;

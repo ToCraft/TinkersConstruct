@@ -1,8 +1,8 @@
 package slimeknights.tconstruct.smeltery.client.screen.module;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.fluids.FluidStack;
@@ -66,7 +66,7 @@ public class GuiFuelModule {
    *
    * @param matrices Matrix stack instance
    */
-  public void draw(PoseStack matrices) {
+  public void draw(GuiGraphics matrices) {
     // draw fire
     int fuel = fuelModule.getFuel();
     int fuelQuality = fuelModule.getFuelQuality();
@@ -91,7 +91,7 @@ public class GuiFuelModule {
    * @param checkX   Top corner relative mouse X
    * @param checkY   Top corner relative mouse Y
    */
-  public void renderHighlight(PoseStack matrices, int checkX, int checkY) {
+  public void renderHighlight(GuiGraphics matrices, int checkX, int checkY) {
     if (isHovered(checkX, checkY)) {
       // if there is a fuel slot, render highlight lower
       if (hasFuelSlot) {
@@ -112,7 +112,7 @@ public class GuiFuelModule {
    * @param mouseX   Mouse X position
    * @param mouseY   Mouse Y position
    */
-  public void addTooltip(PoseStack matrices, int mouseX, int mouseY, boolean hasTank) {
+  public void addTooltip(GuiGraphics matrices, int mouseX, int mouseY, boolean hasTank) {
     int checkX = mouseX - screen.leftPos;
     int checkY = mouseY - screen.topPos;
 

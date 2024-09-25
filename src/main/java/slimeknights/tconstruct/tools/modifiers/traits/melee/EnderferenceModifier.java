@@ -135,9 +135,9 @@ public class EnderferenceModifier extends Modifier implements ProjectileHitModif
         Entity owner = arrow.getOwner();
         DamageSource damageSource;
         if (attacker instanceof Player player) {
-          damageSource = DamageSource.playerAttack(player);
+          damageSource = attacker.damageSources().playerAttack(player);
         } else if (attacker != null) {
-          damageSource = DamageSource.mobAttack(attacker);
+          damageSource = attacker.damageSources().mobAttack(attacker);
         } else {
           damageSource = FALLBACK;
         }

@@ -43,7 +43,6 @@ public class BleedingEffect extends NoMilkEffect {
     } else {
       source = new DamageSource(BLEED);
     }
-    source.bypassMagic();
 
     // perform damage
     int hurtResistantTime = target.invulnerableTime;

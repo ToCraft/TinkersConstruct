@@ -198,7 +198,7 @@ public class PunjiBlock extends Block {
       if (entityIn.fallDistance > 0) {
         damage += entityIn.fallDistance + 1;
       }
-      entityIn.hurt(DamageSource.CACTUS, damage);
+      entityIn.hurt(worldIn.damageSources().cactus(), damage);
     }
   }
 

@@ -41,9 +41,9 @@ public class PiercingModifier extends Modifier implements ToolStatsModifierHook,
     DamageSource source;
     Player player = context.getPlayerAttacker();
     if (player != null) {
-      source = DamageSource.playerAttack(player);
+      source = player.damageSources().playerAttack(player);
     } else {
-      source = DamageSource.mobAttack(context.getAttacker());
+      source = player.damageSources().mobAttack(context.getAttacker());
     }
     source.bypassArmor();
     float secondaryDamage = (modifier.getEffectiveLevel() * tool.getMultiplier(ToolStats.ATTACK_DAMAGE)) * context.getCooldown();

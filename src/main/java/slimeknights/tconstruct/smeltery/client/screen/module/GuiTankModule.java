@@ -3,6 +3,7 @@ package slimeknights.tconstruct.smeltery.client.screen.module;
 import com.mojang.blaze3d.vertex.PoseStack;
 import lombok.Getter;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -74,7 +75,7 @@ public class GuiTankModule {
    *
    * @param matrices Matrix stack instance
    */
-  public void draw(PoseStack matrices) {
+  public void draw(GuiGraphics matrices) {
     GuiUtil.renderFluidTank(matrices, screen, tank.getFluidInTank(TANK_INDEX), tank.getTankCapacity(TANK_INDEX), x, y, width, height, 100);
   }
 
@@ -85,7 +86,7 @@ public class GuiTankModule {
    * @param checkX   Mouse X position, screen relative
    * @param checkY   Mouse Y position, screen relative
    */
-  public void highlightHoveredFluid(PoseStack matrices, int checkX, int checkY) {
+  public void highlightHoveredFluid(GuiGraphics matrices, int checkX, int checkY) {
     // highlight hovered fluid
     if (isHovered(checkX, checkY)) {
       int fluidHeight = getFluidHeight();
@@ -108,7 +109,7 @@ public class GuiTankModule {
    * @param mouseX   Global mouse X position
    * @param mouseY   Global mouse Y position
    */
-  public void renderTooltip(PoseStack matrices, int mouseX, int mouseY) {
+  public void renderTooltip(GuiGraphics matrices, int mouseX, int mouseY) {
     int checkX = mouseX - screen.leftPos;
     int checkY = mouseY - screen.topPos;
 
