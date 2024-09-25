@@ -38,12 +38,6 @@ public class TableRecipeProvider extends BaseRecipeProvider {
     super(generator);
   }
 
-  // XXX Can't override a final method
-//  @Override
-//  public String getName() {
-//    return "Tinkers' Construct Table Recipes";
-//  }
-
   @Override
   protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
     String folder = "tables/";
