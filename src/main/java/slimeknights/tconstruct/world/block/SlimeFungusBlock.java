@@ -3,6 +3,7 @@ package slimeknights.tconstruct.world.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.FungusBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -26,7 +27,7 @@ public class SlimeFungusBlock extends FungusBlock {
   }
 
   @Override
-  public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
+  public boolean isValidBonemealTarget(LevelReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
     return worldIn.getBlockState(pos.below()).is(TinkerTags.Blocks.SLIMY_SOIL);
   }
 }

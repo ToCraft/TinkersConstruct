@@ -77,7 +77,7 @@ public class GuiSmelteryTank {
    *
    * @param matrices Matrix stack instance
    */
-  public void renderFluids(PoseStack matrices) {
+  public void renderFluids(GuiGraphics matrices) {
     // draw liquids
     if (tank.getContained() > 0) {
       int[] heights = calcLiquidHeights(true);

@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.smeltery.client.screen;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -69,7 +70,7 @@ public class HeatingStructureScreen extends MultiModuleScreen<HeatingStructureCo
   }
 
   @Override
-  protected void renderBg(PoseStack matrices, float partialTicks, int mouseX, int mouseY) {
+  protected void renderBg(GuiGraphics matrices, float partialTicks, int mouseX, int mouseY) {
     // draw stuff with background
     GuiUtil.drawBackground(matrices, this, BACKGROUND);
     // fuel
@@ -103,7 +104,7 @@ public class HeatingStructureScreen extends MultiModuleScreen<HeatingStructureCo
   }
 
   @Override
-  protected void renderTooltip(PoseStack matrices, int mouseX, int mouseY) {
+  protected void renderTooltip(GuiGraphics matrices, int mouseX, int mouseY) {
     super.renderTooltip(matrices, mouseX, mouseY);
 
     // fluid tooltips

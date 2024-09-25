@@ -3,6 +3,7 @@ package slimeknights.tconstruct.common.data.loot;
 import net.minecraft.advancements.critereon.EntityEquipmentPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -41,7 +42,7 @@ import slimeknights.tconstruct.tools.modifiers.loot.ModifierBonusLootFunction;
 public class GlobalLootModifiersProvider extends GlobalLootModifierProvider {
 
   public GlobalLootModifiersProvider(DataGenerator gen) {
-    super(gen, TConstruct.MOD_ID);
+    super(gen.getPackOutput(), TConstruct.MOD_ID);
   }
 
   @Override

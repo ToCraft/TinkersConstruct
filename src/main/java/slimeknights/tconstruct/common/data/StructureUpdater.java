@@ -2,6 +2,7 @@ package slimeknights.tconstruct.common.data;
 
 import com.mojang.datafixers.DataFixer;
 import com.mojang.datafixers.DataFixerUpper;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.nbt.CompoundTag;
@@ -21,6 +22,7 @@ import slimeknights.tconstruct.library.data.GenericNBTProvider;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Map.Entry;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Data provider to update structures to a newer data fixer upper version
@@ -50,6 +52,7 @@ public class StructureUpdater extends GenericNBTProvider {
     for (Entry<ResourceLocation, Resource> entry : resources.listResources(basePath, file -> file.getNamespace().equals(modId) && file.getPath().endsWith(".nbt")).entrySet()) {
       process(localize(entry.getKey()), entry.getValue(), cache);
     }
+    return null;
   }
 
   /**
@@ -74,7 +77,7 @@ public class StructureUpdater extends GenericNBTProvider {
   private static CompoundTag updateNBT(CompoundTag nbt) {
     final CompoundTag updatedNBT = NbtUtils.update(DataFixers.getDataFixer(), DataFixTypes.STRUCTURE, nbt, nbt.getInt("DataVersion"));
     StructureTemplate template = new StructureTemplate();
-    template.load(updatedNBT);
+    template.load(BuiltInRegistries.BLOCK.asLookup(), updatedNBT);
     return template.save(new CompoundTag());
   }
 

@@ -2,6 +2,7 @@ package slimeknights.tconstruct.library.recipe.molding;
 
 import lombok.Getter;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -66,7 +67,7 @@ public class MoldingRecipe implements ICommonRecipe<IMoldingContainer> {
   }
 
   @Override
-  public ItemStack getResultItem() {
+  public ItemStack getResultItem(RegistryAccess var1) {
     return recipeOutput.get();
   }
 }
