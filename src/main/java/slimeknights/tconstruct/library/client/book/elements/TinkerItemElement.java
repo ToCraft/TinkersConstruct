@@ -51,7 +51,7 @@ public class TinkerItemElement extends ItemElement {
   }
 
   @Override
-  public void drawOverlay(GuiGraphics matrixStack, int mouseX, int mouseY, float partialTicks, Font fontRenderer) {
+  public void drawOverlay(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks, Font fontRenderer) {
     if (this.noTooltip) {
       return;
     }
@@ -60,6 +60,6 @@ public class TinkerItemElement extends ItemElement {
       fontRenderer = mc.font;
     }
 
-    super.drawOverlay(matrixStack, mouseX, mouseY, partialTicks, fontRenderer);
+    super.drawOverlay(graphics, mouseX, mouseY, partialTicks, fontRenderer);
   }
 }

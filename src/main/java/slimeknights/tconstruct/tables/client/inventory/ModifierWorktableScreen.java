@@ -130,8 +130,8 @@ public class ModifierWorktableScreen extends BaseTabbedScreen<ModifierWorktableB
   }
 
   @Override
-  protected void renderTooltip(GuiGraphics matrixStack, int mouseX, int mouseY) {
-    super.renderTooltip(matrixStack, mouseX, mouseY);
+  protected void renderTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
+    super.renderTooltip(graphics, mouseX, mouseY);
 
     // determime which button we are hovering
     if (tile != null) {
@@ -139,7 +139,7 @@ public class ModifierWorktableScreen extends BaseTabbedScreen<ModifierWorktableB
       if (!buttons.isEmpty()) {
         int index = getButtonAt(mouseX, mouseY);
         if (index >= 0) {
-          renderTooltip(matrixStack, buttons.get(index).getDisplayName(), mouseX, mouseY);
+          renderTooltip(graphics, buttons.get(index).getDisplayName(), mouseX, mouseY);
         }
       }
     }

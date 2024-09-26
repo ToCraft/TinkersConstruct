@@ -114,15 +114,15 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity, 
   }
 
   @Override
-  protected void renderTooltip(GuiGraphics matrixStack, int mouseX, int mouseY) {
-    super.renderTooltip(matrixStack, mouseX, mouseY);
+  protected void renderTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
+    super.renderTooltip(graphics, mouseX, mouseY);
 
     // determime which button we are hovering
     List<Pattern> buttons = tile.getSortedButtons();
     if (!buttons.isEmpty()) {
       int index = getButtonAt(mouseX, mouseY);
       if (index >= 0) {
-        renderTooltip(matrixStack, buttons.get(index).getDisplayName(), mouseX, mouseY);
+        renderTooltip(graphics, buttons.get(index).getDisplayName(), mouseX, mouseY);
       }
     }
   }

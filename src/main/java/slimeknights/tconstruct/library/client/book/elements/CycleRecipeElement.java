@@ -36,9 +36,9 @@ public class CycleRecipeElement extends ArrowElement {
   }
 
   @Override
-  public void drawOverlay(GuiGraphics matrixStack, int mouseX, int mouseY, float partialTicks, Font fontRenderer) {
+  public void drawOverlay(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks, Font fontRenderer) {
     if (this.isHovered(mouseX, mouseY)) {
-      this.drawTooltip(matrixStack, Collections.singletonList(Component.translatable("gui.tconstruct.manual.cycle.recipes")), mouseX, mouseY, fontRenderer);
+      this.drawTooltip(graphics, Collections.singletonList(Component.translatable("gui.tconstruct.manual.cycle.recipes")), mouseX, mouseY, fontRenderer);
     }
   }
 }

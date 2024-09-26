@@ -397,8 +397,8 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
   }
 
   @Override
-  protected void drawContainerName(GuiGraphics matrixStack) {
-    this.font.draw(matrixStack, this.getTitle(), 8.0F, 8.0F, 4210752);
+  protected void drawContainerName(GuiGraphics graphics) {
+    this.font.draw(graphics, this.getTitle(), 8.0F, 8.0F, 4210752);
   }
 
   public static void renderIcon(GuiGraphics graphics, LayoutIcon icon, int x, int y) {
@@ -621,12 +621,12 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
   }
 
   @Override
-  public void renderSlot(GuiGraphics matrixStack, Slot slotIn) {
+  public void renderSlot(GuiGraphics graphics, Slot slotIn) {
     // don't draw dormant slots with no item
     if (slotIn instanceof TinkerStationSlot && ((TinkerStationSlot) slotIn).isDormant() && !slotIn.hasItem()) {
       return;
     }
-    super.renderSlot(matrixStack, slotIn);
+    super.renderSlot(graphics, slotIn);
   }
 
   @Override

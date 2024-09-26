@@ -246,7 +246,7 @@ public class InfoPanelScreen extends ModuleScreen {
   }
 
   @Override
-  protected void renderLabels(GuiGraphics matrixStack, int x, int y) {
+  protected void renderLabels(GuiGraphics graphics, int x, int y) {
     // no-op
   }
 

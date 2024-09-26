@@ -61,17 +61,17 @@ public class MoldingRecipeCategory implements IRecipeCategory<MoldingRecipe> {
   }
 
   @Override
-  public void draw(MoldingRecipe recipe, IRecipeSlotsView slots, GuiGraphics matrixStack, double mouseX, double mouseY) {
+  public void draw(MoldingRecipe recipe, IRecipeSlotsView slots, GuiGraphics graphics, double mouseX, double mouseY) {
     // draw the main block
     IDrawable block = recipe.getType() == TinkerRecipeTypes.MOLDING_BASIN.get() ? basin : table;
-    block.draw(matrixStack, 3, 40);
+    block.draw(graphics, 3, 40);
 
     // if no mold, we "pickup" the item, so draw no table
     if (!recipe.getPattern().isEmpty()) {
-      block.draw(matrixStack, 51, 40);
-      downArrow.draw(matrixStack, 8, 17);
+      block.draw(graphics, 51, 40);
+      downArrow.draw(graphics, 8, 17);
     } else {
-      upArrow.draw(matrixStack, 8, 17);
+      upArrow.draw(graphics, 8, 17);
     }
   }
 
