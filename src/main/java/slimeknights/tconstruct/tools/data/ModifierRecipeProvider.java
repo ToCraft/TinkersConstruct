@@ -2,6 +2,7 @@ package slimeknights.tconstruct.tools.data;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.SpecialRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
@@ -149,7 +150,7 @@ public class ModifierRecipeProvider extends BaseRecipeProvider {
       .save(consumer, prefix(TinkerModifiers.silkyCloth, folder));
 
     // wither bone purifying
-    ShapelessRecipeBuilder.shapeless(Items.BONE)
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.BONE)
       .requires(TinkerTags.Items.WITHER_BONES)
       .unlockedBy("has_bone", has(TinkerTags.Items.WITHER_BONES))
       .save(withCondition(consumer, ConfigEnabledCondition.WITHER_BONE_CONVERSION), location(folder + "wither_bone_conversion"));

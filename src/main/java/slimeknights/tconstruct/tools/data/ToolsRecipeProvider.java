@@ -2,6 +2,7 @@ package slimeknights.tconstruct.tools.data;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.ItemStack;
@@ -76,7 +77,7 @@ public class ToolsRecipeProvider extends BaseRecipeProvider implements IMaterial
     toolBuilding(consumer, TinkerTools.longbow, folder);
 
     // specialized
-    ShapelessRecipeBuilder.shapeless(TinkerTools.flintAndBrick)
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, TinkerTools.flintAndBrick)
       .requires(Items.FLINT)
       .requires(Ingredient.of(TinkerSmeltery.searedBrick, TinkerSmeltery.scorchedBrick))
       .unlockedBy("has_seared", has(TinkerSmeltery.searedBrick))
@@ -84,7 +85,7 @@ public class ToolsRecipeProvider extends BaseRecipeProvider implements IMaterial
       .save(consumer, prefix(TinkerTools.flintAndBrick, folder));
 
     // staff
-    ShapedRecipeBuilder.shaped(TinkerTools.skyStaff)
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, TinkerTools.skyStaff)
       .pattern("CWC")
       .pattern(" I ")
       .pattern(" W ")
@@ -93,7 +94,7 @@ public class ToolsRecipeProvider extends BaseRecipeProvider implements IMaterial
       .define('I', TinkerMaterials.roseGold.getIngotTag())
       .unlockedBy("has_wood", has(TinkerWorld.skyroot.getLogItemTag()))
       .save(consumer, prefix(TinkerTools.skyStaff, folder));
-    ShapedRecipeBuilder.shaped(TinkerTools.earthStaff)
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, TinkerTools.earthStaff)
       .pattern("CWC")
       .pattern(" I ")
       .pattern(" W ")
@@ -102,7 +103,7 @@ public class ToolsRecipeProvider extends BaseRecipeProvider implements IMaterial
       .define('I', TinkerMaterials.cobalt.getIngotTag())
       .unlockedBy("has_wood", has(TinkerWorld.greenheart.getLogItemTag()))
       .save(consumer, prefix(TinkerTools.earthStaff, folder));
-    ShapedRecipeBuilder.shaped(TinkerTools.ichorStaff)
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, TinkerTools.ichorStaff)
       .pattern("CWC")
       .pattern(" I ")
       .pattern(" W ")
@@ -111,7 +112,7 @@ public class ToolsRecipeProvider extends BaseRecipeProvider implements IMaterial
       .define('I', TinkerMaterials.queensSlime.getIngotTag())
       .unlockedBy("has_wood", has(TinkerWorld.bloodshroom.getLogItemTag()))
       .save(consumer, prefix(TinkerTools.ichorStaff, folder));
-    ShapedRecipeBuilder.shaped(TinkerTools.enderStaff)
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, TinkerTools.enderStaff)
       .pattern("CWC")
       .pattern(" I ")
       .pattern(" W ")
@@ -122,7 +123,7 @@ public class ToolsRecipeProvider extends BaseRecipeProvider implements IMaterial
       .save(consumer, prefix(TinkerTools.enderStaff, folder));
 
     // travelers gear
-    ShapedRecipeBuilder.shaped(TinkerTools.travelersGear.get(ArmorSlotType.HELMET))
+    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, TinkerTools.travelersGear.get(ArmorSlotType.HELMET))
       .pattern("l l")
       .pattern("glg")
       .pattern("c c")
@@ -131,7 +132,7 @@ public class ToolsRecipeProvider extends BaseRecipeProvider implements IMaterial
       .define('g', Tags.Items.GLASS_PANES_COLORLESS)
       .unlockedBy("has_item", has(Tags.Items.INGOTS_COPPER))
       .save(consumer, location(armorFolder + "travelers_goggles"));
-    ShapedRecipeBuilder.shaped(TinkerTools.travelersGear.get(ArmorSlotType.CHESTPLATE))
+    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, TinkerTools.travelersGear.get(ArmorSlotType.CHESTPLATE))
       .pattern("l l")
       .pattern("lcl")
       .pattern("lcl")
@@ -139,7 +140,7 @@ public class ToolsRecipeProvider extends BaseRecipeProvider implements IMaterial
       .define('l', Tags.Items.LEATHER)
       .unlockedBy("has_item", has(Tags.Items.INGOTS_COPPER))
       .save(consumer, location(armorFolder + "travelers_chestplate"));
-    ShapedRecipeBuilder.shaped(TinkerTools.travelersGear.get(ArmorSlotType.LEGGINGS))
+    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, TinkerTools.travelersGear.get(ArmorSlotType.LEGGINGS))
       .pattern("lll")
       .pattern("c c")
       .pattern("l l")
@@ -147,14 +148,14 @@ public class ToolsRecipeProvider extends BaseRecipeProvider implements IMaterial
       .define('l', Tags.Items.LEATHER)
       .unlockedBy("has_item", has(Tags.Items.INGOTS_COPPER))
       .save(consumer, location(armorFolder + "travelers_pants"));
-    ShapedRecipeBuilder.shaped(TinkerTools.travelersGear.get(ArmorSlotType.BOOTS))
+    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, TinkerTools.travelersGear.get(ArmorSlotType.BOOTS))
       .pattern("c c")
       .pattern("l l")
       .define('c', Tags.Items.INGOTS_COPPER)
       .define('l', Tags.Items.LEATHER)
       .unlockedBy("has_item", has(Tags.Items.INGOTS_COPPER))
       .save(consumer, location(armorFolder + "travelers_boots"));
-    ShapedRecipeBuilder.shaped(TinkerTools.travelersShield)
+    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, TinkerTools.travelersShield)
       .pattern(" w ")
       .pattern("wlw")
       .pattern(" w ")
