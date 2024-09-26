@@ -274,7 +274,7 @@ public class ToolInventoryCapability extends InventoryModifierHookIterator<Modif
     } else {
       // space leftover? does it match?
       int limit = Math.min(current.getMaxStackSize(), slotLimit);
-      if (current.getCount() >= limit || !current.sameItem(stack)) {
+      if (current.getCount() >= limit || !current.is(stack.getItem())) {
         return stack;
       }
       int maxSize = current.getCount() + stack.getCount();
