@@ -3,6 +3,7 @@ package slimeknights.tconstruct.library.recipe.tinkerstation.repairing;
 import com.mojang.datafixers.util.Pair;
 import lombok.Getter;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
@@ -96,7 +97,7 @@ public class ModifierRepairCraftingRecipe extends CustomRecipe implements IModif
   }
 
   @Override
-  public ItemStack assemble(CraftingContainer inv) {
+  public ItemStack assemble(CraftingContainer inv, RegistryAccess registryAccess) {
     Pair<ToolStack, Integer> inputs = getRelevantInputs(inv);
     if (inputs == null) {
       TConstruct.LOG.error("Recipe repair on {} failed to find items after matching", getId());

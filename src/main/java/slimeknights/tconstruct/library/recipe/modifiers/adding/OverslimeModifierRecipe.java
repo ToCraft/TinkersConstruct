@@ -98,7 +98,7 @@ public class OverslimeModifierRecipe implements ITinkerStationRecipe, IDisplayMo
   /**
    * Updates the input stacks upon crafting this recipe
    *
-   * @param result Result from {@link #assemble(ITinkerStationContainer)}. Generally should not be modified
+   * @param result Result from {@link #assemble(ITinkerStationContainer, net.minecraft.core.RegistryAccess)}. Generally should not be modified
    * @param inv    Inventory instance to modify inputs
    */
   @Override

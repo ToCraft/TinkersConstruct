@@ -3,6 +3,7 @@ package slimeknights.tconstruct.tools.recipe;
 import com.google.gson.JsonObject;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -76,7 +77,7 @@ public class ArmorDyeingRecipe implements ITinkerStationRecipe, IMultiRecipe<IDi
   }
 
   @Override
-  public ItemStack assemble(ITinkerStationContainer inv) {
+  public ItemStack assemble(ITinkerStationContainer inv, RegistryAccess registryAccess) {
     ToolStack tool = inv.getTinkerable().copy();
 
     ModDataNBT persistentData = tool.getPersistentData();
@@ -172,11 +173,11 @@ public class ArmorDyeingRecipe implements ITinkerStationRecipe, IMultiRecipe<IDi
   /* Required */
 
   /**
-   * @deprecated use {@link #assemble(ITinkerStationContainer)}
+   * @deprecated use {@link #assemble(ITinkerStationContainer, RegistryAccess)}
    */
   @Deprecated
   @Override
-  public ItemStack getResultItem() {
+  public ItemStack getResultItem(RegistryAccess registryAccess) {
     return ItemStack.EMPTY;
   }
 
