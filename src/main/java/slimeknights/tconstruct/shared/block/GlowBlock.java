@@ -118,7 +118,7 @@ public class GlowBlock extends Block {
   public boolean addGlow(Level world, BlockPos pos, Direction direction) {
     // only place the block if the current block at the location is replaceable (eg, air, tall grass, etc.)
     BlockState state = world.getBlockState(pos);
-    if (state.getBlock() != this && state.getMaterial().isReplaceable()) {
+    if (state.getBlock() != this && state.canBeReplaced()) {
       // if the location is valid, place the block directly
       if (this.canBlockStay(world, pos, direction)) {
         if (!world.isClientSide) {
