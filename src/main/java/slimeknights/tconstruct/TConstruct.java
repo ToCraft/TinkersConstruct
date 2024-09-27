@@ -158,9 +158,7 @@ public class TConstruct {
     datagenerator.addProvider(server, new GlobalLootModifiersProvider(datagenerator));
   }
 
-  /**
-   * Shared behavior between item and block missing mappings
-   */
+  /** Shared behavior between item and block missing mappings */
   @Nullable
   private static Block missingBlock(String name) {
     return switch (name) {
@@ -180,9 +178,7 @@ public class TConstruct {
     };
   }
 
-  /**
-   * Handles missing mappings of all types
-   */
+  /** Handles missing mappings of all types */
   private static void missingMappings(MissingMappingsEvent event) {
     RegistrationHelper.handleMissingMappings(event, MOD_ID, Registries.BLOCK, name -> {
       // no item form so we handle it directly
@@ -231,7 +227,6 @@ public class TConstruct {
 
   /**
    * Gets a resource location for Tinkers
-   *
    * @param name Resource path
    * @return Location for tinkers
    */
@@ -241,7 +236,6 @@ public class TConstruct {
 
   /**
    * Gets a data key for the capability, mainly used for modifier markers
-   *
    * @param name Resource path
    * @return Location for tinkers
    */
@@ -251,7 +245,6 @@ public class TConstruct {
 
   /**
    * Gets a data key for the capability, mainly used for modifier markers
-   *
    * @param name        Resource path
    * @param constructor Constructor for compute if absent
    * @return Location for tinkers
@@ -276,16 +269,13 @@ public class TConstruct {
     return MOD_ID + "." + name.toLowerCase(Locale.US);
   }
 
-  /**
-   * Makes a Tinker's description ID
-   */
+  /** Makes a Tinker's description ID */
   public static String makeDescriptionId(String type, String name) {
     return type + "." + MOD_ID + "." + name;
   }
 
   /**
    * Makes a translation key for the given name
-   *
    * @param base Base name, such as "block" or "gui"
    * @param name Object name
    * @return Translation key
@@ -296,7 +286,6 @@ public class TConstruct {
 
   /**
    * Makes a translation text component for the given name
-   *
    * @param base Base name, such as "block" or "gui"
    * @param name Object name
    * @return Translation key
@@ -307,7 +296,6 @@ public class TConstruct {
 
   /**
    * Makes a translation text component for the given name
-   *
    * @param base      Base name, such as "block" or "gui"
    * @param name      Object name
    * @param arguments Additional arguments to the translation
@@ -321,9 +309,8 @@ public class TConstruct {
    * This function is called in the constructor in some internal classes that are a common target for addons to wrongly extend.
    * These classes will cause issues if blindly used by the addon, and are typically trivial for the addon to implement
    * the parts they need if they just put in some effort understanding the code they are copying.
-   * <p>
-   * As a reminder for addon devs, anything that is not in the library package can and will change arbitrarily. If you need to use a feature outside library, request it on our github.
    *
+   * As a reminder for addon devs, anything that is not in the library package can and will change arbitrarily. If you need to use a feature outside library, request it on our github.
    * @param self Class to validate
    */
   public static void sealTinkersClass(Object self, String base, String solution) {
