@@ -5,6 +5,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import slimeknights.mantle.client.screen.ScalableElementScreen;
 import slimeknights.mantle.fluid.tooltip.FluidTooltipHandler;
@@ -23,8 +24,9 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 public class GuiFuelModule {
+  private final ResourceLocation background;
 
-  private static final ScalableElementScreen FIRE = new ScalableElementScreen(176, 136, 14, 14, 256, 256);
+  private final ScalableElementScreen FIRE = new ScalableElementScreen(background, 176, 136, 14, 14, 256, 256);
 
   // tooltips
   private static final String TOOLTIP_TEMPERATURE = TConstruct.makeTranslationKey("gui", "melting.fuel.temperature");

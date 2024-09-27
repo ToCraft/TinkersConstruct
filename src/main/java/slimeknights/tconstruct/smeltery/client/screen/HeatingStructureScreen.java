@@ -28,7 +28,7 @@ import java.util.Objects;
 public class HeatingStructureScreen extends MultiModuleScreen<HeatingStructureContainerMenu> implements IScreenWithFluidTank {
 
   public static final ResourceLocation BACKGROUND = TConstruct.getResource("textures/gui/smeltery.png");
-  private static final ElementScreen SCALA = new ElementScreen(176, 76, 52, 52, 256, 256);
+  private static final ElementScreen SCALA = new ElementScreen(BACKGROUND, 176, 76, 52, 52, 256, 256);
 
   private final HeatingStructureSideInventoryScreen sideInventory;
   private final HeatingStructureBlockEntity te;
@@ -47,8 +47,8 @@ public class HeatingStructureScreen extends MultiModuleScreen<HeatingStructureCo
       this.sideInventory = new HeatingStructureSideInventoryScreen(this, container.getSideInventory(), playerInventory, slots, HeatingStructureContainerMenu.calcColumns(slots));
       addModule(sideInventory);
       FuelModule fuelModule = te.getFuelModule();
-      this.melting = new GuiMeltingModule(this, te.getMeltingInventory(), fuelModule::getTemperature, sideInventory::shouldDrawSlot);
-      this.fuel = new GuiFuelModule(this, fuelModule, 71, 32, 12, 36, 70, 15, false);
+      this.melting = new GuiMeltingModule(BACKGROUND, this, te.getMeltingInventory(), fuelModule::getTemperature, sideInventory::shouldDrawSlot);
+      this.fuel = new GuiFuelModule(BACKGROUND, this, fuelModule, 71, 32, 12, 36, 70, 15, false);
     } else {
       this.te = null;
       this.tank = null;
@@ -90,7 +90,7 @@ public class HeatingStructureScreen extends MultiModuleScreen<HeatingStructureCo
     super.renderLabels(graphics, mouseX, mouseY);
 
     assert minecraft != null;
-    RenderUtils.setup(BACKGROUND);
+    //RenderUtils.setup(BACKGROUND);
     SCALA.draw(graphics, 8, 16);
 
     // highlight hovered fluids

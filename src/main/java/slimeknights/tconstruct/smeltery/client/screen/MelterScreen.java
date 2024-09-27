@@ -20,10 +20,10 @@ import javax.annotation.Nullable;
 
 public class MelterScreen extends AbstractContainerScreen<MelterContainerMenu> implements IScreenWithFluidTank {
 
-  private static final ResourceLocation BACKGROUND = TConstruct.getResource("textures/gui/melter.png");
-  private static final ElementScreen SCALA = new ElementScreen(176, 0, 52, 52, 256, 256);
-  private static final ElementScreen FUEL_SLOT = new ElementScreen(176, 52, 18, 36, 256, 256);
-  private static final ElementScreen FUEL_TANK = new ElementScreen(194, 52, 14, 38, 256, 256);
+  public static final ResourceLocation BACKGROUND = TConstruct.getResource("textures/gui/melter.png");
+  private static final ElementScreen SCALA = new ElementScreen(BACKGROUND, 176, 0, 52, 52, 256, 256);
+  private static final ElementScreen FUEL_SLOT = new ElementScreen(BACKGROUND, 176, 52, 18, 36, 256, 256);
+  private static final ElementScreen FUEL_TANK = new ElementScreen(BACKGROUND, 194, 52, 14, 38, 256, 256);
 
   private final GuiMeltingModule melting;
   private final GuiFuelModule fuel;
@@ -34,8 +34,8 @@ public class MelterScreen extends AbstractContainerScreen<MelterContainerMenu> i
     MelterBlockEntity te = container.getTile();
     if (te != null) {
       FuelModule fuelModule = te.getFuelModule();
-      melting = new GuiMeltingModule(this, te.getMeltingInventory(), fuelModule::getTemperature, slot -> true);
-      fuel = new GuiFuelModule(this, fuelModule, 153, 32, 12, 36, 152, 15, container.isHasFuelSlot());
+      melting = new GuiMeltingModule(BACKGROUND, this, te.getMeltingInventory(), fuelModule::getTemperature, slot -> true);
+      fuel = new GuiFuelModule(BACKGROUND, this, fuelModule, 153, 32, 12, 36, 152, 15, container.isHasFuelSlot());
       tank = new GuiTankModule(this, te.getTank(), 90, 16, 52, 52, MelterContainerMenu.TOOLTIP_FORMAT);
     } else {
       melting = null;
@@ -82,7 +82,7 @@ public class MelterScreen extends AbstractContainerScreen<MelterContainerMenu> i
     if (fuel != null) fuel.renderHighlight(graphics, checkX, checkY);
 
     // scala
-    RenderUtils.setup(BACKGROUND);
+    //RenderUtils.setup(BACKGROUND);
     SCALA.draw(graphics, 90, 16);
 
     // heat bars

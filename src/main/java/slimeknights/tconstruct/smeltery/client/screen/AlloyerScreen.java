@@ -23,10 +23,10 @@ public class AlloyerScreen extends AbstractContainerScreen<AlloyerContainerMenu>
 
   private static final int[] INPUT_TANK_START_X = {54, 22, 38, 70, 6};
   private static final ResourceLocation BACKGROUND = TConstruct.getResource("textures/gui/alloyer.png");
-  private static final ElementScreen SCALA = new ElementScreen(176, 0, 34, 52, 256, 256);
-  private static final ElementScreen FUEL_SLOT = new ElementScreen(176, 52, 18, 36, 256, 256);
-  private static final ElementScreen FUEL_TANK = new ElementScreen(194, 52, 14, 38, 256, 256);
-  private static final ElementScreen INPUT_TANK = new ElementScreen(208, 52, 16, 54, 256, 256);
+  private static final ElementScreen SCALA = new ElementScreen(BACKGROUND, 176, 0, 34, 52, 256, 256);
+  private static final ElementScreen FUEL_SLOT = new ElementScreen(BACKGROUND, 176, 52, 18, 36, 256, 256);
+  private static final ElementScreen FUEL_TANK = new ElementScreen(BACKGROUND, 194, 52, 14, 38, 256, 256);
+  private static final ElementScreen INPUT_TANK = new ElementScreen(BACKGROUND, 208, 52, 16, 54, 256, 256);
 
   private final GuiFuelModule fuel;
   private final GuiTankModule outputTank;
@@ -37,7 +37,7 @@ public class AlloyerScreen extends AbstractContainerScreen<AlloyerContainerMenu>
     AlloyerBlockEntity te = container.getTile();
     if (te != null) {
       FuelModule fuelModule = te.getFuelModule();
-      fuel = new GuiFuelModule(this, fuelModule, 153, 32, 12, 36, 152, 15, container.isHasFuelSlot());
+      fuel = new GuiFuelModule(BACKGROUND, this, fuelModule, 153, 32, 12, 36, 152, 15, container.isHasFuelSlot());
       outputTank = new GuiTankModule(this, te.getTank(), 114, 16, 34, 52, AlloyerContainerMenu.TOOLTIP_FORMAT);
       updateTanks();
     } else {
@@ -88,7 +88,7 @@ public class AlloyerScreen extends AbstractContainerScreen<AlloyerContainerMenu>
     if (outputTank != null) outputTank.draw(graphics);
 
     // draw tank backgrounds first, then draw tank contents, less binding
-    RenderUtils.setup(BACKGROUND);
+    //RenderUtils.setup(BACKGROUND);
     for (GuiTankModule tankModule : inputTanks) {
       INPUT_TANK.draw(graphics, tankModule.getX() - 1 + this.leftPos, tankModule.getY() - 1 + this.topPos);
     }
@@ -127,7 +127,7 @@ public class AlloyerScreen extends AbstractContainerScreen<AlloyerContainerMenu>
 
     // scala
     assert minecraft != null;
-    RenderUtils.setup(BACKGROUND);
+    //RenderUtils.setup(BACKGROUND);
     SCALA.draw(graphics, 114, 16);
   }
 

@@ -199,7 +199,7 @@ public class FuelModule implements ContainerData {
       if (time > 0) {
         if (consume) {
           ItemStack extracted = handler.extractItem(i, 1, false);
-          if (extracted.sameItem(stack)) {
+          if (ItemStack.isSameItemSameTags(extracted, stack)) {
             fuel += time;
             fuelQuality = time;
             temperature = SOLID_TEMPERATURE;

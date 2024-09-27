@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.Slot;
 import slimeknights.mantle.client.screen.ScalableElementScreen;
 import slimeknights.tconstruct.TConstruct;
@@ -16,12 +17,13 @@ import java.util.function.Predicate;
 
 @AllArgsConstructor
 public class GuiMeltingModule {
+  private final ResourceLocation background;
 
   // progress bars
-  private static final ScalableElementScreen PROGRESS_BAR = new ScalableElementScreen(176, 150, 3, 16, 256, 256);
-  private static final ScalableElementScreen NO_HEAT_BAR = new ScalableElementScreen(179, 150, 3, 16, 256, 256);
-  private static final ScalableElementScreen NO_SPACE_BAR = new ScalableElementScreen(182, 150, 3, 16, 256, 256);
-  private static final ScalableElementScreen UNMELTABLE_BAR = new ScalableElementScreen(185, 150, 3, 16, 256, 256);
+  private final ScalableElementScreen PROGRESS_BAR = new ScalableElementScreen(background, 176, 150, 3, 16, 256, 256);
+  private final ScalableElementScreen NO_HEAT_BAR = new ScalableElementScreen(background, 179, 150, 3, 16, 256, 256);
+  private final ScalableElementScreen NO_SPACE_BAR = new ScalableElementScreen(background, 182, 150, 3, 16, 256, 256);
+  private final ScalableElementScreen UNMELTABLE_BAR = new ScalableElementScreen(background, 185, 150, 3, 16, 256, 256);
 
   // progress bar tooltips
   private static final Component TOOLTIP_NO_HEAT = Component.translatable(TConstruct.makeTranslationKey("gui", "melting.no_heat"));
