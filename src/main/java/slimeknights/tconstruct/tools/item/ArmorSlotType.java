@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorItem;
 
 import javax.annotation.Nullable;
 import java.util.Locale;
@@ -14,10 +15,10 @@ import java.util.Locale;
 @RequiredArgsConstructor
 @Getter
 public enum ArmorSlotType implements StringRepresentable {
-  BOOTS(EquipmentSlot.FEET),
-  LEGGINGS(EquipmentSlot.LEGS),
-  CHESTPLATE(EquipmentSlot.CHEST),
-  HELMET(EquipmentSlot.HEAD);
+  BOOTS(EquipmentSlot.FEET, ArmorItem.Type.BOOTS),
+  LEGGINGS(EquipmentSlot.LEGS, ArmorItem.Type.LEGGINGS),
+  CHESTPLATE(EquipmentSlot.CHEST, ArmorItem.Type.CHESTPLATE),
+  HELMET(EquipmentSlot.HEAD, ArmorItem.Type.HELMET);
 
   /**
    * Armor slots in order from helmet to boots, {@link #values()} will go from boots to helmet.
@@ -33,6 +34,7 @@ public enum ArmorSlotType implements StringRepresentable {
   public static final int SHIELD_DAMAGE = 22;
 
   private final EquipmentSlot equipmentSlot;
+  private final ArmorItem.Type armorType;
   private final String serializedName = toString().toLowerCase(Locale.ROOT);
   private final int index = ordinal();
 
