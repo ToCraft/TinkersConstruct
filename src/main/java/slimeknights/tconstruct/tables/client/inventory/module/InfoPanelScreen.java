@@ -342,7 +342,7 @@ public class InfoPanelScreen extends ModuleScreen {
 
     // info ? in the top right corner
     if (this.hasTooltips()) {
-      this.font.draw(graphics, "?", guiRight() - this.border.w - this.font.width("?") / 2f, this.topPos + 5, 0xff5f5f5f);
+      graphics.drawString(font, "?", guiRight() - this.border.w - this.font.width("?") / 2f, this.topPos + 5, 0xff5f5f5f, true);
     }
 
     // draw caption
@@ -351,7 +351,7 @@ public class InfoPanelScreen extends ModuleScreen {
       int x2 = this.imageWidth / 2;
       x2 -= this.font.width(this.caption) / 2;
 
-      this.font.drawShadow(graphics, this.caption.getVisualOrderText(), (float) this.leftPos + x2, y, color);
+      graphics.drawString(font,this.caption.getVisualOrderText(), (float) this.leftPos + x2, y, color, false);
       y += scaledFontHeight + 3;
     }
 
@@ -376,7 +376,7 @@ public class InfoPanelScreen extends ModuleScreen {
       }
 
       FormattedCharSequence line = iter.next();
-      this.font.drawShadow(graphics, line, x, y, color);
+      graphics.drawString(font, line, x, y, color, false);
       y += textHeight;
     }
 

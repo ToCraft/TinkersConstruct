@@ -77,7 +77,7 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity, 
     this.drawBackground(graphics, BACKGROUND);
 
     // draw scrollbar
-    this.blit(graphics, this.cornerX + 126, this.cornerY + 15 + (int) (41.0F * this.sliderProgress), 176 + (this.canScroll() ? 0 : 12), 0, 12, 15);
+    graphics.blit(BACKGROUND, this.cornerX + 126, this.cornerY + 15 + (int) (41.0F * this.sliderProgress), 176 + (this.canScroll() ? 0 : 12), 0, 12, 15);
     this.drawRecipesBackground(graphics, mouseX, mouseY, this.cornerX + 51, this.cornerY + 15);
 
     // draw slot icons
@@ -142,7 +142,7 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity, 
       } else if (mouseX >= x && mouseY >= y && mouseX < x + 18 && mouseY < y + 18) {
         u += 36;
       }
-      this.blit(graphics, x, y, 0, u, 18, 18);
+      graphics.blit(x, y, 0, u, 18, 18);
     }
   }
 
@@ -164,7 +164,7 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity, 
       // get the sprite for the pattern and draw
       Pattern pattern = list.get(i);
       TextureAtlasSprite sprite = spriteGetter.apply(pattern.getTexture());
-      blit(graphics, x, y, 100, 16, 16, sprite);
+      graphics.blit(x, y, 100, 16,16, sprite);
     }
   }
 

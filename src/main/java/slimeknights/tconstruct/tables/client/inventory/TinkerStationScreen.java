@@ -398,7 +398,7 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
 
   @Override
   protected void drawContainerName(GuiGraphics graphics) {
-    this.font.draw(graphics, this.getTitle(), 8.0F, 8.0F, 4210752);
+    graphics.drawString(font, this.getTitle().getString(), 8.0F, 8.0F, 4210752, true);
   }
 
   public static void renderIcon(GuiGraphics graphics, LayoutIcon icon, int x, int y) {

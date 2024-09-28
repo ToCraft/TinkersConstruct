@@ -67,7 +67,7 @@ public class ModifierWorktableCategory implements IRecipeCategory<IModifierWorkt
         slotIcons[i].draw(graphics, 43 + i * 18, 16);
       }
     }
-    Minecraft.getInstance().font.draw(graphics, recipe.getTitle(), 3, 2, 0x404040);
+    graphics.drawString(Minecraft.getInstance().font, recipe.getTitle(), 3, 2, 0x404040);
   }
 
   @Override

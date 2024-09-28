@@ -87,7 +87,7 @@ public class ModifierWorktableScreen extends BaseTabbedScreen<ModifierWorktableB
     this.drawBackground(graphics, BACKGROUND);
 
     // draw scrollbar
-    this.blit(graphics, this.cornerX + 103, this.cornerY + 15 + (int) (41.0F * this.sliderProgress), 176 + (this.canScroll() ? 0 : 12), 0, 12, 15);
+    graphics.blit(BACKGROUND, this.cornerX + 103, this.cornerY + 15 + (int) (41.0F * this.sliderProgress), 176 + (this.canScroll() ? 0 : 12), 0, 12, 15);
     this.drawModifierBackgrounds(graphics, mouseX, mouseY, this.cornerX + 28, this.cornerY + 15);
 
     // draw slot icons
