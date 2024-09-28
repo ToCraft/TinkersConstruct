@@ -51,9 +51,6 @@ public abstract class AbstractCastingRecipe implements ICastingRecipe {
   }
 
   @Override
-  public abstract ItemStack getResultItem();
-
-  @Override
   public NonNullList<Ingredient> getIngredients() {
     return NonNullList.of(Ingredient.EMPTY, this.cast);
   }
