@@ -118,7 +118,7 @@ public class FancyItemFrameRenderer<T extends FancyItemFrameEntity> extends Item
           float scale = frameType == FrameType.CLEAR ? 0.75f : 0.5f;
           matrices.scale(scale, scale, scale);
           int light = frameType == FrameType.MANYULLYN ? 0x00F000F0 : packedLight;
-          this.itemRenderer.renderStatic(stack, ItemDisplayContext.FIXED, light, OverlayTexture.NO_OVERLAY, matrices, bufferIn, frame.getId());
+          this.itemRenderer.renderStatic(stack, ItemDisplayContext.FIXED, light, OverlayTexture.NO_OVERLAY, matrices, bufferIn, frame.level(), frame.getId());
         }
       }
     }
