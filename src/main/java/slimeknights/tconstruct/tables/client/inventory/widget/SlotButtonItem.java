@@ -45,7 +45,7 @@ public class SlotButtonItem extends Button {
   }
 
   @Override
-  public void renderButton(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
+  public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
     RenderUtils.setup(this.backgroundLocation);
 
     if (this.visible) {
