@@ -1,7 +1,6 @@
 package slimeknights.tconstruct.plugin.jei.modifiers;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import lombok.Getter;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -50,7 +49,7 @@ import slimeknights.tconstruct.tools.item.CreativeSlotItem;
 import slimeknights.tconstruct.tools.stats.SkullStats;
 
 import javax.annotation.Nullable;
-import java.awt.Color;
+import java.awt.*;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;

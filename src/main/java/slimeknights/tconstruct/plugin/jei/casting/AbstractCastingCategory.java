@@ -3,7 +3,6 @@ package slimeknights.tconstruct.plugin.jei.casting;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.mojang.blaze3d.vertex.PoseStack;
 import lombok.Getter;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.forge.ForgeTypes;
@@ -31,7 +30,7 @@ import slimeknights.tconstruct.library.recipe.FluidValues;
 import slimeknights.tconstruct.library.recipe.casting.IDisplayableCastingRecipe;
 import slimeknights.tconstruct.plugin.jei.IRecipeTooltipReplacement;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.Collections;
 import java.util.List;
 

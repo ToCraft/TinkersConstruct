@@ -14,7 +14,6 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import slimeknights.mantle.data.GenericDataProvider;
 import slimeknights.tconstruct.TConstruct;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;

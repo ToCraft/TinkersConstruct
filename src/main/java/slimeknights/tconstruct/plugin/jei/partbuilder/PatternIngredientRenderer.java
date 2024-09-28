@@ -1,12 +1,10 @@
 package slimeknights.tconstruct.plugin.jei.partbuilder;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import lombok.NoArgsConstructor;
 import mezz.jei.api.ingredients.IIngredientRenderer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.InventoryMenu;

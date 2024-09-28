@@ -1,6 +1,5 @@
 package slimeknights.tconstruct.tables.client.inventory;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;

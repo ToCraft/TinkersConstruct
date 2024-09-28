@@ -13,7 +13,6 @@ import slimeknights.mantle.data.GenericDataProvider;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
 
-import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 

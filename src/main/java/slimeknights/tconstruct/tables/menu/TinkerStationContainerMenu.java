@@ -1,7 +1,6 @@
 package slimeknights.tconstruct.tables.menu;
 
 import lombok.Getter;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;

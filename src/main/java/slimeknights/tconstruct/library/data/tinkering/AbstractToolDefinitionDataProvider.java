@@ -18,7 +18,6 @@ import slimeknights.tconstruct.library.tools.definition.module.ToolModule;
 import slimeknights.tconstruct.tools.item.ArmorSlotType;
 import slimeknights.tconstruct.tools.item.ArmorSlotType.ArmorBuilder;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

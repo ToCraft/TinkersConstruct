@@ -28,7 +28,6 @@ import slimeknights.tconstruct.shared.block.SlimeType;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import slimeknights.tconstruct.world.TinkerWorld;
 
-import java.util.Map.Entry;
 import java.util.stream.Stream;
 
 public class EntityLootTableProvider extends EntityLootSubProvider {

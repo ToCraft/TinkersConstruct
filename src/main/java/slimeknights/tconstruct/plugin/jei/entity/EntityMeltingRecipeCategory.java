@@ -1,6 +1,5 @@
 package slimeknights.tconstruct.plugin.jei.entity;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import lombok.Getter;
@@ -34,7 +33,7 @@ import slimeknights.tconstruct.plugin.jei.IRecipeTooltipReplacement;
 import slimeknights.tconstruct.plugin.jei.TConstructJEIConstants;
 import slimeknights.tconstruct.plugin.jei.melting.MeltingFuelHandler;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.List;
 
 /**

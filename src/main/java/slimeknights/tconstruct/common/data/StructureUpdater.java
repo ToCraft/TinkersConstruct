@@ -22,7 +22,6 @@ import slimeknights.tconstruct.library.data.GenericNBTProvider;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Map.Entry;
-import java.util.concurrent.CompletableFuture;
 
 /**
  * Data provider to update structures to a newer data fixer upper version

@@ -16,11 +16,9 @@ import slimeknights.tconstruct.library.modifiers.dynamic.ComposableModifier;
 import slimeknights.tconstruct.library.modifiers.util.DynamicModifier;
 
 import javax.annotation.Nullable;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
 
 /**
  * Datagen for dynamic modifiers

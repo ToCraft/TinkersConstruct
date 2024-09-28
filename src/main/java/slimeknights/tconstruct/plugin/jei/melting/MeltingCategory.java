@@ -1,6 +1,5 @@
 package slimeknights.tconstruct.plugin.jei.melting;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import mezz.jei.api.constants.VanillaTypes;

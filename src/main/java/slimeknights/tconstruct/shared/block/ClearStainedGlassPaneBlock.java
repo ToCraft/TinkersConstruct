@@ -1,13 +1,11 @@
 package slimeknights.tconstruct.shared.block;
 
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.state.BlockState;
 import slimeknights.tconstruct.shared.block.ClearStainedGlassBlock.GlassColor;
 
 import javax.annotation.Nullable;
-
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class ClearStainedGlassPaneBlock extends ClearGlassPaneBlock {
 

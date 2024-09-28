@@ -1,8 +1,8 @@
 package slimeknights.tconstruct.tables.client.inventory.module;
 
 import net.minecraft.resources.ResourceLocation;
-import slimeknights.mantle.client.screen.ScalableElementScreen;
 import slimeknights.mantle.client.screen.ElementScreen;
+import slimeknights.mantle.client.screen.ScalableElementScreen;
 import slimeknights.tconstruct.TConstruct;
 
 public class GenericScreen {

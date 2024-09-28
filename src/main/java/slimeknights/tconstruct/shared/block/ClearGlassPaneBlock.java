@@ -1,15 +1,13 @@
 package slimeknights.tconstruct.shared.block;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
-import net.minecraft.core.Direction;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.LevelAccessor;
 import slimeknights.mantle.block.IMultipartConnectedBlock;
 import slimeknights.mantle.client.model.connected.ConnectedModelRegistry;
-
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class ClearGlassPaneBlock extends BetterPaneBlock implements IMultipartConnectedBlock {
 

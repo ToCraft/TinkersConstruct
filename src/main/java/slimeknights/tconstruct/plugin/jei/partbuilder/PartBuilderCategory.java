@@ -1,6 +1,5 @@
 package slimeknights.tconstruct.plugin.jei.partbuilder;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import lombok.Getter;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -29,7 +28,7 @@ import slimeknights.tconstruct.library.tools.layout.Patterns;
 import slimeknights.tconstruct.plugin.jei.TConstructJEIConstants;
 import slimeknights.tconstruct.tables.TinkerTables;
 
-import java.awt.Color;
+import java.awt.*;
 
 public class PartBuilderCategory implements IRecipeCategory<IDisplayPartBuilderRecipe> {
 

@@ -3,7 +3,6 @@ package slimeknights.tconstruct.plugin.jei.melting;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.mojang.blaze3d.vertex.PoseStack;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import mezz.jei.api.forge.ForgeTypes;
@@ -29,7 +28,7 @@ import slimeknights.tconstruct.library.client.GuiUtil;
 import slimeknights.tconstruct.library.recipe.melting.MeltingRecipe;
 import slimeknights.tconstruct.plugin.jei.IRecipeTooltipReplacement;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.Collections;
 import java.util.List;
 
