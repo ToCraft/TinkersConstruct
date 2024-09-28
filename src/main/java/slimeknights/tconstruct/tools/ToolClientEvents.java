@@ -189,9 +189,9 @@ public class ToolClientEvents extends ClientEventBase {
   @SubscribeEvent
   static void registerParticleFactories(RegisterParticleProvidersEvent event) {
     ParticleEngine.SpriteParticleRegistration<SimpleParticleType> factory = AttackParticle.Factory::new;
-    event.register(TinkerTools.hammerAttackParticle.get(), factory);
-    event.register(TinkerTools.axeAttackParticle.get(), factory);
-    event.register(TinkerTools.bonkAttackParticle.get(), factory);
+    event.registerSpriteSet(TinkerTools.hammerAttackParticle.get(), factory);
+    event.registerSpriteSet(TinkerTools.axeAttackParticle.get(), factory);
+    event.registerSpriteSet(TinkerTools.bonkAttackParticle.get(), factory);
   }
 
   @SubscribeEvent
