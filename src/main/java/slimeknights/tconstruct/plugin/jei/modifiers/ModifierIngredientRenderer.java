@@ -29,9 +29,9 @@ public record ModifierIngredientRenderer(int width, int height) implements IIngr
   public void render(GuiGraphics graphics, @Nullable ModifierEntry entry) {
     if (entry != null) {
       Component name = entry.getDisplayName();
-      Font fontRenderer = getFontRenderer(Minecraft.getInstance(), entry);
-      int x = (width - fontRenderer.width(name)) / 2;
-      fontRenderer.drawShadow(graphics, name, x, 1, -1);
+      Font font = getFontRenderer(Minecraft.getInstance(), entry);
+      int x = (width - font.width(name)) / 2;
+      graphics.drawString(font, name, x, 1, -1, true);
     }
   }
 

@@ -86,9 +86,9 @@ public class EntityMeltingRecipeCategory implements IRecipeCategory<EntityMeltin
 
     // draw damage string next to the heart icon
     String damage = Float.toString(recipe.getDamage() / 2f);
-    Font fontRenderer = Minecraft.getInstance().font;
-    int x = 84 - fontRenderer.width(damage);
-    fontRenderer.draw(graphics, damage, x, 8, Color.RED.getRGB());
+    Font font = Minecraft.getInstance().font;
+    int x = 84 - font.width(damage);
+    graphics.drawString(font, damage, x, 8, Color.RED.getRGB());
   }
 
   @Override

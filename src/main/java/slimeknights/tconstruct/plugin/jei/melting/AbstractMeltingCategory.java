@@ -84,10 +84,10 @@ public abstract class AbstractMeltingCategory implements IRecipeCategory<Melting
 
     // temperature
     int temperature = recipe.getTemperature();
-    Font fontRenderer = Minecraft.getInstance().font;
+    Font font = Minecraft.getInstance().font;
     String tempString = I18n.get(KEY_TEMPERATURE, temperature);
-    int x = 56 - fontRenderer.width(tempString) / 2;
-    fontRenderer.draw(graphics, tempString, x, 3, Color.GRAY.getRGB());
+    int x = 56 - font.width(tempString) / 2;
+    graphics.drawString(font, tempString, x, 35, Color.GRAY.getRGB());
   }
 
   @Override

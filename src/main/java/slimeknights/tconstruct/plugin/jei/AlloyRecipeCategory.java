@@ -84,10 +84,10 @@ public class AlloyRecipeCategory implements IRecipeCategory<AlloyRecipe> {
   public void draw(AlloyRecipe recipe, IRecipeSlotsView slots, GuiGraphics graphics, double mouseX, double mouseY) {
     arrow.draw(graphics, 90, 21);
     // temperature info
-    Font fontRenderer = Minecraft.getInstance().font;
+    Font font = Minecraft.getInstance().font;
     String tempString = I18n.get(KEY_TEMPERATURE, recipe.getTemperature());
-    int x = 102 - (fontRenderer.width(tempString) / 2);
-    fontRenderer.draw(graphics, tempString, x, 5, Color.GRAY.getRGB());
+    int x = 102 - (font.width(tempString) / 2);
+    graphics.drawString(font, tempString, x, 43, Color.GRAY.getRGB());
   }
 
   /**

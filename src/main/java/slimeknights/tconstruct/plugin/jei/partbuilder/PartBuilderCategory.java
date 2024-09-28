@@ -60,11 +60,11 @@ public class PartBuilderCategory implements IRecipeCategory<IDisplayPartBuilderR
   public void draw(IDisplayPartBuilderRecipe recipe, IRecipeSlotsView slots, GuiGraphics graphics, double mouseX, double mouseY) {
     MaterialVariant variant = recipe.getMaterial();
     if (!variant.isEmpty()) {
-      Font fontRenderer = Minecraft.getInstance().font;
+      Font font = Minecraft.getInstance().font;
       Component name = MaterialTooltipCache.getColoredDisplayName(variant.getVariant());
-      fontRenderer.drawShadow(graphics, name, 3, 2, -1);
+      graphics.drawString(font, name, 3, 2, -1, true);
       String coolingString = I18n.get(KEY_COST, recipe.getCost());
-      fontRenderer.draw(graphics, coolingString, 3, 35, Color.GRAY.getRGB());
+      graphics.drawString(font, coolingString, 3, 35, Color.GRAY.getRGB());
     } else {
       RenderUtils.setup(InventoryMenu.BLOCK_ATLAS);
       GuiUtil.renderPattern(graphics, Patterns.INGOT, 25, 16);

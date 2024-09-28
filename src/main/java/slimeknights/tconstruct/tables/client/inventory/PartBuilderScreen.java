@@ -141,7 +141,7 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity, 
       } else if (mouseX >= x && mouseY >= y && mouseX < x + 18 && mouseY < y + 18) {
         u += 36;
       }
-      graphics.blit(x, y, 0, u, 18, 18);
+      graphics.blit(BACKGROUND, x, y, 0, u, 18, 18);
     }
   }
 

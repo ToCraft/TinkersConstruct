@@ -136,7 +136,8 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
     RenderSystem.setShader(GameRenderer::getPositionTexShader);
     RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
 
-    Screen.blit(graphics, x, y, 0, 16, 16, sprite);
+    graphics.blit(x, y, 0, 16, 16, sprite);
+//    Screen.blit(graphics, x, y, 0, 16, 16, sprite);
   }
 
   @Override
@@ -157,7 +158,7 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
     }
 
     // draw level requirements
-    Font fontRenderer = Minecraft.getInstance().font;
+    Font font = Minecraft.getInstance().font;
     Component levelText = null;
     Component variant = recipe.getVariant();
     if (variant != null) {
@@ -181,7 +182,7 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
     }
     if (levelText != null) {
       // center string
-      fontRenderer.draw(graphics, levelText, 86 - fontRenderer.width(levelText) / 2f, 16, Color.GRAY.getRGB());
+      graphics.drawString(font, levelText.getString(), 86 - font.width(levelText) / 2, 16, Color.GRAY.getRGB());
     }
 
     // draw slot cost
@@ -191,7 +192,7 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
     } else {
       drawSlotType(graphics, slots.type(), 110, 58);
       String text = Integer.toString(slots.count());
-      fontRenderer.draw(graphics, text, 111 - fontRenderer.width(text), 63, Color.GRAY.getRGB());
+      graphics.drawString(font, text, 111 - font.width(text), 63, Color.GRAY.getRGB());
     }
   }
 

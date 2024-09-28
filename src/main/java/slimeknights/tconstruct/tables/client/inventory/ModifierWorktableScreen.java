@@ -161,7 +161,7 @@ public class ModifierWorktableScreen extends BaseTabbedScreen<ModifierWorktableB
         } else if (mouseX >= x && mouseY >= y && mouseX < x + 18 && mouseY < y + 18) {
           u += 36;
         }
-        this.blit(graphics, x, y, 0, u, 18, 18);
+        graphics.blit(BACKGROUND, x, y, 0, u, 18, 18);
       }
     }
   }
