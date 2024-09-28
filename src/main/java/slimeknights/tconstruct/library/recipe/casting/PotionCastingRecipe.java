@@ -96,7 +96,7 @@ public class PotionCastingRecipe implements ICastingRecipe, IMultiRecipe<Display
   }
 
   @Override
-  public ItemStack assemble(ICastingContainer inv) {
+  public ItemStack assemble(ICastingContainer inv, RegistryAccess registryAccess) {
     ItemStack result = new ItemStack(this.result);
     result.setTag(inv.getFluidTag());
     return result;

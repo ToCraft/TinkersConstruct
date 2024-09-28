@@ -1,5 +1,6 @@
 package slimeknights.tconstruct.library.recipe.casting.material;
 
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -123,7 +124,7 @@ public class ToolCastingRecipe extends AbstractMaterialCastingRecipe implements 
   }
 
   @Override
-  public ItemStack assemble(ICastingContainer inv) {
+  public ItemStack assemble(ICastingContainer inv, RegistryAccess registryAccess) {
     MaterialFluidRecipe fluidRecipe = getFluidRecipe(inv);
     MaterialVariant material = fluidRecipe.getOutput();
     ItemStack cast = inv.getStack();

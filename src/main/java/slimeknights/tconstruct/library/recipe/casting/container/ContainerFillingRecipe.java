@@ -90,7 +90,7 @@ public class ContainerFillingRecipe implements ICastingRecipe, IMultiRecipe<Disp
   }
 
   /**
-   * @deprecated use {@link ICastingRecipe#assemble(Container)}
+   * @deprecated use {@link ICastingRecipe#assemble(Container, RegistryAccess)}
    */
   @Override
   @Deprecated
@@ -99,7 +99,7 @@ public class ContainerFillingRecipe implements ICastingRecipe, IMultiRecipe<Disp
   }
 
   @Override
-  public ItemStack assemble(ICastingContainer inv) {
+  public ItemStack assemble(ICastingContainer inv, RegistryAccess registryAccess) {
     ItemStack stack = inv.getStack().copy();
     return stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).map(handler -> {
       handler.fill(new FluidStack(inv.getFluid(), this.fluidAmount, inv.getFluidTag()), FluidAction.EXECUTE);
