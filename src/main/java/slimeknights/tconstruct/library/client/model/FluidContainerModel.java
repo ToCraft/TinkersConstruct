@@ -168,7 +168,7 @@ public record FluidContainerModel(FluidStack fluid, boolean flipGas) implements 
     // add in the base
     if (baseSprite != null) {
       modelBuilder.addQuads(renderTypes, UnbakedGeometryHelper.bakeElements(
-        UnbakedGeometryHelper.createUnbakedItemElements(0, baseSprite),
+        UnbakedGeometryHelper.createUnbakedItemElements(0, baseSprite.contents()),
         $ -> baseSprite, modelState, modelLocation
       ));
     }

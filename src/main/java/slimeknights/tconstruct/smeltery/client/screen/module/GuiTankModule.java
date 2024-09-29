@@ -146,7 +146,7 @@ public class GuiTankModule {
       }
 
       // TODO: renderComponentTooltip->renderTooltip
-      screen.renderComponentTooltip(graphics, tooltip, mouseX, mouseY);
+      graphics.renderComponentTooltip(screen.getMinecraft().font, tooltip, mouseX, mouseY);
     }
   }
 

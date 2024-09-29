@@ -265,7 +265,7 @@ public class InfoPanelScreen extends ModuleScreen {
     int scaledFontHeight = this.getScaledFontHeight();
     if (this.hasTooltips() && mouseX >= this.guiRight() - this.border.w - this.font.width("?") / 2 && mouseX < this.guiRight()
       && mouseY > this.topPos + 5 && mouseY < this.topPos + 5 + scaledFontHeight) {
-      this.renderTooltip(graphics, this.font.split(Component.translatable("gui.tconstruct.general.hover"), 150), mouseX - 155, mouseY);
+      graphics.renderTooltip(this.font, this.font.split(Component.translatable("gui.tconstruct.general.hover"), 150), mouseX - 155, mouseY);
     }
 
     // are we hovering over an entry?
@@ -315,7 +315,7 @@ public class InfoPanelScreen extends ModuleScreen {
 
     List<FormattedCharSequence> lines = this.font.split(this.tooltips.get(i), w);
 
-    this.renderTooltip(graphics, lines, mouseX, (mouseY - lines.size() * this.getScaledFontHeight() / 2));
+    graphics.renderTooltip(this.font, lines, mouseX, (mouseY - lines.size() * this.getScaledFontHeight() / 2));
   }
 
   /**

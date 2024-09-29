@@ -151,7 +151,7 @@ public class GuiFuelModule {
         tooltip = hasTank ? TOOLTIP_NO_FUEL : TOOLTIP_NO_TANK;
       }
 
-      screen.renderComponentTooltip(graphics, tooltip, mouseX, mouseY);
+      graphics.renderComponentTooltip(screen.getMinecraft().font, tooltip, mouseX, mouseY);
     }
   }
 

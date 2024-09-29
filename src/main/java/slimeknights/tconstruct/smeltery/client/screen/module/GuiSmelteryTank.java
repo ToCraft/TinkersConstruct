@@ -189,7 +189,7 @@ public class GuiSmelteryTank {
       } else {
         tooltip = FluidTooltipHandler.getFluidTooltip(tank.getFluidInTank(hovered));
       }
-      parent.renderComponentTooltip(graphics, tooltip, mouseX, mouseY);
+      graphics.renderComponentTooltip(parent.getMinecraft().font, tooltip, mouseX, mouseY);
     }
   }
 
