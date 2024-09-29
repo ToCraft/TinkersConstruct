@@ -1,6 +1,5 @@
 package slimeknights.tconstruct.fluids.fluids;
 
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;

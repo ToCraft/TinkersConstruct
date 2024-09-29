@@ -6,8 +6,6 @@ import net.minecraftforge.fluids.FluidStack;
 import slimeknights.tconstruct.library.fluid.FillOnlyFluidHandler;
 import slimeknights.tconstruct.smeltery.block.entity.ChannelBlockEntity;
 
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-
 /**
  * Tank for each side connection, for the sake of rendering
  */

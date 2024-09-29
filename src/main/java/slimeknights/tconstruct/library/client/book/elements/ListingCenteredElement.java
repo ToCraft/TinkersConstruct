@@ -1,7 +1,6 @@
 package slimeknights.tconstruct.library.client.book.elements;
 
 import com.google.common.collect.Lists;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import slimeknights.mantle.client.book.data.element.TextData;

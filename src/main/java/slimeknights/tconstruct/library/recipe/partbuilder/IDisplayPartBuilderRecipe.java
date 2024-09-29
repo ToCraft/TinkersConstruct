@@ -1,6 +1,5 @@
 package slimeknights.tconstruct.library.recipe.partbuilder;
 
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.ItemStack;
 import slimeknights.mantle.util.RegistryHelper;

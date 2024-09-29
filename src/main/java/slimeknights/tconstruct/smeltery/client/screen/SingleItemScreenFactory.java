@@ -1,7 +1,6 @@
 package slimeknights.tconstruct.smeltery.client.screen;
 
 import net.minecraft.client.gui.screens.MenuScreens.ScreenConstructor;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

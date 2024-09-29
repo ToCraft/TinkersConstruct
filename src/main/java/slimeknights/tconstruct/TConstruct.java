@@ -67,7 +67,6 @@ import slimeknights.tconstruct.world.TinkerWorld;
 import javax.annotation.Nullable;
 import java.util.Locale;
 import java.util.Random;
-import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 /**
