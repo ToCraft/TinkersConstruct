@@ -227,7 +227,7 @@ public class ModifiableCrossbowItem extends ModifiableLauncherItem {
         // setup projectile
         Vector3f targetVector = player.getViewVector(1.0f).toVector3f();
         float angle = startAngle + (10 * arrowIndex);
-        targetVector.transform(new Quaternionf(player.getUpVector(1.0f).toVector3f(), angle, true));
+        targetVector.rotate(new Quaternionf().fromAxisAngleDeg(player.getUpVector(1.0f).toVector3f(), angle));
         projectile.shoot(targetVector.x(), targetVector.y(), targetVector.z(), velocity * speed, inaccuracy);
 
         // add modifiers to the projectile, will let us use them on impact
