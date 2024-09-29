@@ -1,5 +1,6 @@
 package slimeknights.tconstruct.tools.modifiers.defense;
 
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -35,7 +36,7 @@ public class BlastProtectionModifier extends AbstractProtectionModifier<BlastDat
   @Override
   protected void registerHooks(Builder hookBuilder) {
     super.registerHooks(hookBuilder);
-    hookBuilder.addModule(ProtectionModule.builder().sources(DamageSourcePredicate.CAN_PROTECT, DamageSourcePredicate.EXPLOSION).eachLevel(2.5f));
+    hookBuilder.addModule(ProtectionModule.builder().sources(DamageSourcePredicate.CAN_PROTECT).tags(DamageTypeTags.IS_EXPLOSION).eachLevel(2.5f));
   }
 
   @Override

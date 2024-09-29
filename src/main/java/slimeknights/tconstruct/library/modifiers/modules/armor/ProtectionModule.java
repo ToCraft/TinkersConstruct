@@ -3,7 +3,10 @@ package slimeknights.tconstruct.library.modifiers.modules.armor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -33,6 +36,7 @@ import slimeknights.tconstruct.library.utils.Util;
 import slimeknights.tconstruct.tools.data.ModifierIds;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -123,6 +127,11 @@ public record ProtectionModule(IJsonPredicate<DamageSource> source, IJsonPredica
     @SafeVarargs
     public final Builder sources(IJsonPredicate<DamageSource>... sources) {
       return source(DamageSourcePredicate.and(sources));
+    }
+
+    @SafeVarargs
+    public final Builder tags(TagKey<DamageType>... tags) {
+      return source(DamageSourcePredicate.simple(source -> Arrays.stream(tags).noneMatch(source::is)));
     }
 
     @Override

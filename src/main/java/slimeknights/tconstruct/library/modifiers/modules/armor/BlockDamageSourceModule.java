@@ -2,7 +2,9 @@ package slimeknights.tconstruct.library.modifiers.modules.armor;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.EquipmentSlot;
 import slimeknights.mantle.data.loadable.record.RecordLoadable;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
@@ -54,6 +56,10 @@ public record BlockDamageSourceModule(IJsonPredicate<DamageSource> source,
 
   public static Builder source(IJsonPredicate<DamageSource> source) {
     return new Builder(source);
+  }
+
+  public static Builder source(TagKey<DamageType> tag) {
+    return new Builder(DamageSourcePredicate.simple(source -> !source.is(tag)));
   }
 
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
