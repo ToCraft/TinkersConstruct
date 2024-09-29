@@ -3,7 +3,7 @@ package slimeknights.tconstruct.library.modifiers.modules.armor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.network.chat.Component;
-import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
@@ -132,6 +132,11 @@ public record ProtectionModule(IJsonPredicate<DamageSource> source, IJsonPredica
     @SafeVarargs
     public final Builder tags(TagKey<DamageType>... tags) {
       return source(DamageSourcePredicate.simple(source -> Arrays.stream(tags).noneMatch(source::is)));
+    }
+
+    @SafeVarargs
+    public final Builder types(ResourceKey<DamageType>... types) {
+      return source(DamageSourcePredicate.simple(source -> Arrays.stream(types).noneMatch(source::is)));
     }
 
     @Override

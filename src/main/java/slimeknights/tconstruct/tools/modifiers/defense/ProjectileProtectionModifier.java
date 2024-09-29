@@ -1,5 +1,6 @@
 package slimeknights.tconstruct.tools.modifiers.defense;
 
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -30,7 +31,7 @@ public class ProjectileProtectionModifier extends AbstractProtectionModifier<Mod
   @Override
   protected void registerHooks(Builder hookBuilder) {
     super.registerHooks(hookBuilder);
-    hookBuilder.addModule(ProtectionModule.builder().sources(DamageSourcePredicate.CAN_PROTECT, DamageSourcePredicate.PROJECTILE).eachLevel(2.5f));
+    hookBuilder.addModule(ProtectionModule.builder().sources(DamageSourcePredicate.CAN_PROTECT).tags(DamageTypeTags.IS_PROJECTILE).eachLevel(2.5f));
   }
 
   @Override

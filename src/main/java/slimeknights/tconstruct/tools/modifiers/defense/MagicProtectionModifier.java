@@ -1,5 +1,7 @@
 package slimeknights.tconstruct.tools.modifiers.defense;
 
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.common.MinecraftForge;
@@ -29,7 +31,7 @@ public class MagicProtectionModifier extends AbstractProtectionModifier<Modifier
   @Override
   protected void registerHooks(Builder hookBuilder) {
     super.registerHooks(hookBuilder);
-    hookBuilder.addModule(ProtectionModule.builder().sources(DamageSourcePredicate.CAN_PROTECT, DamageSourcePredicate.MAGIC).eachLevel(2.5f));
+    hookBuilder.addModule(ProtectionModule.builder().sources(DamageSourcePredicate.CAN_PROTECT).types(DamageTypes.MAGIC).eachLevel(2.5f));
   }
 
   private static void onPotionStart(MobEffectEvent.Added event) {

@@ -1,5 +1,6 @@
 package slimeknights.tconstruct.tools.modifiers.ability.fluid;
 
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -33,7 +34,7 @@ public class WettingModifier extends UseFluidOnHitModifier implements ModifyDama
 
   @Override
   public float modifyDamageTaken(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage) {
-    if (!source.isBypassMagic() && !source.isBypassInvul()) {
+    if (!source.is(DamageTypeTags.BYPASSES_EFFECTS) && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
       useFluid(tool, modifier, context, slotType, source);
     }
     return amount;

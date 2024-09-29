@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -305,7 +306,7 @@ public class ToolEvents {
     if (vanillaModifier != modifierValue || (cap > 20 && vanillaModifier > 20) || (cap < 20 && vanillaModifier > cap)) {
       // fetch armor and toughness if blockable, passing in 0 to the logic will skip the armor calculations
       float armor = 0, toughness = 0;
-      if (!source.isBypassArmor()) {
+      if (!source.is(DamageTypeTags.BYPASSES_ARMOR)) {
         armor = entity.getArmorValue();
         toughness = (float) entity.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
       }
@@ -315,14 +316,14 @@ public class ToolEvents {
       event.setAmount(finalDamage);
 
       // armor is damaged less as a result of our math, so damage the armor based on the difference if there is one
-      if (!source.isBypassArmor()) {
+      if (!source.is(DamageTypeTags.BYPASSES_ARMOR)) {
         int damageMissed = getArmorDamage(originalDamage) - getArmorDamage(finalDamage);
         // TODO: is this check sufficient for whether the armor should be damaged? I partly wonder if I need to use reflection to call damageArmor
         if (damageMissed > 0 && entity instanceof Player) {
           for (EquipmentSlot slotType : ModifiableArmorMaterial.ARMOR_SLOTS) {
             // for our own armor, saves effort to damage directly with our utility
             IToolStackView tool = context.getToolInSlot(slotType);
-            if (tool != null && (!source.isFire() || !tool.getItem().isFireResistant())) {
+            if (tool != null && (!source.is(DamageTypeTags.IS_FIRE) || !tool.getItem().isFireResistant())) {
               // damaging the tool twice is generally not an issue, except for tanned where there is a difference between damaging by the sum and damaging twoce in pieces
               // so work around this by hardcoding a tanned check. Not making this a hook as this whole chunk of code should hopefully be unneeded in 1.21
               if (tool.getModifierLevel(TinkerModifiers.tanned.getId()) == 0) {
@@ -331,7 +332,7 @@ public class ToolEvents {
             } else {
               // if not our armor, damage using vanilla like logic
               ItemStack armorStack = entity.getItemBySlot(slotType);
-              if (!armorStack.isEmpty() && (!source.isFire() || !armorStack.getItem().isFireResistant()) && armorStack.getItem() instanceof ArmorItem) {
+              if (!armorStack.isEmpty() && (!source.is(DamageTypeTags.IS_FIRE) || !armorStack.getItem().isFireResistant()) && armorStack.getItem() instanceof ArmorItem) {
                 armorStack.hurtAndBreak(damageMissed, entity, e -> e.broadcastBreakEvent(slotType));
               }
             }
@@ -359,7 +360,7 @@ public class ToolEvents {
 
     // when damaging ender dragons, may drop scales - must be player caused explosion, end crystals and TNT are examples
     if (Config.COMMON.dropDragonScales.get() && entity.getType() == EntityType.ENDER_DRAGON && event.getAmount() > 0
-      && source.isExplosion() && source.getEntity() != null && source.getEntity().getType() == EntityType.PLAYER) {
+      && source.is(DamageTypeTags.IS_EXPLOSION) && source.getEntity() != null && source.getEntity().getType() == EntityType.PLAYER) {
       // drops 1 - 8 scales
       ModifierUtil.dropItem(entity, new ItemStack(TinkerModifiers.dragonScale, 1 + entity.level().random.nextInt(8)));
     }

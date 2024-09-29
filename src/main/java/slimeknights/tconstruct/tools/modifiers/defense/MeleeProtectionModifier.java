@@ -1,5 +1,7 @@
 package slimeknights.tconstruct.tools.modifiers.defense;
 
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import slimeknights.mantle.data.predicate.damage.DamageSourcePredicate;
 import slimeknights.tconstruct.TConstruct;
@@ -21,7 +23,7 @@ public class MeleeProtectionModifier extends AbstractProtectionModifier<Modifier
   @Override
   protected void registerHooks(Builder hookBuilder) {
     super.registerHooks(hookBuilder);
-    hookBuilder.addModule(ProtectionModule.builder().sources(DamageSourcePredicate.CAN_PROTECT, DamageSourcePredicate.MELEE).eachLevel(2.5f));
+    hookBuilder.addModule(ProtectionModule.builder().sources(DamageSourcePredicate.CAN_PROTECT).types(DamageTypes.PLAYER_ATTACK, DamageTypes.MOB_ATTACK).eachLevel(2.5f));
   }
 
   @Override
