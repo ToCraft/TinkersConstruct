@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
 import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
 import net.minecraft.server.level.ServerPlayer;
@@ -181,7 +182,7 @@ public class PiggyBackPackItem extends TooltipItem {
     @Override
     public void initializeClient(Consumer<IClientMobEffectExtensions> consumer) {
       consumer.accept(new IClientMobEffectExtensions() {
-        private void renderIcon(MobEffectInstance effect, PoseStack matrices, int x, int y) {
+        private void renderIcon(MobEffectInstance effect, GuiGraphics graphics, int x, int y) {
           RenderUtils.setup(Icons.ICONS);
           ElementScreen element = switch (effect.getAmplifier()) {
             case 0 -> Icons.PIGGYBACK_1;
@@ -189,18 +190,18 @@ public class PiggyBackPackItem extends TooltipItem {
             default -> Icons.PIGGYBACK_3;
           };
 
-          element.draw(matrices, x + 6, y + 7);
+          element.draw(graphics, x + 6, y + 7);
         }
 
         @Override
-        public boolean renderInventoryIcon(MobEffectInstance effect, EffectRenderingInventoryScreen<?> gui, PoseStack matrices, int x, int y, int z) {
-          renderIcon(effect, matrices, x, y);
+        public boolean renderInventoryIcon(MobEffectInstance effect, EffectRenderingInventoryScreen<?> gui, GuiGraphics graphics, int x, int y, int z) {
+          renderIcon(effect, graphics, x, y);
           return true;
         }
 
         @Override
-        public boolean renderGuiIcon(MobEffectInstance effect, Gui gui, PoseStack matrices, int x, int y, float z, float alpha) {
-          renderIcon(effect, matrices, x, y);
+        public boolean renderGuiIcon(MobEffectInstance effect, Gui gui, GuiGraphics graphics, int x, int y, float z, float alpha) {
+          renderIcon(effect, graphics, x, y);
           return true;
         }
       });
