@@ -86,7 +86,7 @@ public class MoldingRecipeCategory implements IRecipeCategory<MoldingRecipe> {
   public void setRecipe(IRecipeLayoutBuilder builder, MoldingRecipe recipe, IFocusGroup focuses) {
     // basic input output
     builder.addSlot(RecipeIngredientRole.INPUT, 3, 24).addIngredients(recipe.getMaterial());
-    builder.addSlot(RecipeIngredientRole.OUTPUT, 51, 24).addItemStack(recipe.getResultItem());
+    builder.addSlot(RecipeIngredientRole.OUTPUT, 51, 24).addItemStack(recipe.getResultItem(null));
 
     // if we have a mold, we are pressing into the table, so draw pressed item on input and output
     Ingredient pattern = recipe.getPattern();

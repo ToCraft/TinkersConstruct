@@ -119,7 +119,7 @@ public class ToolCastingRecipe extends AbstractMaterialCastingRecipe implements 
   }
 
   @Override
-  public ItemStack getResultItem() {
+  public ItemStack getResultItem(RegistryAccess registryAccess) {
     return new ItemStack(result);
   }
 

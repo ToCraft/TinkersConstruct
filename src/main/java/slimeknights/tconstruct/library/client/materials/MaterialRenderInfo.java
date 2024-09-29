@@ -51,7 +51,7 @@ public class MaterialRenderInfo {
   @Nullable
   private TextureAtlasSprite trySprite(Material base, String suffix, Function<Material, TextureAtlasSprite> spriteGetter) {
     TextureAtlasSprite sprite = spriteGetter.apply(getMaterial(base.texture(), suffix));
-    if (!MissingTextureAtlasSprite.getLocation().equals(sprite.getName())) {
+    if (!MissingTextureAtlasSprite.getLocation().equals(sprite.contents().name())) {
       return sprite;
     }
     return null;

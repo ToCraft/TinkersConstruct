@@ -51,7 +51,6 @@ public class StructureUpdater extends GenericNBTProvider {
     for (Entry<ResourceLocation, Resource> entry : resources.listResources(basePath, file -> file.getNamespace().equals(modId) && file.getPath().endsWith(".nbt")).entrySet()) {
       process(localize(entry.getKey()), entry.getValue(), cache);
     }
-    return null;
   }
 
   /**

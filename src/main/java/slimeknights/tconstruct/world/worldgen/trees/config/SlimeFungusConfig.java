@@ -9,6 +9,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.HugeFungusConfiguration;
 
 /**
@@ -28,8 +29,8 @@ public class SlimeFungusConfig extends HugeFungusConfiguration {
   @Getter
   private final TagKey<Block> groundTag;
 
-  public SlimeFungusConfig(TagKey<Block> groundTag, BlockState stem, BlockState hat, BlockState decor, boolean planted) {
-    super(Blocks.AIR.defaultBlockState(), stem, hat, decor, planted);
+  public SlimeFungusConfig(TagKey<Block> groundTag, BlockState stem, BlockState hat, BlockState decor, BlockPredicate predicate, boolean planted) {
+    super(Blocks.AIR.defaultBlockState(), stem, hat, decor, predicate, planted);
     this.groundTag = groundTag;
   }
 }

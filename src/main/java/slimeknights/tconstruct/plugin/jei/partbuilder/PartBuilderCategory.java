@@ -84,6 +84,6 @@ public class PartBuilderCategory implements IRecipeCategory<IDisplayPartBuilderR
     // TODO: material input?
 
     // output
-    builder.addSlot(RecipeIngredientRole.OUTPUT, 96, 15).addItemStack(recipe.getResultItem());
+    builder.addSlot(RecipeIngredientRole.OUTPUT, 96, 15).addItemStack(recipe.getResultItem(null));
   }
 }

@@ -83,7 +83,7 @@ public class RayTracer {
    * @return the block reach distance from the server
    */
   private static double getBlockReachDistanceServer(ServerPlayer player) {
-    return player.getAttributeValue(net.minecraftforge.common.ForgeMod.REACH_DISTANCE.get());
+    return player.getAttributeValue(net.minecraftforge.common.ForgeMod.BLOCK_REACH.get());
   }
 
   private static class ClientOnly {

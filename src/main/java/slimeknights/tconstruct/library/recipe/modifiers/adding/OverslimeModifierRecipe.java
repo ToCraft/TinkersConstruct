@@ -2,6 +2,7 @@ package slimeknights.tconstruct.library.recipe.modifiers.adding;
 
 import lombok.Getter;
 import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -63,6 +64,11 @@ public class OverslimeModifierRecipe implements ITinkerStationRecipe, IDisplayMo
     }
     // must find at least one slime, but multiple is fine, as is empty slots
     return IncrementalModifierRecipe.containsOnlyIngredient(inv, ingredient);
+  }
+
+  @Override
+  public ItemStack getResultItem(RegistryAccess registryAccess) {
+    return null;
   }
 
   @Override

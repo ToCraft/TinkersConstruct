@@ -2,6 +2,7 @@ package slimeknights.tconstruct.gadgets.entity.shuriken;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -53,7 +54,7 @@ public abstract class ShurikenEntityBase extends ThrowableItemProjectile impleme
     super.onHit(result);
 
     if (!this.level().isClientSide) {
-      this.level.broadcastEntityEvent(this, (byte) 3);
+      this.level().broadcastEntityEvent(this, (byte) 3);
       this.discard();
     }
   }
@@ -70,7 +71,7 @@ public abstract class ShurikenEntityBase extends ThrowableItemProjectile impleme
     Entity entity = result.getEntity();
     entity.hurt(DamageSource.thrown(this, this.getOwner()), this.getDamage());
 
-    if (!level.isClientSide() && entity instanceof LivingEntity) {
+    if (!level().isClientSide() && entity instanceof LivingEntity) {
       Vec3 motion = this.getDeltaMovement().normalize();
       ((LivingEntity) entity).knockback(this.getKnockback(), -motion.x, -motion.z);
     }
@@ -88,7 +89,7 @@ public abstract class ShurikenEntityBase extends ThrowableItemProjectile impleme
 
   @Nonnull
   @Override
-  public Packet<?> getAddEntityPacket() {
+  public Packet<ClientGamePacketListener> getAddEntityPacket() {
     return NetworkHooks.getEntitySpawningPacket(this);
   }
 }

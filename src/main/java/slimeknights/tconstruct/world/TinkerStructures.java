@@ -9,6 +9,7 @@ import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.MangrovePropaguleBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.HugeFungusConfiguration;
@@ -195,6 +196,7 @@ public final class TinkerStructures extends TinkerModule {
       TinkerWorld.bloodshroom.getLog().defaultBlockState(),
       TinkerWorld.slimeLeaves.get(FoliageType.BLOOD).defaultBlockState(),
       TinkerWorld.congealedSlime.get(SlimeType.ICHOR).defaultBlockState(),
+      BlockPredicate.ONLY_IN_AIR_PREDICATE,
       true));
   /**
    * Bloodshroom island tree variant
@@ -206,6 +208,7 @@ public final class TinkerStructures extends TinkerModule {
       TinkerWorld.bloodshroom.getLog().defaultBlockState(),
       TinkerWorld.slimeLeaves.get(FoliageType.BLOOD).defaultBlockState(),
       TinkerWorld.congealedSlime.get(SlimeType.ICHOR).defaultBlockState(),
+      BlockPredicate.ONLY_IN_AIR_PREDICATE,
       false));
   /* Deprecated ichor tree */
   public static final RegistryObject<ConfiguredFeature<HugeFungusConfiguration, SlimeFungusFeature>> ichorSlimeFungus = CONFIGURED_FEATURES.registerSupplier(
@@ -215,6 +218,7 @@ public final class TinkerStructures extends TinkerModule {
       TinkerWorld.bloodshroom.getLog().defaultBlockState(),
       TinkerWorld.slimeLeaves.get(FoliageType.ICHOR).defaultBlockState(),
       TinkerWorld.congealedSlime.get(SlimeType.ICHOR).defaultBlockState(),
+      BlockPredicate.ONLY_IN_AIR_PREDICATE,
       false));
 
   /*
