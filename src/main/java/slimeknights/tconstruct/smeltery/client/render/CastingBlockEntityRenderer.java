@@ -1,11 +1,14 @@
 package slimeknights.tconstruct.smeltery.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import slimeknights.mantle.client.model.inventory.ModelItem;
 import slimeknights.mantle.client.model.util.ModelHelper;
 import slimeknights.mantle.client.render.FluidRenderer;
@@ -17,7 +20,9 @@ import slimeknights.tconstruct.smeltery.block.entity.tank.CastingFluidHandler;
 import slimeknights.tconstruct.smeltery.client.util.CastingItemRenderTypeBuffer;
 
 import java.util.List;
+import java.util.Objects;
 
+@OnlyIn(Dist.CLIENT)
 public class CastingBlockEntityRenderer implements BlockEntityRenderer<CastingBlockEntity> {
 
   public CastingBlockEntityRenderer(Context context) {}
@@ -70,7 +75,7 @@ public class CastingBlockEntityRenderer implements BlockEntityRenderer<CastingBl
           ItemStack output = casting.getItem(1);
           MultiBufferSource outputBuffer = buffer;
           if (itemOpacity > 0 && output.isEmpty()) {
-            output = casting.getRecipeOutput();
+            output = casting.getRecipeOutput(Objects.requireNonNull(Minecraft.getInstance().level).registryAccess());
             // apply a buffer wrapper to tint and add opacity
             outputBuffer = new CastingItemRenderTypeBuffer(buffer, itemOpacity, fluidOpacity);
           }
