@@ -77,12 +77,11 @@ public class TankModel implements IUnbakedGeometry<TankModel> {
   protected final boolean forceModelFluid;
 
   @Override
-  public Collection<Material> getMaterials(IGeometryBakingContext owner, Function<ResourceLocation, UnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors) {
-    Collection<Material> textures = new HashSet<>(model.getMaterials(owner, modelGetter, missingTextureErrors));
+  public void resolveParents(Function<ResourceLocation, UnbakedModel> modelGetter, IGeometryBakingContext owner) {
+    model.resolveParents(modelGetter, owner);
     if (gui != null) {
-      textures.addAll(gui.getMaterials(owner, modelGetter, missingTextureErrors));
+      gui.resolveParents(modelGetter, owner);
     }
-    return textures;
   }
 
   @Override

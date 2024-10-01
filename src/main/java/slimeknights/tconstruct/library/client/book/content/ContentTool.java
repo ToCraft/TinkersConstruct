@@ -163,7 +163,7 @@ public class ContentTool extends PageContent {
         // get the stacks for the first crafting table recipe
         Recipe<CraftingContainer> recipe = Optional.ofNullable(Minecraft.getInstance().level)
           .flatMap(world -> world.getRecipeManager().byType(RecipeType.CRAFTING).values().stream()
-            .filter(r -> r.getResultItem().getItem() == tool.asItem())
+            .filter(r -> r.getResultItem(world.registryAccess()).getItem() == tool.asItem())
             .findFirst())
           .orElse(null);
         if (recipe != null) {
