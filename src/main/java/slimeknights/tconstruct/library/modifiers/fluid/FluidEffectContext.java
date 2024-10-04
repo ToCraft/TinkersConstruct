@@ -119,7 +119,7 @@ public abstract class FluidEffectContext {
      * Checks if the block in front of the hit block is replaceable
      */
     public boolean isOffsetReplaceable() {
-      return level.getBlockState(hitResult.getBlockPos().relative(hitResult.getDirection())).getMaterial().isReplaceable();
+      return level.getBlockState(hitResult.getBlockPos().relative(hitResult.getDirection())).canBeReplaced();
     }
   }
 }

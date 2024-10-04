@@ -236,7 +236,7 @@ public class ToolModel implements IUnbakedGeometry<ToolModel> {
   }
 
   @Override
-  public Collection<Material> getMaterials(IGeometryBakingContext owner, Function<ResourceLocation, UnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors) {
+  public void resolveParents(Function<ResourceLocation, UnbakedModel> modelGetter, IGeometryBakingContext owner) {
     Set<Material> allTextures = Sets.newHashSet();
     // default is just a single part named tool, no material
     if (toolParts.isEmpty()) {
@@ -261,8 +261,6 @@ public class ToolModel implements IUnbakedGeometry<ToolModel> {
     }
     // load modifier models
     modifierModels = ModifierModelManager.getModelsForTool(smallModifierRoots, isLarge ? largeModifierRoots : Collections.emptyList(), allTextures);
-
-    return allTextures;
   }
 
   /**
