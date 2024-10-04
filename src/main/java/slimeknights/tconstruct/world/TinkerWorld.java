@@ -219,13 +219,13 @@ public final class TinkerWorld extends TinkerModule {
 
   static {
     Function<FoliageType, BlockBehaviour.Properties> props = type -> {
-      BlockBehaviour.Properties properties;
+      BlockBehaviour.Properties properties = BlockBehaviour.Properties.of();
       if (type.isNether()) {
-        properties = builder(Blocks.REPLACEABLE_FIREPROOF_PLANT, type.getMapColor(), SoundType.ROOTS);
+        properties = properties.sound(SoundType.ROOTS);
       } else {
-        properties = builder(Material.REPLACEABLE_PLANT, type.getMapColor(), SoundType.GRASS);
+        properties = properties.sound(SoundType.GRASS).ignitedByLava();
       }
-      return properties.instabreak().noCollission().offsetType(Block.OffsetType.XYZ);
+      return properties.replaceable().pushReaction(PushReaction.DESTROY).mapColor(type.getMapColor()).instabreak().noCollission().offsetType(Block.OffsetType.XYZ);
     };
     slimeFern = BLOCKS.registerEnum(FoliageType.values(), "slime_fern", type -> new SlimeTallGrassBlock(props.apply(type), type), DEFAULT_BLOCK_ITEM);
     slimeTallGrass = BLOCKS.registerEnum(FoliageType.values(), "slime_tall_grass", type -> new SlimeTallGrassBlock(props.apply(type), type), DEFAULT_BLOCK_ITEM);
@@ -245,16 +245,16 @@ public final class TinkerWorld extends TinkerModule {
   });
   public static final EnumObject<FoliageType, FlowerPotBlock> pottedSlimeSapling = BLOCKS.registerPottedEnum(FoliageType.values(), "slime_sapling", slimeSapling);
   public static final EnumObject<FoliageType, Block> slimeLeaves = new EnumObject.Builder<FoliageType, Block>(FoliageType.class)
-    .putAll(BLOCKS.registerEnum(FoliageType.OVERWORLD, "slime_leaves", type -> new SlimeLeavesBlock(builder(Material.LEAVES, type.getMapColor(), SoundType.GRASS).strength(1.0f).randomTicks().noOcclusion().isValidSpawn(Blocks::never).isSuffocating(Blocks::never).isViewBlocking(Blocks::never), type), DEFAULT_BLOCK_ITEM))
-    .putAll(BLOCKS.registerEnum(FoliageType.NETHER, "slime_leaves", type -> new SlimeWartBlock(builder(Material.GRASS, type.getMapColor(), SoundType.WART_BLOCK).strength(1.5F).isValidSpawn((s, w, p, e) -> false), type), DEFAULT_BLOCK_ITEM))
-    .put(FoliageType.ENDER, BLOCKS.register("ender_slime_leaves", () -> new SlimePropaguleLeavesBlock(builder(Material.LEAVES, FoliageType.ENDER.getMapColor(), SoundType.GRASS).strength(1.0f).randomTicks().noOcclusion().isValidSpawn(Blocks::never).isSuffocating(Blocks::never).isViewBlocking(Blocks::never), FoliageType.ENDER), DEFAULT_BLOCK_ITEM))
+    .putAll(BLOCKS.registerEnum(FoliageType.OVERWORLD, "slime_leaves", type -> new SlimeLeavesBlock(BlockBehaviour.Properties.of().mapColor(type.getMapColor()).sound(SoundType.GRASS).ignitedByLava().strength(1.0f).randomTicks().noOcclusion().isValidSpawn(Blocks::never).isSuffocating(Blocks::never).isViewBlocking(Blocks::never).ignitedByLava().pushReaction(PushReaction.DESTROY), type), DEFAULT_BLOCK_ITEM))
+    .putAll(BLOCKS.registerEnum(FoliageType.NETHER, "slime_leaves", type -> new SlimeWartBlock(BlockBehaviour.Properties.of().mapColor(type.getMapColor()).sound(SoundType.WART_BLOCK).ignitedByLava().strength(1.5F).isValidSpawn((s, w, p, e) -> false), type), DEFAULT_BLOCK_ITEM))
+    .put(FoliageType.ENDER, BLOCKS.register("ender_slime_leaves", () -> new SlimePropaguleLeavesBlock(BlockBehaviour.Properties.of().mapColor(FoliageType.ENDER.getMapColor()).sound(SoundType.GRASS).ignitedByLava().strength(1.0f).randomTicks().noOcclusion().isValidSpawn(Blocks::never).isSuffocating(Blocks::never).isViewBlocking(Blocks::never), FoliageType.ENDER), DEFAULT_BLOCK_ITEM))
     .build();
 
   // slime vines
   public static final ItemObject<SlimeVineBlock> skySlimeVine, enderSlimeVine;
 
   static {
-    Function<SlimeType, BlockBehaviour.Properties> props = type -> builder(Material.REPLACEABLE_PLANT, type.getMapColor(), SoundType.GRASS).strength(0.75F).noCollission().randomTicks();
+    Function<SlimeType, BlockBehaviour.Properties> props = type -> BlockBehaviour.Properties.of().mapColor(type.getMapColor()).sound(SoundType.GRASS).ignitedByLava().pushReaction(PushReaction.DESTROY).strength(0.75F).noCollission().randomTicks();
     skySlimeVine = BLOCKS.register("sky_slime_vine", () -> new SlimeVineBlock(props.apply(SlimeType.SKY), SlimeType.SKY), DEFAULT_BLOCK_ITEM);
     enderSlimeVine = BLOCKS.register("ender_slime_vine", () -> new SlimeVineBlock(props.apply(SlimeType.ENDER), SlimeType.ENDER), DEFAULT_BLOCK_ITEM);
   }
