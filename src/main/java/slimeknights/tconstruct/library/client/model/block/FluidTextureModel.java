@@ -200,7 +200,7 @@ public class FluidTextureModel implements IUnbakedGeometry<FluidTextureModel> {
       return this.cache.computeIfAbsent(key, this::getRetexturedModel);
     }
 
-    @Nonull
+    @Nonnull
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction direction, RandomSource random, ModelData data, @Nullable RenderType renderType) {
       FluidStack fluid = fluids.isEmpty() ? FluidStack.EMPTY : data.get(IDisplayFluidListener.PROPERTY);
