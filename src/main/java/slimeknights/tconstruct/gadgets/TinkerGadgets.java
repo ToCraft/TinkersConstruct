@@ -88,8 +88,8 @@ public final class TinkerGadgets extends TinkerModule {
   public static final EnumObject<FrameType, FancyItemFrameItem> itemFrame = ITEMS.registerEnum(FrameType.values(), "item_frame", (type) -> addToTabItemList(new FancyItemFrameItem(GADGET_PROPS, (world, pos, dir) -> new FancyItemFrameEntity(world, pos, dir, type)), TAB_GADGETS_ITEMS));
 
   // throwballs
-  public static final ItemObject<GlowBallItem> glowBall = ITEMS.register("glow_ball", GlowBallItem::new);
-  public static final ItemObject<EFLNItem> efln = ITEMS.register("efln_ball", EFLNItem::new);
+  public static final ItemObject<GlowBallItem> glowBall = ITEMS.register("glow_ball", () -> addToTabItemList(new GlowBallItem(), TAB_GADGETS_ITEMS));
+  public static final ItemObject<EFLNItem> efln = ITEMS.register("efln_ball", () -> addToTabItemList(new EFLNItem(), TAB_GADGETS_ITEMS));
 
   // foods
   private static final BlockBehaviour.Properties CAKE = builder(Blocks.CAKE, SoundType.WOOL).strength(0.5F);

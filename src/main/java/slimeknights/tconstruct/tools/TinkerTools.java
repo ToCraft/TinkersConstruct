@@ -138,50 +138,50 @@ public final class TinkerTools extends TinkerModule {
   /*
    * Items
    */
-  private static final Item.Properties TOOL = new Item.Properties().stacksTo(1).tab(TAB_TOOLS);
+  private static final Item.Properties TOOL = new Item.Properties().stacksTo(1);
 
-  public static final ItemObject<ModifiableItem> pickaxe = ITEMS.register("pickaxe", () -> new ModifiableItem(TOOL, ToolDefinitions.PICKAXE));
-  public static final ItemObject<ModifiableItem> sledgeHammer = ITEMS.register("sledge_hammer", () -> new ModifiableItem(TOOL, ToolDefinitions.SLEDGE_HAMMER));
-  public static final ItemObject<ModifiableItem> veinHammer = ITEMS.register("vein_hammer", () -> new ModifiableItem(TOOL, ToolDefinitions.VEIN_HAMMER));
+  public static final ItemObject<ModifiableItem> pickaxe = ITEMS.register("pickaxe", () -> addToTabItemList(new ModifiableItem(TOOL, ToolDefinitions.PICKAXE), TAB_TOOLS_ITEMS));
+  public static final ItemObject<ModifiableItem> sledgeHammer = ITEMS.register("sledge_hammer", () -> addToTabItemList(new ModifiableItem(TOOL, ToolDefinitions.SLEDGE_HAMMER), TAB_TOOLS_ITEMS));
+  public static final ItemObject<ModifiableItem> veinHammer = ITEMS.register("vein_hammer", () -> addToTabItemList(new ModifiableItem(TOOL, ToolDefinitions.VEIN_HAMMER), TAB_TOOLS_ITEMS));
 
-  public static final ItemObject<ModifiableItem> mattock = ITEMS.register("mattock", () -> new ModifiableItem(TOOL, ToolDefinitions.MATTOCK));
-  public static final ItemObject<ModifiableItem> pickadze = ITEMS.register("pickadze", () -> new ModifiableItem(TOOL, ToolDefinitions.PICKADZE));
-  public static final ItemObject<ModifiableItem> excavator = ITEMS.register("excavator", () -> new ModifiableItem(TOOL, ToolDefinitions.EXCAVATOR));
+  public static final ItemObject<ModifiableItem> mattock = ITEMS.register("mattock", () -> addToTabItemList(new ModifiableItem(TOOL, ToolDefinitions.MATTOCK), TAB_TOOLS_ITEMS));
+  public static final ItemObject<ModifiableItem> pickadze = ITEMS.register("pickadze", () -> addToTabItemList(new ModifiableItem(TOOL, ToolDefinitions.PICKADZE), TAB_TOOLS_ITEMS));
+  public static final ItemObject<ModifiableItem> excavator = ITEMS.register("excavator", () -> addToTabItemList(new ModifiableItem(TOOL, ToolDefinitions.EXCAVATOR), TAB_TOOLS_ITEMS));
 
-  public static final ItemObject<ModifiableItem> handAxe = ITEMS.register("hand_axe", () -> new ModifiableItem(TOOL, ToolDefinitions.HAND_AXE));
-  public static final ItemObject<ModifiableItem> broadAxe = ITEMS.register("broad_axe", () -> new ModifiableItem(TOOL, ToolDefinitions.BROAD_AXE));
+  public static final ItemObject<ModifiableItem> handAxe = ITEMS.register("hand_axe", () -> addToTabItemList(new ModifiableItem(TOOL, ToolDefinitions.HAND_AXE), TAB_TOOLS_ITEMS));
+  public static final ItemObject<ModifiableItem> broadAxe = ITEMS.register("broad_axe", () -> addToTabItemList(new ModifiableItem(TOOL, ToolDefinitions.BROAD_AXE), TAB_TOOLS_ITEMS));
 
-  public static final ItemObject<ModifiableItem> kama = ITEMS.register("kama", () -> new ModifiableItem(TOOL, ToolDefinitions.KAMA));
-  public static final ItemObject<ModifiableItem> scythe = ITEMS.register("scythe", () -> new ModifiableItem(TOOL, ToolDefinitions.SCYTHE));
+  public static final ItemObject<ModifiableItem> kama = ITEMS.register("kama", () -> addToTabItemList(new ModifiableItem(TOOL, ToolDefinitions.KAMA), TAB_TOOLS_ITEMS));
+  public static final ItemObject<ModifiableItem> scythe = ITEMS.register("scythe", () -> addToTabItemList(new ModifiableItem(TOOL, ToolDefinitions.SCYTHE), TAB_TOOLS_ITEMS));
 
-  public static final ItemObject<ModifiableItem> dagger = ITEMS.register("dagger", () -> new ModifiableSwordItem(new Item.Properties().stacksTo(2).tab(TAB_TOOLS), ToolDefinitions.DAGGER));
-  public static final ItemObject<ModifiableItem> sword = ITEMS.register("sword", () -> new ModifiableSwordItem(TOOL, ToolDefinitions.SWORD));
-  public static final ItemObject<ModifiableItem> cleaver = ITEMS.register("cleaver", () -> new ModifiableSwordItem(TOOL, ToolDefinitions.CLEAVER));
+  public static final ItemObject<ModifiableItem> dagger = ITEMS.register("dagger", () -> addToTabItemList(new ModifiableSwordItem(new Item.Properties().stacksTo(2), ToolDefinitions.DAGGER), TAB_TOOLS_ITEMS));
+  public static final ItemObject<ModifiableItem> sword = ITEMS.register("sword", () -> addToTabItemList(new ModifiableSwordItem(TOOL, ToolDefinitions.SWORD), TAB_TOOLS_ITEMS));
+  public static final ItemObject<ModifiableItem> cleaver = ITEMS.register("cleaver", () -> addToTabItemList(new ModifiableSwordItem(TOOL, ToolDefinitions.CLEAVER), TAB_TOOLS_ITEMS));
 
-  public static final ItemObject<ModifiableCrossbowItem> crossbow = ITEMS.register("crossbow", () -> new ModifiableCrossbowItem(TOOL, ToolDefinitions.CROSSBOW));
-  public static final ItemObject<ModifiableBowItem> longbow = ITEMS.register("longbow", () -> new ModifiableBowItem(TOOL, ToolDefinitions.LONGBOW));
+  public static final ItemObject<ModifiableCrossbowItem> crossbow = ITEMS.register("crossbow", () -> addToTabItemList(new ModifiableCrossbowItem(TOOL, ToolDefinitions.CROSSBOW), TAB_TOOLS_ITEMS));
+  public static final ItemObject<ModifiableBowItem> longbow = ITEMS.register("longbow", () -> addToTabItemList(new ModifiableBowItem(TOOL, ToolDefinitions.LONGBOW), TAB_TOOLS_ITEMS));
 
-  public static final ItemObject<ModifiableItem> flintAndBrick = ITEMS.register("flint_and_brick", () -> new ModifiableItem(TOOL, ToolDefinitions.FLINT_AND_BRICK));
-  public static final ItemObject<ModifiableItem> skyStaff = ITEMS.register("sky_staff", () -> new ModifiableItem(TOOL, ToolDefinitions.SKY_STAFF));
-  public static final ItemObject<ModifiableItem> earthStaff = ITEMS.register("earth_staff", () -> new ModifiableItem(TOOL, ToolDefinitions.EARTH_STAFF));
-  public static final ItemObject<ModifiableItem> ichorStaff = ITEMS.register("ichor_staff", () -> new ModifiableItem(TOOL, ToolDefinitions.ICHOR_STAFF));
-  public static final ItemObject<ModifiableItem> enderStaff = ITEMS.register("ender_staff", () -> new ModifiableItem(TOOL, ToolDefinitions.ENDER_STAFF));
+  public static final ItemObject<ModifiableItem> flintAndBrick = ITEMS.register("flint_and_brick", () -> addToTabItemList(new ModifiableItem(TOOL, ToolDefinitions.FLINT_AND_BRICK), TAB_TOOLS_ITEMS));
+  public static final ItemObject<ModifiableItem> skyStaff = ITEMS.register("sky_staff", () -> addToTabItemList(new ModifiableItem(TOOL, ToolDefinitions.SKY_STAFF), TAB_TOOLS_ITEMS));
+  public static final ItemObject<ModifiableItem> earthStaff = ITEMS.register("earth_staff", () -> addToTabItemList(new ModifiableItem(TOOL, ToolDefinitions.EARTH_STAFF), TAB_TOOLS_ITEMS));
+  public static final ItemObject<ModifiableItem> ichorStaff = ITEMS.register("ichor_staff", () -> addToTabItemList(new ModifiableItem(TOOL, ToolDefinitions.ICHOR_STAFF), TAB_TOOLS_ITEMS));
+  public static final ItemObject<ModifiableItem> enderStaff = ITEMS.register("ender_staff", () -> addToTabItemList(new ModifiableItem(TOOL, ToolDefinitions.ENDER_STAFF), TAB_TOOLS_ITEMS));
 
   // armor
-  public static final EnumObject<ArmorSlotType, ModifiableArmorItem> travelersGear = ITEMS.registerEnum("travelers", ArmorSlotType.values(), type -> new MultilayerArmorItem(ArmorDefinitions.TRAVELERS, type, TOOL));
-  public static final EnumObject<ArmorSlotType, ModifiableArmorItem> plateArmor = ITEMS.registerEnum("plate", ArmorSlotType.values(), type -> new MultilayerArmorItem(ArmorDefinitions.PLATE, type, TOOL));
+  public static final EnumObject<ArmorSlotType, ModifiableArmorItem> travelersGear = ITEMS.registerEnum("travelers", ArmorSlotType.values(), type -> addToTabItemList(new MultilayerArmorItem(ArmorDefinitions.TRAVELERS, type, TOOL), TAB_TOOLS_ITEMS));
+  public static final EnumObject<ArmorSlotType, ModifiableArmorItem> plateArmor = ITEMS.registerEnum("plate", ArmorSlotType.values(), type -> addToTabItemList(new MultilayerArmorItem(ArmorDefinitions.PLATE, type, TOOL), TAB_TOOLS_ITEMS));
   public static final EnumObject<ArmorSlotType, ModifiableArmorItem> slimesuit = new EnumObject.Builder<ArmorSlotType, ModifiableArmorItem>(ArmorSlotType.class)
-    .putAll(ITEMS.registerEnum("slime", new ArmorSlotType[]{ArmorSlotType.BOOTS, ArmorSlotType.LEGGINGS, ArmorSlotType.CHESTPLATE}, type -> new MultilayerArmorItem(ArmorDefinitions.SLIMESUIT, type, TOOL)))
-    .put(ArmorSlotType.HELMET, ITEMS.register("slime_helmet", () -> new SlimeskullItem(ArmorDefinitions.SLIMESUIT, TOOL)))
+    .putAll(ITEMS.registerEnum("slime", new ArmorSlotType[]{ArmorSlotType.BOOTS, ArmorSlotType.LEGGINGS, ArmorSlotType.CHESTPLATE}, type -> addToTabItemList(new MultilayerArmorItem(ArmorDefinitions.SLIMESUIT, type, TOOL), TAB_TOOLS_ITEMS)))
+    .put(ArmorSlotType.HELMET, ITEMS.register("slime_helmet", () -> addToTabItemList(new SlimeskullItem(ArmorDefinitions.SLIMESUIT, TOOL), TAB_TOOLS_ITEMS)))
     .build();
 
 
   // shields
-  public static final ItemObject<ModifiableItem> travelersShield = ITEMS.register("travelers_shield", () -> new ModifiableItem(TOOL, ArmorDefinitions.TRAVELERS_SHIELD));
-  public static final ItemObject<ModifiableItem> plateShield = ITEMS.register("plate_shield", () -> new ModifiableItem(TOOL, ArmorDefinitions.PLATE_SHIELD));
+  public static final ItemObject<ModifiableItem> travelersShield = ITEMS.register("travelers_shield", () -> addToTabItemList(new ModifiableItem(TOOL, ArmorDefinitions.TRAVELERS_SHIELD), TAB_TOOLS_ITEMS));
+  public static final ItemObject<ModifiableItem> plateShield = ITEMS.register("plate_shield", () -> addToTabItemList(new ModifiableItem(TOOL, ArmorDefinitions.PLATE_SHIELD), TAB_TOOLS_ITEMS));
 
   // arrows
-  public static final ItemObject<ArrowItem> crystalshotItem = ITEMS.register("crystalshot", () -> new CrystalshotItem(new Item.Properties().tab(TAB_TOOLS)));
+  public static final ItemObject<ArrowItem> crystalshotItem = ITEMS.register("crystalshot", () -> addToTabItemList(new CrystalshotItem(new Item.Properties()), TAB_TOOLS_ITEMS));
 
   /* Particles */
   public static final RegistryObject<SimpleParticleType> hammerAttackParticle = PARTICLE_TYPES.register("hammer_attack", () -> new SimpleParticleType(true));

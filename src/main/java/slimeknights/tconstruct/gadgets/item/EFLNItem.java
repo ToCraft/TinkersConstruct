@@ -21,7 +21,7 @@ import java.util.List;
 public class EFLNItem extends SnowballItem {
 
   public EFLNItem() {
-    super((new Properties()).stacksTo(16).tab(TinkerGadgets.TAB_GADGETS));
+    super((new Properties()).stacksTo(16));
   }
 
   @Override

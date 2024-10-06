@@ -85,7 +85,7 @@ public abstract class TinkerModule {
   /**
    * Creative tab for items that do not fit in another tab
    */
-  @SuppressWarnings("WeakerAccess")
+  @SuppressWarnings({"WeakerAccess", "unused"})
   public static final CreativeModeTab TAB_GENERAL = CreativeModeTab.builder().title(Component.translatable("itemGroup.tconstruct.general")).icon(() -> new ItemStack(TinkerCommons.slimeball.get(SlimeType.SKY))).displayItems((itemDisplayParameters, output) -> {
     for (ItemLike item : TAB_GENERAL_ITEMS) {
       output.accept(item);

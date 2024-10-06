@@ -270,6 +270,7 @@ import slimeknights.tconstruct.util.SimpleRecipeSerializer;
 
 import static slimeknights.tconstruct.TConstruct.getResource;
 import static slimeknights.tconstruct.tools.TinkerTools.TAB_TOOLS;
+import static slimeknights.tconstruct.tools.TinkerTools.TAB_TOOLS_ITEMS;
 
 /**
  * Contains modifiers and the items or blocks used to craft modifiers
@@ -298,7 +299,7 @@ public final class TinkerModifiers extends TinkerModule {
    */
   public static final ItemObject<Item> silkyCloth = ITEMS.register("silky_cloth", GENERAL_PROPS);
   public static final ItemObject<Item> silkyJewel = ITEMS.register("silky_jewel", HIDDEN_PROPS);
-  public static final ItemObject<Item> dragonScale = ITEMS.register("dragon_scale", () -> new DragonScaleItem(new Item.Properties().tab(TAB_GENERAL).rarity(Rarity.RARE)));
+  public static final ItemObject<Item> dragonScale = ITEMS.register("dragon_scale", () -> addToTabItemList(new DragonScaleItem(new Item.Properties().rarity(Rarity.RARE)), TAB_GENERAL_ITEMS));
   // durability reinforcements
   public static final ItemObject<Item> emeraldReinforcement = ITEMS.register("emerald_reinforcement", GENERAL_PROPS);
   public static final ItemObject<Item> slimesteelReinforcement = ITEMS.register("slimesteel_reinforcement", GENERAL_PROPS);
@@ -309,8 +310,8 @@ public final class TinkerModifiers extends TinkerModule {
   public static final ItemObject<Item> cobaltReinforcement = ITEMS.register("cobalt_reinforcement", GENERAL_PROPS);
   public static final ItemObject<Item> obsidianReinforcement = ITEMS.register("obsidian_reinforcement", GENERAL_PROPS);
   // special
-  public static final ItemObject<Item> modifierCrystal = ITEMS.register("modifier_crystal", () -> new ModifierCrystalItem(new Item.Properties().tab(TAB_TOOLS).stacksTo(16)));
-  public static final ItemObject<Item> creativeSlotItem = ITEMS.register("creative_slot", () -> new CreativeSlotItem(new Item.Properties().tab(TAB_TOOLS)));
+  public static final ItemObject<Item> modifierCrystal = ITEMS.register("modifier_crystal", () -> addToTabItemList(new ModifierCrystalItem(new Item.Properties().stacksTo(16)), TAB_TOOLS_ITEMS));
+  public static final ItemObject<Item> creativeSlotItem = ITEMS.register("creative_slot", () -> addToTabItemList(new CreativeSlotItem(new Item.Properties()), TAB_TOOLS_ITEMS));
 
   // entity
   public static final RegistryObject<EntityType<FluidEffectProjectile>> fluidSpitEntity = ENTITIES.register("fluid_spit", () ->
