@@ -207,10 +207,10 @@ public final class TinkerWorld extends TinkerModule {
   }
 
   // wood
-  public static final WoodBlockObject greenheart = BLOCKS.registerWood("greenheart", createSlimewood(MapColor.COLOR_LIGHT_GREEN, MapColor.COLOR_GREEN), false, TAB_WORLD);
-  public static final WoodBlockObject skyroot = BLOCKS.registerWood("skyroot", createSlimewood(MapColor.COLOR_CYAN, MapColor.TERRACOTTA_CYAN), false, TAB_WORLD);
-  public static final WoodBlockObject bloodshroom = BLOCKS.registerWood("bloodshroom", createSlimewood(MapColor.COLOR_RED, MapColor.COLOR_ORANGE), false, TAB_WORLD);
-  public static final WoodBlockObject enderbark = BLOCKS.registerWood("enderbark", createSlimewood(MapColor.COLOR_BLACK, MapColor.COLOR_BLACK), false, TAB_WORLD);
+  public static final WoodBlockObject greenheart = BLOCKS.registerWood("greenheart", createSlimewood(MapColor.COLOR_LIGHT_GREEN, MapColor.COLOR_GREEN), false);
+  public static final WoodBlockObject skyroot = BLOCKS.registerWood("skyroot", createSlimewood(MapColor.COLOR_CYAN, MapColor.TERRACOTTA_CYAN), false);
+  public static final WoodBlockObject bloodshroom = BLOCKS.registerWood("bloodshroom", createSlimewood(MapColor.COLOR_RED, MapColor.COLOR_ORANGE), false);
+  public static final WoodBlockObject enderbark = BLOCKS.registerWood("enderbark", createSlimewood(MapColor.COLOR_BLACK, MapColor.COLOR_BLACK), false);
   public static final ItemObject<Block> enderbarkRoots = BLOCKS.register("enderbark_roots", () -> new SlimeRootsBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).mapColor(MapColor.COLOR_BLACK).strength(0.7F).randomTicks().sound(SoundType.MANGROVE_ROOTS).noOcclusion().isSuffocating(Blocks::never).isViewBlocking(Blocks::never).noOcclusion()), DEFAULT_BLOCK_ITEM);
   public static final EnumObject<SlimeType, Block> slimyEnderbarkRoots = BLOCKS.registerEnum(SlimeType.values(), "enderbark_roots", type -> new SlimeDirtBlock(BlockBehaviour.Properties.copy(Blocks.DIRT).mapColor(type.getMapColor()).strength(0.7F).sound(SoundType.MUDDY_MANGROVE_ROOTS).lightLevel(s -> type.getLightLevel())), DEFAULT_BLOCK_ITEM);
 
