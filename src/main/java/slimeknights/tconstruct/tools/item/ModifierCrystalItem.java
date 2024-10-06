@@ -103,11 +103,4 @@ public class ModifierCrystalItem extends Item {
     }
     return null;
   }
-
-  @Override
-  public void fillItemCategory(CreativeModeTab category, NonNullList<ItemStack> items) {
-    if (this.allowedIn(category)) {
-      ModifierRecipeLookup.getRecipeModifierList().forEach(modifier -> items.add(withModifier(modifier.getId())));
-    }
-  }
 }

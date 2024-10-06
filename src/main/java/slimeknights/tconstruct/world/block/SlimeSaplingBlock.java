@@ -41,11 +41,4 @@ public class SlimeSaplingBlock extends SaplingBlock {
   public boolean canBeReplaced(BlockState state, BlockPlaceContext useContext) {
     return false;
   }
-
-  @Override
-  public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-    if (this.foliageType != FoliageType.ICHOR) {
-      super.fillItemCategory(group, items);
-    }
-  }
 }

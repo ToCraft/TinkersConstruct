@@ -70,10 +70,6 @@ public class CrystalshotItem extends ArrowItem {
   public boolean isInfinite(ItemStack stack, ItemStack bow, Player player) {
     return EnchantmentHelper.getItemEnchantmentLevel(net.minecraft.world.item.enchantment.Enchantments.INFINITY_ARROWS, bow) > 0;
   }
-
-  @Override
-  public void fillItemCategory(CreativeModeTab pCategory, NonNullList<ItemStack> pItems) {}
-
   /**
    * Creates a crystal shot with the given variant
    */

@@ -466,13 +466,6 @@ public class ModifiableItem extends Item implements IModifiableDisplay {
   /* Display items */
 
   @Override
-  public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-    if (this.allowedIn(group)) {
-      ToolBuildHandler.addDefaultSubItems(this, items);
-    }
-  }
-
-  @Override
   public ItemStack getRenderTool() {
     if (toolForRendering == null) {
       toolForRendering = ToolBuildHandler.buildToolForRendering(this, this.getToolDefinition());

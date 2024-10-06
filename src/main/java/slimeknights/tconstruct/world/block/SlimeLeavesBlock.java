@@ -72,11 +72,4 @@ public class SlimeLeavesBlock extends LeavesBlock {
 //  public boolean canBeReplacedByLeaves(BlockState state, LevelReader world, BlockPos pos) {
 //    return this.isAir(state, world, pos) || state.is(BlockTags.LEAVES) || state.is(TinkerTags.Blocks.SLIMY_LEAVES);
 //  }
-
-  @Override
-  public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-    if (this.foliageType != FoliageType.ICHOR) {
-      super.fillItemCategory(group, items);
-    }
-  }
 }

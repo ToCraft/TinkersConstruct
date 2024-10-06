@@ -55,35 +55,6 @@ public class MaterialItem extends Item implements IMaterialItem {
     return getMaterialId(stack.getTag());
   }
 
-  @Override
-  public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-    if (this.allowedIn(group) && MaterialRegistry.isFullyLoaded()) {
-      // if a specific material is set in the config, try adding that
-      String showOnlyId = Config.COMMON.showOnlyPartMaterial.get();
-      boolean added = false;
-      if (!showOnlyId.isEmpty()) {
-        MaterialVariantId materialId = MaterialVariantId.tryParse(showOnlyId);
-        if (materialId != null && canUseMaterial(materialId.getId())) {
-          items.add(this.withMaterialForDisplay(materialId));
-          added = true;
-        }
-      }
-      // if no material is set or we failed to find it, iterate all materials
-      if (!added) {
-        for (IMaterial material : MaterialRegistry.getInstance().getVisibleMaterials()) {
-          MaterialId id = material.getIdentifier();
-          if (this.canUseMaterial(id)) {
-            items.add(this.withMaterial(id));
-            // if a specific material was requested and not found, stop after first
-            if (!showOnlyId.isEmpty()) {
-              break;
-            }
-          }
-        }
-      }
-    }
-  }
-
   @Nullable
   private static Component getName(String baseKey, MaterialVariantId material) {
     // if there is a specific name, use that

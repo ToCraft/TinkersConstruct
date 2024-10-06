@@ -99,11 +99,4 @@ public class SlimeGrassSeedItem extends TooltipItem {
     }
     return InteractionResult.SUCCESS;
   }
-
-  @Override
-  public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-    if (this.foliage != FoliageType.ICHOR) {
-      super.fillItemCategory(group, items);
-    }
-  }
 }

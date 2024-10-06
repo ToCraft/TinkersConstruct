@@ -27,13 +27,6 @@ public class SlimeNyliumBlock extends Block implements BonemealableBlock {
     this.foliageType = foliageType;
   }
 
-  @Override
-  public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-    if (this.foliageType != FoliageType.ICHOR) {
-      super.fillItemCategory(group, items);
-    }
-  }
-
   private static boolean isDarkEnough(BlockState state, LevelReader reader, BlockPos pos) {
     BlockPos blockpos = pos.above();
     BlockState blockstate = reader.getBlockState(blockpos);

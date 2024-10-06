@@ -1,21 +1,18 @@
 package slimeknights.tconstruct.tools.item;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.tools.SlotType;
 import slimeknights.tconstruct.library.utils.Util;
 
-import javax.annotation.Nullable;
-import java.util.Collection;
 import java.util.List;
 
 public class CreativeSlotItem extends Item {
@@ -68,20 +65,6 @@ public class CreativeSlotItem extends Item {
       tooltip.add(Component.translatable(TOOLTIP, slot.getDisplayName()).withStyle(ChatFormatting.GRAY));
     } else {
       tooltip.add(TOOLTIP_MISSING);
-    }
-  }
-
-  @Override
-  public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-    if (allowedIn(group)) {
-      Collection<SlotType> allTypes = SlotType.getAllSlotTypes();
-      if (allTypes.isEmpty()) {
-        items.add(new ItemStack(this));
-      } else {
-        for (SlotType type : allTypes) {
-          items.add(withSlot(new ItemStack(this), type));
-        }
-      }
     }
   }
 }

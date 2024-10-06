@@ -33,10 +33,6 @@ public class GlowBlock extends Block {
     this.drops = BuiltInLootTables.EMPTY;
   }
 
-  @Override
-  public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-  }
-
   private static final ImmutableMap<Direction, VoxelShape> BOUNDS;
 
   static {

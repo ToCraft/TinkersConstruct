@@ -16,11 +16,4 @@ public class SlimeWartBlock extends Block {
     super(properties);
     this.foliageType = foliageType;
   }
-
-  @Override
-  public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-    if (foliageType != FoliageType.ICHOR) {
-      super.fillItemCategory(group, items);
-    }
-  }
 }
