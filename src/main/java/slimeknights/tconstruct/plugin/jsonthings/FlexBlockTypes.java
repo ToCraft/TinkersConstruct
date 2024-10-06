@@ -7,7 +7,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.Property;
@@ -62,7 +65,7 @@ public class FlexBlockTypes {
           }
         };
       };
-    }, Material.LAVA);
+    }, Blocks.LAVA.getStateDefinition().getProperties().toArray());
     register("mob_effect_liquid", data -> {
       ResourceLocation fluidField = Loadables.RESOURCE_LOCATION.getOrDefault(data, "fluid", null);
       ResourceLocation effectName = Loadables.RESOURCE_LOCATION.getIfPresent(data, "effect");
@@ -78,13 +81,13 @@ public class FlexBlockTypes {
           }
         };
       };
-    }, Material.WATER);
+    }, Blocks.WATER.getStateDefinition().getProperties().toArray());
   }
 
   /**
    * Local helper to register our stuff
    */
-  private static <T extends Block & IFlexBlock> void register(String name, IBlockSerializer<T> factory, Material defaultMaterial) {
-    FlexBlockType.register(TConstruct.resourceString(name), factory, "translucent", true, defaultMaterial);
+  private static <T extends Block & IFlexBlock> void register(String name, IBlockSerializer<T> factory, Property<?>[] defaultProperties) {
+    FlexBlockType.register(TConstruct.resourceString(name), factory, "translucent", true, defaultProperties);
   }
 }

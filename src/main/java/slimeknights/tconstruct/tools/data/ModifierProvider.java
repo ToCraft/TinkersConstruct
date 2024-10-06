@@ -1,5 +1,6 @@
 package slimeknights.tconstruct.tools.data;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
@@ -376,7 +377,7 @@ public class ModifierProvider extends AbstractModifierProvider implements ICondi
       .addModule(BlockDamageSourceModule.source(DamageTypeTags.IS_FALL).build());
     buildModifier(ModifierIds.frostWalker)
       .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
-      .addModule(BlockDamageSourceModule.source(new SourceMessagePredicate(DamageSource.HOT_FLOOR)).build())
+      .addModule(BlockDamageSourceModule.source(new SourceMessagePredicate((Minecraft.getInstance().level).damageSources().hotFloor())).build())
       .addModule(ReplaceBlockWalkerModule.builder().replaceAlways(BlockPropertiesPredicate.block(Blocks.WATER).matches(LiquidBlock.LEVEL, 0).build(), Blocks.FROSTED_ICE.defaultBlockState()).amount(2, 1));
     buildModifier(ModifierIds.pathMaker).levelDisplay(ModifierLevelDisplay.NO_LEVELS).addModule(ToolActionWalkerTransformModule.builder(ToolActions.SHOVEL_FLATTEN, SoundEvents.SHOVEL_FLATTEN).amount(0.5f, 1));
     buildModifier(ModifierIds.plowing).levelDisplay(ModifierLevelDisplay.NO_LEVELS).addModule(ToolActionWalkerTransformModule.builder(ToolActions.HOE_TILL, SoundEvents.HOE_TILL).amount(0.5f, 1));

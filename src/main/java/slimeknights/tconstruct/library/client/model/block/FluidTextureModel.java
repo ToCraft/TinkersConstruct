@@ -33,6 +33,8 @@ import net.minecraftforge.client.model.geometry.IGeometryBakingContext;
 import net.minecraftforge.client.model.geometry.IGeometryLoader;
 import net.minecraftforge.client.model.geometry.IUnbakedGeometry;
 import net.minecraftforge.fluids.FluidStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.client.model.RetexturedModel;
 import slimeknights.mantle.client.model.RetexturedModel.RetexturedContext;
 import slimeknights.mantle.client.model.util.ColoredBlockModel;
@@ -46,8 +48,6 @@ import slimeknights.mantle.util.RetexturedHelper;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.smeltery.block.entity.tank.IDisplayFluidListener;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.BitSet;
 import java.util.Collection;
 import java.util.Collections;
@@ -200,7 +200,7 @@ public class FluidTextureModel implements IUnbakedGeometry<FluidTextureModel> {
       return this.cache.computeIfAbsent(key, this::getRetexturedModel);
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction direction, RandomSource random, ModelData data, @Nullable RenderType renderType) {
       FluidStack fluid = fluids.isEmpty() ? FluidStack.EMPTY : data.get(IDisplayFluidListener.PROPERTY);
