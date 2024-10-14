@@ -402,7 +402,6 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
 
   public static void renderIcon(GuiGraphics graphics, LayoutIcon icon, int x, int y) {
     Pattern pattern = icon.getValue(Pattern.class);
-    Minecraft minecraft = Minecraft.getInstance();
     if (pattern != null) {
       // draw pattern sprite
       RenderUtils.setup(InventoryMenu.BLOCK_ATLAS);
@@ -413,7 +412,7 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
 
     ItemStack stack = icon.getValue(ItemStack.class);
     if (stack != null) {
-      minecraft.getItemRenderer().renderGuiItem(stack, x, y);
+      graphics.renderItem(stack, x, y);
     }
   }
 

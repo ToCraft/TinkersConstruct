@@ -90,7 +90,7 @@ public class ToolBuildingCategory implements IRecipeCategory<ToolBuildingRecipe>
     renderPose.mulPoseMatrix(graphics.pose().last().pose());
     renderPose.translate(5, 6.5, 0);
     renderPose.scale(3.7f, 3.7f, 1.0f);
-    Minecraft.getInstance().getItemRenderer().renderGuiItem(outputStack, 0, 0);
+    graphics.renderItem(outputStack, 0, 0);
     renderPose.popPose();
 
     // next, overlay the item with transparent grey, makes it appear transparent
