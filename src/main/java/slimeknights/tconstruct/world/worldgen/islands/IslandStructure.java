@@ -154,7 +154,7 @@ public class IslandStructure extends Structure {
      * Adds a new tree to the builder with the given weight
      */
     public Builder addTree(Holder<? extends ConfiguredFeature<?, ?>> tree, int weight) {
-      trees.add(Holder.hackyErase(tree), weight);
+      trees.add((Holder<ConfiguredFeature<?, ?>>) tree, weight);
       return this;
     }
 

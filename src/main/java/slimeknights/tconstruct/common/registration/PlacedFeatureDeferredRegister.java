@@ -32,7 +32,7 @@ public class PlacedFeatureDeferredRegister extends DeferredRegisterWrapper<Place
    * @return Registry object
    */
   public RegistryObject<PlacedFeature> register(String name, RegistryObject<? extends ConfiguredFeature<?, ?>> feature, List<PlacementModifier> placement) {
-    return register.register(name, () -> new PlacedFeature(Holder.hackyErase(feature.getHolder().orElseThrow(() -> new IllegalStateException("Feature does not have a holder"))), List.copyOf(placement)));
+    return register.register(name, () -> new PlacedFeature((Holder<ConfiguredFeature<?, ?>>) feature.getHolder().orElseThrow(() -> new IllegalStateException("Feature does not have a holder")), List.copyOf(placement)));
   }
 
   /**
