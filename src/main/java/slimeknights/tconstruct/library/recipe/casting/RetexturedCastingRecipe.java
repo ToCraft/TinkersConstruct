@@ -32,7 +32,7 @@ public class RetexturedCastingRecipe extends ItemCastingRecipe {
 
   @Override
   public ItemStack assemble(ICastingContainer inv, RegistryAccess registryAccess) {
-    ItemStack result = getResultItem().copy();
+    ItemStack result = getResultItem(registryAccess).copy();
     if (inv.getStack().getItem() instanceof BlockItem blockItem) {
       return RetexturedHelper.setTexture(result, blockItem.getBlock());
     }
