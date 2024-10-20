@@ -213,9 +213,9 @@ public class TableRecipeProvider extends BaseRecipeProvider {
     ));
 
     // tool repair recipe
-    SpecialRecipeBuilder.special(TinkerTables.tinkerStationRepairSerializer.get())
+    new SpecialRecipeBuilder(TinkerTables.tinkerStationRepairSerializer.get())
       .save(consumer, prefix(folder + "tinker_station_repair"));
-    SpecialRecipeBuilder.special(TinkerTables.tinkerStationPartSwappingSerializer.get())
+    new SpecialRecipeBuilder(TinkerTables.tinkerStationPartSwappingSerializer.get())
       .save(consumer, prefix(folder + "tinker_station_part_swapping"));
     SpecialRecipeBuilder.special(TinkerTables.craftingTableRepairSerializer.get())
       .save(consumer, prefix(folder + "crafting_table_repair"));

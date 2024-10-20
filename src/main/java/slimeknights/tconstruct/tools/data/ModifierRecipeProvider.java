@@ -1508,7 +1508,7 @@ public class ModifierRecipeProvider extends BaseRecipeProvider {
       .disallowCrystal()
       .save(consumer, wrap(ModifierIds.rebalanced, slotlessFolder, "_traits"));
     // creative
-    SpecialRecipeBuilder.special(TinkerModifiers.creativeSlotSerializer.get()).save(consumer, prefix(slotlessFolder + "creative_slot"));
+    new SpecialRecipeBuilder(TinkerModifiers.creativeSlotSerializer.get()).save(consumer, prefix(slotlessFolder + "creative_slot"));
 
     // removal
     ModifierRemovalRecipeBuilder.removal()
@@ -1707,8 +1707,8 @@ public class ModifierRecipeProvider extends BaseRecipeProvider {
       .save(consumer, location(folder + "wither_skeleton_skull"));
     SeveringRecipeBuilder.severing(EntityIngredient.of(EntityType.CREEPER), Items.CREEPER_HEAD)
       .save(consumer, location(folder + "creeper_head"));
-    SpecialRecipeBuilder.special(TinkerModifiers.playerBeheadingSerializer.get()).save(consumer, prefix(folder + "player_head"));
-    SpecialRecipeBuilder.special(TinkerModifiers.snowGolemBeheadingSerializer.get()).save(consumer, prefix(folder + "snow_golem_head"));
+    new SpecialRecipeBuilder(TinkerModifiers.playerBeheadingSerializer.get()).save(consumer, prefix(folder + "player_head"));
+    new SpecialRecipeBuilder(TinkerModifiers.snowGolemBeheadingSerializer.get()).save(consumer, prefix(folder + "snow_golem_head"));
     SeveringRecipeBuilder.severing(EntityIngredient.of(EntityType.IRON_GOLEM), Blocks.CARVED_PUMPKIN)
       .save(consumer, location(folder + "iron_golem_head"));
     SeveringRecipeBuilder.severing(EntityIngredient.of(EntityType.ENDER_DRAGON), Items.DRAGON_HEAD)
@@ -1766,13 +1766,13 @@ public class ModifierRecipeProvider extends BaseRecipeProvider {
       .noChildOutput()
       .save(consumer, location(folder + "chicken_feather"));
     // beshrooming
-    SpecialRecipeBuilder.special(TinkerModifiers.mooshroomDemushroomingSerializer.get()).save(consumer, prefix(folder + "mooshroom_shroom"));
+    new SpecialRecipeBuilder(TinkerModifiers.mooshroomDemushroomingSerializer.get()).save(consumer, prefix(folder + "mooshroom_shroom"));
     // beshelling
     SeveringRecipeBuilder.severing(EntityIngredient.of(EntityType.TURTLE), Items.TURTLE_HELMET)
       .setChildOutput(ItemOutput.fromItem(Items.SCUTE))
       .save(consumer, location(folder + "turtle_shell"));
     // befleecing
-    SpecialRecipeBuilder.special(TinkerModifiers.sheepShearing.get()).save(consumer, prefix(folder + "sheep_wool"));
+    new SpecialRecipeBuilder(TinkerModifiers.sheepShearing.get()).save(consumer, prefix(folder + "sheep_wool"));
   }
 
   /**
