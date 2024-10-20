@@ -23,6 +23,7 @@ public class SlimeFungusConfig extends HugeFungusConfiguration {
     BlockState.CODEC.fieldOf("stem_state").forGetter(config -> config.stemState),
     BlockState.CODEC.fieldOf("hat_state").forGetter(config -> config.hatState),
     BlockState.CODEC.fieldOf("decor_state").forGetter(config -> config.decorState),
+    BlockPredicate.CODEC.fieldOf("replaceable_blocks").forGetter(config -> config.replaceableBlocks),
     Codec.BOOL.fieldOf("planted").orElse(false).forGetter(config -> config.planted)
   ).apply(instance, SlimeFungusConfig::new));
 
