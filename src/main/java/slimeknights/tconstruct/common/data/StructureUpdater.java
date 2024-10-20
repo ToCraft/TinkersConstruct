@@ -22,6 +22,7 @@ import slimeknights.tconstruct.library.data.GenericNBTProvider;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Map.Entry;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Data provider to update structures to a newer data fixer upper version
@@ -47,10 +48,12 @@ public class StructureUpdater extends GenericNBTProvider {
   }
 
   @Override
-  public void run(CachedOutput cache) {
-    for (Entry<ResourceLocation, Resource> entry : resources.listResources(basePath, file -> file.getNamespace().equals(modId) && file.getPath().endsWith(".nbt")).entrySet()) {
-      process(localize(entry.getKey()), entry.getValue(), cache);
-    }
+  public CompletableFuture<?> run(CachedOutput cache) {
+    return CompletableFuture.runAsync(() -> {
+      for (Entry<ResourceLocation, Resource> entry : resources.listResources(basePath, file -> file.getNamespace().equals(modId) && file.getPath().endsWith(".nbt")).entrySet()) {
+        process(localize(entry.getKey()), entry.getValue(), cache);
+      }
+    });
   }
 
   /**

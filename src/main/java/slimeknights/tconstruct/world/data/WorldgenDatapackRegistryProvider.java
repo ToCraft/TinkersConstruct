@@ -58,6 +58,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 import static net.minecraft.core.HolderSet.direct;
@@ -86,71 +87,73 @@ public class WorldgenDatapackRegistryProvider implements DataProvider {
   private final RegistryOps<JsonElement> registryOps = RegistryOps.create(JsonOps.INSTANCE, registryAccess);
 
   @Override
-  public void run(CachedOutput cache) throws IOException {
-    Map<ResourceKey<Structure>, Structure> structures = new LinkedHashMap<>();
-    // earthslime island
-    structures.put(earthSlimeIsland, IslandStructure.seaBuilder()
-      .addDefaultTemplates(getResource("islands/earth/"))
-      .addTree(reference(earthSlimeIslandTree), 1)
-      .addSlimyGrass(FoliageType.EARTH)
-      .build(new StructureSettings(tag(TinkerTags.Biomes.EARTHSLIME_ISLANDS), monsterOverride(EntityType.SLIME, 4, 4), Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE)));
-    // skyslime island
-    structures.put(skySlimeIsland, IslandStructure.skyBuilder()
-      .addDefaultTemplates(getResource("islands/sky/"))
-      .addTree(reference(skySlimeIslandTree), 1)
-      .addSlimyGrass(FoliageType.SKY)
-      .vines(TinkerWorld.skySlimeVine.get())
-      .build(new StructureSettings(tag(TinkerTags.Biomes.SKYSLIME_ISLANDS), monsterOverride(TinkerWorld.skySlimeEntity.get(), 3, 4), Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE)));
-    // clay island
-    structures.put(clayIsland, IslandStructure.skyBuilder().addDefaultTemplates(getResource("islands/dirt/"))
-      .addTree(reference(TreeFeatures.OAK), 4)
-      .addTree(reference(TreeFeatures.BIRCH), 3)
-      .addTree(reference(TreeFeatures.SPRUCE), 2)
-      .addTree(reference(TreeFeatures.ACACIA), 1)
-      .addTree(reference(TreeFeatures.JUNGLE_TREE_NO_VINE), 1)
-      .addGrass(Blocks.GRASS, 7)
-      .addGrass(Blocks.FERN, 1)
-      .build(new StructureSettings(tag(TinkerTags.Biomes.CLAY_ISLANDS), monsterOverride(TinkerWorld.terracubeEntity.get(), 2, 4), Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE)));
-    // blood island
-    structures.put(bloodIsland, IslandStructure.seaBuilder().addDefaultTemplates(getResource("islands/blood/"))
-      .addTree(reference(bloodSlimeIslandFungus), 1)
-      .addSlimyGrass(FoliageType.BLOOD)
-      .build(new StructureSettings(tag(TinkerTags.Biomes.BLOOD_ISLANDS), monsterOverride(EntityType.MAGMA_CUBE, 4, 6), Decoration.UNDERGROUND_DECORATION, TerrainAdjustment.NONE)));
-    // enderslime
-    structures.put(endSlimeIsland, IslandStructure.skyBuilder().addDefaultTemplates(getResource("islands/ender/"))
-      .addTree(reference(enderSlimeTree), 3)
-      .addTree(reference(enderSlimeTreeTall), 17)
-      .addSlimyGrass(FoliageType.ENDER)
-      .vines(TinkerWorld.enderSlimeVine.get())
-      .build(new StructureSettings(tag(TinkerTags.Biomes.ENDERSLIME_ISLANDS), monsterOverride(TinkerWorld.enderSlimeEntity.get(), 4, 4), Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE)));
+  public CompletableFuture<?> run(CachedOutput cache) {
+    return CompletableFuture.runAsync(() -> {
+      Map<ResourceKey<Structure>, Structure> structures = new LinkedHashMap<>();
+      // earthslime island
+      structures.put(earthSlimeIsland, IslandStructure.seaBuilder()
+        .addDefaultTemplates(getResource("islands/earth/"))
+        .addTree(reference(earthSlimeIslandTree), 1)
+        .addSlimyGrass(FoliageType.EARTH)
+        .build(new StructureSettings(tag(TinkerTags.Biomes.EARTHSLIME_ISLANDS), monsterOverride(EntityType.SLIME, 4, 4), Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE)));
+      // skyslime island
+      structures.put(skySlimeIsland, IslandStructure.skyBuilder()
+        .addDefaultTemplates(getResource("islands/sky/"))
+        .addTree(reference(skySlimeIslandTree), 1)
+        .addSlimyGrass(FoliageType.SKY)
+        .vines(TinkerWorld.skySlimeVine.get())
+        .build(new StructureSettings(tag(TinkerTags.Biomes.SKYSLIME_ISLANDS), monsterOverride(TinkerWorld.skySlimeEntity.get(), 3, 4), Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE)));
+      // clay island
+      structures.put(clayIsland, IslandStructure.skyBuilder().addDefaultTemplates(getResource("islands/dirt/"))
+        .addTree(reference(TreeFeatures.OAK), 4)
+        .addTree(reference(TreeFeatures.BIRCH), 3)
+        .addTree(reference(TreeFeatures.SPRUCE), 2)
+        .addTree(reference(TreeFeatures.ACACIA), 1)
+        .addTree(reference(TreeFeatures.JUNGLE_TREE_NO_VINE), 1)
+        .addGrass(Blocks.GRASS, 7)
+        .addGrass(Blocks.FERN, 1)
+        .build(new StructureSettings(tag(TinkerTags.Biomes.CLAY_ISLANDS), monsterOverride(TinkerWorld.terracubeEntity.get(), 2, 4), Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE)));
+      // blood island
+      structures.put(bloodIsland, IslandStructure.seaBuilder().addDefaultTemplates(getResource("islands/blood/"))
+        .addTree(reference(bloodSlimeIslandFungus), 1)
+        .addSlimyGrass(FoliageType.BLOOD)
+        .build(new StructureSettings(tag(TinkerTags.Biomes.BLOOD_ISLANDS), monsterOverride(EntityType.MAGMA_CUBE, 4, 6), Decoration.UNDERGROUND_DECORATION, TerrainAdjustment.NONE)));
+      // enderslime
+      structures.put(endSlimeIsland, IslandStructure.skyBuilder().addDefaultTemplates(getResource("islands/ender/"))
+        .addTree(reference(enderSlimeTree), 3)
+        .addTree(reference(enderSlimeTreeTall), 17)
+        .addSlimyGrass(FoliageType.ENDER)
+        .vines(TinkerWorld.enderSlimeVine.get())
+        .build(new StructureSettings(tag(TinkerTags.Biomes.ENDERSLIME_ISLANDS), monsterOverride(TinkerWorld.enderSlimeEntity.get(), 4, 4), Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE)));
 
-    // structure sets
-    Map<String, StructureSet> structureSets = new LinkedHashMap<>();
-    structureSets.put("overworld_ocean_island", structureSet(new RandomSpreadStructurePlacement(35, 25, RandomSpreadType.LINEAR, 25988585), entry(earthSlimeIsland, 1)));
-    structureSets.put("overworld_sky_island", structureSet(new RandomSpreadStructurePlacement(40, 15, RandomSpreadType.LINEAR, 14357800), entry(skySlimeIsland, 4), entry(clayIsland, 1)));
-    structureSets.put("nether_ocean_island", structureSet(new RandomSpreadStructurePlacement(15, 10, RandomSpreadType.LINEAR, 65245622), entry(bloodIsland, 1)));
-    structureSets.put("end_sky_island", structureSet(new RandomSpreadStructurePlacement(25, 12, RandomSpreadType.LINEAR, 368963602), entry(endSlimeIsland, 1)));
+      // structure sets
+      Map<String, StructureSet> structureSets = new LinkedHashMap<>();
+      structureSets.put("overworld_ocean_island", structureSet(new RandomSpreadStructurePlacement(35, 25, RandomSpreadType.LINEAR, 25988585), entry(earthSlimeIsland, 1)));
+      structureSets.put("overworld_sky_island", structureSet(new RandomSpreadStructurePlacement(40, 15, RandomSpreadType.LINEAR, 14357800), entry(skySlimeIsland, 4), entry(clayIsland, 1)));
+      structureSets.put("nether_ocean_island", structureSet(new RandomSpreadStructurePlacement(15, 10, RandomSpreadType.LINEAR, 65245622), entry(bloodIsland, 1)));
+      structureSets.put("end_sky_island", structureSet(new RandomSpreadStructurePlacement(25, 12, RandomSpreadType.LINEAR, 368963602), entry(endSlimeIsland, 1)));
 
-    // biome modifiers
-    Map<String, BiomeModifier> biomeModifiers = new LinkedHashMap<>();
-    HolderSet<Biome> overworld = tag(BiomeTags.IS_OVERWORLD);
-    HolderSet<Biome> nether = tag(BiomeTags.IS_NETHER);
-    HolderSet<Biome> end = tag(BiomeTags.IS_END);
+      // biome modifiers
+      Map<String, BiomeModifier> biomeModifiers = new LinkedHashMap<>();
+      HolderSet<Biome> overworld = tag(BiomeTags.IS_OVERWORLD);
+      HolderSet<Biome> nether = tag(BiomeTags.IS_NETHER);
+      HolderSet<Biome> end = tag(BiomeTags.IS_END);
 
-    biomeModifiers.put("cobalt_ore", new AddFeaturesBiomeModifier(nether, direct(reference(TinkerWorld.placedSmallCobaltOre), reference(TinkerWorld.placedLargeCobaltOre)), Decoration.UNDERGROUND_DECORATION));
-    // geodes
-    biomeModifiers.put("earth_geode", new AddFeaturesBiomeModifier(overworld, direct(reference(TinkerWorld.placedEarthGeode)), Decoration.LOCAL_MODIFICATIONS));
-    biomeModifiers.put("sky_geode", new AddFeaturesBiomeModifier(and(overworld, not(Registries.BIOME, or(tag(BiomeTags.IS_OCEAN), tag(BiomeTags.IS_DEEP_OCEAN), tag(BiomeTags.IS_BEACH), tag(BiomeTags.IS_RIVER)))), direct(reference(TinkerWorld.placedSkyGeode)), Decoration.LOCAL_MODIFICATIONS));
-    biomeModifiers.put("ichor_geode", new AddFeaturesBiomeModifier(nether, direct(reference(TinkerWorld.placedIchorGeode)), Decoration.LOCAL_MODIFICATIONS));
-    biomeModifiers.put("ender_geode", new AddFeaturesBiomeModifier(and(end, not(Registries.BIOME, direct(reference(Biomes.THE_END)))), direct(reference(TinkerWorld.placedEnderGeode)), Decoration.LOCAL_MODIFICATIONS));
-    // spawns
-    biomeModifiers.put("spawn_overworld_slime", new AddSpawnsBiomeModifier(overworld, List.of(new SpawnerData(TinkerWorld.skySlimeEntity.get(), 100, 2, 4))));
-    biomeModifiers.put("spawn_end_slime", new AddSpawnsBiomeModifier(end, List.of(new SpawnerData(TinkerWorld.enderSlimeEntity.get(), 10, 2, 4))));
+      biomeModifiers.put("cobalt_ore", new AddFeaturesBiomeModifier(nether, direct(reference(TinkerWorld.placedSmallCobaltOre), reference(TinkerWorld.placedLargeCobaltOre)), Decoration.UNDERGROUND_DECORATION));
+      // geodes
+      biomeModifiers.put("earth_geode", new AddFeaturesBiomeModifier(overworld, direct(reference(TinkerWorld.placedEarthGeode)), Decoration.LOCAL_MODIFICATIONS));
+      biomeModifiers.put("sky_geode", new AddFeaturesBiomeModifier(and(overworld, not(Registries.BIOME, or(tag(BiomeTags.IS_OCEAN), tag(BiomeTags.IS_DEEP_OCEAN), tag(BiomeTags.IS_BEACH), tag(BiomeTags.IS_RIVER)))), direct(reference(TinkerWorld.placedSkyGeode)), Decoration.LOCAL_MODIFICATIONS));
+      biomeModifiers.put("ichor_geode", new AddFeaturesBiomeModifier(nether, direct(reference(TinkerWorld.placedIchorGeode)), Decoration.LOCAL_MODIFICATIONS));
+      biomeModifiers.put("ender_geode", new AddFeaturesBiomeModifier(and(end, not(Registries.BIOME, direct(reference(Biomes.THE_END)))), direct(reference(TinkerWorld.placedEnderGeode)), Decoration.LOCAL_MODIFICATIONS));
+      // spawns
+      biomeModifiers.put("spawn_overworld_slime", new AddSpawnsBiomeModifier(overworld, List.of(new SpawnerData(TinkerWorld.skySlimeEntity.get(), 100, 2, 4))));
+      biomeModifiers.put("spawn_end_slime", new AddSpawnsBiomeModifier(end, List.of(new SpawnerData(TinkerWorld.enderSlimeEntity.get(), 10, 2, 4))));
 
-    // run final loading
-    registryName(Registries.STRUCTURE_SET, structureSets).run(cache);
-    registryKey(Registries.STRUCTURE, structures).run(cache);
-    registryName(ForgeRegistries.Keys.BIOME_MODIFIERS, biomeModifiers).run(cache);
+      // run final loading
+      registryName(Registries.STRUCTURE_SET, structureSets).run(cache);
+      registryKey(Registries.STRUCTURE, structures).run(cache);
+      registryName(ForgeRegistries.Keys.BIOME_MODIFIERS, biomeModifiers).run(cache);
+    });
   }
 
   @Override
