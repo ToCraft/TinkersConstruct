@@ -635,12 +635,13 @@ public class BlockTagProvider extends TagsProvider<Block> {
     if (doesBurn) {
       // regular logs is handled by slimy logs tag
       this.tag(BlockTags.LOGS_THAT_BURN).addTag(object.getLogBlockTag());
-    } else {
-      this.tag(BlockTags.NON_FLAMMABLE_WOOD)
-        .add(object.get(), object.getSlab(), object.getStairs(),
-          object.getFence(), object.getFenceGate(), object.getDoor(), object.getTrapdoor(),
-          object.getPressurePlate(), object.getButton())
-        .addTag(object.getLogBlockTag());
+      // We no longer need to specify non-flammable wood, as it is now based on the presence of the LOGS_THAT_BURN tag...I think...
+//    } else {
+//      this.tag(BlockTags.NON_FLAMMABLE_WOOD)
+//        .add(object.get(), object.getSlab(), object.getStairs(),
+//          object.getFence(), object.getFenceGate(), object.getDoor(), object.getTrapdoor(),
+//          object.getPressurePlate(), object.getButton())
+//        .addTag(object.getLogBlockTag());
     }
 
     // signs

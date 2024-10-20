@@ -207,7 +207,7 @@ public class ItemTagProvider extends ItemTagsProvider {
     this.tag(Tags.Items.RAW_MATERIALS).addTag(TinkerTags.Items.RAW_COBALT);
 
     // wood
-    this.copy(BlockTags.NON_FLAMMABLE_WOOD, ItemTags.NON_FLAMMABLE_WOOD);
+//    this.copy(BlockTags.NON_FLAMMABLE_WOOD, ItemTags.NON_FLAMMABLE_WOOD);
     // planks
     this.copy(BlockTags.PLANKS, ItemTags.PLANKS);
     this.copy(BlockTags.WOODEN_SLABS, ItemTags.WOODEN_SLABS);
