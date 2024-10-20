@@ -89,7 +89,7 @@ public abstract class AbstractStructureRepalleter extends GenericNBTProvider {
               // if requested, run it through the structure template to cleanup NBT (e.g. compact palettes)
               if (task.reprocess) {
                 StructureTemplate template = new StructureTemplate();
-                template.load(newStructure);
+                template.load(BuiltInRegistries.BLOCK.asLookup(), newStructure);
                 newStructure = template.save(new CompoundTag());
               }
               saveNBT(cache, new ResourceLocation(modId, task.location), newStructure);
