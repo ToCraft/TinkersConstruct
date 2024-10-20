@@ -422,7 +422,7 @@ public class JEIPlugin implements IModPlugin {
 
     // shown via the modifiers
     NonNullList<ItemStack> modifierCrystals = NonNullList.create();
-    TinkerModifiers.modifierCrystal.get().fillItemCategory(CreativeModeTab.TAB_SEARCH, modifierCrystals);
+//    TinkerModifiers.modifierCrystal.get().fillItemCategory(CreativeModeTab.TAB_SEARCH, modifierCrystals);
     if (!modifierCrystals.isEmpty()) {
       manager.removeIngredientsAtRuntime(VanillaTypes.ITEM_STACK, modifierCrystals);
     }
