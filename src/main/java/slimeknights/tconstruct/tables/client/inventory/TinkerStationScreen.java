@@ -182,11 +182,6 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
 
   @Override
   public void init() {
-
-    assert this.minecraft != null;
-    // TODO: pretty sure we don't need this unless we add back the renaming slot
-    this.minecraft.keyboardHandler.setSendRepeatsToGui(true);
-
     // workaround to line up the tabs on switching even though the GUI is a tad higher
     this.topPos += 4;
     this.cornerY += 4;
@@ -728,20 +723,5 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
     String s = this.textField.getValue();
     super.resize(pMinecraft, pWidth, pHeight);
     this.textField.setValue(s);
-  }
-
-  @Override
-  public void removed() {
-    super.removed();
-    assert this.minecraft != null;
-    this.minecraft.keyboardHandler.setSendRepeatsToGui(false);
-  }
-
-  @Override
-  public void onClose() {
-    super.onClose();
-
-    assert this.minecraft != null;
-    this.minecraft.keyboardHandler.setSendRepeatsToGui(false);
   }
 }
