@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FungusBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -16,8 +17,8 @@ import slimeknights.tconstruct.world.worldgen.trees.feature.SlimeFungusFeature;
  */
 public class SlimeFungusBlock extends FungusBlock {
 
-  public SlimeFungusBlock(Properties properties, ResourceKey<ConfiguredFeature<HugeFungusConfiguration, SlimeFungusFeature>> fungusFeature) {
-    super(properties, fungusFeature);
+  public SlimeFungusBlock(Properties properties, ResourceKey<ConfiguredFeature<HugeFungusConfiguration, SlimeFungusFeature>> fungusFeature, Block requiredBlock) {
+    super(properties, (ResourceKey<ConfiguredFeature<?, ?>>) (ResourceKey<?>) fungusFeature, requiredBlock);
   }
 
   @Override
