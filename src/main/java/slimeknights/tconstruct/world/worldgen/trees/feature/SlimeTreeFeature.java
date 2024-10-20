@@ -262,7 +262,7 @@ public class SlimeTreeFeature extends Feature<SlimeTreeConfig> {
   }
 
   private static boolean isTallPlantAt(LevelSimulatedReader reader, BlockPos blockPos) {
-    return reader.isStateAtPosition(blockPos, state -> state.getMaterial() == Material.REPLACEABLE_PLANT);
+    return reader.isStateAtPosition(blockPos, state -> state.is(BlockTags.REPLACEABLE));
   }
 
   public static boolean isReplaceableAt(LevelSimulatedReader reader, BlockPos blockPos) {
