@@ -3,6 +3,7 @@ package slimeknights.tconstruct.tables.client.inventory;
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
@@ -121,7 +122,7 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity, 
     if (!buttons.isEmpty()) {
       int index = getButtonAt(mouseX, mouseY);
       if (index >= 0) {
-        renderTooltip(graphics, buttons.get(index).getDisplayName(), mouseX, mouseY);
+        graphics.renderTooltip(Minecraft.getInstance().font, buttons.get(index).getDisplayName(), mouseX, mouseY);
       }
     }
   }

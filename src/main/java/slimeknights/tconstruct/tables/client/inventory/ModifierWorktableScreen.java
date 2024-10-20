@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.tables.client.inventory;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
@@ -138,7 +139,7 @@ public class ModifierWorktableScreen extends BaseTabbedScreen<ModifierWorktableB
       if (!buttons.isEmpty()) {
         int index = getButtonAt(mouseX, mouseY);
         if (index >= 0) {
-          renderTooltip(graphics, buttons.get(index).getDisplayName(), mouseX, mouseY);
+          graphics.renderTooltip(Minecraft.getInstance().font, buttons.get(index).getDisplayName(), mouseX, mouseY);
         }
       }
     }
