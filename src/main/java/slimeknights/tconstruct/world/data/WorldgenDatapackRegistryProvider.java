@@ -1,18 +1,14 @@
 package slimeknights.tconstruct.world.data;
 
-import com.google.gson.JsonElement;
-import com.mojang.serialization.JsonOps;
-import lombok.RequiredArgsConstructor;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
-import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.CachedOutput;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DataProvider;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.features.TreeFeatures;
-import net.minecraft.resources.RegistryOps;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
@@ -36,8 +32,7 @@ import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
 import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadStructurePlacement;
 import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadType;
 import net.minecraft.world.level.levelgen.structure.placement.StructurePlacement;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.data.JsonCodecProvider;
+import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.common.world.ForgeBiomeModifiers.AddFeaturesBiomeModifier;
 import net.minecraftforge.common.world.ForgeBiomeModifiers.AddSpawnsBiomeModifier;
@@ -52,14 +47,10 @@ import slimeknights.tconstruct.world.TinkerWorld;
 import slimeknights.tconstruct.world.block.FoliageType;
 import slimeknights.tconstruct.world.worldgen.islands.IslandStructure;
 
-import java.io.IOException;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
 
 import static net.minecraft.core.HolderSet.direct;
 import static slimeknights.tconstruct.TConstruct.getResource;
@@ -74,86 +65,82 @@ import static slimeknights.tconstruct.world.TinkerStructures.enderSlimeTreeTall;
 import static slimeknights.tconstruct.world.TinkerStructures.skySlimeIsland;
 import static slimeknights.tconstruct.world.TinkerStructures.skySlimeIslandTree;
 
-/**
- * Provider for all our worldgen datapack registry stuff
- */
-@SuppressWarnings("SameParameterValue")
-@RequiredArgsConstructor
-public class WorldgenDatapackRegistryProvider implements DataProvider {
+public class WorldgenDatapackRegistryProvider extends DatapackBuiltinEntriesProvider {
 
-  private final DataGenerator generator;
-  private final ExistingFileHelper existingFileHelper;
-  private final RegistryAccess registryAccess = RegistryAccess.builtinCopy();
-  private final RegistryOps<JsonElement> registryOps = RegistryOps.create(JsonOps.INSTANCE, registryAccess);
+  public WorldgenDatapackRegistryProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+    super(output, registries, createRegistrySet(), Set.of(TConstruct.MOD_ID));
+  }
 
-  @Override
-  public CompletableFuture<?> run(CachedOutput cache) {
-    return CompletableFuture.runAsync(() -> {
-      Map<ResourceKey<Structure>, Structure> structures = new LinkedHashMap<>();
-      // earthslime island
-      structures.put(earthSlimeIsland, IslandStructure.seaBuilder()
-        .addDefaultTemplates(getResource("islands/earth/"))
-        .addTree(reference(earthSlimeIslandTree), 1)
-        .addSlimyGrass(FoliageType.EARTH)
-        .build(new StructureSettings(tag(TinkerTags.Biomes.EARTHSLIME_ISLANDS), monsterOverride(EntityType.SLIME, 4, 4), Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE)));
-      // skyslime island
-      structures.put(skySlimeIsland, IslandStructure.skyBuilder()
-        .addDefaultTemplates(getResource("islands/sky/"))
-        .addTree(reference(skySlimeIslandTree), 1)
-        .addSlimyGrass(FoliageType.SKY)
-        .vines(TinkerWorld.skySlimeVine.get())
-        .build(new StructureSettings(tag(TinkerTags.Biomes.SKYSLIME_ISLANDS), monsterOverride(TinkerWorld.skySlimeEntity.get(), 3, 4), Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE)));
-      // clay island
-      structures.put(clayIsland, IslandStructure.skyBuilder().addDefaultTemplates(getResource("islands/dirt/"))
-        .addTree(reference(TreeFeatures.OAK), 4)
-        .addTree(reference(TreeFeatures.BIRCH), 3)
-        .addTree(reference(TreeFeatures.SPRUCE), 2)
-        .addTree(reference(TreeFeatures.ACACIA), 1)
-        .addTree(reference(TreeFeatures.JUNGLE_TREE_NO_VINE), 1)
-        .addGrass(Blocks.GRASS, 7)
-        .addGrass(Blocks.FERN, 1)
-        .build(new StructureSettings(tag(TinkerTags.Biomes.CLAY_ISLANDS), monsterOverride(TinkerWorld.terracubeEntity.get(), 2, 4), Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE)));
-      // blood island
-      structures.put(bloodIsland, IslandStructure.seaBuilder().addDefaultTemplates(getResource("islands/blood/"))
-        .addTree(reference(bloodSlimeIslandFungus), 1)
-        .addSlimyGrass(FoliageType.BLOOD)
-        .build(new StructureSettings(tag(TinkerTags.Biomes.BLOOD_ISLANDS), monsterOverride(EntityType.MAGMA_CUBE, 4, 6), Decoration.UNDERGROUND_DECORATION, TerrainAdjustment.NONE)));
-      // enderslime
-      structures.put(endSlimeIsland, IslandStructure.skyBuilder().addDefaultTemplates(getResource("islands/ender/"))
-        .addTree(reference(enderSlimeTree), 3)
-        .addTree(reference(enderSlimeTreeTall), 17)
-        .addSlimyGrass(FoliageType.ENDER)
-        .vines(TinkerWorld.enderSlimeVine.get())
-        .build(new StructureSettings(tag(TinkerTags.Biomes.ENDERSLIME_ISLANDS), monsterOverride(TinkerWorld.enderSlimeEntity.get(), 4, 4), Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE)));
+  private static RegistrySetBuilder createRegistrySet() {
+    return new RegistrySetBuilder()
+      .add(Registries.STRUCTURE, WorldgenDatapackRegistryProvider::bootstrapStructures)
+      .add(Registries.STRUCTURE_SET, WorldgenDatapackRegistryProvider::bootstrapStructureSets)
+      .add(ForgeRegistries.Keys.BIOME_MODIFIERS, WorldgenDatapackRegistryProvider::bootstrapBiomeModifiers);
+  }
 
-      // structure sets
-      Map<String, StructureSet> structureSets = new LinkedHashMap<>();
-      structureSets.put("overworld_ocean_island", structureSet(new RandomSpreadStructurePlacement(35, 25, RandomSpreadType.LINEAR, 25988585), entry(earthSlimeIsland, 1)));
-      structureSets.put("overworld_sky_island", structureSet(new RandomSpreadStructurePlacement(40, 15, RandomSpreadType.LINEAR, 14357800), entry(skySlimeIsland, 4), entry(clayIsland, 1)));
-      structureSets.put("nether_ocean_island", structureSet(new RandomSpreadStructurePlacement(15, 10, RandomSpreadType.LINEAR, 65245622), entry(bloodIsland, 1)));
-      structureSets.put("end_sky_island", structureSet(new RandomSpreadStructurePlacement(25, 12, RandomSpreadType.LINEAR, 368963602), entry(endSlimeIsland, 1)));
+  private static void bootstrapStructures(BootstapContext<Structure> context) {
 
-      // biome modifiers
-      Map<String, BiomeModifier> biomeModifiers = new LinkedHashMap<>();
-      HolderSet<Biome> overworld = tag(BiomeTags.IS_OVERWORLD);
-      HolderSet<Biome> nether = tag(BiomeTags.IS_NETHER);
-      HolderSet<Biome> end = tag(BiomeTags.IS_END);
 
-      biomeModifiers.put("cobalt_ore", new AddFeaturesBiomeModifier(nether, direct(reference(TinkerWorld.placedSmallCobaltOre), reference(TinkerWorld.placedLargeCobaltOre)), Decoration.UNDERGROUND_DECORATION));
-      // geodes
-      biomeModifiers.put("earth_geode", new AddFeaturesBiomeModifier(overworld, direct(reference(TinkerWorld.placedEarthGeode)), Decoration.LOCAL_MODIFICATIONS));
-      biomeModifiers.put("sky_geode", new AddFeaturesBiomeModifier(and(overworld, not(Registries.BIOME, or(tag(BiomeTags.IS_OCEAN), tag(BiomeTags.IS_DEEP_OCEAN), tag(BiomeTags.IS_BEACH), tag(BiomeTags.IS_RIVER)))), direct(reference(TinkerWorld.placedSkyGeode)), Decoration.LOCAL_MODIFICATIONS));
-      biomeModifiers.put("ichor_geode", new AddFeaturesBiomeModifier(nether, direct(reference(TinkerWorld.placedIchorGeode)), Decoration.LOCAL_MODIFICATIONS));
-      biomeModifiers.put("ender_geode", new AddFeaturesBiomeModifier(and(end, not(Registries.BIOME, direct(reference(Biomes.THE_END)))), direct(reference(TinkerWorld.placedEnderGeode)), Decoration.LOCAL_MODIFICATIONS));
-      // spawns
-      biomeModifiers.put("spawn_overworld_slime", new AddSpawnsBiomeModifier(overworld, List.of(new SpawnerData(TinkerWorld.skySlimeEntity.get(), 100, 2, 4))));
-      biomeModifiers.put("spawn_end_slime", new AddSpawnsBiomeModifier(end, List.of(new SpawnerData(TinkerWorld.enderSlimeEntity.get(), 10, 2, 4))));
+    // earthslime island
+    context.register(earthSlimeIsland, IslandStructure.seaBuilder()
+      .addDefaultTemplates(getResource("islands/earth/"))
+      .addTree(reference(earthSlimeIslandTree), 1)
+      .addSlimyGrass(FoliageType.EARTH)
+      .build(new StructureSettings(tag(context, TinkerTags.Biomes.EARTHSLIME_ISLANDS), monsterOverride(EntityType.SLIME, 4, 4), Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE)));
+    // skyslime island
+    context.register(skySlimeIsland, IslandStructure.skyBuilder()
+      .addDefaultTemplates(getResource("islands/sky/"))
+      .addTree(reference(skySlimeIslandTree), 1)
+      .addSlimyGrass(FoliageType.SKY)
+      .vines(TinkerWorld.skySlimeVine.get())
+      .build(new StructureSettings(tag(context, TinkerTags.Biomes.SKYSLIME_ISLANDS), monsterOverride(TinkerWorld.skySlimeEntity.get(), 3, 4), Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE)));
+    // clay island
+    context.register(clayIsland, IslandStructure.skyBuilder().addDefaultTemplates(getResource("islands/dirt/"))
+      .addTree(reference(context, TreeFeatures.OAK), 4)
+      .addTree(reference(context, TreeFeatures.BIRCH), 3)
+      .addTree(reference(context, TreeFeatures.SPRUCE), 2)
+      .addTree(reference(context, TreeFeatures.ACACIA), 1)
+      .addTree(reference(context, TreeFeatures.JUNGLE_TREE_NO_VINE), 1)
+      .addGrass(Blocks.GRASS, 7)
+      .addGrass(Blocks.FERN, 1)
+      .build(new StructureSettings(tag(context, TinkerTags.Biomes.CLAY_ISLANDS), monsterOverride(TinkerWorld.terracubeEntity.get(), 2, 4), Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE)));
+    // blood island
+    context.register(bloodIsland, IslandStructure.seaBuilder().addDefaultTemplates(getResource("islands/blood/"))
+      .addTree(reference(bloodSlimeIslandFungus), 1)
+      .addSlimyGrass(FoliageType.BLOOD)
+      .build(new StructureSettings(tag(context, TinkerTags.Biomes.BLOOD_ISLANDS), monsterOverride(EntityType.MAGMA_CUBE, 4, 6), Decoration.UNDERGROUND_DECORATION, TerrainAdjustment.NONE)));
+    // enderslime
+    context.register(endSlimeIsland, IslandStructure.skyBuilder().addDefaultTemplates(getResource("islands/ender/"))
+      .addTree(reference(enderSlimeTree), 3)
+      .addTree(reference(enderSlimeTreeTall), 17)
+      .addSlimyGrass(FoliageType.ENDER)
+      .vines(TinkerWorld.enderSlimeVine.get())
+      .build(new StructureSettings(tag(context, TinkerTags.Biomes.ENDERSLIME_ISLANDS), monsterOverride(TinkerWorld.enderSlimeEntity.get(), 4, 4), Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE)));
+  }
 
-      // run final loading
-      registryName(Registries.STRUCTURE_SET, structureSets).run(cache);
-      registryKey(Registries.STRUCTURE, structures).run(cache);
-      registryName(ForgeRegistries.Keys.BIOME_MODIFIERS, biomeModifiers).run(cache);
-    });
+  private static void bootstrapStructureSets(BootstapContext<StructureSet> context) {
+    // structure sets
+    context.register(ResourceKey.create(Registries.STRUCTURE_SET, new ResourceLocation(TConstruct.MOD_ID, "overworld_ocean_island")), structureSet(new RandomSpreadStructurePlacement(35, 25, RandomSpreadType.LINEAR, 25988585), entry(context, earthSlimeIsland, 1)));
+    context.register(ResourceKey.create(Registries.STRUCTURE_SET, new ResourceLocation(TConstruct.MOD_ID, "overworld_sky_island")), structureSet(new RandomSpreadStructurePlacement(40, 15, RandomSpreadType.LINEAR, 14357800), entry(context, skySlimeIsland, 4), entry(context, clayIsland, 1)));
+    context.register(ResourceKey.create(Registries.STRUCTURE_SET, new ResourceLocation(TConstruct.MOD_ID, "nether_ocean_island")), structureSet(new RandomSpreadStructurePlacement(15, 10, RandomSpreadType.LINEAR, 65245622), entry(context, bloodIsland, 1)));
+    context.register(ResourceKey.create(Registries.STRUCTURE_SET, new ResourceLocation(TConstruct.MOD_ID, "end_sky_island")), structureSet(new RandomSpreadStructurePlacement(25, 12, RandomSpreadType.LINEAR, 368963602), entry(context, endSlimeIsland, 1)));
+  }
+
+  private static void bootstrapBiomeModifiers(BootstapContext<BiomeModifier> context) {
+    // biome modifiers
+    HolderSet<Biome> overworld = tag(context, BiomeTags.IS_OVERWORLD);
+    HolderSet<Biome> nether = tag(context, BiomeTags.IS_NETHER);
+    HolderSet<Biome> end = tag(context, BiomeTags.IS_END);
+
+    context.register(ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(TConstruct.MOD_ID, "cobalt_ore")), new AddFeaturesBiomeModifier(nether, direct(reference(TinkerWorld.placedSmallCobaltOre), reference(TinkerWorld.placedLargeCobaltOre)), Decoration.UNDERGROUND_DECORATION));
+    // geodes
+    context.register(ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(TConstruct.MOD_ID, "earth_geode")), new AddFeaturesBiomeModifier(overworld, direct(reference(TinkerWorld.placedEarthGeode)), Decoration.LOCAL_MODIFICATIONS));
+    context.register(ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(TConstruct.MOD_ID, "sky_geode")), new AddFeaturesBiomeModifier(and(overworld, not(context.registryLookup(Registries.BIOME).orElseThrow(), or(tag(context, BiomeTags.IS_OCEAN), tag(context, BiomeTags.IS_DEEP_OCEAN), tag(context, BiomeTags.IS_BEACH), tag(context, BiomeTags.IS_RIVER)))), direct(reference(TinkerWorld.placedSkyGeode)), Decoration.LOCAL_MODIFICATIONS));
+    context.register(ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(TConstruct.MOD_ID, "ichor_geode")), new AddFeaturesBiomeModifier(nether, direct(reference(TinkerWorld.placedIchorGeode)), Decoration.LOCAL_MODIFICATIONS));
+    context.register(ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(TConstruct.MOD_ID, "ender_geode")), new AddFeaturesBiomeModifier(and(end, not(context.registryLookup(Registries.BIOME).orElseThrow(), direct(reference(context, Biomes.THE_END)))), direct(reference(TinkerWorld.placedEnderGeode)), Decoration.LOCAL_MODIFICATIONS));
+    // spawns
+    context.register(ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(TConstruct.MOD_ID, "spawn_overworld_slime")), new AddSpawnsBiomeModifier(overworld, List.of(new SpawnerData(TinkerWorld.skySlimeEntity.get(), 100, 2, 4))));
+    context.register(ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(TConstruct.MOD_ID, "spawn_end_slime")), new AddSpawnsBiomeModifier(end, List.of(new SpawnerData(TinkerWorld.enderSlimeEntity.get(), 10, 2, 4))));
   }
 
   @Override
@@ -161,106 +148,57 @@ public class WorldgenDatapackRegistryProvider implements DataProvider {
     return "Tinkers' Construct Worldgen Datapack Registries";
   }
 
-
   /* Registry helpers */
 
-  /**
-   * Creates a reference to the given registry object
-   */
-  private <T> Holder<T> reference(ResourceKey<T> key) {
+  /** Creates a reference to the given registry object */
+  private static <T> Holder<T> reference(BootstapContext<?> context, ResourceKey<T> key) {
     ResourceKey<Registry<T>> registry = ResourceKey.createRegistryKey(key.registry());
-    return registryAccess.registryOrThrow(registry).getHolderOrThrow(Objects.requireNonNull(key));
+    return context.registryLookup(registry).orElseThrow().getOrThrow(key);
   }
 
-  /**
-   * Creates a reference to the given registry object
-   */
-  private <T> Holder<T> reference(Holder<T> object) {
-    return reference(object.unwrapKey().orElseThrow());
-  }
-
-  /**
-   * Creates a reference to the given registry object
-   */
-  private <T> Holder<T> reference(RegistryObject<T> object) {
-    return reference(Objects.requireNonNull(object.getKey()));
+  /** Creates a reference to the given registry object */
+  private static <T> Holder<T> reference(RegistryObject<T> object) {
+    return object.getHolder().orElseThrow();
   }
 
 
   /* Holder sets */
 
-  /**
-   * Creates a holder set tag for the given registry
-   */
-  private <T> HolderSet<T> tag(TagKey<T> key) {
-    return registryAccess.registryOrThrow(key.registry()).getOrCreateTag(key);
+  /** Creates a holder set tag for the given registry */
+  private static <T> HolderSet.Named<T> tag(BootstapContext<?> context, TagKey<T> key) {
+    return context.registryLookup(key.registry()).orElseThrow().getOrThrow(key);
   }
 
-  /**
-   * Ands the holder sets together
-   */
+  /** Ands the holder sets together */
   @SafeVarargs
-  private <T> AndHolderSet<T> and(HolderSet<T>... sets) {
+  private static <T> AndHolderSet<T> and(HolderSet<T>... sets) {
     return new AndHolderSet<>(List.of(sets));
   }
 
-  /**
-   * Ors the holder sets together
-   */
+  /** Ors the holder sets together */
   @SafeVarargs
-  private <T> OrHolderSet<T> or(HolderSet<T>... sets) {
+  private static <T> OrHolderSet<T> or(HolderSet<T>... sets) {
     return new OrHolderSet<>(List.of(sets));
   }
 
-  private <T> NotHolderSet<T> not(ResourceKey<Registry<T>> key, HolderSet<T> set) {
-    return new NotHolderSet<>(registryAccess.registryOrThrow(key).asLookup(), set);
+  private static <T> NotHolderSet<T> not(HolderLookup.RegistryLookup<T> lookup, HolderSet<T> set) {
+    return new NotHolderSet<>(lookup, set);
   }
-
-
-  /* Datapack helpers */
-
-  /**
-   * Creates a datapack registry with the given entries
-   */
-  private <T> DataProvider registryRL(ResourceKey<Registry<T>> registry, Map<ResourceLocation, T> entries) {
-    return JsonCodecProvider.forDatapackRegistry(generator, existingFileHelper, TConstruct.MOD_ID, registryOps, registry, entries);
-  }
-
-  /**
-   * Creates a datapack registry with the given entries
-   */
-  private <T> DataProvider registryName(ResourceKey<Registry<T>> registry, Map<String, T> entries) {
-    return registryRL(registry, entries.entrySet().stream().collect(Collectors.toMap(entry -> TConstruct.getResource(entry.getKey()), Entry::getValue)));
-  }
-
-  /**
-   * Creates a datapack registry with the given entries
-   */
-  private <T> DataProvider registryKey(ResourceKey<Registry<T>> registry, Map<ResourceKey<T>, T> entries) {
-    return registryRL(registry, entries.entrySet().stream().collect(Collectors.toMap(entry -> entry.getKey().location(), Entry::getValue)));
-  }
-
 
   /* Object creation helpers */
 
-  /**
-   * Saves a structure set
-   */
-  private StructureSet structureSet(StructurePlacement placement, StructureSelectionEntry... structures) {
+  /** Saves a structure set */
+  private static StructureSet structureSet(StructurePlacement placement, StructureSelectionEntry... structures) {
     return new StructureSet(List.of(structures), placement);
   }
 
-  /**
-   * Creates an entry for a registry object
-   */
-  private StructureSelectionEntry entry(ResourceKey<Structure> structure, int weight) {
-    return new StructureSelectionEntry(reference(structure), weight);
+  /** Creates an entry for a registry object */
+  private static StructureSelectionEntry entry(BootstapContext<?> context, ResourceKey<Structure> structure, int weight) {
+    return new StructureSelectionEntry(reference(context, structure), weight);
   }
 
-  /**
-   * Creates a spawn override for a single mob
-   */
-  private static Map<MobCategory, StructureSpawnOverride> monsterOverride(EntityType<?> entity, int min, int max) {
+  /** Creates a spawn override for a single mob */
+  private static Map<MobCategory,StructureSpawnOverride> monsterOverride(EntityType<?> entity, int min, int max) {
     return Map.of(MobCategory.MONSTER, new StructureSpawnOverride(BoundingBoxType.STRUCTURE, WeightedRandomList.create(new MobSpawnSettings.SpawnerData(entity, 1, min, max))));
   }
 }
