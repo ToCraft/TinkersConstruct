@@ -5,6 +5,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,7 +30,7 @@ public abstract class ToolItemTest extends BaseMcTest {
     MaterialItemFixture.init();
     if (tool == null) {
       tool = new ModifiableItem(new Item.Properties().stacksTo(1), ToolDefinitionFixture.getStandardToolDefinition());
-      Registry.register(BuiltInRegistries.ITEM, new ResourceLocation("test", "toolcore"), tool);
+      ForgeRegistries.ITEMS.register(new ResourceLocation("test", "toolcore"), tool);
     }
     setupTierSorting();
     ModifierStatsBuilder.disableFilter();

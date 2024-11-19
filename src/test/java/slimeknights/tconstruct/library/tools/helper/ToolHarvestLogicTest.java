@@ -1,5 +1,6 @@
 package slimeknights.tconstruct.library.tools.helper;
 
+import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -7,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import slimeknights.mantle.data.predicate.block.BlockPredicate;
@@ -34,7 +36,7 @@ class ToolHarvestLogicTest extends ToolItemTest {
     MaterialItemFixture.init();
     if (pickaxeTool == null) {
       pickaxeTool = new ModifiableItem(new Item.Properties().stacksTo(1), ToolDefinitionFixture.getStandardToolDefinition());
-      Registry.register(BuiltInRegistries.ITEM, new ResourceLocation("test", "pickaxe"), pickaxeTool);
+      ForgeRegistries.ITEMS.register(new ResourceLocation("test", "pickaxe"), pickaxeTool);
     }
   }
 
@@ -92,7 +94,7 @@ class ToolHarvestLogicTest extends ToolItemTest {
                          .build());
 
     ModifiableItem toolWithMiningModifier = new ModifiableItem(new Item.Properties(), definition);
-    Registry.register(BuiltInRegistries.ITEM, new ResourceLocation("test", "tool_with_mining_modifier"), toolWithMiningModifier);
+    ForgeRegistries.ITEMS.register(new ResourceLocation("test", "tool_with_mining_modifier"), toolWithMiningModifier);
     ItemStack tool = buildTestTool(toolWithMiningModifier);
 
     // boosted by correct block
