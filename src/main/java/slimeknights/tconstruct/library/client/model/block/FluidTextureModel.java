@@ -252,7 +252,7 @@ public class FluidTextureModel implements IUnbakedGeometry<FluidTextureModel> {
       }
 
       // get the block first, ensuring its valid
-      Block block = RetexturedBlockItem.getTexture(stack);
+      Block block = RetexturedHelper.getBlock(RetexturedHelper.getTextureName(stack.getTag()));
       if (block == Blocks.AIR) {
         return originalModel;
       }
