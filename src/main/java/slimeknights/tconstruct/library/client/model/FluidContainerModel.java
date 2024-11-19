@@ -121,6 +121,7 @@ public record FluidContainerModel(FluidStack fluid, boolean flipGas) implements 
     }
   }
 
+  /*
   @Override
   public Collection<Material> getMaterials(IGeometryBakingContext owner, Function<ResourceLocation, UnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors) {
     Set<Material> textures = Sets.newHashSet();
@@ -129,6 +130,7 @@ public record FluidContainerModel(FluidStack fluid, boolean flipGas) implements 
     textures.add(owner.getMaterial("fluid"));
     return textures;
   }
+   */
 
   /**
    * Gets the given sprite, or null if the texture is not present in the model
