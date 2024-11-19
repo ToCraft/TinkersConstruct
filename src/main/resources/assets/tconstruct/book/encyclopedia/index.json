@@ -100,7 +100,12 @@
   {
     "name": "materials_harvest",
     "data": "no-load",
-    "extraData": { "tconstruct:material_tier": { "type": "tconstruct:melee_harvest", "detailed": true }},
+    "extraData": {
+      "tconstruct:material_tier": {
+        "type": "tconstruct:melee_harvest",
+        "detailed": true
+      }
+    },
     "icon": {
       "item": "minecraft:stone"
     }
@@ -108,7 +113,12 @@
   {
     "name": "materials_ranged",
     "data": "no-load",
-    "extraData": { "tconstruct:material_tier": { "type": "tconstruct:ranged", "detailed": true }},
+    "extraData": {
+      "tconstruct:material_tier": {
+        "type": "tconstruct:ranged",
+        "detailed": true
+      }
+    },
     "icon": {
       "item": "minecraft:bamboo"
     }
@@ -116,7 +126,12 @@
   {
     "name": "materials_armor",
     "data": "no-load",
-    "extraData": { "tconstruct:material_tier": { "type": "tconstruct:armor", "detailed": true } },
+    "extraData": {
+      "tconstruct:material_tier": {
+        "type": "tconstruct:armor",
+        "detailed": true
+      }
+    },
     "icon": {
       "item": "minecraft:gold_ingot"
     }
@@ -124,7 +139,12 @@
   {
     "name": "materials_skull",
     "data": "no-load",
-    "extraData": { "tconstruct:material_tier": { "type": "tconstruct:skull", "detailed": true } },
+    "extraData": {
+      "tconstruct:material_tier": {
+        "type": "tconstruct:skull",
+        "detailed": true
+      }
+    },
     "icon": {
       "item": "minecraft:skeleton_skull"
     }

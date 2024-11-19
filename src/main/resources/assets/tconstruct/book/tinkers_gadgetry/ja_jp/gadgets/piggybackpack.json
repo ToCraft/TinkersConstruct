@@ -1,7 +1,7 @@
 {
   "title": "ピギーバックパック",
   "image": {
-	"file": "tconstruct:book/images/piggybackpack.png",
+    "file": "tconstruct:book/images/piggybackpack.png",
     "width": 140,
     "height": 80
   },

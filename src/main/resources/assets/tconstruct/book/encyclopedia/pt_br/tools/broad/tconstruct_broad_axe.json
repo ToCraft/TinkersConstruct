@@ -1,8 +1,13 @@
 {
   "tool": "tconstruct:broad_axe",
   "text": [
-    { "text": "O Machado Grande pode extrair uma única coluna de uma árvore, ou 6 blocos em uma coluna vertical." },
-    { "text": "Os expansores se alternam entre largura e profundidade.", "paragraph": true }
+    {
+      "text": "O Machado Grande pode extrair uma única coluna de uma árvore, ou 6 blocos em uma coluna vertical."
+    },
+    {
+      "text": "Os expansores se alternam entre largura e profundidade.",
+      "paragraph": true
+    }
   ],
   "properties": [
     "+5 Dano de Ataque",

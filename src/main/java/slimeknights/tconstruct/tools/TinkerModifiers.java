@@ -269,7 +269,6 @@ import slimeknights.tconstruct.tools.stats.ToolType;
 import slimeknights.tconstruct.util.SimpleRecipeSerializer;
 
 import static slimeknights.tconstruct.TConstruct.getResource;
-import static slimeknights.tconstruct.tools.TinkerTools.TAB_TOOLS;
 import static slimeknights.tconstruct.tools.TinkerTools.TAB_TOOLS_ITEMS;
 
 /**

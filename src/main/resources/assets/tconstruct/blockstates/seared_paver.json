@@ -1,7 +1,7 @@
 {
-    "variants": {
-        "": {
-            "model": "tconstruct:block/smeltery/seared/paver"
-        }
+  "variants": {
+    "": {
+      "model": "tconstruct:block/smeltery/seared/paver"
     }
+  }
 }

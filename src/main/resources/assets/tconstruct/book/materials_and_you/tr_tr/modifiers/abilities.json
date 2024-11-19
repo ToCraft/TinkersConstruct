@@ -8,7 +8,9 @@
       "slot": "abilities"
     }
   },
-  "tooltip": [ "Yetenek Yuvası İmgesi" ],
+  "tooltip": [
+    "Yetenek Yuvası İmgesi"
+  ],
   "text": [
     {
       "text": "Yetenekler aracı gözle görülür bir biçimde değiştiren güçlü değiştiricilerdir. Çifte kullanma araçları tutmasını kolaylaştırırken ipeksi ve kendiliğinden ergitme gibi değiştiriciler blokları çıkarma etkilerini gözle görülür biçimde değiştirir. "

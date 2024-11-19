@@ -1,7 +1,7 @@
 {
   "title": "史萊姆蛋糕",
   "image": {
-	"file": "tconstruct:book/images/cake.png",
+    "file": "tconstruct:book/images/cake.png",
     "width": 180,
     "height": 67
   },

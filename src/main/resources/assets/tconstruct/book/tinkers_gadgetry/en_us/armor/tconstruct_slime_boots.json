@@ -1,8 +1,13 @@
 {
   "tool": "tconstruct:slime_boots",
   "text": [
-    { "text": "These boots combine the power of the rabbit with slime to allow you to jump around with ease." },
-    { "text": "To create these fantastic boots, pour enderslime on a rabbits foot. The boots can later be repaired using rabbit hide.", "paragraph": true }
+    {
+      "text": "These boots combine the power of the rabbit with slime to allow you to jump around with ease."
+    },
+    {
+      "text": "To create these fantastic boots, pour enderslime on a rabbits foot. The boots can later be repaired using rabbit hide.",
+      "paragraph": true
+    }
   ],
   "properties": [
     "High Durability",

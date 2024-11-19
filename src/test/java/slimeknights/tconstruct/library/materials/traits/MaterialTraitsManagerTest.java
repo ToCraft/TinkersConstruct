@@ -15,6 +15,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MaterialTraitsManagerTest extends BaseMcTest {
+
   // file containing just default traits
   private static final MaterialId DEFAULT_TRAITS = new MaterialId(TConstruct.getResource("default"));
   // file containing just traits per stat type

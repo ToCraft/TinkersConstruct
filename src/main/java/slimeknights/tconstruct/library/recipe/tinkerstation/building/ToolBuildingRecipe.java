@@ -49,7 +49,7 @@ public class ToolBuildingRecipe implements ITinkerStationRecipe {
     LoadableRecipeSerializer.RECIPE_GROUP,
     TinkerLoadables.MODIFIABLE_ITEM.requiredField("result", r -> r.output),
     IntLoadable.FROM_ONE.defaultField("result_count", 1, true, r -> r.outputCount),
-    Loadables.RESOURCE_LOCATION.nullableField("slot_layout",  r -> r.layoutSlot),
+    Loadables.RESOURCE_LOCATION.nullableField("slot_layout", r -> r.layoutSlot),
     IngredientLoadable.DISALLOW_EMPTY.list(0).defaultField("extra_requirements", List.of(), r -> r.ingredients),
     ToolBuildingRecipe::new);
 
@@ -69,7 +69,9 @@ public class ToolBuildingRecipe implements ITinkerStationRecipe {
   public static final int Y_OFFSET = -15;
   public static final int SLOT_SIZE = 18;
 
-  /** @deprecated Use {@link #ToolBuildingRecipe(ResourceLocation, String, IModifiable, int, ResourceLocation, List)} */
+  /**
+   * @deprecated Use {@link #ToolBuildingRecipe(ResourceLocation, String, IModifiable, int, ResourceLocation, List)}
+   */
   @Deprecated
   public ToolBuildingRecipe(ResourceLocation id, String group, IModifiable output, int outputCount, List<Ingredient> ingredients) {
     this(id, group, output, outputCount, null, ingredients);
@@ -83,7 +85,9 @@ public class ToolBuildingRecipe implements ITinkerStationRecipe {
     return Objects.requireNonNullElse(layoutSlot, getOutput().getToolDefinition().getId());
   }
 
-  /** Gets the layout slots so we know where go position item slots for guis */
+  /**
+   * Gets the layout slots so we know where go position item slots for guis
+   */
   public List<LayoutSlot> getLayoutSlots() {
     if (layoutSlots == null) {
       layoutSlots = StationSlotLayoutLoader.getInstance().get(getLayoutSlotId()).getInputSlots();
@@ -104,7 +108,9 @@ public class ToolBuildingRecipe implements ITinkerStationRecipe {
     return layoutSlots;
   }
 
-  /** Gets the tool parts for this tool */
+  /**
+   * Gets the tool parts for this tool
+   */
   public List<IToolPart> getToolParts() {
     return ToolPartsHook.parts(getOutput().getToolDefinition());
   }
@@ -131,7 +137,9 @@ public class ToolBuildingRecipe implements ITinkerStationRecipe {
     return ingredients;
   }
 
-  /** Helper to determine if an anvil is required */
+  /**
+   * Helper to determine if an anvil is required
+   */
   public boolean requiresAnvil() {
     return getToolParts().size() + getExtraRequirements().size() >= 4;
   }

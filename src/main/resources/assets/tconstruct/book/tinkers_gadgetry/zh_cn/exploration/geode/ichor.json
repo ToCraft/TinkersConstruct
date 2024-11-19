@@ -1,7 +1,7 @@
 {
   "title": "灵浆水晶洞",
   "image": {
-	"file": "tconstruct:book/images/geodes/ichor.png",
+    "file": "tconstruct:book/images/geodes/ichor.png",
     "width": 180,
     "height": 106
   },

@@ -1,6 +1,5 @@
 {
   "_comment": "Tinkers Common",
-
   "block.tconstruct.sky_slime": "スカイスライムブロック",
   "block.tconstruct.sky_slime.tooltip": "スライムブロック、ハチミツブロックにくっつく",
   "block.tconstruct.ichor_slime": "イコルブロック",
@@ -9,7 +8,6 @@
   "block.tconstruct.ender_slime.tooltip": "押されるとくっつくが、粘着性ブロックの横に置いてもくっつかない",
   "block.tconstruct.blood_slime": "血液ブロック",
   "block.tconstruct.blood_slime.tooltip": "よく跳ねるが、粘着性はない",
-
   "block.tconstruct.earth_congealed_slime": "固めたスライムブロック",
   "block.tconstruct.earth_congealed_slime.tooltip": "とても高く跳べる",
   "block.tconstruct.sky_congealed_slime": "固めたスカイスライムブロック",
@@ -20,47 +18,37 @@
   "block.tconstruct.blood_congealed_slime.tooltip": "とても高く跳べる",
   "block.tconstruct.ichor_congealed_slime": "固めたイコルブロック",
   "block.tconstruct.ichor_congealed_slime.tooltip": "とても高く跳べる",
-
   "block.tconstruct.mud_bricks": "泥レンガ",
   "block.tconstruct.mud_bricks_slab": "泥レンガのハーフブロック",
   "block.tconstruct.mud_bricks_stairs": "泥レンガの階段",
-
   "block.tconstruct.lavawood": "ラヴァウッド",
   "block.tconstruct.lavawood_slab": "ラヴァウッドのハーフブロック",
   "block.tconstruct.lavawood_stairs": "ラヴァウッドの階段",
-
   "block.tconstruct.blazewood": "ブレイズウッド",
   "block.tconstruct.blazewood_slab": "ブレイズウッドのハーフブロック",
   "block.tconstruct.blazewood_stairs": "ブレイズウッドの階段",
-
   "block.tconstruct.nahuatl": "ナワトルの板材",
   "block.tconstruct.nahuatl_slab": "ナワトルのハーフブロック",
   "block.tconstruct.nahuatl_stairs": "ナワトルの階段",
   "block.tconstruct.nahuatl_fence": "ナワトルのフェンス",
-
   "block.tconstruct.clear_glass": "クリアガラス",
   "block.tconstruct.clear_glass_pane": "クリアガラス板",
   "block.tconstruct.clear_tinted_glass": "クリア遮光ガラス",
-
   "block.tconstruct.obsidian_pane": "黒曜石の板",
   "block.tconstruct.gold_bars": "金格子",
   "block.tconstruct.gold_bars.tooltip": "鋳造台に置くと空のキャストとして働く",
-  
   "block.tconstruct.gold_platform": "金のプラットフォーム",
   "block.tconstruct.gold_platform.tooltip": "鋳造鉢に置くと空のキャストとして働く",
   "block.tconstruct.iron_platform": "鉄のプラットフォーム",
   "block.tconstruct.cobalt_platform": "コバルトのプラットフォーム",
-  
-  "block.tconstruct.copper_platform":           "銅のプラットフォーム",
-  "block.tconstruct.exposed_copper_platform":   "風化した銅のプラットフォーム",
+  "block.tconstruct.copper_platform": "銅のプラットフォーム",
+  "block.tconstruct.exposed_copper_platform": "風化した銅のプラットフォーム",
   "block.tconstruct.weathered_copper_platform": "錆びた銅のプラットフォーム",
-  "block.tconstruct.oxidized_copper_platform":  "酸化した銅のプラットフォーム",
-  
-  "block.tconstruct.waxed_copper_platform":           "錆止めされた銅のプラットフォーム",
-  "block.tconstruct.waxed_exposed_copper_platform":   "錆止めされた風化した銅のプラットフォーム",
+  "block.tconstruct.oxidized_copper_platform": "酸化した銅のプラットフォーム",
+  "block.tconstruct.waxed_copper_platform": "錆止めされた銅のプラットフォーム",
+  "block.tconstruct.waxed_exposed_copper_platform": "錆止めされた風化した銅のプラットフォーム",
   "block.tconstruct.waxed_weathered_copper_platform": "錆止めされた錆びた銅のプラットフォーム",
-  "block.tconstruct.waxed_oxidized_copper_platform":  "錆止めされた酸化した銅のプラットフォーム",
-
+  "block.tconstruct.waxed_oxidized_copper_platform": "錆止めされた酸化した銅のプラットフォーム",
   "block.tconstruct.white_clear_stained_glass": "白色の色付きクリアガラス",
   "block.tconstruct.orange_clear_stained_glass": "橙色の色付きクリアガラス",
   "block.tconstruct.magenta_clear_stained_glass": "赤紫色の色付きクリアガラス",
@@ -77,7 +65,6 @@
   "block.tconstruct.green_clear_stained_glass": "緑色の色付きクリアガラス",
   "block.tconstruct.red_clear_stained_glass": "赤色の色付きクリアガラス",
   "block.tconstruct.black_clear_stained_glass": "黒色の色付きクリアガラス",
-
   "block.tconstruct.white_clear_stained_glass_pane": "白色の色付きクリアガラス板",
   "block.tconstruct.orange_clear_stained_glass_pane": "橙色の色付きクリアガラス板",
   "block.tconstruct.magenta_clear_stained_glass_pane": "赤紫色の色付きクリアガラス板",
@@ -94,109 +81,79 @@
   "block.tconstruct.green_clear_stained_glass_pane": "緑色の色付きクリアガラス板",
   "block.tconstruct.red_clear_stained_glass_pane": "赤色の色付きクリアガラス板",
   "block.tconstruct.black_clear_stained_glass_pane": "黒色の色付きクリアガラス板",
-
   "block.tconstruct.soul_glass": "ソウルガラス",
   "block.tconstruct.soul_glass.tooltip": "固体のようだが、通り抜けられる",
   "block.tconstruct.soul_glass_pane": "ソウルガラス板",
   "block.tconstruct.soul_glass_pane.tooltip": "固体のようだが、通り抜けられる",
-
   "block.tconstruct.glow": "グロウ",
   "block.tconstruct.silky_jewel_block": "シルキージュエルブロック",
-
-
   "__comment": "Ore Metals",
-
   "item.tconstruct.copper_nugget": "銅塊",
-
   "block.tconstruct.cobalt_ore": "ネザーコバルト鉱石",
   "item.tconstruct.raw_cobalt": "コバルトの原石",
   "block.tconstruct.raw_cobalt_block": "コバルトの原石ブロック",
-
   "block.tconstruct.cobalt_block": "コバルトブロック",
   "block.tconstruct.cobalt_block.tooltip": "ビーコンの土台に使用可能",
   "item.tconstruct.cobalt_ingot": "コバルトインゴット",
   "item.tconstruct.cobalt_nugget": "コバルト塊",
-
-
   "__comment": "Tier 3 Metals",
-
   "block.tconstruct.slimesteel_block": "スライムスチールブロック",
   "item.tconstruct.slimesteel_ingot": "スライムスチールインゴット",
   "item.tconstruct.slimesteel_nugget": "スライムスチール塊",
-
   "block.tconstruct.amethyst_bronze_block": "アメジスト青銅ブロック",
   "item.tconstruct.amethyst_bronze_ingot": "アメジスト青銅インゴット",
   "item.tconstruct.amethyst_bronze_nugget": "アメジスト青銅塊",
-
   "block.tconstruct.rose_gold_block": "ローズゴールドブロック",
   "item.tconstruct.rose_gold_ingot": "ローズゴールドインゴット",
   "item.tconstruct.rose_gold_nugget": "ローズゴールド塊",
-
   "block.tconstruct.pig_iron_block": "銑鉄ブロック",
   "item.tconstruct.pig_iron_ingot": "銑鉄インゴット",
   "item.tconstruct.pig_iron_nugget": "銑鉄塊",
-
-
   "__comment": "Tier 4 Metals",
-
   "block.tconstruct.manyullyn_block": "マンユリンブロック",
   "block.tconstruct.manyullyn_block.tooltip": "ビーコンの土台に使用可能",
   "item.tconstruct.manyullyn_ingot": "マンユリンインゴット",
   "item.tconstruct.manyullyn_nugget": "マンユリン塊",
-
   "block.tconstruct.hepatizon_block": "ヘパティゾンブロック",
   "block.tconstruct.hepatizon_block.tooltip": "ビーコンの土台に使用可能",
   "item.tconstruct.hepatizon_ingot": "ヘパティゾンインゴット",
   "item.tconstruct.hepatizon_nugget": "ヘパティゾン塊",
-
   "block.tconstruct.queens_slime_block": "クイーンスライムブロック",
   "block.tconstruct.queens_slime_block.tooltip": "ビーコンの土台に使用可能",
   "item.tconstruct.queens_slime_ingot": "クイーンスライムインゴット",
   "item.tconstruct.queens_slime_nugget": "クイーンスライム塊",
-
   "block.tconstruct.soulsteel_block": "ソウルスチールブロック",
   "block.tconstruct.soulsteel_block.tooltip": "ビーコンの土台に使用可能",
   "item.tconstruct.soulsteel_ingot": "ソウルスチールブロック",
   "item.tconstruct.soulsteel_nugget": "ソウルスチールブロック",
-
   "item.tconstruct.netherite_nugget": "ネザライト塊",
   "item.tconstruct.debris_nugget": "残骸の破片",
   "item.tconstruct.debris_nugget.tooltip": "古代の残骸の欠片、溶融させれば復元できるかもしれない",
-
-
   "__comment": "Tier 5 Metals",
-
   "block.tconstruct.knightslime_block": "ナイトスライムブロック",
   "item.tconstruct.knightslime_ingot": "ナイトスライムインゴット",
   "item.tconstruct.knightslime_ingot.tooltip": "べとつくが金属のようであり石でもある？何だかわからないがすごい！",
   "item.tconstruct.knightslime_nugget": "ナイトスライム塊",
-
   "item.tconstruct.materials_and_you": "素材とあなた",
   "item.tconstruct.materials_and_you.tooltip": "道具と材料についての入門書\nby Selena",
   "item.tconstruct.encyclopedia": "ティンカー大辞典",
   "item.tconstruct.encyclopedia.tooltip": "すべてのティンカーのための参考書\nby Selena",
-
   "item.tconstruct.tinkers_gadgetry": "ティンカーのガジェット類",
   "item.tconstruct.tinkers_gadgetry.tooltip": "日々の作業の助けとなるスライムの利用法を記した書\nby Melvin",
-
   "item.tconstruct.puny_smelting": "初等精錬",
   "item.tconstruct.puny_smelting.tooltip": "初歩的な精錬と鋳造の説明書\nby Thruul M'Gon",
   "item.tconstruct.mighty_smelting": "応用精錬",
   "item.tconstruct.mighty_smelting.tooltip": "溶融、鋳造、合金化を習得するための教科書\nby Thruul M'Gon",
-
   "item.tconstruct.fantastic_foundry": "魅惑の鋳造炉",
   "item.tconstruct.fantastic_foundry.tooltip": "金属を融かす最新技術に関する本\nby Nemea",
-
   "item.tconstruct.sky_slime_ball": "スカイスライムボール",
   "item.tconstruct.ender_slime_ball": "エンダースライムボール",
   "item.tconstruct.blood_slime_ball": "凝固した血液",
   "item.tconstruct.ichor_slime_ball": "イコルボール",
-
   "item.tconstruct.bacon": "ベーコン",
   "item.tconstruct.cheese_ingot": "チーズ",
   "block.tconstruct.cheese_block": "チーズブロック",
   "item.tconstruct.cheese.tooltip": "食べるとランダムで1つステータス効果が消える",
-
   "item.tconstruct.earth_slime_crystal": "アーススライムクリスタル",
   "block.tconstruct.earth_slime_crystal_block": "アーススライムクリスタルブロック",
   "block.tconstruct.small_earth_slime_crystal_bud": "小さなアーススライムクリスタルの芽",
@@ -204,7 +161,6 @@
   "block.tconstruct.large_earth_slime_crystal_bud": "大きなアーススライムクリスタルの芽",
   "block.tconstruct.earth_slime_crystal_cluster": "アーススライムクリスタルの塊",
   "block.tconstruct.budding_earth_slime_crystal": "芽生えたアーススライムクリスタル",
-
   "item.tconstruct.sky_slime_crystal": "スカイスライムクリスタル",
   "block.tconstruct.sky_slime_crystal_block": "スカイスライムクリスタルブロック",
   "block.tconstruct.small_sky_slime_crystal_bud": "小さなスカイスライムクリスタルの芽",
@@ -212,7 +168,6 @@
   "block.tconstruct.large_sky_slime_crystal_bud": "大きなスカイスライムクリスタルの芽",
   "block.tconstruct.sky_slime_crystal_cluster": "スカイスライムクリスタルの塊",
   "block.tconstruct.budding_sky_slime_crystal": "芽生えたスカイスライムクリスタル",
-
   "item.tconstruct.ichor_slime_crystal": "イコルクリスタル",
   "block.tconstruct.ichor_slime_crystal_block": "イコルクリスタルブロック",
   "block.tconstruct.small_ichor_slime_crystal_bud": "小さなイコルクリスタルの芽",
@@ -220,7 +175,6 @@
   "block.tconstruct.large_ichor_slime_crystal_bud": "大きなイコルクリスタルの芽",
   "block.tconstruct.ichor_slime_crystal_cluster": "イコルクリスタルの塊",
   "block.tconstruct.budding_ichor_slime_crystal": "芽生えたイコルクリスタル",
-
   "item.tconstruct.ender_slime_crystal": "エンダースライムクリスタル",
   "block.tconstruct.ender_slime_crystal_block": "エンダースライムクリスタルブロック",
   "block.tconstruct.small_ender_slime_crystal_bud": "小さなエンダースライムクリスタルの芽",
@@ -228,7 +182,6 @@
   "block.tconstruct.large_ender_slime_crystal_bud": "大きなエンダースライムクリスタルの芽",
   "block.tconstruct.ender_slime_crystal_cluster": "エンダースライムクリスタルの塊",
   "block.tconstruct.budding_ender_slime_crystal": "芽生えたエンダースライムクリスタル",
-
   "item.tconstruct.iron_reinforcement": "鉄製の補強",
   "item.tconstruct.iron_reinforcement.tooltip": "道具の耐久度が減る確率を減らす",
   "item.tconstruct.slimesteel_reinforcement": "スライムスチール製の補強",
@@ -255,12 +208,10 @@
   "item.tconstruct.blazing_bone": "ブレイズボーン",
   "item.tconstruct.dragon_scale": "ドラゴンの鱗",
   "item.tconstruct.dragon_scale.tooltip": "エンダードラゴンから吹き飛ばされたもの",
-
   "item.tconstruct.modifier_crystal": "改造クリスタル",
   "item.tconstruct.modifier_crystal.format": "%sのクリスタル",
   "item.tconstruct.modifier_crystal.missing": "改造タイプを定義するNBTが見つからないか無効です",
   "item.tconstruct.modifier_crystal.tooltip": "対応するスロットを消費して、この改造のレベル1を道具に適用します。",
-
   "item.tconstruct.creative_slot": "クリエイティブスロット",
   "item.tconstruct.creative_slot.upgrades": "クリエイティブアップグレード",
   "item.tconstruct.creative_slot.abilities": "クリエイティブアビリティ",
@@ -268,545 +219,406 @@
   "item.tconstruct.creative_slot.defense": "クリエイティブ防御スロット",
   "item.tconstruct.creative_slot.missing": "このスロットタイプを定義するものとしては未定義または無効なNBTです",
   "item.tconstruct.creative_slot.tooltip": "道具に%sスロットを追加します。",
-
   "item.tconstruct.copper_can": "銅缶",
   "item.tconstruct.copper_can.tooltip": "1インゴット分の液体を保持するスタック可能な液体コンテナ",
   "item.tconstruct.copper_can.contents": "中身: 1インゴット分の%s",
-
-
   "_comment": "Tinkers Patterns",
-
   "pattern.tconstruct.repair_kit": "リペアキット",
-
   "_comment": "Small Head Gold Casts",
-
   "pattern.tconstruct.pick_head": "ツルハシ頭",
   "pattern.tconstruct.small_axe_head": "小斧頭",
   "pattern.tconstruct.small_blade": "小型刃",
   "pattern.tconstruct.sign_head": "看板頭",
   "pattern.tconstruct.bow_limb": "弓幹",
-
   "_comment": "Large Head Gold Casts",
-
   "pattern.tconstruct.hammer_head": "ハンマー頭",
   "pattern.tconstruct.broad_axe_head": "大斧頭",
   "pattern.tconstruct.broad_blade": "大型刃",
-
   "_comment": "Binding Gold Casts",
-
   "pattern.tconstruct.tool_binding": "締め具",
   "pattern.tconstruct.round_plate": "丸板",
   "pattern.tconstruct.large_plate": "大板",
   "pattern.tconstruct.bowstring": "弓弦",
-
   "_comment": "Tool Handle Gold Casts",
-
   "pattern.tconstruct.tool_handle": "持ち手",
   "pattern.tconstruct.tough_handle": "強化持ち手",
   "pattern.tconstruct.bow_grip": "弓柄",
-
-
   "_comment": "Tinkers Gold Casts",
-
   "item.tconstruct.blank_cast": "空の金型",
   "item.tconstruct.ingot_cast": "インゴットの金型",
   "item.tconstruct.nugget_cast": "塊の金型",
   "item.tconstruct.gem_cast": "宝石の金型",
   "item.tconstruct.rod_cast": "棒の金型",
-
   "item.tconstruct.gear_cast": "歯車の金型",
   "item.tconstruct.plate_cast": "小板の金型",
   "item.tconstruct.coin_cast": "硬貨の金型",
   "item.tconstruct.wire_cast": "ワイヤーの金型",
-
   "item.tconstruct.repair_kit_cast": "リペアキットの金型",
-
   "_comment": "Small Head Gold Casts",
-
   "item.tconstruct.pick_head_cast": "ツルハシ頭の金型",
   "item.tconstruct.small_axe_head_cast": "小斧頭の金型",
   "item.tconstruct.small_blade_cast": "小型刃の金型",
   "item.tconstruct.sign_head_cast": "看板頭の金型",
   "item.tconstruct.bow_limb_cast": "弓幹の金型",
   "item.tconstruct.bow_grip_cast": "弓柄の金型",
-
   "_comment": "Large Head Gold Casts",
-
   "item.tconstruct.hammer_head_cast": "ハンマー頭の金型",
   "item.tconstruct.broad_axe_head_cast": "大斧頭の金型",
   "item.tconstruct.broad_blade_cast": "大型刃の金型",
-
   "_comment": "Binding Gold Casts",
-
   "item.tconstruct.tool_binding_cast": "締め具の金型",
   "item.tconstruct.round_plate_cast": "丸板の金型",
   "item.tconstruct.large_plate_cast": "大板の金型",
-
   "_comment": "Tool Handle Gold Casts",
-
   "item.tconstruct.tool_handle_cast": "持ち手の金型",
   "item.tconstruct.tough_handle_cast": "強化持ち手の金型",
-
-
   "_comment": "Tinkers Sand Casts",
-
   "item.tconstruct.blank_sand_cast": "空の砂型",
   "item.tconstruct.ingot_sand_cast": "インゴットの砂型",
   "item.tconstruct.nugget_sand_cast": "塊の砂型",
   "item.tconstruct.gem_sand_cast": "宝石の砂型",
   "item.tconstruct.rod_sand_cast": "棒の砂型",
-
   "item.tconstruct.gear_sand_cast": "歯車の砂型",
   "item.tconstruct.plate_sand_cast": "小板の砂型",
   "item.tconstruct.coin_sand_cast": "硬貨の砂型",
   "item.tconstruct.wire_sand_cast": "ワイヤーの砂型",
-
   "item.tconstruct.repair_kit_sand_cast": "リペアキットの砂型",
-
   "_comment": "Small Head Sand Casts",
-
   "item.tconstruct.pick_head_sand_cast": "ツルハシ頭の砂型",
   "item.tconstruct.small_axe_head_sand_cast": "小斧頭の砂型",
   "item.tconstruct.small_blade_sand_cast": "小型刃の砂型",
   "item.tconstruct.sign_head_sand_cast": "看板頭の砂型",
   "item.tconstruct.bow_limb_sand_cast": "弓幹の砂型",
   "item.tconstruct.bow_grip_sand_cast": "弓柄の砂型",
-
   "_comment": "Large Head Sand Casts",
-
   "item.tconstruct.hammer_head_sand_cast": "ハンマー頭の砂型",
   "item.tconstruct.broad_axe_head_sand_cast": "大斧頭の砂型",
   "item.tconstruct.broad_blade_sand_cast": "大型刃の砂型",
-
   "_comment": "Binding Sand Casts",
-
   "item.tconstruct.tool_binding_sand_cast": "締め具の砂型",
   "item.tconstruct.round_plate_sand_cast": "丸板の砂型",
   "item.tconstruct.large_plate_sand_cast": "大板の砂型",
-
   "_comment": "Tool Handle Sand Casts",
-
   "item.tconstruct.tool_handle_sand_cast": "持ち手の幹砂型",
   "item.tconstruct.tough_handle_sand_cast": "強化持ち手の砂型",
-
-
   "_comment": "Tinkers Red Sand Casts",
-
   "item.tconstruct.blank_red_sand_cast": "空の赤い砂型",
   "item.tconstruct.ingot_red_sand_cast": "インゴットの赤い砂型",
   "item.tconstruct.nugget_red_sand_cast": "塊の赤い砂型",
   "item.tconstruct.gem_red_sand_cast": "宝石の赤い砂型",
   "item.tconstruct.rod_red_sand_cast": "棒の赤い砂型",
-
   "item.tconstruct.gear_red_sand_cast": "歯車の赤い砂型",
   "item.tconstruct.plate_red_sand_cast": "小板の赤い砂型",
   "item.tconstruct.coin_red_sand_cast": "硬貨の赤い砂型",
   "item.tconstruct.wire_red_sand_cast": "ワイヤーの赤い砂型",
-
   "item.tconstruct.repair_kit_red_sand_cast": "リペアキットの赤い砂型",
-
   "_comment": "Small Head Red Sand Casts",
-
   "item.tconstruct.pick_head_red_sand_cast": "ツルハシ頭の赤い砂型",
   "item.tconstruct.small_axe_head_red_sand_cast": "小斧頭の赤い砂型",
   "item.tconstruct.small_blade_red_sand_cast": "小型刃の赤い砂型",
   "item.tconstruct.sign_head_red_sand_cast": "看板頭の赤い砂型",
   "item.tconstruct.bow_limb_red_sand_cast": "弓幹の赤い砂型",
   "item.tconstruct.bow_grip_red_sand_cast": "弓柄の赤い砂型",
-
   "_comment": "Large Head Red Sand Casts",
-
   "item.tconstruct.hammer_head_red_sand_cast": "ハンマー頭の赤い砂型",
   "item.tconstruct.broad_axe_head_red_sand_cast": "大斧頭の赤い砂型",
   "item.tconstruct.broad_blade_red_sand_cast": "大型刃の赤い砂型",
-
   "_comment": "Binding Red Sand Casts",
-
   "item.tconstruct.tool_binding_red_sand_cast": "締め具の赤い砂型",
   "item.tconstruct.round_plate_red_sand_cast": "丸板の赤い砂型",
   "item.tconstruct.large_plate_red_sand_cast": "大板の赤い砂型",
-
   "_comment": "Tool Handle Red Sand Casts",
-
   "item.tconstruct.tool_handle_red_sand_cast": "持ち手の赤い砂型",
   "item.tconstruct.tough_handle_red_sand_cast": "強化持ち手の赤い砂型",
-
-
   "_comment": "Tinkers Fluids",
-
   "block.tconstruct.blazing_blood_fluid": "燃え盛る血液",
   "fluid.tconstruct.blazing_blood": "燃え盛る血液",
   "fluid.tconstruct.flowing_blazing_blood": "流れる燃え盛る血液",
   "item.tconstruct.blazing_blood_bucket": "燃え盛る血液入りバケツ",
-
   "fluid.tconstruct.powdered_snow": "粉雪",
-
   "_comment": "Food",
-
   "block.tconstruct.honey_fluid": "ハチミツ",
   "fluid.tconstruct.honey": "ハチミツ",
   "fluid.tconstruct.flowing_honey": "流れるハチミツ",
   "item.tconstruct.honey_bucket": "ハチミツ入りバケツ",
-
   "block.tconstruct.beetroot_soup_fluid": "ビートルートスープ",
   "fluid.tconstruct.beetroot_soup": "ビートルートスープ",
   "fluid.tconstruct.flowing_beetroot_soup": "流れるビートルートスープ",
   "item.tconstruct.beetroot_soup_bucket": "ビートルートスープ入りバケツ",
-
   "block.tconstruct.mushroom_stew_fluid": "キノコシチュー",
   "fluid.tconstruct.mushroom_stew": "キノコシチュー",
   "fluid.tconstruct.flowing_mushroom_stew": "流れるキノコシチュー",
   "item.tconstruct.mushroom_stew_bucket": "キノコシチュー入りバケツ",
-
   "block.tconstruct.rabbit_stew_fluid": "ウサギシチュー",
   "fluid.tconstruct.rabbit_stew": "ウサギシチュー",
   "fluid.tconstruct.flowing_rabbit_stew": "流れるウサギシチュー",
   "item.tconstruct.rabbit_stew_bucket": "ウサギシチュー入りバケツ",
-
-
   "_comment": "Potion",
-
   "fluid.tconstruct.potion": "ポーション",
-
   "item.tconstruct.potion_bucket": "クラフト不可能なポーション入りバケツ",
   "item.tconstruct.potion_bucket.effect.water": "水入りバケツ",
   "item.tconstruct.potion_bucket.contents": "%s入りバケツ",
-
   "item.tconstruct.splash_bottle": "スプラッシュ瓶",
   "item.tconstruct.lingering_bottle": "残留瓶",
-
-
   "_comment": "Slime",
-
   "block.tconstruct.blood_fluid": "血液",
   "fluid.tconstruct.blood": "血液",
   "fluid.tconstruct.flowing_blood": "流れる血液",
   "item.tconstruct.blood_bucket": "血液入りバケツ",
   "item.tconstruct.blood_bottle": "血液入り瓶",
-
   "block.tconstruct.earth_slime_fluid": "液状スライム",
   "fluid.tconstruct.earth_slime": "液状スライム",
   "fluid.tconstruct.flowing_earth_slime": "流れる液状スライム",
   "item.tconstruct.earth_slime_bucket": "液状スライム入りバケツ",
   "item.tconstruct.earth_slime_bottle": "液状スライム入り瓶",
-
   "block.tconstruct.sky_slime_fluid": "液状スカイスライム",
   "fluid.tconstruct.sky_slime": "液状スカイスライム",
   "fluid.tconstruct.flowing_sky_slime": "流れる液状スカイスライム",
   "item.tconstruct.sky_slime_bucket": "液状スカイスライム入りバケツ",
   "item.tconstruct.sky_slime_bottle": "液状スカイスライム入り瓶",
-
   "block.tconstruct.magma_fluid": "マグマ",
   "fluid.tconstruct.magma": "マグマ",
   "fluid.tconstruct.flowing_magma": "流れるマグマ",
   "item.tconstruct.magma_bucket": "マグマ入りバケツ",
   "item.tconstruct.magma_bottle": "マグマ入りバケツ",
-
   "block.tconstruct.ender_slime_fluid": "液状エンダースライム",
   "fluid.tconstruct.ender_slime": "液状エンダースライム",
   "fluid.tconstruct.flowing_ender_slime": "流れる液状エンダースライム",
   "item.tconstruct.ender_slime_bucket": "液状エンダースライム入りバケツ",
   "item.tconstruct.ender_slime_bottle": "液状エンダースライム入り瓶",
-
   "block.tconstruct.venom_fluid": "毒液",
   "fluid.tconstruct.venom": "毒液",
   "fluid.tconstruct.flowing_venom": "流れる毒液",
   "item.tconstruct.venom_bucket": "毒液入りバケツ",
   "item.tconstruct.venom_bottle": "毒液入り瓶",
-  
   "item.tconstruct.ichor_bottle": "液状イコル入り瓶",
-
   "_comment": "Rock",
-
   "block.tconstruct.seared_stone_fluid": "溶融した焼成石",
   "fluid.tconstruct.seared_stone": "溶融した焼成石",
   "fluid.tconstruct.flowing_seared_stone": "流れる溶融した焼成石",
   "item.tconstruct.seared_stone_bucket": "溶融した焼成石入りバケツ",
-
   "block.tconstruct.scorched_stone_fluid": "溶融した焦熱石",
   "fluid.tconstruct.scorched_stone": "溶融した焦熱石",
   "fluid.tconstruct.flowing_scorched_stone": "流れる溶融した焦熱石",
   "item.tconstruct.scorched_stone_bucket": "溶融した焦熱石入りバケツ",
-
   "block.tconstruct.molten_clay_fluid": "溶融した粘土",
   "fluid.tconstruct.molten_clay": "溶融した粘土",
   "fluid.tconstruct.flowing_molten_clay": "流れる溶融した粘土",
   "item.tconstruct.molten_clay_bucket": "溶融した粘土入りバケツ",
-
   "block.tconstruct.molten_glass_fluid": "溶融したガラス",
   "fluid.tconstruct.molten_glass": "溶融したガラス",
   "fluid.tconstruct.flowing_molten_glass": "流れる溶融したガラス",
   "item.tconstruct.molten_glass_bucket": "溶融したガラス入りバケツ",
-
   "block.tconstruct.liquid_soul_fluid": "液状ソウル",
   "fluid.tconstruct.liquid_soul": "液状ソウル",
   "fluid.tconstruct.flowing_liquid_soul": "流れる液状ソウル",
   "item.tconstruct.liquid_soul_bucket": "液状ソウル入りバケツ",
-
   "block.tconstruct.molten_obsidian_fluid": "溶融した黒曜石",
   "fluid.tconstruct.molten_obsidian": "溶融した黒曜石",
   "fluid.tconstruct.flowing_molten_obsidian": "流れる溶融した黒曜石",
   "item.tconstruct.molten_obsidian_bucket": "溶融した黒曜石入りバケツ",
-
   "block.tconstruct.molten_emerald_fluid": "溶融したエメラルド",
   "fluid.tconstruct.molten_emerald": "溶融したエメラルド",
   "fluid.tconstruct.flowing_molten_emerald": "流れる溶融したエメラルド",
   "item.tconstruct.molten_emerald_bucket": "溶融したエメラルド入りバケツ",
-
   "block.tconstruct.molten_quartz_fluid": "溶融したクォーツ",
   "fluid.tconstruct.molten_quartz": "溶融したクォーツ",
   "fluid.tconstruct.flowing_molten_quartz": "流れる溶融したクォーツ",
   "item.tconstruct.molten_quartz_bucket": "溶融したクォーツ入りバケツ",
-
   "block.tconstruct.molten_amethyst_fluid": "溶融したアメジスト",
   "fluid.tconstruct.molten_amethyst": "溶融したアメジスト",
   "fluid.tconstruct.flowing_molten_amethyst": "流れる溶融したアメジスト",
   "item.tconstruct.molten_amethyst_bucket": "溶融したアメジスト入りバケツ",
-
   "block.tconstruct.molten_diamond_fluid": "溶融したダイヤモンド",
   "fluid.tconstruct.molten_diamond": "溶融したダイヤモンド",
   "fluid.tconstruct.flowing_molten_diamond": "流れる溶融したダイヤモンド",
   "item.tconstruct.molten_diamond_bucket": "溶融したダイヤモンド入りバケツ",
-
   "block.tconstruct.molten_ender_fluid": "溶融したエンダー",
   "fluid.tconstruct.molten_ender": "溶融したエンダー",
   "fluid.tconstruct.flowing_molten_ender": "流れる溶融したエンダー",
   "item.tconstruct.molten_ender_bucket": "溶融したエンダー入りバケツ",
-
   "block.tconstruct.molten_porcelain_fluid": "溶融したポーセレン",
   "fluid.tconstruct.molten_porcelain": "溶融したポーセレン",
   "fluid.tconstruct.flowing_molten_porcelain": "流れる溶融したポーセレン",
   "item.tconstruct.molten_porcelain_bucket": "溶融したポーセレン入りバケツ",
-
   "_comment": "Ores",
-
   "block.tconstruct.molten_iron_fluid": "溶融した鉄",
   "fluid.tconstruct.molten_iron": "溶融した鉄",
   "fluid.tconstruct.flowing_molten_iron": "流れる溶融した鉄",
   "item.tconstruct.molten_iron_bucket": "溶融した鉄入りバケツ",
-
   "block.tconstruct.molten_gold_fluid": "溶融した金",
   "fluid.tconstruct.molten_gold": "溶融した金",
   "fluid.tconstruct.flowing_molten_gold": "流れる溶融した金",
   "item.tconstruct.molten_gold_bucket": "溶融した金入りバケツ",
-
   "block.tconstruct.molten_copper_fluid": "溶融した銅",
   "fluid.tconstruct.molten_copper": "溶融した銅",
   "fluid.tconstruct.flowing_molten_copper": "流れる溶融した銅",
   "item.tconstruct.molten_copper_bucket": "溶融した銅入りバケツ",
-
   "block.tconstruct.molten_cobalt_fluid": "溶融したコバルト",
   "fluid.tconstruct.molten_cobalt": "溶融したコバルト",
   "fluid.tconstruct.flowing_molten_cobalt": "流れる溶融したコバルト",
   "item.tconstruct.molten_cobalt_bucket": "溶融したコバルト入りバケツ",
-
   "block.tconstruct.molten_debris_fluid": "溶融した残骸",
   "fluid.tconstruct.molten_debris": "溶融した残骸",
   "fluid.tconstruct.flowing_molten_debris": "流れる溶融した残骸",
   "item.tconstruct.molten_debris_bucket": "溶融した残骸入りバケツ",
-
   "_comment": "Tier 3 Alloys",
-
   "block.tconstruct.molten_slimesteel_fluid": "溶融したスライムスチール",
   "fluid.tconstruct.molten_slimesteel": "溶融したスライムスチール",
   "fluid.tconstruct.flowing_molten_slimesteel": "流れる溶融したスライムスチール",
   "item.tconstruct.molten_slimesteel_bucket": "溶融したスライムスチール入りバケツ",
-
   "block.tconstruct.molten_amethyst_bronze_fluid": "溶融したアメジスト青銅",
   "fluid.tconstruct.molten_amethyst_bronze": "溶融したアメジスト青銅",
   "fluid.tconstruct.flowing_molten_amethyst_bronze": "流れる溶融したアメジスト青銅",
   "item.tconstruct.molten_amethyst_bronze_bucket": "溶融したアメジスト青銅入りバケツ",
-
   "block.tconstruct.molten_rose_gold_fluid": "溶融したローズゴールド",
   "fluid.tconstruct.molten_rose_gold": "溶融したローズゴールド",
   "fluid.tconstruct.flowing_molten_rose_gold": "流れる溶融したローズゴールド",
   "item.tconstruct.molten_rose_gold_bucket": "溶融したローズゴールド入りバケツ",
-
   "block.tconstruct.molten_pig_iron_fluid": "溶融した銑鉄",
   "fluid.tconstruct.molten_pig_iron": "溶融した銑鉄",
   "fluid.tconstruct.flowing_molten_pig_iron": "流れる溶融した銑鉄",
   "item.tconstruct.molten_pig_iron_bucket": "溶融した銑鉄入りバケツ",
-
   "_comment": "Tier 4 Alloys",
-
   "block.tconstruct.molten_manyullyn_fluid": "溶融したマンユリン",
   "fluid.tconstruct.molten_manyullyn": "溶融したマンユリン",
   "fluid.tconstruct.flowing_molten_manyullyn": "流れる溶融したマンユリン",
   "item.tconstruct.molten_manyullyn_bucket": "溶融したマンユリン入りバケツ",
-
   "block.tconstruct.molten_hepatizon_fluid": "溶融したヘパティゾン",
   "fluid.tconstruct.molten_hepatizon": "溶融したヘパティゾン",
   "fluid.tconstruct.flowing_molten_hepatizon": "流れる溶融したヘパティゾン",
   "item.tconstruct.molten_hepatizon_bucket": "溶融したヘパティゾン入りバケツ",
-
   "block.tconstruct.molten_queens_slime_fluid": "溶融したクイーンスライム",
   "fluid.tconstruct.molten_queens_slime": "溶融したクイーンスライム",
   "fluid.tconstruct.flowing_molten_queens_slime": "流れる溶融したクイーンスライム",
   "item.tconstruct.molten_queens_slime_bucket": "溶融したクイーンスライム入りバケツ",
-
   "block.tconstruct.molten_soulsteel_fluid": "溶融したソウルスチール",
   "fluid.tconstruct.molten_soulsteel": "溶融したソウルスチール",
   "fluid.tconstruct.flowing_molten_soulsteel": "流れる溶融したソウルスチール",
   "item.tconstruct.molten_soulsteel_bucket": "溶融したソウルスチール入りバケツ",
-
   "block.tconstruct.molten_netherite_fluid": "溶融したネザライト",
   "fluid.tconstruct.molten_netherite": "溶融したネザライト",
   "fluid.tconstruct.flowing_molten_netherite": "流れる溶融したネザライト",
   "item.tconstruct.molten_netherite_bucket": "溶融したネザライト入りバケツ",
-
   "block.tconstruct.molten_knightslime_fluid": "溶融したナイトスライム",
   "fluid.tconstruct.molten_knightslime": "溶融したナイトスライム",
   "fluid.tconstruct.flowing_molten_knightslime": "流れる溶融したナイトスライム",
   "item.tconstruct.molten_knightslime_bucket": "溶融したナイトスライム入りバケツ",
-
   "_comment": "Compat Ores",
-
   "block.tconstruct.molten_tin_fluid": "溶融した錫",
   "fluid.tconstruct.molten_tin": "溶融した錫",
   "fluid.tconstruct.flowing_molten_tin": "流れる溶融した錫",
   "item.tconstruct.molten_tin_bucket": "溶融した錫入りバケツ",
-
   "block.tconstruct.molten_aluminum_fluid": "溶融したアルミニウム",
   "fluid.tconstruct.molten_aluminum": "溶融したアルミニウム",
   "fluid.tconstruct.flowing_molten_aluminum": "流れる溶融したアルミニウム",
   "item.tconstruct.molten_aluminum_bucket": "溶融したアルミニウム入りバケツ",
-
   "block.tconstruct.molten_lead_fluid": "溶融した鉛",
   "fluid.tconstruct.molten_lead": "溶融した鉛",
   "fluid.tconstruct.flowing_molten_lead": "流れる溶融した鉛",
   "item.tconstruct.molten_lead_bucket": "溶融した鉛入りバケツ",
-
   "block.tconstruct.molten_silver_fluid": "溶融した銀",
   "fluid.tconstruct.molten_silver": "溶融した銀",
   "fluid.tconstruct.flowing_molten_silver": "流れる溶融した銀",
   "item.tconstruct.molten_silver_bucket": "溶融した銀入りバケツ",
-
   "block.tconstruct.molten_nickel_fluid": "溶融したニッケル",
   "fluid.tconstruct.molten_nickel": "溶融したニッケル",
   "fluid.tconstruct.flowing_molten_nickel": "流れる溶融したニッケル",
   "item.tconstruct.molten_nickel_bucket": "溶融したニッケル入りバケツ",
-
   "block.tconstruct.molten_zinc_fluid": "溶融した亜鉛",
   "fluid.tconstruct.molten_zinc": "溶融した亜鉛",
   "fluid.tconstruct.flowing_molten_zinc": "流れる溶融した亜鉛",
   "item.tconstruct.molten_zinc_bucket": "溶融した亜鉛入りバケツ",
-
   "block.tconstruct.molten_platinum_fluid": "溶融したプラチナ",
   "fluid.tconstruct.molten_platinum": "溶融したプラチナ",
   "fluid.tconstruct.flowing_molten_platinum": "流れる溶融したプラチナ",
   "item.tconstruct.molten_platinum_bucket": "溶融したプラチナ入りバケツ",
-
   "block.tconstruct.molten_tungsten_fluid": "溶融したタングステン",
   "fluid.tconstruct.molten_tungsten": "溶融したタングステン",
   "fluid.tconstruct.flowing_molten_tungsten": "流れる溶融したタングステン",
   "item.tconstruct.molten_tungsten_bucket": "溶融したタングステン入りバケツ",
-
   "block.tconstruct.molten_osmium_fluid": "溶融したオスミウム",
   "fluid.tconstruct.molten_osmium": "溶融したオスミウム",
   "fluid.tconstruct.flowing_molten_osmium": "流れる溶融したオスミウム",
   "item.tconstruct.molten_osmium_bucket": "溶融したオスミウム入りバケツ",
-
   "block.tconstruct.molten_uranium_fluid": "溶融したウラン",
   "fluid.tconstruct.molten_uranium": "溶融したウラン",
   "fluid.tconstruct.flowing_molten_uranium": "流れる溶融したウラン",
   "item.tconstruct.molten_uranium_bucket": "溶融したウラン入りバケツ",
-
   "_comment": "Compat Alloys",
-
   "block.tconstruct.molten_bronze_fluid": "溶融した青銅",
   "fluid.tconstruct.molten_bronze": "溶融した青銅",
   "fluid.tconstruct.flowing_molten_bronze": "流れる溶融した青銅",
   "item.tconstruct.molten_bronze_bucket": "溶融した青銅入りバケツ",
-
   "block.tconstruct.molten_brass_fluid": "溶融した黄銅",
   "fluid.tconstruct.molten_brass": "溶融した黄銅",
   "fluid.tconstruct.flowing_molten_brass": "流れる溶融した黄銅",
   "item.tconstruct.molten_brass_bucket": "溶融した黄銅入りバケツ",
-
   "block.tconstruct.molten_electrum_fluid": "溶融したエレクトラム",
   "fluid.tconstruct.molten_electrum": "溶融したエレクトラム",
   "fluid.tconstruct.flowing_molten_electrum": "流れる溶融したエレクトラム",
   "item.tconstruct.molten_electrum_bucket": "溶融したエレクトラム入りバケツ",
-
   "block.tconstruct.molten_invar_fluid": "溶融したインバー",
   "fluid.tconstruct.molten_invar": "溶融したインバー",
   "fluid.tconstruct.flowing_molten_invar": "流れる溶融したインバー",
   "item.tconstruct.molten_invar_bucket": "溶融したインバー入りバケツ",
-
   "block.tconstruct.molten_constantan_fluid": "溶融したコンスタンタン",
   "fluid.tconstruct.molten_constantan": "溶融したコンスタンタン",
   "fluid.tconstruct.flowing_molten_constantan": "流れる溶融したコンスタンタン",
   "item.tconstruct.molten_constantan_bucket": "溶融したコンスタンタン入りバケツ",
-
   "block.tconstruct.molten_pewter_fluid": "溶融したピューター",
   "fluid.tconstruct.molten_pewter": "溶融したピューター",
   "fluid.tconstruct.flowing_molten_pewter": "流れる溶融したピューター",
   "item.tconstruct.molten_pewter_bucket": "溶融したピューター入りバケツ",
-
   "block.tconstruct.molten_steel_fluid": "溶融した鋼鉄",
   "fluid.tconstruct.molten_steel": "溶融した鋼鉄",
   "fluid.tconstruct.flowing_molten_steel": "流れる溶融した鋼鉄",
   "item.tconstruct.molten_steel_bucket": "溶融した鋼鉄入りバケツ",
-
   "_comment": "Thermal Alloys",
-
   "block.tconstruct.molten_enderium_fluid": "溶融したエンダリウム",
   "fluid.tconstruct.molten_enderium": "溶融したエンダリウム",
   "fluid.tconstruct.flowing_molten_enderium": "流れる溶融したエンダリウム",
   "item.tconstruct.molten_enderium_bucket": "溶融したエンダリウム入りバケツ",
-
   "block.tconstruct.molten_lumium_fluid": "溶融したルミウム",
   "fluid.tconstruct.molten_lumium": "溶融したルミウム",
   "fluid.tconstruct.flowing_molten_lumium": "流れる溶融したルミウム",
   "item.tconstruct.molten_lumium_bucket": "溶融したルミウム入りバケツ",
-
   "block.tconstruct.molten_signalum_fluid": "溶融したシグナルム",
   "fluid.tconstruct.molten_signalum": "溶融したシグナルム",
   "fluid.tconstruct.flowing_molten_signalum": "流れる溶融したシグナルム",
   "item.tconstruct.molten_signalum_bucket": "溶融したシグナルム入りバケツ",
-
   "_comment": "Mekanism Alloys",
-
   "block.tconstruct.molten_refined_glowstone_fluid": "溶融した精製グロウストーン",
   "fluid.tconstruct.molten_refined_glowstone": "溶融した精製グロウストーン",
   "fluid.tconstruct.flowing_molten_refined_glowstone": "流れる溶融した精製グロウストーン",
   "item.tconstruct.molten_refined_glowstone_bucket": "溶融した精製グロウストーン入りバケツ",
-
   "block.tconstruct.molten_refined_obsidian_fluid": "溶融した精製黒曜石",
   "fluid.tconstruct.molten_refined_obsidian": "溶融した精製黒曜石",
   "fluid.tconstruct.flowing_molten_refined_obsidian": "流れる溶融した精製黒曜石",
   "item.tconstruct.molten_refined_obsidian_bucket": "溶融した精製黒曜石入りバケツ",
-
-
   "_comment": "Tinkers Gadgets",
-
   "block.tconstruct.punji": "竹槍トラップ",
   "block.tconstruct.punji.tooltip": "鋭い！壁に設置することもできる。",
-
   "item.tconstruct.clear_item_frame": "透明な額縁",
   "item.tconstruct.gold_item_frame": "金の額縁",
   "item.tconstruct.reversed_gold_item_frame": "金の額縁(逆回転)",
   "item.tconstruct.diamond_item_frame": "ダイヤモンドの額縁",
   "item.tconstruct.manyullyn_item_frame": "マンユリンの額縁",
   "item.tconstruct.netherite_item_frame": "ネザライトの額縁",
-
   "item.tconstruct.glow_ball": "グロウボール",
   "item.tconstruct.glow_ball.tooltip": "食べられません。",
   "item.tconstruct.efln_ball": "EFLN",
   "item.tconstruct.efln_ball.tooltip": "爆発する！採掘に安全に使える",
-
   "item.tconstruct.quartz_shuriken": "クォーツの手裏剣",
   "item.tconstruct.quartz_shuriken.tooltip": "大ダメージを与える投擲武器",
   "item.tconstruct.flint_shuriken": "火打石の手裏剣",
   "item.tconstruct.flint_shuriken.tooltip": "大きくノックバックさせる投擲武器",
-
   "block.tconstruct.earth_cake": "アーススライムケーキ",
-  "block.tconstruct.sky_cake":   "スカイスライムケーキ",
+  "block.tconstruct.sky_cake": "スカイスライムケーキ",
   "block.tconstruct.ichor_cake": "イコルケーキ",
   "block.tconstruct.ender_cake": "エンダースライムケーキ",
   "block.tconstruct.blood_cake": "血液ケーキ",
   "block.tconstruct.magma_cake": "マグマケーキ",
-
   "item.tconstruct.earth_slime_sling": "スライムスリング",
   "item.tconstruct.earth_slime_sling.tooltip": "溜めて地面に向けて打つと、跳ね上がる！\n命を大事にしたいなら弾性の改造を使おう！",
   "item.tconstruct.sky_slime_sling": "スカイスライムスリング",
@@ -815,201 +627,151 @@
   "item.tconstruct.ender_slime_sling.tooltip": "溜めて行きたい方向に向けて打つと、狙った先にワープする！",
   "item.tconstruct.ichor_slime_sling": "イコルスリング",
   "item.tconstruct.ichor_slime_sling.tooltip": "溜めてMobに向かって打つと、相手を吹き飛ばす！",
-
   "item.tconstruct.piggy_backpack": "ピギーバックパック",
   "item.tconstruct.piggy_backpack.tooltip": "Mobに対して使うと、そのMobを担ぐ",
   "effect.tconstruct.carry": "担ぎ状態",
-  
-  "block.tconstruct.blaze_head":            "ブレイズの頭",
-  "block.tconstruct.enderman_head":         "エンダーマンの頭",
-  "block.tconstruct.stray_head":            "ストレイの頭",
-  "block.tconstruct.husk_head":             "ハスクの頭",
-  "block.tconstruct.drowned_head":          "ドラウンドの頭",
-  "block.tconstruct.spider_head":           "クモの頭",
-  "block.tconstruct.cave_spider_head":      "洞窟グモの頭",
-  "block.tconstruct.piglin_head":           "ピグリンの頭",
-  "block.tconstruct.piglin_brute_head":     "ピグリンブルートの頭",
+  "block.tconstruct.blaze_head": "ブレイズの頭",
+  "block.tconstruct.enderman_head": "エンダーマンの頭",
+  "block.tconstruct.stray_head": "ストレイの頭",
+  "block.tconstruct.husk_head": "ハスクの頭",
+  "block.tconstruct.drowned_head": "ドラウンドの頭",
+  "block.tconstruct.spider_head": "クモの頭",
+  "block.tconstruct.cave_spider_head": "洞窟グモの頭",
+  "block.tconstruct.piglin_head": "ピグリンの頭",
+  "block.tconstruct.piglin_brute_head": "ピグリンブルートの頭",
   "block.tconstruct.zombified_piglin_head": "ゾンビピグリンの頭",
-
-
   "_comment": "Tinkers Tables",
-
   "block.tconstruct.crafting_station": "改良作業台",
-
   "block.tconstruct.tinker_station": "ティンカー台",
   "block.tconstruct.tinkers_anvil": "ティンカー金床",
   "block.tconstruct.scorched_anvil": "ティンカー金床",
-
   "block.tconstruct.part_builder": "部品作成台",
   "block.tconstruct.modifier_worktable": "改造調整台",
-
   "block.tconstruct.part_chest": "部品チェスト",
   "block.tconstruct.part_chest.tooltip": "最大で256個の部品を収納可能",
-
   "block.tconstruct.tinkers_chest": "ティンカーチェスト",
   "block.tconstruct.tinkers_chest.tooltip": "最大で16種類のアイテムを64スタック収納可能",
-
   "block.tconstruct.cast_chest": "金型チェスト",
   "block.tconstruct.cast_chest.tooltip": "全種類の金型を収納可能",
-
   "item.tconstruct.pattern": "パターン",
-
   "_comment": "Tinkers Tools",
-
   "_comment_on_format_": "These format allows you to have more control over separators in material names. By default we separate with space. You can use %1$s and %2$s if you wish to change the order.",
   "item.tconstruct.tool.format": "%sの%s",
   "item.tconstruct.tool.id_format": "%s (%s)",
   "item.tconstruct.tool.material_separator": "と",
-
   "item.tconstruct.pickaxe": "ツルハシ",
   "item.tconstruct.sledge_hammer": "大型ハンマー",
   "item.tconstruct.vein_hammer": "鉱脈ハンマー",
-
   "item.tconstruct.mattock": "マトック",
   "item.tconstruct.pickadze": "ピックアッズ",
   "item.tconstruct.excavator": "エクスカベーター",
-
   "item.tconstruct.hand_axe": "手斧",
   "item.tconstruct.broad_axe": "まさかり",
-
   "item.tconstruct.kama": "鎌",
   "item.tconstruct.scythe": "大鎌",
-
   "item.tconstruct.dagger": "短剣",
   "item.tconstruct.sword": "剣",
   "item.tconstruct.cleaver": "大剣",
-
   "item.tconstruct.crossbow": "クロスボウ",
   "item.tconstruct.longbow": "ロングボウ",
-
   "item.tconstruct.flint_and_brick": "火打石とレンガ",
   "item.tconstruct.sky_staff": "スカイスライムの杖",
   "item.tconstruct.earth_staff": "アーススライムの杖",
   "item.tconstruct.ichor_staff": "イコルの杖",
   "item.tconstruct.ender_staff": "エンダースライムの杖",
-  
   "item.tconstruct.travelers_helmet": "旅行者のゴーグル",
   "item.tconstruct.travelers_chestplate": "旅行者のベスト",
   "item.tconstruct.travelers_leggings": "旅行者のズボン",
   "item.tconstruct.travelers_boots": "旅行者の靴",
   "item.tconstruct.travelers_shield": "旅行者の盾",
-  
   "item.tconstruct.plate_helmet": "プレートヘルメット",
   "item.tconstruct.plate_chestplate": "プレートチェストプレート",
   "item.tconstruct.plate_leggings": "プレートレギンス",
   "item.tconstruct.plate_boots": "プレートブーツ",
   "item.tconstruct.plate_shield": "プレートシールド",
-
   "item.tconstruct.slime_helmet": "スライムスカル",
   "item.tconstruct.slime_chestplate": "スライムリトラ",
   "item.tconstruct.slime_leggings": "スライムシェル",
   "item.tconstruct.slime_boots": "スライムブーツ",
-  "item.tconstruct.slime_helmet.material.tconstruct.glass":         "クリーパーのスライムスカル",
-  "item.tconstruct.slime_helmet.material.tconstruct.ender_pearl":   "エンダーマンのスライムスカル",
-  "item.tconstruct.slime_helmet.material.tconstruct.bone":          "スケルトンのスライムスカル",
-  "item.tconstruct.slime_helmet.material.tconstruct.bloodbone":     "ストレイのスライムスカル",
+  "item.tconstruct.slime_helmet.material.tconstruct.glass": "クリーパーのスライムスカル",
+  "item.tconstruct.slime_helmet.material.tconstruct.ender_pearl": "エンダーマンのスライムスカル",
+  "item.tconstruct.slime_helmet.material.tconstruct.bone": "スケルトンのスライムスカル",
+  "item.tconstruct.slime_helmet.material.tconstruct.bloodbone": "ストレイのスライムスカル",
   "item.tconstruct.slime_helmet.material.tconstruct.necrotic_bone": "ウィザースケルトンのスライムスカル",
-  "item.tconstruct.slime_helmet.material.tconstruct.string":        "クモのスライムスカル",
-  "item.tconstruct.slime_helmet.material.tconstruct.darkthread":    "洞窟グモのスライムスカル",
-  "item.tconstruct.slime_helmet.material.tconstruct.rotten_flesh":  "ゾンビのスライムスカル",
-  "item.tconstruct.slime_helmet.material.tconstruct.iron":          "ハスクのスライムスカル",
-  "item.tconstruct.slime_helmet.material.tconstruct.copper":        "ドラウンドのスライムスカル",
-  "item.tconstruct.slime_helmet.material.tconstruct.blazing_bone":  "ブレイズのスライムスカル",
-  "item.tconstruct.slime_helmet.material.tconstruct.gold":          "ピグリンのスライムスカル",
-  "item.tconstruct.slime_helmet.material.tconstruct.rose_gold":     "ピグリンブルートのスライムスカル",
-  "item.tconstruct.slime_helmet.material.tconstruct.pig_iron":      "ゾンビピグリンのスライムスカル",
-
+  "item.tconstruct.slime_helmet.material.tconstruct.string": "クモのスライムスカル",
+  "item.tconstruct.slime_helmet.material.tconstruct.darkthread": "洞窟グモのスライムスカル",
+  "item.tconstruct.slime_helmet.material.tconstruct.rotten_flesh": "ゾンビのスライムスカル",
+  "item.tconstruct.slime_helmet.material.tconstruct.iron": "ハスクのスライムスカル",
+  "item.tconstruct.slime_helmet.material.tconstruct.copper": "ドラウンドのスライムスカル",
+  "item.tconstruct.slime_helmet.material.tconstruct.blazing_bone": "ブレイズのスライムスカル",
+  "item.tconstruct.slime_helmet.material.tconstruct.gold": "ピグリンのスライムスカル",
+  "item.tconstruct.slime_helmet.material.tconstruct.rose_gold": "ピグリンブルートのスライムスカル",
+  "item.tconstruct.slime_helmet.material.tconstruct.pig_iron": "ゾンビピグリンのスライムスカル",
   "item.tconstruct.crystalshot": "クリスタルショット",
   "entity.tconstruct.crystalshot": "クリスタルショット",
-
   "_comment": "Tinkers Tool Parts",
-
   "item.tconstruct.repair_kit": "リペアキット",
-
   "item.tconstruct.pick_head": "ツルハシ頭",
   "item.tconstruct.hammer_head": "ハンマー頭",
-
   "item.tconstruct.small_axe_head": "小斧頭",
   "item.tconstruct.broad_axe_head": "大斧頭",
-
   "item.tconstruct.small_blade": "小型刃",
   "item.tconstruct.broad_blade": "大型刃",
-
   "item.tconstruct.tool_handle": "持ち手",
   "item.tconstruct.tough_handle": "強化持ち手",
   "item.tconstruct.tool_binding": "締め具",
   "item.tconstruct.round_plate": "丸板",
   "item.tconstruct.large_plate": "大板",
-  
   "item.tconstruct.bow_limb": "弓幹",
   "item.tconstruct.bow_grip": "弓柄",
   "item.tconstruct.bowstring": "弓弦",
-
-
   "_conment": "Tool Descriptions",
-
   "item.tconstruct.pickaxe.description": "ツルハシは精密な採掘道具です。石や鉱石に効果的です。\nそのブロックを壊しても大丈夫？",
   "item.tconstruct.sledge_hammer.description": "大型ハンマーは大型の採掘道具です。広範囲のブロックを壊します。\nアンデッドに対しても効果的です。",
   "item.tconstruct.vein_hammer.description": "鉱脈ハンマーは大型の採掘道具です。採掘するブロックに接する同種のブロックを一度に壊します。鉱石採掘に最適です。",
-
   "item.tconstruct.mattock.description": "カッターマトックは万能な農具です。木、土、砂、砂利、植物に効果的です。\n墓穴を掘らないでください！",
   "item.tconstruct.pickadze.description": "ピックアッズは万能な採掘道具です。石、土、砂、砂利に効果的ですが、鉱石のような石より硬いものを掘れるほどの鋭さはありません。",
   "item.tconstruct.excavator.description": "エクスカベーターは大型の掘り道具です。広範囲の土や雪を一度に掘り起こせます。\nテラフォーミング！",
-
   "item.tconstruct.hand_axe.description": "手斧は、木を切り倒せ、葉を短時間で壊せます。武器としても有用です。\nバッサバッサ！",
   "item.tconstruct.broad_axe.description": "まさかりは、小さな木であれば一振りで切り倒せ、巨木も素早く切り倒すことができます。強力な重量武器にもなります。\n木が倒れるぞ！",
-
   "item.tconstruct.kama.description": "鎌は精密な収穫用道具で、植物を刈り取り動物の毛を刈ります。\n右クリック: 収穫と植え替え",
   "item.tconstruct.scythe.description": "大鎌は大型の収穫用道具で、広いエリアの植物を刈り取ります。\n右クリック: 収穫と植え替え",
-
   "item.tconstruct.dagger.description": "短剣は軽量武器で、どちらの手でも素早く攻撃できます。",
   "item.tconstruct.sword.description": "剣は万能武器です。薙ぎ払い攻撃は敵の大群を寄せ付けません。\n蜘蛛の巣にも有効です！",
   "item.tconstruct.cleaver.description": "大剣は乾式精錬炉マスターのための武器です。高範囲攻撃で強靭な敵を切り裂くことができます。",
-
   "item.tconstruct.crossbow.description": "クロスボウは低射程の武器で、矢や花火を素早く発射できます。",
   "item.tconstruct.longbow.description": "ロングボウは高射程の武器で、長距離に渡って正確に矢を放つことができます。",
-
-
   "_comment": "Smeltery shared",
-
   "block.tconstruct.tank.fluid": "液体: %s",
   "block.tconstruct.tank.mb": "%d mb",
   "block.tconstruct.tank.ingots": "%dインゴット分",
   "block.tconstruct.tank.mixed": "%dインゴット分 + %d mb",
-
   "block.tconstruct.tank.drained": "%s mb %sを排出",
   "block.tconstruct.tank.filled": "%s mb %sを注入",
-
   "block.tconstruct.channel.side.in": "手前側に流す",
   "block.tconstruct.channel.side.out": "奥側に流す",
   "block.tconstruct.channel.side.none": "この側は接続しない",
   "block.tconstruct.channel.down.out": "下に流す",
   "block.tconstruct.channel.down.none": "下に流さない",
-
   "death.attack.tconstruct.smeltery_heat": "%1$sは溶融プレイヤーになろうとした",
   "death.attack.tconstruct.smeltery_heat.player": "%1$sは%2$sと戦いながら溶融プレイヤーになろうとした",
   "death.attack.tconstruct.smeltery_magic": "%1$sは乾式精錬炉と1つになった",
   "death.attack.tconstruct.smeltery_magic.player": "%1$sは%2$sと戦いながら乾式精錬炉と1つになった",
   "death.attack.tconstruct.self_destruct": "%1$sは自爆した",
   "death.attack.tconstruct.self_destruct.player": "%1$sは%2$sと戦いながら自爆した",
-
   "gui.tconstruct.melting.no_recipe": "このアイテムは溶融できません。",
   "gui.tconstruct.melting.no_heat": "このアイテムを溶融させるための熱量が足りません。",
   "gui.tconstruct.melting.no_space": "液体を格納する空きスペースがありません。",
-
   "gui.tconstruct.melting.fuel.no_tank": "タンクが付いてません",
   "gui.tconstruct.melting.fuel.empty": "燃料がありません",
   "gui.tconstruct.melting.fuel.solid": "固形燃料",
   "gui.tconstruct.melting.fuel.temperature": "温度: %s°C",
   "gui.tconstruct.melting.fuel.invalid": "燃料として使用できません！",
-
   "gui.tconstruct.duct": "ダクト",
-
   "multiblock.tconstruct.generic.no_attempt": "構造物の検出はまだ実行されていません、これは通常はmodのバグです",
   "multiblock.tconstruct.generic.not_loaded": "構造物が読み込み済みのエリア外にあります、これは通常はmodのバグです。",
   "multiblock.tconstruct.generic.too_high": "構造物にはワールドの設置上限より上にブロックが必要です",
   "multiblock.tconstruct.generic.too_large": "構造体の内寸が大きすぎます: 現在%s×%s、最大%s×%s",
-
   "multiblock.tconstruct.generic.invalid_inner_block": "構造内に無効なブロックがあります",
   "multiblock.tconstruct.generic.invalid_wall_block": "壁に無効なブロックがあります",
   "multiblock.tconstruct.generic.invalid_floor_block": "床に無効なブロックがあります",
@@ -1017,45 +779,35 @@
   "multiblock.tconstruct.generic.invalid_wall_frame": "壁の四隅に無効なブロックがあります",
   "multiblock.tconstruct.generic.invalid_floor_frame": "床の四隅に無効なブロックがあります",
   "multiblock.tconstruct.generic.invalid_ceiling_frame": "天井の四隅に無効なブロックがあります",
-
   "multiblock.tconstruct.tiny.no_fuel_tank": "動作させるには、燃料タンクまたは発熱器の上に配置する必要があります",
-
-
   "_comment": "Tinkers Smeltery",
-
   "block.tconstruct.grout": "グラウト",
   "block.tconstruct.grout.tooltip": "私はグラウト！",
-
   "block.tconstruct.seared_stone": "焼成石",
   "block.tconstruct.seared_stone.tooltip": "乾式製錬炉の部品。",
   "block.tconstruct.seared_stone_slab": "焼成石のハーフブロック",
   "block.tconstruct.seared_stone_stairs": "焼成石の階段",
-
   "block.tconstruct.seared_cobble": "焼成丸石",
   "block.tconstruct.seared_cobble.tooltip": "乾式製錬炉の部品。",
   "block.tconstruct.seared_cobble_slab": "焼成丸石のハーフブロック",
   "block.tconstruct.seared_cobble_stairs": "焼成丸石の階段",
   "block.tconstruct.seared_cobble_wall": "焼成丸石の塀",
-
   "item.tconstruct.seared_brick": "焼成レンガ",
   "block.tconstruct.seared_bricks": "焼成レンガ",
   "block.tconstruct.seared_bricks.tooltip": "乾式製錬炉の部品。",
   "block.tconstruct.seared_bricks_slab": "焼成レンガのハーフブロック",
   "block.tconstruct.seared_bricks_stairs": "焼成レンガの階段",
   "block.tconstruct.seared_bricks_wall": "焼成レンガの塀",
-
   "block.tconstruct.seared_paver": "舗装された焼成石",
   "block.tconstruct.seared_paver.tooltip": "乾式製錬炉の部品",
   "block.tconstruct.seared_paver_slab": "舗装された焼成石のハーフブロック",
   "block.tconstruct.seared_paver_stairs": "舗装された焼成石の階段",
-
   "block.tconstruct.seared_cracked_bricks": "ひび割れた焼成レンガ",
   "block.tconstruct.seared_cracked_bricks.tooltip": "乾式製錬炉の部品。",
   "block.tconstruct.seared_fancy_bricks": "おしゃれな焼成レンガ",
   "block.tconstruct.seared_fancy_bricks.tooltip": "乾式製錬炉の部品。",
   "block.tconstruct.seared_triangle_bricks": "三角柄の焼成レンガ",
   "block.tconstruct.seared_triangle_bricks.tooltip": "乾式製錬炉の部品。",
-
   "block.tconstruct.seared_glass": "焼成ガラス",
   "block.tconstruct.seared_glass.tooltip": "乾式製錬炉の部品。\n液体は格納できない。",
   "block.tconstruct.seared_soul_glass": "焼成ソウルガラス",
@@ -1066,10 +818,8 @@
   "block.tconstruct.seared_glass_pane.tooltip": "乾式製錬炉の部品として使用できない。",
   "block.tconstruct.seared_soul_glass_pane": "焼成ソウルガラス板",
   "block.tconstruct.seared_soul_glass_pane.tooltip": "乾式製錬炉の部品として使用できないが、通り抜けられる。",
-
   "block.tconstruct.seared_ladder": "焼成石のはしご",
   "block.tconstruct.seared_ladder.tooltip": "壁伝いに登れる乾式製錬炉の部品。",
-
   "block.tconstruct.seared_fuel_tank": "焼成石の燃料タンク",
   "block.tconstruct.seared_fuel_tank.tooltip": "乾式製錬炉の心臓部。\nブロック化しても中の液体を保持する。",
   "block.tconstruct.seared_fuel_gauge": "焼成石の燃料ゲージ",
@@ -1080,65 +830,51 @@
   "block.tconstruct.seared_ingot_gauge.tooltip": "金属用で、48インゴット分の液体を保持する。\nブロック化しても中の液体を保持する。",
   "block.tconstruct.seared_lantern": "焼成石のランタン",
   "block.tconstruct.seared_lantern.tooltip": "装飾用で、100mbの液体を保持する。\nブロック化しても中の液体を保持する。",
-
   "block.tconstruct.seared_faucet": "焼成石の蛇口",
   "block.tconstruct.seared_faucet.tooltip": "乾式製錬炉やタンクから液体を排出する。",
   "block.tconstruct.seared_channel": "焼成石のチャネル",
   "block.tconstruct.seared_channel.tooltip": "蛇口から注がれた液体を流す。",
-
   "block.tconstruct.seared_basin": "焼成石の鋳造鉢",
   "block.tconstruct.seared_basin.tooltip": "乾式製錬炉から溶けた金属を流し込んでアイテム化させる。",
   "block.tconstruct.seared_table": "焼成石の鋳造台",
   "block.tconstruct.seared_table.tooltip": "乾式製錬炉から溶けた金属を流し込んでアイテム化させる。",
-
   "block.tconstruct.seared_melter": "焼成石の溶融器",
   "block.tconstruct.seared_melter.tooltip": "最初の精錬炉。\nタンクや発熱器の上に置く。",
   "gui.tconstruct.melter": "溶融器",
   "gui.tconstruct.melting.capacity": "容量:",
   "gui.tconstruct.melting.available": "空き:",
   "gui.tconstruct.melting.used": "使用:",
-
   "block.tconstruct.seared_heater": "焼成石の発熱器",
   "block.tconstruct.seared_heater.tooltip": "溶融器を稼動させるため熱源で、固形燃料が使用できる。",
   "gui.tconstruct.heater": "発熱器",
-
   "block.tconstruct.smeltery_controller": "乾式製錬炉コントローラー",
   "block.tconstruct.smeltery_controller.tooltip": "乾式製錬炉の頭脳。",
   "gui.tconstruct.smeltery": "乾式製錬炉",
-
   "block.tconstruct.seared_drain": "焼成石のドレン",
   "block.tconstruct.seared_drain.tooltip": "乾式製錬炉に液体を入出力する口",
   "block.tconstruct.seared_duct": "焼成石のダクト",
   "block.tconstruct.seared_duct.tooltip": "銅缶またはバケツで入出力する液体をフィルタリングできる口",
   "block.tconstruct.seared_chute": "焼成石のシュート",
   "block.tconstruct.seared_chute.tooltip": "乾式製錬炉にアイテムを入出力する口",
-
-
   "_comment": "Tinkers Foundry",
-
   "block.tconstruct.nether_grout": "ネザーグラウト",
   "block.tconstruct.nether_grout.tooltip": "私たちはグラウト！",
-
   "block.tconstruct.scorched_stone": "焦熱石",
   "block.tconstruct.scorched_stone.tooltip": "鋳造炉の部品。",
   "block.tconstruct.polished_scorched_stone": "磨かれた焦熱石",
   "block.tconstruct.polished_scorched_stone.tooltip": "鋳造炉の部品。",
-
   "item.tconstruct.scorched_brick": "焦熱レンガ",
   "block.tconstruct.scorched_bricks": "焦熱レンガ",
   "block.tconstruct.scorched_bricks.tooltip": "鋳造炉の部品。",
   "block.tconstruct.scorched_bricks_slab": "焦熱レンガのハーフブロック",
   "block.tconstruct.scorched_bricks_stairs": "焦熱レンガの階段",
   "block.tconstruct.scorched_bricks_fence": "焦熱レンガのフェンス",
-
   "block.tconstruct.scorched_road": "焦熱レンガの道",
   "block.tconstruct.scorched_road.tooltip": "鋳造炉の部品。",
   "block.tconstruct.scorched_road_slab": "焦熱レンガの道のハーフブロック",
   "block.tconstruct.scorched_road_stairs": "焦熱レンガの道の階段",
-
   "block.tconstruct.chiseled_scorched_bricks": "彫刻された焦熱レンガ",
   "block.tconstruct.chiseled_scorched_bricks.tooltip": "鋳造炉の部品。",
-
   "block.tconstruct.scorched_glass": "焦熱ガラス",
   "block.tconstruct.scorched_glass.tooltip": "鋳造炉の部品。\n液体は格納できない。",
   "block.tconstruct.scorched_soul_glass": "焦熱ソウルガラス",
@@ -1149,10 +885,8 @@
   "block.tconstruct.scorched_glass_pane.tooltip": "鋳造炉の部品として使用できない。",
   "block.tconstruct.scorched_soul_glass_pane": "焦熱ソウルガラス",
   "block.tconstruct.scorched_soul_glass_pane.tooltip": "鋳造炉の部品として使用できないが、通り抜けられる。",
-
   "block.tconstruct.scorched_ladder": "焦熱石のはしご",
   "block.tconstruct.scorched_ladder.tooltip": "壁伝いに登れる鋳造炉の部品。",
-
   "block.tconstruct.scorched_fuel_tank": "焦熱石の燃料タンク",
   "block.tconstruct.scorched_fuel_tank.tooltip": "鋳造炉の心臓部。\nブロック化しても中の液体を保持する。",
   "block.tconstruct.scorched_fuel_gauge": "焦熱石の燃料ゲージ",
@@ -1163,37 +897,29 @@
   "block.tconstruct.scorched_ingot_gauge.tooltip": "金属用で、48インゴット分の液体を保持する。\nブロック化しても中の液体を保持する。",
   "block.tconstruct.scorched_lantern": "焦熱石のランタン",
   "block.tconstruct.scorched_lantern.tooltip": "装飾用で、100mbの液体を保持する。\nブロック化しても中の液体を保持する。",
-
   "block.tconstruct.scorched_faucet": "焦熱石の蛇口",
   "block.tconstruct.scorched_faucet.tooltip": "鋳造炉やタンクから液体を排出する。",
   "block.tconstruct.scorched_basin": "焦熱石の鋳造鉢",
   "block.tconstruct.scorched_basin.tooltip": "鋳造炉から溶けた金属を流し込んでアイテム化させる。",
   "block.tconstruct.scorched_table": "焦熱石の鋳造台",
   "block.tconstruct.scorched_table.tooltip": "鋳造炉から溶けた金属を流し込んでアイテム化させる。",
-
   "block.tconstruct.scorched_channel": "焦熱石のチャネル",
   "block.tconstruct.scorched_channel.tooltip": "蛇口から注がれた液体を流す。",
-
   "block.tconstruct.scorched_alloyer": "焦熱石の合金炉",
   "block.tconstruct.scorched_alloyer.tooltip": "単純な合金化装置。タンクや発熱器の上に置く。",
   "gui.tconstruct.alloyer": "合金炉",
-
   "block.tconstruct.foundry_controller": "鋳造炉コントローラー",
   "block.tconstruct.foundry_controller.tooltip": "鋳造炉の頭脳。",
   "gui.tconstruct.foundry": "鋳造炉",
-
   "block.tconstruct.scorched_drain": "焦熱石のドレン",
   "block.tconstruct.scorched_drain.tooltip": "鋳造炉に液体を入出力する口",
   "block.tconstruct.scorched_duct": "焦熱石のダクト",
   "block.tconstruct.scorched_duct.tooltip": "銅缶またはバケツで入出力する液体をフィルタリングできる口",
   "block.tconstruct.scorched_chute": "焦熱石のシュート",
   "block.tconstruct.scorched_chute.tooltip": "鋳造炉にアイテムを入出力する口",
-
-
   "gui.tconstruct.fluid.kilobucket": "%s kb",
   "gui.tconstruct.fluid.bucket": "%s b",
   "gui.tconstruct.fluid.millibucket": "%s mb",
-
   "gui.tconstruct.fluid.block": "%sブロック分",
   "gui.tconstruct.fluid.ingot": "%sインゴット分",
   "gui.tconstruct.fluid.nugget": "%s塊分",
@@ -1204,12 +930,8 @@
   "gui.tconstruct.fluid.brick": "%sレンガ分",
   "gui.tconstruct.fluid.bowl": "%sボウル分",
   "gui.tconstruct.fluid.bottle": "%s瓶分",
-
   "gui.tconstruct.fluid.hold_shift": "§e§oShift§r§7を押すとバケツ単位に切り替わります",
-
-
   "_comment": "Tinkers World",
-
   "entity.tconstruct.earth_slime": "アーススライム",
   "item.tconstruct.earth_slime_spawn_egg": "アーススライムのスポーンエッグ",
   "entity.tconstruct.sky_slime": "スカイスライム",
@@ -1218,7 +940,6 @@
   "item.tconstruct.ender_slime_spawn_egg": "エンダースライムのスポーンエッグ",
   "entity.tconstruct.terracube": "テラキューブ",
   "item.tconstruct.terracube_spawn_egg": "テラキューブのスポーンエッグ",
-
   "block.tconstruct.earth_slime_dirt": "アーススライムの土",
   "block.tconstruct.earth_slime_dirt.tooltip": "べとつくが、高く飛べる",
   "block.tconstruct.sky_slime_dirt": "スカイスライムの土",
@@ -1227,7 +948,6 @@
   "block.tconstruct.ichor_slime_dirt.tooltip": "べとつくが、高く飛べる",
   "block.tconstruct.ender_slime_dirt": "エンダースライムの土",
   "block.tconstruct.ender_slime_dirt.tooltip": "べとつくが、高く飛べる",
-
   "block.tconstruct.earth_vanilla_slime_grass": "アーススライムの草ブロック",
   "block.tconstruct.earth_vanilla_slime_grass.tooltip": "高く飛べ、オーバーワールドに設置するとアーススライムをスポーンさせる",
   "block.tconstruct.earth_earth_slime_grass": "アーススライムの草ブロック",
@@ -1238,7 +958,6 @@
   "block.tconstruct.earth_ichor_slime_grass.tooltip": "高く飛べ、オーバーワールドに設置するとアーススライムをスポーンさせる",
   "block.tconstruct.earth_ender_slime_grass": "アーススライムの草ブロック",
   "block.tconstruct.earth_ender_slime_grass.tooltip": "高く飛べ、オーバーワールドに設置するとアーススライムをスポーンさせる",
-
   "block.tconstruct.sky_vanilla_slime_grass": "スカイスライムの草ブロック",
   "block.tconstruct.sky_vanilla_slime_grass.tooltip": "高く飛べ、オーバーワールドに設置するとスカイスライムをスポーンさせる",
   "block.tconstruct.sky_earth_slime_grass": "スカイスライムの草ブロック",
@@ -1249,7 +968,6 @@
   "block.tconstruct.sky_ichor_slime_grass.tooltip": "高く飛べ、オーバーワールドに設置するとスカイスライムをスポーンさせる",
   "block.tconstruct.sky_ender_slime_grass": "スカイスライムの草ブロック",
   "block.tconstruct.sky_ender_slime_grass.tooltip": "高く飛べ、オーバーワールドに設置するとスカイスライムをスポーンさせる",
-
   "block.tconstruct.blood_vanilla_slime_grass": "血塗られたナイリウム",
   "block.tconstruct.blood_vanilla_slime_grass.tooltip": "高く飛べ、骨粉をまくと血塗られたキノコが生える",
   "block.tconstruct.blood_earth_slime_grass": "血塗られたナイリウム",
@@ -1260,7 +978,6 @@
   "block.tconstruct.blood_ichor_slime_grass.tooltip": "高く飛べ、骨粉をまくと血塗られたキノコが生える",
   "block.tconstruct.blood_ender_slime_grass": "血塗られたナイリウム",
   "block.tconstruct.blood_ender_slime_grass.tooltip": "高く飛べ、骨粉をまくと血塗られたキノコが生える",
-
   "block.tconstruct.ichor_vanilla_slime_grass": "イコルのナイリウム",
   "block.tconstruct.ichor_vanilla_slime_grass.tooltip": "とても柔らかい！高く飛べる",
   "block.tconstruct.ichor_earth_slime_grass": "イコルのナイリウム",
@@ -1271,7 +988,6 @@
   "block.tconstruct.ichor_ichor_slime_grass.tooltip": "とても柔らかい！高く飛べる",
   "block.tconstruct.ichor_ender_slime_grass": "イコルのナイリウム",
   "block.tconstruct.ichor_ender_slime_grass.tooltip": "とても柔らかい！高く飛べる",
-
   "block.tconstruct.ender_vanilla_slime_grass": "エンダースライムの草ブロック",
   "block.tconstruct.ender_vanilla_slime_grass.tooltip": "高く飛べ、ジ・エンドに設置するとエンダースライムをスポーンさせる",
   "block.tconstruct.ender_earth_slime_grass": "エンダースライムの草ブロック",
@@ -1282,7 +998,6 @@
   "block.tconstruct.ender_ichor_slime_grass.tooltip": "高く飛べ、ジ・エンドに設置するとエンダースライムをスポーンさせる",
   "block.tconstruct.ender_ender_slime_grass": "エンダースライムの草ブロック",
   "block.tconstruct.ender_ender_slime_grass.tooltip": "高く飛べ、ジ・エンドに設置するとエンダースライムをスポーンさせる",
-
   "item.tconstruct.earth_slime_grass_seeds": "べとつく種",
   "item.tconstruct.earth_slime_grass_seeds.tooltip": "土やスライムの土に使うとスライムの草ブロックに変化する",
   "item.tconstruct.sky_slime_grass_seeds": "べとつく種",
@@ -1293,31 +1008,26 @@
   "item.tconstruct.ichor_slime_grass_seeds.tooltip": "土やスライムの土に使うとスライムのナイリウムに変化する",
   "item.tconstruct.ender_slime_grass_seeds": "べとつく種",
   "item.tconstruct.ender_slime_grass_seeds.tooltip": "土やスライムの土に使うとスライムの草ブロックに変化し、ツタに使うとべとつくツタに変化する",
-
   "block.tconstruct.earth_slime_leaves": "べとつく葉",
   "block.tconstruct.sky_slime_leaves": "べとつく葉",
   "block.tconstruct.blood_slime_leaves": "べとつくウォートブロック",
   "block.tconstruct.ichor_slime_leaves": "べとつくウォートブロック",
   "block.tconstruct.ender_slime_leaves": "べとつく葉",
-
   "block.tconstruct.earth_slime_tall_grass": "背の高いべとつく草",
   "block.tconstruct.sky_slime_tall_grass": "背の高いべとつく草",
   "block.tconstruct.blood_slime_tall_grass": "背の高いべとつく草",
   "block.tconstruct.ichor_slime_tall_grass": "背の高いべとつく草",
   "block.tconstruct.ender_slime_tall_grass": "背の高いべとつく草",
-
   "block.tconstruct.earth_slime_fern": "べとつくシダ",
   "block.tconstruct.sky_slime_fern": "べとつくシダ",
   "block.tconstruct.blood_slime_fern": "べとつく根",
   "block.tconstruct.ichor_slime_fern": "べとつく根",
   "block.tconstruct.ender_slime_fern": "べとつくシダ",
-
   "block.tconstruct.potted_earth_slime_fern": "植えられたべとつくシダ",
   "block.tconstruct.potted_sky_slime_fern": "植えられたべとつくシダ",
   "block.tconstruct.potted_blood_slime_fern": "植えられたべとつく根",
   "block.tconstruct.potted_ichor_slime_fern": "植えられたべとつく根",
   "block.tconstruct.potted_ender_slime_fern": "植えられたべとつくシダ",
-
   "block.tconstruct.earth_slime_sapling": "グリーンハートの苗木",
   "block.tconstruct.earth_slime_sapling.tooltip": "スライムの土またはスライムの草ブロックの上でのみ成長する",
   "block.tconstruct.sky_slime_sapling": "スカイルートの苗木",
@@ -1328,140 +1038,116 @@
   "block.tconstruct.ichor_slime_sapling.tooltip": "スライムのナイリウムの上でのみ成長する",
   "block.tconstruct.ender_slime_sapling": "エンダースライムの苗木",
   "block.tconstruct.ender_slime_sapling.tooltip": "スライムの土またはスライムの草ブロックの上でのみ成長する",
-
   "block.tconstruct.potted_earth_slime_sapling": "植えられたグリーンハートの苗木",
-  "block.tconstruct.potted_sky_slime_sapling":   "植えられたスカイルートの苗木",
+  "block.tconstruct.potted_sky_slime_sapling": "植えられたスカイルートの苗木",
   "block.tconstruct.potted_blood_slime_sapling": "植えられた血塗られたキノコ",
   "block.tconstruct.potted_ichor_slime_sapling": "植えられたイコルの苗木",
   "block.tconstruct.potted_ender_slime_sapling": "植えられたエンダースライムの苗木",
-
   "block.tconstruct.ender_slime_vine": "べとつくツタ",
   "block.tconstruct.sky_slime_vine": "べとつくツタ",
-
-
   "_comment": "Wood",
-
-  "block.tconstruct.greenheart_planks":        "グリーンハートの板材",
-  "block.tconstruct.greenheart_planks_slab":   "グリーンハートのハーフブロック",
+  "block.tconstruct.greenheart_planks": "グリーンハートの板材",
+  "block.tconstruct.greenheart_planks_slab": "グリーンハートのハーフブロック",
   "block.tconstruct.greenheart_planks_stairs": "グリーンハートの階段",
-  "block.tconstruct.greenheart_log":           "グリーンハートの原木",
-  "block.tconstruct.stripped_greenheart_log":  "樹皮を剥いだグリーンハートの原木",
-  "block.tconstruct.greenheart_wood":          "グリーンハートの木",
+  "block.tconstruct.greenheart_log": "グリーンハートの原木",
+  "block.tconstruct.stripped_greenheart_log": "樹皮を剥いだグリーンハートの原木",
+  "block.tconstruct.greenheart_wood": "グリーンハートの木",
   "block.tconstruct.stripped_greenheart_wood": "樹皮を剥いだグリーンハートの木",
-
-  "block.tconstruct.greenheart_fence":          "グリーンハートのフェンス",
-  "block.tconstruct.greenheart_fence_gate":     "グリーンハートのフェンスゲート",
-  "block.tconstruct.greenheart_door":           "グリーンハートのドア",
-  "block.tconstruct.greenheart_trapdoor":       "グリーンハートのトラップドア",
+  "block.tconstruct.greenheart_fence": "グリーンハートのフェンス",
+  "block.tconstruct.greenheart_fence_gate": "グリーンハートのフェンスゲート",
+  "block.tconstruct.greenheart_door": "グリーンハートのドア",
+  "block.tconstruct.greenheart_trapdoor": "グリーンハートのトラップドア",
   "block.tconstruct.greenheart_pressure_plate": "グリーンハートの感圧板",
-  "block.tconstruct.greenheart_button":         "グリーンハートのボタン",
-  "block.tconstruct.greenheart_sign":           "グリーンハートの看板",
-  "block.tconstruct.greenheart_wall_sign":      "グリーンハートの看板",
-
-  "block.tconstruct.skyroot_planks":        "スカイルートの板材",
-  "block.tconstruct.skyroot_planks_slab":   "スカイルートのハーフブロック",
+  "block.tconstruct.greenheart_button": "グリーンハートのボタン",
+  "block.tconstruct.greenheart_sign": "グリーンハートの看板",
+  "block.tconstruct.greenheart_wall_sign": "グリーンハートの看板",
+  "block.tconstruct.skyroot_planks": "スカイルートの板材",
+  "block.tconstruct.skyroot_planks_slab": "スカイルートのハーフブロック",
   "block.tconstruct.skyroot_planks_stairs": "スカイルートの階段",
-  "block.tconstruct.skyroot_log":           "スカイルートの原木",
-  "block.tconstruct.stripped_skyroot_log":  "樹皮を剥いだスカイルートの原木",
-  "block.tconstruct.skyroot_wood":          "スカイルートの木",
+  "block.tconstruct.skyroot_log": "スカイルートの原木",
+  "block.tconstruct.stripped_skyroot_log": "樹皮を剥いだスカイルートの原木",
+  "block.tconstruct.skyroot_wood": "スカイルートの木",
   "block.tconstruct.stripped_skyroot_wood": "樹皮を剥いだスカイルートの木",
-
-  "block.tconstruct.skyroot_fence":          "スカイルートのフェンス",
-  "block.tconstruct.skyroot_fence_gate":     "スカイルートのフェンスゲート",
-  "block.tconstruct.skyroot_door":           "スカイルートのドア",
-  "block.tconstruct.skyroot_trapdoor":       "スカイルートのトラップドア",
+  "block.tconstruct.skyroot_fence": "スカイルートのフェンス",
+  "block.tconstruct.skyroot_fence_gate": "スカイルートのフェンスゲート",
+  "block.tconstruct.skyroot_door": "スカイルートのドア",
+  "block.tconstruct.skyroot_trapdoor": "スカイルートのトラップドア",
   "block.tconstruct.skyroot_pressure_plate": "スカイルートの感圧板",
-  "block.tconstruct.skyroot_button":         "スカイルートのボタン",
-  "block.tconstruct.skyroot_sign":           "スカイルートの看板",
-  "block.tconstruct.skyroot_wall_sign":      "スカイルートの看板",
-
-  "block.tconstruct.bloodshroom_planks":        "血塗られたキノコの板材",
-  "block.tconstruct.bloodshroom_planks_slab":   "血塗られたキノコのハーフブロック",
+  "block.tconstruct.skyroot_button": "スカイルートのボタン",
+  "block.tconstruct.skyroot_sign": "スカイルートの看板",
+  "block.tconstruct.skyroot_wall_sign": "スカイルートの看板",
+  "block.tconstruct.bloodshroom_planks": "血塗られたキノコの板材",
+  "block.tconstruct.bloodshroom_planks_slab": "血塗られたキノコのハーフブロック",
   "block.tconstruct.bloodshroom_planks_stairs": "血塗られたキノコの階段",
-  "block.tconstruct.bloodshroom_log":           "血塗られたキノコの幹",
-  "block.tconstruct.stripped_bloodshroom_log":  "表皮を剥いだ血塗られたキノコの幹",
-  "block.tconstruct.bloodshroom_wood":          "血塗られたキノコの菌糸",
+  "block.tconstruct.bloodshroom_log": "血塗られたキノコの幹",
+  "block.tconstruct.stripped_bloodshroom_log": "表皮を剥いだ血塗られたキノコの幹",
+  "block.tconstruct.bloodshroom_wood": "血塗られたキノコの菌糸",
   "block.tconstruct.stripped_bloodshroom_wood": "表皮を剥いだ血塗られたキノコの菌糸",
-
-  "block.tconstruct.bloodshroom_fence":          "血塗られたキノコのフェンス",
-  "block.tconstruct.bloodshroom_fence_gate":     "血塗られたキノコのフェンスゲート",
-  "block.tconstruct.bloodshroom_door":           "血塗られたキノコのドア",
-  "block.tconstruct.bloodshroom_trapdoor":       "血塗られたキノコのトラップドア",
+  "block.tconstruct.bloodshroom_fence": "血塗られたキノコのフェンス",
+  "block.tconstruct.bloodshroom_fence_gate": "血塗られたキノコのフェンスゲート",
+  "block.tconstruct.bloodshroom_door": "血塗られたキノコのドア",
+  "block.tconstruct.bloodshroom_trapdoor": "血塗られたキノコのトラップドア",
   "block.tconstruct.bloodshroom_pressure_plate": "血塗られたキノコの感圧板",
-  "block.tconstruct.bloodshroom_button":         "血塗られたキノコのボタン",
-  "block.tconstruct.bloodshroom_sign":           "血塗られたキノコの看板",
-  "block.tconstruct.bloodshroom_wall_sign":      "血塗られたキノコの看板",
-
-
+  "block.tconstruct.bloodshroom_button": "血塗られたキノコのボタン",
+  "block.tconstruct.bloodshroom_sign": "血塗られたキノコの看板",
+  "block.tconstruct.bloodshroom_wall_sign": "血塗られたキノコの看板",
   "material.tconstruct.unknown": "不明",
-
   "__comment": "Tier 1 Materials",
   "material.tconstruct.wood": "木",
-  "material.tconstruct.wood.oak":      "オークの木",
-  "material.tconstruct.wood.spruce":   "トウヒの木",
-  "material.tconstruct.wood.birch":    "シラカバの木",
-  "material.tconstruct.wood.jungle":   "ジャングルの木",
-  "material.tconstruct.wood.acacia":   "アカシアの木",
+  "material.tconstruct.wood.oak": "オークの木",
+  "material.tconstruct.wood.spruce": "トウヒの木",
+  "material.tconstruct.wood.birch": "シラカバの木",
+  "material.tconstruct.wood.jungle": "ジャングルの木",
+  "material.tconstruct.wood.acacia": "アカシアの木",
   "material.tconstruct.wood.dark_oak": "ダークオークの木",
-  "material.tconstruct.wood.crimson":  "真紅の菌糸",
-  "material.tconstruct.wood.warped":   "歪んだ菌糸",
+  "material.tconstruct.wood.crimson": "真紅の菌糸",
+  "material.tconstruct.wood.warped": "歪んだ菌糸",
   "material.tconstruct.wood.format": "木の%s",
   "material.tconstruct.wood.flavor": "キツツキ木突き中きつく木に頭突きし傷つき気絶し木突き続けられず",
   "material.tconstruct.wood.encyclopedia": "部品1個辺り、修理の際に素材1個で回復する耐久度が50%上昇する",
-
   "material.tconstruct.bamboo": "竹",
   "material.tconstruct.bamboo.flavor": "惑わせる！",
   "material.tconstruct.bamboo.ranged": "矢の速度が110%になるが、基本攻撃力が90%になる。実質、同程度のダメージを与えながらより遠くまで飛ぶようになる",
-
   "material.tconstruct.rock": "岩石",
-  "material.tconstruct.rock.stone":      "石",
-  "material.tconstruct.rock.andesite":   "安山岩",
-  "material.tconstruct.rock.diorite":    "閃緑岩",
-  "material.tconstruct.rock.granite":    "花崗岩",
+  "material.tconstruct.rock.stone": "石",
+  "material.tconstruct.rock.andesite": "安山岩",
+  "material.tconstruct.rock.diorite": "閃緑岩",
+  "material.tconstruct.rock.granite": "花崗岩",
   "material.tconstruct.rock.blackstone": "ブラックストーン",
-  "material.tconstruct.rock.deepslate":  "深層岩",
+  "material.tconstruct.rock.deepslate": "深層岩",
   "material.tconstruct.rock.flavor": "堅実",
   "material.tconstruct.rock.encyclopedia": "減少した耐久度の平方根の更に半分の値に、この特性のレベルを掛けた分、採掘速度が上がる",
-
   "material.tconstruct.flint": "火打石",
   "material.tconstruct.flint.basalt": "玄武岩",
   "material.tconstruct.flint.flavor": "ティンカーの心が燃え上がる！",
   "material.tconstruct.flint.encyclopedia": "減少した耐久度の平方根の更に4分の1の値に、この特性のレベルを掛けた分、攻撃力が増加する",
-
   "material.tconstruct.bone": "骨",
   "material.tconstruct.bone.flavor": "体は剣で出来ている",
   "material.tconstruct.bone.encyclopedia": "攻撃力0.5辺り、1の防御無視ダメージに変換する",
   "material.tconstruct.bone.ranged": "矢は通常のダメージに加えて、レベルごとに1の防御無視ダメージを与える",
   "material.tconstruct.bone.skull_flavor": "ミルク買ってある？",
   "material.tconstruct.bone.skull_encyclopedia": "ミルクを飲むと1分間耐性が付く",
-
   "material.tconstruct.necrotic_bone": "ネクロボーン",
   "material.tconstruct.necrotic_bone.flavor": "骨は拾ってやる",
   "material.tconstruct.necrotic_bone.encyclopedia": "クリティカル攻撃で与えたダメージの一定割合の体力が回復する",
   "material.tconstruct.necrotic_bone.ranged": "矢がヒットした場合に与えたダメージの一定割合の体力が回復する",
   "material.tconstruct.necrotic_bone.skull_flavor": "不気味で怖いスケルトン！",
   "material.tconstruct.necrotic_bone.skull_encyclopedia": "近接攻撃をすると相手をウィザー状態にする。ミルクを飲むと効果が高まる",
-
-  "material.tconstruct.chorus":              "コーラス",
-  "material.tconstruct.chorus.flavor":       "エンダーマンだけでなく、エンダーウーマンやエンダーチャイルドにも",
+  "material.tconstruct.chorus": "コーラス",
+  "material.tconstruct.chorus.flavor": "エンダーマンだけでなく、エンダーウーマンやエンダーチャイルドにも",
   "material.tconstruct.chorus.encyclopedia": "レベルごとに5秒間、対象のテレポートを防ぐ",
   "material.tconstruct.chorus.ranged": "レベルごとに5秒間、対象のテレポートを防ぎ、更に弓でエンダーマンを攻撃できるようになる",
-
   "material.tconstruct.string": "糸",
   "material.tconstruct.string.flavor": "理論上、最高の素材。",
   "material.tconstruct.string.encyclopedia": "ティンカー台または作業台で、道具を糸で修理できるようになる",
   "material.tconstruct.string.skull_flavor": "クモはポーションの達人であり、その秘密を知ればポーションの効果を高めることができるかもしれない…",
   "material.tconstruct.string.skull_encyclopedia": "正のポーション効果の持続時間が25%伸びる",
-
   "material.tconstruct.leather": "革",
   "material.tconstruct.leather.flavor": "牛を殺して、革を干した。",
   "material.tconstruct.leather.encyclopedia": "道具を1回使用して2以上の耐久度が消費されないようになる",
-
   "material.tconstruct.vine": "ツタ",
   "material.tconstruct.vine.flavor": "ソーシャルネットワークとは異なり、生き続ける。",
   "material.tconstruct.vine.encyclopedia": "直射日光の元で使用すると、最大75%の確率で耐久度が消費されなくなる",
-
-
   "__comment": "Tier 2 Materials",
   "material.tconstruct.iron": "鉄",
   "material.tconstruct.iron.oxidized": "鉄の原石",
@@ -1469,15 +1155,12 @@
   "material.tconstruct.iron.encyclopedia": "部品1つごとに15％耐久度が増える",
   "material.tconstruct.iron.skull_flavor": "検疫違反",
   "material.tconstruct.iron.skull_encyclopedia": "近接攻撃をすると着用者のマイナスのステータス効果を相手に移す",
-
   "material.tconstruct.seared_stone": "焼成石",
   "material.tconstruct.seared_stone.flavor": "熱くなったグラウト。",
   "material.tconstruct.seared_stone.encyclopedia": "溶融器で溶かすことができるブロックに対して採掘速度が+6される",
-
   "material.tconstruct.scorched_stone": "焦熱石",
   "material.tconstruct.scorched_stone.flavor": "焦熱バージョンのボーナス。",
   "material.tconstruct.scorched_stone.encyclopedia": "レベルごとに、燃えているMobに対して+2の攻撃力補正を得る",
-
   "material.tconstruct.copper": "銅",
   "material.tconstruct.copper.oxidized": "酸化した銅",
   "material.tconstruct.copper.flavor": "変色させないでね。",
@@ -1485,223 +1168,175 @@
   "material.tconstruct.copper.ranged": "より低い高度で使用すると矢の速度ボーナスが発生し、高度64以下で64ブロックごとに+0.05される",
   "material.tconstruct.copper.skull_flavor": "相手の呼吸を奪う",
   "material.tconstruct.copper.skull_encyclopedia": "近接攻撃をすると相手の空気を3秒奪う",
-
   "material.tconstruct.slimewood": "スライムウッド",
-  "material.tconstruct.slimewood.greenheart":  "グリーンハート",
-  "material.tconstruct.slimewood.skyroot":     "スカイルート",
+  "material.tconstruct.slimewood.greenheart": "グリーンハート",
+  "material.tconstruct.slimewood.skyroot": "スカイルート",
   "material.tconstruct.slimewood.bloodshroom": "血塗られたキノコ",
   "material.tconstruct.slimewood.flavor": "これはスライムの木ですか？木にスライムが染み込んでいるのですか？",
   "material.tconstruct.slimewood.encyclopedia": "レベルごとに、毎秒5%の確率でオーバースライムが回復する",
-
   "material.tconstruct.bloodbone": "ブラッドボーン",
   "material.tconstruct.bloodbone.flavor": "血液は骨の中を流れているものではないのか？",
   "material.tconstruct.bloodbone.encyclopedia": "体力ハートを1つ失うごとに、レベルごとに最大+4の攻撃力補正を得る",
   "material.tconstruct.bloodbone.ranged": "体力ハートを1つ失うごとに、レベルごとにに最大+0.25の弓引き速度補正を得る",
   "material.tconstruct.bloodbone.skull_flavor": "骨まで凍えさせる",
   "material.tconstruct.bloodbone.skull_encyclopedia": "遠距離攻撃をすると相手に移動速度低下を与える。ミルクを飲むと、近接攻撃で移動速度低下を与え、低下の効果も強まる。",
-
   "material.tconstruct.rose_gold": "ローズゴールド",
   "material.tconstruct.rose_gold.flavor": "免責事項：バラは入っていません。",
   "material.tconstruct.rose_gold.encyclopedia": "部品1つごとに1の追加のアップグレードスロットを得る",
   "material.tconstruct.rose_gold.skull_flavor": "アームシールドをうまく使えるようになる",
   "material.tconstruct.rose_gold.skull_encyclopedia": "体力がハート1つ分増え、金の防具を付けていると更に追加でハートが増える。",
-
   "material.tconstruct.chain": "鎖",
   "material.tconstruct.chain.flavor": "これであなたも今から鎖使いになれる。",
   "material.tconstruct.chain.encyclopedia": "道具が受けるダメージが25%減少する",
-
   "material.tconstruct.skyslime_vine": "べとつくツタ",
   "material.tconstruct.skyslime_vine.flavor": "蝶のように舞い、蜂のように刺す。",
   "material.tconstruct.skyslime_vine.encyclopedia": "足が大地に付いてない場合でも採掘速度が低下しなくなる",
   "material.tconstruct.skyslime_vine.ranged": "地面やはしごに乗っていない時に+0.5の正確性補正を得る",
-
-
   "__comment": "Tier 3 Materials",
   "material.tconstruct.slimesteel": "スライムスチール",
   "material.tconstruct.slimesteel.flavor": "スライムスチールを手に入れるにはスライムを盗まなければならない。",
   "material.tconstruct.slimesteel.encyclopedia": "レベルごとに、オーバースライムの値を25増やし、更に加算後の値を50%増やす",
-
   "material.tconstruct.nahuatl": "ナワトル",
   "material.tconstruct.nahuatl.flavor": "これは黒曜石の部品ではない、もしそうなら「黒曜石」と表現する。",
   "material.tconstruct.nahuatl.encyclopedia": "50%の確率で、攻撃した相手に持続ダメージ効果を付与し、ダメージはレベルが上がると最大5まで上がる",
-
   "material.tconstruct.amethyst_bronze": "アメジスト青銅",
   "material.tconstruct.amethyst_bronze.flavor": "青銅と混同しないように。",
   "material.tconstruct.amethyst_bronze.encyclopedia": "レベルごとに+0.5の採掘速度補正があり、道具がそのブロック採掘に適していない場合でも効果がある",
   "material.tconstruct.amethyst_bronze.ranged": "レベルごとに+0.1の速度補正を得るが、代償として最初の3レベルで矢を放てる角度が32方向、16方向、8方向に制限されていく",
-
   "material.tconstruct.pig_iron": "銑鉄",
   "material.tconstruct.pig_iron.flavor": "絶対に最高の素材、議論の余地なし。",
   "material.tconstruct.pig_iron.encyclopedia": "食べることができ、レベルごとにハート1つと満腹度0.1が回復する",
   "material.tconstruct.pig_iron.skull_flavor": "私を怒らせると、あなたは私のことが嫌いになるだろう！",
   "material.tconstruct.pig_iron.skull_encyclopedia": "他のMobからダメージを受けると、15秒間攻撃力上昇効果を得る",
-
   "material.tconstruct.darkthread": "暗黒糸",
   "material.tconstruct.darkthread.flavor": "暗黒面に落ち、我々は種を蒔く",
   "material.tconstruct.darkthread.encyclopedia": "Mobからのドロップ率が上がり、運が良ければ複数落ちる",
   "material.tconstruct.darkthread.ranged": "矢で倒したMobからのドロップ率が上がる",
   "material.tconstruct.darkthread.skull_flavor": "誰が正直者かを見極めるためにどれを飲むか決める知恵比べをしている場合には、最高である。",
   "material.tconstruct.darkthread.skull_encyclopedia": "毒ダメージを受けなくなるが、毒の効果がなくなるわけではない",
-
-
   "__comment": "Tier Nether Materials",
   "material.tconstruct.cobalt": "コバルト",
   "material.tconstruct.cobalt.flavor": "Coblatとも書く。赤軍の素材。",
   "material.tconstruct.cobalt.encyclopedia": "レベルごとに、採掘速度と攻撃速度が7%上がる",
   "material.tconstruct.cobalt.ranged": "レベルごとに弓引き速度と矢の速度が5%上がる",
-
   "material.tconstruct.manyullyn": "マンユリン",
   "material.tconstruct.manyullyn.flavor": "ほとんどのティンカーが正しく発音していない金属。星切の素材としても知られている。",
   "material.tconstruct.manyullyn.encyclopedia": "攻撃を8回連続でヒットさせた後、以降のダメージがレベルごとに+2される",
   "material.tconstruct.manyullyn.ranged": "攻撃を8回連続でヒットさせた後、以降の矢のダメージがレベルごとに+1(速度によるダメージ補正をする前の値)される",
-
   "material.tconstruct.hepatizon": "ヘパティゾン",
   "material.tconstruct.hepatizon.flavor": "He-pa-ti-zon - 茹でて潰してシチューに入れる。",
   "material.tconstruct.hepatizon.encyclopedia": "ブロックを32回連続で採掘した後、以降の採掘速度がレベルごとに25％上がる",
   "material.tconstruct.hepatizon.ranged": "矢を16回続けて放つと、以降の弓引き速度がレベルごとに25%上がる",
-
   "material.tconstruct.queens_slime": "クイーンスライム",
   "material.tconstruct.queens_slime.flavor": "邪悪な姫は自らを王女にしようとする",
   "material.tconstruct.queens_slime.encyclopedia": "レベルごとに、耐久度が15%減少し、減少した耐久度の66%がオーバースライムに変換される",
-
   "material.tconstruct.blazing_bone": "ブレイズボーン",
   "material.tconstruct.blazing_bone.flavor": "骨とブレイズ - ネザー要塞のすべての力の結晶",
   "material.tconstruct.blazing_bone.encyclopedia": "炎上中は1秒ごとに+1%、溶岩に15秒間浸かると最大で+15%の攻撃力補正を得る。耐火状態では上昇値が減少する。",
   "material.tconstruct.blazing_bone.ranged": "炎上中は1秒ごとに+1%、溶岩に15秒間浸かると最大で+15%の矢の攻撃力補正を得る。耐火状態では上昇値が減少する。",
   "material.tconstruct.blazing_bone.skull_flavor": "これは技術的にはファイアスピットであり、ファイアブレスではないのだが、どうやら私は自分が発明したこの能力の名前を決めることができない",
   "material.tconstruct.blazing_bone.skull_encyclopedia": "インベントリ内のファイヤーチャージを使って火球を飛ばせる。発動後に5秒間のクールタイムがあり、水中では発動しない",
-
   "material.tconstruct.soulsteel": "ソウルスチール",
-
   "material.tconstruct.ancient_hide": "古代の革",
   "material.tconstruct.ancient_hide.flavor": "最古の石でなめした革",
   "material.tconstruct.ancient_hide.encyclopedia": "ブロックからのドロップ率が上昇し、運が良ければ複数落ちる",
-
   "__comment": "Tier End Materials",
   "material.tconstruct.knightslime": "ナイトスライム",
-
   "material.tconstruct.enderslime_vine": "べとつくツタ",
   "material.tconstruct.enderslime_vine.flavor": "おしまい？",
   "material.tconstruct.enderslime_vine.encyclopedia": "所有者を採掘したブロックまたは倒したMobの位置にテレポートさせる",
   "material.tconstruct.enderslime_vine.ranged": "矢がブロックに当たると所有者をその位置にテレポートさせ、Mobに当たると所有者と位置を入れ替える",
-
   "__comment": "Slimesuit materials",
   "material.tconstruct.glass": "ガラス",
   "material.tconstruct.glass.skull_flavor": "今その素敵なものが破壊されている、クリーパー？",
   "material.tconstruct.glass.skull_encyclopedia": "ヘルメットのアクションキーを押すと着用者が爆発する",
-
   "material.tconstruct.ender_pearl": "エンダーパール",
   "material.tconstruct.ender_pearl.skull_flavor": "エンダーマンは危害から遠ざかる術を知っており、また科学者でもある。彼らは何週間もの間私のインタビューのリクエストを無視し続けた！",
   "material.tconstruct.ender_pearl.skull_encyclopedia": "飛翔体で攻撃されると自動的にテレポートし、近接攻撃でもランダムでテレポートする。15秒間のクールタイムがある",
-
   "material.tconstruct.rotten_flesh": "腐った肉",
   "material.tconstruct.rotten_flesh.skull_flavor": "これでいいのだ",
   "material.tconstruct.rotten_flesh.skull_encyclopedia": "直接攻撃をすると、着用者の炎上時間に応じて相手の炎上時間を伸ばす",
-
   "material.tconstruct.gold": "金",
   "material.tconstruct.gold.skull_flavor": "何という輝き",
   "material.tconstruct.gold.skull_encyclopedia": "金鉱石を採掘すると追加の金塊がドロップされることがあり、また金の防具をドロップする確率が4%増加する。金塊や防具のドロップ確率は、金装備をしている部位の個数によって更に増加する。",
-
-  "material.tconstruct.obsidian":   "黒曜石",
-  "material.tconstruct.debris":     "残骸",
-  "material.tconstruct.netherite":  "ネザライト",
+  "material.tconstruct.obsidian": "黒曜石",
+  "material.tconstruct.debris": "残骸",
+  "material.tconstruct.netherite": "ネザライト",
   "material.tconstruct.earthslime": "アーススライム",
-  "material.tconstruct.skyslime":   "スカイスライム",
-  "material.tconstruct.blood":      "血",
-  "material.tconstruct.ichor":      "イコル",
+  "material.tconstruct.skyslime": "スカイスライム",
+  "material.tconstruct.blood": "血",
+  "material.tconstruct.ichor": "イコル",
   "material.tconstruct.enderslime": "エンダースライム",
-  "material.tconstruct.clay":       "粘土",
-  "material.tconstruct.honey":      "ハチミツ",
-  "material.tconstruct.venom":      "毒液",
-  "material.tconstruct.phantom":    "ファントムの皮膜",
-
-  "material.tconstruct.nickel":   "ニッケル",
-  "material.tconstruct.tin":      "錫",
-  "material.tconstruct.zinc":     "亜鉛",
-  "material.tconstruct.brass":    "黄銅",
-  "material.tconstruct.uranium":  "ウラン",
-
-
+  "material.tconstruct.clay": "粘土",
+  "material.tconstruct.honey": "ハチミツ",
+  "material.tconstruct.venom": "毒液",
+  "material.tconstruct.phantom": "ファントムの皮膜",
+  "material.tconstruct.nickel": "ニッケル",
+  "material.tconstruct.tin": "錫",
+  "material.tconstruct.zinc": "亜鉛",
+  "material.tconstruct.brass": "黄銅",
+  "material.tconstruct.uranium": "ウラン",
   "__comment": "Tier 2 Integration Materials",
   "material.tconstruct.osmium": "オスミウム",
   "material.tconstruct.osmium.flavor": "鈍感すぎて冗談が通じない",
   "material.tconstruct.osmium.encyclopedia": "レベルごとに、道具が耐久度を消費する確率が33%減少するが、修理コストが25%上昇する",
-
   "material.tconstruct.tungsten": "タングステン",
   "material.tconstruct.tungsten.flavor": "ヘビメタバンドを始めてみない？",
   "material.tconstruct.tungsten.encyclopedia": "レベルごとに+10%の採掘速度補正と-10%の移動速度補正を得る",
   "material.tconstruct.tungsten.ranged": "レベルごとに+15%の弓引き速度補正と-10%の移動速度補正を得る",
-
   "material.tconstruct.platinum": "プラチナ",
   "material.tconstruct.platinum.flavor": "勝利者が使うもの！",
   "material.tconstruct.platinum.encyclopedia": "鉱石採掘時に追加で2～6個の塊がドロップされ、レベルが上がると効果も上がる",
   "material.tconstruct.platinum.ranged": "遠くのMobに攻撃を当てると、レベルごとに5%の確率で塊がドロップされる。50ブロック以上でプラチナ、40以上で金、30以上で鉄、20以上で銅。",
-
   "material.tconstruct.lead": "鉛",
   "material.tconstruct.lead.flavor": "これでサンドイッチを作ってみて。",
   "material.tconstruct.lead.encyclopedia": "レベルごとに+10%の攻撃力補正と-10%の移動速度補正を得る",
   "material.tconstruct.lead.ranged": "レベルごとに+10%の飛翔体攻撃力補正と-10%の移動速度補正を得る",
-
   "material.tconstruct.silver": "銀",
   "material.tconstruct.silver.flavor": "ご存知の通り、この道具は数日で光沢がなくなる。",
   "material.tconstruct.silver.encyclopedia": "レベルごとにアンデッドに対して+2.5の攻撃力補正を得る",
   "material.tconstruct.silver.ranged": "レベルごとにアンデッドに対して+0.5の飛翔体攻撃力補正を得る",
-
   "material.tconstruct.whitestone": "ホワイトストーン",
   "material.tconstruct.whitestone.end": "エンドストーン",
   "material.tconstruct.whitestone.flavor": "無価値な白い金属から価値のある道具を生み出そう。",
   "material.tconstruct.whitestone.encyclopedia": "レベルごとに20%の確率で、石を採掘すると+3のストーンシールドを得る",
-
   "material.tconstruct.aluminum": "アルミニウム",
   "material.tconstruct.aluminum.flavor": "灰塚でよく見られる。",
   "material.tconstruct.aluminum.ranged": "+7%の弓引き速度と正確性補正を得る",
-
-
   "__comment": "Tier 3 Integration Materials",
   "material.tconstruct.steel": "鋼鉄",
   "material.tconstruct.steel.flavor": "材料科学の90%を占める基本的な素材",
   "material.tconstruct.steel.encyclopedia": "レベルごとに、+4%の耐久度、攻撃力、速度補正を得る",
   "material.tconstruct.steel.ranged": "レベルごとに+4%の耐久度補正、+3%の矢の速度補正、+3%の飛翔体攻撃力補正を得る",
-
   "material.tconstruct.bronze": "青銅",
   "material.tconstruct.bronze.flavor": "アメジスト青銅と混同しないように。",
   "material.tconstruct.bronze.encyclopedia": "耐久度が満タンの場合にレベルごとに+6の採掘速度補正を得るが、耐久度が50%以下になると補正がなくなる",
   "material.tconstruct.bronze.ranged": "耐久度が満タンの場合にレベルごとに+0.05の矢の速度補正を得るが、耐久度が50%以下になると補正がなくなる",
-
   "material.tconstruct.constantan": "コンスタンタン",
   "material.tconstruct.constantan.flavor": "コンスタンタンタンタンタンタンタン…。ごめん、「タン」を足すのが楽しくて。",
   "material.tconstruct.constantan.encyclopedia": "極端に寒い場所で使用すると+7.5の採掘速度補正があり、極端に暑い場所では効果が2倍になる",
   "material.tconstruct.constantan.ranged": "極端に寒い場所で使用すると+0.15の矢の速度補正があり、極端に暑い場所では効果が2倍になる",
-
   "material.tconstruct.invar": "インバー",
   "material.tconstruct.invar.flavor": "温度と変形の両方に耐性がある。",
   "material.tconstruct.invar.encyclopedia": "中間的な温度の場所で使用すると+2.5の攻撃力補正を得る",
   "material.tconstruct.invar.ranged": "中間的な温度の場所で使用すると+0.15の正確性補正を得る",
-
   "material.tconstruct.electrum": "エレクトラム",
   "material.tconstruct.electrum.flavor": "電子部品に良い。",
   "material.tconstruct.electrum.encyclopedia": "レベルごとに鉱石またはMobから得られる経験値に+50%の補正を得る",
   "material.tconstruct.electrum.ranged": "レベルごとに矢で倒したMobから得られる経験値に+50%の補正を得る",
-
   "material.tconstruct.necronium": "ネクロニウム",
   "material.tconstruct.necronium.flavor": "この大量の崩壊は恐らく自身の寿命の1/4を犠牲にする",
   "material.tconstruct.necronium.encyclopedia": "相手を最低5秒間ウィザー状態にするが、25%の確率で自分もかかる",
-
   "material.tconstruct.plated_slimewood": "プレートスライムウッド",
   "material.tconstruct.plated_slimewood.flavor": "スライムのぬるぬるが生み出す黄銅のような輝き",
   "material.tconstruct.plated_slimewood.encyclopedia": "オーバースライムの全ての回復手段に+100%の補正を得る",
-
-
   "_comment": "Modifiers",
-
   "key.categories.tconstruct": "Tinkers' Construct",
   "key.tconstruct.helmet_interact": "ヘルメットのアクション",
   "key.tconstruct.leggings_interact": "レギンスのアクション",
-
   "modifier.tconstruct.empty": "無効な改造",
   "modifier.tconstruct.empty.flavor": "欠損！",
   "modifier.tconstruct.empty.description": "改造の情報がない場合の代替表示",
-
   "modifier.tconstruct.shiny": "ピカピカ",
   "modifier.tconstruct.shiny.flavor": "魔力の流れを感じる！",
   "modifier.tconstruct.shiny.description": "道具がエンチャントされたかのように光る",
@@ -1716,8 +1351,6 @@
   "modifier.tconstruct.offhanded.flavor": "あまり難しく考えなくて良い",
   "modifier.tconstruct.offhanded.description": "オフハンドに何か持っている場合にこの道具のアクション効果を無効にする",
   "modifier.tconstruct.offhanded.description.2": "道具のアクション効果を完全に無効にする",
-
-
   "_comment": "Durability",
   "modifier.tconstruct.reinforced": "補強",
   "modifier.tconstruct.reinforced.flavor": "長持ち！",
@@ -1741,11 +1374,9 @@
   "modifier.tconstruct.netherite.flavor": "洗練！",
   "modifier.tconstruct.netherite.description": "古代の金属の力により、道具の能力が上がり、更に炎などの外部ダメージで消滅しなくなる",
   "recipe.tconstruct.modifier.netherite_requirements": "ネザライトを適用するにはダイヤモンドかエメラルドが適用されていなければなりません",
-
   "modifier.tconstruct.overslime": "オーバースライム",
   "modifier.tconstruct.overslime.flavor": "べとべと！",
   "modifier.tconstruct.overslime.description": "道具は耐久度の代わりにオーバースライムを消費する！スライムが付いていない道具にはよろしくない",
-
   "_comment": "Tool or harvest",
   "modifier.tconstruct.experienced": "経験豊富",
   "modifier.tconstruct.experienced.flavor": "飲み込みが早い！",
@@ -1753,7 +1384,6 @@
   "modifier.tconstruct.magnetic": "磁力",
   "modifier.tconstruct.magnetic.flavor": "パーソナル磁石！",
   "modifier.tconstruct.magnetic.description": "物を叩くと近くのアイテムが引き寄せられる？！",
-
   "modifier.tconstruct.haste": "加速",
   "modifier.tconstruct.haste.1": "加速",
   "modifier.tconstruct.haste.2": "超加速",
@@ -1762,7 +1392,6 @@
   "modifier.tconstruct.haste.5": "超超超超加速",
   "modifier.tconstruct.haste.flavor": "科学！",
   "modifier.tconstruct.haste.description": "不思議な赤い粉の力で道具をより早く動かせるようになる！",
-
   "modifier.tconstruct.blasting": "爆風",
   "modifier.tconstruct.blasting.flavor": "爆破採掘！",
   "modifier.tconstruct.blasting.description": "道具は爆発に弱いブロック、例えば鉱石などを早く採掘できる！",
@@ -1775,7 +1404,6 @@
   "modifier.tconstruct.lightspeed.flavor": "より明るいものはより早く！",
   "modifier.tconstruct.lightspeed.description": "道具は光るブロックを早く採掘できる！",
   "modifier.tconstruct.lightspeed.mining_speed": "発光物採掘補正",
-
   "_comment": "Weapon",
   "modifier.tconstruct.knockback": "ノックバック",
   "modifier.tconstruct.knockback.flavor": "ワーーーーーー！",
@@ -1793,7 +1421,6 @@
   "modifier.tconstruct.necrotic.flavor": "まるでヴァンパイア！",
   "modifier.tconstruct.necrotic.description": "敵にクリティカル攻撃をすると体力を奪い自分の体力が回復する",
   "modifier.tconstruct.necrotic.lifesteal": "体力略奪",
-
   "_comment": "Damage boost",
   "modifier.tconstruct.piercing": "貫通",
   "modifier.tconstruct.piercing.flavor": "サボテンになる！",
@@ -1826,7 +1453,6 @@
   "modifier.tconstruct.sweeping_edge.flavor": "サムライ！",
   "modifier.tconstruct.sweeping_edge.description": "薙ぎ払い攻撃の際に周囲の相手に与えるダメージが増加する",
   "modifier.tconstruct.sweeping_edge.attack_damage": "薙ぎ払い攻撃力補正",
-
   "modifier.tconstruct.sharpness": "鋭利",
   "modifier.tconstruct.sharpness.1": "鋭利",
   "modifier.tconstruct.sharpness.2": "超鋭利",
@@ -1843,10 +1469,7 @@
   "modifier.tconstruct.swiftstrike.5": "超超超超神速",
   "modifier.tconstruct.swiftstrike.flavor": "魔法！",
   "modifier.tconstruct.swiftstrike.description": "魔法の紫宝石の力で、武器が軽くなり素早く振り下ろせるようになる！",
-
-
   "_comment": "Ranged",
-
   "modifier.tconstruct.power": "射撃ダメージ増加",
   "modifier.tconstruct.power.flavor": "内なる力が外への力となる",
   "modifier.tconstruct.power.description": "矢の攻撃力が上がる",
@@ -1889,7 +1512,6 @@
   "modifier.tconstruct.scope": "スコープ",
   "modifier.tconstruct.scope.flavor": "360度スコープは、それほどクールじゃない",
   "modifier.tconstruct.scope.description": "弓を引き終わると、対象をズームする",
-
   "_comment": "Armor",
   "modifier.tconstruct.knockback_resistance": "ノックバック耐性",
   "modifier.tconstruct.knockback_resistance.flavor": "重いもの",
@@ -1903,7 +1525,6 @@
   "modifier.tconstruct.revitalizing": "みなぎる力",
   "modifier.tconstruct.revitalizing.flavor": "エネルギーが流れてくるのを感じる",
   "modifier.tconstruct.revitalizing.description": "心が強化され、追加のハートを得る",
-
   "modifier.tconstruct.embellishment": "装飾",
   "modifier.tconstruct.embellishment.formatted": "%sの装飾",
   "modifier.tconstruct.embellishment.flavor": "模様替え！",
@@ -1912,7 +1533,6 @@
   "modifier.tconstruct.dyed.formatted": "#%sで染色",
   "modifier.tconstruct.dyed.flavor": "模様替え！",
   "modifier.tconstruct.dyed.description": "防具の外観は別の素材に合わせて変更された",
-
   "_comment": "Armor - Protection",
   "modifier.tconstruct.protection": "ダメージ軽減",
   "modifier.tconstruct.protection.flavor": "なんでも屋！",
@@ -1953,7 +1573,6 @@
   "modifier.tconstruct.boundless": "限界突破",
   "modifier.tconstruct.boundless.flavor": "制限を超える",
   "modifier.tconstruct.boundless.description": "あらゆる種類の耐性効果の上限を上げる",
-
   "_comment": "Armor - counterattack",
   "modifier.tconstruct.thorns": "棘の鎧",
   "modifier.tconstruct.thorns.flavor": "全くもって金属",
@@ -1965,7 +1584,6 @@
   "modifier.tconstruct.springy": "弾力性",
   "modifier.tconstruct.springy.flavor": "ボヨンボヨン！",
   "modifier.tconstruct.springy.description": "攻撃者は鎧によって跳ね返される",
-
   "_comment": "Armor - helmet",
   "modifier.tconstruct.respiration": "水中呼吸",
   "modifier.tconstruct.respiration.flavor": "水にも酸素が含まれている",
@@ -1982,7 +1600,6 @@
   "modifier.tconstruct.item_frame": "額縁",
   "modifier.tconstruct.item_frame.flavor": "私にはすべてが見える",
   "modifier.tconstruct.item_frame.description": "ヘルメットに、確認だけが可能なインベントリスロットを追加する。時計やコンパスに最適",
-
   "_comment": "Armor - chestplate",
   "modifier.tconstruct.armor_power": "射撃ダメージ増加",
   "modifier.tconstruct.armor_power.flavor": "あなたを通して流れてくる力を感じることができる？",
@@ -1997,7 +1614,6 @@
   "modifier.tconstruct.wings": "翼",
   "modifier.tconstruct.wings.flavor": "空はあなたのもの",
   "modifier.tconstruct.wings.description": "空中でジャンプすることで空を翔けることができるようになる",
-
   "_comment": "Armor - leggings",
   "modifier.tconstruct.speedy": "スピーディ",
   "modifier.tconstruct.speedy.flavor": "前へ前へ前へ…",
@@ -2022,9 +1638,7 @@
   "modifier.tconstruct.pocket_chain.flavor": "それらを紐付ける一つの鎖",
   "modifier.tconstruct.pocket_chain.description": "スニークしながらアクションボタンを押すことでツールベルトまたはシールドストラップの全てのスロットにアクセスできるようになり、更にスロットが+1される",
   "recipe.tconstruct.modifier.pocket_chain": "ポケットチェーンを適用するにはツールベルトかシールドストラップが必要です",
-
   "modifier.tconstruct.inventory_cannot_remove": "この変更を行うと道具に保存されているアイテムが削除されます",
-
   "_comment": "Armor - boots",
   "modifier.tconstruct.feather_falling": "低速落下",
   "modifier.tconstruct.feather_falling.flavor": "フワフワ",
@@ -2051,7 +1665,6 @@
   "modifier.tconstruct.bouncy": "弾性",
   "modifier.tconstruct.bouncy.flavor": "スカイバウンド！",
   "modifier.tconstruct.bouncy.description": "常にスライムブロックの上にいるかのように、地面があなたを反射させる",
-
   "modifier.tconstruct.frost_walker": "氷渡り",
   "modifier.tconstruct.frost_walker.flavor": "私のスーパースーツはどこ？",
   "modifier.tconstruct.frost_walker.description": "水ブロックが一時的に凍る",
@@ -2067,13 +1680,10 @@
   "modifier.tconstruct.flamewake": "火渡り",
   "modifier.tconstruct.flamewake.flavor": "これでいいのだ！",
   "modifier.tconstruct.flamewake.description": "歩いたところに火が残る",
-
   "_comment": "Armor - shields",
   "modifier.tconstruct.reflecting": "反射",
   "modifier.tconstruct.reflecting.flavor": "弾性のある盾",
   "modifier.tconstruct.reflecting.description": "盾を構えた瞬間、少しの間飛翔体を反射できるようになる",
-
-
   "_comment": "Abilities",
   "modifier.tconstruct.unbreakable": "不可壊",
   "modifier.tconstruct.unbreakable.flavor": "凍りついた状態！",
@@ -2083,7 +1693,6 @@
   "modifier.tconstruct.dual_wielding.flavor": "ダブルアクション！",
   "modifier.tconstruct.dual_wielding.description": "メインハンドの道具が二刀流可能である場合、この道具はオフハンドから攻撃できる。二刀流で使用する道具は能力が低下する",
   "recipe.tconstruct.modifier.two_handed_dual_wielding": "両手持ちの道具に二刀流を付与するにはオフハンド化が必要です。",
-
   "_comment": "Loot",
   "modifier.tconstruct.silky": "シルキー",
   "modifier.tconstruct.silky.flavor": "絹のような滑らかさ！",
@@ -2105,7 +1714,6 @@
   "modifier.tconstruct.looting": "ドロップ増加",
   "modifier.tconstruct.looting.flavor": "ラッキーのMobバージョン！",
   "modifier.tconstruct.looting.description": "Mobを倒した時により良いものが手に入る！",
-
   "_comment": "Expanders",
   "modifier.tconstruct.expanded": "広範",
   "modifier.tconstruct.expanded.flavor": "レッグデーはさぼるな！！",
@@ -2113,7 +1721,6 @@
   "modifier.tconstruct.reach": "リーチ",
   "modifier.tconstruct.reach.flavor": "テレキネシス！",
   "modifier.tconstruct.reach.description": "この道具を持っている間、遠くのブロックやMobに届くようになる！",
-
   "_comment": "Block transform",
   "modifier.tconstruct.pathing": "整地",
   "modifier.tconstruct.pathing.flavor": "我々の行く先には、道路が必要だ！",
@@ -2166,7 +1773,6 @@
   "modifier.tconstruct.warping": "ワープ",
   "modifier.tconstruct.warping.flavor": "エンダーテレポート",
   "modifier.tconstruct.warping.description": "溜めて行きたい方向に向けて打つと、狙った先にワープする！",
-
   "_comment": "Fluids",
   "modifier.tconstruct.melting": "溶融",
   "modifier.tconstruct.melting.flavor": "溶融器の力がこの手の中に！",
@@ -2188,7 +1794,6 @@
   "modifier.tconstruct.spitting": "唾吐き",
   "modifier.tconstruct.spitting.flavor": "ラマより良い",
   "modifier.tconstruct.spitting.description": "道具を溜めて離すとタンクの中の液体を飛ばし、対象に影響を与える。弓の能力の影響を受ける。",
-
   "_comment": "Bonus modifier slots",
   "modifier.tconstruct.creative_slot": "クリエイティブスロット",
   "modifier.tconstruct.creative_slot.flavor": "ダーティチーター！",
@@ -2198,7 +1803,6 @@
   "modifier.tconstruct.stat_override.description": "道具の能力がコマンドで編集されている",
   "modifier.tconstruct.stat_override.bonuses": "ボーナス:",
   "modifier.tconstruct.stat_override.multipliers": "倍率:",
-
   "__comment": "Free Modifiers",
   "modifier.tconstruct.extra_modifier.type_format": "%s (%s)",
   "modifier.tconstruct.writable": "余白",
@@ -2222,7 +1826,6 @@
   "modifier.tconstruct.rebalanced": "調整",
   "modifier.tconstruct.rebalanced.flavor": "道具の天秤の皿",
   "modifier.tconstruct.rebalanced.description": "道具に好きな種類のスロットを追加できるが、強力なものを選べばペナルティがある",
-
   "__comment": "Three more +1 upgrade modifiers for modpacks",
   "modifier.tconstruct.red_extra_upgrade": "赤の追加アップグレード",
   "modifier.tconstruct.red_extra_upgrade.flavor": "Modパック用！",
@@ -2236,11 +1839,8 @@
   "modifier.tconstruct.extra_ability": "追加アビリティ",
   "modifier.tconstruct.extra_ability.flavor": "Modパック用！",
   "modifier.tconstruct.extra_ability.description": "この拡張を実装するリソースパックを提供するようにModパック作成者に問い合わせてください",
-
-
   "__comment": "Tier 1 Traits",
   "modifier.tconstruct.fake_attribute.mining_speed": "採掘速度",
-
   "modifier.tconstruct.cultivated": "栽培",
   "modifier.tconstruct.cultivated.flavor": "経済的！",
   "modifier.tconstruct.cultivated.description": "修理の際に、道具が修理素材を増幅させる",
@@ -2265,7 +1865,6 @@
   "modifier.tconstruct.solar_powered": "ソーラーパワー",
   "modifier.tconstruct.solar_powered.flavor": "環境に良い",
   "modifier.tconstruct.solar_powered.description": "日光の下で道具がダメージを受けにくくなる",
-
   "__comment": "Tier 2 Traits",
   "modifier.tconstruct.sturdy": "頑丈",
   "modifier.tconstruct.sturdy.flavor": "上出来！",
@@ -2298,7 +1897,6 @@
   "modifier.tconstruct.airborne.flavor": "空を飛ぶ！",
   "modifier.tconstruct.airborne.description": "道具は空中での採掘時にペナルティを受けず、矢の正確性にボーナスが発生する",
   "modifier.tconstruct.airborne.accuracy": "エアボーン正確性",
-
   "__comment": "Tier 3 Traits",
   "modifier.tconstruct.overcast": "オーバーキャスト",
   "modifier.tconstruct.overcast.flavor": "厚いカバレッジ！",
@@ -2319,10 +1917,8 @@
   "modifier.tconstruct.tasty": "美味しそう",
   "modifier.tconstruct.tasty.flavor": "むしゃむしゃ",
   "modifier.tconstruct.tasty.description": "いい匂いだ、道具を一齧りしたい誘惑を抑えきれない",
-
   "death.attack.tconstruct.bleed": "%1$sは出血で死んだ",
   "death.attack.tconstruct.bleed.item": "%1$sは%2$sで攻撃された傷による出血で死んだ",
-
   "__comment": "Tier 4 Traits",
   "modifier.tconstruct.overlord": "オーバーロード",
   "modifier.tconstruct.overlord.flavor": "王者！",
@@ -2339,13 +1935,10 @@
   "modifier.tconstruct.conducting.flavor": "熱力学！",
   "modifier.tconstruct.conducting.description": "炎上中に使用すると道具の攻撃力に倍率がかかる",
   "modifier.tconstruct.conducting.attack_damage": "炎上中攻撃力補正(上限)",
-
   "__comment": "Tier 5 Traits",
   "modifier.tconstruct.enderporting": "エンダーポート",
   "modifier.tconstruct.enderporting.flavor": "エンダースライムの力の結晶",
   "modifier.tconstruct.enderporting.description": "道具は所有者を採掘したブロックまたは倒したMobの位置にテレポートさせる",
-
-
   "__comment": "Tier 2 Mod Compat Traits",
   "modifier.tconstruct.dense": "高密度",
   "modifier.tconstruct.dense.flavor": "なかなか型崩れしない",
@@ -2371,8 +1964,6 @@
   "modifier.tconstruct.holy": "申請",
   "modifier.tconstruct.holy.flavor": "愚かなるものに死を！",
   "modifier.tconstruct.holy.description": "矢はアンデッドに対してボーナスダメージを与える",
-
-
   "__comment": "Tier 3 Mod Compat Traits",
   "modifier.tconstruct.ductile": "延性",
   "modifier.tconstruct.ductile.flavor": "成形しやすい！",
@@ -2401,7 +1992,6 @@
   "modifier.tconstruct.overworked": "オーバーワーク",
   "modifier.tconstruct.overworked.flavor": "適正な給料が支払われていない",
   "modifier.tconstruct.overworked.description": "全ての効果から得られるオーバースライムの総量を増やす",
-
   "_comment": "Slimeskull traits",
   "modifier.tconstruct.self_destructive": "自己破壊",
   "modifier.tconstruct.self_destructive.flavor": "健康によろしくない",
@@ -2446,7 +2036,6 @@
   "modifier.tconstruct.revenge": "復讐",
   "modifier.tconstruct.revenge.flavor": "完璧なカウンター",
   "modifier.tconstruct.revenge.description": "攻撃されると強くなる",
-
   "modifier.tconstruct.creeper_disguise": "クリーパー偽装",
   "modifier.tconstruct.creeper_disguise.flavor": "ちょっと不気味",
   "modifier.tconstruct.creeper_disguise.description": "見た目がクリーパーそっくりになる",
@@ -2489,17 +2078,13 @@
   "modifier.tconstruct.zombified_piglin_disguise": "ゾンビピグリン偽装",
   "modifier.tconstruct.zombified_piglin_disguise.flavor": "それは豚ですか？人ですか？ゾンビですか？",
   "modifier.tconstruct.zombified_piglin_disguise.description": "見た目がゾンビピグリンそっくりになる",
-
   "_comment": "Compat Modifiers",
   "modifier.tconstruct.the_one_probe": "The One Probe",
   "modifier.tconstruct.the_one_probe.flavor": "科学的！",
   "modifier.tconstruct.the_one_probe.description": "この改造が付いた道具を所持またはヘルメットを着用していると、見ているブロックの情報が表示される。",
-
   "_comment": "Internal modifiers",
   "modifier.tconstruct.overslime_friend": "オーバースライムの友",
   "modifier.tconstruct.snow_boots": "雪のブーツ",
-
-
   "_comment": "Internal effects",
   "effect.tconstruct.bleeding": "出血",
   "effect.tconstruct.magnetic": "磁力",
@@ -2514,8 +2099,6 @@
   "effect.tconstruct.calcified": "石灰化",
   "effect.tconstruct.self_destructing": "自己破壊",
   "effect.tconstruct.enderference": "エンダーファレンス",
-
-
   "_comment": "Roman numerals",
   "roman_numeral.value.1": "I",
   "roman_numeral.value.2": "II",
@@ -2537,16 +2120,13 @@
   "roman_numeral.value.18": "XVIII",
   "roman_numeral.value.19": "XIX",
   "roman_numeral.value.20": "XX",
-
   "_comment": "Stats",
-
   "tool_stat.tconstruct.attack_speed": "攻撃速度: ",
   "tool_stat.tconstruct.attack_speed.description": "攻撃速度計算の基本値。\n概ね1秒毎に最大の攻撃力で攻撃できる。",
   "tool_stat.tconstruct.durability": "耐久度: ",
   "tool_stat.tconstruct.durability.description": "耐久度計算の基本値。\n通常、道具全体の耐久度を決める重要な値。",
   "tool_stat.tconstruct.use_item_speed": "使用時速度補正: ",
   "tool_stat.tconstruct.use_item_speed.description": "弓や盾を使用中の移動速度倍率",
-
   "stat.tconstruct.head": "ヘッド部",
   "tool_stat.tconstruct.mining_speed": "採掘速度: ",
   "tool_stat.tconstruct.mining_speed.description": "この素材でヘッド部を作った道具がどれくらい早くブロックを採掘できるかの値。\n他の道具部品によって補正がかかる場合がある。",
@@ -2554,20 +2134,17 @@
   "tool_stat.tconstruct.harvest_tier.description": "この素材でヘッド部を作った道具が、バニラのどのツルハシと同じブロック採掘範囲かを表したもの。",
   "tool_stat.tconstruct.attack_damage": "攻撃力: ",
   "tool_stat.tconstruct.attack_damage.description": "攻撃力計算の基本値。\n最終的な値は、他の構成や改造等によって変わる。",
-
   "tool_stat.tconstruct.armor": "防具: ",
   "tool_stat.tconstruct.armor.description": "この防具がどれくらいダメージを防いでくれるかの値。",
   "tool_stat.tconstruct.armor_toughness": "防具強度: ",
   "tool_stat.tconstruct.armor_toughness.description": "この防具が強力な攻撃に対してどれくらい抵抗力があるかの値。",
   "tool_stat.tconstruct.knockback_resistance": "ノックバック耐性: ",
   "tool_stat.tconstruct.knockback_resistance.description": "この防具がどれくらいノックバックを減らすかの値。",
-
   "stat.tconstruct.handle": "持ち手",
   "tool_stat.tconstruct.handle.durability.description": "道具の最終的な耐久度はこの値を乗じたものになる。",
   "tool_stat.tconstruct.handle.attack_damage.description": "道具の最終的な攻撃力はこの値を乗じたものになる。",
   "tool_stat.tconstruct.handle.attack_speed.description": "道具の最終的な攻撃速度はこの値を乗じたものになる。",
   "tool_stat.tconstruct.handle.mining_speed.description": "道具の最終的な採掘速度はこの値を乗じたものになる。",
-  
   "stat.tconstruct.limb": "幹",
   "stat.tconstruct.grip": "柄",
   "tool_stat.tconstruct.draw_speed": "弓引き速度: ",
@@ -2578,42 +2155,32 @@
   "tool_stat.tconstruct.accuracy.description": "弓で狙った中心にどれくらい正確に当たるかを示します。",
   "tool_stat.tconstruct.projectile_damage": "飛翔体ダメージ: ",
   "tool_stat.tconsturct.projectile_damage.description": "この武器によって発射される飛翔体の基本攻撃力を示します。",
-
   "stat.tconstruct.extra": "締め具",
   "stat.tconstruct.bowstring": "弓弦",
   "tool_stat.tconstruct.extra.no_stats": "能力なし",
-
   "tool_stat.tconstruct.block_amount": "ブロック量: ",
   "tool_stat.tconstruct.block_amount.description": "この盾で攻撃を防いだ際に減少させる最大ダメージ量",
   "tool_stat.tconstruct.block_angle": "ブロック角度: ",
   "tool_stat.tconstruct.block_angle.description": "盾でブロックできる前方の角度で、最大360度。この範囲外からの攻撃はブロックできません。",
-
   "stat.tconstruct.repair_kit": "リペアキット",
   "stat.tconstruct.skull": "スライムスカル",
-
   "stat.tconstruct.harvest_tier.minecraft.wood": "木",
   "stat.tconstruct.harvest_tier.minecraft.gold": "金",
   "stat.tconstruct.harvest_tier.minecraft.stone": "石",
   "stat.tconstruct.harvest_tier.minecraft.iron": "鉄",
   "stat.tconstruct.harvest_tier.minecraft.diamond": "ダイヤモンド",
   "stat.tconstruct.harvest_tier.minecraft.netherite": "ネザライト",
-
   "stat.tconstruct.slot.prefix.upgrades": "アップグレード: ",
   "stat.tconstruct.slot.prefix.abilities": "アビリティ: ",
   "stat.tconstruct.slot.prefix.souls": "ソウルスロット: ",
   "stat.tconstruct.slot.prefix.defense": "防御スロット: ",
-
   "stat.tconstruct.slot.display.upgrades": "アップグレード",
   "stat.tconstruct.slot.display.abilities": "アビリティ",
   "stat.tconstruct.slot.display.souls": "ソウル",
   "stat.tconstruct.slot.display.defense": "防御",
-
-
   "_comment": "Tooltips",
-
   "key.tconstruct.shift": "Shift",
   "key.tconstruct.ctrl": "Ctrl",
-
   "tooltip.tconstruct.tool.broken": "破損",
   "tooltip.tconstruct.tool.empty": "空",
   "tooltip.tconstruct.hold_shift": "%sで状態を表示",
@@ -2621,25 +2188,20 @@
   "tooltip.tconstruct.missing_data": "道具データなし",
   "tooltip.tconstruct.uninitialized": "インベントリに入れると初期化される",
   "tooltip.tconstruct.random_materials": "ランダムな素材",
-
   "tooltip.tconstruct.part.added_by": "%sで追加された素材",
   "tooltip.tconstruct.part.missing_material": "素材データなし: %s",
   "tooltip.tconstruct.part.missing_stats": "素材は%sに対応していません",
   "tooltip.tconstruct.part.missing_info": "部品のデータなし",
   "tooltip.tconstruct.part.material_id": "素材ID: %s",
-
   "_comment": "GUIs",
-
   "itemGroup.tconstruct.general": "Tinkers' 一般アイテム",
   "itemGroup.tconstruct.tools": "Tinkers' 道具",
   "itemGroup.tconstruct.tool_parts": "Tinkers' 道具の部品",
   "itemGroup.tconstruct.smeltery": "Tinkers' 精錬炉関連",
   "itemGroup.tconstruct.world": "Tinkers' 自然生成物",
   "itemGroup.tconstruct.gadgets": "Tinkers' ガジェット",
-
   "gui.tconstruct.crafting_station": "改良作業台",
   "gui.tconstruct.crafting_station.uncraftable": "このアイテムは現在プレイヤーがクラフトできません",
-
   "gui.tconstruct.part_builder": "部品作成台",
   "gui.tconstruct.part_builder.info": "あなたのティンカーとしての夢を叶える道具の部品を作れます。\n\n部品を作るには、左のスロットに空のパターンを入れて作成したい部品を選択します。残りのスロットには部品を作るための素材を置きます。",
   "gui.tconstruct.part_builder.material_value": "素材値: %s",
@@ -2647,11 +2209,9 @@
   "gui.tconstruct.part_builder.trait": "能力",
   "gui.tconstruct.part_builder.uncraftable": "成形できません",
   "gui.tconstruct.part_builder.uncraftable.tooltip": "この素材は部品作成台で成形することはできません。鋳造などの他の方法が必要です。",
-
   "gui.tconstruct.tinkers_chest": "ティンカーチェスト",
   "gui.tconstruct.cast_chest": "金型チェスト",
   "gui.tconstruct.part_chest": "部品チェスト",
-
   "gui.tconstruct.tinker_station": "ティンカー台",
   "gui.tconstruct.tinker_station.repair_limited": "修理と変更",
   "gui.tconstruct.tinker_station.repair_limited.description": "全ての基本道具の作成とほとんどの改造の適用ができます。左側の一覧から選んで始めましょう。",
@@ -2663,43 +2223,33 @@
   "gui.tconstruct.tinker_station.components": "構成",
   "gui.tconstruct.tinker_station.info": "道具を修理・部品交換できます。左側に道具と素材を置いてスタートします。",
   "gui.tconstruct.tinker_station.no_traits": "能力なし :[",
-
   "gui.tconstruct.manual.cycle.recipes": "次のレシピに切り替え",
-
   "recipe.tconstruct.tool_repair.fully_repaired": "道具は新品そのものです",
   "recipe.tconstruct.damaging.broken": "道具は既に壊れています",
   "recipe.tconstruct.overslime.at_capacity": "道具にオーバースライムを適用するスペースがもうありません",
-
   "recipe.tconstruct.swappable.already_present": "道具には既にこの改造と類似した%sが含まれています",
-
   "gui.tconstruct.modifier_worktable": "改造調整台",
   "gui.tconstruct.modifier_worktable.title": "改造のチューニング",
   "gui.tconstruct.modifier_worktable.info": "道具に適切なアイテムを使用することで、道具の改造を調整できます",
   "recipe.tconstruct.modifier_set_worktable.empty": "道具には適用できる改造がありません",
-
   "recipe.tconstruct.remove_modifier.title": "改造の除去",
   "recipe.tconstruct.remove_modifier.description": "削除する改造を選択すると、スロットが開放されますが、使用したアイテムは失われます。液体は入力のアイテムから消費され、コンテナが返却されます。",
   "recipe.tconstruct.remove_modifier.no_modifiers": "道具には取り外しできる改造がありません",
-
   "recipe.tconstruct.modifier_sorting.title": "改造の並べ替え",
   "recipe.tconstruct.modifier_sorting.description": "改造を選択して、表示位置をリスト内で次に選択した改造と入れ替えます。入れ替えによってアイテムは消費されません。",
   "recipe.tconstruct.modifier_sorting.not_enough_modifiers": "入れ替えを行うには道具は最低2つの改造を持っている必要があります",
-
   "recipe.tconstruct.invisible_modifiers.adding.title": "不可視のインク",
   "recipe.tconstruct.invisible_modifiers.adding.description": "道具の情報から非表示にしたい改造を選びます",
   "recipe.tconstruct.invisible_modifiers.removing.title": "可視のインク",
   "recipe.tconstruct.invisible_modifiers.removing.description": "道具の情報から非表示になっている改造を選んで再表示させます",
-
   "modifier.tconstruct.attack_toggled": "%s (攻撃)",
   "recipe.tconstruct.attack_modifiers.adding.title": "アクションのトグル",
   "recipe.tconstruct.attack_modifiers.adding.description": "アクション改造を発動させる方法を攻撃(通常は左クリック)にします",
   "recipe.tconstruct.attack_modifiers.removing.title": "アクションのトグル",
   "recipe.tconstruct.attack_modifiers.removing.description": "アクション改造を発動させる方法をアクション(通常は右クリック)にします",
-
   "recipe.tconstruct.extract_modifier.title": "改造の抽出",
   "recipe.tconstruct.extract_modifier.description": "改造クリスタルに抽出する改造を選択します。スロットが復活しますが、改造に使用したアイテムは失われます。",
   "recipe.tconstruct.extract_modifier.no_modifiers": "道具に抽出できる改造がありません。",
-
   "recipe.tconstruct.enchantment_converting.upgrades.title": "アップグレードの抽出",
   "recipe.tconstruct.enchantment_converting.slotless.title": "スロット不要の抽出",
   "recipe.tconstruct.enchantment_converting.abilities.title": "アビリティの抽出",
@@ -2709,23 +2259,17 @@
   "recipe.tconstruct.enchantment_converting.description.keep": "エンチャントされたアイテムから指定した種類の改造を選択し、改造クリスタルに抽出します。エンチャントされたアイテムはエンチャントされていない状態で戻されます。",
   "recipe.tconstruct.enchantment_converting.no_enchantments": "このアイテムには抽出できるエンチャントがありません",
   "recipe.tconstruct.enchantment_converting.too_few": "高レベルのエンチャントを抽出するには、より多くの入力アイテムが必要です",
-
   "recipe.tconstruct.part_swapping.too_many_parts": "ティンカー台はこの道具の部品を入れ替えるには狭すぎます",
-
   "recipe.tconstruct.modifier.not_enough_slot": " この改造を適用するには少なくとも1以上の%sスロットが必要です",
   "recipe.tconstruct.modifier.not_enough_slots": "この改造を適用するには少なくとも%s以上の%sスロットが必要です",
   "recipe.tconstruct.modifier.validate_slots": "この変更を適用すると道具の%sスロットが不足します",
   "recipe.tconstruct.modifier.min_level": "このレシピを道具に適用するには、最低%sレベルの%sが必要です",
   "recipe.tconstruct.modifier.max_level": "%sのレベルは%s以上にはなりません",
   "recipe.tconstruct.modifier.requirements_error": "道具の改造の状態が不正です。Modパック作成者に連絡して記述エラーがないか確認してください。",
-
   "recipe.tconstruct.tool_recycling": "道具のリサイクル",
   "recipe.tconstruct.tool_recycling.info": "この道具からサルベージする部品を選びます。道具の現在の耐久度に基づいて、2番目以降の部品をサルベージできる場合があります。",
   "recipe.tconstruct.tool_recycling.no_modifiers": "アップグレードやアビリティが含まれる道具はリサイクルできません。まずそれらを削除する必要があります。",
-
-
   "_comment": "GUIs Messages",
-
   "gui.tconstruct.caption": "見出し",
   "gui.tconstruct.error": "エラー",
   "gui.tconstruct.warning": "警告",
@@ -2735,15 +2279,11 @@
   "gui.tconstruct.error.unknown_material": "未知の素材",
   "gui.tconstruct.error.useless_tool_part": "この部品を使って道具を作ることはできません。\n\n素材%sの情報が欠けているか、または材料に%sを使う道具が存在しません。",
   "gui.tconstruct.error.not_enough_durability": "部品を入れ替えるための耐久度が足りません！\n耐久度があと%d必要です。",
-
-
   "_comment": "Subtitles for sounds",
-
   "subtitles.tconstruct.little_saw": "のこぎりが使用される",
   "subtitles.tconstruct.item_frame_click": "額縁の時計が音を立てる",
   "subtitles.tconstruct.casting_cools": "鋳造したアイテムが冷える",
   "subtitles.tconstruct.casting.click": "鋳造したブロックが固まる",
-
   "subtitles.tconstruct.slime_sling": "スライムスリングで跳ねる",
   "subtitles.tconstruct.slime_sling.teleport": "スライムスリングでテレポートする",
   "subtitles.tconstruct.enderporting": "エンティティがエンダーポートする",
@@ -2752,35 +2292,25 @@
   "subtitles.tconstruct.longbow.charge": "ロングボウが引かれる",
   "subtitles.tconstruct.crystalshot": "矢が当たる",
   "subtitles.tconstruct.bonk": "道具がぶっ飛ばす",
-
   "subtitles.tconstruct.necrotic_heal": "体力を奪う",
   "subtitles.tconstruct.extra_jump": "エンティティが急降下する",
-
   "subtitles.tconstruct.slime_teleport": "スライムがテレポートする",
   "subtitles.tconstruct.slimy_bounce": "スライムで跳ねる",
-
   "subtitles.tconstruct.equip.slime": "スライムアーマーが装着される",
   "subtitles.tconstruct.equip.travelers": "旅行者の防具が装着される",
   "subtitles.tconstruct.equip.plate": "プレートアーマーが装着される",
-
   "subtitles.tconstruct.block.earth_crystal.chime": "アーススライムクリスタルが音を奏でる",
-  "subtitles.tconstruct.block.sky_crystal.chime":   "スカイスライムクリスタルが音を奏でる",
+  "subtitles.tconstruct.block.sky_crystal.chime": "スカイスライムクリスタルが音を奏でる",
   "subtitles.tconstruct.block.ichor_crystal.chime": "イコルクリスタルが音を奏でる",
   "subtitles.tconstruct.block.ender_crystal.chime": "エンダースライムクリスタルが音を奏でる",
-
-
   "_comment": "Book Strings",
-
   "book.tconstruct.material.part_builder": "部品作成台で作成可能",
   "book.tconstruct.material.cast_from": "%sを型に流して作成可能",
   "book.tconstruct.material.composite_from": "%2$sの部品に%1$sを流して作成可能",
   "book.tconstruct.material.skull_from": "鉢に%sを入れてエンダースライムの液体を流して作成可能",
   "book.tconstruct.modifiers.effect": "効果:",
   "book.tconstruct.tool.properties": "特徴:",
-
-
   "_comment": "Commands",
-
   "command.tconstruct.slot_type.not_found": "未知のスロットタイプです: %s",
   "command.tconstruct.fluid.not_found": "未知の液体です: %s",
   "command.tconstruct.stat_type.not_found": "未知の能力タイプです: %s",
@@ -2788,62 +2318,49 @@
   "command.tconstruct.material.not_found": "未知の素材です: %s",
   "command.tconstruct.modifier.not_found": "未知の改造です: %s",
   "command.tconstruct.modifier_usage": "改造の使用状況がゲームログに正常に出力されました",
-
   "command.tconstruct.modifiers.success.add.single": "改造「%s」が%sのアイテムに付与されました",
   "command.tconstruct.modifiers.success.add.multiple": "改造「%s」が%sのエンティティに付与されました",
   "command.tconstruct.modifiers.success.remove.single": "改造「%s」が%sのアイテムから除去されました",
   "command.tconstruct.modifiers.success.remove.multiple": "改造「%s」が%sのエンティティから除去されました",
   "command.tconstruct.modifiers.failure.too_few_levels": "改造「%s」を%sのアイテムから除去できません",
-
   "command.tconstruct.slots.success.add.single": "%sの%sスロットが%sのアイテムに付与されました",
   "command.tconstruct.slots.success.add.multiple": "%sの%sスロットが%sのエンティティに付与されました",
   "command.tconstruct.slots.success.set.single": "%3$sのアイテムの%1$sスロットが%2$sに設定されました",
   "command.tconstruct.slots.success.set.multiple": "%3$sのエンティティの%1$sスロットが%2$sに設定されました",
   "command.tconstruct.slots.failure.invalid_count": "スロットを0個付与することはできません、正または負の値を指定してください",
-
   "command.tconstruct.stats.success.bonus.modify.single": "%1$s%3$sのアイテムの値が%2$s増加しました",
   "command.tconstruct.stats.success.bonus.modify.multiple": "%1$s%3$sのエンティティの値が%2$s増加しました",
   "command.tconstruct.stats.success.bonus.set.single": "%1$s%3$sのアイテムのボーナス値が%2$sになりました",
   "command.tconstruct.stats.success.bonus.set.multiple": "%1$s%3$sのエンティティのボーナス値が%2$sになりました",
   "command.tconstruct.stats.success.bonus.set.parse_fail": "%s%sの解析に失敗しました",
-
   "command.tconstruct.stats.success.multiply.modify.single": "%1$s%3$sのアイテムの値が%2$s倍になりました",
   "command.tconstruct.stats.success.multiply.modify.multiple": "%1$s%3$sのエンティティの値が%2$s倍になりました",
   "command.tconstruct.stats.success.multiply.set.single": "%1$s%3$sのアイテムの値の乗数が%2$sになりました",
   "command.tconstruct.stats.success.multiply.set.multiple": "%1$s%3$sのエンティティの値の乗数が%2$sになりました",
-
   "command.tconstruct.stats.success.reset.all.single": "%sのアイテムの全ての道具の能力ボーナスと乗数をリセットしました",
   "command.tconstruct.stats.success.reset.all.multiple": "%sのエンティティの全ての道具の能力ボーナスと乗数をリセットしました",
   "command.tconstruct.stats.success.reset.stat.single": "%s%sのアイテムのボーナスと乗数をリセットしました",
   "command.tconstruct.stats.success.reset.stat.multiple": "%s%sのエンティティのボーナスと乗数をリセットしました",
-
   "command.tconstruct.stats.failure.invalid_add": "能力を0増やすことはできません、正または負の値を指定してください",
   "command.tconstruct.stats.failure.invalid_multiply": "能力に1を乗じることはできません、異なる正の値を乗じなければなりません",
-
   "command.tconstruct.held_modifiable.failed": "何も変更されません。対象が改造可能なアイテムを持っていないか、対象が見つかりません。",
   "command.tconstruct.held_modifiable.failed.nonliving": "%sはこのコマンドに対して妥当なエンティティではありません",
   "command.tconstruct.held_modifiable.failed.no_item": "%sはアイテムを持っていません",
   "command.tconstruct.held_modifiable.failed.invalid_item": "%sは改造可能なアイテムを持っていません",
-
   "command.tconstruct.generate_part_textures.start": "部品のテクスチャの生成を開始します",
   "command.tconstruct.generate_part_textures.finish": "%sの部品のテクスチャを%s秒で生成しました。 %s",
   "command.tconstruct.generate_part_textures.no_materials": "素材の情報がないため、何も生成しません",
   "command.tconstruct.generate_part_textures.no_parts": "リソースパックに部品のスプライトが存在しません",
-
-
   "_comment": "JEI Strings",
   "jei.tconstruct.time": "%s秒",
   "jei.tconstruct.temperature": "%s°C",
   "jei.tconstruct.modifier_ingredient": "%sの改造",
-
   "jei.tconstruct.casting.basin": "鋳造鉢",
   "jei.tconstruct.casting.table": "鋳造台",
   "jei.tconstruct.casting.cast_kept": "型は再利用できます",
   "jei.tconstruct.casting.cast_consumed": "型はなくなります",
-
   "jei.tconstruct.molding.title": "成形",
   "jei.tconstruct.molding.pattern_consumed": "パターンはなくなります",
-
   "jei.tconstruct.melting.title": "溶融",
   "jei.tconstruct.melting.multiplier": "速度倍率: %sx",
   "jei.tconstruct.melting.ore": "レシピの出力速度はコントローラーの種類によって変わります",
@@ -2851,28 +2368,20 @@
   "jei.tconstruct.melting.smeltery": "乾式製錬炉の場合:",
   "jei.tconstruct.melting.melter": "溶融器の場合:",
   "jei.tconstruct.foundry.title": "鋳造炉",
-
   "jei.tconstruct.entity_melting.title": "エンティティ溶融",
   "jei.tconstruct.entity_melting.per_hearts": "ハート%s個分のダメージあたり",
   "jei.tconstruct.entity_melting.per_heart": "ハート1.0個分のダメージあたり",
-
   "jei.tconstruct.alloy.title": "合金化",
-
   "jei.tconstruct.modifiers.title": "改造",
   "jei.tconstruct.modifiers.slot": "この改造を適用するには%sスロットが1つ必要です",
   "jei.tconstruct.modifiers.slots": "この改造を適用するには%2$sスロットが%1$sつ必要です",
   "jei.tconstruct.modifiers.free": "改造スロットは不要です",
   "jei.tconstruct.modifiers.incremental": "このレシピは材料を部分的に設定でき、必要数に満たない入力の場合は部分的な効果を得られます",
   "jei.tconstruct.modifiers.max": "最大: ",
-
   "jei.tconstruct.severing.title": "切断",
-
   "jei.tconstruct.part_builder.title": "部品作成台",
   "jei.tconstruct.part_builder.cost": "コスト: %s",
-
   "jei.tconstruct.modifier_worktable.title": "改造調整台",
-
-
   "_comment": "Tool Advancements",
   "advancements.tconstruct.tools.materials_and_you.title": "ティンカー入門",
   "advancements.tconstruct.tools.materials_and_you.description": "Tinkers' Constructの入門書である「素材とあなた」をクラフトする",
@@ -2902,7 +2411,6 @@
   "advancements.tconstruct.tools.one_shot.description": "一般的なMobをクリティカルなしで一撃で倒せる攻撃力(21以上)を持つ近接武器を作る",
   "advancements.tconstruct.tools.material_master.title": "素材マスター",
   "advancements.tconstruct.tools.material_master.description": "全ての標準素材を1回以上使用する",
-
   "_comment": "Smeltery Advancements",
   "advancements.tconstruct.smeltery.puny_smelting.title": "精錬入門",
   "advancements.tconstruct.smeltery.puny_smelting.description": "「初等精錬」のガイドブックをクラフトする",
@@ -2924,7 +2432,6 @@
   "advancements.tconstruct.smeltery.tool_forge.description": "金床でいずれか1つの大型道具を組み立てる",
   "advancements.tconstruct.smeltery.abilities.title": "アビリティマスター",
   "advancements.tconstruct.smeltery.abilities.description": "全ての1スロットを消費する標準アビリティ改造を1回以上適用させる",
-
   "_comment": "Foundry Advancements",
   "advancements.tconstruct.foundry.fantastic_foundry.title": "ネザー精錬",
   "advancements.tconstruct.foundry.fantastic_foundry.description": "ネザー精錬のガイドブックである「魅惑の鋳造炉」を作る",
@@ -2940,7 +2447,6 @@
   "advancements.tconstruct.foundry.manyullyn_lanterns.description": "溶融したマンユリンを満たした、焼成または焦熱ランタンを1スタック作る",
   "advancements.tconstruct.foundry.encyclopedia.title": "大辞典",
   "advancements.tconstruct.foundry.encyclopedia.description": "全ての本の知識が詰まった素材の大辞典を作る",
-
   "_comment": "Gadget Advancements",
   "advancements.tconstruct.world.tinkers_gadgetry.title": "ティンカーのガジェット類",
   "advancements.tconstruct.world.tinkers_gadgetry.description": "「ティンカーのガジェット類」を作って世界を探検する",
@@ -2964,6 +2470,5 @@
   "advancements.tconstruct.world.slime_sling.description": "4種類のスライムスリングを使う",
   "advancements.tconstruct.world.piggybackpack.title": "豚をおんぶ",
   "advancements.tconstruct.world.piggybackpack.description": "ピギーバックパックで豚を担ぐ"
-
 }
 

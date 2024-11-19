@@ -19,6 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MaterialRegistryExtension.class)
 class StatsNBTTest extends BaseMcTest {
+
   @BeforeAll
   static void setupTiers() {
     setupTierSorting();
@@ -88,7 +89,7 @@ class StatsNBTTest extends BaseMcTest {
       .set(ToolStats.ATTACK_SPEED, 5f)
       .build();
     CompoundTag nbt = testStatsNBT.serializeToNBT();
-    
+
     assertThat(nbt.getInt(ToolStats.DURABILITY.getName().toString())).isEqualTo(1);
     assertThat(nbt.getString(ToolStats.HARVEST_TIER.getName().toString())).isEqualTo(Objects.requireNonNull(TierSortingRegistry.getName(Tiers.NETHERITE)).toString());
     assertThat(nbt.getFloat(ToolStats.ATTACK_DAMAGE.getName().toString())).isEqualTo(3);
@@ -139,9 +140,9 @@ class StatsNBTTest extends BaseMcTest {
   @Test
   void missing_isDefault() {
     StatsNBT partialStatsNBT = StatsNBT.builder()
-                                       .set(ToolStats.DURABILITY, 1f)
-                                       .set(ToolStats.ATTACK_DAMAGE, 3f)
-                                       .build();
+      .set(ToolStats.DURABILITY, 1f)
+      .set(ToolStats.ATTACK_DAMAGE, 3f)
+      .build();
     assertThat(partialStatsNBT.get(ToolStats.MINING_SPEED)).isEqualTo(ToolStats.MINING_SPEED.getDefaultValue());
     assertThat(partialStatsNBT.get(ToolStats.ARMOR)).isEqualTo(ToolStats.ARMOR.getDefaultValue());
     assertThat(partialStatsNBT.get(ToolStats.HARVEST_TIER)).isEqualTo(ToolStats.HARVEST_TIER.getDefaultValue());

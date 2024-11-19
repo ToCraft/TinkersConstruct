@@ -1,8 +1,13 @@
 {
   "tool": "tconstruct:slime_boots",
   "text": [
-    { "text": "Estas botas combinam o poder do coelho com o slime para permitir que você salte com facilidade." },
-    { "text": "Para criar estas botas fantásticas, despeje calda de enderslime sobre um pé de coelho. As botas são reparadas usando couro de coelho.", "paragraph": true }
+    {
+      "text": "Estas botas combinam o poder do coelho com o slime para permitir que você salte com facilidade."
+    },
+    {
+      "text": "Para criar estas botas fantásticas, despeje calda de enderslime sobre um pé de coelho. As botas são reparadas usando couro de coelho.",
+      "paragraph": true
+    }
   ],
   "properties": [
     "Alta Durabilidade",

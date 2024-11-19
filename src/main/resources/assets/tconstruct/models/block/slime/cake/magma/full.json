@@ -2,8 +2,8 @@
   "parent": "block/cake",
   "textures": {
     "particle": "tconstruct:block/slime/cake/magma_side",
-    "bottom":   "tconstruct:block/slime/cake/magma_bottom",
-    "top":      "tconstruct:block/slime/cake/magma_top",
-    "side":     "tconstruct:block/slime/cake/magma_side"
+    "bottom": "tconstruct:block/slime/cake/magma_bottom",
+    "top": "tconstruct:block/slime/cake/magma_top",
+    "side": "tconstruct:block/slime/cake/magma_side"
   }
 }

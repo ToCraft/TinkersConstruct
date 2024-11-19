@@ -3,6 +3,8 @@
   "recipe": "tconstruct:common/fantastic_foundry",
   "grid_size": "small",
   "description": [
-    { "text": "Sıpsıcak ergimiş metallerin uygulayımları. Kallama ocağını geç, dökümevi ile başla! Dahasını Nemea tarafından §oDüşlemsel Dökümevinde§r öğren." }
+    {
+      "text": "Sıpsıcak ergimiş metallerin uygulayımları. Kallama ocağını geç, dökümevi ile başla! Dahasını Nemea tarafından §oDüşlemsel Dökümevinde§r öğren."
+    }
   ]
 }

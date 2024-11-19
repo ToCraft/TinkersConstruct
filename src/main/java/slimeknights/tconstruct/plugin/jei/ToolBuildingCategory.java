@@ -11,7 +11,6 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -34,6 +33,7 @@ import static slimeknights.tconstruct.library.recipe.tinkerstation.building.Tool
 import static slimeknights.tconstruct.library.recipe.tinkerstation.building.ToolBuildingRecipe.Y_OFFSET;
 
 public class ToolBuildingCategory implements IRecipeCategory<ToolBuildingRecipe> {
+
   private static final ResourceLocation BACKGROUND_LOC = TConstruct.getResource("textures/gui/jei/tinker_station.png");
   private static final Component TITLE = TConstruct.makeTranslation("jei", "tinkering.tool_building");
   @Getter
@@ -65,7 +65,7 @@ public class ToolBuildingCategory implements IRecipeCategory<ToolBuildingRecipe>
 
     if (missingSlots < 0) {
       partsAndExtras = new ArrayList<>(partsAndExtras);
-      for (int additionalItem = 0; additionalItem > missingSlots; additionalItem--){
+      for (int additionalItem = 0; additionalItem > missingSlots; additionalItem--) {
         // just add nothing to fill the empty slots
         partsAndExtras.add(List.of(ItemStack.EMPTY));
       }
@@ -73,7 +73,7 @@ public class ToolBuildingCategory implements IRecipeCategory<ToolBuildingRecipe>
 
     for (int i = 0; i < layoutSlots.size(); i++) {
       builder.addSlot(RecipeIngredientRole.INPUT, layoutSlots.get(i).getX() + X_OFFSET, layoutSlots.get(i).getY() + Y_OFFSET)
-             .addItemStacks(partsAndExtras.get(i));
+        .addItemStacks(partsAndExtras.get(i));
     }
 
     ItemStack outputStack = recipe.getOutput() instanceof IModifiableDisplay modifiable ? modifiable.getRenderTool() : recipe.getOutput().asItem().getDefaultInstance();

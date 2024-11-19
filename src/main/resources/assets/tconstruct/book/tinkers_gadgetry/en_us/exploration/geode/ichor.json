@@ -1,7 +1,7 @@
 {
   "title": "Ichor Geodes",
   "image": {
-	"file": "tconstruct:book/images/geodes/ichor.png",
+    "file": "tconstruct:book/images/geodes/ichor.png",
     "width": 180,
     "height": 106
   },

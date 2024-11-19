@@ -1,7 +1,6 @@
 package slimeknights.tconstruct.common.config;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -66,8 +65,6 @@ public class Config {
     public final EnumValue<LogInvalidToolStack> logInvalidToolStack;
 
     public enum LogInvalidToolStack {STACKTRACE, WARNING, IGNORED}
-
-    ;
 
     Common(ForgeConfigSpec.Builder builder) {
       builder.comment("Everything to do with gameplay").push("gameplay");
@@ -363,8 +360,6 @@ public class Config {
   public static void init() {
     ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.commonSpec);
     ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.clientSpec);
-
-    IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
   }
 
   /**

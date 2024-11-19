@@ -4,7 +4,6 @@
     "type": "mantle:index",
     "data": "smeltery/index.json"
   },
-
   {
     "name": "features",
     "type": "mantle:text",
@@ -37,7 +36,7 @@
   {
     "name": "hidden",
     "type": "mantle:image_text",
-	"data": "smeltery/hottub.json"
+    "data": "smeltery/hottub.json"
   },
   {
     "name": "sgui1",
@@ -49,7 +48,6 @@
     "type": "mantle:text",
     "data": "smeltery/gui2.json"
   },
-
   {
     "name": "seared_tanks",
     "type": "mantle:showcase",
@@ -95,4 +93,4 @@
     "type": "mantle:showcase",
     "data": "smeltery/seared_chute.json"
   }
- ]
+]

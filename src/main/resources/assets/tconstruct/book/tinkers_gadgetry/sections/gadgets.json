@@ -32,7 +32,7 @@
   {
     "name": "hidden",
     "type": "mantle:image_text",
-	"data": "gadgets/melvin.json"
+    "data": "gadgets/melvin.json"
   },
   {
     "name": "fancy_frames",

@@ -20,7 +20,7 @@ public interface ProcessLootModifierHook {
    * @param modifier      Modifier level
    * @param generatedLoot Current loot list before this modifier
    * @param context       Full loot context
-   *                      TODO: can we ditch this hook in favor of just using GLMs? Just need a loot condition to detect a modifier, and it gives us a lot more flexability
+   *                                                                TODO: can we ditch this hook in favor of just using GLMs? Just need a loot condition to detect a modifier, and it gives us a lot more flexability
    */
   void processLoot(IToolStackView tool, ModifierEntry modifier, List<ItemStack> generatedLoot, LootContext context);
 

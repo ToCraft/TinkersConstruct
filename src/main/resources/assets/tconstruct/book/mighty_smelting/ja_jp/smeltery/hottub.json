@@ -1,7 +1,7 @@
 {
   "title": "ホットタブ",
   "image": {
-	"file": "tconstruct:book/images/hottub.png",
+    "file": "tconstruct:book/images/hottub.png",
     "width": 120,
     "height": 120
   },

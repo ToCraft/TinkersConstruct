@@ -1,9 +1,12 @@
 {
   "tool": "tconstruct:travelers_boots",
   "text": [
-    { "text": "這雙靴子為行走而生，而這正是它們的使命。" },
-	{
-      "text": "每個冒險家都需要一雙時髦且可定製的靴子來開始他們的旅程。", "paragraph": true
+    {
+      "text": "這雙靴子為行走而生，而這正是它們的使命。"
+    },
+    {
+      "text": "每個冒險家都需要一雙時髦且可定製的靴子來開始他們的旅程。",
+      "paragraph": true
     }
   ],
   "properties": [

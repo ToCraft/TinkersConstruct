@@ -75,7 +75,7 @@ public abstract class GenericTextureGenerator implements DataProvider {
    * Saves metadata for the given image
    */
   protected CompletableFuture<?> saveMetadata(CachedOutput cache, ResourceLocation location, JsonObject metadata) {
-      Path path = this.generator.getPackOutput().getOutputFolder().resolve(Paths.get(PackType.CLIENT_RESOURCES.getDirectory(), location.getNamespace(), folder, location.getPath() + ".png.mcmeta"));
-      return DataProvider.saveStable(cache, metadata, path);
+    Path path = this.generator.getPackOutput().getOutputFolder().resolve(Paths.get(PackType.CLIENT_RESOURCES.getDirectory(), location.getNamespace(), folder, location.getPath() + ".png.mcmeta"));
+    return DataProvider.saveStable(cache, metadata, path);
   }
 }

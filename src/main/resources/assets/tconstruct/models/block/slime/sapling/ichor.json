@@ -1,6 +1,6 @@
 {
-    "parent": "block/cross",
-    "textures": {
-        "cross": "tconstruct:block/slime/sapling/ichor"
-    }
+  "parent": "block/cross",
+  "textures": {
+    "cross": "tconstruct:block/slime/sapling/ichor"
+  }
 }

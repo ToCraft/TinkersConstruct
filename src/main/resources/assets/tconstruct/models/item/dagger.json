@@ -2,21 +2,33 @@
   "loader": "tconstruct:tool",
   "parent": "forge:item/default-tool",
   "textures": {
-    "head":        "tconstruct:item/tool/dagger/blade",
-    "crossguard":  "tconstruct:item/tool/dagger/crossguard"
+    "head": "tconstruct:item/tool/dagger/blade",
+    "crossguard": "tconstruct:item/tool/dagger/crossguard"
   },
-  "modifier_roots": [ "tconstruct:item/tool/dagger/modifiers/" ],
+  "modifier_roots": [
+    "tconstruct:item/tool/dagger/modifiers/"
+  ],
   "parts": [
-    { "name": "head",       "index": 0 },
-    { "name": "crossguard", "index": 1 }
+    {
+      "name": "head",
+      "index": 0
+    },
+    {
+      "name": "crossguard",
+      "index": 1
+    }
   ],
   "overrides": [
     {
-      "predicate": { "tconstruct:charging": 2 },
+      "predicate": {
+        "tconstruct:charging": 2
+      },
       "model": "tconstruct:item/tool/dagger/blocking"
     },
     {
-      "predicate": { "tconstruct:broken": 1 },
+      "predicate": {
+        "tconstruct:broken": 1
+      },
       "model": "tconstruct:item/tool/dagger/broken"
     }
   ]

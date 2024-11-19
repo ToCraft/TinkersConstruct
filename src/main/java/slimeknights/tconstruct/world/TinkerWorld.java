@@ -198,8 +198,7 @@ public final class TinkerWorld extends TinkerModule {
    */
   private static Function<WoodVariant, BlockBehaviour.Properties> createSlimewood(MapColor planks, MapColor bark) {
     return type -> switch (type) {
-      case WOOD ->
-        BlockBehaviour.Properties.of().mapColor(bark).sound(SoundType.WOOD).requiresCorrectToolForDrops();
+      case WOOD -> BlockBehaviour.Properties.of().mapColor(bark).sound(SoundType.WOOD).requiresCorrectToolForDrops();
       case LOG ->
         BlockBehaviour.Properties.copy(Blocks.WARPED_HYPHAE).mapColor(state -> state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? planks : bark).sound(SoundType.WOOD).requiresCorrectToolForDrops();
       default -> BlockBehaviour.Properties.of().mapColor(planks).sound(SoundType.SLIME_BLOCK);

@@ -150,7 +150,7 @@ public class MeltingModifier extends NoLevelsModifier implements MeleeHitModifie
           // recipe amount determines how much we get per hit, up to twice the recipe damage
           int fluidAmount;
           if (damageDealt < damagePerOutput * 2) {
-            fluidAmount = (int)(output.getAmount() * damageDealt / damagePerOutput);
+            fluidAmount = (int) (output.getAmount() * damageDealt / damagePerOutput);
           } else {
             fluidAmount = output.getAmount() * 2;
           }

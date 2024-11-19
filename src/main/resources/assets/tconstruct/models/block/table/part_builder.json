@@ -9,10 +9,38 @@
     "bottom": "tconstruct:block/table/bottom",
     "legBottom": "tconstruct:block/table/bottom"
   },
-  "retextured": [ "leg", "legBottom" ],
+  "retextured": [
+    "leg",
+    "legBottom"
+  ],
   "items": [
-    { "center": [  4.5, 17.5,     4.5 ], "transform": "tconstruct:table", "size": 3 },
-    { "center": [  4.5, 16.3125, 11.5 ], "transform": "tconstruct:table", "size": 5, "x": 270 },
-    { "center": [ 11.5, 17.5,     4.5 ], "transform": "tconstruct:table", "size": 3 }
+    {
+      "center": [
+        4.5,
+        17.5,
+        4.5
+      ],
+      "transform": "tconstruct:table",
+      "size": 3
+    },
+    {
+      "center": [
+        4.5,
+        16.3125,
+        11.5
+      ],
+      "transform": "tconstruct:table",
+      "size": 5,
+      "x": 270
+    },
+    {
+      "center": [
+        11.5,
+        17.5,
+        4.5
+      ],
+      "transform": "tconstruct:table",
+      "size": 3
+    }
   ]
 }

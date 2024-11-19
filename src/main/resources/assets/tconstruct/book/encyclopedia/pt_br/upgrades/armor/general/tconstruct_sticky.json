@@ -5,7 +5,8 @@
       "text": "Tem 25% chance por nivel de aplicar até 1.5 segundos (mais 1 segundo por nivel) de lentidão ao atacante. Aplica o efeito da peça com o maior bônus."
     },
     {
-      "text": "Em armas, o bônus se aplica a alvos atacados.", "paragraph": true
+      "text": "Em armas, o bônus se aplica a alvos atacados.",
+      "paragraph": true
     }
   ],
   "more_text_space": true,

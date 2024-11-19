@@ -15,6 +15,7 @@ import java.util.function.IntSupplier;
 import java.util.function.Predicate;
 
 public class GuiMeltingModule {
+
   // progress bars
   private final ScalableElementScreen PROGRESS_BAR;
   private final ScalableElementScreen NO_HEAT_BAR;

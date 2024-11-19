@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "tconstruct:block/smeltery/tank/fuel_tank"}
+  "variants": {
+    "": {
+      "model": "tconstruct:block/smeltery/tank/fuel_tank"
     }
+  }
 }

@@ -14,6 +14,7 @@ import java.util.Iterator;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class UpdateTinkerSlotLayoutsPacketTest extends BaseMcTest {
+
   @Test
   void packetReadWrite() {
     StationSlotLayout layout = StationSlotLayout

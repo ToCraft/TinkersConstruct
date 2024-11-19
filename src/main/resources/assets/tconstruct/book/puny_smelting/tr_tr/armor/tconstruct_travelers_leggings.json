@@ -1,9 +1,12 @@
 {
   "tool": "tconstruct:travelers_leggings",
   "text": [
-    { "text": "Balım, paaaaaaaantoooooooolooooooonnlaaaaaaarııııım nerede?" },
-	{
-      "text": "Dünyaya pantolonsuz çıkmak pek iyi bir düşünce değil, neden seni sıcak tutacak ve gezinde sana yardımcı olacak pantolon almayasın!", "paragraph": true
+    {
+      "text": "Balım, paaaaaaaantoooooooolooooooonnlaaaaaaarııııım nerede?"
+    },
+    {
+      "text": "Dünyaya pantolonsuz çıkmak pek iyi bir düşünce değil, neden seni sıcak tutacak ve gezinde sana yardımcı olacak pantolon almayasın!",
+      "paragraph": true
     }
   ],
   "properties": [

@@ -1,7 +1,9 @@
 {
   "tool": "tconstruct:plate_shield",
   "text": [
-    { "text": "The plate shield is a highly defensive shield, granting high blocking power at the cost of speed while blocking." }
+    {
+      "text": "The plate shield is a highly defensive shield, granting high blocking power at the cost of speed while blocking."
+    }
   ],
   "properties": [
     "Material controlled stats",

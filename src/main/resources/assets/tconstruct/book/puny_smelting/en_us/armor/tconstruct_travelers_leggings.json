@@ -1,9 +1,12 @@
 {
   "tool": "tconstruct:travelers_leggings",
   "text": [
-    { "text": "Honey, where are my paaaaaaaaaaaaaaaaaants?" },
-	{
-      "text": "Going out in the world without pants on is not a very good idea, why not take a pair of pants to keep you warm, and help you travel!", "paragraph": true
+    {
+      "text": "Honey, where are my paaaaaaaaaaaaaaaaaants?"
+    },
+    {
+      "text": "Going out in the world without pants on is not a very good idea, why not take a pair of pants to keep you warm, and help you travel!",
+      "paragraph": true
     }
   ],
   "properties": [

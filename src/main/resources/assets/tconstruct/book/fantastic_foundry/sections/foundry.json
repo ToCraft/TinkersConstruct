@@ -4,7 +4,6 @@
     "type": "mantle:index",
     "data": "foundry/index.json"
   },
-
   {
     "name": "features",
     "type": "mantle:text",
@@ -40,7 +39,6 @@
     "type": "mantle:text",
     "data": "foundry/gui2.json"
   },
-
   {
     "name": "scorched_tanks",
     "type": "mantle:showcase",

@@ -23,7 +23,12 @@
   {
     "name": "melee_harvest_materials",
     "data": "no-load",
-    "extraData": { "tconstruct:material_tier": { "type": "tconstruct:melee_harvest", "tier": 3 } },
+    "extraData": {
+      "tconstruct:material_tier": {
+        "type": "tconstruct:melee_harvest",
+        "tier": 3
+      }
+    },
     "icon": {
       "item": "tconstruct:slimesteel_ingot"
     }
@@ -31,7 +36,12 @@
   {
     "name": "ranged_materials",
     "data": "no-load",
-    "extraData": { "tconstruct:material_tier": { "type": "tconstruct:ranged", "tier": 3 } },
+    "extraData": {
+      "tconstruct:material_tier": {
+        "type": "tconstruct:ranged",
+        "tier": 3
+      }
+    },
     "icon": {
       "item": "tconstruct:nahuatl"
     }
@@ -39,7 +49,12 @@
   {
     "name": "armor_materials",
     "data": "no-load",
-    "extraData": { "tconstruct:material_tier": { "type": "tconstruct:armor", "tier": 3 } },
+    "extraData": {
+      "tconstruct:material_tier": {
+        "type": "tconstruct:armor",
+        "tier": 3
+      }
+    },
     "icon": {
       "item": "minecraft:obsidian"
     }
@@ -65,7 +80,10 @@
     },
     "data": "no-load",
     "extraData": {
-      "tconstruct:load_tools": { "tag": "tconstruct:modifiable/broad", "path": "tools" }
+      "tconstruct:load_tools": {
+        "tag": "tconstruct:modifiable/broad",
+        "path": "tools"
+      }
     }
   },
   {
@@ -80,7 +98,11 @@
     },
     "data": "no-load",
     "extraData": {
-      "tconstruct:load_tools": { "tag": "tconstruct:modifiable/book_armor/mighty_smelting", "path": "armor", "sort": false }
+      "tconstruct:load_tools": {
+        "tag": "tconstruct:modifiable/book_armor/mighty_smelting",
+        "path": "armor",
+        "sort": false
+      }
     }
   },
   {

@@ -6,14 +6,34 @@
     "pane": "tconstruct:block/clear_stained_glass"
   },
   "connection": {
-    "textures": {"pane": "cornerless_full"},
+    "textures": {
+      "pane": "cornerless_full"
+    },
     "predicate": "pane"
   },
   "elements": [
-    { "from": [ 7, 0, 7 ],
-      "to": [ 9, 16, 9 ],
+    {
+      "from": [
+        7,
+        0,
+        7
+      ],
+      "to": [
+        9,
+        16,
+        9
+      ],
       "faces": {
-        "north": { "uv": [  9, 0,  7, 16 ], "texture": "#pane", "tintindex": 0 }
+        "north": {
+          "uv": [
+            9,
+            0,
+            7,
+            16
+          ],
+          "texture": "#pane",
+          "tintindex": 0
+        }
       }
     }
   ]

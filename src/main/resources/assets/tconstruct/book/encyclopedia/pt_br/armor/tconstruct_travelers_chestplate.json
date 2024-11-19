@@ -1,7 +1,9 @@
 {
   "tool": "tconstruct:travelers_chestplate",
   "text": [
-    { "text": "O Colete do Viajante é um peitoral balanceado, com proteção média, e uma quantidade mediana de slots de melhoria e de defesa." }
+    {
+      "text": "O Colete do Viajante é um peitoral balanceado, com proteção média, e uma quantidade mediana de slots de melhoria e de defesa."
+    }
   ],
   "properties": [
     "160 Durabilidade",

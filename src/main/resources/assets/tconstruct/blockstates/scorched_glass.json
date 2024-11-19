@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "tconstruct:block/foundry/glass/block" }
+    "": {
+      "model": "tconstruct:block/foundry/glass/block"
+    }
   }
 }

@@ -1,8 +1,13 @@
 {
   "tool": "tconstruct:mattock",
   "text": [
-    { "text": "The Mattock is a farming tool, effective on logs, dirt, gravel, and sand. It is also faster on wood." },
-    { "text": "Expanders cause adjacent blocks of the same type to also be mined, with range based on the number of expanders.", "paragraph": true }
+    {
+      "text": "The Mattock is a farming tool, effective on logs, dirt, gravel, and sand. It is also faster on wood."
+    },
+    {
+      "text": "Expanders cause adjacent blocks of the same type to also be mined, with range based on the number of expanders.",
+      "paragraph": true
+    }
   ],
   "properties": [
     "+1.5 Attack Damage",

@@ -14,6 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MaterialRegistryExtension.class)
 class MultiplierNBTTest extends BaseMcTest {
+
   @Test
   void empty_ensureEmpty() {
     // ensure no stats present

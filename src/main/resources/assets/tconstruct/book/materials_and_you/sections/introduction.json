@@ -52,6 +52,6 @@
   {
     "name": "hidden",
     "type": "mantle:image_text",
-	"data": "intro/selena.json"
+    "data": "intro/selena.json"
   }
 ]

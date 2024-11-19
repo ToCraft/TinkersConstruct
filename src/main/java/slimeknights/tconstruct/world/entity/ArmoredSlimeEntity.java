@@ -25,7 +25,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoField;
 
 public abstract class ArmoredSlimeEntity extends Slime {
 
@@ -59,7 +58,7 @@ public abstract class ArmoredSlimeEntity extends Slime {
     // pumpkins on halloween
     if (this.getItemBySlot(EquipmentSlot.HEAD).isEmpty()) {
       LocalDate localdate = LocalDate.now();
-      if (localdate.get(ChronoField.MONTH_OF_YEAR) == 10 && localdate.get(ChronoField.DAY_OF_MONTH) == 31 && this.random.nextFloat() < 0.25F) {
+      if (localdate.getMonth().getValue() == 10 && localdate.getDayOfMonth() == 31 && this.random.nextFloat() < 0.25F) {
         this.setItemSlot(EquipmentSlot.HEAD, new ItemStack(this.random.nextFloat() < 0.1F ? Blocks.JACK_O_LANTERN : Blocks.CARVED_PUMPKIN));
         this.armorDropChances[EquipmentSlot.HEAD.getIndex()] = 0.0F;
       }

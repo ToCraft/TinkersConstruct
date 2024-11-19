@@ -47,6 +47,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 class UpdateToolDefinitionDataPacketTest extends BaseMcTest {
+
   private static final ResourceLocation EMPTY_ID = new ResourceLocation("test", "empty");
   private static final ResourceLocation FILLED_ID = new ResourceLocation("test", "filled");
 
@@ -69,8 +70,8 @@ class UpdateToolDefinitionDataPacketTest extends BaseMcTest {
       .builder()
       // parts
       .module(PartStatsModule.parts()
-                             .part(MaterialItemFixture.MATERIAL_ITEM_HEAD, 10)
-                             .part(MaterialItemFixture.MATERIAL_ITEM_HANDLE).build())
+        .part(MaterialItemFixture.MATERIAL_ITEM_HEAD, 10)
+        .part(MaterialItemFixture.MATERIAL_ITEM_HANDLE).build())
       // stats
       .module(new SetStatsModule(StatsNBT.builder()
         .set(ToolStats.DURABILITY, 1000)
@@ -96,7 +97,7 @@ class UpdateToolDefinitionDataPacketTest extends BaseMcTest {
     UpdateToolDefinitionDataPacket decoded = new UpdateToolDefinitionDataPacket(buffer);
 
     // parse results
-    Map<ResourceLocation,ToolDefinitionData> parsedMap = decoded.getDataMap();
+    Map<ResourceLocation, ToolDefinitionData> parsedMap = decoded.getDataMap();
     assertThat(parsedMap).hasSize(2);
 
     // first validate empty
@@ -120,7 +121,7 @@ class UpdateToolDefinitionDataPacketTest extends BaseMcTest {
     // parts
     ToolPartsHook toolPartsHook = parsed.getHook(ToolHooks.TOOL_PARTS);
     assertThat(toolPartsHook).isInstanceOf(PartStatsModule.class);
-    PartStatsModule module = (PartStatsModule)toolPartsHook;
+    PartStatsModule module = (PartStatsModule) toolPartsHook;
     List<IToolPart> parts = module.getParts(ToolDefinition.EMPTY);
     float[] scales = module.getScales();
     assertThat(parts).hasSize(2);
@@ -149,7 +150,7 @@ class UpdateToolDefinitionDataPacketTest extends BaseMcTest {
     // slots
     VolatileDataToolHook volatileHook = parsed.getHook(ToolHooks.VOLATILE_DATA);
     assertThat(volatileHook).isInstanceOf(ToolSlotsModule.class);
-    Map<SlotType,Integer> slots = ((ToolSlotsModule) volatileHook).slots();
+    Map<SlotType, Integer> slots = ((ToolSlotsModule) volatileHook).slots();
     assertThat(slots).hasSize(2);
     assertThat(slots).containsEntry(SlotType.UPGRADE, 5);
     assertThat(slots).containsEntry(SlotType.ABILITY, 8);
@@ -176,12 +177,12 @@ class UpdateToolDefinitionDataPacketTest extends BaseMcTest {
     // aoe
     AreaOfEffectIterator aoe = parsed.getHook(ToolHooks.AOE_ITERATOR);
     assertThat(aoe).isInstanceOf(CircleAOEIterator.class);
-    assertThat(((CircleAOEIterator)aoe).diameter()).isEqualTo(7);
-    assertThat(((CircleAOEIterator)aoe).is3D()).isTrue();
+    assertThat(((CircleAOEIterator) aoe).diameter()).isEqualTo(7);
+    assertThat(((CircleAOEIterator) aoe).is3D()).isTrue();
 
     // weapon
     MeleeHitToolHook attack = parsed.getHook(ToolHooks.MELEE_HIT);
     assertThat(attack).isInstanceOf(SweepWeaponAttack.class);
-    assertThat(((SweepWeaponAttack)attack).range()).isEqualTo(4);
+    assertThat(((SweepWeaponAttack) attack).range()).isEqualTo(4);
   }
 }

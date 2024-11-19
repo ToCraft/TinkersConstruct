@@ -55,6 +55,7 @@ import java.util.function.Function;
  */
 @SuppressWarnings("unused")
 public final class TinkerGadgets extends TinkerModule {
+
   // Concurrent in case Forge loads something asynchronous
   private static final List<ItemLike> TAB_GADGETS_ITEMS = new CopyOnWriteArrayList<>();
   /**

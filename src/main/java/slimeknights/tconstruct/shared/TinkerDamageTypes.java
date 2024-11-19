@@ -9,6 +9,7 @@ import net.minecraft.world.damagesource.DamageType;
 import slimeknights.tconstruct.TConstruct;
 
 public class TinkerDamageTypes {
+
   public static final ResourceKey<DamageType> SELF_DESTRUCT = ResourceKey.create(Registries.DAMAGE_TYPE, TConstruct.getResource("self_destruct"));
   public static final ResourceKey<DamageType> BLEEDING = ResourceKey.create(Registries.DAMAGE_TYPE, TConstruct.getResource("bleed"));
   public static final ResourceKey<DamageType> SMELTERY_DAMAGE = ResourceKey.create(Registries.DAMAGE_TYPE, TConstruct.getResource("smeltery_heat"));

@@ -8,7 +8,9 @@
       "slot": "slotless"
     }
   },
-  "tooltip": [ "Yuvasız İmge" ],
+  "tooltip": [
+    "Yuvasız İmge"
+  ],
   "text": [
     {
       "text": "Yuvasız değiştiriciler, öbür bütün değiştiricilerin aksine yuva gerektirmiyorlar. Bu çoğu zaman ya değiştiricinin ödün vermesi gerektiğini ya da etkisinin zayıf olduğu belirtmektedir. "

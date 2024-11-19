@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_melting",
-  "input": "tconstruct:hepatizon",
-  "result": {
-    "amount": 90,
-    "fluid": "tconstruct:molten_hepatizon"
-  },
-  "temperature": 1400
-}

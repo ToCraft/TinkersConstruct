@@ -4,6 +4,7 @@ import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 public class Maths {
+
   public static Vector3f POSITIVE_X() {
     return new Vector3f(1, 0, 0);
   }

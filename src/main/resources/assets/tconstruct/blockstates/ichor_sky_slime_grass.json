@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "tconstruct:block/slime/dirt/sky/nylium" }
+  "variants": {
+    "": {
+      "model": "tconstruct:block/slime/dirt/sky/nylium"
     }
+  }
 }

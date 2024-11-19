@@ -1,9 +1,12 @@
 {
   "tool": "tconstruct:travelers_chestplate",
   "text": [
-    { "text": "Etiketi içeriye sokmayı unutma, onunla dışarıda dolanırken gözükmek istemezsin." },
-	{
-      "text": "Göğüslük, göğüs organlarınızı koruma için önemlidir. Ve bunu yaparken kudretli gözükürsün.", "paragraph": true
+    {
+      "text": "Etiketi içeriye sokmayı unutma, onunla dışarıda dolanırken gözükmek istemezsin."
+    },
+    {
+      "text": "Göğüslük, göğüs organlarınızı koruma için önemlidir. Ve bunu yaparken kudretli gözükürsün.",
+      "paragraph": true
     }
   ],
   "properties": [

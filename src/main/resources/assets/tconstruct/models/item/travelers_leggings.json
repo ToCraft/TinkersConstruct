@@ -4,11 +4,18 @@
   "textures": {
     "tool": "tconstruct:item/tool/armor/travelers/pants"
   },
-  "modifier_roots": [ "tconstruct:item/tool/armor/travelers/pants_modifiers/" ],
-  "first_modifiers": [ "tconstruct:dyed", "tconstruct:golden" ],
+  "modifier_roots": [
+    "tconstruct:item/tool/armor/travelers/pants_modifiers/"
+  ],
+  "first_modifiers": [
+    "tconstruct:dyed",
+    "tconstruct:golden"
+  ],
   "overrides": [
     {
-      "predicate": { "tconstruct:broken": 1 },
+      "predicate": {
+        "tconstruct:broken": 1
+      },
       "model": "tconstruct:item/armor/travelers/leggings_broken"
     }
   ]

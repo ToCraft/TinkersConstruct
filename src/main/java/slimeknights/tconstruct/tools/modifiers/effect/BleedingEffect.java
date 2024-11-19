@@ -39,10 +39,9 @@ public class BleedingEffect extends NoMilkEffect {
     // attribute to player kill
     LivingEntity lastAttacker = target.getLastHurtMob();
     DamageSource source;
-    if(lastAttacker != null) {
+    if (lastAttacker != null) {
       source = new BleedingDamageSource(target.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(TinkerDamageTypes.BLEEDING), lastAttacker);
-    }
-    else {
+    } else {
       source = new DamageSource(target.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(TinkerDamageTypes.BLEEDING));
     }
 

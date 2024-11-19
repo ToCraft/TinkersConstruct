@@ -8,7 +8,7 @@
   "tool_filter": "tconstruct:modifiable/armor",
   "effects": [
     "Saldıranlar vurduklarında onları dondurma şansı vardır",
-  	"Çoklu seviyeler, düşmanları yavaşlatması her seviyede uzar",
-  	"Seviye başına 1 yükseltme yuvası gerekir"
+    "Çoklu seviyeler, düşmanları yavaşlatması her seviyede uzar",
+    "Seviye başına 1 yükseltme yuvası gerekir"
   ]
 }

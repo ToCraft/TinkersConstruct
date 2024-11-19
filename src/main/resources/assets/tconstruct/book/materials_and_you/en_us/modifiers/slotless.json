@@ -8,7 +8,9 @@
       "slot": "slotless"
     }
   },
-  "tooltip": [ "Slotless Icon" ],
+  "tooltip": [
+    "Slotless Icon"
+  ],
   "text": [
     {
       "text": "Slotless modifiers do not require slots, unlike all other types of modifiers. This typically means the modifier either has some tradeoff or the effect is minor. "

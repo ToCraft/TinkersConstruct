@@ -1,8 +1,13 @@
 {
   "tool": "tconstruct:slime_leggings",
   "text": [
-    { "text": "Slimeshells are one part defense, one part storage, granting the best of both shulker abilities." },
-    { "text": "To create these wondrous pants, pour enderslime on a shulker shell in a basin. The shell can later be repaired using chorus.", "paragraph": true }
+    {
+      "text": "Slimeshells are one part defense, one part storage, granting the best of both shulker abilities."
+    },
+    {
+      "text": "To create these wondrous pants, pour enderslime on a shulker shell in a basin. The shell can later be repaired using chorus.",
+      "paragraph": true
+    }
   ],
   "properties": [
     "High Durability",

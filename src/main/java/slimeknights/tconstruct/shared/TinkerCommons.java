@@ -71,6 +71,8 @@ import slimeknights.tconstruct.shared.item.TinkerBookItem;
 import slimeknights.tconstruct.shared.item.TinkerBookItem.BookType;
 import slimeknights.tconstruct.shared.particle.FluidParticleData;
 
+import java.util.function.Supplier;
+
 import static slimeknights.tconstruct.TConstruct.getResource;
 
 /**
@@ -84,13 +86,13 @@ public final class TinkerCommons extends TinkerModule {
   /*
    * Blocks
    */
-  public static final Block GLOW_BLOCK = new Block(BlockBehaviour.Properties.of().mapColor(MapColor.NONE)
+  public static final Supplier<Block> GLOW_BLOCK = () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.NONE)
     .noCollission()
     .instabreak()
     .isRedstoneConductor(Blocks::never)
     .replaceable()
     .pushReaction(PushReaction.DESTROY));
-  public static final RegistryObject<GlowBlock> glow = BLOCKS.registerNoItem("glow", () -> new GlowBlock(builder(GLOW_BLOCK, SoundType.WOOL).strength(0.0F).lightLevel(s -> 14).noOcclusion()));
+  public static final RegistryObject<GlowBlock> glow = BLOCKS.registerNoItem("glow", () -> new GlowBlock(builder(GLOW_BLOCK.get(), SoundType.WOOL).strength(0.0F).lightLevel(s -> 14).noOcclusion()));
   // glass
   public static final ItemObject<GlassBlock> clearGlass = BLOCKS.register("clear_glass", () -> new GlassBlock(glassBuilder(MapColor.NONE)), GENERAL_BLOCK_ITEM);
   public static final ItemObject<TintedGlassBlock> clearTintedGlass = BLOCKS.register("clear_tinted_glass", () -> new TintedGlassBlock(glassBuilder(MapColor.COLOR_GRAY).mapColor(MapColor.COLOR_GRAY).noOcclusion().isValidSpawn(Blocks::never).isRedstoneConductor(Blocks::never).isSuffocating(Blocks::never).isViewBlocking(Blocks::never)), GENERAL_BLOCK_ITEM);
@@ -131,7 +133,7 @@ public final class TinkerCommons extends TinkerModule {
   private static final Item.Properties BOOK = new Item.Properties().stacksTo(1);
   public static final ItemObject<TinkerBookItem> materialsAndYou = ITEMS.register("materials_and_you", () -> addToTabItemList(new TinkerBookItem(BOOK, BookType.MATERIALS_AND_YOU), TAB_GENERAL_ITEMS));
   public static final ItemObject<TinkerBookItem> punySmelting = ITEMS.register("puny_smelting", () -> addToTabItemList(new TinkerBookItem(BOOK, BookType.PUNY_SMELTING), TAB_GENERAL_ITEMS));
-  public static final ItemObject<TinkerBookItem> mightySmelting = ITEMS.register("mighty_smelting", () -> addToTabItemList( new TinkerBookItem(BOOK, BookType.MIGHTY_SMELTING), TAB_GENERAL_ITEMS));
+  public static final ItemObject<TinkerBookItem> mightySmelting = ITEMS.register("mighty_smelting", () -> addToTabItemList(new TinkerBookItem(BOOK, BookType.MIGHTY_SMELTING), TAB_GENERAL_ITEMS));
   public static final ItemObject<TinkerBookItem> tinkersGadgetry = ITEMS.register("tinkers_gadgetry", () -> addToTabItemList(new TinkerBookItem(BOOK, BookType.TINKERS_GADGETRY), TAB_GENERAL_ITEMS));
   public static final ItemObject<TinkerBookItem> fantasticFoundry = ITEMS.register("fantastic_foundry", () -> addToTabItemList(new TinkerBookItem(BOOK, BookType.FANTASTIC_FOUNDRY), TAB_GENERAL_ITEMS));
   public static final ItemObject<TinkerBookItem> encyclopedia = ITEMS.register("encyclopedia", () -> addToTabItemList(new TinkerBookItem(BOOK, BookType.ENCYCLOPEDIA), TAB_GENERAL_ITEMS));

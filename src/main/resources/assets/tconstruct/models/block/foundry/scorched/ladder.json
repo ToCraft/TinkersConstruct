@@ -2,8 +2,8 @@
   "parent": "tconstruct:block/template/ladder",
   "textures": {
     "particle": "tconstruct:block/foundry/scorched/ladder",
-    "top":      "tconstruct:block/foundry/scorched/road",
-    "side":     "tconstruct:block/foundry/scorched/ladder",
-    "bottom":   "tconstruct:block/foundry/scorched/ladder"
+    "top": "tconstruct:block/foundry/scorched/road",
+    "side": "tconstruct:block/foundry/scorched/ladder",
+    "bottom": "tconstruct:block/foundry/scorched/ladder"
   }
 }

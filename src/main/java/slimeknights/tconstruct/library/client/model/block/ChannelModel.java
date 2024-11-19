@@ -2,7 +2,6 @@ package slimeknights.tconstruct.library.client.model.block;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
@@ -20,10 +19,8 @@ import slimeknights.mantle.client.model.fluid.FluidCuboid;
 import slimeknights.mantle.client.model.util.ColoredBlockModel;
 import slimeknights.mantle.client.model.util.SimpleBlockModel;
 
-import java.util.Collection;
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Function;
 
 /**
@@ -148,6 +145,6 @@ public class ChannelModel implements IUnbakedGeometry<ChannelModel> {
     SIDE_IN,
     SIDE_OUT,
     SIDE_EDGE,
-    DOWN;
+    DOWN
   }
 }

@@ -51,11 +51,11 @@ public final class TinkerFood {
    */
   public static FoodProperties getCake(FoliageType slime) {
     return switch (slime) {
-      default -> EARTH_CAKE;
       case SKY -> SKY_CAKE;
       case ICHOR -> ICHOR_CAKE;
       case BLOOD -> BLOOD_CAKE;
       case ENDER -> ENDER_CAKE;
+      default -> EARTH_CAKE;
     };
   }
 
@@ -67,10 +67,10 @@ public final class TinkerFood {
    */
   public static FoodProperties getBottle(SlimeType slime) {
     return switch (slime) {
-      default -> EARTH_BOTTLE;
       case SKY -> SKY_BOTTLE;
       case ICHOR -> ICHOR_BOTTLE;
       case ENDER -> ENDER_BOTTLE;
+      default -> EARTH_BOTTLE;
     };
   }
 }

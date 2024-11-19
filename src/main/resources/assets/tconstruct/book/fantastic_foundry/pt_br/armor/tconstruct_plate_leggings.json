@@ -1,9 +1,12 @@
 {
   "tool": "tconstruct:plate_leggings",
   "text": [
-    { "text": "Minha perna, Minha perna." },
-	{
-      "text": "Estas calças oferecem alta proteção para todas as suas necessidades de combate!", "paragraph": true
+    {
+      "text": "Minha perna, Minha perna."
+    },
+    {
+      "text": "Estas calças oferecem alta proteção para todas as suas necessidades de combate!",
+      "paragraph": true
     }
   ],
   "properties": [

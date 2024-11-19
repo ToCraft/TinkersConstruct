@@ -16,13 +16,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MaterialRegistryExtension.class)
 class StatProviderTest extends BaseMcTest {
+
   @BeforeAll
   static void beforeAll() {
     MaterialItemFixture.init();
     setupTierSorting();
   }
 
-  /** Builds the given stats */
+  /**
+   * Builds the given stats
+   */
   private static ModifierStatsBuilder addStats(ModifierStatsBuilder builder, IMaterialStats... stats) {
     for (IMaterialStats stat : stats) {
       stat.apply(builder, 1);

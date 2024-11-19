@@ -477,9 +477,13 @@ public class TinkerTags {
     /*
      * Tool tags
      */
-    /** Anything that can be stored in the part chest */
+    /**
+     * Anything that can be stored in the part chest
+     */
     public static final TagKey<Item> CHEST_PARTS = tag("chest_parts");
-    /** All material items, used to populate several lists such as books or subtypes in JEI */
+    /**
+     * All material items, used to populate several lists such as books or subtypes in JEI
+     */
     public static final TagKey<Item> TOOL_PARTS = tag("parts");
 
     /**

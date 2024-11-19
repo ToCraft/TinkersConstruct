@@ -164,7 +164,7 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity, 
       // get the sprite for the pattern and draw
       Pattern pattern = list.get(i);
       TextureAtlasSprite sprite = spriteGetter.apply(pattern.getTexture());
-      graphics.blit(x, y, 100, 16,16, sprite);
+      graphics.blit(x, y, 100, 16, 16, sprite);
     }
   }
 

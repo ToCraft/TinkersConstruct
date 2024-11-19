@@ -1,5 +1,8 @@
 {
   "title": "Alazlı Kan",
   "subText": "Hiçbir şey ateşli blazeden iyi değildir.",
-  "hidden": ["intro", "piggy_backpack_craft"]
+  "hidden": [
+    "intro",
+    "piggy_backpack_craft"
+  ]
 }

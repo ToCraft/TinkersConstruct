@@ -12,6 +12,7 @@ import slimeknights.tconstruct.test.BaseMcTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class StationSlotLayoutTest extends BaseMcTest {
+
   @Test
   void layoutSlot_bufferReadWrite() {
     LayoutSlot slot = new LayoutSlot(new Pattern("test:pattern"), "name", 5, 6, Ingredient.of(Items.BOOK));

@@ -95,12 +95,6 @@ public class IncrementalFluidCuboid extends FluidCuboid {
         u2 = to.x();
         v2 = to.z();
       }
-      default -> {
-        u1 = 16f - to.x();
-        v1 = 16f - to.y();
-        u2 = 16f - from.x();
-        v2 = 16f - from.y();
-      }
       case SOUTH -> {
         u1 = from.x();
         v1 = 16f - to.y();
@@ -117,6 +111,12 @@ public class IncrementalFluidCuboid extends FluidCuboid {
         u1 = 16f - to.z();
         v1 = 16f - to.y();
         u2 = 16f - from.z();
+        v2 = 16f - from.y();
+      }
+      default -> {
+        u1 = 16f - to.x();
+        v1 = 16f - to.y();
+        u2 = 16f - from.x();
         v2 = 16f - from.y();
       }
     }

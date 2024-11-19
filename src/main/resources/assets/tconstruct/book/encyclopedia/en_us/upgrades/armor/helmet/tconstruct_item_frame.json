@@ -5,7 +5,8 @@
       "text": "Adds slots to the helmet which will render on the UI when the helmet is worn."
     },
     {
-      "text": "Helmet inventory can be opened by interacting with it while holding.", "paragraph": true
+      "text": "Helmet inventory can be opened by interacting with it while holding.",
+      "paragraph": true
     }
   ],
   "more_text_space": true,

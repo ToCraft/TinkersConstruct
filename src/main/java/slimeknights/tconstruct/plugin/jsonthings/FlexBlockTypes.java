@@ -1,26 +1,20 @@
 package slimeknights.tconstruct.plugin.jsonthings;
 
-import dev.gigaherz.jsonthings.things.IFlexBlock;
 import dev.gigaherz.jsonthings.things.serializers.FlexBlockType;
 import dev.gigaherz.jsonthings.things.serializers.IBlockSerializer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.FlowingFluid;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.util.Lazy;
 import slimeknights.mantle.data.loadable.Loadables;
-import slimeknights.mantle.data.loadable.primitive.ResourceLocationLoadable;
 import slimeknights.tconstruct.TConstruct;
-import slimeknights.tconstruct.library.materials.definition.Material;
 import slimeknights.tconstruct.plugin.jsonthings.block.FlexBurningLiquidBlock;
 import slimeknights.tconstruct.plugin.jsonthings.block.FlexMobEffectLiquidBlock;
 
@@ -39,7 +33,7 @@ public class FlexBlockTypes {
   private static Supplier<FlowingFluid> fluidSupplier(ResourceLocation name) {
     return Lazy.of(() -> {
       // TODO: make Mantle loadables resource location
-      if (((ResourceLocationLoadable<Fluid>) Loadables.FLUID).fromKey(name, "fluid") instanceof FlowingFluid flowing) {
+      if (Loadables.FLUID.fromKey(name, "fluid") instanceof FlowingFluid flowing) {
         return flowing;
       } else {
         throw new RuntimeException("LiquidBlock requires a flowing fluid");

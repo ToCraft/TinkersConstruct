@@ -11,9 +11,13 @@ import slimeknights.tconstruct.TConstruct;
 import javax.annotation.Nullable;
 import java.util.List;
 
-/** Item for creating casts that looks like a tool part */
+/**
+ * Item for creating casts that looks like a tool part
+ */
 public class DummyMaterialItem extends Item {
+
   private static final Component DUMMY_TOOL_PART = TConstruct.makeTranslation("item", "dummy_tool_part.tooltip").withStyle(ChatFormatting.GRAY);
+
   public DummyMaterialItem(Properties pProperties) {
     super(pProperties);
   }

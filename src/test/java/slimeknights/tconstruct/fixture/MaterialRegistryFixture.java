@@ -23,10 +23,11 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 public class MaterialRegistryFixture implements IMaterialRegistry {
+
   private final Map<MaterialId, IMaterial> materials;
   private final Map<MaterialId, Map<MaterialStatsId, IMaterialStats>> stats;
   private final Map<MaterialStatsId, IMaterialStats> defaultStats;
-  private final Map<MaterialId,MaterialTraits> traits;
+  private final Map<MaterialId, MaterialTraits> traits;
 
 
   /* Materials */
@@ -66,7 +67,7 @@ public class MaterialRegistryFixture implements IMaterialRegistry {
   @Override
   @SuppressWarnings("unchecked")
   public <T extends IMaterialStats> Optional<T> getMaterialStats(MaterialId materialId, MaterialStatsId statsId) {
-    return Optional.ofNullable((T)stats.getOrDefault(materialId, Collections.emptyMap()).get(statsId));
+    return Optional.ofNullable((T) stats.getOrDefault(materialId, Collections.emptyMap()).get(statsId));
   }
 
   @Override
@@ -88,7 +89,7 @@ public class MaterialRegistryFixture implements IMaterialRegistry {
   @Override
   @SuppressWarnings("unchecked")
   public <T extends IMaterialStats> T getDefaultStats(MaterialStatsId statsId) {
-    return Objects.requireNonNull((T)defaultStats.get(statsId));
+    return Objects.requireNonNull((T) defaultStats.get(statsId));
   }
 
   @Override

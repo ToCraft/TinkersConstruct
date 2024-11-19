@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "tconstruct:block/wood/enderbark/roots/sky_top",
-    "side": "tconstruct:block/wood/enderbark/roots/sky"
-  }
-}

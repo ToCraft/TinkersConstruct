@@ -14,11 +14,14 @@ import javax.annotation.Nullable;
 
 /**
  * Transformer that shifts the sprite by the given offset
- * @param base     Transformer to apply first. If null, will offset the untransformed image.
- * @param xOffset  Amount to shift the sprite in the X direction, positive means right.
- * @param yOffset  Amount to shift the sprite in the Y direction, positive means down.
+ *
+ * @param base    Transformer to apply first. If null, will offset the untransformed image.
+ * @param xOffset Amount to shift the sprite in the X direction, positive means right.
+ * @param yOffset Amount to shift the sprite in the Y direction, positive means down.
  */
-public record OffsettingSpriteTransformer(@Nullable ISpriteTransformer base, int xOffset, int yOffset) implements ISpriteTransformer {
+public record OffsettingSpriteTransformer(@Nullable ISpriteTransformer base, int xOffset,
+                                          int yOffset) implements ISpriteTransformer {
+
   public static final ResourceLocation NAME = TConstruct.getResource("offsetting");
 
   @Override
@@ -92,7 +95,9 @@ public record OffsettingSpriteTransformer(@Nullable ISpriteTransformer base, int
     return json;
   }
 
-  /** Deserializer instance */
+  /**
+   * Deserializer instance
+   */
   public static final JsonDeserializer<OffsettingSpriteTransformer> DESERIALIZER = (element, type, context) -> {
     JsonObject json = element.getAsJsonObject();
     ISpriteTransformer base = null;

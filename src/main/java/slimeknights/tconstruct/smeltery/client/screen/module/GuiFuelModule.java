@@ -1,6 +1,5 @@
 package slimeknights.tconstruct.smeltery.client.screen.module;
 
-import lombok.RequiredArgsConstructor;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -23,6 +22,7 @@ import java.util.List;
  * GUI component handling the fuel module
  */
 public class GuiFuelModule {
+
   private final ScalableElementScreen FIRE;
 
   // tooltips

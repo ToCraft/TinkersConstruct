@@ -9,8 +9,12 @@ import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
 
 import java.util.List;
 
-/** Stat type testing weird fields like strings along with a variable type */
-public record ComplexTestStats(MaterialStatType<?> type, int num, float floating, String text) implements IMaterialStats {
+/**
+ * Stat type testing weird fields like strings along with a variable type
+ */
+public record ComplexTestStats(MaterialStatType<?> type, int num, float floating,
+                               String text) implements IMaterialStats {
+
   public static final RecordLoadable<ComplexTestStats> LOADER = RecordLoadable.create(
     MaterialStatType.CONTEXT_KEY.requiredField(),
     IntLoadable.ANY_SHORT.defaultField("num", 0, ComplexTestStats::num),
@@ -23,12 +27,16 @@ public record ComplexTestStats(MaterialStatType<?> type, int num, float floating
     return type;
   }
 
-  /** Makes a new type with the given name */
+  /**
+   * Makes a new type with the given name
+   */
   public static MaterialStatType<ComplexTestStats> makeType(MaterialStatsId name) {
     return new MaterialStatType<ComplexTestStats>(name, type -> new ComplexTestStats(type, 0, 0f, ""), LOADER);
   }
 
-  /** Makes a new type with the given name */
+  /**
+   * Makes a new type with the given name
+   */
   public static MaterialStatType<ComplexTestStats> makeType(MaterialStatsId name, int num, float floating, String text) {
     return new MaterialStatType<ComplexTestStats>(name, type -> new ComplexTestStats(type, num, floating, text), LOADER);
   }

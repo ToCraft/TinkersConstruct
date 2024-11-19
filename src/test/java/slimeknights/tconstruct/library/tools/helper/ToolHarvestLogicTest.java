@@ -1,9 +1,5 @@
 package slimeknights.tconstruct.library.tools.helper;
 
-import net.minecraft.core.MappedRegistry;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -29,6 +25,7 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ToolHarvestLogicTest extends ToolItemTest {
+
   private static ModifiableItem pickaxeTool;
 
   @BeforeAll
@@ -84,14 +81,14 @@ class ToolHarvestLogicTest extends ToolItemTest {
 
     ToolDefinition definition = new ToolDefinition(new ResourceLocation("test", "mining_tool"));
     definition.setData(ToolDefinitionDataBuilder
-                         .builder()
-                         .module(new IsEffectiveModule(BlockPredicate.set(Blocks.COBBLESTONE), true))
-                         .module(PartStatsModule.parts()
-                                                .part(MaterialItemFixture.MATERIAL_ITEM_HEAD)
-                                                .part(MaterialItemFixture.MATERIAL_ITEM_HANDLE)
-                                                .part(MaterialItemFixture.MATERIAL_ITEM_EXTRA).build())
-                         .module(new MultiplyStatsModule(MultiplierNBT.builder().set(ToolStats.MINING_SPEED, modifier).build()))
-                         .build());
+      .builder()
+      .module(new IsEffectiveModule(BlockPredicate.set(Blocks.COBBLESTONE), true))
+      .module(PartStatsModule.parts()
+        .part(MaterialItemFixture.MATERIAL_ITEM_HEAD)
+        .part(MaterialItemFixture.MATERIAL_ITEM_HANDLE)
+        .part(MaterialItemFixture.MATERIAL_ITEM_EXTRA).build())
+      .module(new MultiplyStatsModule(MultiplierNBT.builder().set(ToolStats.MINING_SPEED, modifier).build()))
+      .build());
 
     ModifiableItem toolWithMiningModifier = new ModifiableItem(new Item.Properties(), definition);
     ForgeRegistries.ITEMS.register(new ResourceLocation("test", "tool_with_mining_modifier"), toolWithMiningModifier);

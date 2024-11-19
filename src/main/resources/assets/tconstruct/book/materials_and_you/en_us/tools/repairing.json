@@ -35,7 +35,9 @@
         "tconstruct:ui_render#handle",
         "tconstruct:ui_render#extra"
       ],
-      "tic_stats": { "tconstruct:durability": 100 }
+      "tic_stats": {
+        "tconstruct:durability": 100
+      }
     }
   },
   "description": [
@@ -43,5 +45,5 @@
       "text": "Repairing your tool is an important thing to do, unless you want it to break. In Tinker Station or Tinker Anvil place the tool and material of the head/plate and it will repair. Alternatively, you can use repair kits, which work in crafting tables!",
       "paragraph": true
     }
-	]
+  ]
 }

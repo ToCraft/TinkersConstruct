@@ -1,7 +1,9 @@
 {
   "tool": "tconstruct:plate_chestplate",
   "text": [
-    { "text": "Plate Chestplate is a defensive chestplate, with high protection, and low ability slots and high defense slots." }
+    {
+      "text": "Plate Chestplate is a defensive chestplate, with high protection, and low ability slots and high defense slots."
+    }
   ],
   "properties": [
     "Material controlled stats",

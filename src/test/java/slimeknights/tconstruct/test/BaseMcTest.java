@@ -30,10 +30,14 @@ public class BaseMcTest {
     }
   }
 
-  /** No need to set it up multiple times */
+  /**
+   * No need to set it up multiple times
+   */
   private static boolean setupTiers = false;
 
-  /** Sets up the forge tier sorting registry */
+  /**
+   * Sets up the forge tier sorting registry
+   */
   public static void setupTierSorting() {
     if (setupTiers) {
       return;

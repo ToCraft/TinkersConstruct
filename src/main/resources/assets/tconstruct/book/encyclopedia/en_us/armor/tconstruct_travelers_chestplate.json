@@ -1,7 +1,9 @@
 {
   "tool": "tconstruct:travelers_chestplate",
   "text": [
-    { "text": "Traveler's Vest is a balanced chestplate, with medium protection, and average upgrade and defense slots." }
+    {
+      "text": "Traveler's Vest is a balanced chestplate, with medium protection, and average upgrade and defense slots."
+    }
   ],
   "properties": [
     "160 Durability",

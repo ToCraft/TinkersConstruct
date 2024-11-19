@@ -1,9 +1,12 @@
 {
   "tool": "tconstruct:plate_helmet",
   "text": [
-    { "text": "Hard hats for hard heads." },
-	{
-      "text": "A good solid helmet to protect your brain. Nothing can hurt that head of yours!", "paragraph": true
+    {
+      "text": "Hard hats for hard heads."
+    },
+    {
+      "text": "A good solid helmet to protect your brain. Nothing can hurt that head of yours!",
+      "paragraph": true
     }
   ],
   "properties": [

@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public final class TinkerToolParts extends TinkerModule {
+
   // Concurrent in case Forge loads something asynchronous
   private static final List<ItemLike> TAB_TOOL_PARTS_ITEMS = new CopyOnWriteArrayList<>();
   /**

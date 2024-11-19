@@ -1,6 +1,10 @@
 {
-    "variants": {
-        "map=false": { "model": "tconstruct:block/gold_frame" },
-        "map=true": { "model": "tconstruct:block/gold_frame_map" }
+  "variants": {
+    "map=false": {
+      "model": "tconstruct:block/gold_frame"
+    },
+    "map=true": {
+      "model": "tconstruct:block/gold_frame_map"
     }
+  }
 }

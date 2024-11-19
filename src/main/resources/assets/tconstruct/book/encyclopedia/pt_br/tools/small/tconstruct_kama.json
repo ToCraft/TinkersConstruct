@@ -1,8 +1,13 @@
 {
   "tool": "tconstruct:kama",
   "text": [
-    { "text": "O Kama é uma ferramenta de colheita de precisão, eficaz em plantas, teias e lã." },
-    { "text": "Os expansores aumentam o raio circular da ferramenta.", "paragraph": true }
+    {
+      "text": "O Kama é uma ferramenta de colheita de precisão, eficaz em plantas, teias e lã."
+    },
+    {
+      "text": "Os expansores aumentam o raio circular da ferramenta.",
+      "paragraph": true
+    }
   ],
   "properties": [
     "+1 Dano de Ataque",

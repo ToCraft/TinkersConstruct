@@ -49,6 +49,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 class ToolDefinitionLoaderTest extends BaseMcTest {
+
   private static final ToolDefinitionData WRONG_DATA = ToolDefinitionDataBuilder.builder().module(new SetStatsModule(StatsNBT.builder().set(ToolStats.DURABILITY, 100).build())).build();
   private static final JsonFileLoader fileLoader = new JsonFileLoader(JsonHelper.DEFAULT_GSON, ToolDefinitionLoader.FOLDER);
   private static final ToolDefinition NO_PARTS_MINIMAL = ToolDefinition.create(TConstruct.getResource("minimal_no_parts"));
@@ -72,7 +73,9 @@ class ToolDefinitionLoaderTest extends BaseMcTest {
     RegistrationFixture.register(ToolModule.LOADER, "sweep", SweepWeaponAttack.LOADER);
   }
 
-  /** Helper to do all the stats checks */
+  /**
+   * Helper to do all the stats checks
+   */
   private static void checkFullNonParts(ToolDefinitionData data) {
     // base stats
     ToolDefinitionStats stats = TestHelper.buildStats(data);
@@ -96,7 +99,7 @@ class ToolDefinitionLoaderTest extends BaseMcTest {
     // slots
     VolatileDataToolHook volatileHook = data.getHook(ToolHooks.VOLATILE_DATA);
     assertThat(volatileHook).isInstanceOf(ToolSlotsModule.class);
-    Map<SlotType,Integer> slots = ((ToolSlotsModule) volatileHook).slots();
+    Map<SlotType, Integer> slots = ((ToolSlotsModule) volatileHook).slots();
     assertThat(slots).hasSize(3);
     assertThat(slots).containsEntry(SlotType.UPGRADE, 3);
     assertThat(slots).containsEntry(SlotType.DEFENSE, 2);
@@ -122,12 +125,12 @@ class ToolDefinitionLoaderTest extends BaseMcTest {
     // aoe
     AreaOfEffectIterator aoe = data.getHook(ToolHooks.AOE_ITERATOR);
     assertThat(aoe).isInstanceOf(CircleAOEIterator.class);
-    assertThat(((CircleAOEIterator)aoe).diameter()).isEqualTo(3);
-    assertThat(((CircleAOEIterator)aoe).is3D()).isTrue();
+    assertThat(((CircleAOEIterator) aoe).diameter()).isEqualTo(3);
+    assertThat(((CircleAOEIterator) aoe).is3D()).isTrue();
     // weapon
     MeleeHitToolHook attack = data.getHook(ToolHooks.MELEE_HIT);
     assertThat(attack).isInstanceOf(SweepWeaponAttack.class);
-    assertThat(((SweepWeaponAttack)attack).range()).isEqualTo(5);
+    assertThat(((SweepWeaponAttack) attack).range()).isEqualTo(5);
   }
 
   @BeforeAll
@@ -139,7 +142,7 @@ class ToolDefinitionLoaderTest extends BaseMcTest {
 
   @Test
   void noParts_minimal() {
-    Map<ResourceLocation,JsonElement> splashList = fileLoader.loadFilesAsSplashlist(NO_PARTS_MINIMAL.getId().getPath());
+    Map<ResourceLocation, JsonElement> splashList = fileLoader.loadFilesAsSplashlist(NO_PARTS_MINIMAL.getId().getPath());
     ToolDefinitionLoader.getInstance().apply(splashList, mock(ResourceManager.class), mock(ProfilerFiller.class));
 
     ToolDefinitionData data = NO_PARTS_MINIMAL.getData();
@@ -151,7 +154,7 @@ class ToolDefinitionLoaderTest extends BaseMcTest {
 
   @Test
   void noParts_full() {
-    Map<ResourceLocation,JsonElement> splashList = fileLoader.loadFilesAsSplashlist(NO_PARTS_FULL.getId().getPath());
+    Map<ResourceLocation, JsonElement> splashList = fileLoader.loadFilesAsSplashlist(NO_PARTS_FULL.getId().getPath());
     ToolDefinitionLoader.getInstance().apply(splashList, mock(ResourceManager.class), mock(ProfilerFiller.class));
 
     ToolDefinitionData data = NO_PARTS_FULL.getData();
@@ -165,14 +168,14 @@ class ToolDefinitionLoaderTest extends BaseMcTest {
   void missingStats_defaults() {
     NO_PARTS_FULL.setData(WRONG_DATA); // set to wrong data to ensure something changes
     // next line is intentionally loading a different file, to make it missing
-    Map<ResourceLocation,JsonElement> splashList = fileLoader.loadFilesAsSplashlist(MELEE_HARVEST_MINIMAL.getId().getPath());
+    Map<ResourceLocation, JsonElement> splashList = fileLoader.loadFilesAsSplashlist(MELEE_HARVEST_MINIMAL.getId().getPath());
     ToolDefinitionLoader.getInstance().apply(splashList, mock(ResourceManager.class), mock(ProfilerFiller.class));
     assertThat(NO_PARTS_FULL.getData()).isSameAs(ToolDefinitionData.EMPTY);
   }
 
   @Test
   void meleeHarvest_minimal() {
-    Map<ResourceLocation,JsonElement> splashList = fileLoader.loadFilesAsSplashlist(MELEE_HARVEST_MINIMAL.getId().getPath());
+    Map<ResourceLocation, JsonElement> splashList = fileLoader.loadFilesAsSplashlist(MELEE_HARVEST_MINIMAL.getId().getPath());
     ToolDefinitionLoader.getInstance().apply(splashList, mock(ResourceManager.class), mock(ProfilerFiller.class));
 
     ToolDefinitionData data = MELEE_HARVEST_MINIMAL.getData();
@@ -195,7 +198,7 @@ class ToolDefinitionLoaderTest extends BaseMcTest {
 
   @Test
   void meleeHarvest_full() {
-    Map<ResourceLocation,JsonElement> splashList = fileLoader.loadFilesAsSplashlist(MELEE_HARVEST_FULL.getId().getPath());
+    Map<ResourceLocation, JsonElement> splashList = fileLoader.loadFilesAsSplashlist(MELEE_HARVEST_FULL.getId().getPath());
     ToolDefinitionLoader.getInstance().apply(splashList, mock(ResourceManager.class), mock(ProfilerFiller.class));
 
     ToolDefinitionData data = MELEE_HARVEST_FULL.getData();
@@ -220,7 +223,7 @@ class ToolDefinitionLoaderTest extends BaseMcTest {
   @Test
   void meleeHarvest_missingParts_defaults() {
     NEED_PARTS_HAS_NONE.setData(WRONG_DATA); // set to wrong data to ensure something changes
-    Map<ResourceLocation,JsonElement> splashList = fileLoader.loadFilesAsSplashlist(NEED_PARTS_HAS_NONE.getId().getPath());
+    Map<ResourceLocation, JsonElement> splashList = fileLoader.loadFilesAsSplashlist(NEED_PARTS_HAS_NONE.getId().getPath());
     ToolDefinitionLoader.getInstance().apply(splashList, mock(ResourceManager.class), mock(ProfilerFiller.class));
     assertThat(NEED_PARTS_HAS_NONE.getData()).isSameAs(ToolDefinitionData.EMPTY);
   }

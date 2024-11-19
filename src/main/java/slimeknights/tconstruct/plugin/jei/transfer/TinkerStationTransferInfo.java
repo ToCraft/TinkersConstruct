@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public record TinkerStationTransferInfo<T>(RecipeType<T> getRecipeType) implements IRecipeTransferInfo<TinkerStationContainerMenu,T> {
+public record TinkerStationTransferInfo<T>(
+  RecipeType<T> getRecipeType) implements IRecipeTransferInfo<TinkerStationContainerMenu, T> {
+
   @Override
   public Class<TinkerStationContainerMenu> getContainerClass() {
     return TinkerStationContainerMenu.class;

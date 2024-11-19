@@ -22,6 +22,7 @@ class UpdateMaterialStatsPacketTest extends BaseMcTest {
 
   public static final MaterialId MATERIAL_ID = MaterialFixture.MATERIAL_1.getIdentifier();
   private static final IdAwareComponentRegistry<MaterialStatType<?>> LOADER = new IdAwareComponentRegistry<>("Unknown stat type");
+
   static {
     LOADER.register(MaterialStatsFixture.COMPLEX_TYPE);
     LOADER.register(HeadMaterialStats.TYPE);
@@ -53,9 +54,9 @@ class UpdateMaterialStatsPacketTest extends BaseMcTest {
   @Test
   void testAllTicDefaults() {
     List<IMaterialStats> stats = List.of(
-        HeadMaterialStats.TYPE.getDefaultStats(),
-        HandleMaterialStats.TYPE.getDefaultStats(),
-        StatlessMaterialStats.BINDING);
+      HeadMaterialStats.TYPE.getDefaultStats(),
+      HandleMaterialStats.TYPE.getDefaultStats(),
+      StatlessMaterialStats.BINDING);
     Map<MaterialId, Collection<IMaterialStats>> materialToStats = Map.of(MATERIAL_ID, stats);
 
     UpdateMaterialStatsPacket packet = sendAndReceivePacket(materialToStats);

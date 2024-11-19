@@ -1,9 +1,7 @@
 package slimeknights.tconstruct.fixture;
 
 import net.minecraft.core.MappedRegistry;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -20,6 +18,7 @@ public class MaterialItemFixture {
   }
 
   private static boolean init = false;
+
   public static void init() {
     if (init) {
       return;

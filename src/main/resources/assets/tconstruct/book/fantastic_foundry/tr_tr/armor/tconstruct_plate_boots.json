@@ -1,9 +1,12 @@
 {
   "tool": "tconstruct:plate_boots",
   "text": [
-    { "text": "Buuuuunlaaar neeee?" },
-	{
-      "text": "Nethera girmek ayaklarını korumak için sert botlar gerektirir! Kimse yerin gerçekten ne kadar sıcak olduğunu hiç düşünmüyor.", "paragraph": true
+    {
+      "text": "Buuuuunlaaar neeee?"
+    },
+    {
+      "text": "Nethera girmek ayaklarını korumak için sert botlar gerektirir! Kimse yerin gerçekten ne kadar sıcak olduğunu hiç düşünmüyor.",
+      "paragraph": true
     }
   ],
   "properties": [

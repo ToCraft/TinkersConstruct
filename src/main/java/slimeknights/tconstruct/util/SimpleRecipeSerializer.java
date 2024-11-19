@@ -12,22 +12,19 @@ import java.util.function.Function;
 
 public record SimpleRecipeSerializer<R extends Recipe<?>>(
   Function<ResourceLocation, R> create
-) implements RecipeSerializer<R>
-{
+) implements RecipeSerializer<R> {
+
   @Override
-  public @NotNull R fromJson(@NotNull ResourceLocation pRecipeId, @NotNull JsonObject pSerializedRecipe)
-  {
+  public @NotNull R fromJson(@NotNull ResourceLocation pRecipeId, @NotNull JsonObject pSerializedRecipe) {
     return create.apply(pRecipeId);
   }
 
   @Override
-  public @Nullable R fromNetwork(@NotNull ResourceLocation pRecipeId, @NotNull FriendlyByteBuf pBuffer)
-  {
+  public @Nullable R fromNetwork(@NotNull ResourceLocation pRecipeId, @NotNull FriendlyByteBuf pBuffer) {
     return create.apply(pRecipeId);
   }
 
   @Override
-  public void toNetwork(@NotNull FriendlyByteBuf pBuffer, @NotNull R pRecipe)
-  {
+  public void toNetwork(@NotNull FriendlyByteBuf pBuffer, @NotNull R pRecipe) {
   }
 }

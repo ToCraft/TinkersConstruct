@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "tconstruct:block/smeltery/soul_glass/block" }
+    "": {
+      "model": "tconstruct:block/smeltery/soul_glass/block"
+    }
   }
 }

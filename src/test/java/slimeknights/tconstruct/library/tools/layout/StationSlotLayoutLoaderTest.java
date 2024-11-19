@@ -25,6 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 class StationSlotLayoutLoaderTest extends BaseMcTest {
+
   private static final JsonFileLoader fileLoader = new JsonFileLoader(StationSlotLayoutLoader.GSON, StationSlotLayoutLoader.FOLDER);
 
   @BeforeAll
@@ -38,7 +39,7 @@ class StationSlotLayoutLoaderTest extends BaseMcTest {
 
   @Test
   void minimal_noTool() {
-    Map<ResourceLocation,JsonElement> splashList = fileLoader.loadFilesAsSplashlist("minimal");
+    Map<ResourceLocation, JsonElement> splashList = fileLoader.loadFilesAsSplashlist("minimal");
     StationSlotLayoutLoader.getInstance().apply(splashList, mock(ResourceManager.class), mock(ProfilerFiller.class));
 
     StationSlotLayout layout = StationSlotLayoutLoader.getInstance().get(TConstruct.getResource("minimal"));
@@ -64,7 +65,7 @@ class StationSlotLayoutLoaderTest extends BaseMcTest {
 
   @Test
   void minimal_withTool() {
-    Map<ResourceLocation,JsonElement> splashList = fileLoader.loadFilesAsSplashlist("minimal_with_tool");
+    Map<ResourceLocation, JsonElement> splashList = fileLoader.loadFilesAsSplashlist("minimal_with_tool");
     StationSlotLayoutLoader.getInstance().apply(splashList, mock(ResourceManager.class), mock(ProfilerFiller.class));
 
     StationSlotLayout layout = StationSlotLayoutLoader.getInstance().get(TConstruct.getResource("minimal_with_tool"));
@@ -88,7 +89,9 @@ class StationSlotLayoutLoaderTest extends BaseMcTest {
     assertThat(slots.get(0).getTranslationKey()).isEmpty();
   }
 
-  /** Checks the given ingredient is just the given item */
+  /**
+   * Checks the given ingredient is just the given item
+   */
   private static void ingredientIsItem(Ingredient ingredient, Item item) {
     ItemStack[] stacks = ingredient.getItems();
     assertThat(stacks).hasSize(1);
@@ -98,7 +101,7 @@ class StationSlotLayoutLoaderTest extends BaseMcTest {
 
   @Test
   void full() {
-    Map<ResourceLocation,JsonElement> splashList = fileLoader.loadFilesAsSplashlist("full");
+    Map<ResourceLocation, JsonElement> splashList = fileLoader.loadFilesAsSplashlist("full");
     StationSlotLayoutLoader.getInstance().apply(splashList, mock(ResourceManager.class), mock(ProfilerFiller.class));
 
     StationSlotLayout layout = StationSlotLayoutLoader.getInstance().get(TConstruct.getResource("full"));
@@ -165,7 +168,7 @@ class StationSlotLayoutLoaderTest extends BaseMcTest {
 
   @Test
   void tooFewSlots_defaults() {
-    Map<ResourceLocation,JsonElement> splashList = fileLoader.loadFilesAsSplashlist("too_few_slots");
+    Map<ResourceLocation, JsonElement> splashList = fileLoader.loadFilesAsSplashlist("too_few_slots");
     StationSlotLayoutLoader.getInstance().apply(splashList, mock(ResourceManager.class), mock(ProfilerFiller.class));
     StationSlotLayout layout = StationSlotLayoutLoader.getInstance().get(TConstruct.getResource("too_few_slots"));
     assertThat(layout).isSameAs(StationSlotLayout.EMPTY);
@@ -173,7 +176,7 @@ class StationSlotLayoutLoaderTest extends BaseMcTest {
 
   @Test
   void tooFewSlots_withTool_defaults() {
-    Map<ResourceLocation,JsonElement> splashList = fileLoader.loadFilesAsSplashlist("too_few_slots_with_tool");
+    Map<ResourceLocation, JsonElement> splashList = fileLoader.loadFilesAsSplashlist("too_few_slots_with_tool");
     StationSlotLayoutLoader.getInstance().apply(splashList, mock(ResourceManager.class), mock(ProfilerFiller.class));
     StationSlotLayout layout = StationSlotLayoutLoader.getInstance().get(TConstruct.getResource("too_few_slots_with_tool"));
     assertThat(layout).isSameAs(StationSlotLayout.EMPTY);

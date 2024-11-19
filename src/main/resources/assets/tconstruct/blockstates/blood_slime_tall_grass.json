@@ -1,7 +1,7 @@
 {
-    "variants": {
-        "": {
-            "model": "tconstruct:block/slime/nether_grass"
-        }
+  "variants": {
+    "": {
+      "model": "tconstruct:block/slime/nether_grass"
     }
+  }
 }

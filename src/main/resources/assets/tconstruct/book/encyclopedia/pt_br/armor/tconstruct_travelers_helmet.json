@@ -1,7 +1,9 @@
 {
   "tool": "tconstruct:travelers_helmet",
   "text": [
-    { "text": "O Óculos do Viajante é um capacete balanceado , possui pouca proteção , e uma quantidade mediana de slots de melhoria e de defesa." }
+    {
+      "text": "O Óculos do Viajante é um capacete balanceado , possui pouca proteção , e uma quantidade mediana de slots de melhoria e de defesa."
+    }
   ],
   "properties": [
     "110 Durabilidade",

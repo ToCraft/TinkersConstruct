@@ -1,7 +1,7 @@
 {
-    "variants": {
-        "": {
-            "model": "tconstruct:block/slime/sticky/ichor"
-        }
+  "variants": {
+    "": {
+      "model": "tconstruct:block/slime/sticky/ichor"
     }
+  }
 }

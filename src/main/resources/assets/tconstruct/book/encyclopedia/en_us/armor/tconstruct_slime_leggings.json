@@ -1,8 +1,13 @@
 {
   "tool": "tconstruct:slime_leggings",
   "text": [
-    { "text": "The slimeshell harnesses the power of the shulker, increasing inventory and defense." },
-    { "text": "They are created by pouring enderslime on a shulker shell, and repaired with popped chorus.", "paragraph": true }
+    {
+      "text": "The slimeshell harnesses the power of the shulker, increasing inventory and defense."
+    },
+    {
+      "text": "They are created by pouring enderslime on a shulker shell, and repaired with popped chorus.",
+      "paragraph": true
+    }
   ],
   "properties": [
     "630 Durability",

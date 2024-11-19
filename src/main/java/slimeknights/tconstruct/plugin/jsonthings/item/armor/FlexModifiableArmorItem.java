@@ -1,7 +1,6 @@
 package slimeknights.tconstruct.plugin.jsonthings.item.armor;
 
 import dev.gigaherz.jsonthings.things.IFlexItem;
-import dev.gigaherz.jsonthings.things.StackContext;
 import dev.gigaherz.jsonthings.things.events.FlexEventHandler;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterial;

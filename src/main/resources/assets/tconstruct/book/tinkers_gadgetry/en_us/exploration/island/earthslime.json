@@ -1,7 +1,7 @@
 {
   "title": "Earthslime Islands",
   "image": {
-	"file": "tconstruct:book/images/islands/earthslime.png",
+    "file": "tconstruct:book/images/islands/earthslime.png",
     "width": 180,
     "height": 84
   },

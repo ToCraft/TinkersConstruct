@@ -7,8 +7,11 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.within;
 
-/** Tests math functions that are part of armor util, does not bootstrap the game */
+/**
+ * Tests math functions that are part of armor util, does not bootstrap the game
+ */
 public class ArmorUtilMathTest {
+
   @Test
   void damageArmorAbsorb_inverse() {
     float deltaDamage = 1f;

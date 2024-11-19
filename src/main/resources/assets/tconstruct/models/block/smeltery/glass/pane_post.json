@@ -6,7 +6,9 @@
     "pane": "tconstruct:block/smeltery/seared_glass"
   },
   "connection": {
-    "textures": {"pane": "cornerless_full"},
+    "textures": {
+      "pane": "cornerless_full"
+    },
     "predicate": "pane"
   }
 }

@@ -1,8 +1,13 @@
 {
   "tool": "tconstruct:sword",
   "text": [
-    { "text": "A Espada é uma arma universal, que possui velocidade média e ataque de varredura." },
-    { "text": "Expansores sobre uma espada aumentam a área do ataque, enquanto a seda permite tosquiar.", "paragraph": true }
+    {
+      "text": "A Espada é uma arma universal, que possui velocidade média e ataque de varredura."
+    },
+    {
+      "text": "Expansores sobre uma espada aumentam a área do ataque, enquanto a seda permite tosquiar.",
+      "paragraph": true
+    }
   ],
   "properties": [
     "+3 Dano de Ataque",

@@ -1,7 +1,7 @@
 {
-    "parent": "tconstruct:block/cube_overlay_side",
-    "textures": {
-        "overlay": "tconstruct:block/slime/dirt/grass_snowy",
-        "all":     "tconstruct:block/slime/dirt/ichor"
-    }
+  "parent": "tconstruct:block/cube_overlay_side",
+  "textures": {
+    "overlay": "tconstruct:block/slime/dirt/grass_snowy",
+    "all": "tconstruct:block/slime/dirt/ichor"
+  }
 }

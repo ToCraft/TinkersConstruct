@@ -1,7 +1,9 @@
 {
   "tool": "tconstruct:plate_helmet",
   "text": [
-    { "text": "O capacete de placas é um capacete de proteção, com alta proteção, poucos slots de melhoria e com muitos slots de defesa." }
+    {
+      "text": "O capacete de placas é um capacete de proteção, com alta proteção, poucos slots de melhoria e com muitos slots de defesa."
+    }
   ],
   "properties": [
     "330 Durabilidade",

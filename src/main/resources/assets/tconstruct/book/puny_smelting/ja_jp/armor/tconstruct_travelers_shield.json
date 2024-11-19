@@ -1,9 +1,12 @@
 {
   "tool": "tconstruct:travelers_shield",
   "text": [
-    { "text": "残念ながら、フリスビーには不向きです。" },
     {
-      "text": "盾は冒険中に受ける攻撃を防ぐために重要なので、旅行に行く時は盾を持っていくべきです。", "paragraph": true
+      "text": "残念ながら、フリスビーには不向きです。"
+    },
+    {
+      "text": "盾は冒険中に受ける攻撃を防ぐために重要なので、旅行に行く時は盾を持っていくべきです。",
+      "paragraph": true
     }
   ],
   "properties": [

@@ -1,9 +1,12 @@
 {
   "tool": "tconstruct:plate_helmet",
   "text": [
-    { "text": "鐵頭娃就要配堅固的頭盔。" },
-	{
-      "text": "一頂十分厚實的頭盔，可以保護你的腦袋。你的頭顱，刀槍不入！", "paragraph": true
+    {
+      "text": "鐵頭娃就要配堅固的頭盔。"
+    },
+    {
+      "text": "一頂十分厚實的頭盔，可以保護你的腦袋。你的頭顱，刀槍不入！",
+      "paragraph": true
     }
   ],
   "properties": [

@@ -10,6 +10,7 @@ import slimeknights.tconstruct.test.BaseMcTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ModDataNBTTest extends BaseMcTest {
+
   private static final ResourceLocation testKey = new ResourceLocation("test");
   private static final ResourceLocation testKey2 = new ResourceLocation("test2");
 

@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "tconstruct:block/clear_tinted_glass" }
+  "variants": {
+    "": {
+      "model": "tconstruct:block/clear_tinted_glass"
     }
+  }
 }

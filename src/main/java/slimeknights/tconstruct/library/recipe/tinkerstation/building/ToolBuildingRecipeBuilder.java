@@ -25,7 +25,8 @@ public class ToolBuildingRecipeBuilder extends AbstractRecipeBuilder<ToolBuildin
   private final IModifiable output;
   @Setter
   private int outputSize = 1;
-  @Nullable @Setter
+  @Nullable
+  @Setter
   private ResourceLocation layoutSlot = null;
   private final List<Ingredient> extraRequirements = new ArrayList<>();
 

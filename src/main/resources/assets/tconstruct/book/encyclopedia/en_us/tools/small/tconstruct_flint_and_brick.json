@@ -1,8 +1,13 @@
 {
   "tool": "tconstruct:flint_and_brick",
   "text": [
-    { "text": "Flint and Brick is a handheld tool starting with firestarter." },
-    { "text": "Expanded increases the radius of fire, which is further increased by fireprimer.", "paragraph": true }
+    {
+      "text": "Flint and Brick is a handheld tool starting with firestarter."
+    },
+    {
+      "text": "Expanded increases the radius of fire, which is further increased by fireprimer.",
+      "paragraph": true
+    }
   ],
   "properties": [
     "+0 Attack Damage",

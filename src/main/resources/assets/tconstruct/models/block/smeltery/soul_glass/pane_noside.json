@@ -5,7 +5,9 @@
     "pane": "tconstruct:block/smeltery/soul_glass"
   },
   "connection": {
-    "textures": {"pane": "cornerless_full"},
+    "textures": {
+      "pane": "cornerless_full"
+    },
     "predicate": "pane"
   }
 }

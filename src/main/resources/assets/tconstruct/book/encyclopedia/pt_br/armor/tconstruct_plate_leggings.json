@@ -1,7 +1,9 @@
 {
   "tool": "tconstruct:plate_leggings",
   "text": [
-    { "text": "As perneiras de placas são perneiras de proteção, com alta proteção, poucos slots de melhoria e com muitos slots de defesa." }
+    {
+      "text": "As perneiras de placas são perneiras de proteção, com alta proteção, poucos slots de melhoria e com muitos slots de defesa."
+    }
   ],
   "properties": [
     "450 Durabilidade",

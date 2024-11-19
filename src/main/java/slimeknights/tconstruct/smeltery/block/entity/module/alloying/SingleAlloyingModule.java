@@ -43,7 +43,7 @@ public class SingleAlloyingModule implements IAlloyingModule {
       .byType(TinkerRecipeTypes.ALLOYING.get())
       .values().stream()
       .filter(r -> r instanceof AlloyRecipe)
-      .map(r -> (AlloyRecipe) r)
+      .map(r -> r)
       .filter(r -> alloyTank.canFit(r.getOutput(), 0) && r.canPerform(alloyTank))
       .findAny();
     // if found, cache and return

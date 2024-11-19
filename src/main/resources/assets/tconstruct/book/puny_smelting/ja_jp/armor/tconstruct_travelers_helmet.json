@@ -1,9 +1,12 @@
 {
   "tool": "tconstruct:travelers_helmet",
   "text": [
-    { "text": "ゴーグルは、キングに、レミングスに、そしてKing Lemmingsにフィットします。" },
-	{
-      "text": "良質なゴーグルは、安全な冒険、優れた視界、そして王の作り方をもたらします", "paragraph": true
+    {
+      "text": "ゴーグルは、キングに、レミングスに、そしてKing Lemmingsにフィットします。"
+    },
+    {
+      "text": "良質なゴーグルは、安全な冒険、優れた視界、そして王の作り方をもたらします",
+      "paragraph": true
     }
   ],
   "properties": [

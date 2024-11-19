@@ -20,9 +20,18 @@
     {
       "type": "test:part_stats",
       "parts": [
-        { "item": "test:test_extra",  "scale": 2 },
-        { "item": "test:test_head",   "scale": 1 },
-        { "item": "test:test_handle", "scale": 3 }
+        {
+          "item": "test:test_extra",
+          "scale": 2
+        },
+        {
+          "item": "test:test_head",
+          "scale": 1
+        },
+        {
+          "item": "test:test_handle",
+          "scale": 3
+        }
       ],
       "stat_provider": "tconstruct:melee_harvest"
     },
@@ -37,18 +46,29 @@
     {
       "type": "test:traits",
       "traits": [
-        { "name": "test:modifier_1", "level": 1 },
-        { "name": "test:modifier_2", "level": 3 }
+        {
+          "name": "test:modifier_1",
+          "level": 1
+        },
+        {
+          "name": "test:modifier_2",
+          "level": 3
+        }
       ]
     },
     {
       "type": "test:actions",
-      "tool_actions": [ "axe_dig", "custom_action" ]
+      "tool_actions": [
+        "axe_dig",
+        "custom_action"
+      ]
     },
     {
       "type": "test:is_effective",
       "predicate_type": "mantle:set",
-      "blocks": ["minecraft:diamond_block"],
+      "blocks": [
+        "minecraft:diamond_block"
+      ],
       "ignore_tier": true
     },
     {

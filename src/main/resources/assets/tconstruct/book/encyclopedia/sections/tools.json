@@ -3,18 +3,34 @@
     "name": "group_small",
     "type": "mantle:text",
     "data": "tools/small.json",
-    "extraData": { "tconstruct:load_tools": { "tag": "tconstruct:modifiable/small", "path": "tools/small" }}
+    "extraData": {
+      "tconstruct:load_tools": {
+        "tag": "tconstruct:modifiable/small",
+        "path": "tools/small"
+      }
+    }
   },
   {
     "name": "group_large",
     "type": "mantle:text",
     "data": "tools/broad.json",
-    "extraData": { "tconstruct:load_tools": { "tag": "tconstruct:modifiable/broad", "path": "tools/broad" }}
+    "extraData": {
+      "tconstruct:load_tools": {
+        "tag": "tconstruct:modifiable/broad",
+        "path": "tools/broad"
+      }
+    }
   },
   {
     "name": "group_staff",
     "type": "mantle:text",
     "data": "tools/staff.json",
-    "extraData": { "tconstruct:load_tools": { "tag": "tconstruct:modifiable/special", "path": "tools/staff", "sort": false }}
+    "extraData": {
+      "tconstruct:load_tools": {
+        "tag": "tconstruct:modifiable/special",
+        "path": "tools/staff",
+        "sort": false
+      }
+    }
   }
 ]

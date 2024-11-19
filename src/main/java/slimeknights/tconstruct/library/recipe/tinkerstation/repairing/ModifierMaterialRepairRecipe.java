@@ -39,7 +39,7 @@ public class ModifierMaterialRepairRecipe extends TinkerStationRepairRecipe impl
    * Stat type used for repairing, null means it will be fetched as the first available stat type
    */
   @Getter
-  private MaterialStatsId statType;
+  private final MaterialStatsId statType;
 
   public ModifierMaterialRepairRecipe(ResourceLocation id, ModifierId modifier, MaterialId repairMaterialID, MaterialStatsId statType) {
     super(id);

@@ -29,9 +29,9 @@ public final class MaterialStatsFixture {
   public static final StatlessMaterialStats MATERIAL_STATS_EXTRA = StatlessMaterialStats.BINDING;
 
   public static final List<IMaterialStats> TIC_DEFAULT_STATS = ImmutableList.of(
-      HeadMaterialStats.TYPE.getDefaultStats(),
-      HandleMaterialStats.TYPE.getDefaultStats(),
-      StatlessMaterialStats.BINDING
+    HeadMaterialStats.TYPE.getDefaultStats(),
+    HandleMaterialStats.TYPE.getDefaultStats(),
+    StatlessMaterialStats.BINDING
   );
 
   private MaterialStatsFixture() {

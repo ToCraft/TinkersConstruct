@@ -5,6 +5,8 @@
     "all": "tconstruct:block/smeltery/soul_glass"
   },
   "connection": {
-    "textures": {"all": "cornerless_full"}
+    "textures": {
+      "all": "cornerless_full"
+    }
   }
 }

@@ -1,9 +1,12 @@
 {
   "tool": "tconstruct:plate_shield",
   "text": [
-    { "text": "亮藍色的盾牌，恰適亮藍色的冒險。" },
     {
-      "text": "一面強大的盾牌，足以抵擋最強力的攻擊。", "paragraph": true
+      "text": "亮藍色的盾牌，恰適亮藍色的冒險。"
+    },
+    {
+      "text": "一面強大的盾牌，足以抵擋最強力的攻擊。",
+      "paragraph": true
     }
   ],
   "properties": [

@@ -1,7 +1,9 @@
 {
   "tool": "tconstruct:travelers_shield",
   "text": [
-    { "text": "Traveler's Shield is a lightweight shield with limited blocking potential but quick movement while blocking." }
+    {
+      "text": "Traveler's Shield is a lightweight shield with limited blocking potential but quick movement while blocking."
+    }
   ],
   "properties": [
     "200 Durability",

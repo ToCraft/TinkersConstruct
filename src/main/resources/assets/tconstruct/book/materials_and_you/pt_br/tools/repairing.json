@@ -35,7 +35,9 @@
         "tconstruct:ui_render_handle",
         "tconstruct:ui_render_extra"
       ],
-      "tic_stats": { "tconstruct:durability": 100 }
+      "tic_stats": {
+        "tconstruct:durability": 100
+      }
     }
   },
   "description": [
@@ -43,5 +45,5 @@
       "text": "Reparar sua ferramenta é uma coisa importante a se fazer, a menos que você queira que ela quebre. Na Estação Tinker ou na Bigorna Tinker coloque a ferramenta e o material da cabeça/placa e ela será reparada. Como alternativa, você pode usar kits de reparo, que funcionam em mesas de fabricação!",
       "paragraph": true
     }
-	]
+  ]
 }

@@ -1,9 +1,17 @@
 {
-  "title":"Göze Çarpan Varlıklar",
+  "title": "Göze Çarpan Varlıklar",
   "text": [
-    { "text": "• Gümüşçün - Kararmış Taş" },
-    { "text": "\n• Köylüler ve Höylüler- Zümrüt" },
-    { "text": "\n• İskeletler - Süt" },
-    { "text": "\n• Belki de daha çok keşfedilecek vardır." }
+    {
+      "text": "• Gümüşçün - Kararmış Taş"
+    },
+    {
+      "text": "\n• Köylüler ve Höylüler- Zümrüt"
+    },
+    {
+      "text": "\n• İskeletler - Süt"
+    },
+    {
+      "text": "\n• Belki de daha çok keşfedilecek vardır."
+    }
   ]
 }

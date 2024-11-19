@@ -150,8 +150,9 @@ public final class ToolBuildHandler {
 
   /**
    * Gets display tool part
+   *
    * @param toolPart tool part
-   * @param i determines material color
+   * @param i        determines material color
    * @return ItemStack of part for display
    */
   public static ItemStack getDisplayPart(IToolPart toolPart, int i) {

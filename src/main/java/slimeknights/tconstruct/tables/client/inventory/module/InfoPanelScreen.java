@@ -350,7 +350,7 @@ public class InfoPanelScreen extends ModuleScreen {
       int x2 = this.imageWidth / 2;
       x2 -= this.font.width(this.caption) / 2;
 
-      graphics.drawString(font,this.caption.getVisualOrderText(), (float) this.leftPos + x2, y, color, false);
+      graphics.drawString(font, this.caption.getVisualOrderText(), (float) this.leftPos + x2, y, color, false);
       y += scaledFontHeight + 3;
     }
 

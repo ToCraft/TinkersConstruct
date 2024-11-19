@@ -42,6 +42,7 @@ public interface IToolRecipeHelper extends ICastCreationHelper {
 
   /**
    * Registers recipe for tool building
+   *
    * @param consumer   Recipe consumer
    * @param tool       Tool
    * @param folder     Folder for recipe
@@ -55,6 +56,7 @@ public interface IToolRecipeHelper extends ICastCreationHelper {
 
   /**
    * Registers recipe for tool building
+   *
    * @param consumer Recipe consumer
    * @param tool     Tool supplier
    * @param folder   Folder for recipe
@@ -65,11 +67,12 @@ public interface IToolRecipeHelper extends ICastCreationHelper {
 
   /**
    * Adds part casting recipes for using a part. Does not add part builder recipes or cast creation recipes
-   * @param consumer Recipe consumer
-   * @param part     Part to be crafted
-   * @param cast     Part cast
-   * @param cost     Part cost
-   * @param partFolder   Folder for recipes
+   *
+   * @param consumer   Recipe consumer
+   * @param part       Part to be crafted
+   * @param cast       Part cast
+   * @param cost       Part cost
+   * @param partFolder Folder for recipes
    */
   default void partCasting(Consumer<FinishedRecipe> consumer, IMaterialItem part, CastItemObject cast, int cost, String partFolder) {
     String name = id(part).getPath();
@@ -83,17 +86,18 @@ public interface IToolRecipeHelper extends ICastCreationHelper {
       .setCast(cast.getSingleUseTag(), true)
       .save(consumer, location(castingFolder + name + "_sand_cast"));
     CompositeCastingRecipeBuilder.table(part, cost)
-                                 .save(consumer, location(castingFolder + name + "_composite"));
+      .save(consumer, location(castingFolder + name + "_composite"));
   }
 
   /**
    * Adds cast creation and casting recipes for using a part. Does not add part builder recipes.
-   * @param consumer Recipe consumer
-   * @param part     Part to be crafted
-   * @param cast     Part cast
-   * @param cost     Part cost
-   * @param partFolder   Folder for recipes
-   * @param castFolder   Folder for cast creation recipes
+   *
+   * @param consumer   Recipe consumer
+   * @param part       Part to be crafted
+   * @param cast       Part cast
+   * @param cost       Part cost
+   * @param partFolder Folder for recipes
+   * @param castFolder Folder for cast creation recipes
    */
   default void partCasting(Consumer<FinishedRecipe> consumer, IMaterialItem part, CastItemObject cast, int cost, String partFolder, String castFolder) {
     // Material Casting
@@ -125,13 +129,14 @@ public interface IToolRecipeHelper extends ICastCreationHelper {
 
   /**
    * Adds cast creation and casting recipes for using a part with a dummy part for the part builder
+   *
    * @param consumer   Recipe consumer
    * @param part       Part to be crafted
    * @param dummyPart  Dummy item used for creating casts, made in the part builder
    * @param cast       Part cast
    * @param cost       Part cost
-   * @param partFolder   Folder for recipes
-   * @param castFolder   Folder for cast creation recipes
+   * @param partFolder Folder for recipes
+   * @param castFolder Folder for cast creation recipes
    */
   default void partWithDummy(Consumer<FinishedRecipe> consumer, IMaterialItem part, ItemLike dummyPart, CastItemObject cast, int cost, String partFolder, String castFolder) {
     // Material Casting
@@ -140,9 +145,9 @@ public interface IToolRecipeHelper extends ICastCreationHelper {
     castCreation(consumer, CompoundIngredient.of(Ingredient.of(dummyPart), MaterialIngredient.of(part)), cast, castFolder, id(part).getPath());
     // dummy part builder recipe
     ItemPartRecipeBuilder.item(cast.getName(), ItemOutput.fromItem(dummyPart))
-                         .material(MaterialIds.rock, cost)
-                         .setPatternItem(CompoundIngredient.of(Ingredient.of(TinkerTags.Items.DEFAULT_PATTERNS), Ingredient.of(cast.get())))
-                         .save(consumer, location(partFolder + "builder/" + cast.getName().getPath()));
+      .material(MaterialIds.rock, cost)
+      .setPatternItem(CompoundIngredient.of(Ingredient.of(TinkerTags.Items.DEFAULT_PATTERNS), Ingredient.of(cast.get())))
+      .save(consumer, location(partFolder + "builder/" + cast.getName().getPath()));
   }
 
   /**

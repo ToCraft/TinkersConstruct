@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "tconstruct:block/foundry/tank/fuel_gauge"}
+    "": {
+      "model": "tconstruct:block/foundry/tank/fuel_gauge"
+    }
   }
 }

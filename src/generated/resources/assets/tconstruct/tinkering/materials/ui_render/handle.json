@@ -1,9 +1,0 @@
-{
-  "color": "FF745F38",
-  "fallbacks": [
-    "wood",
-    "stick"
-  ],
-  "luminosity": 0,
-  "texture": "tconstruct:wood"
-}

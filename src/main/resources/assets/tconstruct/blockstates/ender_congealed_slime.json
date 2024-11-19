@@ -1,7 +1,7 @@
 {
-    "variants": {
-        "": {
-            "model": "tconstruct:block/slime/congealed/ender"
-        }
+  "variants": {
+    "": {
+      "model": "tconstruct:block/slime/congealed/ender"
     }
+  }
 }

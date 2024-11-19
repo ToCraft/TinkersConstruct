@@ -8,7 +8,9 @@
       "slot": "upgrades"
     }
   },
-  "tooltip": [ "Yükseltme Yuvası İmgesi" ],
+  "tooltip": [
+    "Yükseltme Yuvası İmgesi"
+  ],
   "text": [
     {
       "text": "Yükseltmeler aracın olağan gelişimleridir. Genelde bir eşyayı uygulayarak ve onun bazı büyü niteliklerini 'bulaştırarak' yapılır, örneğin redstone araçları hızlı yapar. "

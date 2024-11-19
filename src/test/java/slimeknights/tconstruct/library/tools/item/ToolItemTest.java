@@ -1,7 +1,5 @@
 package slimeknights.tconstruct.library.tools.item;
 
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -45,12 +43,16 @@ public abstract class ToolItemTest extends BaseMcTest {
     return ToolBuildHandler.buildItemFromMaterials(tool, MaterialNBT.of(MaterialFixture.MATERIAL_WITH_HEAD, MaterialFixture.MATERIAL_WITH_HANDLE, MaterialFixture.MATERIAL_WITH_EXTRA));
   }
 
-  /** Checks if the test item is broken */
+  /**
+   * Checks if the test item is broken
+   */
   protected boolean IsTestItemBroken() {
     return ToolDamageUtil.isBroken(testItemStack);
   }
 
-  /** Breaks a tool using high damage */
+  /**
+   * Breaks a tool using high damage
+   */
   protected void breakTool(ItemStack stack) {
     stack.setDamageValue(99999);
   }

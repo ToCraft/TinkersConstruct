@@ -1,4 +1,10 @@
 {
   "parent": "tconstruct:block/punji/stick",
-  "transform": { "translation": [ 0, 0, -0.5 ] }
+  "transform": {
+    "translation": [
+      0,
+      0,
+      -0.5
+    ]
+  }
 }

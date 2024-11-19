@@ -452,6 +452,7 @@ public class JEIPlugin implements IModPlugin {
    * Class to pass {@link IScreenWithFluidTank} into JEI
    */
   public static class GuiContainerTankHandler<C extends AbstractContainerMenu, T extends AbstractContainerScreen<C> & IScreenWithFluidTank> implements IGuiContainerHandler<T> {
+
     @Override
     public Optional<IClickableIngredient<?>> getClickableIngredientUnderMouse(T containerScreen, double mouseX, double mouseY) {
       return IGuiContainerHandler.super.getClickableIngredientUnderMouse(containerScreen, mouseX, mouseY);

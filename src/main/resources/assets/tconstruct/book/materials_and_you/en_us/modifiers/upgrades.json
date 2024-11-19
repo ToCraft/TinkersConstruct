@@ -8,7 +8,9 @@
       "slot": "upgrades"
     }
   },
-  "tooltip": [ "Upgrade Slot Icon" ],
+  "tooltip": [
+    "Upgrade Slot Icon"
+  ],
   "text": [
     {
       "text": "Upgrades are standard improvements to a tool. They are usually done by applying an item and 'rubbing off' some of its magic qualities, like redstone making tools faster. "

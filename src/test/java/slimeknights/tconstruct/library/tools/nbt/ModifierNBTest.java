@@ -12,6 +12,7 @@ import slimeknights.tconstruct.test.BaseMcTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ModifierNBTest extends BaseMcTest {
+
   @BeforeAll
   static void before() {
     ModifierFixture.init();

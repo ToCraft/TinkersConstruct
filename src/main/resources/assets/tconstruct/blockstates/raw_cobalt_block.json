@@ -1,7 +1,7 @@
 {
   "variants": {
-        "": {
-            "model": "tconstruct:block/storage/raw_cobalt"
-        }
+    "": {
+      "model": "tconstruct:block/storage/raw_cobalt"
     }
+  }
 }

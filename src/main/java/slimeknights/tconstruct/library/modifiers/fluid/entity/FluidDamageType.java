@@ -66,6 +66,8 @@ public enum FluidDamageType {
 
   private final String name = this.name().toLowerCase();
 
-  /** Applies this effect to the given damage source */
+  /**
+   * Applies this effect to the given damage source
+   */
   public abstract DamageSource apply(FluidEffectContext.Entity context);
 }

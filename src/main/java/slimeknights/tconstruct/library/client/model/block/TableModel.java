@@ -2,7 +2,6 @@ package slimeknights.tconstruct.library.client.model.block;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
-import com.mojang.datafixers.util.Pair;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
@@ -20,7 +19,6 @@ import slimeknights.mantle.client.model.RetexturedModel;
 import slimeknights.mantle.client.model.inventory.ModelItem;
 import slimeknights.mantle.client.model.util.SimpleBlockModel;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;

@@ -1,8 +1,8 @@
 {
-  "title":"Графический интерфейс Плавильной Печи",
-    "image": {
-     "file": "tconstruct:book/images/meltergui.png",
-	 "width": 172,
+  "title": "Графический интерфейс Плавильной Печи",
+  "image": {
+    "file": "tconstruct:book/images/meltergui.png",
+    "width": 172,
     "height": 81
   },
   "text": [
@@ -10,5 +10,5 @@
       "text": "Это интерфейс базовой плавильной печи. Не больше и не меньше.",
       "paragraph": true
     }
-	]
+  ]
 }

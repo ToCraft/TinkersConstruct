@@ -1,8 +1,13 @@
 {
   "tool": "tconstruct:kama",
   "text": [
-    { "text": "The Kama is a precision reaping tool, effective on plants, webs, and wool." },
-    { "text": "Expanders increase the circular radius of the tool.", "paragraph": true }
+    {
+      "text": "The Kama is a precision reaping tool, effective on plants, webs, and wool."
+    },
+    {
+      "text": "Expanders increase the circular radius of the tool.",
+      "paragraph": true
+    }
   ],
   "properties": [
     "+1 Attack Damage",

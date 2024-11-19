@@ -34,7 +34,7 @@ public class JsonFileLoader {
     this.folder = folder;
   }
 
-  public Map<ResourceLocation,JsonElement> loadFilesAsSplashlist(String... files) {
+  public Map<ResourceLocation, JsonElement> loadFilesAsSplashlist(String... files) {
     ResourceLocation[] resourceLocations = Arrays.stream(files)
       .map(TConstruct::getResource)
       .toArray(ResourceLocation[]::new);

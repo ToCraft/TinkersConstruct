@@ -1,6 +1,8 @@
 {
   "title": "Özel Savunma Değiştiricileri",
   "text": [
-    { "text": "Özel korumalar korumayı ham savunmadan farklı yollarla artırır." }
+    {
+      "text": "Özel korumalar korumayı ham savunmadan farklı yollarla artırır."
+    }
   ]
 }

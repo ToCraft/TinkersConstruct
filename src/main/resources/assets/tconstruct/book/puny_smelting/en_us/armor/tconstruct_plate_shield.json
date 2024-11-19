@@ -1,9 +1,12 @@
 {
   "tool": "tconstruct:plate_shield",
   "text": [
-    { "text": "Shiny rectangle shield for shiny rectangle adventures." },
     {
-      "text": "A powerful shield for blocking the strongest of attacks. Made from casting metal or ceramics on a shield core.", "paragraph": true
+      "text": "Shiny rectangle shield for shiny rectangle adventures."
+    },
+    {
+      "text": "A powerful shield for blocking the strongest of attacks. Made from casting metal or ceramics on a shield core.",
+      "paragraph": true
     }
   ],
   "properties": [

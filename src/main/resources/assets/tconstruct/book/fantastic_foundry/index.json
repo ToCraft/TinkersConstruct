@@ -6,7 +6,7 @@
       "item": "tconstruct:ichor_slime_ball"
     }
   },
-   {
+  {
     "name": "alloyer",
     "data": "sections/alloyer.json",
     "icon": {
@@ -30,7 +30,12 @@
   {
     "name": "melee_harvest_materials",
     "data": "no-load",
-    "extraData": { "tconstruct:material_tier": { "type": "tconstruct:melee_harvest", "tier": 4 } },
+    "extraData": {
+      "tconstruct:material_tier": {
+        "type": "tconstruct:melee_harvest",
+        "tier": 4
+      }
+    },
     "icon": {
       "item": "tconstruct:manyullyn_ingot"
     }
@@ -38,7 +43,12 @@
   {
     "name": "ranged_materials",
     "data": "no-load",
-    "extraData": { "tconstruct:material_tier": { "type": "tconstruct:ranged", "tier": 4 } },
+    "extraData": {
+      "tconstruct:material_tier": {
+        "type": "tconstruct:ranged",
+        "tier": 4
+      }
+    },
     "icon": {
       "item": "tconstruct:hepatizon_ingot"
     }
@@ -46,7 +56,12 @@
   {
     "name": "armor_materials",
     "data": "no-load",
-    "extraData": { "tconstruct:material_tier": { "type": "tconstruct:armor", "tier": 4 } },
+    "extraData": {
+      "tconstruct:material_tier": {
+        "type": "tconstruct:armor",
+        "tier": 4
+      }
+    },
     "icon": {
       "item": "tconstruct:blazewood"
     }
@@ -75,7 +90,11 @@
     },
     "data": "no-load",
     "extraData": {
-      "tconstruct:load_tools": { "tag": "tconstruct:modifiable/book_armor/fantastic_foundry", "path": "armor", "sort": false }
+      "tconstruct:load_tools": {
+        "tag": "tconstruct:modifiable/book_armor/fantastic_foundry",
+        "path": "armor",
+        "sort": false
+      }
     }
   }
 ]

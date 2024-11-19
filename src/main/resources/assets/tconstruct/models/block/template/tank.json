@@ -2,8 +2,16 @@
   "loader": "tconstruct:tank",
   "parent": "block/block",
   "fluid": {
-    "from": [ 0.08, 0.08, 0.08 ],
-    "to": [ 15.92, 15.92, 15.92 ],
+    "from": [
+      0.08,
+      0.08,
+      0.08
+    ],
+    "to": [
+      15.92,
+      15.92,
+      15.92
+    ],
     "increments": 256
   },
   "textures": {
@@ -17,29 +25,83 @@
   },
   "elements": [
     {
-      "from": [ 0, 0, 0 ],
-      "to": [ 16, 16, 16 ],
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
       "faces": {
-        "north": { "texture": "#side", "cullface": "north" },
-        "east":  { "texture": "#side", "cullface": "east"  },
-        "south": { "texture": "#side", "cullface": "south" },
-        "west":  { "texture": "#side", "cullface": "west"  },
-        "up":    { "texture": "#top",  "cullface": "up"    },
-        "down":  { "texture": "#top",  "cullface": "down"  }
+        "north": {
+          "texture": "#side",
+          "cullface": "north"
+        },
+        "east": {
+          "texture": "#side",
+          "cullface": "east"
+        },
+        "south": {
+          "texture": "#side",
+          "cullface": "south"
+        },
+        "west": {
+          "texture": "#side",
+          "cullface": "west"
+        },
+        "up": {
+          "texture": "#top",
+          "cullface": "up"
+        },
+        "down": {
+          "texture": "#top",
+          "cullface": "down"
+        }
       }
     },
     {
-      "from": [ 15.9, 15.9, 15.9 ],
-      "to": [ 0.1, 0.1, 0.1 ],
+      "from": [
+        15.9,
+        15.9,
+        15.9
+      ],
+      "to": [
+        0.1,
+        0.1,
+        0.1
+      ],
       "faces": {
-        "north": { "texture": "#side", "shade": false },
-        "east":  { "texture": "#side", "shade": false },
-        "south": { "texture": "#side", "shade": false },
-        "west":  { "texture": "#side", "shade": false },
-        "up":    { "texture": "#top",  "shade": false },
-        "down":  { "texture": "#top",  "shade": false }
+        "north": {
+          "texture": "#side",
+          "shade": false
+        },
+        "east": {
+          "texture": "#side",
+          "shade": false
+        },
+        "south": {
+          "texture": "#side",
+          "shade": false
+        },
+        "west": {
+          "texture": "#side",
+          "shade": false
+        },
+        "up": {
+          "texture": "#top",
+          "shade": false
+        },
+        "down": {
+          "texture": "#top",
+          "shade": false
+        }
       }
     }
   ],
-  "gui": { "parent": "block/cube" }
+  "gui": {
+    "parent": "block/cube"
+  }
 }

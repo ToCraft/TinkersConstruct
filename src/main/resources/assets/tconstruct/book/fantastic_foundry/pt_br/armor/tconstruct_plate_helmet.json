@@ -1,9 +1,12 @@
 {
   "tool": "tconstruct:plate_helmet",
   "text": [
-    { "text": "Elmos duros para cabeças duras." },
-	{
-      "text": "Um elmo sólido para proteger seu cérebro. Nada poderá machucar essa sua cabecinha!", "paragraph": true
+    {
+      "text": "Elmos duros para cabeças duras."
+    },
+    {
+      "text": "Um elmo sólido para proteger seu cérebro. Nada poderá machucar essa sua cabecinha!",
+      "paragraph": true
     }
   ],
   "properties": [

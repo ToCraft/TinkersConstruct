@@ -55,7 +55,9 @@ public class PotionFluidType extends FluidType {
     });
   }
 
-  /** Creates a fluid stack for the given potion */
+  /**
+   * Creates a fluid stack for the given potion
+   */
   public static FluidStack potionFluid(Potion potion, int size) {
     CompoundTag tag = null;
     if (potion != Potions.EMPTY) {

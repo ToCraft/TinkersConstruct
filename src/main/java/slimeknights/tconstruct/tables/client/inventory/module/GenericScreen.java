@@ -26,7 +26,7 @@ public class GenericScreen {
   public static final ElementScreen overlapBottomLeft = new ElementScreen(LOCATION, 7, 47, 7, 7, 64, 64);
   public static final ElementScreen overlapBottomRight = new ElementScreen(LOCATION, 14, 47, 7, 7, 64, 64);
 
-  public static final ScalableElementScreen textBackground = new ScalableElementScreen(LOCATION, 7 + 18, 7, 18, 10, 64,64);
+  public static final ScalableElementScreen textBackground = new ScalableElementScreen(LOCATION, 7 + 18, 7, 18, 10, 64, 64);
 
   public static final ScalableElementScreen slot = new ScalableElementScreen(LOCATION, 7, 7, 18, 18, 64, 64);
   public static final ScalableElementScreen slotEmpty = new ScalableElementScreen(LOCATION, 7 + 18, 7, 18, 18, 64, 64);

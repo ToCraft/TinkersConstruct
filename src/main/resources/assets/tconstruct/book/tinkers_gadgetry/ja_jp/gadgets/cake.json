@@ -1,7 +1,7 @@
 {
   "title": "スライムケーキ",
   "image": {
-	"file": "tconstruct:book/images/cake.png",
+    "file": "tconstruct:book/images/cake.png",
     "width": 180,
     "height": 67
   },

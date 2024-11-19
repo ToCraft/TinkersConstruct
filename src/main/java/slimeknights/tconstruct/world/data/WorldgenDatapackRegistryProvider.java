@@ -152,13 +152,17 @@ public class WorldgenDatapackRegistryProvider extends DatapackBuiltinEntriesProv
 
   /* Registry helpers */
 
-  /** Creates a reference to the given registry object */
+  /**
+   * Creates a reference to the given registry object
+   */
   private static <T> Holder<T> reference(BootstapContext<?> context, ResourceKey<T> key) {
     ResourceKey<Registry<T>> registry = ResourceKey.createRegistryKey(key.registry());
     return context.registryLookup(registry).orElseThrow().getOrThrow(key);
   }
 
-  /** Creates a reference to the given registry object */
+  /**
+   * Creates a reference to the given registry object
+   */
   private static <T> Holder<T> reference(RegistryObject<T> object) {
     return object.getHolder().orElseThrow();
   }
@@ -166,18 +170,24 @@ public class WorldgenDatapackRegistryProvider extends DatapackBuiltinEntriesProv
 
   /* Holder sets */
 
-  /** Creates a holder set tag for the given registry */
+  /**
+   * Creates a holder set tag for the given registry
+   */
   private static <T> HolderSet.Named<T> tag(BootstapContext<?> context, TagKey<T> key) {
     return context.registryLookup(key.registry()).orElseThrow().getOrThrow(key);
   }
 
-  /** Ands the holder sets together */
+  /**
+   * Ands the holder sets together
+   */
   @SafeVarargs
   private static <T> AndHolderSet<T> and(HolderSet<T>... sets) {
     return new AndHolderSet<>(List.of(sets));
   }
 
-  /** Ors the holder sets together */
+  /**
+   * Ors the holder sets together
+   */
   @SafeVarargs
   private static <T> OrHolderSet<T> or(HolderSet<T>... sets) {
     return new OrHolderSet<>(List.of(sets));
@@ -189,18 +199,24 @@ public class WorldgenDatapackRegistryProvider extends DatapackBuiltinEntriesProv
 
   /* Object creation helpers */
 
-  /** Saves a structure set */
+  /**
+   * Saves a structure set
+   */
   private static StructureSet structureSet(StructurePlacement placement, StructureSelectionEntry... structures) {
     return new StructureSet(List.of(structures), placement);
   }
 
-  /** Creates an entry for a registry object */
+  /**
+   * Creates an entry for a registry object
+   */
   private static StructureSelectionEntry entry(BootstapContext<?> context, ResourceKey<Structure> structure, int weight) {
     return new StructureSelectionEntry(reference(context, structure), weight);
   }
 
-  /** Creates a spawn override for a single mob */
-  private static Map<MobCategory,StructureSpawnOverride> monsterOverride(EntityType<?> entity, int min, int max) {
+  /**
+   * Creates a spawn override for a single mob
+   */
+  private static Map<MobCategory, StructureSpawnOverride> monsterOverride(EntityType<?> entity, int min, int max) {
     return Map.of(MobCategory.MONSTER, new StructureSpawnOverride(BoundingBoxType.STRUCTURE, WeightedRandomList.create(new MobSpawnSettings.SpawnerData(entity, 1, min, max))));
   }
 }

@@ -1,6 +1,8 @@
 {
   "title": "Modificadores de Defesa",
   "text": [
-    { "text": "Os modificadores de defesa aumentam a resistência para um determinado tipo de dano. TODAS as fontes de danos devem se encaixar em um dos cinco tipos, e os tipos podem ser misturados livremente sobre uma armadura." }
+    {
+      "text": "Os modificadores de defesa aumentam a resistência para um determinado tipo de dano. TODAS as fontes de danos devem se encaixar em um dos cinco tipos, e os tipos podem ser misturados livremente sobre uma armadura."
+    }
   ]
 }

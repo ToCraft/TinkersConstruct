@@ -33,9 +33,9 @@ public enum Orientation2D {
      */
     public int align(int max) {
       return switch (this) {
-        default -> 0;
         case MIDDLE -> max / 2;
         case END -> max;
+        default -> 0;
       };
     }
   }

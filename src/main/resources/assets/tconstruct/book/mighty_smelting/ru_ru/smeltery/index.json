@@ -1,5 +1,8 @@
 {
   "title": "Плавильня",
   "subText": "Могущественная плавильня в вашем распоряжении.",
-  "hidden": ["structurereq", "sgui2"]
+  "hidden": [
+    "structurereq",
+    "sgui2"
+  ]
 }

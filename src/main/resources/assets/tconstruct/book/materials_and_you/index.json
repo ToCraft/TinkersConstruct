@@ -9,7 +9,12 @@
   {
     "name": "melee_harvest_materials",
     "data": "no-load",
-    "extraData": { "tconstruct:material_tier": { "type": "tconstruct:melee_harvest", "tier": 1 } },
+    "extraData": {
+      "tconstruct:material_tier": {
+        "type": "tconstruct:melee_harvest",
+        "tier": 1
+      }
+    },
     "icon": {
       "item": "minecraft:stone"
     }
@@ -17,7 +22,12 @@
   {
     "name": "ranged_materials",
     "data": "no-load",
-    "extraData": { "tconstruct:material_tier": { "type": "tconstruct:ranged", "tier": 1 } },
+    "extraData": {
+      "tconstruct:material_tier": {
+        "type": "tconstruct:ranged",
+        "tier": 1
+      }
+    },
     "icon": {
       "item": "minecraft:bamboo"
     }
@@ -42,7 +52,10 @@
       }
     },
     "extraData": {
-      "tconstruct:load_tools": { "tag": "tconstruct:modifiable/small", "path": "tools" }
+      "tconstruct:load_tools": {
+        "tag": "tconstruct:modifiable/small",
+        "path": "tools"
+      }
     }
   },
   {
@@ -57,7 +70,11 @@
     },
     "data": "no-load",
     "extraData": {
-      "tconstruct:load_tools": { "tag": "tconstruct:modifiable/book_armor/materials_and_you", "path": "armor", "sort": false }
+      "tconstruct:load_tools": {
+        "tag": "tconstruct:modifiable/book_armor/materials_and_you",
+        "path": "armor",
+        "sort": false
+      }
     }
   },
   {

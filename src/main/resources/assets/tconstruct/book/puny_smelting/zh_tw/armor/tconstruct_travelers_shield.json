@@ -1,9 +1,12 @@
 {
   "tool": "tconstruct:travelers_shield",
   "text": [
-    { "text": "不適合拿來做飛盤。" },
     {
-      "text": "盾牌是居家旅行，遊歷世界時抵禦攻擊的重要物件，外出冒險時一定要帶上一面。", "paragraph": true
+      "text": "不適合拿來做飛盤。"
+    },
+    {
+      "text": "盾牌是居家旅行，遊歷世界時抵禦攻擊的重要物件，外出冒險時一定要帶上一面。",
+      "paragraph": true
     }
   ],
   "properties": [

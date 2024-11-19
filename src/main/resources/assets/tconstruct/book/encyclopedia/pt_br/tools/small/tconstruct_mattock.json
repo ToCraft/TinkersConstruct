@@ -1,8 +1,13 @@
 {
   "tool": "tconstruct:mattock",
   "text": [
-    { "text": "A Chibanca é uma ferramenta de agricultura, efetiva em troncos, terra, cascalho, e areia. Também é mais rápido na madeira." },
-    { "text": "Os expansores fazem com que blocos adjacentes do mesmo tipo também sejam minerados, com alcance baseado no número de expansores.", "paragraph": true }
+    {
+      "text": "A Chibanca é uma ferramenta de agricultura, efetiva em troncos, terra, cascalho, e areia. Também é mais rápido na madeira."
+    },
+    {
+      "text": "Os expansores fazem com que blocos adjacentes do mesmo tipo também sejam minerados, com alcance baseado no número de expansores.",
+      "paragraph": true
+    }
   ],
   "properties": [
     "+1.5 Dano de Ataque",

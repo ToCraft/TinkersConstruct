@@ -11,7 +11,6 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.common.util.Lazy;
 import slimeknights.mantle.data.loadable.Loadable;
 import slimeknights.mantle.data.loadable.Loadables;
-import slimeknights.mantle.data.loadable.primitive.ResourceLocationLoadable;
 import slimeknights.mantle.util.JsonHelper;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.client.armor.texture.ArmorTextureSupplier;
@@ -92,7 +91,7 @@ public class FlexItemTypes {
     /* Registries a cast item that shows a part cost in the tooltip */
     register("part_cast", data -> {
       ResourceLocation partId = JsonHelper.getResourceLocation(data, "part");
-      return (props, builder) -> new FlexPartCastItem(props, builder, Lazy.of(() -> ((ResourceLocationLoadable<Item>) Loadables.ITEM).fromKey(partId, "part")));
+      return (props, builder) -> new FlexPartCastItem(props, builder, Lazy.of(() -> Loadables.ITEM.fromKey(partId, "part")));
     });
 
 

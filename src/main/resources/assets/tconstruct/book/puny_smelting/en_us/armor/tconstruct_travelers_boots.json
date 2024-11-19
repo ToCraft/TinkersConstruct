@@ -1,9 +1,12 @@
 {
   "tool": "tconstruct:travelers_boots",
   "text": [
-    { "text": "These boots are made for walkin', and that's just what they'll do." },
-	{
-      "text": "Every adventurer needs a good pair of stylish, customizable boots to start their journey", "paragraph": true
+    {
+      "text": "These boots are made for walkin', and that's just what they'll do."
+    },
+    {
+      "text": "Every adventurer needs a good pair of stylish, customizable boots to start their journey",
+      "paragraph": true
     }
   ],
   "properties": [

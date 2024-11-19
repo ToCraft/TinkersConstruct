@@ -1,9 +1,12 @@
 {
   "tool": "tconstruct:plate_chestplate",
   "text": [
-    { "text": "Başını göğüslüğüne doğru koyarsan kalp atışını arkanda creeper patlıyormuşcasına duyabilirsin. Neden çıkardın?" },
-	{
-      "text": "Yüksek zırh, esneklik sağlamak için zincir zırhla, bundan daha havalı olamazdı!", "paragraph": true
+    {
+      "text": "Başını göğüslüğüne doğru koyarsan kalp atışını arkanda creeper patlıyormuşcasına duyabilirsin. Neden çıkardın?"
+    },
+    {
+      "text": "Yüksek zırh, esneklik sağlamak için zincir zırhla, bundan daha havalı olamazdı!",
+      "paragraph": true
     }
   ],
   "properties": [

@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "tconstruct:block/foundry/tank/ingot_gauge"}
+    "": {
+      "model": "tconstruct:block/foundry/tank/ingot_gauge"
+    }
   }
 }

@@ -22,7 +22,9 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/** Mod info for running tests, a prime example of putting too many things in an interface */
+/**
+ * Mod info for running tests, a prime example of putting too many things in an interface
+ */
 public enum TestModInfo implements IModInfo {
   INSTANCE;
 
@@ -65,7 +67,7 @@ public enum TestModInfo implements IModInfo {
   }
 
   @Override
-  public Map<String,Object> getModProperties() {
+  public Map<String, Object> getModProperties() {
     return Map.of();
   }
 
@@ -127,7 +129,7 @@ public enum TestModInfo implements IModInfo {
     }
 
     @Override
-    public Map<String,Object> getFileProperties() {
+    public Map<String, Object> getFileProperties() {
       return Map.of();
     }
 
@@ -176,7 +178,7 @@ public enum TestModInfo implements IModInfo {
     }
 
     @Override
-    public Supplier<Map<String,Object>> getSubstitutionMap() {
+    public Supplier<Map<String, Object>> getSubstitutionMap() {
       return Map::of;
     }
 
@@ -232,7 +234,7 @@ public enum TestModInfo implements IModInfo {
     public void scanFile(IModFile modFile, Consumer<Path> pathConsumer) {}
 
     @Override
-    public void initArguments(Map<String,?> arguments) {}
+    public void initArguments(Map<String, ?> arguments) {}
 
     @Override
     public boolean isValid(IModFile modFile) {

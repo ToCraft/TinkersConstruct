@@ -1,8 +1,8 @@
 {
-    "stats": {
-        "test:stat1": {
-        },
-        "test:stat2": {
-        }
+  "stats": {
+    "test:stat1": {
+    },
+    "test:stat2": {
     }
+  }
 }

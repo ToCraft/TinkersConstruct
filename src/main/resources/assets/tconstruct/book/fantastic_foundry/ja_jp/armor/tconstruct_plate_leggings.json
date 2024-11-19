@@ -1,9 +1,12 @@
 {
   "tool": "tconstruct:plate_leggings",
   "text": [
-    { "text": "足が、足が。" },
-	{
-      "text": "このズボンは、あらゆる戦闘に対応した高い保護性能を備えています。", "paragraph": true
+    {
+      "text": "足が、足が。"
+    },
+    {
+      "text": "このズボンは、あらゆる戦闘に対応した高い保護性能を備えています。",
+      "paragraph": true
     }
   ],
   "properties": [

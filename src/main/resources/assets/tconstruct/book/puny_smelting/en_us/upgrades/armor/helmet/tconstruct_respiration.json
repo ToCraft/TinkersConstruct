@@ -6,7 +6,7 @@
     }
   ],
   "effects": [
-    "Reduces air consumption underwater", 
+    "Reduces air consumption underwater",
     "Multiple levels, each level further decreases air consumption",
     "Requires 1 upgrade slot per level"
   ]

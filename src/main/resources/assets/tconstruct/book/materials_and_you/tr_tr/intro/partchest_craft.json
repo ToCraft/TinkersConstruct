@@ -2,6 +2,8 @@
   "title": "Parça Sandığı Üretimi",
   "recipe": "tconstruct:tables/part_chest",
   "description": [
-    { "text": "O kullanılmayan araç parçalarının ne zaman gerekeceğini bilemezsin." }
+    {
+      "text": "O kullanılmayan araç parçalarının ne zaman gerekeceğini bilemezsin."
+    }
   ]
 }

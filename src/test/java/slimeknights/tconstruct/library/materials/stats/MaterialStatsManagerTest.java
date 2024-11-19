@@ -12,6 +12,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MaterialStatsManagerTest extends BaseMcTest {
+
   private static final MaterialStatsId STATS_ID_SIMPLE = new MaterialStatsId("test", "stat");
   private static final MaterialStatType<ComplexTestStats> STATS_TYPE_SIMPLE = ComplexTestStats.makeType(STATS_ID_SIMPLE);
   private static final MaterialStatsId STATS_ID_DONT_CARE = new MaterialStatsId("dont", "care");

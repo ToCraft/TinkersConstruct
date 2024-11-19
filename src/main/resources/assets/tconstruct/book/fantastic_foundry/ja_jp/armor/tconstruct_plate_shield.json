@@ -1,9 +1,12 @@
 {
   "tool": "tconstruct:plate_shield",
   "text": [
-    { "text": "シャイニーブルーの冒険のための、シャイニーブルーの盾。" },
     {
-      "text": "強力な攻撃も防げるパワフルな盾です。", "paragraph": true
+      "text": "シャイニーブルーの冒険のための、シャイニーブルーの盾。"
+    },
+    {
+      "text": "強力な攻撃も防げるパワフルな盾です。",
+      "paragraph": true
     }
   ],
   "properties": [

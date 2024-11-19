@@ -27,20 +27,27 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 class ToolDefinitionDataTest extends BaseMcTest {
-  /** Checks that the stats are all empty */
+
+  /**
+   * Checks that the stats are all empty
+   */
   protected static void checkStatsEmpty(ToolDefinitionData data) {
     ToolDefinitionStats stats = TestHelper.buildStats(data);
     assertThat(stats.base().getContainedStats()).isEmpty();
     assertThat(stats.multipliers().getContainedStats()).isEmpty();
   }
 
-  /** Checks that the stats are all empty */
+  /**
+   * Checks that the stats are all empty
+   */
   protected static void checkToolDataNonPartsEmpty(ToolDefinitionData data) {
     checkStatsEmpty(data);
     assertThat(TestHelper.getTraits(data)).isEmpty();
   }
 
-  /** Checks that the stats are all empty */
+  /**
+   * Checks that the stats are all empty
+   */
   protected static void checkToolDataEmpty(ToolDefinitionData data) {
     List<IToolPart> parts = data.getHook(ToolHooks.TOOL_PARTS).getParts(ToolDefinition.EMPTY);
     assertThat(parts).isNotNull();

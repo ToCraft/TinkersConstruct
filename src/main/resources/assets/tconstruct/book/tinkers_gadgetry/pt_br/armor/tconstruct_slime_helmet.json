@@ -1,8 +1,13 @@
 {
   "tool": "tconstruct:slime_helmet",
   "text": [
-    { "text": "Descobri que o enderslime pode ser usado para imitar os efeitos dos monstros com o foco adequado, como um crânio." },
-    { "text": "Os crânios que eu testei estão descritos na próxima seção do livro.", "paragraph": true }
+    {
+      "text": "Descobri que o enderslime pode ser usado para imitar os efeitos dos monstros com o foco adequado, como um crânio."
+    },
+    {
+      "text": "Os crânios que eu testei estão descritos na próxima seção do livro.",
+      "paragraph": true
+    }
   ],
   "properties": [
     "Alta Durabilidade",

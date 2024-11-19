@@ -103,9 +103,9 @@ public class MomentumModifier extends Modifier implements ProjectileLaunchModifi
       float bonus;
       if (player != null && key == TooltipKey.SHIFT) {
         bonus = getBonus(player, type, modifier) / (switch (type) {
-          default -> 128;
           case RANGED -> 64;
           case ARMOR -> 4;
+          default -> 128;
         });
       } else {
         bonus = modifier.getEffectiveLevel();

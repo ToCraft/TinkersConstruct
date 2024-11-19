@@ -1,5 +1,8 @@
 {
   "title": "燃え盛る血液",
   "subText": "灼熱のブレイズに勝るものはありません。",
-  "hidden": ["intro", "piggy_backpack_craft"]
+  "hidden": [
+    "intro",
+    "piggy_backpack_craft"
+  ]
 }

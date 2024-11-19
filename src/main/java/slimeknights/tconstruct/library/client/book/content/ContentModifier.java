@@ -39,23 +39,23 @@ import java.util.stream.Collectors;
 
 public class ContentModifier extends PageContent {
 
-  public static final transient ResourceLocation ID = TConstruct.getResource("modifier");
-  public static final transient int TEX_SIZE = 256;
+  public static final ResourceLocation ID = TConstruct.getResource("modifier");
+  public static final int TEX_SIZE = 256;
   public static final ResourceLocation BOOK_MODIFY = TConstruct.getResource("textures/gui/book/modify.png");
-  private static final transient String KEY_EFFECTS = TConstruct.makeTranslationKey("book", "modifiers.effect");
+  private static final String KEY_EFFECTS = TConstruct.makeTranslationKey("book", "modifiers.effect");
 
-  public static final transient ImageData IMG_SLOT_1 = new ImageData(BOOK_MODIFY, 0, 75, 22, 22, TEX_SIZE, TEX_SIZE);
-  public static final transient ImageData IMG_SLOT_2 = new ImageData(BOOK_MODIFY, 0, 97, 40, 22, TEX_SIZE, TEX_SIZE);
-  public static final transient ImageData IMG_SLOT_3 = new ImageData(BOOK_MODIFY, 0, 119, 58, 22, TEX_SIZE, TEX_SIZE);
-  public static final transient ImageData IMG_SLOT_4 = new ImageData(BOOK_MODIFY, 0, 141, 40, 40, TEX_SIZE, TEX_SIZE);
-  public static final transient ImageData IMG_SLOT_5 = new ImageData(BOOK_MODIFY, 0, 181, 58, 41, TEX_SIZE, TEX_SIZE);
-  public static final transient ImageData IMG_TABLE = new ImageData(BOOK_MODIFY, 214, 0, 42, 46, TEX_SIZE, TEX_SIZE);
-  public static final transient ImageData[] IMG_SLOTS = new ImageData[]{IMG_SLOT_1, IMG_SLOT_2, IMG_SLOT_3, IMG_SLOT_4, IMG_SLOT_5};
+  public static final ImageData IMG_SLOT_1 = new ImageData(BOOK_MODIFY, 0, 75, 22, 22, TEX_SIZE, TEX_SIZE);
+  public static final ImageData IMG_SLOT_2 = new ImageData(BOOK_MODIFY, 0, 97, 40, 22, TEX_SIZE, TEX_SIZE);
+  public static final ImageData IMG_SLOT_3 = new ImageData(BOOK_MODIFY, 0, 119, 58, 22, TEX_SIZE, TEX_SIZE);
+  public static final ImageData IMG_SLOT_4 = new ImageData(BOOK_MODIFY, 0, 141, 40, 40, TEX_SIZE, TEX_SIZE);
+  public static final ImageData IMG_SLOT_5 = new ImageData(BOOK_MODIFY, 0, 181, 58, 41, TEX_SIZE, TEX_SIZE);
+  public static final ImageData IMG_TABLE = new ImageData(BOOK_MODIFY, 214, 0, 42, 46, TEX_SIZE, TEX_SIZE);
+  public static final ImageData[] IMG_SLOTS = new ImageData[]{IMG_SLOT_1, IMG_SLOT_2, IMG_SLOT_3, IMG_SLOT_4, IMG_SLOT_5};
 
-  public static final transient int[] SLOTS_X = new int[]{3, 21, 39, 12, 30};
-  public static final transient int[] SLOTS_Y = new int[]{3, 3, 3, 22, 22};
-  public static final transient int[] SLOTS_X_4 = new int[]{3, 21, 3, 21};
-  public static final transient int[] SLOTS_Y_4 = new int[]{3, 3, 22, 22};
+  public static final int[] SLOTS_X = new int[]{3, 21, 39, 12, 30};
+  public static final int[] SLOTS_Y = new int[]{3, 3, 3, 22, 22};
+  public static final int[] SLOTS_X_4 = new int[]{3, 21, 3, 21};
+  public static final int[] SLOTS_Y_4 = new int[]{3, 3, 22, 22};
 
   @Nullable
   private transient Modifier modifier;

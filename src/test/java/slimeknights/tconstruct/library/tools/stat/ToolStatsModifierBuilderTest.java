@@ -9,13 +9,14 @@ import slimeknights.tconstruct.test.BaseMcTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ToolStatsModifierBuilderTest extends BaseMcTest {
+
   private final StatsNBT testStatsNBT = StatsNBT.builder()
-                                                .set(ToolStats.DURABILITY, 100f)
-                                                .set(ToolStats.HARVEST_TIER, Tiers.STONE)
-                                                .set(ToolStats.ATTACK_DAMAGE, 2f)
-                                                .set(ToolStats.MINING_SPEED, 3f)
-                                                .set(ToolStats.ATTACK_SPEED, 5f)
-                                                .build();
+    .set(ToolStats.DURABILITY, 100f)
+    .set(ToolStats.HARVEST_TIER, Tiers.STONE)
+    .set(ToolStats.ATTACK_DAMAGE, 2f)
+    .set(ToolStats.MINING_SPEED, 3f)
+    .set(ToolStats.ATTACK_SPEED, 5f)
+    .build();
 
   @BeforeAll
   static void setup() {

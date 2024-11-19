@@ -15,8 +15,8 @@ import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
 /**
  * Effect that damages an entity
  *
- * @param type      damage type to apply
- * @param damage    Amount of damage to apply
+ * @param type   damage type to apply
+ * @param damage Amount of damage to apply
  */
 public record DamageFluidEffect(FluidDamageType type,
                                 float damage) implements FluidEffect<FluidEffectContext.Entity> {

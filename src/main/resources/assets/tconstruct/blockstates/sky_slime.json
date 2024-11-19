@@ -1,7 +1,7 @@
 {
-    "variants": {
-        "": {
-            "model": "tconstruct:block/slime/sticky/sky"
-        }
+  "variants": {
+    "": {
+      "model": "tconstruct:block/slime/sticky/sky"
     }
+  }
 }

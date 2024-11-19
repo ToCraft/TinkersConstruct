@@ -1,5 +1,8 @@
 {
   "title": "Литейная печь",
   "subText": "Нет ничего более фантастического, чем Литейная Печь.",
-  "hidden": ["structurereq", "fgui2"]
+  "hidden": [
+    "structurereq",
+    "fgui2"
+  ]
 }

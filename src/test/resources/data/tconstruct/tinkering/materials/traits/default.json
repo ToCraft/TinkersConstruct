@@ -1,3 +1,8 @@
 {
-    "default": [{ "name": "test:modifier_1", "level": 1 }]
+  "default": [
+    {
+      "name": "test:modifier_1",
+      "level": 1
+    }
+  ]
 }

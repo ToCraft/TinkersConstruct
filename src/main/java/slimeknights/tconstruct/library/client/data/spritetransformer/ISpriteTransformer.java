@@ -35,9 +35,10 @@ public interface ISpriteTransformer extends IJsonSerializable {
 
   /**
    * Copies the image. Overridable version of {@link #copyImage(NativeImage)} to make it easier to wrap a transformer.
-   * @param image          Image to copy
-   * @param allowAnimated  If true, the image may be animated
-   * @return  Copy of the passed image with the first frame filled.
+   *
+   * @param image         Image to copy
+   * @param allowAnimated If true, the image may be animated
+   * @return Copy of the passed image with the first frame filled.
    */
   default NativeImage copyImage(NativeImage image, boolean allowAnimated) {
     return copyImage(image);
@@ -67,7 +68,9 @@ public interface ISpriteTransformer extends IJsonSerializable {
     return null;
   }
 
-  /** Gets the number of animation frames represented by this transformer, used to make nesting transformers possible */
+  /**
+   * Gets the number of animation frames represented by this transformer, used to make nesting transformers possible
+   */
   default int getFrames() {
     return 1;
   }

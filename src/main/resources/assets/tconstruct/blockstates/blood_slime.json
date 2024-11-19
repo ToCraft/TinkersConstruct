@@ -1,7 +1,7 @@
 {
-    "variants": {
-        "": {
-            "model": "tconstruct:block/slime/sticky/blood"
-        }
+  "variants": {
+    "": {
+      "model": "tconstruct:block/slime/sticky/blood"
     }
+  }
 }

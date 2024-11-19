@@ -3,7 +3,6 @@ package slimeknights.tconstruct.library.tools.layout;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import io.netty.buffer.Unpooled;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;

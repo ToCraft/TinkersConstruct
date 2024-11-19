@@ -1,9 +1,12 @@
 {
   "tool": "tconstruct:travelers_helmet",
   "text": [
-    { "text": "Gözlükler Hakanlara veya Yaban Sıçanlarına veya Hakan Yaban Sıçanlarına yakışır." },
-	{
-      "text": "İyi bir gözlük güvenli maceralar, kolay görüş ve Hakanın özelliklerini sağlar.", "paragraph": true
+    {
+      "text": "Gözlükler Hakanlara veya Yaban Sıçanlarına veya Hakan Yaban Sıçanlarına yakışır."
+    },
+    {
+      "text": "İyi bir gözlük güvenli maceralar, kolay görüş ve Hakanın özelliklerini sağlar.",
+      "paragraph": true
     }
   ],
   "properties": [

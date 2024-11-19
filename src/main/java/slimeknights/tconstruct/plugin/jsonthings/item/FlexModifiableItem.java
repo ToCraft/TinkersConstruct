@@ -1,7 +1,6 @@
 package slimeknights.tconstruct.plugin.jsonthings.item;
 
 import dev.gigaherz.jsonthings.things.IFlexItem;
-import dev.gigaherz.jsonthings.things.StackContext;
 import dev.gigaherz.jsonthings.things.events.FlexEventHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;

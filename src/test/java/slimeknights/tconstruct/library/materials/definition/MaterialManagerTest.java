@@ -27,7 +27,9 @@ class MaterialManagerTest extends BaseMcTest {
   private static MaterialManager materialManager;
   private final JsonFileLoader fileLoader = new JsonFileLoader(MaterialManager.GSON, MaterialManager.FOLDER);
 
-  /** Ensures the given condition serializer is registered */
+  /**
+   * Ensures the given condition serializer is registered
+   */
   private static void ensureSerializerRegistered(IConditionSerializer<?> serializer) {
     try {
       CraftingHelper.register(serializer);
@@ -45,7 +47,7 @@ class MaterialManagerTest extends BaseMcTest {
 
   @Test
   void loadFullMaterial_allStatsPresent() {
-    Map<ResourceLocation,JsonElement> splashList = fileLoader.loadFilesAsSplashlist("full");
+    Map<ResourceLocation, JsonElement> splashList = fileLoader.loadFilesAsSplashlist("full");
 
     materialManager.apply(splashList, mock(ResourceManager.class), mock(ProfilerFiller.class));
 

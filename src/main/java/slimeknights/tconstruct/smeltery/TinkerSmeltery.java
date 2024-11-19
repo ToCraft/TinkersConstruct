@@ -123,6 +123,7 @@ import java.util.function.Supplier;
  */
 @SuppressWarnings("unused")
 public final class TinkerSmeltery extends TinkerModule {
+
   // Concurrent in case Forge loads something asynchronous
   private static final List<ItemLike> TAB_SMELTERY_ITEMS = new CopyOnWriteArrayList<>();
   /**
@@ -359,7 +360,7 @@ public final class TinkerSmeltery extends TinkerModule {
   public static final CastItemObject bootsPlatingCast = ITEMS.registerCast("boots_plating", () -> addToTabItemList(new PartCastItem(SMELTERY_PROPS, () -> TinkerToolParts.plating.get(ArmorSlotType.BOOTS)), TAB_SMELTERY_ITEMS));
   public static final CastItemObject mailleCast = ITEMS.registerCast(TinkerToolParts.maille.getId().getPath(), () -> addToTabItemList(new Item(SMELTERY_PROPS), TAB_SMELTERY_ITEMS));
   // dummy cast creation items
-  public static final EnumObject<ArmorSlotType,DummyMaterialItem> dummyPlating = ITEMS.registerEnum(ArmorSlotType.values(), "plating_dummy", t -> addToTabItemList(new DummyMaterialItem(SMELTERY_PROPS), TAB_SMELTERY_ITEMS));
+  public static final EnumObject<ArmorSlotType, DummyMaterialItem> dummyPlating = ITEMS.registerEnum(ArmorSlotType.values(), "plating_dummy", t -> addToTabItemList(new DummyMaterialItem(SMELTERY_PROPS), TAB_SMELTERY_ITEMS));
 
 
   /*

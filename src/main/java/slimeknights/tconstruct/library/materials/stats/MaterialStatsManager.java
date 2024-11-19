@@ -176,7 +176,7 @@ public class MaterialStatsManager extends MergingJsonDataLoader<Map<ResourceLoca
     long time = System.nanoTime();
     super.onResourceManagerReload(manager);
     log.info("{} stats loaded for {} materials in {} ms",
-      materialToStatsPerType.values().stream().mapToInt(stats -> stats.keySet().size()).sum(),
+      materialToStatsPerType.values().stream().mapToInt(stats -> stats.size()).sum(),
       materialToStatsPerType.size(), (System.nanoTime() - time) / 1000000f);
   }
 

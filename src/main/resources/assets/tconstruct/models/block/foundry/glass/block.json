@@ -5,6 +5,8 @@
     "all": "tconstruct:block/foundry/glass"
   },
   "connection": {
-    "textures": {"all": "cornerless_full"}
+    "textures": {
+      "all": "cornerless_full"
+    }
   }
 }

@@ -18,6 +18,7 @@ import slimeknights.tconstruct.library.client.RenderUtils;
 import slimeknights.tconstruct.tables.client.inventory.widget.BorderWidget;
 
 public class SideInventoryScreen<P extends MultiModuleScreen<?>, C extends AbstractContainerMenu> extends ModuleScreen<P, C> {
+
   protected static final ResourceLocation GENERIC_INVENTORY = TConstruct.getResource("textures/gui/generic.png");
 
   protected ScalableElementScreen overlap = GenericScreen.overlap;

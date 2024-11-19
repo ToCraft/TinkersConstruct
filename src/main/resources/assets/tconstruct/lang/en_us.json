@@ -1,13 +1,11 @@
 {
   "_comment": "Tinkers Common",
-
   "block.tconstruct.sky_slime": "Skyslime Block",
   "block.tconstruct.sky_slime.tooltip": "Sticks to both slime and honey",
   "block.tconstruct.ichor_slime": "Ichor Block",
   "block.tconstruct.ichor_slime.tooltip": "Sticks all sticky blocks besides ichor",
   "block.tconstruct.ender_slime": "Enderslime Block",
   "block.tconstruct.ender_slime.tooltip": "Sticks when pushed, but not when adjacent to a sticky block",
-
   "block.tconstruct.earth_congealed_slime": "Congealed Slime Block",
   "block.tconstruct.earth_congealed_slime.tooltip": "Lets you jump really high",
   "block.tconstruct.sky_congealed_slime": "Congealed Skyslime Block",
@@ -16,44 +14,35 @@
   "block.tconstruct.ender_congealed_slime.tooltip": "Lets you jump really high",
   "block.tconstruct.ichor_congealed_slime": "Congealed Ichor",
   "block.tconstruct.ichor_congealed_slime.tooltip": "Lets you jump really high",
-
   "block.tconstruct.mud_bricks": "Mud Bricks",
   "block.tconstruct.mud_bricks_slab": "Mud Bricks Slab",
   "block.tconstruct.mud_bricks_stairs": "Mud Bricks Stairs",
-
   "block.tconstruct.blazewood": "Blazewood",
   "block.tconstruct.blazewood_slab": "Blazewood Slab",
   "block.tconstruct.blazewood_stairs": "Blazewood Stairs",
   "block.tconstruct.blazewood_fence": "Blazewood Fence",
-
   "block.tconstruct.nahuatl": "Nahuatl Planks",
   "block.tconstruct.nahuatl_slab": "Nahuatl Slab",
   "block.tconstruct.nahuatl_stairs": "Nahuatl Stairs",
   "block.tconstruct.nahuatl_fence": "Nahuatl Fence",
-
   "block.tconstruct.clear_glass": "Clear Glass",
   "block.tconstruct.clear_glass_pane": "Clear Glass Pane",
   "block.tconstruct.clear_tinted_glass": "Tinted Clear Glass",
-
   "block.tconstruct.obsidian_pane": "Obsidian Pane",
   "block.tconstruct.gold_bars": "Gold Bars",
   "block.tconstruct.gold_bars.tooltip": "Acts as a empty cast in casting tables",
-  
   "block.tconstruct.gold_platform": "Gold Platform",
   "block.tconstruct.gold_platform.tooltip": "Acts as a empty cast in casting basins",
   "block.tconstruct.iron_platform": "Iron Platform",
   "block.tconstruct.cobalt_platform": "Cobalt Platform",
-  
-  "block.tconstruct.copper_platform":           "Copper Platform",
-  "block.tconstruct.exposed_copper_platform":   "Exposed Copper Platform",
+  "block.tconstruct.copper_platform": "Copper Platform",
+  "block.tconstruct.exposed_copper_platform": "Exposed Copper Platform",
   "block.tconstruct.weathered_copper_platform": "Weathered Copper Platform",
-  "block.tconstruct.oxidized_copper_platform":  "Oxidized Copper Platform",
-  
-  "block.tconstruct.waxed_copper_platform":           "Waxed Copper Platform",
-  "block.tconstruct.waxed_exposed_copper_platform":   "Waxed Exposed Copper Platform",
+  "block.tconstruct.oxidized_copper_platform": "Oxidized Copper Platform",
+  "block.tconstruct.waxed_copper_platform": "Waxed Copper Platform",
+  "block.tconstruct.waxed_exposed_copper_platform": "Waxed Exposed Copper Platform",
   "block.tconstruct.waxed_weathered_copper_platform": "Waxed Weathered Copper Platform",
-  "block.tconstruct.waxed_oxidized_copper_platform":  "Waxed Oxidized Copper Platform",
-
+  "block.tconstruct.waxed_oxidized_copper_platform": "Waxed Oxidized Copper Platform",
   "block.tconstruct.white_clear_stained_glass": "Clear White Stained Glass",
   "block.tconstruct.orange_clear_stained_glass": "Clear Orange Stained Glass",
   "block.tconstruct.magenta_clear_stained_glass": "Clear Magenta Stained Glass",
@@ -70,7 +59,6 @@
   "block.tconstruct.green_clear_stained_glass": "Clear Green Stained Glass",
   "block.tconstruct.red_clear_stained_glass": "Clear Red Stained Glass",
   "block.tconstruct.black_clear_stained_glass": "Clear Black Stained Glass",
-
   "block.tconstruct.white_clear_stained_glass_pane": "Clear White Stained Glass Pane",
   "block.tconstruct.orange_clear_stained_glass_pane": "Clear Orange Stained Glass Pane",
   "block.tconstruct.magenta_clear_stained_glass_pane": "Clear Magenta Stained Glass Pane",
@@ -87,108 +75,78 @@
   "block.tconstruct.green_clear_stained_glass_pane": "Clear Green Stained Glass Pane",
   "block.tconstruct.red_clear_stained_glass_pane": "Clear Red Stained Glass Pane",
   "block.tconstruct.black_clear_stained_glass_pane": "Clear Black Stained Glass Pane",
-
   "block.tconstruct.soul_glass": "Soul Glass",
   "block.tconstruct.soul_glass.tooltip": "Acts solid, but can be walked through",
   "block.tconstruct.soul_glass_pane": "Soul Glass Pane",
   "block.tconstruct.soul_glass_pane.tooltip": "Acts solid, but can be walked through",
-
   "block.tconstruct.glow": "Glow",
   "block.tconstruct.silky_jewel_block": "Silky Block of Jewel",
-
-
   "__comment": "Ore Metals",
-
   "item.tconstruct.copper_nugget": "Copper Nugget",
-
   "block.tconstruct.cobalt_ore": "Nether Cobalt Ore",
   "item.tconstruct.raw_cobalt": "Raw Cobalt",
   "block.tconstruct.raw_cobalt_block": "Block of Raw Cobalt",
-
   "block.tconstruct.cobalt_block": "Block of Cobalt",
   "block.tconstruct.cobalt_block.tooltip": "Can be used as beacon base",
   "item.tconstruct.cobalt_ingot": "Cobalt Ingot",
   "item.tconstruct.cobalt_nugget": "Cobalt Nugget",
-
-
   "__comment": "Tier 3 Metals",
-
   "block.tconstruct.slimesteel_block": "Block of Slimesteel",
   "item.tconstruct.slimesteel_ingot": "Slimesteel Ingot",
   "item.tconstruct.slimesteel_nugget": "Slimesteel Nugget",
-
   "block.tconstruct.amethyst_bronze_block": "Block of Amethyst Bronze",
   "item.tconstruct.amethyst_bronze_ingot": "Amethyst Bronze Ingot",
   "item.tconstruct.amethyst_bronze_nugget": "Amethyst Bronze Nugget",
-
   "block.tconstruct.rose_gold_block": "Block of Rose Gold",
   "item.tconstruct.rose_gold_ingot": "Rose Gold Ingot",
   "item.tconstruct.rose_gold_nugget": "Rose Gold Nugget",
-
   "block.tconstruct.pig_iron_block": "Block of Pig Iron",
   "item.tconstruct.pig_iron_ingot": "Pig Iron Ingot",
   "item.tconstruct.pig_iron_nugget": "Pig Iron Nugget",
-
-
   "__comment": "Tier 4 Metals",
-
   "block.tconstruct.manyullyn_block": "Block of Manyullyn",
   "block.tconstruct.manyullyn_block.tooltip": "Can be used as beacon base",
   "item.tconstruct.manyullyn_ingot": "Manyullyn Ingot",
   "item.tconstruct.manyullyn_nugget": "Manyullyn Nugget",
-
   "block.tconstruct.hepatizon_block": "Block of Hepatizon",
   "block.tconstruct.hepatizon_block.tooltip": "Can be used as beacon base",
   "item.tconstruct.hepatizon_ingot": "Hepatizon Ingot",
   "item.tconstruct.hepatizon_nugget": "Hepatizon Nugget",
-
   "block.tconstruct.queens_slime_block": "Block of Queen's Slime",
   "block.tconstruct.queens_slime_block.tooltip": "Can be used as beacon base",
   "item.tconstruct.queens_slime_ingot": "Queen's Slime Ingot",
   "item.tconstruct.queens_slime_nugget": "Queen's Slime Nugget",
-
   "block.tconstruct.soulsteel_block": "Block of Soulsteel",
   "block.tconstruct.soulsteel_block.tooltip": "Can be used as beacon base",
   "item.tconstruct.soulsteel_ingot": "Soulsteel Ingot",
   "item.tconstruct.soulsteel_nugget": "Soulsteel Nugget",
-
   "item.tconstruct.netherite_nugget": "Netherite Nugget",
   "item.tconstruct.debris_nugget": "Debris Scrap",
   "item.tconstruct.debris_nugget.tooltip": "Small shard of ancient netherite, possibly can be melted to salvage",
-
-
   "__comment": "Tier 5 Metals",
-
   "block.tconstruct.knightslime_block": "Block of Knightslime",
   "item.tconstruct.knightslime_ingot": "Knightslime Ingot",
   "item.tconstruct.knightslime_ingot.tooltip": "Slimy yet metallic but also stone? Fascinating!",
   "item.tconstruct.knightslime_nugget": "Knightslime Nugget",
-
   "item.tconstruct.materials_and_you": "Materials and You",
   "item.tconstruct.materials_and_you.tooltip": "The introduction book into tools and materials\nby Selena",
   "item.tconstruct.encyclopedia": "Encyclopedia of Tinkering",
   "item.tconstruct.encyclopedia.tooltip": "The reference book every tinker needs\nby Selena",
-
   "item.tconstruct.tinkers_gadgetry": "Tinker's Gadgetry",
   "item.tconstruct.tinkers_gadgetry.tooltip": "Book of uses of slime in everyday tasks\nby Melvin",
-
   "item.tconstruct.puny_smelting": "Puny Smelting",
   "item.tconstruct.puny_smelting.tooltip": "Smelting and casting guidebook for beginners\nby Thruul M'Gon",
   "item.tconstruct.mighty_smelting": "Mighty Smelting",
   "item.tconstruct.mighty_smelting.tooltip": "Textbook for mastery of melting, casting, and alloying\nby Thruul M'Gon",
-
   "item.tconstruct.fantastic_foundry": "Fantastic Foundry",
   "item.tconstruct.fantastic_foundry.tooltip": "Book about the hottest new technology in molten metals\nby Nemea",
-
   "item.tconstruct.sky_slime_ball": "Skyslime Ball",
   "item.tconstruct.ender_slime_ball": "Enderslime Ball",
   "item.tconstruct.ichor_slime_ball": "Ichor Ball",
-
   "item.tconstruct.bacon": "Bacon",
   "item.tconstruct.cheese_ingot": "Cheese",
   "block.tconstruct.cheese_block": "Cheese Block",
   "item.tconstruct.cheese.tooltip": "Removes a random effect when eaten",
-
   "item.tconstruct.earth_slime_crystal": "Earthslime Crystal",
   "block.tconstruct.earth_slime_crystal_block": "Earthslime Crystal Block",
   "block.tconstruct.small_earth_slime_crystal_bud": "Small Earthslime Crystal Bud",
@@ -196,7 +154,6 @@
   "block.tconstruct.large_earth_slime_crystal_bud": "Large Earthslime Crystal Bud",
   "block.tconstruct.earth_slime_crystal_cluster": "Earthslime Crystal Cluster",
   "block.tconstruct.budding_earth_slime_crystal": "Budding Earthslime Crystal",
-
   "item.tconstruct.sky_slime_crystal": "Skyslime Crystal",
   "block.tconstruct.sky_slime_crystal_block": "Skyslime Crystal Block",
   "block.tconstruct.small_sky_slime_crystal_bud": "Small Skyslime Crystal Bud",
@@ -204,7 +161,6 @@
   "block.tconstruct.large_sky_slime_crystal_bud": "Large Skyslime Crystal Bud",
   "block.tconstruct.sky_slime_crystal_cluster": "Skyslime Crystal Cluster",
   "block.tconstruct.budding_sky_slime_crystal": "Budding Skyslime Crystal",
-
   "item.tconstruct.ichor_slime_crystal": "Ichor Crystal",
   "block.tconstruct.ichor_slime_crystal_block": "Ichor Crystal Block",
   "block.tconstruct.small_ichor_slime_crystal_bud": "Small Ichor Crystal Bud",
@@ -212,7 +168,6 @@
   "block.tconstruct.large_ichor_slime_crystal_bud": "Large Ichor Crystal Bud",
   "block.tconstruct.ichor_slime_crystal_cluster": "Ichor Crystal Cluster",
   "block.tconstruct.budding_ichor_slime_crystal": "Budding Ichor Crystal",
-
   "item.tconstruct.ender_slime_crystal": "Enderslime Crystal",
   "block.tconstruct.ender_slime_crystal_block": "Enderslime Crystal Block",
   "block.tconstruct.small_ender_slime_crystal_bud": "Small Enderslime Crystal Bud",
@@ -220,7 +175,6 @@
   "block.tconstruct.large_ender_slime_crystal_bud": "Large Enderslime Crystal Bud",
   "block.tconstruct.ender_slime_crystal_cluster": "Enderslime Crystal Cluster",
   "block.tconstruct.budding_ender_slime_crystal": "Budding Enderslime Crystal",
-
   "item.tconstruct.emerald_reinforcement": "Emerald Reinforcement",
   "item.tconstruct.emerald_reinforcement.tooltip": "Reduces chance of a tool taking damage",
   "item.tconstruct.slimesteel_reinforcement": "Slimesteel Reinforcement",
@@ -247,13 +201,11 @@
   "item.tconstruct.blazing_bone": "Blazing Bone",
   "item.tconstruct.dragon_scale": "Dragon Scale",
   "item.tconstruct.dragon_scale.tooltip": "Blasted off an ender dragon",
-
   "item.tconstruct.modifier_crystal": "Modifier Crystal",
   "item.tconstruct.modifier_crystal.format": "%s Crystal",
   "item.tconstruct.modifier_crystal.missing": "Missing or invalid NBT defining the modifier type",
   "item.tconstruct.modifier_crystal.tooltip": "Apply to a tool to gain 1 level of the modifier, consuming the appropriate slots.",
   "item.tconstruct.modifier_crystal.modifier_id": "Modifier ID: %s",
-
   "item.tconstruct.creative_slot": "Creative Slot",
   "item.tconstruct.creative_slot.upgrades": "Creative Upgrade",
   "item.tconstruct.creative_slot.abilities": "Creative Ability",
@@ -261,718 +213,539 @@
   "item.tconstruct.creative_slot.defense": "Creative Defense Slot",
   "item.tconstruct.creative_slot.missing": "Missing or invalid NBT defining the slot type",
   "item.tconstruct.creative_slot.tooltip": "Adds an additional %s slot to a tool",
-
   "item.tconstruct.copper_can": "Copper Can",
   "item.tconstruct.copper_can.tooltip": "Stackable container holding 1 ingot of fluid",
   "item.tconstruct.copper_can.contents": "Contains: 1 ingot %s",
-
-
   "_comment": "Tinkers Patterns",
-
   "pattern.tconstruct.ingot": "Ingot",
   "pattern.tconstruct.nugget": "Nugget",
   "pattern.tconstruct.gem": "Gem",
   "pattern.tconstruct.rod": "Rod",
-
   "pattern.tconstruct.gear": "Gear",
   "pattern.tconstruct.plate": "Small Plate",
   "pattern.tconstruct.coin": "Coin",
   "pattern.tconstruct.wire": "Wire",
-
   "pattern.tconstruct.repair_kit": "Repair Kit",
   "pattern.tconstruct.plating": "Plating",
   "pattern.tconstruct.helmet_plating": "Helmet Plating",
   "pattern.tconstruct.chestplate_plating": "Chest Plating",
   "pattern.tconstruct.leggings_plating": "Leg Plating",
   "pattern.tconstruct.boots_plating": "Boot Plating",
-
   "_comment": "Small Head Patterns",
-
   "pattern.tconstruct.pick_head": "Pick Head",
   "pattern.tconstruct.small_axe_head": "Small Axe Head",
   "pattern.tconstruct.small_blade": "Small Blade",
   "pattern.tconstruct.sign_head": "Sign Head",
   "pattern.tconstruct.bow_limb": "Bow Limb",
-
   "_comment": "Large Head Patterns",
-
   "pattern.tconstruct.hammer_head": "Hammer Head",
   "pattern.tconstruct.broad_axe_head": "Broad Axe Head",
   "pattern.tconstruct.broad_blade": "Broad Blade",
-
   "_comment": "Binding Patterns",
-
   "pattern.tconstruct.tool_binding": "Tool Binding",
   "pattern.tconstruct.round_plate": "Round Plate",
   "pattern.tconstruct.large_plate": "Large Plate",
   "pattern.tconstruct.bowstring": "Bowstring",
   "pattern.tconstruct.maille": "Maille",
   "pattern.tconstruct.shield_core": "Shield Core",
-
   "_comment": "Tool Handle Patterns",
-
   "pattern.tconstruct.tool_handle": "Tool Handle",
   "pattern.tconstruct.tough_handle": "Tough Handle",
   "pattern.tconstruct.bow_grip": "Bow Grip",
-
-
   "_comment": "Tinkers Gold Casts",
-
   "item.tconstruct.cast.cost": "Material cost: %d",
-
   "item.tconstruct.blank_cast": "Blank Gold Cast",
   "item.tconstruct.ingot_cast": "Ingot Gold Cast",
   "item.tconstruct.nugget_cast": "Nugget Gold Cast",
   "item.tconstruct.gem_cast": "Gem Gold Cast",
   "item.tconstruct.rod_cast": "Rod Gold Cast",
-
   "item.tconstruct.gear_cast": "Gear Gold Cast",
   "item.tconstruct.plate_cast": "Small Plate Gold Cast",
   "item.tconstruct.coin_cast": "Coin Gold Cast",
   "item.tconstruct.wire_cast": "Wire Gold Cast",
-
   "item.tconstruct.repair_kit_cast": "Repair Kit Gold Cast",
-
   "_comment": "Small Head Gold Casts",
-
   "item.tconstruct.pick_head_cast": "Pick Head Gold Cast",
   "item.tconstruct.small_axe_head_cast": "Small Axe Head Gold Cast",
   "item.tconstruct.small_blade_cast": "Small Blade Gold Cast",
   "item.tconstruct.sign_head_cast": "Sign Head Gold Cast",
   "item.tconstruct.bow_limb_cast": "Bow Limb Gold Cast",
   "item.tconstruct.bow_grip_cast": "Bow Grip Gold Cast",
-
   "_comment": "Large Head Gold Casts",
-
   "item.tconstruct.hammer_head_cast": "Hammer Head Gold Cast",
   "item.tconstruct.broad_axe_head_cast": "Broad Axe Head Gold Cast",
   "item.tconstruct.broad_blade_cast": "Broad Blade Gold Cast",
-
   "_comment": "Binding Gold Casts",
-
   "item.tconstruct.tool_binding_cast": "Tool Binding Gold Cast",
   "item.tconstruct.round_plate_cast": "Round Plate Gold Cast",
   "item.tconstruct.large_plate_cast": "Large Plate Gold Cast",
-
   "_comment": "Tool Handle Gold Casts",
-
   "item.tconstruct.tool_handle_cast": "Tool Handle Gold Cast",
   "item.tconstruct.tough_handle_cast": "Tough Handle Gold Cast",
-
   "_comment": "Armor Gold Casts",
   "item.tconstruct.helmet_plating_cast": "Helmet Plating Gold Cast",
   "item.tconstruct.chestplate_plating_cast": "Chest Plating Gold Cast",
   "item.tconstruct.leggings_plating_cast": "Leg Plating Gold Cast",
   "item.tconstruct.boots_plating_cast": "Boot Plating Gold Cast",
   "item.tconstruct.maille_cast": "Maille Gold Cast",
-
-
   "_comment": "Tinkers Sand Casts",
-
   "item.tconstruct.blank_sand_cast": "Blank Sand Cast",
   "item.tconstruct.ingot_sand_cast": "Ingot Sand Cast",
   "item.tconstruct.nugget_sand_cast": "Nugget Sand Cast",
   "item.tconstruct.gem_sand_cast": "Gem Sand Cast",
   "item.tconstruct.rod_sand_cast": "Rod Sand Cast",
-
   "item.tconstruct.gear_sand_cast": "Gear Sand Cast",
   "item.tconstruct.plate_sand_cast": "Small Plate Sand Cast",
   "item.tconstruct.coin_sand_cast": "Coin Sand Cast",
   "item.tconstruct.wire_sand_cast": "Wire Sand Cast",
-
   "item.tconstruct.repair_kit_sand_cast": "Repair Kit Sand Cast",
-
   "_comment": "Small Head Sand Casts",
-
   "item.tconstruct.pick_head_sand_cast": "Pick Head Sand Cast",
   "item.tconstruct.small_axe_head_sand_cast": "Small Axe Head Sand Cast",
   "item.tconstruct.small_blade_sand_cast": "Small Blade Sand Cast",
   "item.tconstruct.sign_head_sand_cast": "Sign Head Sand Cast",
   "item.tconstruct.bow_limb_sand_cast": "Bow Limb Sand Cast",
   "item.tconstruct.bow_grip_sand_cast": "Bow Grip Sand Cast",
-
   "_comment": "Large Head Sand Casts",
-
   "item.tconstruct.hammer_head_sand_cast": "Hammer Head Sand Cast",
   "item.tconstruct.broad_axe_head_sand_cast": "Broad Axe Head Sand Cast",
   "item.tconstruct.broad_blade_sand_cast": "Broad Blade Sand Cast",
-
   "_comment": "Binding Sand Casts",
-
   "item.tconstruct.tool_binding_sand_cast": "Tool Binding Sand Cast",
   "item.tconstruct.round_plate_sand_cast": "Round Plate Sand Cast",
   "item.tconstruct.large_plate_sand_cast": "Large Plate Sand Cast",
-
   "_comment": "Tool Handle Sand Casts",
-
   "item.tconstruct.tool_handle_sand_cast": "Tool Handle Sand Cast",
   "item.tconstruct.tough_handle_sand_cast": "Tough Handle Sand Cast",
-
   "_comment": "Armor Sand Casts",
-
   "item.tconstruct.helmet_plating_sand_cast": "Helmet Plating Sand Cast",
   "item.tconstruct.chestplate_plating_sand_cast": "Chest Plating Sand Cast",
   "item.tconstruct.leggings_plating_sand_cast": "Leg Plating Sand Cast",
   "item.tconstruct.boots_plating_sand_cast": "Boot Plating Sand Cast",
   "item.tconstruct.maille_sand_cast": "Maille Sand Cast",
-
-
   "_comment": "Tinkers Red Sand Casts",
-
   "item.tconstruct.blank_red_sand_cast": "Blank Red Sand Cast",
   "item.tconstruct.ingot_red_sand_cast": "Ingot Red Sand Cast",
   "item.tconstruct.nugget_red_sand_cast": "Nugget Red Sand Cast",
   "item.tconstruct.gem_red_sand_cast": "Gem Red Sand Cast",
   "item.tconstruct.rod_red_sand_cast": "Rod Red Sand Cast",
-
   "item.tconstruct.gear_red_sand_cast": "Gear Red Sand Cast",
   "item.tconstruct.plate_red_sand_cast": "Small Plate Red Sand Cast",
   "item.tconstruct.coin_red_sand_cast": "Coin Red Sand Cast",
   "item.tconstruct.wire_red_sand_cast": "Wire Red Sand Cast",
-
   "item.tconstruct.repair_kit_red_sand_cast": "Repair Kit Red Sand Cast",
-
   "_comment": "Small Head Red Sand Casts",
-
   "item.tconstruct.pick_head_red_sand_cast": "Pick Head Red Sand Cast",
   "item.tconstruct.small_axe_head_red_sand_cast": "Small Axe Head Red Sand Cast",
   "item.tconstruct.small_blade_red_sand_cast": "Small Blade Red Sand Cast",
   "item.tconstruct.sign_head_red_sand_cast": "Sign Head Red Sand Cast",
   "item.tconstruct.bow_limb_red_sand_cast": "Bow Limb Red Sand Cast",
   "item.tconstruct.bow_grip_red_sand_cast": "Bow Grip Red Sand Cast",
-
   "_comment": "Large Head Red Sand Casts",
-
   "item.tconstruct.hammer_head_red_sand_cast": "Hammer Head Red Sand Cast",
   "item.tconstruct.broad_axe_head_red_sand_cast": "Broad Axe Head Red Sand Cast",
   "item.tconstruct.broad_blade_red_sand_cast": "Broad Blade Red Sand Cast",
-
   "_comment": "Binding Red Sand Casts",
-
   "item.tconstruct.tool_binding_red_sand_cast": "Tool Binding Red Sand Cast",
   "item.tconstruct.round_plate_red_sand_cast": "Round Plate Red Sand Cast",
   "item.tconstruct.large_plate_red_sand_cast": "Large Plate Red Sand Cast",
-
   "_comment": "Tool Handle Red Sand Casts",
-
   "item.tconstruct.tool_handle_red_sand_cast": "Tool Handle Red Sand Cast",
   "item.tconstruct.tough_handle_red_sand_cast": "Tough Handle Red Sand Cast",
-
   "_comment": "Armor Red Sand Casts",
-
   "item.tconstruct.helmet_plating_red_sand_cast": "Helmet Plating Red Sand Cast",
   "item.tconstruct.chestplate_plating_red_sand_cast": "Chest Plating Red Sand Cast",
   "item.tconstruct.leggings_plating_red_sand_cast": "Leg Plating Red Sand Cast",
   "item.tconstruct.boots_plating_red_sand_cast": "Boot Plating Red Sand Cast",
   "item.tconstruct.maille_red_sand_cast": "Maille Red Sand Cast",
-
-
   "_comment": "Tinkers Fluids",
-
   "block.tconstruct.blazing_blood_fluid": "Blazing Blood",
   "fluid.tconstruct.blazing_blood": "Blazing Blood",
   "fluid.tconstruct.flowing_blazing_blood": "Flowing Blazing Blood",
   "item.tconstruct.blazing_blood_bucket": "Blazing Blood Bucket",
-
   "fluid.tconstruct.powdered_snow": "Powdered Snow",
-
   "_comment": "Food",
-
   "block.tconstruct.honey_fluid": "Honey",
   "fluid.tconstruct.honey": "Honey",
   "fluid.tconstruct.flowing_honey": "Flowing Honey",
   "item.tconstruct.honey_bucket": "Honey Bucket",
-
   "block.tconstruct.beetroot_soup_fluid": "Beetroot Soup",
   "fluid.tconstruct.beetroot_soup": "Beetroot Soup",
   "fluid.tconstruct.flowing_beetroot_soup": "Flowing Beetroot Soup",
   "item.tconstruct.beetroot_soup_bucket": "Beetroot Soup Bucket",
-
   "block.tconstruct.mushroom_stew_fluid": "Mushroom Stew",
   "fluid.tconstruct.mushroom_stew": "Mushroom Stew",
   "fluid.tconstruct.flowing_mushroom_stew": "Flowing Mushroom Stew",
   "item.tconstruct.mushroom_stew_bucket": "Mushroom Stew Bucket",
-
   "block.tconstruct.rabbit_stew_fluid": "Rabbit Stew",
   "fluid.tconstruct.rabbit_stew": "Rabbit Stew",
   "fluid.tconstruct.flowing_rabbit_stew": "Flowing Rabbit Stew",
   "item.tconstruct.rabbit_stew_bucket": "Rabbit Stew Bucket",
-
   "block.tconstruct.meat_soup_fluid": "Meat Soup",
   "fluid.tconstruct.meat_soup": "Meat Soup",
   "fluid.tconstruct.flowing_meat_soup": "Flowing Meat Soup",
   "item.tconstruct.meat_soup_bucket": "Meat Soup Bucket",
   "item.tconstruct.meat_soup": "Meat Soup",
-
-
   "_comment": "Potion",
-
   "fluid.tconstruct.potion": "Potion",
-
   "item.tconstruct.potion_bucket": "Uncraftable Potion Bucket",
   "item.tconstruct.potion_bucket.effect.water": "Water Bucket",
   "item.tconstruct.potion_bucket.contents": "%s Bucket",
-
   "item.tconstruct.splash_bottle": "Splash Bottle",
   "item.tconstruct.lingering_bottle": "Lingering Bottle",
-
-
   "_comment": "Slime",
-
   "block.tconstruct.earth_slime_fluid": "Slime",
   "fluid.tconstruct.earth_slime": "Slime",
   "fluid.tconstruct.flowing_earth_slime": "Flowing Slime",
   "item.tconstruct.earth_slime_bucket": "Slime Bucket",
   "item.tconstruct.earth_slime_bottle": "Slime Bottle",
-
   "block.tconstruct.sky_slime_fluid": "Skyslime",
   "fluid.tconstruct.sky_slime": "Skyslime",
   "fluid.tconstruct.flowing_sky_slime": "Flowing Skyslime",
   "item.tconstruct.sky_slime_bucket": "Skyslime Bucket",
   "item.tconstruct.sky_slime_bottle": "Skyslime Bottle",
-
   "block.tconstruct.magma_fluid": "Magma",
   "fluid.tconstruct.magma": "Magma",
   "fluid.tconstruct.flowing_magma": "Flowing Magma",
   "item.tconstruct.magma_bucket": "Magma Bucket",
   "item.tconstruct.magma_bottle": "Magma Bottle",
-
   "block.tconstruct.ender_slime_fluid": "Enderslime",
   "fluid.tconstruct.ender_slime": "Enderslime",
   "fluid.tconstruct.flowing_ender_slime": "Flowing Enderslime",
   "item.tconstruct.ender_slime_bucket": "Enderslime Bucket",
   "item.tconstruct.ender_slime_bottle": "Enderslime Bottle",
-
   "block.tconstruct.venom_fluid": "Venom",
   "fluid.tconstruct.venom": "Venom",
   "fluid.tconstruct.flowing_venom": "Flowing Venom",
   "item.tconstruct.venom_bucket": "Venom Bucket",
   "item.tconstruct.venom_bottle": "Venom Bottle",
-  
   "item.tconstruct.ichor_slime_bottle": "Ichor Bottle",
-
   "_comment": "Rock",
-
   "block.tconstruct.seared_stone_fluid": "Seared Stone",
   "fluid.tconstruct.seared_stone": "Seared Stone",
   "fluid.tconstruct.flowing_seared_stone": "Flowing Seared Stone",
   "item.tconstruct.seared_stone_bucket": "Seared Stone Bucket",
-
   "block.tconstruct.scorched_stone_fluid": "Scorched Stone",
   "fluid.tconstruct.scorched_stone": "Scorched Stone",
   "fluid.tconstruct.flowing_scorched_stone": "Flowing Scorched Stone",
   "item.tconstruct.scorched_stone_bucket": "Scorched Stone Bucket",
-
   "block.tconstruct.molten_clay_fluid": "Molten Clay",
   "fluid.tconstruct.molten_clay": "Molten Clay",
   "fluid.tconstruct.flowing_molten_clay": "Flowing Molten Clay",
   "item.tconstruct.molten_clay_bucket": "Molten Clay Bucket",
-
   "block.tconstruct.molten_glass_fluid": "Molten Glass",
   "fluid.tconstruct.molten_glass": "Molten Glass",
   "fluid.tconstruct.flowing_molten_glass": "Flowing Molten Glass",
   "item.tconstruct.molten_glass_bucket": "Molten Glass Bucket",
-
   "block.tconstruct.liquid_soul_fluid": "Liquid Soul",
   "fluid.tconstruct.liquid_soul": "Liquid Soul",
   "fluid.tconstruct.flowing_liquid_soul": "Flowing Liquid Soul",
   "item.tconstruct.liquid_soul_bucket": "Liquid Soul Bucket",
-
   "block.tconstruct.molten_obsidian_fluid": "Molten Obsidian",
   "fluid.tconstruct.molten_obsidian": "Molten Obsidian",
   "fluid.tconstruct.flowing_molten_obsidian": "Flowing Molten Obsidian",
   "item.tconstruct.molten_obsidian_bucket": "Molten Obsidian Bucket",
-
   "block.tconstruct.molten_emerald_fluid": "Molten Emerald",
   "fluid.tconstruct.molten_emerald": "Molten Emerald",
   "fluid.tconstruct.flowing_molten_emerald": "Flowing Molten Emerald",
   "item.tconstruct.molten_emerald_bucket": "Molten Emerald Bucket",
-
   "block.tconstruct.molten_quartz_fluid": "Molten Quartz",
   "fluid.tconstruct.molten_quartz": "Molten Quartz",
   "fluid.tconstruct.flowing_molten_quartz": "Flowing Molten Quartz",
   "item.tconstruct.molten_quartz_bucket": "Molten Quartz Bucket",
-
   "block.tconstruct.molten_amethyst_fluid": "Molten Amethyst",
   "fluid.tconstruct.molten_amethyst": "Molten Amethyst",
   "fluid.tconstruct.flowing_molten_amethyst": "Flowing Molten Amethyst",
   "item.tconstruct.molten_amethyst_bucket": "Molten Amethyst Bucket",
-
   "block.tconstruct.molten_diamond_fluid": "Molten Diamond",
   "fluid.tconstruct.molten_diamond": "Molten Diamond",
   "fluid.tconstruct.flowing_molten_diamond": "Flowing Molten Diamond",
   "item.tconstruct.molten_diamond_bucket": "Molten Diamond Bucket",
-
   "block.tconstruct.molten_ender_fluid": "Molten Ender",
   "fluid.tconstruct.molten_ender": "Molten Ender",
   "fluid.tconstruct.flowing_molten_ender": "Flowing Molten Ender",
   "item.tconstruct.molten_ender_bucket": "Molten Ender Bucket",
-
   "block.tconstruct.molten_porcelain_fluid": "Molten Porcelain",
   "fluid.tconstruct.molten_porcelain": "Molten Porcelain",
   "fluid.tconstruct.flowing_molten_porcelain": "Flowing Molten Porcelain",
   "item.tconstruct.molten_porcelain_bucket": "Molten Porcelain Bucket",
-
   "_comment": "Ores",
-
   "block.tconstruct.molten_iron_fluid": "Molten Iron",
   "fluid.tconstruct.molten_iron": "Molten Iron",
   "fluid.tconstruct.flowing_molten_iron": "Flowing Molten Iron",
   "item.tconstruct.molten_iron_bucket": "Molten Iron Bucket",
-
   "block.tconstruct.molten_gold_fluid": "Molten Gold",
   "fluid.tconstruct.molten_gold": "Molten Gold",
   "fluid.tconstruct.flowing_molten_gold": "Flowing Molten Gold",
   "item.tconstruct.molten_gold_bucket": "Molten Gold Bucket",
-
   "block.tconstruct.molten_copper_fluid": "Molten Copper",
   "fluid.tconstruct.molten_copper": "Molten Copper",
   "fluid.tconstruct.flowing_molten_copper": "Flowing Molten Copper",
   "item.tconstruct.molten_copper_bucket": "Molten Copper Bucket",
-
   "block.tconstruct.molten_cobalt_fluid": "Molten Cobalt",
   "fluid.tconstruct.molten_cobalt": "Molten Cobalt",
   "fluid.tconstruct.flowing_molten_cobalt": "Flowing Molten Cobalt",
   "item.tconstruct.molten_cobalt_bucket": "Molten Cobalt Bucket",
-
   "block.tconstruct.molten_debris_fluid": "Molten Debris",
   "fluid.tconstruct.molten_debris": "Molten Debris",
   "fluid.tconstruct.flowing_molten_debris": "Flowing Molten Debris",
   "item.tconstruct.molten_debris_bucket": "Molten Debris Bucket",
-
   "_comment": "Tier 3 Alloys",
-
   "block.tconstruct.molten_slimesteel_fluid": "Molten Slimesteel",
   "fluid.tconstruct.molten_slimesteel": "Molten Slimesteel",
   "fluid.tconstruct.flowing_molten_slimesteel": "Flowing Molten Slimesteel",
   "item.tconstruct.molten_slimesteel_bucket": "Molten Slimesteel Bucket",
-
   "block.tconstruct.molten_amethyst_bronze_fluid": "Molten Amethyst Bronze",
   "fluid.tconstruct.molten_amethyst_bronze": "Molten Amethyst Bronze",
   "fluid.tconstruct.flowing_molten_amethyst_bronze": "Flowing Molten Amethyst Bronze",
   "item.tconstruct.molten_amethyst_bronze_bucket": "Molten Amethyst Bronze Bucket",
-
   "block.tconstruct.molten_rose_gold_fluid": "Molten Rose Gold",
   "fluid.tconstruct.molten_rose_gold": "Molten Rose Gold",
   "fluid.tconstruct.flowing_molten_rose_gold": "Flowing Molten Rose Gold",
   "item.tconstruct.molten_rose_gold_bucket": "Molten Rose Gold Bucket",
-
   "block.tconstruct.molten_pig_iron_fluid": "Molten Pig Iron",
   "fluid.tconstruct.molten_pig_iron": "Molten Pig Iron",
   "fluid.tconstruct.flowing_molten_pig_iron": "Flowing Molten Pig Iron",
   "item.tconstruct.molten_pig_iron_bucket": "Molten Pig Iron Bucket",
-
   "_comment": "Tier 4 Alloys",
-
   "block.tconstruct.molten_manyullyn_fluid": "Molten Manyullyn",
   "fluid.tconstruct.molten_manyullyn": "Molten Manyullyn",
   "fluid.tconstruct.flowing_molten_manyullyn": "Flowing Molten Manyullyn",
   "item.tconstruct.molten_manyullyn_bucket": "Molten Manyullyn Bucket",
-
   "block.tconstruct.molten_hepatizon_fluid": "Molten Hepatizon",
   "fluid.tconstruct.molten_hepatizon": "Molten Hepatizon",
   "fluid.tconstruct.flowing_molten_hepatizon": "Flowing Molten Hepatizon",
   "item.tconstruct.molten_hepatizon_bucket": "Molten Hepatizon Bucket",
-
   "block.tconstruct.molten_queens_slime_fluid": "Molten Queen's Slime",
   "fluid.tconstruct.molten_queens_slime": "Molten Queen's Slime",
   "fluid.tconstruct.flowing_molten_queens_slime": "Flowing Molten Queen's Slime",
   "item.tconstruct.molten_queens_slime_bucket": "Molten Queen's Slime Bucket",
-
   "block.tconstruct.molten_soulsteel_fluid": "Molten Soulsteel",
   "fluid.tconstruct.molten_soulsteel": "Molten Soulsteel",
   "fluid.tconstruct.flowing_molten_soulsteel": "Flowing Molten Soulsteel",
   "item.tconstruct.molten_soulsteel_bucket": "Molten Soulsteel Bucket",
-
   "block.tconstruct.molten_netherite_fluid": "Molten Netherite",
   "fluid.tconstruct.molten_netherite": "Molten Netherite",
   "fluid.tconstruct.flowing_molten_netherite": "Flowing Molten Netherite",
   "item.tconstruct.molten_netherite_bucket": "Molten Netherite Bucket",
-
   "block.tconstruct.molten_knightslime_fluid": "Molten Knightslime",
   "fluid.tconstruct.molten_knightslime": "Molten Knightslime",
   "fluid.tconstruct.flowing_molten_knightslime": "Flowing Molten Knightslime",
   "item.tconstruct.molten_knightslime_bucket": "Molten Knightslime Bucket",
-
   "_comment": "Compat Ores",
-
   "block.tconstruct.molten_tin_fluid": "Molten Tin",
   "fluid.tconstruct.molten_tin": "Molten Tin",
   "fluid.tconstruct.flowing_molten_tin": "Flowing Molten Tin",
   "item.tconstruct.molten_tin_bucket": "Molten Tin Bucket",
-
   "block.tconstruct.molten_aluminum_fluid": "Molten Aluminum",
   "fluid.tconstruct.molten_aluminum": "Molten Aluminum",
   "fluid.tconstruct.flowing_molten_aluminum": "Flowing Molten Aluminum",
   "item.tconstruct.molten_aluminum_bucket": "Molten Aluminum Bucket",
-
   "block.tconstruct.molten_lead_fluid": "Molten Lead",
   "fluid.tconstruct.molten_lead": "Molten Lead",
   "fluid.tconstruct.flowing_molten_lead": "Flowing Molten Lead",
   "item.tconstruct.molten_lead_bucket": "Molten Lead Bucket",
-
   "block.tconstruct.molten_silver_fluid": "Molten Silver",
   "fluid.tconstruct.molten_silver": "Molten Silver",
   "fluid.tconstruct.flowing_molten_silver": "Flowing Molten Silver",
   "item.tconstruct.molten_silver_bucket": "Molten Silver Bucket",
-
   "block.tconstruct.molten_nickel_fluid": "Molten Nickel",
   "fluid.tconstruct.molten_nickel": "Molten Nickel",
   "fluid.tconstruct.flowing_molten_nickel": "Flowing Molten Nickel",
   "item.tconstruct.molten_nickel_bucket": "Molten Nickel Bucket",
-
   "block.tconstruct.molten_zinc_fluid": "Molten Zinc",
   "fluid.tconstruct.molten_zinc": "Molten Zinc",
   "fluid.tconstruct.flowing_molten_zinc": "Flowing Molten Zinc",
   "item.tconstruct.molten_zinc_bucket": "Molten Zinc Bucket",
-
   "block.tconstruct.molten_platinum_fluid": "Molten Platinum",
   "fluid.tconstruct.molten_platinum": "Molten Platinum",
   "fluid.tconstruct.flowing_molten_platinum": "Flowing Molten Platinum",
   "item.tconstruct.molten_platinum_bucket": "Molten Platinum Bucket",
-
   "block.tconstruct.molten_tungsten_fluid": "Molten Tungsten",
   "fluid.tconstruct.molten_tungsten": "Molten Tungsten",
   "fluid.tconstruct.flowing_molten_tungsten": "Flowing Molten Tungsten",
   "item.tconstruct.molten_tungsten_bucket": "Molten Tungsten Bucket",
-
   "block.tconstruct.molten_osmium_fluid": "Molten Osmium",
   "fluid.tconstruct.molten_osmium": "Molten Osmium",
   "fluid.tconstruct.flowing_molten_osmium": "Flowing Molten Osmium",
   "item.tconstruct.molten_osmium_bucket": "Molten Osmium Bucket",
-
   "block.tconstruct.molten_uranium_fluid": "Molten Uranium",
   "fluid.tconstruct.molten_uranium": "Molten Uranium",
   "fluid.tconstruct.flowing_molten_uranium": "Flowing Molten Uranium",
   "item.tconstruct.molten_uranium_bucket": "Molten Uranium Bucket",
-
   "_comment": "Compat Alloys",
-
   "block.tconstruct.molten_bronze_fluid": "Molten Bronze",
   "fluid.tconstruct.molten_bronze": "Molten Bronze",
   "fluid.tconstruct.flowing_molten_bronze": "Flowing Molten Bronze",
   "item.tconstruct.molten_bronze_bucket": "Molten Bronze Bucket",
-
   "block.tconstruct.molten_brass_fluid": "Molten Brass",
   "fluid.tconstruct.molten_brass": "Molten Brass",
   "fluid.tconstruct.flowing_molten_brass": "Flowing Molten Brass",
   "item.tconstruct.molten_brass_bucket": "Molten Brass Bucket",
-
   "block.tconstruct.molten_electrum_fluid": "Molten Electrum",
   "fluid.tconstruct.molten_electrum": "Molten Electrum",
   "fluid.tconstruct.flowing_molten_electrum": "Flowing Molten Electrum",
   "item.tconstruct.molten_electrum_bucket": "Molten Electrum Bucket",
-
   "block.tconstruct.molten_invar_fluid": "Molten Invar",
   "fluid.tconstruct.molten_invar": "Molten Invar",
   "fluid.tconstruct.flowing_molten_invar": "Flowing Molten Invar",
   "item.tconstruct.molten_invar_bucket": "Molten Invar Bucket",
-
   "block.tconstruct.molten_constantan_fluid": "Molten Constantan",
   "fluid.tconstruct.molten_constantan": "Molten Constantan",
   "fluid.tconstruct.flowing_molten_constantan": "Flowing Molten Constantan",
   "item.tconstruct.molten_constantan_bucket": "Molten Constantan Bucket",
-
   "block.tconstruct.molten_pewter_fluid": "Molten Pewter",
   "fluid.tconstruct.molten_pewter": "Molten Pewter",
   "fluid.tconstruct.flowing_molten_pewter": "Flowing Molten Pewter",
   "item.tconstruct.molten_pewter_bucket": "Molten Pewter Bucket",
-
   "block.tconstruct.molten_steel_fluid": "Molten Steel",
   "fluid.tconstruct.molten_steel": "Molten Steel",
   "fluid.tconstruct.flowing_molten_steel": "Flowing Molten Steel",
   "item.tconstruct.molten_steel_bucket": "Molten Steel Bucket",
-
   "_comment": "Thermal Alloys",
-
   "block.tconstruct.molten_enderium_fluid": "Molten Enderium",
   "fluid.tconstruct.molten_enderium": "Molten Enderium",
   "fluid.tconstruct.flowing_molten_enderium": "Flowing Molten Enderium",
   "item.tconstruct.molten_enderium_bucket": "Molten Enderium Bucket",
-
   "block.tconstruct.molten_lumium_fluid": "Molten Lumium",
   "fluid.tconstruct.molten_lumium": "Molten Lumium",
   "fluid.tconstruct.flowing_molten_lumium": "Flowing Molten Lumium",
   "item.tconstruct.molten_lumium_bucket": "Molten Lumium Bucket",
-
   "block.tconstruct.molten_signalum_fluid": "Molten Signalum",
   "fluid.tconstruct.molten_signalum": "Molten Signalum",
   "fluid.tconstruct.flowing_molten_signalum": "Flowing Molten Signalum",
   "item.tconstruct.molten_signalum_bucket": "Molten Signalum Bucket",
-
   "_comment": "Mekanism Alloys",
-
   "block.tconstruct.molten_refined_glowstone_fluid": "Molten Refined Glowstone",
   "fluid.tconstruct.molten_refined_glowstone": "Molten Refined Glowstone",
   "fluid.tconstruct.flowing_molten_refined_glowstone": "Flowing Molten Refined Glowstone",
   "item.tconstruct.molten_refined_glowstone_bucket": "Molten Refined Glowstone Bucket",
-
   "block.tconstruct.molten_refined_obsidian_fluid": "Molten Refined Obsidian",
   "fluid.tconstruct.molten_refined_obsidian": "Molten Refined Obsidian",
   "fluid.tconstruct.flowing_molten_refined_obsidian": "Flowing Molten Refined Obsidian",
   "item.tconstruct.molten_refined_obsidian_bucket": "Molten Refined Obsidian Bucket",
-
-
   "_comment": "Tinkers Gadgets",
-
   "block.tconstruct.punji": "Punji Sticks",
   "block.tconstruct.punji.tooltip": "Pointy! Also sticks to walls.",
-
   "item.tconstruct.clear_item_frame": "Clear Item Frame",
   "item.tconstruct.gold_item_frame": "Golden Item Frame",
   "item.tconstruct.reversed_gold_item_frame": "Inverted Golden Item Frame",
   "item.tconstruct.diamond_item_frame": "Diamond Item Frame",
   "item.tconstruct.manyullyn_item_frame": "Manyullyn Item Frame",
   "item.tconstruct.netherite_item_frame": "Netherite Item Frame",
-
   "item.tconstruct.glow_ball": "Glowball",
   "item.tconstruct.glow_ball.tooltip": "Not suited for consumption.",
   "item.tconstruct.efln_ball": "EFLN",
   "item.tconstruct.efln_ball.tooltip": "Explodes! Safe for mining",
-
   "item.tconstruct.quartz_shuriken": "Quartz Shuriken",
   "item.tconstruct.quartz_shuriken.tooltip": "A throwable weapon with higher damage",
   "item.tconstruct.flint_shuriken": "Flint Shuriken",
   "item.tconstruct.flint_shuriken.tooltip": "A throwable weapon with high knockback",
-
   "block.tconstruct.earth_cake": "Earthslime Cake",
-  "block.tconstruct.sky_cake":   "Skyslime Cake",
+  "block.tconstruct.sky_cake": "Skyslime Cake",
   "block.tconstruct.ichor_cake": "Ichor Cake",
   "block.tconstruct.ender_cake": "Enderslime Cake",
   "block.tconstruct.blood_cake": "Blood Cake",
   "block.tconstruct.magma_cake": "Magma Cake",
-
   "item.tconstruct.piggy_backpack": "Piggybackpack",
   "item.tconstruct.piggy_backpack.tooltip": "Use on a mob to pick it up",
   "effect.tconstruct.carry": "Carrying",
-  
-  "block.tconstruct.blaze_head":            "Blaze Head",
-  "block.tconstruct.enderman_head":         "Enderman Head",
-  "block.tconstruct.stray_head":            "Stray Skull",
-  "block.tconstruct.husk_head":             "Husk Head",
-  "block.tconstruct.drowned_head":          "Drowned Head",
-  "block.tconstruct.spider_head":           "Spider Head",
-  "block.tconstruct.cave_spider_head":      "Cave Spider Head",
-  "block.tconstruct.piglin_head":           "Piglin Head",
-  "block.tconstruct.piglin_brute_head":     "Piglin Brute Head",
+  "block.tconstruct.blaze_head": "Blaze Head",
+  "block.tconstruct.enderman_head": "Enderman Head",
+  "block.tconstruct.stray_head": "Stray Skull",
+  "block.tconstruct.husk_head": "Husk Head",
+  "block.tconstruct.drowned_head": "Drowned Head",
+  "block.tconstruct.spider_head": "Spider Head",
+  "block.tconstruct.cave_spider_head": "Cave Spider Head",
+  "block.tconstruct.piglin_head": "Piglin Head",
+  "block.tconstruct.piglin_brute_head": "Piglin Brute Head",
   "block.tconstruct.zombified_piglin_head": "Zombified Piglin Head",
-
-
   "_comment": "Tinkers Tables",
-
   "block.tconstruct.crafting_station": "Crafting Station",
-
   "block.tconstruct.tinker_station": "Tinker Station",
   "block.tconstruct.tinkers_anvil": "Tinker's Anvil",
   "block.tconstruct.scorched_anvil": "Tinker's Anvil",
-
   "block.tconstruct.part_builder": "Part Builder",
   "block.tconstruct.modifier_worktable": "Modifier Worktable",
-
   "block.tconstruct.part_chest": "Part Chest",
   "block.tconstruct.part_chest.tooltip": "Holds up to 256 different tool parts",
-
   "block.tconstruct.tinkers_chest": "Tinker's Chest",
   "block.tconstruct.tinkers_chest.tooltip": "Holds up to 64 stacks of 16 items",
-
   "block.tconstruct.cast_chest": "Cast Chest",
   "block.tconstruct.cast_chest.tooltip": "Holds all relevant casts",
-
   "item.tconstruct.pattern": "Pattern",
-
   "_comment": "Tinkers Tools",
-
   "_comment_on_format_": "These format allows you to have more control over separators in material names. By default we separate with space. You can use %1$s and %2$s if you wish to change the order.",
   "item.tconstruct.tool.format": "%s %s",
   "item.tconstruct.tool.id_format": "%s (%s)",
   "item.tconstruct.tool.material_separator": "-",
-
   "item.tconstruct.pickaxe": "Pickaxe",
   "item.tconstruct.sledge_hammer": "Sledge Hammer",
   "item.tconstruct.vein_hammer": "Vein Hammer",
-
   "item.tconstruct.mattock": "Mattock",
   "item.tconstruct.pickadze": "Pickadze",
   "item.tconstruct.excavator": "Excavator",
-
   "item.tconstruct.hand_axe": "Hand Axe",
   "item.tconstruct.broad_axe": "Broad Axe",
-
   "item.tconstruct.kama": "Kama",
   "item.tconstruct.scythe": "Scythe",
-
   "item.tconstruct.dagger": "Dagger",
   "item.tconstruct.sword": "Sword",
   "item.tconstruct.cleaver": "Cleaver",
-
   "item.tconstruct.crossbow": "Crossbow",
   "item.tconstruct.longbow": "Longbow",
-
   "item.tconstruct.flint_and_brick": "Flint and Brick",
   "item.tconstruct.sky_staff": "Skyslime Staff",
   "item.tconstruct.earth_staff": "Earthslime Staff",
   "item.tconstruct.ichor_staff": "Ichor Staff",
   "item.tconstruct.ender_staff": "Enderslime Staff",
-  
   "item.tconstruct.travelers_helmet": "Traveler's Goggles",
   "item.tconstruct.travelers_chestplate": "Traveler's Vest",
   "item.tconstruct.travelers_leggings": "Traveler's Pants",
   "item.tconstruct.travelers_boots": "Traveler's Boots",
   "item.tconstruct.travelers_shield": "Traveler's Shield",
-  
   "item.tconstruct.plate_helmet": "Plate Helmet",
   "item.tconstruct.plate_chestplate": "Plate Chestplate",
   "item.tconstruct.plate_leggings": "Plate Leggings",
   "item.tconstruct.plate_boots": "Plate Boots",
   "item.tconstruct.plate_shield": "Plate Shield",
-
   "item.tconstruct.slime_helmet": "Slimeskull",
   "item.tconstruct.slime_chestplate": "Slimelytra",
   "item.tconstruct.slime_leggings": "Slimeshell",
   "item.tconstruct.slime_boots": "Slimeboots",
-  "item.tconstruct.slime_helmet.material.tconstruct.glass":         "Creeper Slimeskull",
-  "item.tconstruct.slime_helmet.material.tconstruct.ender_pearl":   "Enderman Slimeskull",
-  "item.tconstruct.slime_helmet.material.tconstruct.bone":          "Skeleton Slimeskull",
-  "item.tconstruct.slime_helmet.material.tconstruct.venombone":     "Stray Slimeskull",
+  "item.tconstruct.slime_helmet.material.tconstruct.glass": "Creeper Slimeskull",
+  "item.tconstruct.slime_helmet.material.tconstruct.ender_pearl": "Enderman Slimeskull",
+  "item.tconstruct.slime_helmet.material.tconstruct.bone": "Skeleton Slimeskull",
+  "item.tconstruct.slime_helmet.material.tconstruct.venombone": "Stray Slimeskull",
   "item.tconstruct.slime_helmet.material.tconstruct.necrotic_bone": "Wither Skeleton Slimeskull",
-  "item.tconstruct.slime_helmet.material.tconstruct.string":        "Spider Slimeskull",
-  "item.tconstruct.slime_helmet.material.tconstruct.darkthread":    "Cave Spider Slimeskull",
-  "item.tconstruct.slime_helmet.material.tconstruct.rotten_flesh":  "Zombie Slimeskull",
-  "item.tconstruct.slime_helmet.material.tconstruct.iron":          "Husk Slimeskull",
-  "item.tconstruct.slime_helmet.material.tconstruct.copper":        "Drowned Slimeskull",
-  "item.tconstruct.slime_helmet.material.tconstruct.blazing_bone":  "Blaze Slimeskull",
-  "item.tconstruct.slime_helmet.material.tconstruct.gold":          "Piglin Slimeskull",
-  "item.tconstruct.slime_helmet.material.tconstruct.rose_gold":     "Piglin Brute Slimeskull",
-  "item.tconstruct.slime_helmet.material.tconstruct.pig_iron":      "Zombified Piglin Slimeskull",
-
+  "item.tconstruct.slime_helmet.material.tconstruct.string": "Spider Slimeskull",
+  "item.tconstruct.slime_helmet.material.tconstruct.darkthread": "Cave Spider Slimeskull",
+  "item.tconstruct.slime_helmet.material.tconstruct.rotten_flesh": "Zombie Slimeskull",
+  "item.tconstruct.slime_helmet.material.tconstruct.iron": "Husk Slimeskull",
+  "item.tconstruct.slime_helmet.material.tconstruct.copper": "Drowned Slimeskull",
+  "item.tconstruct.slime_helmet.material.tconstruct.blazing_bone": "Blaze Slimeskull",
+  "item.tconstruct.slime_helmet.material.tconstruct.gold": "Piglin Slimeskull",
+  "item.tconstruct.slime_helmet.material.tconstruct.rose_gold": "Piglin Brute Slimeskull",
+  "item.tconstruct.slime_helmet.material.tconstruct.pig_iron": "Zombified Piglin Slimeskull",
   "item.tconstruct.crystalshot": "Crystalshot",
   "entity.tconstruct.crystalshot": "Crystalshot",
-
   "_comment": "Tinkers Tool Parts",
-
   "item.tconstruct.dummy_tool_part.tooltip": "Used to create casts, cannot be used to create tools.",
-
   "item.tconstruct.repair_kit": "Repair Kit",
-
   "item.tconstruct.pick_head": "Pick Head",
   "item.tconstruct.hammer_head": "Hammer Head",
-
   "item.tconstruct.small_axe_head": "Small Axe Head",
   "item.tconstruct.broad_axe_head": "Broad Axe Head",
-
   "item.tconstruct.small_blade": "Small Blade",
   "item.tconstruct.broad_blade": "Broad Blade",
-
   "item.tconstruct.tool_handle": "Tool Handle",
   "item.tconstruct.tough_handle": "Tough Handle",
   "item.tconstruct.tool_binding": "Tool Binding",
   "item.tconstruct.round_plate": "Round Plate",
   "item.tconstruct.large_plate": "Large Plate",
-  
   "item.tconstruct.bow_limb": "Bow Limb",
   "item.tconstruct.bow_grip": "Bow Grip",
   "item.tconstruct.bowstring": "Bowstring",
-
   "item.tconstruct.helmet_plating": "Helmet Plating",
   "item.tconstruct.chestplate_plating": "Chest Plating",
   "item.tconstruct.leggings_plating": "Leg Plating",
@@ -983,74 +756,55 @@
   "item.tconstruct.boots_plating_dummy": "Stone Boot Plating",
   "item.tconstruct.maille": "Maille",
   "item.tconstruct.shield_core": "Shield Core",
-
-
   "_conment": "Tool Descriptions",
-
   "item.tconstruct.pickaxe.description": "The Pickaxe is a precise mining tool. It is effective on stone and ores.\nIt breaks blocks, OK?",
   "item.tconstruct.sledge_hammer.description": "The Sledge Hammer is a broad mining tool. It harvests blocks in a wide range.\nAlso effective against undead.",
   "item.tconstruct.vein_hammer.description": "The Vein Hammer is a broad mining tool. It harvests many connected blocks of the same type, perfect for ores.",
-
   "item.tconstruct.mattock.description": "The Cutter Mattock is a versatile farming tool. It is effective on logs, dirt, sand, gravel, and plants.\nJust don't dig your own grave!",
   "item.tconstruct.pickadze.description": "The Pickadze is a versatile mining tool. It is effective on rock, dirt, sand and gravel, but is not sharp enough to mine tougher stone blocks like many ores.",
   "item.tconstruct.excavator.description": "The Excavator is a broad digging tool. It digs up large areas of soil and snow in a wide range.\nTerraforming!",
-
   "item.tconstruct.hand_axe.description": "The Hand Axe chops up wood and makes short work of leaves. It also makes for an effective weapon.\nChop chop!",
   "item.tconstruct.broad_axe.description": "The Broad Axe fells small trees in a single swing, and makes quick work of large trees. It makes for a powerful heavy weapon.\nTimber!",
-
   "item.tconstruct.kama.description": "The Kama is a precision reaping tool, mowing down plants and shearing animals.\nRight Click: Harvest and replant crops",
   "item.tconstruct.scythe.description": "The Scythe is a broad reaping tool, mowing down plants in a wide area.\nRight Click: Harvest and replant crops",
-
   "item.tconstruct.dagger.description": "The Dagger is a light weapon, capable of quick strikes from either hand.",
   "item.tconstruct.sword.description": "The Sword is a universal weapon. Sweep attacks keep enemy hordes at bay.\nAlso good against cobwebs!",
   "item.tconstruct.cleaver.description": "The Cleaver is a weapon for a smeltery master. High range attacks keep cut through the toughest of foes.",
-
   "item.tconstruct.crossbow.description": "The Crossbow is a light ranged weapon, capable of quickly firing arrows and fireworks.",
   "item.tconstruct.longbow.description": "The Longbow is a broad ranged weapon, capable of firing arrows with precision over long distances.",
-
   "gui.tconstruct.plate_armor": "Plate Armor",
   "gui.tconstruct.plate_armor.description": "Plate armor is a highly defensive armor set with limited ability slots.",
-
   "_comment": "Smeltery shared",
-
   "block.tconstruct.tank.fluid": "Liquid %s",
   "block.tconstruct.tank.mb": "%d mb",
   "block.tconstruct.tank.ingots": "%d ingots",
   "block.tconstruct.tank.mixed": "%d ingots, %d mb",
-
   "block.tconstruct.tank.drained": "Drained %s mb %s",
   "block.tconstruct.tank.filled": "Filled %s mb %s",
-
   "block.tconstruct.channel.side.in": "Set side to flow inwards",
   "block.tconstruct.channel.side.out": "Set side to flow outwards",
   "block.tconstruct.channel.side.none": "Disallowed flowing on side",
   "block.tconstruct.channel.down.out": "Allowed flowing down",
   "block.tconstruct.channel.down.none": "Disallowed flowing down",
-
   "death.attack.tconstruct.smeltery_heat": "%1$s tried to make molten player",
   "death.attack.tconstruct.smeltery_heat.player": "%1$s tried to make molten player whilst fighting %2$s",
   "death.attack.tconstruct.smeltery_magic": "%1$s has become one with the smeltery",
   "death.attack.tconstruct.smeltery_magic.player": "%1$s has become one with the smeltery whilst fighting %2$s",
   "death.attack.tconstruct.self_destruct": "%1$s self destructed",
   "death.attack.tconstruct.self_destruct.player": "%1$s self destructed whilst fighting %2$s",
-
   "gui.tconstruct.melting.no_recipe": "Item cannot be molten.",
   "gui.tconstruct.melting.no_heat": "Not enough heat to melt this item.",
   "gui.tconstruct.melting.no_space": "Not enough free space for the fluid.",
-
   "gui.tconstruct.melting.fuel.no_tank": "No tank in structure",
   "gui.tconstruct.melting.fuel.empty": "No fuel found",
   "gui.tconstruct.melting.fuel.solid": "Solid fuel",
   "gui.tconstruct.melting.fuel.temperature": "Temperature: %s°C",
   "gui.tconstruct.melting.fuel.invalid": "Invalid melting fuel!",
-
   "gui.tconstruct.duct": "Duct",
-
   "multiblock.tconstruct.generic.no_attempt": "Structure detection has not yet run, this is normally a bug with the mod",
   "multiblock.tconstruct.generic.not_loaded": "Structure is outside the loaded area, this is normally a bug with the mod",
   "multiblock.tconstruct.generic.too_high": "Structure requires blocks above the top of the world",
   "multiblock.tconstruct.generic.too_large": "Structure inside is too large: currently %s×%s, max %s×%s, ",
-
   "multiblock.tconstruct.generic.invalid_inner_block": "Invalid block inside the structure",
   "multiblock.tconstruct.generic.invalid_wall_block": "Invalid block in the walls",
   "multiblock.tconstruct.generic.invalid_floor_block": "Invalid block in the floor",
@@ -1058,45 +812,35 @@
   "multiblock.tconstruct.generic.invalid_wall_frame": "Invalid block in the wall frame",
   "multiblock.tconstruct.generic.invalid_floor_frame": "Invalid block on the edges of the floor",
   "multiblock.tconstruct.generic.invalid_ceiling_frame": "Invalid block on the edges of the ceiling",
-
   "multiblock.tconstruct.tiny.no_fuel_tank": "Must be placed above a fuel tank or a heater to function",
-
-
   "_comment": "Tinkers Smeltery",
-
   "block.tconstruct.grout": "Grout",
   "block.tconstruct.grout.tooltip": "I am Grout!",
-
   "block.tconstruct.seared_stone": "Seared Stone",
   "block.tconstruct.seared_stone.tooltip": "Part of the Smeltery.",
   "block.tconstruct.seared_stone_slab": "Seared Stone Slab",
   "block.tconstruct.seared_stone_stairs": "Seared Stone Stairs",
-
   "block.tconstruct.seared_cobble": "Seared Cobblestone",
   "block.tconstruct.seared_cobble.tooltip": "Part of the Smeltery.",
   "block.tconstruct.seared_cobble_slab": "Seared Cobblestone Slab",
   "block.tconstruct.seared_cobble_stairs": "Seared Cobblestone Stairs",
   "block.tconstruct.seared_cobble_wall": "Seared Cobblestone Wall",
-
   "item.tconstruct.seared_brick": "Seared Brick",
   "block.tconstruct.seared_bricks": "Seared Bricks",
   "block.tconstruct.seared_bricks.tooltip": "Part of the Smeltery.",
   "block.tconstruct.seared_bricks_slab": "Seared Bricks Slab",
   "block.tconstruct.seared_bricks_stairs": "Seared Bricks Stairs",
   "block.tconstruct.seared_bricks_wall": "Seared Bricks Wall",
-
   "block.tconstruct.seared_paver": "Seared Paver",
   "block.tconstruct.seared_paver.tooltip": "Part of the Smeltery.",
   "block.tconstruct.seared_paver_slab": "Seared Paver Slab",
   "block.tconstruct.seared_paver_stairs": "Seared Paver Stairs",
-
   "block.tconstruct.seared_cracked_bricks": "Cracked Seared Bricks",
   "block.tconstruct.seared_cracked_bricks.tooltip": "Part of the Smeltery.",
   "block.tconstruct.seared_fancy_bricks": "Fancy Seared Bricks",
   "block.tconstruct.seared_fancy_bricks.tooltip": "Part of the Smeltery.",
   "block.tconstruct.seared_triangle_bricks": "Triangle Seared Bricks",
   "block.tconstruct.seared_triangle_bricks.tooltip": "Part of the Smeltery.",
-
   "block.tconstruct.seared_glass": "Seared Glass",
   "block.tconstruct.seared_glass.tooltip": "Part of the Smeltery.\nCannot store liquids.",
   "block.tconstruct.seared_soul_glass": "Seared Soul Glass",
@@ -1107,10 +851,8 @@
   "block.tconstruct.seared_glass_pane.tooltip": "Cannot be used in a Smeltery.",
   "block.tconstruct.seared_soul_glass_pane": "Seared Soul Glass Pane",
   "block.tconstruct.seared_soul_glass_pane.tooltip": "Cannot be used in a Smeltery, but can be walked through.",
-
   "block.tconstruct.seared_ladder": "Seared Ladder",
   "block.tconstruct.seared_ladder.tooltip": "Climbable Smeltery block.",
-
   "block.tconstruct.seared_fuel_tank": "Seared Fuel Tank",
   "block.tconstruct.seared_fuel_tank.tooltip": "Heart of the Smeltery.\nRetains liquid when broken.",
   "block.tconstruct.seared_fuel_gauge": "Seared Fuel Gauge",
@@ -1121,65 +863,51 @@
   "block.tconstruct.seared_ingot_gauge.tooltip": "Ideal for metals, holding 48 ingots of fluid.\nRetains liquid when broken.",
   "block.tconstruct.seared_lantern": "Seared Lantern",
   "block.tconstruct.seared_lantern.tooltip": "Ideal for decoration, holding 50mb of fluid.\nRetains liquid when broken.",
-
   "block.tconstruct.seared_faucet": "Seared Faucet",
   "block.tconstruct.seared_faucet.tooltip": "Drains liquids from Smelteries and Tanks",
   "block.tconstruct.seared_channel": "Seared Channel",
   "block.tconstruct.seared_channel.tooltip": "Distributes fluids poured from a faucet above.",
-
   "block.tconstruct.seared_basin": "Seared Casting Basin",
   "block.tconstruct.seared_basin.tooltip": "Cast items using molten metals from a Smeltery",
   "block.tconstruct.seared_table": "Seared Casting Table",
   "block.tconstruct.seared_table.tooltip": "Cast items using molten metals from a Smeltery",
-
   "block.tconstruct.seared_melter": "Seared Melter",
   "block.tconstruct.seared_melter.tooltip": "First Smeltery.\nPlace above a tank or heater to fuel.",
   "gui.tconstruct.melter": "Melter",
   "gui.tconstruct.melting.capacity": "Capacity:",
   "gui.tconstruct.melting.available": "Free:",
   "gui.tconstruct.melting.used": "Used:",
-
   "block.tconstruct.seared_heater": "Seared Heater",
   "block.tconstruct.seared_heater.tooltip": "Solid fuel source for the Melter.",
   "gui.tconstruct.heater": "Heater",
-
   "block.tconstruct.smeltery_controller": "Smeltery Controller",
   "block.tconstruct.smeltery_controller.tooltip": "Brain of the Smeltery.",
   "gui.tconstruct.smeltery": "Smeltery",
-
   "block.tconstruct.seared_drain": "Seared Drain",
   "block.tconstruct.seared_drain.tooltip": "Smeltery fluid input and output",
   "block.tconstruct.seared_duct": "Seared Duct",
   "block.tconstruct.seared_duct.tooltip": "Filtered smeltery fluid input and output using copper cans or buckets",
   "block.tconstruct.seared_chute": "Seared Chute",
   "block.tconstruct.seared_chute.tooltip": "Smeltery item input and output",
-
-
   "_comment": "Tinkers Foundry",
-
   "block.tconstruct.nether_grout": "Nether Grout",
   "block.tconstruct.nether_grout.tooltip": "We are Grout!",
-
   "block.tconstruct.scorched_stone": "Scorched Stone",
   "block.tconstruct.scorched_stone.tooltip": "Part of the Foundry.",
   "block.tconstruct.polished_scorched_stone": "Polished Scorched Stone",
   "block.tconstruct.polished_scorched_stone.tooltip": "Part of the Foundry.",
-
   "item.tconstruct.scorched_brick": "Scorched Brick",
   "block.tconstruct.scorched_bricks": "Scorched Bricks",
   "block.tconstruct.scorched_bricks.tooltip": "Part of the Foundry.",
   "block.tconstruct.scorched_bricks_slab": "Scorched Bricks Slab",
   "block.tconstruct.scorched_bricks_stairs": "Scorched Bricks Stairs",
   "block.tconstruct.scorched_bricks_fence": "Scorched Bricks Fence",
-
   "block.tconstruct.scorched_road": "Scorched Road",
   "block.tconstruct.scorched_road.tooltip": "Part of the Foundry.",
   "block.tconstruct.scorched_road_slab": "Scorched Road Slab",
   "block.tconstruct.scorched_road_stairs": "Scorched Road Stairs",
-
   "block.tconstruct.chiseled_scorched_bricks": "Chiseled Scorched Bricks",
   "block.tconstruct.chiseled_scorched_bricks.tooltip": "Part of the Foundry.",
-
   "block.tconstruct.scorched_glass": "Scorched Glass",
   "block.tconstruct.scorched_glass.tooltip": "Part of the Foundry.\nCannot store liquids.",
   "block.tconstruct.scorched_soul_glass": "Scorched Soul Glass",
@@ -1190,10 +918,8 @@
   "block.tconstruct.scorched_glass_pane.tooltip": "Cannot be used in a Foundry.",
   "block.tconstruct.scorched_soul_glass_pane": "Scorched Soul Glass Pane",
   "block.tconstruct.scorched_soul_glass_pane.tooltip": "Cannot be used in a Foundry, but can be walked through.",
-
   "block.tconstruct.scorched_ladder": "Scorched Ladder",
   "block.tconstruct.scorched_ladder.tooltip": "Climbable Foundry block.",
-
   "block.tconstruct.scorched_fuel_tank": "Scorched Fuel Tank",
   "block.tconstruct.scorched_fuel_tank.tooltip": "Heart of the Foundry.\nRetains liquid when broken.",
   "block.tconstruct.scorched_fuel_gauge": "Scorched Fuel Gauge",
@@ -1204,37 +930,29 @@
   "block.tconstruct.scorched_ingot_gauge.tooltip": "Ideal for metals, holding 48 ingots of fluid.\nRetains liquid when broken.",
   "block.tconstruct.scorched_lantern": "Scorched Lantern",
   "block.tconstruct.scorched_lantern.tooltip": "Ideal for decoration, holding 50mb of fluid.\nRetains liquid when broken.",
-
   "block.tconstruct.scorched_faucet": "Scorched Faucet",
   "block.tconstruct.scorched_faucet.tooltip": "Drains liquids from Foundries and Tanks",
   "block.tconstruct.scorched_basin": "Scorched Casting Basin",
   "block.tconstruct.scorched_basin.tooltip": "Cast items using molten metals from a Foundry, requires a cast or gold platform to cast",
   "block.tconstruct.scorched_table": "Scorched Casting Table",
   "block.tconstruct.scorched_table.tooltip": "Cast items using molten metals from a Foundry, requires a cast or gold bars to cast",
-
   "block.tconstruct.scorched_channel": "Scorched Channel",
   "block.tconstruct.scorched_channel.tooltip": "Distributes fluids poured from a faucet above.",
-
   "block.tconstruct.scorched_alloyer": "Scorched Alloyer",
   "block.tconstruct.scorched_alloyer.tooltip": "Simple alloying machine.\nPlace above a tank or heater to fuel.",
   "gui.tconstruct.alloyer": "Alloyer",
-
   "block.tconstruct.foundry_controller": "Foundry Controller",
   "block.tconstruct.foundry_controller.tooltip": "Brain of the Foundry.",
   "gui.tconstruct.foundry": "Foundry",
-
   "block.tconstruct.scorched_drain": "Scorched Drain",
   "block.tconstruct.scorched_drain.tooltip": "Foundry fluid input and output",
   "block.tconstruct.scorched_duct": "Scorched Duct",
   "block.tconstruct.scorched_duct.tooltip": "Filtered Foundry fluid input and output using copper cans or buckets",
   "block.tconstruct.scorched_chute": "Scorched Chute",
   "block.tconstruct.scorched_chute.tooltip": "Foundry item input and output",
-
-
   "gui.tconstruct.fluid.kilobucket": "%s kb",
   "gui.tconstruct.fluid.bucket": "%s b",
   "gui.tconstruct.fluid.millibucket": "%s mb",
-
   "gui.tconstruct.fluid.block": "%s Blocks",
   "gui.tconstruct.fluid.ingot": "%s Ingots",
   "gui.tconstruct.fluid.nugget": "%s Nuggets",
@@ -1245,12 +963,8 @@
   "gui.tconstruct.fluid.brick": "%s Bricks",
   "gui.tconstruct.fluid.bowl": "%s Bowls",
   "gui.tconstruct.fluid.bottle": "%s Bottles",
-
   "gui.tconstruct.fluid.hold_shift": "Hold §e§oShift§r§7 for buckets",
-
-
   "_comment": "Tinkers World",
-
   "entity.tconstruct.earth_slime": "Earthslime",
   "item.tconstruct.earth_slime_spawn_egg": "Earthslime Spawn Egg",
   "entity.tconstruct.sky_slime": "Skyslime",
@@ -1259,7 +973,6 @@
   "item.tconstruct.ender_slime_spawn_egg": "Enderslime Spawn Egg",
   "entity.tconstruct.terracube": "Terracube",
   "item.tconstruct.terracube_spawn_egg": "Terracube Spawn Egg",
-
   "block.tconstruct.earth_slime_dirt": "Earthslime Dirt",
   "block.tconstruct.earth_slime_dirt.tooltip": "Slimy, but lets you jump higher",
   "block.tconstruct.sky_slime_dirt": "Skyslime Dirt",
@@ -1268,7 +981,6 @@
   "block.tconstruct.ichor_slime_dirt.tooltip": "Slimy, but lets you jump higher",
   "block.tconstruct.ender_slime_dirt": "Enderslime Dirt",
   "block.tconstruct.ender_slime_dirt.tooltip": "Slimy, but lets you jump higher",
-
   "block.tconstruct.earth_vanilla_slime_grass": "Earthslime Grass",
   "block.tconstruct.earth_vanilla_slime_grass.tooltip": "Lets you jump higher and spawns earthslimes in the overworld",
   "block.tconstruct.earth_earth_slime_grass": "Earthslime Grass",
@@ -1279,7 +991,6 @@
   "block.tconstruct.earth_ichor_slime_grass.tooltip": "Lets you jump higher and spawns earthslimes in the overworld",
   "block.tconstruct.earth_ender_slime_grass": "Earthslime Grass",
   "block.tconstruct.earth_ender_slime_grass.tooltip": "Lets you jump higher and spawns earthslimes in the overworld",
-
   "block.tconstruct.sky_vanilla_slime_grass": "Skyslime Grass",
   "block.tconstruct.sky_vanilla_slime_grass.tooltip": "Lets you jump higher and spawns skyslimes in the overworld",
   "block.tconstruct.sky_earth_slime_grass": "Skyslime Grass",
@@ -1290,7 +1001,6 @@
   "block.tconstruct.sky_ichor_slime_grass.tooltip": "Lets you jump higher and spawns skyslimes in the overworld",
   "block.tconstruct.sky_ender_slime_grass": "Skyslime Grass",
   "block.tconstruct.sky_ender_slime_grass.tooltip": "Lets you jump higher and spawns skyslimes in the overworld",
-
   "block.tconstruct.blood_vanilla_slime_grass": "Bloody Nylium",
   "block.tconstruct.blood_vanilla_slime_grass.tooltip": "Lets you jump higher and produces bloodshrooms when bonemealed",
   "block.tconstruct.blood_earth_slime_grass": "Bloody Nylium",
@@ -1301,7 +1011,6 @@
   "block.tconstruct.blood_ichor_slime_grass.tooltip": "Lets you jump higher and produces bloodshrooms when bonemealed",
   "block.tconstruct.blood_ender_slime_grass": "Bloody Nylium",
   "block.tconstruct.blood_ender_slime_grass.tooltip": "Lets you jump higher and produces bloodshrooms when bonemealed",
-
   "block.tconstruct.ichor_vanilla_slime_grass": "Ichor Nylium",
   "block.tconstruct.ichor_vanilla_slime_grass.tooltip": "So soft! Lets you jump higher",
   "block.tconstruct.ichor_earth_slime_grass": "Ichor Nylium",
@@ -1312,7 +1021,6 @@
   "block.tconstruct.ichor_ichor_slime_grass.tooltip": "So soft! Lets you jump higher",
   "block.tconstruct.ichor_ender_slime_grass": "Ichor Nylium",
   "block.tconstruct.ichor_ender_slime_grass.tooltip": "So soft! Lets you jump higher",
-
   "block.tconstruct.ender_vanilla_slime_grass": "Enderslime Grass",
   "block.tconstruct.ender_vanilla_slime_grass.tooltip": "Lets you jump higher and spawns enderslimes in the end",
   "block.tconstruct.ender_earth_slime_grass": "Enderslime Grass",
@@ -1323,7 +1031,6 @@
   "block.tconstruct.ender_ichor_slime_grass.tooltip": "Lets you jump higher and spawns enderslimes in the end",
   "block.tconstruct.ender_ender_slime_grass": "Enderslime Grass",
   "block.tconstruct.ender_ender_slime_grass.tooltip": "Lets you jump higher and spawns enderslimes in the end",
-
   "item.tconstruct.earth_slime_grass_seeds": "Earthslime Seeds",
   "item.tconstruct.earth_slime_grass_seeds.tooltip": "Plant on dirt or slimy dirt to make slimy grass",
   "item.tconstruct.sky_slime_grass_seeds": "Skyslime Seeds",
@@ -1334,31 +1041,26 @@
   "item.tconstruct.ichor_slime_grass_seeds.tooltip": "Plant on dirt or slimy dirt to make slimy nylium",
   "item.tconstruct.ender_slime_grass_seeds": "Enderslime Seeds",
   "item.tconstruct.ender_slime_grass_seeds.tooltip": "Plant on dirt or slimy dirt to make slimy grass, or on vines to get slimy vines",
-
   "block.tconstruct.earth_slime_leaves": "Slimy Leaves",
   "block.tconstruct.sky_slime_leaves": "Slimy Leaves",
   "block.tconstruct.blood_slime_leaves": "Bloody Wart",
   "block.tconstruct.ichor_slime_leaves": "Slimy Wart",
   "block.tconstruct.ender_slime_leaves": "Slimy Leaves",
-
   "block.tconstruct.earth_slime_tall_grass": "Tall Slimy Grass",
   "block.tconstruct.sky_slime_tall_grass": "Tall Slimy Grass",
   "block.tconstruct.blood_slime_tall_grass": "Tall Bloody Grass",
   "block.tconstruct.ichor_slime_tall_grass": "Tall Slimy Grass",
   "block.tconstruct.ender_slime_tall_grass": "Tall Slimy Grass",
-
   "block.tconstruct.earth_slime_fern": "Slimy Fern",
   "block.tconstruct.sky_slime_fern": "Slimy Fern",
   "block.tconstruct.blood_slime_fern": "Bloody Roots",
   "block.tconstruct.ichor_slime_fern": "Slimy Roots",
   "block.tconstruct.ender_slime_fern": "Slimy Fern",
-
   "block.tconstruct.potted_earth_slime_fern": "Potted Slimy Fern",
   "block.tconstruct.potted_sky_slime_fern": "Potted Slimy Fern",
   "block.tconstruct.potted_blood_slime_fern": "Potted Bloody Roots",
   "block.tconstruct.potted_ichor_slime_fern": "Potted Slimy Roots",
   "block.tconstruct.potted_ender_slime_fern": "Potted Slimy Fern",
-
   "block.tconstruct.earth_slime_sapling": "Greenheart Sapling",
   "block.tconstruct.earth_slime_sapling.tooltip": "Only grows on slimy dirt or grass",
   "block.tconstruct.sky_slime_sapling": "Skyroot Sapling",
@@ -1369,166 +1071,139 @@
   "block.tconstruct.ichor_slime_sapling.tooltip": "Only grows on slimy nylium",
   "block.tconstruct.ender_slime_sapling": "Enderbark Propagule",
   "block.tconstruct.ender_slime_sapling.tooltip": "Only grows on slimy dirt or grass",
-
   "block.tconstruct.potted_earth_slime_sapling": "Potted Greenheart Sapling",
-  "block.tconstruct.potted_sky_slime_sapling":   "Potted Skyroot Sapling",
+  "block.tconstruct.potted_sky_slime_sapling": "Potted Skyroot Sapling",
   "block.tconstruct.potted_blood_slime_sapling": "Potted Bloodshroom",
   "block.tconstruct.potted_ichor_slime_sapling": "Potted Ichor Sapling",
   "block.tconstruct.potted_ender_slime_sapling": "Potted Enderbark Propagule",
-
   "block.tconstruct.ender_slime_vine": "Slimy Vine",
   "block.tconstruct.sky_slime_vine": "Slimy Vine",
-
-
   "_comment": "Wood",
-
-  "block.tconstruct.greenheart_planks":        "Greenheart Planks",
-  "block.tconstruct.greenheart_planks_slab":   "Greenheart Slab",
+  "block.tconstruct.greenheart_planks": "Greenheart Planks",
+  "block.tconstruct.greenheart_planks_slab": "Greenheart Slab",
   "block.tconstruct.greenheart_planks_stairs": "Greenheart Stairs",
-  "block.tconstruct.greenheart_log":           "Greenheart Log",
-  "block.tconstruct.stripped_greenheart_log":  "Stripped Greenheart Log",
-  "block.tconstruct.greenheart_wood":          "Greenheart Wood",
+  "block.tconstruct.greenheart_log": "Greenheart Log",
+  "block.tconstruct.stripped_greenheart_log": "Stripped Greenheart Log",
+  "block.tconstruct.greenheart_wood": "Greenheart Wood",
   "block.tconstruct.stripped_greenheart_wood": "Stripped Greenheart Wood",
-
-  "block.tconstruct.greenheart_fence":          "Greenheart Fence",
-  "block.tconstruct.greenheart_fence_gate":     "Greenheart Fence Gate",
-  "block.tconstruct.greenheart_door":           "Greenheart Door",
-  "block.tconstruct.greenheart_trapdoor":       "Greenheart Trapdoor",
+  "block.tconstruct.greenheart_fence": "Greenheart Fence",
+  "block.tconstruct.greenheart_fence_gate": "Greenheart Fence Gate",
+  "block.tconstruct.greenheart_door": "Greenheart Door",
+  "block.tconstruct.greenheart_trapdoor": "Greenheart Trapdoor",
   "block.tconstruct.greenheart_pressure_plate": "Greenheart Pressure Plate",
-  "block.tconstruct.greenheart_button":         "Greenheart Button",
-  "block.tconstruct.greenheart_sign":           "Greenheart Sign",
-  "block.tconstruct.greenheart_wall_sign":      "Greenheart Sign",
-
-  "block.tconstruct.skyroot_planks":        "Skyroot Planks",
-  "block.tconstruct.skyroot_planks_slab":   "Skyroot Slab",
+  "block.tconstruct.greenheart_button": "Greenheart Button",
+  "block.tconstruct.greenheart_sign": "Greenheart Sign",
+  "block.tconstruct.greenheart_wall_sign": "Greenheart Sign",
+  "block.tconstruct.skyroot_planks": "Skyroot Planks",
+  "block.tconstruct.skyroot_planks_slab": "Skyroot Slab",
   "block.tconstruct.skyroot_planks_stairs": "Skyroot Stairs",
-  "block.tconstruct.skyroot_log":           "Skyroot Log",
-  "block.tconstruct.stripped_skyroot_log":  "Stripped Skyroot Log",
-  "block.tconstruct.skyroot_wood":          "Skyroot Wood",
+  "block.tconstruct.skyroot_log": "Skyroot Log",
+  "block.tconstruct.stripped_skyroot_log": "Stripped Skyroot Log",
+  "block.tconstruct.skyroot_wood": "Skyroot Wood",
   "block.tconstruct.stripped_skyroot_wood": "Stripped Skyroot Wood",
-
-  "block.tconstruct.skyroot_fence":          "Skyroot Fence",
-  "block.tconstruct.skyroot_fence_gate":     "Skyroot Fence Gate",
-  "block.tconstruct.skyroot_door":           "Skyroot Door",
-  "block.tconstruct.skyroot_trapdoor":       "Skyroot Trapdoor",
+  "block.tconstruct.skyroot_fence": "Skyroot Fence",
+  "block.tconstruct.skyroot_fence_gate": "Skyroot Fence Gate",
+  "block.tconstruct.skyroot_door": "Skyroot Door",
+  "block.tconstruct.skyroot_trapdoor": "Skyroot Trapdoor",
   "block.tconstruct.skyroot_pressure_plate": "Skyroot Pressure Plate",
-  "block.tconstruct.skyroot_button":         "Skyroot Button",
-  "block.tconstruct.skyroot_sign":           "Skyroot Sign",
-  "block.tconstruct.skyroot_wall_sign":      "Skyroot Sign",
-
-  "block.tconstruct.bloodshroom_planks":        "Bloodshroom Planks",
-  "block.tconstruct.bloodshroom_planks_slab":   "Bloodshroom Slab",
+  "block.tconstruct.skyroot_button": "Skyroot Button",
+  "block.tconstruct.skyroot_sign": "Skyroot Sign",
+  "block.tconstruct.skyroot_wall_sign": "Skyroot Sign",
+  "block.tconstruct.bloodshroom_planks": "Bloodshroom Planks",
+  "block.tconstruct.bloodshroom_planks_slab": "Bloodshroom Slab",
   "block.tconstruct.bloodshroom_planks_stairs": "Bloodshroom Stairs",
-  "block.tconstruct.bloodshroom_log":           "Bloodshroom Stem",
-  "block.tconstruct.stripped_bloodshroom_log":  "Stripped Bloodshroom Stem",
-  "block.tconstruct.bloodshroom_wood":          "Bloodshroom Hyphae",
+  "block.tconstruct.bloodshroom_log": "Bloodshroom Stem",
+  "block.tconstruct.stripped_bloodshroom_log": "Stripped Bloodshroom Stem",
+  "block.tconstruct.bloodshroom_wood": "Bloodshroom Hyphae",
   "block.tconstruct.stripped_bloodshroom_wood": "Stripped Bloodshroom Hyphae",
-
-  "block.tconstruct.bloodshroom_fence":          "Bloodshroom Fence",
-  "block.tconstruct.bloodshroom_fence_gate":     "Bloodshroom Fence Gate",
-  "block.tconstruct.bloodshroom_door":           "Bloodshroom Door",
-  "block.tconstruct.bloodshroom_trapdoor":       "Bloodshroom Trapdoor",
+  "block.tconstruct.bloodshroom_fence": "Bloodshroom Fence",
+  "block.tconstruct.bloodshroom_fence_gate": "Bloodshroom Fence Gate",
+  "block.tconstruct.bloodshroom_door": "Bloodshroom Door",
+  "block.tconstruct.bloodshroom_trapdoor": "Bloodshroom Trapdoor",
   "block.tconstruct.bloodshroom_pressure_plate": "Bloodshroom Pressure Plate",
-  "block.tconstruct.bloodshroom_button":         "Bloodshroom Button",
-  "block.tconstruct.bloodshroom_sign":           "Bloodshroom Sign",
-  "block.tconstruct.bloodshroom_wall_sign":      "Bloodshroom Sign",
-
-  "block.tconstruct.enderbark_planks":        "Enderbark Planks",
-  "block.tconstruct.enderbark_planks_slab":   "Enderbark Slab",
+  "block.tconstruct.bloodshroom_button": "Bloodshroom Button",
+  "block.tconstruct.bloodshroom_sign": "Bloodshroom Sign",
+  "block.tconstruct.bloodshroom_wall_sign": "Bloodshroom Sign",
+  "block.tconstruct.enderbark_planks": "Enderbark Planks",
+  "block.tconstruct.enderbark_planks_slab": "Enderbark Slab",
   "block.tconstruct.enderbark_planks_stairs": "Enderbark Stairs",
-  "block.tconstruct.enderbark_log":           "Enderbark Log",
-  "block.tconstruct.stripped_enderbark_log":  "Stripped Enderbark Log",
-  "block.tconstruct.enderbark_wood":          "Enderbark Wood",
+  "block.tconstruct.enderbark_log": "Enderbark Log",
+  "block.tconstruct.stripped_enderbark_log": "Stripped Enderbark Log",
+  "block.tconstruct.enderbark_wood": "Enderbark Wood",
   "block.tconstruct.stripped_enderbark_wood": "Stripped Enderbark Wood",
-
   "block.tconstruct.enderbark_roots": "Enderbark Roots",
   "block.tconstruct.earth_enderbark_roots": "Slimy Enderbark Roots",
   "block.tconstruct.sky_enderbark_roots": "Slimy Enderbark Roots",
   "block.tconstruct.ichor_enderbark_roots": "Slimy Enderbark Roots",
   "block.tconstruct.ender_enderbark_roots": "Slimy Enderbark Roots",
-
-  "block.tconstruct.enderbark_fence":          "Enderbark Fence",
-  "block.tconstruct.enderbark_fence_gate":     "Enderbark Fence Gate",
-  "block.tconstruct.enderbark_door":           "Enderbark Door",
-  "block.tconstruct.enderbark_trapdoor":       "Enderbark Trapdoor",
+  "block.tconstruct.enderbark_fence": "Enderbark Fence",
+  "block.tconstruct.enderbark_fence_gate": "Enderbark Fence Gate",
+  "block.tconstruct.enderbark_door": "Enderbark Door",
+  "block.tconstruct.enderbark_trapdoor": "Enderbark Trapdoor",
   "block.tconstruct.enderbark_pressure_plate": "Enderbark Pressure Plate",
-  "block.tconstruct.enderbark_button":         "Enderbark Button",
-  "block.tconstruct.enderbark_sign":           "Enderbark Sign",
-  "block.tconstruct.enderbark_wall_sign":      "Enderbark Sign",
-
-
+  "block.tconstruct.enderbark_button": "Enderbark Button",
+  "block.tconstruct.enderbark_sign": "Enderbark Sign",
+  "block.tconstruct.enderbark_wall_sign": "Enderbark Sign",
   "material.tconstruct.unknown": "Unknown",
-
   "__comment": "Tier 1 Materials",
   "material.tconstruct.wood": "Wood",
-  "material.tconstruct.wood.oak":      "Oak Wood",
-  "material.tconstruct.wood.spruce":   "Spruce Wood",
-  "material.tconstruct.wood.birch":    "Birch Wood",
-  "material.tconstruct.wood.jungle":   "Jungle Wood",
-  "material.tconstruct.wood.acacia":   "Acacia Wood",
+  "material.tconstruct.wood.oak": "Oak Wood",
+  "material.tconstruct.wood.spruce": "Spruce Wood",
+  "material.tconstruct.wood.birch": "Birch Wood",
+  "material.tconstruct.wood.jungle": "Jungle Wood",
+  "material.tconstruct.wood.acacia": "Acacia Wood",
   "material.tconstruct.wood.dark_oak": "Dark Oak Wood",
   "material.tconstruct.wood.mangrove": "Mangrove Wood",
-  "material.tconstruct.wood.crimson":  "Crimson Hyphae",
-  "material.tconstruct.wood.warped":   "Warped Hyphae",
+  "material.tconstruct.wood.crimson": "Crimson Hyphae",
+  "material.tconstruct.wood.warped": "Warped Hyphae",
   "material.tconstruct.wood.format": "Wooden %s",
   "material.tconstruct.wood.flavor": "How much wood could a woodchuck chuck if a woodchuck could chuck wood?",
   "material.tconstruct.wood.encyclopedia": "Makes repairs 50% more effective per part",
-
   "material.tconstruct.bamboo": "Bamboo",
   "material.tconstruct.bamboo.flavor": "Get bamboozled!",
   "material.tconstruct.bamboo.ranged": "Movement penalty when drawing back the bow is reduced by 10%",
   "material.tconstruct.bamboo.armor": "Movement penalty when using the shield is reduced by 10%",
-
   "material.tconstruct.rock": "Rock",
-  "material.tconstruct.rock.stone":      "Stone",
-  "material.tconstruct.rock.andesite":   "Andesite",
-  "material.tconstruct.rock.diorite":    "Diorite",
-  "material.tconstruct.rock.granite":    "Granite",
+  "material.tconstruct.rock.stone": "Stone",
+  "material.tconstruct.rock.andesite": "Andesite",
+  "material.tconstruct.rock.diorite": "Diorite",
+  "material.tconstruct.rock.granite": "Granite",
   "material.tconstruct.rock.blackstone": "Blackstone",
-  "material.tconstruct.rock.deepslate":  "Deepslate",
+  "material.tconstruct.rock.deepslate": "Deepslate",
   "material.tconstruct.rock.flavor": "Rock solid",
   "material.tconstruct.rock.encyclopedia": "Causes the tool to mine faster by half of the square root of the trait level times lost durability",
-
   "material.tconstruct.flint": "Flint",
   "material.tconstruct.flint.basalt": "Basalt",
   "material.tconstruct.flint.flavor": "This will spark the flames of a Tinker's heart!",
   "material.tconstruct.flint.encyclopedia": "Increases damage by a quarter of the square root of the trait level times lost durability",
-
   "material.tconstruct.bone": "Bone",
   "material.tconstruct.bone.flavor": "I am the bone of my sword",
   "material.tconstruct.bone.encyclopedia": "Increases melee damage by 0.5 and grants 1 armor pierce per level",
   "material.tconstruct.bone.ranged": "Increases melee damage by 0.5 and grants 1 armor pierce per level",
   "material.tconstruct.bone.skull_flavor": "Got Milk?",
   "material.tconstruct.bone.skull_encyclopedia": "Grants resistance for 1 minute after drinking milk",
-
   "material.tconstruct.necrotic_bone": "Necrotic Bone",
   "material.tconstruct.necrotic_bone.flavor": "Do you have a bone to pick with me?",
   "material.tconstruct.necrotic_bone.encyclopedia": "Heals a percentage of damage dealt from critical hits",
   "material.tconstruct.necrotic_bone.ranged": "Heals a percentage of damage dealt from successful arrow hits",
   "material.tconstruct.necrotic_bone.skull_flavor": "Spooky Scary Skeleton!",
   "material.tconstruct.necrotic_bone.skull_encyclopedia": "Melee attacks cause withering. After drinking milk the effect becomes faster",
-
   "material.tconstruct.chorus": "Chorus",
   "material.tconstruct.chorus.flavor": "Not just the endermen, but the enderwomen, and the enderchildren",
   "material.tconstruct.chorus.encyclopedia": "Prevents the target from teleporting for a 5 seconds per effect level",
   "material.tconstruct.chorus.ranged": "Prevents the target from teleporting for a 5 seconds per effect level and allows damaging endermen with arrows",
   "material.tconstruct.chorus.armor": "Has a 25% chance per level of randomly teleporting attackers away",
-
   "material.tconstruct.string": "String",
   "material.tconstruct.string.flavor": "Theoretically the best material.",
   "material.tconstruct.string.encyclopedia": "Allows the tool to be repaired using string in the tinker station or crafting table",
   "material.tconstruct.string.skull_flavor": "Spiders are a master of potions, maybe their secret can help me enhance potions...",
   "material.tconstruct.string.skull_encyclopedia": "Causes positive potion effects to last 25% longer",
-
   "material.tconstruct.leather": "Leather",
   "material.tconstruct.leather.flavor": "Killed a cow, tanned it's hide.",
   "material.tconstruct.leather.encyclopedia": "Prevents the tool from taking more than 1 damage in an action",
-
   "material.tconstruct.vine": "Vine",
   "material.tconstruct.vine.flavor": "Keeps living, unlike the social network.",
   "material.tconstruct.vine.encyclopedia": "Tool has up to a 75% chance to resist damage in full sunlight",
-
-
   "__comment": "Tier 2 Materials",
   "material.tconstruct.iron": "Iron",
   "material.tconstruct.iron.wrought": "Wrought Iron",
@@ -1539,17 +1214,14 @@
   "material.tconstruct.iron.armor": "Reduces damage from projectiles by 10% per level, and grants 5% knockback resistance times the max level.",
   "material.tconstruct.iron.skull_flavor": "Violation of quarantine",
   "material.tconstruct.iron.skull_encyclopedia": "Melee attacks copy all negative status effects from the wearer to the target",
-
   "material.tconstruct.seared_stone": "Seared Stone",
   "material.tconstruct.seared_stone.flavor": "Hotter Grout.",
   "material.tconstruct.seared_stone.encyclopedia": "Gives +6 mining speed against blocks that can be melted in a melter",
   "material.tconstruct.seared_stone.armor": "Reduces damage from fire by 10% per level, and reduces fire burn time",
-
   "material.tconstruct.scorched_stone": "Scorched Stone",
   "material.tconstruct.scorched_stone.flavor": "Founders edition bonus.",
   "material.tconstruct.scorched_stone.encyclopedia": "Gives +2 damage per level against burning targets",
   "material.tconstruct.scorched_stone.armor": "Reduces damage from fire immune mobs by 5% per level, and reduces fire burn time",
-
   "material.tconstruct.copper": "Copper",
   "material.tconstruct.copper.oxidized": "Oxidized Copper",
   "material.tconstruct.copper.flavor": "Don't let this tarnish your day.",
@@ -1558,244 +1230,196 @@
   "material.tconstruct.copper.armor": "Grants bonus protection at lower depth, +5% per 64 blocks below 64",
   "material.tconstruct.copper.skull_flavor": "Knocks the wind right out of them",
   "material.tconstruct.copper.skull_encyclopedia": "Melee attacks steal 3 seconds of air from the target",
-
   "material.tconstruct.slimewood": "Slimewood",
-  "material.tconstruct.slimewood.greenheart":  "Greenheart",
-  "material.tconstruct.slimewood.skyroot":     "Skyroot",
+  "material.tconstruct.slimewood.greenheart": "Greenheart",
+  "material.tconstruct.slimewood.skyroot": "Skyroot",
   "material.tconstruct.slimewood.bloodshroom": "Bloodshroom",
-  "material.tconstruct.slimewood.enderbark":  "Enderbark",
+  "material.tconstruct.slimewood.enderbark": "Enderbark",
   "material.tconstruct.slimewood.flavor": "Is this the wood of a slime or slime that's been infused with wood?",
   "material.tconstruct.slimewood.encyclopedia": "Gives a 5% chance per level of regenerating overslime each second",
-
   "material.tconstruct.venombone": "Venombone",
   "material.tconstruct.venombone.flavor": "Become the bane of your enemies",
   "material.tconstruct.venombone.encyclopedia": "Boosts melee damage when poisoned by 0.5 plus the level of poison",
   "material.tconstruct.venombone.ranged": "Boosts drawspeed when poisoned by 0.05 plus 0.1 per level of poison",
   "material.tconstruct.venombone.skull_flavor": "Chills straight to the bone",
   "material.tconstruct.venombone.skull_encyclopedia": "Projectiles cause slowness to the target. After drinking milk, melee attacks cause slowness and the level is stronger.",
-
   "material.tconstruct.rose_gold": "Rose Gold",
   "material.tconstruct.rose_gold.flavor": "Disclaimer: Not actually made with roses.",
   "material.tconstruct.rose_gold.encyclopedia": "Grants 1 extra upgrade slot per part",
   "material.tconstruct.rose_gold.skull_flavor": "Putting that arm shield to good use",
   "material.tconstruct.rose_gold.skull_encyclopedia": "Boosts health by 1 heart, plus an additional heart per piece of golden armor.",
-
   "material.tconstruct.skyslime_vine": "Slimy Vine",
   "material.tconstruct.skyslime_vine.flavor": "Float like a butterfly, sting like a bee.",
   "material.tconstruct.skyslime_vine.encyclopedia": "Cancels out the mining speed reduction when not on the ground",
   "material.tconstruct.skyslime_vine.ranged": "Grants +0.5 accuracy when not on the ground or a ladder",
-
-
   "__comment": "Tier 3 Materials",
   "material.tconstruct.slimesteel": "Slimesteel",
   "material.tconstruct.slimesteel.flavor": "You must steal the slime to get slimesteel.",
   "material.tconstruct.slimesteel.encyclopedia": "Grants 25 extra overslime, +50% of the total per level",
-
   "material.tconstruct.nahuatl": "Nahuatl",
   "material.tconstruct.nahuatl.flavor": "This is not an obsidian part, if it was it would say \"Obsidian.\"",
   "material.tconstruct.nahuatl.encyclopedia": "Has a 50% chance of doing up to 5 damage over time, more damage at higher levels",
   "material.tconstruct.nahuatl.armor": "Has a 25% chance per level of doing up to 5 damage over time",
-
   "material.tconstruct.amethyst_bronze": "Amethyst Bronze",
   "material.tconstruct.amethyst_bronze.flavor": "Not to be confused with bronze.",
   "material.tconstruct.amethyst_bronze.encyclopedia": "Grants +0.5 mining speed per level to blocks that don't require tools, even ones where the tool is not effective",
   "material.tconstruct.amethyst_bronze.ranged": "Adds +0.1 velocity per level at the cost of limiting arrow angles to 32, 16, or 8 directions at the first 3 levels respectively",
   "material.tconstruct.amethyst_bronze.armor": "Grants +2.5% attack speed per level at the cost of limiting taken knockback angles to 32, 16, 8, or 4 directions",
-
   "material.tconstruct.pig_iron": "Pig Iron",
   "material.tconstruct.pig_iron.flavor": "The absolute best material, no debates.",
   "material.tconstruct.pig_iron.encyclopedia": "Can be eaten to restore 1 hunger per level at 0.6 saturation",
   "material.tconstruct.pig_iron.armor": "Grants a 15% chance per level of eating the armor for 1 hunger per level at 0.6 saturation",
   "material.tconstruct.pig_iron.skull_flavor": "You won't like me when I'm angry!",
   "material.tconstruct.pig_iron.skull_encyclopedia": "Grants 15 seconds of strength when damaged by another mob",
-
   "material.tconstruct.darkthread": "Darkthread",
   "material.tconstruct.darkthread.flavor": "Come to the dark side, we have sowing",
   "material.tconstruct.darkthread.encyclopedia": "Increases drop chances from mobs, stacking with luck",
   "material.tconstruct.darkthread.ranged": "Increases drop chances from mobs killed by arrows",
   "material.tconstruct.darkthread.skull_flavor": "Perfect for battles of wits, when you have to decide and drink to find out who is right.",
   "material.tconstruct.darkthread.skull_encyclopedia": "Makes the wearer immune to poison, though will not remove existing poison",
-
-
   "__comment": "Tier Nether Materials",
   "material.tconstruct.cobalt": "Cobalt",
   "material.tconstruct.cobalt.flavor": "Coblat. The material of the Red Army.",
   "material.tconstruct.cobalt.encyclopedia": "Boosts mining and attack speed by 7% per level",
   "material.tconstruct.cobalt.ranged": "Boosts drawspeed and velocity by 5% per level",
   "material.tconstruct.cobalt.armor": "Reduces damage from melee attacks by 10% per level, and boosts movement speed when using items by 5% per max level",
-
   "material.tconstruct.manyullyn": "Manyullyn",
   "material.tconstruct.manyullyn.flavor": "The metal that most Tinkers will never pronounce right. Also known as a star cutting material.",
   "material.tconstruct.manyullyn.encyclopedia": "Grants +2 damage per level after 8 consecutive hits",
   "material.tconstruct.manyullyn.ranged": "Arrows gain +1 damage per level (before velocity) after 8 consecutive arrow hits",
   "material.tconstruct.manyullyn.armor": "Temporarily boosts melee damage by 1 after taking damage, capping at the total level across all armor",
-
   "material.tconstruct.hepatizon": "Hepatizon",
   "material.tconstruct.hepatizon.flavor": "He-pa-ti-zon - boil it, mash it, put it in a stew.",
   "material.tconstruct.hepatizon.encyclopedia": "Boosts mining speed by 25% per level after mining 32 consecutive blocks",
   "material.tconstruct.hepatizon.ranged": "Boosts drawspeed by 25% per level after firing 16 consecutive arrows",
   "material.tconstruct.hepatizon.armor": "Reduces damage from all attacks by 5% per level if you recently took damage",
-
   "material.tconstruct.queens_slime": "Queen's Slime",
   "material.tconstruct.queens_slime.flavor": "Princesses are evil, get yourself a Queen.",
   "material.tconstruct.queens_slime.encyclopedia": "Reduces durability by 15% per level, 66% of that going towards overslime",
-
   "material.tconstruct.blazing_bone": "Blazing Bone",
   "material.tconstruct.blazing_bone.flavor": "Harness the full power of the Nether Fortress - bone and blaze",
   "material.tconstruct.blazing_bone.encyclopedia": "Grants +1% damage per second of fire, up to +15% from lava's 15 seconds. Bonus reduced by fire resistance.",
   "material.tconstruct.blazing_bone.ranged": "Grants +1% arrow damage per second of fire, up to +15% from lava's 15 seconds. Bonus reduced by fire resistance.",
   "material.tconstruct.blazing_bone.skull_flavor": "I told them this is technically firespit, not firebreath, but apparently I don't get to decide the names for things I invent",
   "material.tconstruct.blazing_bone.skull_encyclopedia": "Allows spitting firecharges from the inventory as fireballs. Has a cooldown of 5 seconds and does not work underwater",
-
   "material.tconstruct.blazewood": "Blazewood",
   "material.tconstruct.blazewood.flavor": "The flame protects the flame",
   "material.tconstruct.blazewood.encyclopedia": "Grants +0.5% protection against non-fire damage per second of fire, up to +7.5% from lava's 15 seconds. Bonus reduced by fire resistance.",
-
   "material.tconstruct.soulsteel": "Soulsteel",
-
   "material.tconstruct.ancient_hide": "Ancient Hide",
   "material.tconstruct.ancient_hide.flavor": "Leather tanned by the oldest of stone",
   "material.tconstruct.ancient_hide.encyclopedia": "Increases drop chances from blocks, stacking with luck",
   "material.tconstruct.ancient_hide.armor": "Grants an extra defense slot",
-
   "__comment": "Tier End Materials",
   "material.tconstruct.knightslime": "Knightslime",
-
   "material.tconstruct.enderslime_vine": "Slimy Vine",
   "material.tconstruct.enderslime_vine.flavor": "The End?",
   "material.tconstruct.enderslime_vine.encyclopedia": "Teleports the holder to the location of mined blocks or swaps the holder with attacked monsters",
   "material.tconstruct.enderslime_vine.ranged": "Teleports the holder to the location of arrows that land in blocks or swaps the holder with monsters hit by arrows",
-
   "__comment": "Slimesuit materials",
   "material.tconstruct.glass": "Glass",
   "material.tconstruct.glass.skull_flavor": "Whose nice things are being destroyed now, creeper?",
   "material.tconstruct.glass.skull_encyclopedia": "Holding the helmet interact key causes the wearer to explode",
-
   "material.tconstruct.ender_pearl": "Ender Pearl",
   "material.tconstruct.ender_pearl.skull_flavor": "Endermen know how to stay away from harm, and scientists. They have been ignoring my interview requests for weeks!",
   "material.tconstruct.ender_pearl.skull_encyclopedia": "Teleports automatically when attacked by a projectile, and randomly from melee. Has a 15 second cooldown",
-
   "material.tconstruct.rotten_flesh": "Rotten Flesh",
   "material.tconstruct.rotten_flesh.skull_flavor": "This is fine",
   "material.tconstruct.rotten_flesh.skull_encyclopedia": "Melee attacks increase the targets fire time based on the wearer's fire time",
-
   "material.tconstruct.gold": "Gold",
   "material.tconstruct.gold.flavor": "Piglins love it.",
   "material.tconstruct.gold.armor": "Grants 10% protection per level against magic damage and reduces the time of negative potion effects. Also makes piglins friendly.",
   "material.tconstruct.gold.skull_flavor": "So shiny",
   "material.tconstruct.gold.skull_encyclopedia": "Causes some gold ores to drop extra gold nuggets, and increases drop chance of gold armor by 4%. Nuggets and armor drops are further boosted by each piece of golden armor worn.",
-
-  "material.tconstruct.obsidian":   "Obsidian",
+  "material.tconstruct.obsidian": "Obsidian",
   "material.tconstruct.obsidian.flavor": "This is an obsidian part, if it was not it would not say \"Obsidian.\"",
   "material.tconstruct.obsidian.armor": "Grants 10% protection per level against explosions, and reduces explosion knockback",
-  "material.tconstruct.debris":     "Debris",
-  "material.tconstruct.netherite":  "Netherite",
+  "material.tconstruct.debris": "Debris",
+  "material.tconstruct.netherite": "Netherite",
   "material.tconstruct.earthslime": "Earthslime",
-  "material.tconstruct.skyslime":   "Skyslime",
-  "material.tconstruct.blood":      "Blood",
-  "material.tconstruct.magma":      "Magma",
-  "material.tconstruct.ichor":      "Ichor",
+  "material.tconstruct.skyslime": "Skyslime",
+  "material.tconstruct.blood": "Blood",
+  "material.tconstruct.magma": "Magma",
+  "material.tconstruct.ichor": "Ichor",
   "material.tconstruct.enderslime": "Enderslime",
-  "material.tconstruct.clay":       "Clay",
-  "material.tconstruct.honey":      "Honey",
-  "material.tconstruct.venom":      "Venom",
-  "material.tconstruct.phantom":    "Phantom Membrane",
-
-  "material.tconstruct.nickel":   "Nickel",
-  "material.tconstruct.tin":      "Tin",
-  "material.tconstruct.zinc":     "Zinc",
-  "material.tconstruct.brass":    "Brass",
-  "material.tconstruct.uranium":  "Uranium",
-
-
+  "material.tconstruct.clay": "Clay",
+  "material.tconstruct.honey": "Honey",
+  "material.tconstruct.venom": "Venom",
+  "material.tconstruct.phantom": "Phantom Membrane",
+  "material.tconstruct.nickel": "Nickel",
+  "material.tconstruct.tin": "Tin",
+  "material.tconstruct.zinc": "Zinc",
+  "material.tconstruct.brass": "Brass",
+  "material.tconstruct.uranium": "Uranium",
   "__comment": "Tier 2 Integration Materials",
   "material.tconstruct.osmium": "Osmium",
   "material.tconstruct.osmium.flavor": "Too dense to get most jokes",
   "material.tconstruct.osmium.encyclopedia": "Prevents 33% of damage at the cost of an extra 25% repair cost at first level",
-
   "material.tconstruct.tungsten": "Tungsten",
   "material.tconstruct.tungsten.flavor": "Have you considered starting a heavy metal band?",
   "material.tconstruct.tungsten.encyclopedia": "Grants +10% mining speed and -10% movement speed per level",
   "material.tconstruct.tungsten.ranged": "Grants +15% draw speed and -10% movement speed per level",
   "material.tconstruct.tungsten.armor": "Grants +2 toughness and -10% movement speed per level",
-
   "material.tconstruct.platinum": "Platinum",
   "material.tconstruct.platinum.flavor": "Its what winners use!",
   "material.tconstruct.platinum.encyclopedia": "Grants 2-6 bonus nugget drops when mining ore, boosted at higher levels",
   "material.tconstruct.platinum.ranged": "Hitting a distant monster has a 5% chance per level to drop nuggets. 50 blocks or more drops platinum, 40 blocks gold, 30 blocks iron, and 20 blocks copper.",
-
   "material.tconstruct.lead": "Lead",
   "material.tconstruct.lead.flavor": "Could try and make a sandwich out of this.",
   "material.tconstruct.lead.encyclopedia": "Grants +10% attack and -10% movement speed per level",
   "material.tconstruct.lead.ranged": "Grants +10% projectile power and -10% movement speed per level",
   "material.tconstruct.lead.armor": "Grants +10% knockback resistance and -10% movement speed per level",
-
   "material.tconstruct.silver": "Silver",
   "material.tconstruct.silver.flavor": "You know, this tool isn't going to look so shiny in a few days.",
   "material.tconstruct.silver.encyclopedia": "Gives +2.5 damage against undead per level",
   "material.tconstruct.silver.ranged": "Gives +0.5 projectile power against undead per level",
   "material.tconstruct.silver.armor": "Reduces damage from undead by 5% per level",
-
   "material.tconstruct.whitestone": "Whitestone",
   "material.tconstruct.whitestone.end": "End Stone",
   "material.tconstruct.whitestone.flavor": "Take your useless white metals or rocks and make a useful tool",
   "material.tconstruct.whitestone.encyclopedia": "Mining stone has a 20% per level of granting +3 stoneshield",
-
   "material.tconstruct.aluminum": "Aluminum",
   "material.tconstruct.aluminum.flavor": "Found most commonly in ashmounds.",
   "material.tconstruct.aluminum.ranged": "Grants +7% drawspeed and accuracy",
   "material.tconstruct.aluminum.armor": "Grants +5% use item speed at the cost of 5% loss of protection",
-
-
   "__comment": "Tier 3 Integration Materials",
   "material.tconstruct.steel": "Steel",
   "material.tconstruct.steel.flavor": "Basically 90% of material science",
   "material.tconstruct.steel.encyclopedia": "Grants +4% durability, damage, and speed per level",
   "material.tconstruct.steel.ranged": "Grants +4% durability, +3% velocity, and +3% projectile power per level",
   "material.tconstruct.steel.armor": "Grants +4% durability and +1 toughness per level",
-
   "material.tconstruct.bronze": "Bronze",
   "material.tconstruct.bronze.flavor": "Not to be confused with amethyst bronze.",
   "material.tconstruct.bronze.encyclopedia": "Grants +6 mining speed per level at full durability, 0 boost below 50% durability",
   "material.tconstruct.bronze.ranged": "Grants +0.05 velocity per level at full durability, 0 boost below 50% durability",
   "material.tconstruct.bronze.armor": "Boosts toughness by 2 per level when at full durability, but boost drops to 0 below 50% durability",
-
   "material.tconstruct.constantan": "Constantan",
   "material.tconstruct.constantan.flavor": "Constantantantantantantan... Sorry it's fun to add more \"tans.\"",
   "material.tconstruct.constantan.encyclopedia": "Grants +7.5 mining speed in extreme cold and twice reinforced in extreme heat",
   "material.tconstruct.constantan.ranged": "Grants +0.15 velocity in extreme cold and twice reinforced in extreme heat",
   "material.tconstruct.constantan.armor": "Grants 5% protection in extreme cold and twice reinforced in extreme heat",
-
   "material.tconstruct.invar": "Invar",
   "material.tconstruct.invar.flavor": "Resists both temperature and arrest.",
   "material.tconstruct.invar.encyclopedia": "Grants +2.5 damage in biomes with neutral temperatures",
   "material.tconstruct.invar.ranged": "Grants +0.15 accuracy in biomes with neutral temperatures",
   "material.tconstruct.invar.armor": "Reduces damage by 5% per level in biomes with neutral temperatures",
-
   "material.tconstruct.electrum": "Electrum",
   "material.tconstruct.electrum.flavor": "Good for electronic components.",
   "material.tconstruct.electrum.encyclopedia": "Grants +50% XP per level from blocks and monsters",
   "material.tconstruct.electrum.ranged": "Grants +50% XP per level from monsters killed by arrows",
-
   "material.tconstruct.necronium": "Necronium",
   "material.tconstruct.necronium.flavor": "This much decay probably only leaves it with a quarter life",
   "material.tconstruct.necronium.encyclopedia": "Causes at least 5 seconds of wither, to your target and at a 25% chance to you",
-
   "material.tconstruct.plated_slimewood": "Plated Slimewood",
   "material.tconstruct.plated_slimewood.flavor": "All the shininess of brass with the squish of slime",
   "material.tconstruct.plated_slimewood.encyclopedia": "Grants +100% to all methods of restoring overslime",
-
-
   "_comment": "Modifiers",
-
   "key.categories.tconstruct": "Tinkers' Construct",
   "key.tconstruct.helmet_interact": "Helmet Interaction",
   "key.tconstruct.leggings_interact": "Leggings Interaction",
-
   "modifier.tconstruct.empty": "Invalid modifier",
   "modifier.tconstruct.empty.flavor": "Missing!",
   "modifier.tconstruct.empty.description": "Fallback for when a modifier is missing",
-
   "modifier.tconstruct.shiny": "Shiny",
   "modifier.tconstruct.shiny.flavor": "Magical Energy Flows!",
   "modifier.tconstruct.shiny.description": "Tool glows with an enchanted glint",
@@ -1809,8 +1433,6 @@
   "modifier.tconstruct.offhanded.2": "Nohanded",
   "modifier.tconstruct.offhanded.flavor": "Don't think about it too hard",
   "modifier.tconstruct.offhanded.description": "Disables the tools interaction abilities when the offhand is filled. Second level disables interaction abilities entirely.",
-
-
   "_comment": "Durability",
   "modifier.tconstruct.reinforced": "Reinforced",
   "modifier.tconstruct.reinforced.flavor": "Long Lasting!",
@@ -1834,11 +1456,9 @@
   "modifier.tconstruct.netherite.flavor": "Refined!",
   "modifier.tconstruct.netherite.description": "Harness the power of ancient metal, making the tool stronger and immune to external damage such as fire",
   "modifier.tconstruct.netherite.requirements": "Netherite requires a gem first to be applied",
-
   "modifier.tconstruct.overslime": "Overslime",
   "modifier.tconstruct.overslime.flavor": "Slimy!",
   "modifier.tconstruct.overslime.description": "Tool consumes overslime instead of durability, until it runs out! Not friendly towards tools lacking slime",
-
   "_comment": "Tool or harvest",
   "modifier.tconstruct.experienced": "Experienced",
   "modifier.tconstruct.experienced.flavor": "Fast Learner!",
@@ -1846,7 +1466,6 @@
   "modifier.tconstruct.magnetic": "Magnetic",
   "modifier.tconstruct.magnetic.flavor": "Magnetic Personality!",
   "modifier.tconstruct.magnetic.description": "Hitting things attracts nearby items?!",
-
   "modifier.tconstruct.haste": "Haste",
   "modifier.tconstruct.haste.2": "Hastier",
   "modifier.tconstruct.haste.3": "Hastiest",
@@ -1854,7 +1473,6 @@
   "modifier.tconstruct.haste.5": "Hastiestest",
   "modifier.tconstruct.haste.flavor": "Science!",
   "modifier.tconstruct.haste.description": "Magic red dust makes tool mine faster!",
-
   "modifier.tconstruct.blasting": "Blasting",
   "modifier.tconstruct.blasting.flavor": "Explosive Mining!",
   "modifier.tconstruct.blasting.description": "Your tool breaks blocks weak to explosions, such as ores, faster!",
@@ -1867,7 +1485,6 @@
   "modifier.tconstruct.lightspeed.flavor": "Brighter is faster!",
   "modifier.tconstruct.lightspeed.description": "Tool mines well lit blocks faster!",
   "modifier.tconstruct.lightspeed.mining_speed": "Mining in Light",
-
   "_comment": "Weapon",
   "modifier.tconstruct.knockback": "Knockback",
   "modifier.tconstruct.knockback.flavor": "Weeeeee!",
@@ -1885,7 +1502,6 @@
   "modifier.tconstruct.necrotic.flavor": "Vampiric!",
   "modifier.tconstruct.necrotic.description": "Critical hits on enemies drains their life to heal you",
   "modifier.tconstruct.necrotic.lifesteal": "Life Steal",
-
   "_comment": "Damage boost",
   "modifier.tconstruct.piercing": "Piercing",
   "modifier.tconstruct.piercing.flavor": "Become the cactus!",
@@ -1918,7 +1534,6 @@
   "modifier.tconstruct.sweeping_edge.flavor": "Samurai!",
   "modifier.tconstruct.sweeping_edge.description": "Targets of sweep attack take a larger percentage of this tool's damage",
   "modifier.tconstruct.sweeping_edge.attack_damage": "Sweeping Damage",
-
   "modifier.tconstruct.sharpness": "Sharpness",
   "modifier.tconstruct.sharpness.1": "Sharp",
   "modifier.tconstruct.sharpness.2": "Sharper",
@@ -1934,10 +1549,7 @@
   "modifier.tconstruct.swiftstrike.5": "Swiftesteststrike",
   "modifier.tconstruct.swiftstrike.flavor": "Magic!",
   "modifier.tconstruct.swiftstrike.description": "Magic purple gems make the weapon lighter and easier to swing!",
-
-
   "_comment": "Ranged",
-
   "modifier.tconstruct.power": "Power",
   "modifier.tconstruct.power.flavor": "The power within becomes the power without",
   "modifier.tconstruct.power.description": "Boosts damage of arrows",
@@ -1987,7 +1599,6 @@
   "modifier.tconstruct.scope": "Scope",
   "modifier.tconstruct.scope.flavor": "360 with scope does not sound as cool",
   "modifier.tconstruct.scope.description": "Zoom in on the target when charging the bow.",
-
   "_comment": "Armor",
   "modifier.tconstruct.knockback_resistance": "Knockback Resistance",
   "modifier.tconstruct.knockback_resistance.flavor": "A weighty subject",
@@ -2001,7 +1612,6 @@
   "modifier.tconstruct.revitalizing": "Revitalizing",
   "modifier.tconstruct.revitalizing.flavor": "Can feel the energy flowing",
   "modifier.tconstruct.revitalizing.description": "Strengthens the heart, granting more hearts",
-
   "modifier.tconstruct.embellishment": "Embellishment",
   "modifier.tconstruct.embellishment.formatted": "%s Embellishment",
   "modifier.tconstruct.embellishment.flavor": "Redecorate!",
@@ -2010,7 +1620,6 @@
   "modifier.tconstruct.dyed.formatted": "Dyed #%s",
   "modifier.tconstruct.dyed.flavor": "Redecorate!",
   "modifier.tconstruct.dyed.description": "Armor appearance changed to match a different material",
-
   "_comment": "Armor - Protection",
   "modifier.tconstruct.protection": "Protection",
   "modifier.tconstruct.protection.flavor": "Jack of all trades!",
@@ -2055,7 +1664,6 @@
   "modifier.tconstruct.boundless": "Boundless",
   "modifier.tconstruct.boundless.flavor": "Increasing your limits",
   "modifier.tconstruct.boundless.description": "Increases the maximum percentage of protection from any source",
-
   "_comment": "Armor - counterattack",
   "modifier.tconstruct.thorns": "Thorns",
   "modifier.tconstruct.thorns.flavor": "Quite metal",
@@ -2067,7 +1675,6 @@
   "modifier.tconstruct.springy": "Springy",
   "modifier.tconstruct.springy.flavor": "Ka-boing!",
   "modifier.tconstruct.springy.description": "Attackers may bounce off your armor",
-
   "_comment": "Armor - helmet",
   "modifier.tconstruct.respiration": "Respiration",
   "modifier.tconstruct.respiration.flavor": "Water has oxygen too",
@@ -2084,7 +1691,6 @@
   "modifier.tconstruct.item_frame": "Item Frame",
   "modifier.tconstruct.item_frame.flavor": "I see everything",
   "modifier.tconstruct.item_frame.description": "Adds inventory slots to the helmet for items to observe. Perfect for clocks and compasses",
-
   "_comment": "Armor - chestplate",
   "modifier.tconstruct.armor_power": "Power",
   "modifier.tconstruct.armor_power.flavor": "Can you feel the power flowing through you?",
@@ -2098,7 +1704,6 @@
   "modifier.tconstruct.wings": "Wings",
   "modifier.tconstruct.wings.flavor": "The sky is yours",
   "modifier.tconstruct.wings.description": "Allows you to soar through the air by jumping while in mid air",
-
   "_comment": "Armor - leggings",
   "modifier.tconstruct.speedy": "Speedy",
   "modifier.tconstruct.speedy.flavor": "Keep going and going and going...",
@@ -2125,9 +1730,7 @@
   "modifier.tconstruct.swift_sneak": "Swift Sneak",
   "modifier.tconstruct.swift_sneak.flavor": "Sneaky, but faster!",
   "modifier.tconstruct.swift_sneak.description": "Increases movement speed while crouching",
-
   "modifier.tconstruct.inventory_cannot_remove": "Making this change would cause an item stored in this tool to be deleted",
-
   "_comment": "Armor - boots",
   "modifier.tconstruct.feather_falling": "Feather Falling",
   "modifier.tconstruct.feather_falling.flavor": "Floof",
@@ -2154,7 +1757,6 @@
   "modifier.tconstruct.bouncy": "Bouncy",
   "modifier.tconstruct.bouncy.flavor": "Skybound!",
   "modifier.tconstruct.bouncy.description": "Causes the ground to reflect you, as if you are constantly on slime blocks",
-
   "modifier.tconstruct.frost_walker": "Frost Walker",
   "modifier.tconstruct.frost_walker.flavor": "Where's My Super Suit?",
   "modifier.tconstruct.frost_walker.description": "Causes water blocks to temporarily freeze",
@@ -2170,13 +1772,10 @@
   "modifier.tconstruct.flamewake": "Flamewake",
   "modifier.tconstruct.flamewake.flavor": "This is fine!",
   "modifier.tconstruct.flamewake.description": "Leave a trail of fire in your wake",
-
   "_comment": "Armor - shields",
   "modifier.tconstruct.reflecting": "Reflecting",
   "modifier.tconstruct.reflecting.flavor": "Bouncy Shield",
   "modifier.tconstruct.reflecting.description": "Allows reflecting projectiles within a short window of deploying your shield",
-
-
   "_comment": "Abilities",
   "modifier.tconstruct.unbreakable": "Unbreakable",
   "modifier.tconstruct.unbreakable.flavor": "Frozen state!",
@@ -2185,7 +1784,6 @@
   "modifier.tconstruct.dual_wielding": "Dual Wielding",
   "modifier.tconstruct.dual_wielding.flavor": "Double action!",
   "modifier.tconstruct.dual_wielding.description": "Can attack from the offhand, provided the main hand can also dual wield. Tools with dual wielding have reduced stats",
-
   "_comment": "Loot",
   "modifier.tconstruct.silky": "Silky",
   "modifier.tconstruct.silky.flavor": "Smooth as silk!",
@@ -2204,7 +1802,6 @@
   "modifier.tconstruct.looting": "Looting",
   "modifier.tconstruct.looting.flavor": "Luck of the Mobs!",
   "modifier.tconstruct.looting.description": "Gives you more nice things when killing mobs!",
-
   "_comment": "Expanders",
   "modifier.tconstruct.expanded": "Expanded",
   "modifier.tconstruct.expanded.flavor": "Did not skip leg day!",
@@ -2212,7 +1809,6 @@
   "modifier.tconstruct.reach": "Reach",
   "modifier.tconstruct.reach.flavor": "Telekinesis!",
   "modifier.tconstruct.reach.description": "Can reach further blocks and mobs while holding this tool!",
-
   "_comment": "Block transform",
   "modifier.tconstruct.pathing": "Pathing",
   "modifier.tconstruct.pathing.flavor": "Where we're going, we need roads!",
@@ -2265,7 +1861,6 @@
   "modifier.tconstruct.warping": "Warping",
   "modifier.tconstruct.warping.flavor": "Ender transporting",
   "modifier.tconstruct.warping.description": "Charge up, aim at a wall, and warp to the other side!",
-
   "_comment": "Fluids",
   "modifier.tconstruct.melting": "Melting",
   "modifier.tconstruct.melting.flavor": "The power of a Melter on a stick!",
@@ -2291,7 +1886,6 @@
   "modifier.tconstruct.spitting": "Spitting",
   "modifier.tconstruct.spitting.flavor": "Become the better llama",
   "modifier.tconstruct.spitting.description": "Can charge the tool to launch fluid projectiles from the tank, applying the effect to the target. Affected by bow stats.",
-
   "_comment": "Bonus modifier slots",
   "modifier.tconstruct.creative_slot": "Creative Slot",
   "modifier.tconstruct.creative_slot.flavor": "Dirty Cheater!",
@@ -2301,7 +1895,6 @@
   "modifier.tconstruct.stat_override.description": "Tool stats modified using commands",
   "modifier.tconstruct.stat_override.bonuses": "Bonuses:",
   "modifier.tconstruct.stat_override.multipliers": "Multipliers:",
-
   "__comment": "Free Modifiers",
   "modifier.tconstruct.extra_modifier.type_format": "%s (%s)",
   "modifier.tconstruct.writable": "Writable",
@@ -2330,7 +1923,6 @@
   "modifier.tconstruct.rebalanced.souls": "Soul",
   "modifier.tconstruct.rebalanced.defense": "Defense",
   "modifier.tconstruct.rebalanced.traits": "Trait",
-
   "__comment": "Three more +1 upgrade modifiers for modpacks",
   "modifier.tconstruct.red_extra_upgrade": "Red Extra Upgrade",
   "modifier.tconstruct.red_extra_upgrade.flavor": "For modpacks!",
@@ -2344,10 +1936,7 @@
   "modifier.tconstruct.extra_ability": "Extra Ability",
   "modifier.tconstruct.extra_ability.flavor": "For modpacks!",
   "modifier.tconstruct.extra_ability.description": "Ask your modpack maker to provide a resource pack giving this better lore",
-
-
   "__comment": "Tier 1 Traits",
-
   "modifier.tconstruct.cultivated": "Cultivated",
   "modifier.tconstruct.cultivated.flavor": "Economical!",
   "modifier.tconstruct.cultivated.description": "Tool practically grows more material when repairing",
@@ -2375,7 +1964,6 @@
   "modifier.tconstruct.solar_powered": "Solar Powered",
   "modifier.tconstruct.solar_powered.flavor": "Good for the environment",
   "modifier.tconstruct.solar_powered.description": "Tool resists damage in sunlight",
-
   "__comment": "Tier 2 Traits",
   "modifier.tconstruct.sturdy": "Sturdy",
   "modifier.tconstruct.sturdy.flavor": "Well Made!",
@@ -2420,7 +2008,6 @@
   "modifier.tconstruct.airborne.flavor": "Take to the skies!",
   "modifier.tconstruct.airborne.description": "Tool no longer is penalized when mining in the air and gains a projectile accuracy bonus",
   "modifier.tconstruct.airborne.accuracy": "Airborne Accuracy",
-
   "__comment": "Tier 3 Traits",
   "modifier.tconstruct.overcast": "Overcast",
   "modifier.tconstruct.overcast.flavor": "Thick Coverage!",
@@ -2444,10 +2031,8 @@
   "modifier.tconstruct.tasty": "Tasty",
   "modifier.tconstruct.tasty.flavor": "Om Nom Nom",
   "modifier.tconstruct.tasty.description": "Smells so good, you cannot resist taking a few bites of your tool",
-
   "death.attack.tconstruct.bleed": "%1$s bled to death",
   "death.attack.tconstruct.bleed.item": "%1$s bled to death from injuries caused by %2$s",
-
   "__comment": "Tier 4 Traits",
   "modifier.tconstruct.overlord": "Overlord",
   "modifier.tconstruct.overlord.flavor": "Regal!",
@@ -2476,13 +2061,10 @@
   "modifier.tconstruct.flame_barrier.flavor": "Thermoshielding!",
   "modifier.tconstruct.flame_barrier.description": "Increases protection while on fire",
   "modifier.tconstruct.flame_barrier.resistance": "Barrier Resistance",
-
   "__comment": "Tier 5 Traits",
   "modifier.tconstruct.enderporting": "Enderporting",
   "modifier.tconstruct.enderporting.flavor": "Harness the power of the enderslime",
   "modifier.tconstruct.enderporting.description": "Tool teleports the holder to mined blocks or killed entities",
-
-
   "__comment": "Tier 2 Mod Compat Traits",
   "modifier.tconstruct.dense": "Dense",
   "modifier.tconstruct.dense.flavor": "Barely loses its shape",
@@ -2513,8 +2095,6 @@
   "modifier.tconstruct.consecrated.flavor": "Die, Fowl Creature!",
   "modifier.tconstruct.consecrated.description": "Take less damage from the undead",
   "modifier.tconstruct.consecrated.resistance": "Undead Resistance",
-
-
   "__comment": "Tier 3 Mod Compat Traits",
   "modifier.tconstruct.ductile": "Ductile",
   "modifier.tconstruct.ductile.flavor": "Reshapes well!",
@@ -2545,7 +2125,6 @@
   "modifier.tconstruct.overworked": "Overworked",
   "modifier.tconstruct.overworked.flavor": "Underpaid",
   "modifier.tconstruct.overworked.description": "Increases amount of overslime restored from all sources",
-
   "_comment": "Slimeskull traits",
   "modifier.tconstruct.self_destructive": "Self Destructive",
   "modifier.tconstruct.self_destructive.flavor": "Not super healthy",
@@ -2590,7 +2169,6 @@
   "modifier.tconstruct.revenge": "Revenge",
   "modifier.tconstruct.revenge.flavor": "Perfect for counterattacks",
   "modifier.tconstruct.revenge.description": "Makes you stronger after you are attacked",
-
   "modifier.tconstruct.creeper_disguise": "Creeper Disguise",
   "modifier.tconstruct.creeper_disguise.flavor": "Kinda Creepy",
   "modifier.tconstruct.creeper_disguise.description": "Makes you look more like a creeper to other creepers",
@@ -2633,17 +2211,13 @@
   "modifier.tconstruct.zombified_piglin_disguise": "Zombified Piglin Disguise",
   "modifier.tconstruct.zombified_piglin_disguise.flavor": "Is it a pig? A man? A zombie?",
   "modifier.tconstruct.zombified_piglin_disguise.description": "Makes you look more like a zombified piglin to other zombified piglins",
-
   "_comment": "Compat Modifiers",
   "modifier.tconstruct.the_one_probe": "The One Probe",
   "modifier.tconstruct.the_one_probe.flavor": "Sciency!",
   "modifier.tconstruct.the_one_probe.description": "Shows information about the targeted block when held or on a helmet.",
-
   "_comment": "Internal modifiers",
   "modifier.tconstruct.overslime_friend": "Overslime Friend",
   "modifier.tconstruct.snow_boots": "Snow Boots",
-
-
   "_comment": "Internal effects",
   "effect.tconstruct.bleeding": "Bleeding",
   "effect.tconstruct.magnetic": "Magnetic",
@@ -2660,8 +2234,6 @@
   "effect.tconstruct.calcified": "Calcified",
   "effect.tconstruct.self_destructing": "Self Destructing",
   "effect.tconstruct.enderference": "Enderference",
-
-
   "_comment": "Roman numerals",
   "roman_numeral.value.1": "I",
   "roman_numeral.value.2": "II",
@@ -2683,16 +2255,13 @@
   "roman_numeral.value.18": "XVIII",
   "roman_numeral.value.19": "XIX",
   "roman_numeral.value.20": "XX",
-
   "_comment": "Stats",
-
   "tool_stat.tconstruct.attack_speed": "Melee Speed: ",
   "tool_stat.tconstruct.attack_speed.description": "Base value for melee attack speed calculations.\nRoughly is number of full strength attacks per second.",
   "tool_stat.tconstruct.durability": "Durability: ",
   "tool_stat.tconstruct.durability.description": "The base-value for durability calculations.\nUsually an integral part to the overall durability of a tool.",
   "tool_stat.tconstruct.use_item_speed": "Use Item Speed: ",
   "tool_stat.tconstruct.use_item_speed.description": "Movement speed multiplier when using an item, such as a bow or a shield.",
-
   "stat.tconstruct.head": "Head",
   "tool_stat.tconstruct.mining_speed": "Mining Speed: ",
   "tool_stat.tconstruct.mining_speed.description": "How fast a tool with a tool head of this material can mine blocks.\nMay be influenced by other toolparts.",
@@ -2700,7 +2269,6 @@
   "tool_stat.tconstruct.harvest_tier.description": "What range of blocks a tool with a tool head of this material can mine.",
   "tool_stat.tconstruct.attack_damage": "Melee Damage: ",
   "tool_stat.tconstruct.attack_damage.description": "Base value for melee attack damage calculations.\nThe end result depends on the tool itself and the other components used.",
-
   "stat.tconstruct.plating": "Plating",
   "stat.tconstruct.plating_armor": "Armor Plating",
   "stat.tconstruct.plating_helmet": "Helmet Plating",
@@ -2716,13 +2284,11 @@
   "tool_stat.tconstruct.armor_toughness.description": "How much this armor resists high damage blows.",
   "tool_stat.tconstruct.knockback_resistance": "Knockback Resist: ",
   "tool_stat.tconstruct.knockback_resistance.description": "How much this armor reduces knockback.",
-
   "stat.tconstruct.handle": "Handle",
   "tool_stat.tconstruct.handle.durability.description": "The total durability of the tool will be multiplied by this.",
   "tool_stat.tconstruct.handle.attack_damage.description": "The total attack damage of the tool will be multiplied by this.",
   "tool_stat.tconstruct.handle.attack_speed.description": "The total attack speed of the tool will be multiplied by this.",
   "tool_stat.tconstruct.handle.mining_speed.description": "The total mining speed of the tool will be multiplied by this.",
-  
   "stat.tconstruct.limb": "Limb",
   "stat.tconstruct.grip": "Grip",
   "tool_stat.tconstruct.draw_speed": "Draw Speed: ",
@@ -2733,53 +2299,41 @@
   "tool_stat.tconstruct.accuracy.description": "Determines how close the bow aims towards the center.",
   "tool_stat.tconstruct.projectile_damage": "Proj. Power: ",
   "tool_stat.tconsturct.projectile_damage.description": "Determines the base damage or strength of projectiles fired by this weapon.",
-
   "stat.tconstruct.binding": "Binding",
   "stat.tconstruct.bowstring": "Bowstring",
   "tool_stat.tconstruct.extra.no_stats": "No stats",
-
   "tool_stat.tconstruct.block_amount": "Block Amount: ",
   "tool_stat.tconstruct.block_amount.description": "Maximum amount of damage blocked by this shield per attack.",
   "tool_stat.tconstruct.block_angle": "Block Angle: ",
   "tool_stat.tconstruct.block_angle.description": "Total angle of protection in front when shielding out of a max 360 degrees. Any attacks from an angle beyond this are not blocked.",
-
   "tool_stat.tconstruct.overslime": "Overslime Capacity: ",
   "tool_stat.tconstruct.overslime.description": "Maximum amount of overslime allowed on this tool.",
   "tool_stat.tconstruct.tank_capacity": "Tank Capacity: ",
   "tool_stat.tconstruct.tank_capacity.description": "Maximum amount of fluid that can be stored in this tool's tank.",
   "tool_stat.tconstruct.tank_capacity.fluid": "Fluid: ",
-
   "stat.tconstruct.repair_kit": "Repair Kit",
   "stat.tconstruct.skull": "Slimeskull",
-
   "stat.tconstruct.harvest_tier.minecraft.wood": "Wood",
   "stat.tconstruct.harvest_tier.minecraft.gold": "Gold",
   "stat.tconstruct.harvest_tier.minecraft.stone": "Stone",
   "stat.tconstruct.harvest_tier.minecraft.iron": "Iron",
   "stat.tconstruct.harvest_tier.minecraft.diamond": "Diamond",
   "stat.tconstruct.harvest_tier.minecraft.netherite": "Netherite",
-
   "stat.tconstruct.slot.prefix.upgrades": "Upgrades: ",
   "stat.tconstruct.slot.prefix.abilities": "Abilities: ",
   "stat.tconstruct.slot.prefix.souls": "Soul Slots: ",
   "stat.tconstruct.slot.prefix.defense": "Defense Slots: ",
-
   "stat.tconstruct.slot.display.upgrades": "upgrade",
   "stat.tconstruct.slot.display.abilities": "ability",
   "stat.tconstruct.slot.display.souls": "soul",
   "stat.tconstruct.slot.display.defense": "defense",
   "stat.tconstruct.slot.display.traits": "trait",
-
   "armor_stat.tconstruct.mining_speed": "Mining Speed",
   "armor_stat.tconstruct.use_item_speed": "Use Item Speed",
   "armor_stat.tconstruct.experience": "Experience",
-
-
   "_comment": "Tooltips",
-
   "key.tconstruct.shift": "Shift",
   "key.tconstruct.ctrl": "Ctrl",
-
   "tooltip.tconstruct.tool.broken": "Broken",
   "tooltip.tconstruct.tool.empty": "Empty",
   "tooltip.tconstruct.hold_shift": "Hold %s for stats",
@@ -2787,25 +2341,20 @@
   "tooltip.tconstruct.missing_data": "Missing tool data",
   "tooltip.tconstruct.uninitialized": "Place in inventory to initialize",
   "tooltip.tconstruct.random_materials": "Randomized materials",
-
   "tooltip.tconstruct.part.added_by": "Material added by %s",
   "tooltip.tconstruct.part.missing_material": "Missing material: %s",
   "tooltip.tconstruct.part.missing_stats": "Material does not support %s",
   "tooltip.tconstruct.part.missing_info": "Part has no data",
   "tooltip.tconstruct.part.material_id": "Material ID: %s",
-
   "_comment": "GUIs",
-
   "itemGroup.tconstruct.general": "Tinkers' General Items",
   "itemGroup.tconstruct.tools": "Tinkers' Tools",
   "itemGroup.tconstruct.tool_parts": "Tinkers' Toolparts",
   "itemGroup.tconstruct.smeltery": "Tinkers' Smeltery",
   "itemGroup.tconstruct.world": "Tinkers' World",
   "itemGroup.tconstruct.gadgets": "Tinkers' Gadgets",
-
   "gui.tconstruct.crafting_station": "Crafting Station",
   "gui.tconstruct.crafting_station.uncraftable": "This item is not currently craftable by the player",
-
   "gui.tconstruct.part_builder": "Part Builder",
   "gui.tconstruct.part_builder.info": "Here you can craft tool parts to fulfill your tinkering fantasies.\n\nTo craft a part simply put a blank pattern into the left slot and select the part you want. The remaining slot holds the material you want to craft your part out of.",
   "gui.tconstruct.part_builder.material_value": "Material value: %s",
@@ -2813,11 +2362,9 @@
   "gui.tconstruct.part_builder.trait": "Trait",
   "gui.tconstruct.part_builder.uncraftable": "Cannot shape",
   "gui.tconstruct.part_builder.uncraftable.tooltip": "Material cannot be shaped in the part builder. Other methods such as casting are required.",
-
   "gui.tconstruct.tinkers_chest": "Tinker's Chest",
   "gui.tconstruct.cast_chest": "Cast Chest",
   "gui.tconstruct.part_chest": "Part Chest",
-
   "gui.tconstruct.tinker_station": "Tinker Station",
   "gui.tconstruct.tinker_station.repair_limited": "Repair & Modify",
   "gui.tconstruct.tinker_station.repair_limited.description": "Allows creating all basic tools and applying most modifiers. Select a layout from the buttons on the left to get started.",
@@ -2829,39 +2376,30 @@
   "gui.tconstruct.tinker_station.components": "Components",
   "gui.tconstruct.tinker_station.info": "The main way to repair or change your tools. Place a tool and a material on the left to get started.",
   "gui.tconstruct.tinker_station.no_traits": "None :[",
-
   "gui.tconstruct.manual.cycle.recipes": "Cycle to other recipes",
-
   "recipe.tconstruct.tool_repair.fully_repaired": "Tool is not damaged",
   "recipe.tconstruct.damaging.broken": "Tool is already broken",
   "recipe.tconstruct.overslime.at_capacity": "Tool has no more space for overslime",
-
   "recipe.tconstruct.swappable.already_present": "Tool already contains %s with variant %s",
-
   "gui.tconstruct.modifier_worktable": "Modifier Worktable",
   "gui.tconstruct.modifier_worktable.title": "Modifier Tuning",
   "gui.tconstruct.modifier_worktable.info": "Add a tool and the proper items to tune the tool's modifiers",
   "recipe.tconstruct.modifier_set_worktable.empty": "Tool has no applicable modifiers",
-
   "recipe.tconstruct.remove_modifier.modifiers": "Remove Modifiers",
   "recipe.tconstruct.remove_modifier.description": "Select a modifier to remove, slots will be returned but any item cost is lost. Fluid will be consumed from the input, and the container returned.",
   "recipe.tconstruct.remove_modifier.no_modifiers": "Tool does not have any modifiers removable by this recipe",
-
   "recipe.tconstruct.modifier_sorting.title": "Sort Modifiers",
   "recipe.tconstruct.modifier_sorting.description": "Select a modifier to swap its location with the next modifier in the list. Does not consume items to swap.",
   "recipe.tconstruct.modifier_sorting.not_enough_modifiers": "Tool needs at least two modifiers to sort",
-
   "recipe.tconstruct.invisible_modifiers.adding.title": "Invisible Ink",
   "recipe.tconstruct.invisible_modifiers.adding.description": "Select a modifier to hide it from the tool's model",
   "recipe.tconstruct.invisible_modifiers.removing.title": "Visible Ink",
   "recipe.tconstruct.invisible_modifiers.removing.description": "Select a hidden modifier to make it show in the tool's model again",
-
   "modifier.tconstruct.attack_toggled": "%s (Attack)",
   "recipe.tconstruct.attack_modifiers.adding.title": "Toggle Interaction",
   "recipe.tconstruct.attack_modifiers.adding.description": "Switches an interaction modifier from activating on interaction to attack",
   "recipe.tconstruct.attack_modifiers.removing.title": "Untoggle Interaction",
   "recipe.tconstruct.attack_modifiers.removing.description": "Switches an interaction modifier back to activating on interaction",
-
   "recipe.tconstruct.extract_modifier.upgrades": "Extract Upgrade",
   "recipe.tconstruct.extract_modifier.slotless": "Extract Slotless",
   "recipe.tconstruct.extract_modifier.abilities": "Extract Ability",
@@ -2869,14 +2407,11 @@
   "recipe.tconstruct.extract_modifier.modifiers": "Extract Modifier",
   "recipe.tconstruct.extract_modifier.description": "Select a modifier to extract onto a modifier crystal, slots will be returned but any item cost is lost.",
   "recipe.tconstruct.extract_modifier.no_modifiers": "Tool does not have any modifiers extractable with this recipe",
-
   "recipe.tconstruct.enchantment_converting.description.lost": "Select a modifier of the given type from the enchanted book to extract as a modifier crystal. The enchanted item will be lost.",
   "recipe.tconstruct.enchantment_converting.description.keep": "Select a modifier of the given type from the enchanted book to extract as a modifier crystal. The item will be returned without that enchantment.",
   "recipe.tconstruct.enchantment_converting.no_enchantments": "Item does not have any applicable enchantments",
   "recipe.tconstruct.enchantment_converting.too_few": "Need to provide more inputs to convert an enchantment of a higher level",
-
   "recipe.tconstruct.part_swapping.too_many_parts": "Table is too small to swap parts on this tool",
-
   "recipe.tconstruct.modifier.not_enough_slot": "Need at least 1 %s slot to add this modifier",
   "recipe.tconstruct.modifier.not_enough_slots": "Need at least %s %s slots to add this modifier",
   "recipe.tconstruct.modifier.validate_slots": "This change leaves the tool with too few %s slots",
@@ -2884,14 +2419,10 @@
   "recipe.tconstruct.modifier.max_level": "This recipe cannot increase %s above level %s (ignoring traits)",
   "recipe.tconstruct.modifier.min_level.traits": "This recipe requires the tool to have at least %s to apply (including traits)",
   "recipe.tconstruct.modifier.max_level.traits": "This recipe cannot increase %s above level %s (including traits)",
-
   "recipe.tconstruct.tool_recycling": "Tool Recycling",
   "recipe.tconstruct.tool_recycling.info": "Select which part to salvage from this tool. There is a chance based on the tool's remaining durability to salvage a second part.",
   "recipe.tconstruct.tool_recycling.no_modifiers": "A tool cannot be recycled if it contains any upgrades or abilities, those must be removed first.",
-
-
   "_comment": "GUIs Messages",
-
   "gui.tconstruct.caption": "Caption",
   "gui.tconstruct.error": "ERROR",
   "gui.tconstruct.warning": "WARNING",
@@ -2901,15 +2432,11 @@
   "gui.tconstruct.error.unknown_material": "Unknown Material",
   "gui.tconstruct.error.useless_tool_part": "This part can not be used to craft any tool!\n\nEither the material %s is missing some information or no tool uses a(n) %s in its crafting.",
   "gui.tconstruct.error.not_enough_durability": "Not enough durability to replace parts!\n%d more durability required.",
-
-
   "_comment": "Subtitles for sounds",
-
   "subtitles.tconstruct.little_saw": "Saw used",
   "subtitles.tconstruct.item_frame_click": "Item Frame clock clicks",
   "subtitles.tconstruct.casting_cools": "Cast item cools",
   "subtitles.tconstruct.casting.click": "Casting block clicks",
-
   "subtitles.tconstruct.slime_sling": "Slime Sling bounces",
   "subtitles.tconstruct.slime_sling.teleport": "Slime Sling teleports",
   "subtitles.tconstruct.enderporting": "Entity enderports",
@@ -2918,35 +2445,25 @@
   "subtitles.tconstruct.longbow.charge": "Longbow pulls back",
   "subtitles.tconstruct.crystalshot": "Arrow hits",
   "subtitles.tconstruct.bonk": "Tool bonks",
-
   "subtitles.tconstruct.necrotic_heal": "Life drained",
   "subtitles.tconstruct.extra_jump": "Entity swooshed",
-
   "subtitles.tconstruct.slime_teleport": "Slime teleports",
   "subtitles.tconstruct.slimy_bounce": "Slimy bouncing",
-
   "subtitles.tconstruct.equip.slime": "Slimy armor jiggles",
   "subtitles.tconstruct.equip.travelers": "Travelers armor rustles",
   "subtitles.tconstruct.equip.plate": "Plate armor clanks",
-
   "subtitles.tconstruct.block.earth_crystal.chime": "Earth Crystal Chimes",
-  "subtitles.tconstruct.block.sky_crystal.chime":   "Sky Crystal Chimes",
+  "subtitles.tconstruct.block.sky_crystal.chime": "Sky Crystal Chimes",
   "subtitles.tconstruct.block.ichor_crystal.chime": "Ichor Crystal Chimes",
   "subtitles.tconstruct.block.ender_crystal.chime": "Ender Crystal Chimes",
-
-
   "_comment": "Book Strings",
-
   "book.tconstruct.material.part_builder": "Can be made in the part builder",
   "book.tconstruct.material.cast_from": "Can be casted from %s in casts",
   "book.tconstruct.material.composite_from": "Can be casted from %s on %s parts",
   "book.tconstruct.material.skull_from": "Can be created from casting Enderslime on a %s in a basin",
   "book.tconstruct.modifiers.effect": "Effects:",
   "book.tconstruct.tool.properties": "Properties:",
-
-
   "_comment": "Commands",
-
   "command.tconstruct.slot_type.not_found": "Unknown slot type %s",
   "command.tconstruct.fluid.not_found": "Unknown fluid %s",
   "command.tconstruct.stat_type.not_found": "Unknown stat type %s",
@@ -2956,62 +2473,49 @@
   "command.tconstruct.modifier_hook.not_found": "Unknown modifier hook %s",
   "command.tconstruct.modifier_usage": "Successfully printed modifier usage to the game log",
   "command.tconstruct.modifier_priority": "Successfully printed modifier priorities to the game log",
-
   "command.tconstruct.modifiers.success.add.single": "Applied modifier %s to %s's item",
   "command.tconstruct.modifiers.success.add.multiple": "Applied modifier %s to %s entities",
   "command.tconstruct.modifiers.success.remove.single": "Removed modifier %s from %s's item",
   "command.tconstruct.modifiers.success.remove.multiple": "Removed modifier %s from %s entities",
   "command.tconstruct.modifiers.failure.too_few_levels": "Cannot remove modifier %s from to %s's item",
-
   "command.tconstruct.slots.success.add.single": "Applied %s %s slots to %s's item",
   "command.tconstruct.slots.success.add.multiple": "Applied %s %s slots to %s entities",
   "command.tconstruct.slots.success.set.single": "Set %s slots to %s on %s's item",
   "command.tconstruct.slots.success.set.multiple": "Set %s slots to %s on %s entities",
   "command.tconstruct.slots.failure.invalid_count": "Cannot add zero slots, must add a positive or a negative value",
-
   "command.tconstruct.stats.success.bonus.modify.single": "%sIncreased by %s on %s's item",
   "command.tconstruct.stats.success.bonus.modify.multiple": "%sIncreased by %s on %s entities",
   "command.tconstruct.stats.success.bonus.set.single": "%sSet bonus to %s on %s's item",
   "command.tconstruct.stats.success.bonus.set.multiple": "%sSet bonus to %s on %s entities",
   "command.tconstruct.stats.success.bonus.set.parse_fail": "%sFailed to parse %s",
-
   "command.tconstruct.stats.success.multiply.modify.single": "%sMultiplied by %s on %s's item",
   "command.tconstruct.stats.success.multiply.modify.multiple": "%sMultiplied by %s on %s entities",
   "command.tconstruct.stats.success.multiply.set.single": "%sSet multiplier to %s on %s's item",
   "command.tconstruct.stats.success.multiply.set.multiple": "%sSet multiplier to %s on %s entities",
-
   "command.tconstruct.stats.success.reset.all.single": "Reset all tool stats bonuses and multipliers on %s's item",
   "command.tconstruct.stats.success.reset.all.multiple": "Reset all tool stats bonuses and multipliers on %s entities",
   "command.tconstruct.stats.success.reset.stat.single": "%sReset bonuses and multipliers on %s's item",
   "command.tconstruct.stats.success.reset.stat.multiple": "%sReset bonuses and multipliers on %s entities",
-
   "command.tconstruct.stats.failure.invalid_add": "Cannot add zero to a stat, must add a positive or negative number",
   "command.tconstruct.stats.failure.invalid_multiply": "Cannot multiply a stat by 1, must multiply by a different positive number",
-
   "command.tconstruct.held_modifiable.failed": "Nothing changed. Targets have no modifiable item in their hands or no targets were found",
   "command.tconstruct.held_modifiable.failed.nonliving": "%s is not a valid entity for this command",
   "command.tconstruct.held_modifiable.failed.no_item": "%s is not holding any item",
   "command.tconstruct.held_modifiable.failed.invalid_item": "%s is not holding a modifiable item",
-
   "command.tconstruct.generate_part_textures.start": "Started generating part textures",
   "command.tconstruct.generate_part_textures.finish": "Successfully generated %s part textures in %s s at %s",
   "command.tconstruct.generate_part_textures.no_materials": "No material's have generator info, nothing to generate",
   "command.tconstruct.generate_part_textures.no_parts": "No part sprites present in resource packs",
-
-
   "_comment": "JEI Strings",
   "jei.tconstruct.time": "%s s",
   "jei.tconstruct.temperature": "%s°C",
   "jei.tconstruct.modifier_ingredient": "%s Modifier",
-
   "jei.tconstruct.casting.basin": "Casting Basin",
   "jei.tconstruct.casting.table": "Casting Table",
   "jei.tconstruct.casting.cast_kept": "Cast item can be reused in later recipes",
   "jei.tconstruct.casting.cast_consumed": "Cast item is consumed on casting",
-
   "jei.tconstruct.molding.title": "Molding",
   "jei.tconstruct.molding.pattern_consumed": "Pattern is consumed on crafting",
-
   "jei.tconstruct.melting.title": "Melting",
   "jei.tconstruct.melting.multiplier": "Speed multiplier: %sx",
   "jei.tconstruct.melting.ore": "Recipe output is boosted based on the controller type",
@@ -3019,13 +2523,10 @@
   "jei.tconstruct.melting.smeltery": "In smeltery:",
   "jei.tconstruct.melting.melter": "In melter:",
   "jei.tconstruct.foundry.title": "Foundry",
-
   "jei.tconstruct.entity_melting.title": "Entity Melting",
   "jei.tconstruct.entity_melting.per_hearts": "Per %s Hearts Damage",
   "jei.tconstruct.entity_melting.per_heart": "Per 1.0 Heart Damage",
-
   "jei.tconstruct.alloy.title": "Alloying",
-
   "jei.tconstruct.modifiers.title": "Modifiers",
   "jei.tconstruct.modifiers.slot": "Modifier requires 1 %s slot to apply",
   "jei.tconstruct.modifiers.slots": "Modifier requires %s %s slots to apply",
@@ -3035,18 +2536,12 @@
   "jei.tconstruct.modifiers.level.max": "Max level: %s",
   "jei.tconstruct.modifiers.level.range": "Level range: %s-%s",
   "jei.tconstruct.modifiers.level.exact": "For level: %s",
-
   "jei.tconstruct.severing.title": "Severing",
-
   "jei.tconstruct.tinkering.tool_building": "Tool Building",
   "jei.tconstruct.tinkering.tool_building.anvil": "Broad tools require the Tinker's Anvil to be created or swap parts",
-
   "jei.tconstruct.part_builder.title": "Part Builder",
   "jei.tconstruct.part_builder.cost": "Cost: %s",
-
   "jei.tconstruct.modifier_worktable.title": "Modifier Worktable",
-
-
   "_comment": "Tool Advancements",
   "advancements.tconstruct.tools.materials_and_you.title": "Tinker In Training",
   "advancements.tconstruct.tools.materials_and_you.description": "Craft Materials and You, the introduction book into Tinkers' Construct",
@@ -3076,7 +2571,6 @@
   "advancements.tconstruct.tools.one_shot.description": "Create a melee weapon that can unconditionally kill any common monsters in a single non-critical attack (21 flat damage or more)",
   "advancements.tconstruct.tools.material_master.title": "Material Master",
   "advancements.tconstruct.tools.material_master.description": "Use each default material at least once",
-
   "_comment": "Smeltery Advancements",
   "advancements.tconstruct.smeltery.puny_smelting.title": "Smeltery Recruit",
   "advancements.tconstruct.smeltery.puny_smelting.description": "Craft the guidebook puny smelting",
@@ -3098,7 +2592,6 @@
   "advancements.tconstruct.smeltery.tool_forge.description": "Forge one of every broad tool in the anvil",
   "advancements.tconstruct.smeltery.abilities.title": "Ability Master",
   "advancements.tconstruct.smeltery.abilities.description": "Apply every single default ability modifier to a tool at least once",
-
   "_comment": "Foundry Advancements",
   "advancements.tconstruct.foundry.fantastic_foundry.title": "Nether Smelting",
   "advancements.tconstruct.foundry.fantastic_foundry.description": "Create fantastic foundry, the nether smelting guidebook",
@@ -3114,7 +2607,6 @@
   "advancements.tconstruct.foundry.manyullyn_lanterns.description": "Create a full stack of seared or scorched lanterns filled with molten manyullyn",
   "advancements.tconstruct.foundry.encyclopedia.title": "Encyclopedia",
   "advancements.tconstruct.foundry.encyclopedia.description": "Craft the encyclopedia of materials with your knowledge from all the books",
-
   "_comment": "Gadget Advancements",
   "advancements.tconstruct.world.tinkers_gadgetry.title": "Tinker's Gadgetry",
   "advancements.tconstruct.world.tinkers_gadgetry.description": "Craft Tinker's Gadgetry to begin exploring the world",
@@ -3136,6 +2628,5 @@
   "advancements.tconstruct.world.slime_collector.description": "Obtain all 5 types of slime",
   "advancements.tconstruct.world.piggybackpack.title": "Pig Piggyback",
   "advancements.tconstruct.world.piggybackpack.description": "Pick up a pig with a piggybackpack"
-
 }
 

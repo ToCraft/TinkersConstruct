@@ -12,6 +12,7 @@ import slimeknights.mantle.client.screen.MultiModuleScreen;
 import java.util.List;
 
 public class SideButtonsWidget<T extends Button> implements Renderable, GuiEventListener {
+
   private static final int SPACING = 4;
 
   protected final MultiModuleScreen<?> parent;

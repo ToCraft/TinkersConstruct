@@ -16,11 +16,16 @@ import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
 
 import java.util.List;
 
-/** Helpers for running tests */
+/**
+ * Helpers for running tests
+ */
 public class TestHelper {
+
   private TestHelper() {}
 
-  /** Helper to fetch traits from the trait hook */
+  /**
+   * Helper to fetch traits from the trait hook
+   */
   public static List<ModifierEntry> getTraits(ToolDefinitionData data) {
     ModifierNBT.Builder builder = ModifierNBT.builder();
     data.getHook(ToolHooks.TOOL_TRAITS).addTraits(ToolDefinition.EMPTY, MaterialNBT.EMPTY, builder);
@@ -29,7 +34,9 @@ public class TestHelper {
 
   public record ToolDefinitionStats(StatsNBT base, MultiplierNBT multipliers) {}
 
-  /** Computes the stats for the given tool */
+  /**
+   * Computes the stats for the given tool
+   */
   public static ToolDefinitionStats buildStats(ToolDefinitionData data) {
     ModifierStatsBuilder builder = ModifierStatsBuilder.builder();
     data.getHook(ToolHooks.TOOL_STATS).addToolStats(new DummyToolStack(Items.AIR, ModifierNBT.EMPTY, new ModDataNBT()), builder);
