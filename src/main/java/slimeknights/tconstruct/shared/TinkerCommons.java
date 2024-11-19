@@ -64,6 +64,7 @@ import slimeknights.tconstruct.shared.block.WaxedPlatformBlock;
 import slimeknights.tconstruct.shared.block.WeatheringPlatformBlock;
 import slimeknights.tconstruct.shared.command.TConstructCommand;
 import slimeknights.tconstruct.shared.data.CommonRecipeProvider;
+import slimeknights.tconstruct.shared.data.TinkerDamageTypeTagProvider;
 import slimeknights.tconstruct.shared.inventory.BlockContainerOpenedTrigger;
 import slimeknights.tconstruct.shared.item.CheeseBlockItem;
 import slimeknights.tconstruct.shared.item.CheeseItem;
@@ -190,5 +191,6 @@ public final class TinkerCommons extends TinkerModule {
     generator.addProvider(client, new TinkerBlockStateProvider(generator, existingFileHelper));
     generator.addProvider(client, new TinkerSpriteSourceProvider(generator, existingFileHelper));
     generator.addProvider(event.includeServer(), new CommonRecipeProvider(generator));
+    generator.addProvider(event.includeServer(), new TinkerDamageTypeTagProvider(generator, event.getLookupProvider(), existingFileHelper));
   }
 }
