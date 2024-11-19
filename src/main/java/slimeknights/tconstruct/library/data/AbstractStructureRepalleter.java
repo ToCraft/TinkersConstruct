@@ -62,44 +62,40 @@ public abstract class AbstractStructureRepalleter extends GenericNBTProvider {
   @Override
   public CompletableFuture<?> run(CachedOutput cache) {
     return CompletableFuture.runAsync(() -> {
-      try {
-        addStructures();
-        for (Entry<ResourceLocation, Collection<RepaletteTask>> entry : structures.asMap().entrySet()) {
-          ResourceLocation original = entry.getKey();
+      addStructures();
+      for (Entry<ResourceLocation, Collection<RepaletteTask>> entry : structures.asMap().entrySet()) {
+        ResourceLocation original = entry.getKey();
 
-          try (InputStream io = existingFileHelper.getResource(original, packType, ".nbt", folder).open()) {
-            CompoundTag inputNBT = NbtIo.readCompressed(io);
-            for (RepaletteTask task : entry.getValue()) {
-              // start by fetching the palette, we assume its not randomized
-              CompoundTag newStructure = inputNBT.copy();
-              ListTag palette = newStructure.getList("palette", Tag.TAG_COMPOUND);
+        try (InputStream io = existingFileHelper.getResource(original, packType, ".nbt", folder).open()) {
+          CompoundTag inputNBT = NbtIo.readCompressed(io);
+          for (RepaletteTask task : entry.getValue()) {
+            // start by fetching the palette, we assume its not randomized
+            CompoundTag newStructure = inputNBT.copy();
+            ListTag palette = newStructure.getList("palette", Tag.TAG_COMPOUND);
 
-              // if we have a single palette, modify directly
-              if (task.replacements.length == 1) {
-                repaletteNBT(palette, task.replacements[0].build());
-              } else {
-                // multiple means we are building a randomized palette
-                newStructure.remove("palette");
-                ListTag palettes = new ListTag();
-                for (Replacement replacement : task.replacements) {
-                  palettes.add(repaletteNBT(palette.copy(), replacement.build()));
-                }
-                newStructure.put("palettes", palettes);
+            // if we have a single palette, modify directly
+            if (task.replacements.length == 1) {
+              repaletteNBT(palette, task.replacements[0].build());
+            } else {
+              // multiple means we are building a randomized palette
+              newStructure.remove("palette");
+              ListTag palettes = new ListTag();
+              for (Replacement replacement : task.replacements) {
+                palettes.add(repaletteNBT(palette.copy(), replacement.build()));
               }
-              // if requested, run it through the structure template to cleanup NBT (e.g. compact palettes)
-              if (task.reprocess) {
-                StructureTemplate template = new StructureTemplate();
-                template.load(BuiltInRegistries.BLOCK.asLookup(), newStructure);
-                newStructure = template.save(new CompoundTag());
-              }
-              saveNBT(cache, new ResourceLocation(modId, task.location), newStructure);
+              newStructure.put("palettes", palettes);
             }
-          } catch (IOException e) {
-            TConstruct.LOG.error("Couldn't read NBT for {}", original, e);
+            // if requested, run it through the structure template to cleanup NBT (e.g. compact palettes)
+            if (task.reprocess) {
+              StructureTemplate template = new StructureTemplate();
+              template.load(BuiltInRegistries.BLOCK.asLookup(), newStructure);
+              newStructure = template.save(new CompoundTag());
+            }
+            saveNBT(cache, new ResourceLocation(modId, task.location), newStructure);
           }
+        } catch (IOException e) {
+          TConstruct.LOG.error("Couldn't read NBT for {}", original, e);
         }
-      } catch (IOException e) {
-        throw new RuntimeException(e);
       }
     });
   }
