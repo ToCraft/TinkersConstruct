@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.texture.SpriteLoader;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -65,7 +66,6 @@ public class ModifierIconManager implements IEarlySafeManagerReloadListener {
    */
   public static void init() {
     IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-    bus.addListener(ModifierIconManager::textureStitch);
     bus.addListener(ModifierIconManager::onResourceManagerRegister);
   }
 
@@ -79,17 +79,14 @@ public class ModifierIconManager implements IEarlySafeManagerReloadListener {
   /**
    * Called on texture stitch to add the new textures
    */
-  private static void textureStitch(TextureStitchEvent event) {
-    if (event.getAtlas().location().equals(InventoryMenu.BLOCK_ATLAS)) {
-      // temporary workaround to the fact that texture stitching might run before the resource loader
-      if (modifierIcons.isEmpty()) {
-        INSTANCE.onReloadSafe(Minecraft.getInstance().getResourceManager());
-      }
-      Consumer<ResourceLocation> spriteAdder = event::addSprite;
-      modifierIcons.values().forEach(list -> list.forEach(spriteAdder));
-      event.addSprite(DEFAULT_COVER);
-      event.addSprite(DEFAULT_PAGES);
+  public static void onTextureStitch(Consumer<ResourceLocation> spriteAdder, ResourceManager manager) {
+    // temporary workaround to the fact that texture stitching might run before the resource loader
+    if (modifierIcons.isEmpty()) {
+      INSTANCE.onReloadSafe(Minecraft.getInstance().getResourceManager());
     }
+    modifierIcons.values().forEach(list -> list.forEach(spriteAdder));
+    spriteAdder.accept(DEFAULT_COVER);
+    spriteAdder.accept(DEFAULT_PAGES);
   }
 
   @Override

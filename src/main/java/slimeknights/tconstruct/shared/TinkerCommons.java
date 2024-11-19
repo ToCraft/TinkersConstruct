@@ -40,6 +40,7 @@ import slimeknights.tconstruct.common.data.model.TinkerItemModelProvider;
 import slimeknights.tconstruct.common.json.BlockOrEntityCondition;
 import slimeknights.tconstruct.common.json.ConfigEnabledCondition;
 import slimeknights.tconstruct.common.recipe.RecipeCacheInvalidator;
+import slimeknights.tconstruct.library.client.data.TinkerSpriteSourceProvider;
 import slimeknights.tconstruct.library.json.condition.TagDifferencePresentCondition;
 import slimeknights.tconstruct.library.json.condition.TagIntersectionPresentCondition;
 import slimeknights.tconstruct.library.json.condition.TagNotEmptyCondition;
@@ -185,6 +186,7 @@ public final class TinkerCommons extends TinkerModule {
     generator.addProvider(client, new ModelSpriteProvider(generator, existingFileHelper));
     generator.addProvider(client, new TinkerItemModelProvider(generator, existingFileHelper));
     generator.addProvider(client, new TinkerBlockStateProvider(generator, existingFileHelper));
+    generator.addProvider(client, new TinkerSpriteSourceProvider(generator, existingFileHelper));
     generator.addProvider(event.includeServer(), new CommonRecipeProvider(generator));
   }
 }

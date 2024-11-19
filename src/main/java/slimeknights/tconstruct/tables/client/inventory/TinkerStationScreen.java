@@ -177,7 +177,6 @@ public class TinkerStationScreen extends BaseTabbedScreen<TinkerStationBlockEnti
     }
     this.currentLayout = this.defaultLayout;
     this.activeInputs = Math.min(defaultLayout.getInputCount(), max);
-    this.passEvents = false;
   }
 
   @Override
