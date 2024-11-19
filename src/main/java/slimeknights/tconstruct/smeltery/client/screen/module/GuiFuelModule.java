@@ -22,11 +22,8 @@ import java.util.List;
 /**
  * GUI component handling the fuel module
  */
-@RequiredArgsConstructor
 public class GuiFuelModule {
-  private final ResourceLocation background;
-
-  private final ScalableElementScreen FIRE = new ScalableElementScreen(background, 176, 136, 14, 14, 256, 256);
+  private final ScalableElementScreen FIRE;
 
   // tooltips
   private static final String TOOLTIP_TEMPERATURE = TConstruct.makeTranslationKey("gui", "melting.fuel.temperature");
@@ -51,6 +48,20 @@ public class GuiFuelModule {
   private final boolean hasFuelSlot;
 
   private FuelInfo fuelInfo = FuelInfo.EMPTY;
+
+  public GuiFuelModule(ResourceLocation background, AbstractContainerScreen<?> screen, FuelModule fuelModule, int x, int y, int width, int height, int fireX, int fireY, boolean hasFuelSlot) {
+    this.screen = screen;
+    this.fuelModule = fuelModule;
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.fireX = fireX;
+    this.fireY = fireY;
+    this.hasFuelSlot = hasFuelSlot;
+
+    FIRE = new ScalableElementScreen(background, 176, 136, 14, 14, 256, 256);
+  }
 
   /**
    * Checks if the fuel tank is hovered

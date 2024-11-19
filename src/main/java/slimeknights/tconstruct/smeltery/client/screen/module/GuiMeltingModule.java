@@ -1,6 +1,5 @@
 package slimeknights.tconstruct.smeltery.client.screen.module;
 
-import lombok.AllArgsConstructor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -15,15 +14,12 @@ import slimeknights.tconstruct.smeltery.block.entity.module.MeltingModuleInvento
 import java.util.function.IntSupplier;
 import java.util.function.Predicate;
 
-@AllArgsConstructor
 public class GuiMeltingModule {
-  private final ResourceLocation background;
-
   // progress bars
-  private final ScalableElementScreen PROGRESS_BAR = new ScalableElementScreen(background, 176, 150, 3, 16, 256, 256);
-  private final ScalableElementScreen NO_HEAT_BAR = new ScalableElementScreen(background, 179, 150, 3, 16, 256, 256);
-  private final ScalableElementScreen NO_SPACE_BAR = new ScalableElementScreen(background, 182, 150, 3, 16, 256, 256);
-  private final ScalableElementScreen UNMELTABLE_BAR = new ScalableElementScreen(background, 185, 150, 3, 16, 256, 256);
+  private final ScalableElementScreen PROGRESS_BAR;
+  private final ScalableElementScreen NO_HEAT_BAR;
+  private final ScalableElementScreen NO_SPACE_BAR;
+  private final ScalableElementScreen UNMELTABLE_BAR;
 
   // progress bar tooltips
   private static final Component TOOLTIP_NO_HEAT = Component.translatable(TConstruct.makeTranslationKey("gui", "melting.no_heat"));
@@ -34,6 +30,20 @@ public class GuiMeltingModule {
   private final MeltingModuleInventory inventory;
   private final IntSupplier temperature;
   private final Predicate<Slot> slotPredicate;
+
+  public GuiMeltingModule(ResourceLocation background, AbstractContainerScreen<?> screen, MeltingModuleInventory inventory, IntSupplier temperature, Predicate<Slot> slotPredicate) {
+    this.screen = screen;
+    this.inventory = inventory;
+    this.temperature = temperature;
+    this.slotPredicate = slotPredicate;
+
+    // progress bars
+    PROGRESS_BAR = new ScalableElementScreen(background, 176, 150, 3, 16, 256, 256);
+    NO_HEAT_BAR = new ScalableElementScreen(background, 179, 150, 3, 16, 256, 256);
+    NO_SPACE_BAR = new ScalableElementScreen(background, 182, 150, 3, 16, 256, 256);
+    UNMELTABLE_BAR = new ScalableElementScreen(background, 185, 150, 3, 16, 256, 256);
+
+  }
 
 
   /**
