@@ -45,7 +45,8 @@ public class PiercingModifier extends Modifier implements ToolStatsModifierHook,
     } else {
       source = player.damageSources().mobAttack(context.getAttacker());
     }
-    source.bypassArmor();
+    // FIXME: This is not secure
+    //source.bypassArmor();
     float secondaryDamage = (modifier.getEffectiveLevel() * tool.getMultiplier(ToolStats.ATTACK_DAMAGE)) * context.getCooldown();
     if (context.isCritical()) {
       secondaryDamage *= 1.5f;

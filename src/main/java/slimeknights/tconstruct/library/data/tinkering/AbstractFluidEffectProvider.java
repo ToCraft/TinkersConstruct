@@ -31,6 +31,7 @@ import slimeknights.tconstruct.library.modifiers.fluid.TimeAction;
 import slimeknights.tconstruct.library.modifiers.fluid.block.PlaceBlockFluidEffect;
 import slimeknights.tconstruct.library.modifiers.fluid.entity.DamageFluidEffect;
 import slimeknights.tconstruct.library.modifiers.fluid.entity.FireFluidEffect;
+import slimeknights.tconstruct.library.modifiers.fluid.entity.FluidDamageType;
 import slimeknights.tconstruct.library.modifiers.fluid.entity.MobEffectFluidEffect;
 import slimeknights.tconstruct.library.recipe.FluidValues;
 
@@ -131,7 +132,7 @@ public abstract class AbstractFluidEffectProvider extends GenericDataProvider {
    * Adds a builder for burning
    */
   protected Builder burningFluid(String name, TagKey<Fluid> tag, int amount, float damage, int time) {
-    Builder builder = addFluid(name, tag, amount).addEntityEffect(LivingEntityPredicate.FIRE_IMMUNE.inverted(), new DamageFluidEffect(damage, DamageFluidEffect.FIRE));
+    Builder builder = addFluid(name, tag, amount).addEntityEffect(LivingEntityPredicate.FIRE_IMMUNE.inverted(), new DamageFluidEffect(damage, FluidDamageType.FIRE));
     if (time > 0) {
       builder.addEntityEffect(new FireFluidEffect(TimeAction.SET, time)).addBlockEffect(new PlaceBlockFluidEffect(Blocks.FIRE));
     }

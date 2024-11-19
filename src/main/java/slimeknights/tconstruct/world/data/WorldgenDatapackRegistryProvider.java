@@ -43,6 +43,7 @@ import net.minecraftforge.registries.holdersets.NotHolderSet;
 import net.minecraftforge.registries.holdersets.OrHolderSet;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.shared.TinkerDamageTypes;
 import slimeknights.tconstruct.world.TinkerWorld;
 import slimeknights.tconstruct.world.block.FoliageType;
 import slimeknights.tconstruct.world.worldgen.islands.IslandStructure;
@@ -75,7 +76,8 @@ public class WorldgenDatapackRegistryProvider extends DatapackBuiltinEntriesProv
     return new RegistrySetBuilder()
       .add(Registries.STRUCTURE, WorldgenDatapackRegistryProvider::bootstrapStructures)
       .add(Registries.STRUCTURE_SET, WorldgenDatapackRegistryProvider::bootstrapStructureSets)
-      .add(ForgeRegistries.Keys.BIOME_MODIFIERS, WorldgenDatapackRegistryProvider::bootstrapBiomeModifiers);
+      .add(ForgeRegistries.Keys.BIOME_MODIFIERS, WorldgenDatapackRegistryProvider::bootstrapBiomeModifiers)
+      .add(Registries.DAMAGE_TYPE, TinkerDamageTypes::bootstrap);
   }
 
   private static void bootstrapStructures(BootstapContext<Structure> context) {

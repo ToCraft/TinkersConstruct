@@ -14,6 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
+import slimeknights.tconstruct.shared.TinkerDamageTypes;
 import slimeknights.tconstruct.tools.modifiers.traits.melee.LaceratingModifier;
 
 /**
@@ -38,10 +39,11 @@ public class BleedingEffect extends NoMilkEffect {
     // attribute to player kill
     LivingEntity lastAttacker = target.getLastHurtMob();
     DamageSource source;
-    if (lastAttacker != null) {
-      source = new BleedingDamageSource(BLEED, lastAttacker);
-    } else {
-      source = new DamageSource(BLEED);
+    if(lastAttacker != null) {
+      source = new BleedingDamageSource(target.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(TinkerDamageTypes.BLEEDING), lastAttacker);
+    }
+    else {
+      source = new DamageSource(target.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(TinkerDamageTypes.BLEEDING));
     }
 
     // perform damage
