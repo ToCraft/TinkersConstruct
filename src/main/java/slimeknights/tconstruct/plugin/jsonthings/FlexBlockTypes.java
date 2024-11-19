@@ -65,14 +65,14 @@ public class FlexBlockTypes {
           }
         };
       };
-    }, Blocks.LAVA.getStateDefinition().getProperties().toArray());
+    }, Blocks.LAVA.getStateDefinition().getProperties().toArray(Property<?>[]::new));
     register("mob_effect_liquid", data -> {
       ResourceLocation fluidField = Loadables.RESOURCE_LOCATION.getOrDefault(data, "fluid", null);
       ResourceLocation effectName = Loadables.RESOURCE_LOCATION.getIfPresent(data, "effect");
       int effectLevel = GsonHelper.getAsInt(data, "burn_time");
       return (props, builder) -> {
         final List<Property<?>> _properties = builder.getProperties();
-        Lazy<MobEffect> effect = Lazy.of(() -> ((ResourceLocationLoadable<MobEffect>) Loadables.MOB_EFFECT).fromKey(effectName, "effect"));
+        Lazy<MobEffect> effect = Lazy.of(() -> Loadables.MOB_EFFECT.fromKey(effectName, "effect"));
         return new FlexMobEffectLiquidBlock(props, builder.getPropertyDefaultValues(), fluidSupplier(Objects.requireNonNullElse(fluidField, builder.getRegistryName())), () -> new MobEffectInstance(effect.get(), 5 * 20, effectLevel - 1)) {
           @Override
           protected void createBlockStateDefinition(Builder<Block, BlockState> stateBuilder) {
@@ -81,13 +81,13 @@ public class FlexBlockTypes {
           }
         };
       };
-    }, Blocks.WATER.getStateDefinition().getProperties().toArray());
+    }, Blocks.WATER.getStateDefinition().getProperties().toArray(Property<?>[]::new));
   }
 
   /**
    * Local helper to register our stuff
    */
-  private static <T extends Block & IFlexBlock> void register(String name, IBlockSerializer<T> factory, Property<?>[] defaultProperties) {
+  private static void register(String name, IBlockSerializer<?> factory, Property<?>[] defaultProperties) {
     FlexBlockType.register(TConstruct.resourceString(name), factory, "translucent", true, defaultProperties);
   }
 }

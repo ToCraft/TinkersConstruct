@@ -18,7 +18,7 @@ public class TableBlockItem extends BlockItem {
   private final BooleanSupplier showAllCondition;
 
   public TableBlockItem(Block block, TagKey<Item> textureTag, Item.Properties builder, BooleanSupplier showAllCondition) {
-    super(block, textureTag, builder);
+    super(block, builder);
     this.showAllCondition = showAllCondition;
   }
 
