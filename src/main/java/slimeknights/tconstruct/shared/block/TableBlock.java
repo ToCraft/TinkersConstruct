@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -26,6 +27,7 @@ import slimeknights.mantle.block.InventoryBlock;
  */
 public abstract class TableBlock extends InventoryBlock implements SimpleWaterloggedBlock {
 
+  protected static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
   protected static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
   private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -51,7 +53,7 @@ public abstract class TableBlock extends InventoryBlock implements SimpleWaterlo
   @Override
   public BlockState getStateForPlacement(BlockPlaceContext context) {
     boolean flag = context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER;
-    return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(WATERLOGGED, flag);
+    return this.defaultBlockState().setValue(AXIS, context.getClickedFace().getAxis()).setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(WATERLOGGED, flag);
   }
 
   @Deprecated
@@ -68,7 +70,7 @@ public abstract class TableBlock extends InventoryBlock implements SimpleWaterlo
 
   @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-    builder.add(FACING, WATERLOGGED);
+    builder.add(AXIS, FACING, WATERLOGGED);
   }
 
   @Deprecated
